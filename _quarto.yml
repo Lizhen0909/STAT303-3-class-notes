@@ -1,0 +1,53 @@
+project:
+  type: book
+
+
+book:
+  title: "Data Science II with python (Class notes)"
+  subtitle: "STAT 303-2"
+  author: "Arvind Krishna"
+  date: "1/3/2023"
+  
+  sidebar:
+    search: true
+    logo: "NU_Stat_logo.png"
+    logo-href: "https://statistics.northwestern.edu/"
+    
+  chapters:
+    - index.qmd
+    - part: "Linear regression"
+      chapters:
+        - Lec1_SimpleLinearRegression.ipynb
+        - Lec2_MultipleLinearRegression.ipynb
+        - Lec3_VariableTransformations_and_Interactions.ipynb
+        - Lec4_ModelAssumptions.ipynb
+        - Lec5_Potential_issues.ipynb
+        - Lec6_Autocorrelation.ipynb
+    - part: "Logistic regression"
+      chapters:
+        - Lec7_logistic_regression.ipynb
+    - part: "Variable selection & Regularization"
+      chapters:
+        - Lec8_ModelSelection_BestSubset_FwdBwd_stepwise.ipynb
+        - Lec9_RidgeRegression_Lasso.ipynb
+  appendices: 
+    - Assignment 1.ipynb
+    - Assignment B.ipynb
+    - Assignment C.ipynb
+    - Assignment D.ipynb
+    - Assignment E.ipynb
+    - Assignment E_updated.ipynb
+    - Practice_Final_Answer_Key.ipynb
+    - Datasets.ipynb
+    - references.qmd  
+
+bibliography: references.bib
+
+format:
+  html:
+    theme: cosmo
+  pdf:
+    documentclass: scrreprt
+
+
+

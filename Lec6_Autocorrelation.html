@@ -1,0 +1,5502 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.0.37">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Data Science II with python (Class notes) - 6&nbsp; Autocorrelation</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./Lec7_logistic_regression.html" rel="next">
+<link href="./Lec5_Potential_issues.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Autocorrelation</span></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="./" class="sidebar-logo-link">
+      <img src="./NU_Stat_logo.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
+      </a>
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Data Science II with python (Class notes)</a> 
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">Preface</a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">Linear regression</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lec1_SimpleLinearRegression.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Simple Linear Regression</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lec2_MultipleLinearRegression.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Multiple Linear Regression</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lec3_VariableTransformations_and_Interactions.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Variable interactions and transformations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lec4_ModelAssumptions.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Model assumptions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lec5_Potential_issues.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Potential issues</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lec6_Autocorrelation.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Autocorrelation</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">Logistic regression</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lec7_logistic_regression.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Logistic regression</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">Variable selection &amp; Regularization</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lec8_ModelSelection_BestSubset_FwdBwd_stepwise.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Best subset and Stepwise selection</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lec9_RidgeRegression_Lasso.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Ridge regression and Lasso</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">Appendices</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Assignment 1.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Assignment A</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Assignment B.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Assignment B</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Assignment C.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Assignment C</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Assignment D.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">Assignment D</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Assignment E.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">E</span>&nbsp; <span class="chapter-title">Assignment E</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Assignment E_updated.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">F</span>&nbsp; <span class="chapter-title">Assignment E (Section 22)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Practice_Final_Answer_Key.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">G</span>&nbsp; <span class="chapter-title">Practice Final Solutions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Datasets.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">H</span>&nbsp; <span class="chapter-title">Datasets, assignment and project files</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">References</a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"> <span class="header-section-number">6.1</span> Introduction</a></li>
+  <li><a href="#the-data" id="toc-the-data" class="nav-link" data-scroll-target="#the-data"> <span class="header-section-number">6.2</span> The data</a></li>
+  <li><a href="#predictor-temperature" id="toc-predictor-temperature" class="nav-link" data-scroll-target="#predictor-temperature"> <span class="header-section-number">6.3</span> Predictor: temperature</a></li>
+  <li><a href="#predictors-temperature-one-day-lag-of-power." id="toc-predictors-temperature-one-day-lag-of-power." class="nav-link" data-scroll-target="#predictors-temperature-one-day-lag-of-power."> <span class="header-section-number">6.4</span> Predictors: Temperature + one day lag of power.</a></li>
+  <li><a href="#predictors-temperature-1-day-lag-of-power-1-week-lag-of-power" id="toc-predictors-temperature-1-day-lag-of-power-1-week-lag-of-power" class="nav-link" data-scroll-target="#predictors-temperature-1-day-lag-of-power-1-week-lag-of-power"> <span class="header-section-number">6.5</span> Predictors: Temperature + 1 day lag of power + 1 week lag of power</a></li>
+  <li><a href="#predictors-temperature-1-day-lag-of-power-1-week-lag-of-power-2-weeks-lag-of-power" id="toc-predictors-temperature-1-day-lag-of-power-1-week-lag-of-power-2-weeks-lag-of-power" class="nav-link" data-scroll-target="#predictors-temperature-1-day-lag-of-power-1-week-lag-of-power-2-weeks-lag-of-power"> <span class="header-section-number">6.6</span> Predictors: Temperature + 1 day lag of power + 1 week lag of power + 2 weeks lag of power</a></li>
+  <li><a href="#remark" id="toc-remark" class="nav-link" data-scroll-target="#remark"> <span class="header-section-number">7</span> Remark</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Autocorrelation</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    
+  </div>
+  
+
+</header>
+
+<p><em>Read section 3.3.3 (2) of the book before using these notes.</em></p>
+<p><em>Note that in this course, lecture notes are not sufficient, you must read the book for better understanding. Lecture notes are just implementing the concepts of the book on a dataset, but not explaining the concepts elaborately.</em></p>
+<p>Below is an example showing violation of the autocorrelation assumption <em>(refer to the book to understand autocorrelation)</em> in linear regression. Subsequently, it is shown that addressing the assumption violation leads to a much better model fit.</p>
+<section id="introduction" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">6.1</span> Introduction</h2>
+<p><strong>Example:</strong> Using linear regression models to predict electricity demand in Toronto, CA.</p>
+<p>We have hourly power demand and temperature (in Celsius) data from 2017 to 2020.</p>
+<p>We are going to build a linear model to predict the hourly power demand for the next day (for example, when it is 1/1/2021, we predict hourly demand on 1/2/2021 using historical data and the weather forecasts).</p>
+<p>When we are building a model, it is important to keep in mind what data we can use as features. For this model:</p>
+<ul>
+<li><p>We cannot use previous hourly data as features. (Although in a high frequency setting, it is possible)</p></li>
+<li><p>The temperature in our raw data can not be used directly, since it is the actual, not the forecasted temperature. We are going to use the previous day temperature as the forecast.</p></li>
+</ul>
+<p><strong>Source:</strong> <a href="https://towardsdatascience.com/keep-it-simple-keep-it-linear-a-linear-regression-model-for-time-series-5dbc83d89fc3">Keep it simple, keep it linear: A linear regression model for time series</a></p>
+<div class="cell" data-outputid="dfcee015-b588-4506-9909-03945d594c03" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>pylab inline</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.api <span class="im">as</span> sm</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>plt.rcParams[<span class="st">'figure.figsize'</span>] <span class="op">=</span> [<span class="dv">9</span>, <span class="dv">5</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Populating the interactive namespace from numpy and matplotlib</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># A few helper functions</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy.ma <span class="im">as</span> ma</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.stats.stats <span class="im">import</span> pearsonr, normaltest</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.spatial.distance <span class="im">import</span> correlation</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> build_model(features):</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  X<span class="op">=</span>sm.add_constant(df[features])</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  y<span class="op">=</span>df[<span class="st">'power'</span>]</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  model <span class="op">=</span> sm.OLS(y,X, missing<span class="op">=</span><span class="st">'drop'</span>).fit()</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  predictions <span class="op">=</span> model.predict(X) </span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  display(model.summary()) </span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  res<span class="op">=</span>y<span class="op">-</span>predictions</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> res </span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plt_residual(res):</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>  plt.plot(<span class="bu">range</span>(<span class="bu">len</span>(res)), res) </span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>  plt.ylabel(<span class="st">'Residual'</span>)</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>  plt.xlabel(<span class="st">"Hour"</span>)</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plt_residual_lag(res, nlag):</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>  x<span class="op">=</span>res.values</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>  y<span class="op">=</span>res.shift(nlag).values</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>  sns.kdeplot(x,y<span class="op">=</span>y,color<span class="op">=</span><span class="st">'blue'</span>,shade<span class="op">=</span><span class="va">True</span> )</span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>  plt.xlabel(<span class="st">'res'</span>)</span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>  plt.ylabel(<span class="st">"res-lag-</span><span class="sc">{}</span><span class="st">"</span>.<span class="bu">format</span>(nlag))</span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>  rho,p<span class="op">=</span>corrcoef(x,y)</span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>  plt.title(<span class="st">"n_lag=</span><span class="sc">{}</span><span class="st"> hours, correlation=</span><span class="sc">{:f}</span><span class="st">"</span>.<span class="bu">format</span>(nlag, rho))</span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plt_acf(res):</span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>  plt.rcParams[<span class="st">'figure.figsize'</span>] <span class="op">=</span> [<span class="dv">18</span>, <span class="dv">5</span>]</span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>  acorr <span class="op">=</span> sm.tsa.acf(res.dropna(), nlags <span class="op">=</span> <span class="bu">len</span>(res.dropna())<span class="op">-</span><span class="dv">1</span>)</span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>  fig, (ax1, ax2) <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">2</span>)</span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>  ax1.plot(acorr)</span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>  ax1.set_ylabel(<span class="st">'corr'</span>)</span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a>  ax1.set_xlabel(<span class="st">'n_lag'</span>)</span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>  ax1.set_title(<span class="st">'Auto Correlation'</span>)</span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a>  ax2.plot(acorr[:<span class="dv">4</span><span class="op">*</span><span class="dv">7</span><span class="op">*</span><span class="dv">24</span>])</span>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a>  ax2.set_ylabel(<span class="st">'corr'</span>)</span>
+<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a>  ax2.set_xlabel(<span class="st">'n_lag'</span>)</span>
+<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a>  ax2.set_title(<span class="st">'Auto Correlation (4-week zoomed in) '</span>)</span>
+<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a>  plt.show()</span>
+<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a>  pd.set_option(<span class="st">'display.max_columns'</span>, <span class="va">None</span>)</span>
+<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a>  adf<span class="op">=</span>pd.DataFrame(np.<span class="bu">round</span>(acorr[:<span class="dv">30</span><span class="op">*</span><span class="dv">24</span>],<span class="dv">2</span>).reshape([<span class="dv">30</span>, <span class="dv">24</span>] ))</span>
+<span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a>  adf.index.name<span class="op">=</span><span class="st">'day'</span></span>
+<span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a>  display(adf)</span>
+<span id="cb3-46"><a href="#cb3-46" aria-hidden="true" tabindex="-1"></a>  plt.rcParams[<span class="st">'figure.figsize'</span>] <span class="op">=</span> [<span class="dv">9</span>, <span class="dv">5</span>]</span>
+<span id="cb3-47"><a href="#cb3-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-48"><a href="#cb3-48" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> corrcoef(x,y):</span>
+<span id="cb3-49"><a href="#cb3-49" aria-hidden="true" tabindex="-1"></a>    a,b<span class="op">=</span>ma.masked_invalid(x),ma.masked_invalid(y)</span>
+<span id="cb3-50"><a href="#cb3-50" aria-hidden="true" tabindex="-1"></a>    msk <span class="op">=</span> (<span class="op">~</span>a.mask <span class="op">&amp;</span> <span class="op">~</span>b.mask)</span>
+<span id="cb3-51"><a href="#cb3-51" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> pearsonr(x[msk],y[msk])[<span class="dv">0</span>], normaltest(res, nan_policy<span class="op">=</span><span class="st">'omit'</span>)[<span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="the-data" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="the-data"><span class="header-section-number">6.2</span> The data</h2>
+<div class="cell" data-outputid="0848ad70-6f6f-41fb-a2a7-7f4676925197" data-execution_count="19">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>df<span class="op">=</span>pd.read_csv(<span class="st">"./Datasets/Toronto_power_demand.csv"</span>, parse_dates<span class="op">=</span>[<span class="st">'Date'</span>], index_col<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'temperature'</span>]<span class="op">=</span>df[<span class="st">'temperature'</span>].shift(<span class="dv">24</span><span class="op">*</span><span class="dv">1</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>df.tail()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="19">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Date</th>
+      <th>Hour</th>
+      <th>power</th>
+      <th>temperature</th>
+    </tr>
+    <tr>
+      <th>key</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>20201231:19</th>
+      <td>2020-12-31</td>
+      <td>19</td>
+      <td>5948</td>
+      <td>4.9</td>
+    </tr>
+    <tr>
+      <th>20201231:20</th>
+      <td>2020-12-31</td>
+      <td>20</td>
+      <td>5741</td>
+      <td>4.5</td>
+    </tr>
+    <tr>
+      <th>20201231:21</th>
+      <td>2020-12-31</td>
+      <td>21</td>
+      <td>5527</td>
+      <td>3.7</td>
+    </tr>
+    <tr>
+      <th>20201231:22</th>
+      <td>2020-12-31</td>
+      <td>22</td>
+      <td>5301</td>
+      <td>2.9</td>
+    </tr>
+    <tr>
+      <th>20201231:23</th>
+      <td>2020-12-31</td>
+      <td>23</td>
+      <td>5094</td>
+      <td>2.1</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="cell" data-outputid="9c90ac41-cae2-46f2-c664-35737e54b8a4" data-execution_count="20">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>ndays<span class="op">=</span><span class="bu">len</span>(<span class="bu">set</span>(df[<span class="st">'Date'</span>]))</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"There are </span><span class="sc">{}</span><span class="st"> rows, which is </span><span class="sc">{}</span><span class="st">*24=</span><span class="sc">{}</span><span class="st">, for </span><span class="sc">{}</span><span class="st"> days. And The data is already in sorted order"</span> .<span class="bu">format</span>(df.shape[<span class="dv">0</span>], ndays, ndays<span class="op">*</span><span class="dv">24</span>, ndays))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>There are 35064 rows, which is 1461*24=35064, for 1461 days. And The data is already in sorted order</code></pre>
+</div>
+</div>
+<div class="cell" data-outputid="aa2cee76-89a7-4a8e-a230-53fe9e4b6f72" data-execution_count="21">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"It is natural to think that there is a relationship between power demand and temperature."</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>sns.kdeplot(df[<span class="st">'temperature'</span>].values, y<span class="op">=</span>df[<span class="st">'power'</span>].values,color<span class="op">=</span><span class="st">'blue'</span>,shade<span class="op">=</span><span class="va">True</span> )</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Power Demand vs Temperature"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>It is natural to think that there is a relationship between power demand and temperature.</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="21">
+<pre><code>Text(0.5, 1.0, 'Power Demand vs Temperature')</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Lec6_Autocorrelation_files/figure-html/cell-6-output-3.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="cell" data-outputid="3771e7df-bc6f-4065-90ef-d6cbc9daeb33" data-execution_count="22">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"""</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="st">It is not a linear relationship. We create two features corresponding to hot and cold weather, which makes </span><span class="ch">\</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="st">it possible to develop a linear model. </span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span>)</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>is_hot<span class="op">=</span>(df[<span class="st">'temperature'</span>]<span class="op">&gt;</span><span class="dv">15</span>).astype(<span class="bu">int</span>)</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="sc">{:f}% o</span><span class="st">f data points are hot"</span>.<span class="bu">format</span>(is_hot.mean()<span class="op">*</span><span class="dv">100</span>))</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'temp_hot'</span>]<span class="op">=</span>df[<span class="st">'temperature'</span>]<span class="op">*</span>is_hot</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'temp_cold'</span>]<span class="op">=</span>df[<span class="st">'temperature'</span>]<span class="op">*</span>(<span class="dv">1</span><span class="op">-</span>is_hot)</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>df.tail()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+It is not a linear relationship. We create two features corresponding to hot and cold weather, which makes it possible to develop a linear model. 
+
+34.813484% of data points are hot</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="22">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Date</th>
+      <th>Hour</th>
+      <th>power</th>
+      <th>temperature</th>
+      <th>temp_hot</th>
+      <th>temp_cold</th>
+    </tr>
+    <tr>
+      <th>key</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>20201231:19</th>
+      <td>2020-12-31</td>
+      <td>19</td>
+      <td>5948</td>
+      <td>4.9</td>
+      <td>0.0</td>
+      <td>4.9</td>
+    </tr>
+    <tr>
+      <th>20201231:20</th>
+      <td>2020-12-31</td>
+      <td>20</td>
+      <td>5741</td>
+      <td>4.5</td>
+      <td>0.0</td>
+      <td>4.5</td>
+    </tr>
+    <tr>
+      <th>20201231:21</th>
+      <td>2020-12-31</td>
+      <td>21</td>
+      <td>5527</td>
+      <td>3.7</td>
+      <td>0.0</td>
+      <td>3.7</td>
+    </tr>
+    <tr>
+      <th>20201231:22</th>
+      <td>2020-12-31</td>
+      <td>22</td>
+      <td>5301</td>
+      <td>2.9</td>
+      <td>0.0</td>
+      <td>2.9</td>
+    </tr>
+    <tr>
+      <th>20201231:23</th>
+      <td>2020-12-31</td>
+      <td>23</td>
+      <td>5094</td>
+      <td>2.1</td>
+      <td>0.0</td>
+      <td>2.1</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+</section>
+<section id="predictor-temperature" class="level2" data-number="6.3">
+<h2 data-number="6.3" class="anchored" data-anchor-id="predictor-temperature"><span class="header-section-number">6.3</span> Predictor: temperature</h2>
+<div class="cell" data-outputid="dd469846-4260-4a71-9855-9d884a98ee7b" data-execution_count="23">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>res<span class="op">=</span>build_model([<span class="st">'temp_hot'</span>, <span class="st">'temp_cold'</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+
+<table class="simpletable">
+<caption>OLS Regression Results</caption>
+<tbody><tr>
+  <th>Dep. Variable:</th>          <td>power</td>      <th>  R-squared:         </th>  <td>   0.195</td>  
+</tr>
+<tr>
+  <th>Model:</th>                   <td>OLS</td>       <th>  Adj. R-squared:    </th>  <td>   0.195</td>  
+</tr>
+<tr>
+  <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th>  <td>   4251.</td>  
+</tr>
+<tr>
+  <th>Date:</th>             <td>Sun, 05 Feb 2023</td> <th>  Prob (F-statistic):</th>   <td>  0.00</td>   
+</tr>
+<tr>
+  <th>Time:</th>                 <td>23:15:53</td>     <th>  Log-Likelihood:    </th> <td>-2.8766e+05</td>
+</tr>
+<tr>
+  <th>No. Observations:</th>      <td> 35040</td>      <th>  AIC:               </th>  <td>5.753e+05</td> 
+</tr>
+<tr>
+  <th>Df Residuals:</th>          <td> 35037</td>      <th>  BIC:               </th>  <td>5.753e+05</td> 
+</tr>
+<tr>
+  <th>Df Model:</th>              <td>     2</td>      <th>                     </th>      <td> </td>     
+</tr>
+<tr>
+  <th>Covariance Type:</th>      <td>nonrobust</td>    <th>                     </th>      <td> </td>     
+</tr>
+</tbody></table>
+<table class="simpletable">
+<tbody><tr>
+      <td></td>         <th>coef</th>     <th>std err</th>      <th>t</th>      <th>P&gt;|t|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>const</th>     <td> 5501.3027</td> <td>    6.222</td> <td>  884.115</td> <td> 0.000</td> <td> 5489.107</td> <td> 5513.499</td>
+</tr>
+<tr>
+  <th>temp_hot</th>  <td>   31.8488</td> <td>    0.462</td> <td>   68.911</td> <td> 0.000</td> <td>   30.943</td> <td>   32.755</td>
+</tr>
+<tr>
+  <th>temp_cold</th> <td>  -37.5088</td> <td>    0.827</td> <td>  -45.364</td> <td> 0.000</td> <td>  -39.129</td> <td>  -35.888</td>
+</tr>
+</tbody></table>
+<table class="simpletable">
+<tbody><tr>
+  <th>Omnibus:</th>       <td>945.032</td> <th>  Durbin-Watson:     </th> <td>   0.093</td> 
+</tr>
+<tr>
+  <th>Prob(Omnibus):</th> <td> 0.000</td>  <th>  Jarque-Bera (JB):  </th> <td> 469.200</td> 
+</tr>
+<tr>
+  <th>Skew:</th>          <td> 0.034</td>  <th>  Prob(JB):          </th> <td>1.30e-102</td>
+</tr>
+<tr>
+  <th>Kurtosis:</th>      <td> 2.437</td>  <th>  Cond. No.          </th> <td>    17.0</td> 
+</tr>
+</tbody></table><br><br>Notes:<br>[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+</div>
+</div>
+<div class="cell" data-outputid="22aafad4-0215-4048-cbde-7cc65e42c318" data-scrolled="true" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>plt_residual(res)  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="Lec6_Autocorrelation_files/figure-html/cell-9-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="cell" data-outputid="29763658-dd71-4d32-8e9b-9a1008edc363" data-execution_count="25">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"acf shows that there is a strong correlation for 24 lags, which is one day."</span>)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>plt_acf(res)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>acf shows that there is a strong correlation for 24 lags, which is one day.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>C:\Users\akl0407\Anaconda3\lib\site-packages\statsmodels\tsa\stattools.py:667: FutureWarning: fft=True will become the default after the release of the 0.12 release of statsmodels. To suppress this warning, explicitly set fft=False.
+  warnings.warn(</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Lec6_Autocorrelation_files/figure-html/cell-10-output-3.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>0</th>
+      <th>1</th>
+      <th>2</th>
+      <th>3</th>
+      <th>4</th>
+      <th>5</th>
+      <th>6</th>
+      <th>7</th>
+      <th>8</th>
+      <th>9</th>
+      <th>10</th>
+      <th>11</th>
+      <th>12</th>
+      <th>13</th>
+      <th>14</th>
+      <th>15</th>
+      <th>16</th>
+      <th>17</th>
+      <th>18</th>
+      <th>19</th>
+      <th>20</th>
+      <th>21</th>
+      <th>22</th>
+      <th>23</th>
+    </tr>
+    <tr>
+      <th>day</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1.00</td>
+      <td>0.95</td>
+      <td>0.85</td>
+      <td>0.72</td>
+      <td>0.56</td>
+      <td>0.40</td>
+      <td>0.24</td>
+      <td>0.09</td>
+      <td>-0.02</td>
+      <td>-0.11</td>
+      <td>-0.16</td>
+      <td>-0.20</td>
+      <td>-0.22</td>
+      <td>-0.21</td>
+      <td>-0.19</td>
+      <td>-0.14</td>
+      <td>-0.07</td>
+      <td>0.03</td>
+      <td>0.15</td>
+      <td>0.30</td>
+      <td>0.45</td>
+      <td>0.58</td>
+      <td>0.70</td>
+      <td>0.78</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.81</td>
+      <td>0.77</td>
+      <td>0.68</td>
+      <td>0.55</td>
+      <td>0.40</td>
+      <td>0.25</td>
+      <td>0.09</td>
+      <td>-0.04</td>
+      <td>-0.15</td>
+      <td>-0.23</td>
+      <td>-0.29</td>
+      <td>-0.32</td>
+      <td>-0.34</td>
+      <td>-0.33</td>
+      <td>-0.31</td>
+      <td>-0.26</td>
+      <td>-0.19</td>
+      <td>-0.09</td>
+      <td>0.04</td>
+      <td>0.18</td>
+      <td>0.33</td>
+      <td>0.47</td>
+      <td>0.58</td>
+      <td>0.66</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.69</td>
+      <td>0.65</td>
+      <td>0.57</td>
+      <td>0.45</td>
+      <td>0.31</td>
+      <td>0.16</td>
+      <td>0.01</td>
+      <td>-0.12</td>
+      <td>-0.22</td>
+      <td>-0.30</td>
+      <td>-0.35</td>
+      <td>-0.38</td>
+      <td>-0.39</td>
+      <td>-0.38</td>
+      <td>-0.36</td>
+      <td>-0.31</td>
+      <td>-0.23</td>
+      <td>-0.13</td>
+      <td>-0.00</td>
+      <td>0.14</td>
+      <td>0.29</td>
+      <td>0.42</td>
+      <td>0.54</td>
+      <td>0.62</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0.64</td>
+      <td>0.61</td>
+      <td>0.53</td>
+      <td>0.42</td>
+      <td>0.28</td>
+      <td>0.13</td>
+      <td>-0.01</td>
+      <td>-0.14</td>
+      <td>-0.24</td>
+      <td>-0.32</td>
+      <td>-0.37</td>
+      <td>-0.40</td>
+      <td>-0.41</td>
+      <td>-0.40</td>
+      <td>-0.37</td>
+      <td>-0.32</td>
+      <td>-0.25</td>
+      <td>-0.15</td>
+      <td>-0.02</td>
+      <td>0.12</td>
+      <td>0.27</td>
+      <td>0.41</td>
+      <td>0.52</td>
+      <td>0.60</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0.63</td>
+      <td>0.60</td>
+      <td>0.52</td>
+      <td>0.41</td>
+      <td>0.27</td>
+      <td>0.12</td>
+      <td>-0.02</td>
+      <td>-0.14</td>
+      <td>-0.24</td>
+      <td>-0.32</td>
+      <td>-0.37</td>
+      <td>-0.40</td>
+      <td>-0.40</td>
+      <td>-0.39</td>
+      <td>-0.36</td>
+      <td>-0.31</td>
+      <td>-0.24</td>
+      <td>-0.13</td>
+      <td>-0.01</td>
+      <td>0.14</td>
+      <td>0.28</td>
+      <td>0.42</td>
+      <td>0.54</td>
+      <td>0.62</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>0.65</td>
+      <td>0.62</td>
+      <td>0.54</td>
+      <td>0.43</td>
+      <td>0.30</td>
+      <td>0.15</td>
+      <td>0.01</td>
+      <td>-0.11</td>
+      <td>-0.21</td>
+      <td>-0.28</td>
+      <td>-0.33</td>
+      <td>-0.36</td>
+      <td>-0.36</td>
+      <td>-0.35</td>
+      <td>-0.32</td>
+      <td>-0.27</td>
+      <td>-0.19</td>
+      <td>-0.08</td>
+      <td>0.04</td>
+      <td>0.19</td>
+      <td>0.34</td>
+      <td>0.48</td>
+      <td>0.60</td>
+      <td>0.69</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>0.72</td>
+      <td>0.69</td>
+      <td>0.61</td>
+      <td>0.50</td>
+      <td>0.36</td>
+      <td>0.21</td>
+      <td>0.07</td>
+      <td>-0.05</td>
+      <td>-0.15</td>
+      <td>-0.22</td>
+      <td>-0.27</td>
+      <td>-0.29</td>
+      <td>-0.30</td>
+      <td>-0.29</td>
+      <td>-0.26</td>
+      <td>-0.21</td>
+      <td>-0.13</td>
+      <td>-0.02</td>
+      <td>0.11</td>
+      <td>0.25</td>
+      <td>0.40</td>
+      <td>0.55</td>
+      <td>0.67</td>
+      <td>0.75</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>0.78</td>
+      <td>0.75</td>
+      <td>0.67</td>
+      <td>0.54</td>
+      <td>0.40</td>
+      <td>0.25</td>
+      <td>0.10</td>
+      <td>-0.03</td>
+      <td>-0.13</td>
+      <td>-0.21</td>
+      <td>-0.26</td>
+      <td>-0.29</td>
+      <td>-0.30</td>
+      <td>-0.30</td>
+      <td>-0.27</td>
+      <td>-0.22</td>
+      <td>-0.15</td>
+      <td>-0.05</td>
+      <td>0.07</td>
+      <td>0.21</td>
+      <td>0.36</td>
+      <td>0.49</td>
+      <td>0.61</td>
+      <td>0.69</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>0.71</td>
+      <td>0.68</td>
+      <td>0.60</td>
+      <td>0.48</td>
+      <td>0.34</td>
+      <td>0.19</td>
+      <td>0.04</td>
+      <td>-0.09</td>
+      <td>-0.19</td>
+      <td>-0.27</td>
+      <td>-0.32</td>
+      <td>-0.35</td>
+      <td>-0.36</td>
+      <td>-0.36</td>
+      <td>-0.33</td>
+      <td>-0.28</td>
+      <td>-0.21</td>
+      <td>-0.12</td>
+      <td>0.01</td>
+      <td>0.14</td>
+      <td>0.29</td>
+      <td>0.42</td>
+      <td>0.53</td>
+      <td>0.61</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>0.64</td>
+      <td>0.61</td>
+      <td>0.53</td>
+      <td>0.41</td>
+      <td>0.27</td>
+      <td>0.13</td>
+      <td>-0.02</td>
+      <td>-0.14</td>
+      <td>-0.24</td>
+      <td>-0.32</td>
+      <td>-0.37</td>
+      <td>-0.40</td>
+      <td>-0.41</td>
+      <td>-0.40</td>
+      <td>-0.37</td>
+      <td>-0.32</td>
+      <td>-0.25</td>
+      <td>-0.15</td>
+      <td>-0.03</td>
+      <td>0.11</td>
+      <td>0.26</td>
+      <td>0.39</td>
+      <td>0.50</td>
+      <td>0.58</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>0.61</td>
+      <td>0.58</td>
+      <td>0.50</td>
+      <td>0.39</td>
+      <td>0.25</td>
+      <td>0.11</td>
+      <td>-0.03</td>
+      <td>-0.16</td>
+      <td>-0.26</td>
+      <td>-0.33</td>
+      <td>-0.38</td>
+      <td>-0.40</td>
+      <td>-0.41</td>
+      <td>-0.40</td>
+      <td>-0.38</td>
+      <td>-0.33</td>
+      <td>-0.25</td>
+      <td>-0.15</td>
+      <td>-0.03</td>
+      <td>0.11</td>
+      <td>0.26</td>
+      <td>0.39</td>
+      <td>0.50</td>
+      <td>0.58</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>0.61</td>
+      <td>0.58</td>
+      <td>0.51</td>
+      <td>0.39</td>
+      <td>0.26</td>
+      <td>0.12</td>
+      <td>-0.02</td>
+      <td>-0.14</td>
+      <td>-0.24</td>
+      <td>-0.32</td>
+      <td>-0.36</td>
+      <td>-0.39</td>
+      <td>-0.40</td>
+      <td>-0.39</td>
+      <td>-0.36</td>
+      <td>-0.31</td>
+      <td>-0.24</td>
+      <td>-0.14</td>
+      <td>-0.01</td>
+      <td>0.13</td>
+      <td>0.28</td>
+      <td>0.41</td>
+      <td>0.53</td>
+      <td>0.61</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>0.63</td>
+      <td>0.61</td>
+      <td>0.53</td>
+      <td>0.42</td>
+      <td>0.28</td>
+      <td>0.14</td>
+      <td>0.00</td>
+      <td>-0.12</td>
+      <td>-0.22</td>
+      <td>-0.29</td>
+      <td>-0.33</td>
+      <td>-0.36</td>
+      <td>-0.36</td>
+      <td>-0.35</td>
+      <td>-0.32</td>
+      <td>-0.27</td>
+      <td>-0.19</td>
+      <td>-0.09</td>
+      <td>0.04</td>
+      <td>0.18</td>
+      <td>0.33</td>
+      <td>0.47</td>
+      <td>0.59</td>
+      <td>0.67</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>0.70</td>
+      <td>0.67</td>
+      <td>0.60</td>
+      <td>0.48</td>
+      <td>0.35</td>
+      <td>0.20</td>
+      <td>0.06</td>
+      <td>-0.06</td>
+      <td>-0.16</td>
+      <td>-0.23</td>
+      <td>-0.27</td>
+      <td>-0.30</td>
+      <td>-0.30</td>
+      <td>-0.29</td>
+      <td>-0.26</td>
+      <td>-0.21</td>
+      <td>-0.14</td>
+      <td>-0.03</td>
+      <td>0.09</td>
+      <td>0.24</td>
+      <td>0.39</td>
+      <td>0.53</td>
+      <td>0.65</td>
+      <td>0.73</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>0.76</td>
+      <td>0.73</td>
+      <td>0.64</td>
+      <td>0.52</td>
+      <td>0.38</td>
+      <td>0.23</td>
+      <td>0.09</td>
+      <td>-0.04</td>
+      <td>-0.14</td>
+      <td>-0.22</td>
+      <td>-0.27</td>
+      <td>-0.30</td>
+      <td>-0.31</td>
+      <td>-0.30</td>
+      <td>-0.27</td>
+      <td>-0.23</td>
+      <td>-0.16</td>
+      <td>-0.06</td>
+      <td>0.06</td>
+      <td>0.20</td>
+      <td>0.34</td>
+      <td>0.48</td>
+      <td>0.59</td>
+      <td>0.66</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>0.69</td>
+      <td>0.66</td>
+      <td>0.58</td>
+      <td>0.46</td>
+      <td>0.32</td>
+      <td>0.17</td>
+      <td>0.03</td>
+      <td>-0.10</td>
+      <td>-0.20</td>
+      <td>-0.28</td>
+      <td>-0.33</td>
+      <td>-0.36</td>
+      <td>-0.38</td>
+      <td>-0.37</td>
+      <td>-0.35</td>
+      <td>-0.30</td>
+      <td>-0.23</td>
+      <td>-0.14</td>
+      <td>-0.02</td>
+      <td>0.12</td>
+      <td>0.26</td>
+      <td>0.39</td>
+      <td>0.50</td>
+      <td>0.58</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>0.60</td>
+      <td>0.57</td>
+      <td>0.50</td>
+      <td>0.38</td>
+      <td>0.25</td>
+      <td>0.10</td>
+      <td>-0.04</td>
+      <td>-0.16</td>
+      <td>-0.26</td>
+      <td>-0.34</td>
+      <td>-0.38</td>
+      <td>-0.41</td>
+      <td>-0.42</td>
+      <td>-0.41</td>
+      <td>-0.39</td>
+      <td>-0.34</td>
+      <td>-0.27</td>
+      <td>-0.17</td>
+      <td>-0.05</td>
+      <td>0.09</td>
+      <td>0.23</td>
+      <td>0.36</td>
+      <td>0.48</td>
+      <td>0.55</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>0.58</td>
+      <td>0.55</td>
+      <td>0.47</td>
+      <td>0.36</td>
+      <td>0.23</td>
+      <td>0.09</td>
+      <td>-0.05</td>
+      <td>-0.17</td>
+      <td>-0.27</td>
+      <td>-0.34</td>
+      <td>-0.39</td>
+      <td>-0.42</td>
+      <td>-0.43</td>
+      <td>-0.42</td>
+      <td>-0.39</td>
+      <td>-0.35</td>
+      <td>-0.27</td>
+      <td>-0.18</td>
+      <td>-0.05</td>
+      <td>0.08</td>
+      <td>0.23</td>
+      <td>0.36</td>
+      <td>0.47</td>
+      <td>0.55</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>0.57</td>
+      <td>0.55</td>
+      <td>0.47</td>
+      <td>0.36</td>
+      <td>0.23</td>
+      <td>0.09</td>
+      <td>-0.05</td>
+      <td>-0.17</td>
+      <td>-0.27</td>
+      <td>-0.34</td>
+      <td>-0.39</td>
+      <td>-0.41</td>
+      <td>-0.42</td>
+      <td>-0.41</td>
+      <td>-0.38</td>
+      <td>-0.34</td>
+      <td>-0.26</td>
+      <td>-0.17</td>
+      <td>-0.04</td>
+      <td>0.10</td>
+      <td>0.24</td>
+      <td>0.37</td>
+      <td>0.48</td>
+      <td>0.56</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>0.59</td>
+      <td>0.57</td>
+      <td>0.49</td>
+      <td>0.38</td>
+      <td>0.25</td>
+      <td>0.11</td>
+      <td>-0.03</td>
+      <td>-0.14</td>
+      <td>-0.24</td>
+      <td>-0.31</td>
+      <td>-0.35</td>
+      <td>-0.38</td>
+      <td>-0.38</td>
+      <td>-0.37</td>
+      <td>-0.34</td>
+      <td>-0.29</td>
+      <td>-0.22</td>
+      <td>-0.11</td>
+      <td>0.01</td>
+      <td>0.15</td>
+      <td>0.30</td>
+      <td>0.44</td>
+      <td>0.55</td>
+      <td>0.64</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>0.67</td>
+      <td>0.64</td>
+      <td>0.56</td>
+      <td>0.45</td>
+      <td>0.32</td>
+      <td>0.18</td>
+      <td>0.04</td>
+      <td>-0.08</td>
+      <td>-0.17</td>
+      <td>-0.24</td>
+      <td>-0.29</td>
+      <td>-0.31</td>
+      <td>-0.32</td>
+      <td>-0.31</td>
+      <td>-0.28</td>
+      <td>-0.23</td>
+      <td>-0.16</td>
+      <td>-0.06</td>
+      <td>0.07</td>
+      <td>0.21</td>
+      <td>0.36</td>
+      <td>0.49</td>
+      <td>0.61</td>
+      <td>0.69</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>0.72</td>
+      <td>0.69</td>
+      <td>0.61</td>
+      <td>0.49</td>
+      <td>0.36</td>
+      <td>0.21</td>
+      <td>0.07</td>
+      <td>-0.06</td>
+      <td>-0.16</td>
+      <td>-0.23</td>
+      <td>-0.28</td>
+      <td>-0.31</td>
+      <td>-0.32</td>
+      <td>-0.32</td>
+      <td>-0.29</td>
+      <td>-0.25</td>
+      <td>-0.18</td>
+      <td>-0.08</td>
+      <td>0.03</td>
+      <td>0.17</td>
+      <td>0.31</td>
+      <td>0.44</td>
+      <td>0.56</td>
+      <td>0.63</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>0.66</td>
+      <td>0.63</td>
+      <td>0.55</td>
+      <td>0.43</td>
+      <td>0.29</td>
+      <td>0.15</td>
+      <td>0.01</td>
+      <td>-0.12</td>
+      <td>-0.22</td>
+      <td>-0.29</td>
+      <td>-0.34</td>
+      <td>-0.37</td>
+      <td>-0.38</td>
+      <td>-0.38</td>
+      <td>-0.35</td>
+      <td>-0.31</td>
+      <td>-0.24</td>
+      <td>-0.15</td>
+      <td>-0.03</td>
+      <td>0.10</td>
+      <td>0.24</td>
+      <td>0.37</td>
+      <td>0.48</td>
+      <td>0.55</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>0.58</td>
+      <td>0.55</td>
+      <td>0.47</td>
+      <td>0.36</td>
+      <td>0.23</td>
+      <td>0.09</td>
+      <td>-0.05</td>
+      <td>-0.17</td>
+      <td>-0.27</td>
+      <td>-0.34</td>
+      <td>-0.39</td>
+      <td>-0.42</td>
+      <td>-0.43</td>
+      <td>-0.42</td>
+      <td>-0.39</td>
+      <td>-0.35</td>
+      <td>-0.28</td>
+      <td>-0.18</td>
+      <td>-0.06</td>
+      <td>0.07</td>
+      <td>0.21</td>
+      <td>0.34</td>
+      <td>0.45</td>
+      <td>0.53</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>0.55</td>
+      <td>0.52</td>
+      <td>0.45</td>
+      <td>0.34</td>
+      <td>0.21</td>
+      <td>0.07</td>
+      <td>-0.07</td>
+      <td>-0.19</td>
+      <td>-0.29</td>
+      <td>-0.36</td>
+      <td>-0.40</td>
+      <td>-0.43</td>
+      <td>-0.44</td>
+      <td>-0.43</td>
+      <td>-0.40</td>
+      <td>-0.36</td>
+      <td>-0.29</td>
+      <td>-0.19</td>
+      <td>-0.07</td>
+      <td>0.06</td>
+      <td>0.20</td>
+      <td>0.33</td>
+      <td>0.44</td>
+      <td>0.52</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>0.55</td>
+      <td>0.52</td>
+      <td>0.45</td>
+      <td>0.34</td>
+      <td>0.21</td>
+      <td>0.07</td>
+      <td>-0.07</td>
+      <td>-0.19</td>
+      <td>-0.28</td>
+      <td>-0.35</td>
+      <td>-0.40</td>
+      <td>-0.42</td>
+      <td>-0.43</td>
+      <td>-0.42</td>
+      <td>-0.39</td>
+      <td>-0.35</td>
+      <td>-0.28</td>
+      <td>-0.18</td>
+      <td>-0.06</td>
+      <td>0.08</td>
+      <td>0.22</td>
+      <td>0.35</td>
+      <td>0.46</td>
+      <td>0.54</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>0.57</td>
+      <td>0.54</td>
+      <td>0.47</td>
+      <td>0.36</td>
+      <td>0.23</td>
+      <td>0.09</td>
+      <td>-0.04</td>
+      <td>-0.16</td>
+      <td>-0.25</td>
+      <td>-0.32</td>
+      <td>-0.36</td>
+      <td>-0.39</td>
+      <td>-0.39</td>
+      <td>-0.38</td>
+      <td>-0.35</td>
+      <td>-0.30</td>
+      <td>-0.23</td>
+      <td>-0.13</td>
+      <td>-0.00</td>
+      <td>0.13</td>
+      <td>0.28</td>
+      <td>0.42</td>
+      <td>0.53</td>
+      <td>0.61</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>0.64</td>
+      <td>0.61</td>
+      <td>0.54</td>
+      <td>0.43</td>
+      <td>0.30</td>
+      <td>0.16</td>
+      <td>0.03</td>
+      <td>-0.09</td>
+      <td>-0.19</td>
+      <td>-0.25</td>
+      <td>-0.30</td>
+      <td>-0.32</td>
+      <td>-0.33</td>
+      <td>-0.32</td>
+      <td>-0.29</td>
+      <td>-0.24</td>
+      <td>-0.17</td>
+      <td>-0.07</td>
+      <td>0.06</td>
+      <td>0.19</td>
+      <td>0.34</td>
+      <td>0.48</td>
+      <td>0.59</td>
+      <td>0.67</td>
+    </tr>
+    <tr>
+      <th>28</th>
+      <td>0.70</td>
+      <td>0.67</td>
+      <td>0.59</td>
+      <td>0.47</td>
+      <td>0.34</td>
+      <td>0.19</td>
+      <td>0.05</td>
+      <td>-0.07</td>
+      <td>-0.17</td>
+      <td>-0.24</td>
+      <td>-0.29</td>
+      <td>-0.32</td>
+      <td>-0.33</td>
+      <td>-0.33</td>
+      <td>-0.30</td>
+      <td>-0.26</td>
+      <td>-0.19</td>
+      <td>-0.10</td>
+      <td>0.02</td>
+      <td>0.15</td>
+      <td>0.29</td>
+      <td>0.42</td>
+      <td>0.53</td>
+      <td>0.61</td>
+    </tr>
+    <tr>
+      <th>29</th>
+      <td>0.63</td>
+      <td>0.60</td>
+      <td>0.53</td>
+      <td>0.41</td>
+      <td>0.28</td>
+      <td>0.13</td>
+      <td>-0.01</td>
+      <td>-0.13</td>
+      <td>-0.23</td>
+      <td>-0.30</td>
+      <td>-0.35</td>
+      <td>-0.38</td>
+      <td>-0.39</td>
+      <td>-0.39</td>
+      <td>-0.37</td>
+      <td>-0.32</td>
+      <td>-0.26</td>
+      <td>-0.16</td>
+      <td>-0.05</td>
+      <td>0.08</td>
+      <td>0.22</td>
+      <td>0.35</td>
+      <td>0.46</td>
+      <td>0.53</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="cell" data-outputid="2d66098e-83d9-41fc-906f-17db868ef454" data-execution_count="40">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Although 1 hour lag correlation is more strong, but we cannot use it, as we intend to predict </span><span class="ch">\</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="st">the power consumption for the next day."</span>)</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>plt_residual_lag(res,<span class="dv">1</span>)</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>plt_residual_lag(res,<span class="dv">24</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Although 1 hour lag correlation is more strong, but we cannot use it, as we intend to predict the power consumption for the next day.</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Lec6_Autocorrelation_files/figure-html/cell-11-output-2.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Lec6_Autocorrelation_files/figure-html/cell-11-output-3.png" class="img-fluid"></p>
+</div>
+</div>
+</section>
+<section id="predictors-temperature-one-day-lag-of-power." class="level2" data-number="6.4">
+<h2 data-number="6.4" class="anchored" data-anchor-id="predictors-temperature-one-day-lag-of-power."><span class="header-section-number">6.4</span> Predictors: Temperature + one day lag of power.</h2>
+<div class="cell" data-outputid="6f3acaf6-dea9-4a89-fe3c-4bebf5fe7183">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'power_lag_1_day'</span>]<span class="op">=</span>df[<span class="st">'power'</span>].shift(<span class="dv">24</span>)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>df.tail()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="11">
+
+
+  <div id="df-78f51adf-53c6-46d8-a40f-03df3b33f084">
+    <div class="colab-df-container">
+      <div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>key</th>
+      <th>Date</th>
+      <th>Hour</th>
+      <th>power</th>
+      <th>temperature</th>
+      <th>temp_hot</th>
+      <th>temp_cold</th>
+      <th>power_lag_1_day</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>35059</th>
+      <td>20201231:19</td>
+      <td>2020-12-31</td>
+      <td>19</td>
+      <td>5948</td>
+      <td>4.9</td>
+      <td>0.0</td>
+      <td>4.9</td>
+      <td>6163.0</td>
+    </tr>
+    <tr>
+      <th>35060</th>
+      <td>20201231:20</td>
+      <td>2020-12-31</td>
+      <td>20</td>
+      <td>5741</td>
+      <td>4.5</td>
+      <td>0.0</td>
+      <td>4.5</td>
+      <td>5983.0</td>
+    </tr>
+    <tr>
+      <th>35061</th>
+      <td>20201231:21</td>
+      <td>2020-12-31</td>
+      <td>21</td>
+      <td>5527</td>
+      <td>3.7</td>
+      <td>0.0</td>
+      <td>3.7</td>
+      <td>5727.0</td>
+    </tr>
+    <tr>
+      <th>35062</th>
+      <td>20201231:22</td>
+      <td>2020-12-31</td>
+      <td>22</td>
+      <td>5301</td>
+      <td>2.9</td>
+      <td>0.0</td>
+      <td>2.9</td>
+      <td>5428.0</td>
+    </tr>
+    <tr>
+      <th>35063</th>
+      <td>20201231:23</td>
+      <td>2020-12-31</td>
+      <td>23</td>
+      <td>5094</td>
+      <td>2.1</td>
+      <td>0.0</td>
+      <td>2.1</td>
+      <td>5104.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+      <button class="colab-df-convert" onclick="convertToInteractive('df-78f51adf-53c6-46d8-a40f-03df3b33f084')" title="Convert this dataframe to an interactive table." style="display:none;">
+        
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewbox="0 0 24 24" width="24px">
+    <path d="M0 0h24v24H0V0z" fill="none"></path>
+    <path d="M18.56 5.44l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94zm-11 1L8.5 8.5l.94-2.06 2.06-.94-2.06-.94L8.5 2.5l-.94 2.06-2.06.94zm10 10l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94z"></path><path d="M17.41 7.96l-1.37-1.37c-.4-.4-.92-.59-1.43-.59-.52 0-1.04.2-1.43.59L10.3 9.45l-7.72 7.72c-.78.78-.78 2.05 0 2.83L4 21.41c.39.39.9.59 1.41.59.51 0 1.02-.2 1.41-.59l7.78-7.78 2.81-2.81c.8-.78.8-2.07 0-2.86zM5.41 20L4 18.59l7.72-7.72 1.47 1.35L5.41 20z"></path>
+  </svg>
+      </button>
+      
+  <style>
+    .colab-df-container {
+      display:flex;
+      flex-wrap:wrap;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+      <script>
+        const buttonEl =
+          document.querySelector('#df-78f51adf-53c6-46d8-a40f-03df3b33f084 button.colab-df-convert');
+        buttonEl.style.display =
+          google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+        async function convertToInteractive(key) {
+          const element = document.querySelector('#df-78f51adf-53c6-46d8-a40f-03df3b33f084');
+          const dataTable =
+            await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                     [key], {});
+          if (!dataTable) return;
+
+          const docLinkHtml = 'Like what you see? Visit the ' +
+            '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+            + ' to learn more about interactive tables.';
+          element.innerHTML = '';
+          dataTable['output_type'] = 'display_data';
+          await google.colab.output.renderOutput(dataTable, element);
+          const docLink = document.createElement('div');
+          docLink.innerHTML = docLinkHtml;
+          element.appendChild(docLink);
+        }
+      </script>
+    </div>
+  </div>
+  
+</div>
+</div>
+<div class="cell" data-outputid="22e7ed4d-c767-43b5-bd99-dbb984096bfc">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>res<span class="op">=</span>build_model([<span class="st">'temp_hot'</span>, <span class="st">'temp_cold'</span>, <span class="st">'power_lag_1_day'</span> ])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/usr/local/lib/python3.8/dist-packages/statsmodels/tsa/tsatools.py:142: FutureWarning: In a future version of pandas all arguments of concat except for the argument 'objs' will be keyword-only
+  x = pd.concat(x[::order], 1)</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+
+<table class="simpletable">
+<caption>OLS Regression Results</caption>
+<tbody><tr>
+  <th>Dep. Variable:</th>          <td>power</td>      <th>  R-squared:         </th>  <td>   0.794</td>  
+</tr>
+<tr>
+  <th>Model:</th>                   <td>OLS</td>       <th>  Adj. R-squared:    </th>  <td>   0.794</td>  
+</tr>
+<tr>
+  <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th>  <td>4.513e+04</td> 
+</tr>
+<tr>
+  <th>Date:</th>             <td>Sun, 22 Jan 2023</td> <th>  Prob (F-statistic):</th>   <td>  0.00</td>   
+</tr>
+<tr>
+  <th>Time:</th>                 <td>19:21:14</td>     <th>  Log-Likelihood:    </th> <td>-2.6375e+05</td>
+</tr>
+<tr>
+  <th>No. Observations:</th>      <td> 35040</td>      <th>  AIC:               </th>  <td>5.275e+05</td> 
+</tr>
+<tr>
+  <th>Df Residuals:</th>          <td> 35036</td>      <th>  BIC:               </th>  <td>5.275e+05</td> 
+</tr>
+<tr>
+  <th>Df Model:</th>              <td>     3</td>      <th>                     </th>      <td> </td>     
+</tr>
+<tr>
+  <th>Covariance Type:</th>      <td>nonrobust</td>    <th>                     </th>      <td> </td>     
+</tr>
+</tbody></table>
+<table class="simpletable">
+<tbody><tr>
+         <td></td>            <th>coef</th>     <th>std err</th>      <th>t</th>      <th>P&gt;|t|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>const</th>           <td>  689.2701</td> <td>   15.384</td> <td>   44.806</td> <td> 0.000</td> <td>  659.118</td> <td>  719.422</td>
+</tr>
+<tr>
+  <th>temp_hot</th>        <td>    3.2158</td> <td>    0.250</td> <td>   12.853</td> <td> 0.000</td> <td>    2.725</td> <td>    3.706</td>
+</tr>
+<tr>
+  <th>temp_cold</th>       <td>   -1.3464</td> <td>    0.433</td> <td>   -3.110</td> <td> 0.002</td> <td>   -2.195</td> <td>   -0.498</td>
+</tr>
+<tr>
+  <th>power_lag_1_day</th> <td>    0.8747</td> <td>    0.003</td> <td>  319.552</td> <td> 0.000</td> <td>    0.869</td> <td>    0.880</td>
+</tr>
+</tbody></table>
+<table class="simpletable">
+<tbody><tr>
+  <th>Omnibus:</th>       <td>2035.537</td> <th>  Durbin-Watson:     </th> <td>   0.041</td>
+</tr>
+<tr>
+  <th>Prob(Omnibus):</th>  <td> 0.000</td>  <th>  Jarque-Bera (JB):  </th> <td>5794.290</td>
+</tr>
+<tr>
+  <th>Skew:</th>           <td> 0.301</td>  <th>  Prob(JB):          </th> <td>    0.00</td>
+</tr>
+<tr>
+  <th>Kurtosis:</th>       <td> 4.899</td>  <th>  Cond. No.          </th> <td>3.69e+04</td>
+</tr>
+</tbody></table><br><br>Notes:<br>[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.<br>[2] The condition number is large, 3.69e+04. This might indicate that there are<br>strong multicollinearity or other numerical problems.
+</div>
+</div>
+<div class="cell" data-outputid="edc81bef-fce6-43a1-ea25-97d810767373">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>plt_residual(res)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="Lec6_Autocorrelation_files/figure-html/cell-14-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="cell" data-outputid="8572fd0b-0b59-45f9-bc94-6013d7025471">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>plt_acf(res)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/usr/local/lib/python3.8/dist-packages/statsmodels/tsa/stattools.py:667: FutureWarning: fft=True will become the default after the release of the 0.12 release of statsmodels. To suppress this warning, explicitly set fft=False.
+  warnings.warn(</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Lec6_Autocorrelation_files/figure-html/cell-15-output-2.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+
+
+  <div id="df-a25876c0-1fda-4525-94b8-e2cc19e8674f">
+    <div class="colab-df-container">
+      <div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>0</th>
+      <th>1</th>
+      <th>2</th>
+      <th>3</th>
+      <th>4</th>
+      <th>5</th>
+      <th>6</th>
+      <th>7</th>
+      <th>8</th>
+      <th>9</th>
+      <th>10</th>
+      <th>11</th>
+      <th>12</th>
+      <th>13</th>
+      <th>14</th>
+      <th>15</th>
+      <th>16</th>
+      <th>17</th>
+      <th>18</th>
+      <th>19</th>
+      <th>20</th>
+      <th>21</th>
+      <th>22</th>
+      <th>23</th>
+    </tr>
+    <tr>
+      <th>day</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1.00</td>
+      <td>0.98</td>
+      <td>0.93</td>
+      <td>0.87</td>
+      <td>0.81</td>
+      <td>0.75</td>
+      <td>0.70</td>
+      <td>0.64</td>
+      <td>0.59</td>
+      <td>0.54</td>
+      <td>0.50</td>
+      <td>0.46</td>
+      <td>0.42</td>
+      <td>0.39</td>
+      <td>0.35</td>
+      <td>0.31</td>
+      <td>0.28</td>
+      <td>0.25</td>
+      <td>0.22</td>
+      <td>0.20</td>
+      <td>0.17</td>
+      <td>0.15</td>
+      <td>0.12</td>
+      <td>0.09</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.07</td>
+      <td>0.05</td>
+      <td>0.03</td>
+      <td>0.00</td>
+      <td>-0.02</td>
+      <td>-0.04</td>
+      <td>-0.06</td>
+      <td>-0.08</td>
+      <td>-0.10</td>
+      <td>-0.12</td>
+      <td>-0.14</td>
+      <td>-0.15</td>
+      <td>-0.16</td>
+      <td>-0.17</td>
+      <td>-0.18</td>
+      <td>-0.19</td>
+      <td>-0.19</td>
+      <td>-0.20</td>
+      <td>-0.20</td>
+      <td>-0.20</td>
+      <td>-0.21</td>
+      <td>-0.21</td>
+      <td>-0.22</td>
+      <td>-0.22</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>-0.23</td>
+      <td>-0.23</td>
+      <td>-0.22</td>
+      <td>-0.22</td>
+      <td>-0.21</td>
+      <td>-0.21</td>
+      <td>-0.21</td>
+      <td>-0.21</td>
+      <td>-0.21</td>
+      <td>-0.20</td>
+      <td>-0.20</td>
+      <td>-0.19</td>
+      <td>-0.18</td>
+      <td>-0.18</td>
+      <td>-0.17</td>
+      <td>-0.16</td>
+      <td>-0.15</td>
+      <td>-0.14</td>
+      <td>-0.12</td>
+      <td>-0.11</td>
+      <td>-0.10</td>
+      <td>-0.09</td>
+      <td>-0.08</td>
+      <td>-0.08</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>-0.07</td>
+      <td>-0.07</td>
+      <td>-0.07</td>
+      <td>-0.07</td>
+      <td>-0.08</td>
+      <td>-0.09</td>
+      <td>-0.09</td>
+      <td>-0.10</td>
+      <td>-0.11</td>
+      <td>-0.11</td>
+      <td>-0.11</td>
+      <td>-0.12</td>
+      <td>-0.12</td>
+      <td>-0.12</td>
+      <td>-0.11</td>
+      <td>-0.11</td>
+      <td>-0.11</td>
+      <td>-0.10</td>
+      <td>-0.09</td>
+      <td>-0.09</td>
+      <td>-0.08</td>
+      <td>-0.07</td>
+      <td>-0.07</td>
+      <td>-0.07</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>-0.07</td>
+      <td>-0.07</td>
+      <td>-0.07</td>
+      <td>-0.08</td>
+      <td>-0.09</td>
+      <td>-0.10</td>
+      <td>-0.11</td>
+      <td>-0.12</td>
+      <td>-0.13</td>
+      <td>-0.14</td>
+      <td>-0.14</td>
+      <td>-0.15</td>
+      <td>-0.16</td>
+      <td>-0.16</td>
+      <td>-0.16</td>
+      <td>-0.17</td>
+      <td>-0.17</td>
+      <td>-0.17</td>
+      <td>-0.17</td>
+      <td>-0.17</td>
+      <td>-0.17</td>
+      <td>-0.17</td>
+      <td>-0.18</td>
+      <td>-0.18</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>-0.18</td>
+      <td>-0.18</td>
+      <td>-0.17</td>
+      <td>-0.17</td>
+      <td>-0.17</td>
+      <td>-0.16</td>
+      <td>-0.16</td>
+      <td>-0.16</td>
+      <td>-0.16</td>
+      <td>-0.15</td>
+      <td>-0.14</td>
+      <td>-0.14</td>
+      <td>-0.13</td>
+      <td>-0.12</td>
+      <td>-0.10</td>
+      <td>-0.09</td>
+      <td>-0.07</td>
+      <td>-0.05</td>
+      <td>-0.04</td>
+      <td>-0.02</td>
+      <td>0.00</td>
+      <td>0.02</td>
+      <td>0.04</td>
+      <td>0.06</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>0.07</td>
+      <td>0.08</td>
+      <td>0.09</td>
+      <td>0.09</td>
+      <td>0.10</td>
+      <td>0.10</td>
+      <td>0.11</td>
+      <td>0.12</td>
+      <td>0.13</td>
+      <td>0.14</td>
+      <td>0.16</td>
+      <td>0.18</td>
+      <td>0.19</td>
+      <td>0.21</td>
+      <td>0.23</td>
+      <td>0.25</td>
+      <td>0.27</td>
+      <td>0.30</td>
+      <td>0.33</td>
+      <td>0.36</td>
+      <td>0.39</td>
+      <td>0.43</td>
+      <td>0.46</td>
+      <td>0.48</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>0.50</td>
+      <td>0.49</td>
+      <td>0.46</td>
+      <td>0.43</td>
+      <td>0.40</td>
+      <td>0.37</td>
+      <td>0.34</td>
+      <td>0.31</td>
+      <td>0.28</td>
+      <td>0.26</td>
+      <td>0.24</td>
+      <td>0.22</td>
+      <td>0.21</td>
+      <td>0.19</td>
+      <td>0.18</td>
+      <td>0.16</td>
+      <td>0.15</td>
+      <td>0.14</td>
+      <td>0.13</td>
+      <td>0.13</td>
+      <td>0.12</td>
+      <td>0.12</td>
+      <td>0.12</td>
+      <td>0.11</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>0.10</td>
+      <td>0.09</td>
+      <td>0.07</td>
+      <td>0.06</td>
+      <td>0.04</td>
+      <td>0.02</td>
+      <td>-0.00</td>
+      <td>-0.02</td>
+      <td>-0.04</td>
+      <td>-0.05</td>
+      <td>-0.07</td>
+      <td>-0.08</td>
+      <td>-0.09</td>
+      <td>-0.10</td>
+      <td>-0.11</td>
+      <td>-0.11</td>
+      <td>-0.12</td>
+      <td>-0.12</td>
+      <td>-0.13</td>
+      <td>-0.13</td>
+      <td>-0.13</td>
+      <td>-0.14</td>
+      <td>-0.15</td>
+      <td>-0.15</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>-0.16</td>
+      <td>-0.16</td>
+      <td>-0.16</td>
+      <td>-0.15</td>
+      <td>-0.16</td>
+      <td>-0.16</td>
+      <td>-0.16</td>
+      <td>-0.16</td>
+      <td>-0.16</td>
+      <td>-0.16</td>
+      <td>-0.15</td>
+      <td>-0.15</td>
+      <td>-0.14</td>
+      <td>-0.14</td>
+      <td>-0.13</td>
+      <td>-0.12</td>
+      <td>-0.11</td>
+      <td>-0.10</td>
+      <td>-0.09</td>
+      <td>-0.07</td>
+      <td>-0.06</td>
+      <td>-0.05</td>
+      <td>-0.04</td>
+      <td>-0.04</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>-0.03</td>
+      <td>-0.03</td>
+      <td>-0.03</td>
+      <td>-0.03</td>
+      <td>-0.04</td>
+      <td>-0.04</td>
+      <td>-0.05</td>
+      <td>-0.06</td>
+      <td>-0.06</td>
+      <td>-0.07</td>
+      <td>-0.07</td>
+      <td>-0.07</td>
+      <td>-0.07</td>
+      <td>-0.07</td>
+      <td>-0.07</td>
+      <td>-0.07</td>
+      <td>-0.06</td>
+      <td>-0.05</td>
+      <td>-0.05</td>
+      <td>-0.04</td>
+      <td>-0.03</td>
+      <td>-0.02</td>
+      <td>-0.02</td>
+      <td>-0.01</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>-0.01</td>
+      <td>-0.01</td>
+      <td>-0.02</td>
+      <td>-0.03</td>
+      <td>-0.03</td>
+      <td>-0.04</td>
+      <td>-0.05</td>
+      <td>-0.06</td>
+      <td>-0.07</td>
+      <td>-0.08</td>
+      <td>-0.09</td>
+      <td>-0.10</td>
+      <td>-0.11</td>
+      <td>-0.11</td>
+      <td>-0.11</td>
+      <td>-0.12</td>
+      <td>-0.12</td>
+      <td>-0.12</td>
+      <td>-0.12</td>
+      <td>-0.12</td>
+      <td>-0.12</td>
+      <td>-0.12</td>
+      <td>-0.13</td>
+      <td>-0.13</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>-0.14</td>
+      <td>-0.14</td>
+      <td>-0.13</td>
+      <td>-0.13</td>
+      <td>-0.13</td>
+      <td>-0.13</td>
+      <td>-0.14</td>
+      <td>-0.14</td>
+      <td>-0.13</td>
+      <td>-0.13</td>
+      <td>-0.13</td>
+      <td>-0.12</td>
+      <td>-0.11</td>
+      <td>-0.10</td>
+      <td>-0.09</td>
+      <td>-0.08</td>
+      <td>-0.06</td>
+      <td>-0.05</td>
+      <td>-0.03</td>
+      <td>-0.01</td>
+      <td>0.01</td>
+      <td>0.03</td>
+      <td>0.05</td>
+      <td>0.07</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>0.08</td>
+      <td>0.09</td>
+      <td>0.10</td>
+      <td>0.10</td>
+      <td>0.11</td>
+      <td>0.11</td>
+      <td>0.12</td>
+      <td>0.13</td>
+      <td>0.14</td>
+      <td>0.15</td>
+      <td>0.17</td>
+      <td>0.18</td>
+      <td>0.20</td>
+      <td>0.22</td>
+      <td>0.23</td>
+      <td>0.26</td>
+      <td>0.28</td>
+      <td>0.31</td>
+      <td>0.33</td>
+      <td>0.36</td>
+      <td>0.40</td>
+      <td>0.43</td>
+      <td>0.46</td>
+      <td>0.48</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>0.49</td>
+      <td>0.48</td>
+      <td>0.46</td>
+      <td>0.43</td>
+      <td>0.40</td>
+      <td>0.37</td>
+      <td>0.34</td>
+      <td>0.31</td>
+      <td>0.28</td>
+      <td>0.26</td>
+      <td>0.24</td>
+      <td>0.23</td>
+      <td>0.21</td>
+      <td>0.20</td>
+      <td>0.18</td>
+      <td>0.17</td>
+      <td>0.15</td>
+      <td>0.14</td>
+      <td>0.13</td>
+      <td>0.13</td>
+      <td>0.12</td>
+      <td>0.12</td>
+      <td>0.12</td>
+      <td>0.11</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>0.10</td>
+      <td>0.09</td>
+      <td>0.07</td>
+      <td>0.05</td>
+      <td>0.03</td>
+      <td>0.01</td>
+      <td>-0.01</td>
+      <td>-0.03</td>
+      <td>-0.05</td>
+      <td>-0.07</td>
+      <td>-0.08</td>
+      <td>-0.10</td>
+      <td>-0.11</td>
+      <td>-0.12</td>
+      <td>-0.13</td>
+      <td>-0.14</td>
+      <td>-0.14</td>
+      <td>-0.15</td>
+      <td>-0.15</td>
+      <td>-0.15</td>
+      <td>-0.15</td>
+      <td>-0.16</td>
+      <td>-0.16</td>
+      <td>-0.17</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>-0.17</td>
+      <td>-0.17</td>
+      <td>-0.17</td>
+      <td>-0.17</td>
+      <td>-0.16</td>
+      <td>-0.16</td>
+      <td>-0.17</td>
+      <td>-0.17</td>
+      <td>-0.16</td>
+      <td>-0.16</td>
+      <td>-0.16</td>
+      <td>-0.16</td>
+      <td>-0.15</td>
+      <td>-0.14</td>
+      <td>-0.13</td>
+      <td>-0.12</td>
+      <td>-0.11</td>
+      <td>-0.10</td>
+      <td>-0.09</td>
+      <td>-0.07</td>
+      <td>-0.06</td>
+      <td>-0.05</td>
+      <td>-0.04</td>
+      <td>-0.03</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>-0.03</td>
+      <td>-0.02</td>
+      <td>-0.02</td>
+      <td>-0.03</td>
+      <td>-0.03</td>
+      <td>-0.04</td>
+      <td>-0.04</td>
+      <td>-0.05</td>
+      <td>-0.05</td>
+      <td>-0.06</td>
+      <td>-0.06</td>
+      <td>-0.06</td>
+      <td>-0.06</td>
+      <td>-0.06</td>
+      <td>-0.06</td>
+      <td>-0.06</td>
+      <td>-0.05</td>
+      <td>-0.05</td>
+      <td>-0.04</td>
+      <td>-0.04</td>
+      <td>-0.03</td>
+      <td>-0.03</td>
+      <td>-0.03</td>
+      <td>-0.03</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>-0.03</td>
+      <td>-0.04</td>
+      <td>-0.04</td>
+      <td>-0.05</td>
+      <td>-0.06</td>
+      <td>-0.08</td>
+      <td>-0.09</td>
+      <td>-0.10</td>
+      <td>-0.11</td>
+      <td>-0.12</td>
+      <td>-0.13</td>
+      <td>-0.14</td>
+      <td>-0.15</td>
+      <td>-0.15</td>
+      <td>-0.16</td>
+      <td>-0.16</td>
+      <td>-0.16</td>
+      <td>-0.17</td>
+      <td>-0.17</td>
+      <td>-0.17</td>
+      <td>-0.17</td>
+      <td>-0.17</td>
+      <td>-0.17</td>
+      <td>-0.17</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>-0.17</td>
+      <td>-0.17</td>
+      <td>-0.16</td>
+      <td>-0.16</td>
+      <td>-0.15</td>
+      <td>-0.15</td>
+      <td>-0.15</td>
+      <td>-0.15</td>
+      <td>-0.14</td>
+      <td>-0.13</td>
+      <td>-0.13</td>
+      <td>-0.12</td>
+      <td>-0.11</td>
+      <td>-0.10</td>
+      <td>-0.09</td>
+      <td>-0.07</td>
+      <td>-0.05</td>
+      <td>-0.03</td>
+      <td>-0.02</td>
+      <td>0.00</td>
+      <td>0.03</td>
+      <td>0.05</td>
+      <td>0.07</td>
+      <td>0.08</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>0.10</td>
+      <td>0.10</td>
+      <td>0.11</td>
+      <td>0.11</td>
+      <td>0.12</td>
+      <td>0.12</td>
+      <td>0.12</td>
+      <td>0.13</td>
+      <td>0.14</td>
+      <td>0.15</td>
+      <td>0.17</td>
+      <td>0.18</td>
+      <td>0.20</td>
+      <td>0.21</td>
+      <td>0.23</td>
+      <td>0.25</td>
+      <td>0.27</td>
+      <td>0.29</td>
+      <td>0.32</td>
+      <td>0.35</td>
+      <td>0.38</td>
+      <td>0.41</td>
+      <td>0.44</td>
+      <td>0.47</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>0.47</td>
+      <td>0.46</td>
+      <td>0.44</td>
+      <td>0.41</td>
+      <td>0.38</td>
+      <td>0.35</td>
+      <td>0.32</td>
+      <td>0.29</td>
+      <td>0.26</td>
+      <td>0.24</td>
+      <td>0.22</td>
+      <td>0.21</td>
+      <td>0.19</td>
+      <td>0.18</td>
+      <td>0.16</td>
+      <td>0.15</td>
+      <td>0.13</td>
+      <td>0.13</td>
+      <td>0.12</td>
+      <td>0.12</td>
+      <td>0.11</td>
+      <td>0.11</td>
+      <td>0.11</td>
+      <td>0.10</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>0.10</td>
+      <td>0.09</td>
+      <td>0.07</td>
+      <td>0.05</td>
+      <td>0.03</td>
+      <td>0.01</td>
+      <td>-0.00</td>
+      <td>-0.02</td>
+      <td>-0.04</td>
+      <td>-0.05</td>
+      <td>-0.07</td>
+      <td>-0.08</td>
+      <td>-0.09</td>
+      <td>-0.10</td>
+      <td>-0.10</td>
+      <td>-0.11</td>
+      <td>-0.12</td>
+      <td>-0.12</td>
+      <td>-0.12</td>
+      <td>-0.13</td>
+      <td>-0.13</td>
+      <td>-0.13</td>
+      <td>-0.14</td>
+      <td>-0.14</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>-0.14</td>
+      <td>-0.14</td>
+      <td>-0.14</td>
+      <td>-0.14</td>
+      <td>-0.14</td>
+      <td>-0.14</td>
+      <td>-0.14</td>
+      <td>-0.14</td>
+      <td>-0.14</td>
+      <td>-0.14</td>
+      <td>-0.13</td>
+      <td>-0.13</td>
+      <td>-0.13</td>
+      <td>-0.12</td>
+      <td>-0.11</td>
+      <td>-0.11</td>
+      <td>-0.10</td>
+      <td>-0.09</td>
+      <td>-0.08</td>
+      <td>-0.07</td>
+      <td>-0.06</td>
+      <td>-0.05</td>
+      <td>-0.04</td>
+      <td>-0.03</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>-0.03</td>
+      <td>-0.03</td>
+      <td>-0.03</td>
+      <td>-0.04</td>
+      <td>-0.05</td>
+      <td>-0.05</td>
+      <td>-0.06</td>
+      <td>-0.07</td>
+      <td>-0.08</td>
+      <td>-0.08</td>
+      <td>-0.09</td>
+      <td>-0.09</td>
+      <td>-0.09</td>
+      <td>-0.09</td>
+      <td>-0.08</td>
+      <td>-0.08</td>
+      <td>-0.08</td>
+      <td>-0.07</td>
+      <td>-0.06</td>
+      <td>-0.05</td>
+      <td>-0.05</td>
+      <td>-0.04</td>
+      <td>-0.04</td>
+      <td>-0.03</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>-0.03</td>
+      <td>-0.04</td>
+      <td>-0.04</td>
+      <td>-0.05</td>
+      <td>-0.06</td>
+      <td>-0.07</td>
+      <td>-0.08</td>
+      <td>-0.09</td>
+      <td>-0.10</td>
+      <td>-0.11</td>
+      <td>-0.12</td>
+      <td>-0.13</td>
+      <td>-0.14</td>
+      <td>-0.14</td>
+      <td>-0.15</td>
+      <td>-0.15</td>
+      <td>-0.15</td>
+      <td>-0.15</td>
+      <td>-0.16</td>
+      <td>-0.16</td>
+      <td>-0.16</td>
+      <td>-0.16</td>
+      <td>-0.16</td>
+      <td>-0.16</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>-0.17</td>
+      <td>-0.17</td>
+      <td>-0.16</td>
+      <td>-0.16</td>
+      <td>-0.16</td>
+      <td>-0.15</td>
+      <td>-0.15</td>
+      <td>-0.15</td>
+      <td>-0.15</td>
+      <td>-0.14</td>
+      <td>-0.13</td>
+      <td>-0.13</td>
+      <td>-0.12</td>
+      <td>-0.11</td>
+      <td>-0.10</td>
+      <td>-0.08</td>
+      <td>-0.07</td>
+      <td>-0.05</td>
+      <td>-0.03</td>
+      <td>-0.01</td>
+      <td>0.01</td>
+      <td>0.03</td>
+      <td>0.05</td>
+      <td>0.07</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>0.08</td>
+      <td>0.09</td>
+      <td>0.10</td>
+      <td>0.11</td>
+      <td>0.11</td>
+      <td>0.12</td>
+      <td>0.12</td>
+      <td>0.13</td>
+      <td>0.14</td>
+      <td>0.16</td>
+      <td>0.18</td>
+      <td>0.19</td>
+      <td>0.21</td>
+      <td>0.22</td>
+      <td>0.24</td>
+      <td>0.26</td>
+      <td>0.28</td>
+      <td>0.31</td>
+      <td>0.34</td>
+      <td>0.37</td>
+      <td>0.40</td>
+      <td>0.43</td>
+      <td>0.46</td>
+      <td>0.48</td>
+    </tr>
+    <tr>
+      <th>28</th>
+      <td>0.49</td>
+      <td>0.48</td>
+      <td>0.45</td>
+      <td>0.42</td>
+      <td>0.39</td>
+      <td>0.36</td>
+      <td>0.33</td>
+      <td>0.30</td>
+      <td>0.27</td>
+      <td>0.25</td>
+      <td>0.23</td>
+      <td>0.22</td>
+      <td>0.20</td>
+      <td>0.19</td>
+      <td>0.17</td>
+      <td>0.16</td>
+      <td>0.14</td>
+      <td>0.13</td>
+      <td>0.12</td>
+      <td>0.12</td>
+      <td>0.11</td>
+      <td>0.11</td>
+      <td>0.11</td>
+      <td>0.10</td>
+    </tr>
+    <tr>
+      <th>29</th>
+      <td>0.09</td>
+      <td>0.08</td>
+      <td>0.06</td>
+      <td>0.04</td>
+      <td>0.02</td>
+      <td>-0.00</td>
+      <td>-0.02</td>
+      <td>-0.04</td>
+      <td>-0.06</td>
+      <td>-0.08</td>
+      <td>-0.09</td>
+      <td>-0.10</td>
+      <td>-0.12</td>
+      <td>-0.13</td>
+      <td>-0.14</td>
+      <td>-0.14</td>
+      <td>-0.15</td>
+      <td>-0.15</td>
+      <td>-0.16</td>
+      <td>-0.16</td>
+      <td>-0.16</td>
+      <td>-0.17</td>
+      <td>-0.17</td>
+      <td>-0.18</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+      <button class="colab-df-convert" onclick="convertToInteractive('df-a25876c0-1fda-4525-94b8-e2cc19e8674f')" title="Convert this dataframe to an interactive table." style="display:none;">
+        
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewbox="0 0 24 24" width="24px">
+    <path d="M0 0h24v24H0V0z" fill="none"></path>
+    <path d="M18.56 5.44l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94zm-11 1L8.5 8.5l.94-2.06 2.06-.94-2.06-.94L8.5 2.5l-.94 2.06-2.06.94zm10 10l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94z"></path><path d="M17.41 7.96l-1.37-1.37c-.4-.4-.92-.59-1.43-.59-.52 0-1.04.2-1.43.59L10.3 9.45l-7.72 7.72c-.78.78-.78 2.05 0 2.83L4 21.41c.39.39.9.59 1.41.59.51 0 1.02-.2 1.41-.59l7.78-7.78 2.81-2.81c.8-.78.8-2.07 0-2.86zM5.41 20L4 18.59l7.72-7.72 1.47 1.35L5.41 20z"></path>
+  </svg>
+      </button>
+      
+  <style>
+    .colab-df-container {
+      display:flex;
+      flex-wrap:wrap;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+      <script>
+        const buttonEl =
+          document.querySelector('#df-a25876c0-1fda-4525-94b8-e2cc19e8674f button.colab-df-convert');
+        buttonEl.style.display =
+          google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+        async function convertToInteractive(key) {
+          const element = document.querySelector('#df-a25876c0-1fda-4525-94b8-e2cc19e8674f');
+          const dataTable =
+            await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                     [key], {});
+          if (!dataTable) return;
+
+          const docLinkHtml = 'Like what you see? Visit the ' +
+            '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+            + ' to learn more about interactive tables.';
+          element.innerHTML = '';
+          dataTable['output_type'] = 'display_data';
+          await google.colab.output.renderOutput(dataTable, element);
+          const docLink = document.createElement('div');
+          docLink.innerHTML = docLinkHtml;
+          element.appendChild(docLink);
+        }
+      </script>
+    </div>
+  </div>
+  
+</div>
+</div>
+<div class="cell" data-outputid="deacea89-1cf0-43f7-dc64-13f61398b1d1">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>plt_residual_lag(res, <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="Lec6_Autocorrelation_files/figure-html/cell-16-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="cell" data-outputid="b5115e67-4f66-4279-b167-ce30e9edd251">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>plt_residual_lag(res, <span class="dv">24</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="Lec6_Autocorrelation_files/figure-html/cell-17-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="cell" data-outputid="a13a98a6-48da-475e-aa65-627a61600718">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>plt_residual_lag(res, <span class="dv">24</span><span class="op">*</span><span class="dv">7</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="Lec6_Autocorrelation_files/figure-html/cell-18-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+</section>
+<section id="predictors-temperature-1-day-lag-of-power-1-week-lag-of-power" class="level2" data-number="6.5">
+<h2 data-number="6.5" class="anchored" data-anchor-id="predictors-temperature-1-day-lag-of-power-1-week-lag-of-power"><span class="header-section-number">6.5</span> Predictors: Temperature + 1 day lag of power + 1 week lag of power</h2>
+<div class="cell" data-outputid="d23f389b-acf8-4050-e4d0-557ca4fc03ce">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'power_lag_1_week'</span>]<span class="op">=</span>df[<span class="st">'power'</span>].shift(<span class="dv">24</span><span class="op">*</span><span class="dv">7</span>)</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>df.tail()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="18">
+
+
+  <div id="df-a90a1e02-2809-4e8a-81b4-361e922c98d1">
+    <div class="colab-df-container">
+      <div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>key</th>
+      <th>Date</th>
+      <th>Hour</th>
+      <th>power</th>
+      <th>temperature</th>
+      <th>temp_hot</th>
+      <th>temp_cold</th>
+      <th>power_lag_1_day</th>
+      <th>power_lag_1_week</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>35059</th>
+      <td>20201231:19</td>
+      <td>2020-12-31</td>
+      <td>19</td>
+      <td>5948</td>
+      <td>4.9</td>
+      <td>0.0</td>
+      <td>4.9</td>
+      <td>6163.0</td>
+      <td>5833.0</td>
+    </tr>
+    <tr>
+      <th>35060</th>
+      <td>20201231:20</td>
+      <td>2020-12-31</td>
+      <td>20</td>
+      <td>5741</td>
+      <td>4.5</td>
+      <td>0.0</td>
+      <td>4.5</td>
+      <td>5983.0</td>
+      <td>5665.0</td>
+    </tr>
+    <tr>
+      <th>35061</th>
+      <td>20201231:21</td>
+      <td>2020-12-31</td>
+      <td>21</td>
+      <td>5527</td>
+      <td>3.7</td>
+      <td>0.0</td>
+      <td>3.7</td>
+      <td>5727.0</td>
+      <td>5474.0</td>
+    </tr>
+    <tr>
+      <th>35062</th>
+      <td>20201231:22</td>
+      <td>2020-12-31</td>
+      <td>22</td>
+      <td>5301</td>
+      <td>2.9</td>
+      <td>0.0</td>
+      <td>2.9</td>
+      <td>5428.0</td>
+      <td>5273.0</td>
+    </tr>
+    <tr>
+      <th>35063</th>
+      <td>20201231:23</td>
+      <td>2020-12-31</td>
+      <td>23</td>
+      <td>5094</td>
+      <td>2.1</td>
+      <td>0.0</td>
+      <td>2.1</td>
+      <td>5104.0</td>
+      <td>5010.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+      <button class="colab-df-convert" onclick="convertToInteractive('df-a90a1e02-2809-4e8a-81b4-361e922c98d1')" title="Convert this dataframe to an interactive table." style="display:none;">
+        
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewbox="0 0 24 24" width="24px">
+    <path d="M0 0h24v24H0V0z" fill="none"></path>
+    <path d="M18.56 5.44l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94zm-11 1L8.5 8.5l.94-2.06 2.06-.94-2.06-.94L8.5 2.5l-.94 2.06-2.06.94zm10 10l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94z"></path><path d="M17.41 7.96l-1.37-1.37c-.4-.4-.92-.59-1.43-.59-.52 0-1.04.2-1.43.59L10.3 9.45l-7.72 7.72c-.78.78-.78 2.05 0 2.83L4 21.41c.39.39.9.59 1.41.59.51 0 1.02-.2 1.41-.59l7.78-7.78 2.81-2.81c.8-.78.8-2.07 0-2.86zM5.41 20L4 18.59l7.72-7.72 1.47 1.35L5.41 20z"></path>
+  </svg>
+      </button>
+      
+  <style>
+    .colab-df-container {
+      display:flex;
+      flex-wrap:wrap;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+      <script>
+        const buttonEl =
+          document.querySelector('#df-a90a1e02-2809-4e8a-81b4-361e922c98d1 button.colab-df-convert');
+        buttonEl.style.display =
+          google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+        async function convertToInteractive(key) {
+          const element = document.querySelector('#df-a90a1e02-2809-4e8a-81b4-361e922c98d1');
+          const dataTable =
+            await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                     [key], {});
+          if (!dataTable) return;
+
+          const docLinkHtml = 'Like what you see? Visit the ' +
+            '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+            + ' to learn more about interactive tables.';
+          element.innerHTML = '';
+          dataTable['output_type'] = 'display_data';
+          await google.colab.output.renderOutput(dataTable, element);
+          const docLink = document.createElement('div');
+          docLink.innerHTML = docLinkHtml;
+          element.appendChild(docLink);
+        }
+      </script>
+    </div>
+  </div>
+  
+</div>
+</div>
+<div class="cell" data-outputid="bbbca3ca-723f-4878-f6c1-606571b0cec9">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>res<span class="op">=</span>build_model([<span class="st">'temp_hot'</span>, <span class="st">'temp_cold'</span>, <span class="st">'power_lag_1_day'</span>, <span class="st">'power_lag_1_week'</span> ])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/usr/local/lib/python3.8/dist-packages/statsmodels/tsa/tsatools.py:142: FutureWarning: In a future version of pandas all arguments of concat except for the argument 'objs' will be keyword-only
+  x = pd.concat(x[::order], 1)</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+
+<table class="simpletable">
+<caption>OLS Regression Results</caption>
+<tbody><tr>
+  <th>Dep. Variable:</th>          <td>power</td>      <th>  R-squared:         </th>  <td>   0.840</td>  
+</tr>
+<tr>
+  <th>Model:</th>                   <td>OLS</td>       <th>  Adj. R-squared:    </th>  <td>   0.840</td>  
+</tr>
+<tr>
+  <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th>  <td>4.585e+04</td> 
+</tr>
+<tr>
+  <th>Date:</th>             <td>Sun, 22 Jan 2023</td> <th>  Prob (F-statistic):</th>   <td>  0.00</td>   
+</tr>
+<tr>
+  <th>Time:</th>                 <td>19:22:49</td>     <th>  Log-Likelihood:    </th> <td>-2.5830e+05</td>
+</tr>
+<tr>
+  <th>No. Observations:</th>      <td> 34896</td>      <th>  AIC:               </th>  <td>5.166e+05</td> 
+</tr>
+<tr>
+  <th>Df Residuals:</th>          <td> 34891</td>      <th>  BIC:               </th>  <td>5.167e+05</td> 
+</tr>
+<tr>
+  <th>Df Model:</th>              <td>     4</td>      <th>                     </th>      <td> </td>     
+</tr>
+<tr>
+  <th>Covariance Type:</th>      <td>nonrobust</td>    <th>                     </th>      <td> </td>     
+</tr>
+</tbody></table>
+<table class="simpletable">
+<tbody><tr>
+          <td></td>            <th>coef</th>     <th>std err</th>      <th>t</th>      <th>P&gt;|t|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>const</th>            <td>  290.4344</td> <td>   14.166</td> <td>   20.502</td> <td> 0.000</td> <td>  262.668</td> <td>  318.201</td>
+</tr>
+<tr>
+  <th>temp_hot</th>         <td>    3.2967</td> <td>    0.221</td> <td>   14.896</td> <td> 0.000</td> <td>    2.863</td> <td>    3.730</td>
+</tr>
+<tr>
+  <th>temp_cold</th>        <td>   -4.5938</td> <td>    0.385</td> <td>  -11.943</td> <td> 0.000</td> <td>   -5.348</td> <td>   -3.840</td>
+</tr>
+<tr>
+  <th>power_lag_1_day</th>  <td>    0.6114</td> <td>    0.004</td> <td>  170.709</td> <td> 0.000</td> <td>    0.604</td> <td>    0.618</td>
+</tr>
+<tr>
+  <th>power_lag_1_week</th> <td>    0.3342</td> <td>    0.003</td> <td>   99.595</td> <td> 0.000</td> <td>    0.328</td> <td>    0.341</td>
+</tr>
+</tbody></table>
+<table class="simpletable">
+<tbody><tr>
+  <th>Omnibus:</th>       <td>2729.372</td> <th>  Durbin-Watson:     </th> <td>   0.037</td> 
+</tr>
+<tr>
+  <th>Prob(Omnibus):</th>  <td> 0.000</td>  <th>  Jarque-Bera (JB):  </th> <td>11234.560</td>
+</tr>
+<tr>
+  <th>Skew:</th>           <td> 0.299</td>  <th>  Prob(JB):          </th> <td>    0.00</td> 
+</tr>
+<tr>
+  <th>Kurtosis:</th>       <td> 5.715</td>  <th>  Cond. No.          </th> <td>5.43e+04</td> 
+</tr>
+</tbody></table><br><br>Notes:<br>[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.<br>[2] The condition number is large, 5.43e+04. This might indicate that there are<br>strong multicollinearity or other numerical problems.
+</div>
+</div>
+<div class="cell" data-outputid="4129e3fe-304c-4d0c-a364-e88f2927e149">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>plt_residual(res)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="Lec6_Autocorrelation_files/figure-html/cell-21-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="cell" data-outputid="96297934-3183-4cd2-ea76-f573fb6bc570">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>plt_acf(res)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/usr/local/lib/python3.8/dist-packages/statsmodels/tsa/stattools.py:667: FutureWarning: fft=True will become the default after the release of the 0.12 release of statsmodels. To suppress this warning, explicitly set fft=False.
+  warnings.warn(</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Lec6_Autocorrelation_files/figure-html/cell-22-output-2.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+
+
+  <div id="df-7af1cb09-b27b-4b1e-b81a-6e7fc99ab6a8">
+    <div class="colab-df-container">
+      <div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>0</th>
+      <th>1</th>
+      <th>2</th>
+      <th>3</th>
+      <th>4</th>
+      <th>5</th>
+      <th>6</th>
+      <th>7</th>
+      <th>8</th>
+      <th>9</th>
+      <th>10</th>
+      <th>11</th>
+      <th>12</th>
+      <th>13</th>
+      <th>14</th>
+      <th>15</th>
+      <th>16</th>
+      <th>17</th>
+      <th>18</th>
+      <th>19</th>
+      <th>20</th>
+      <th>21</th>
+      <th>22</th>
+      <th>23</th>
+    </tr>
+    <tr>
+      <th>day</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1.00</td>
+      <td>0.98</td>
+      <td>0.94</td>
+      <td>0.89</td>
+      <td>0.84</td>
+      <td>0.79</td>
+      <td>0.74</td>
+      <td>0.70</td>
+      <td>0.65</td>
+      <td>0.61</td>
+      <td>0.58</td>
+      <td>0.54</td>
+      <td>0.51</td>
+      <td>0.48</td>
+      <td>0.45</td>
+      <td>0.42</td>
+      <td>0.39</td>
+      <td>0.37</td>
+      <td>0.34</td>
+      <td>0.32</td>
+      <td>0.30</td>
+      <td>0.27</td>
+      <td>0.25</td>
+      <td>0.22</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.20</td>
+      <td>0.18</td>
+      <td>0.16</td>
+      <td>0.14</td>
+      <td>0.12</td>
+      <td>0.10</td>
+      <td>0.09</td>
+      <td>0.07</td>
+      <td>0.06</td>
+      <td>0.04</td>
+      <td>0.03</td>
+      <td>0.02</td>
+      <td>0.01</td>
+      <td>0.00</td>
+      <td>-0.00</td>
+      <td>-0.01</td>
+      <td>-0.02</td>
+      <td>-0.02</td>
+      <td>-0.02</td>
+      <td>-0.03</td>
+      <td>-0.03</td>
+      <td>-0.04</td>
+      <td>-0.04</td>
+      <td>-0.05</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>-0.05</td>
+      <td>-0.06</td>
+      <td>-0.06</td>
+      <td>-0.05</td>
+      <td>-0.05</td>
+      <td>-0.05</td>
+      <td>-0.05</td>
+      <td>-0.05</td>
+      <td>-0.05</td>
+      <td>-0.05</td>
+      <td>-0.05</td>
+      <td>-0.04</td>
+      <td>-0.04</td>
+      <td>-0.04</td>
+      <td>-0.03</td>
+      <td>-0.03</td>
+      <td>-0.02</td>
+      <td>-0.02</td>
+      <td>-0.01</td>
+      <td>-0.01</td>
+      <td>-0.00</td>
+      <td>-0.00</td>
+      <td>0.00</td>
+      <td>0.00</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0.00</td>
+      <td>0.00</td>
+      <td>0.00</td>
+      <td>-0.00</td>
+      <td>-0.00</td>
+      <td>-0.01</td>
+      <td>-0.01</td>
+      <td>-0.01</td>
+      <td>-0.02</td>
+      <td>-0.02</td>
+      <td>-0.02</td>
+      <td>-0.03</td>
+      <td>-0.03</td>
+      <td>-0.03</td>
+      <td>-0.03</td>
+      <td>-0.03</td>
+      <td>-0.03</td>
+      <td>-0.03</td>
+      <td>-0.03</td>
+      <td>-0.03</td>
+      <td>-0.02</td>
+      <td>-0.02</td>
+      <td>-0.02</td>
+      <td>-0.03</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>-0.03</td>
+      <td>-0.03</td>
+      <td>-0.03</td>
+      <td>-0.03</td>
+      <td>-0.03</td>
+      <td>-0.04</td>
+      <td>-0.04</td>
+      <td>-0.04</td>
+      <td>-0.05</td>
+      <td>-0.05</td>
+      <td>-0.05</td>
+      <td>-0.06</td>
+      <td>-0.06</td>
+      <td>-0.06</td>
+      <td>-0.07</td>
+      <td>-0.07</td>
+      <td>-0.07</td>
+      <td>-0.08</td>
+      <td>-0.08</td>
+      <td>-0.08</td>
+      <td>-0.08</td>
+      <td>-0.09</td>
+      <td>-0.09</td>
+      <td>-0.10</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>-0.10</td>
+      <td>-0.09</td>
+      <td>-0.09</td>
+      <td>-0.08</td>
+      <td>-0.08</td>
+      <td>-0.07</td>
+      <td>-0.07</td>
+      <td>-0.07</td>
+      <td>-0.06</td>
+      <td>-0.06</td>
+      <td>-0.05</td>
+      <td>-0.05</td>
+      <td>-0.04</td>
+      <td>-0.04</td>
+      <td>-0.03</td>
+      <td>-0.02</td>
+      <td>-0.02</td>
+      <td>-0.01</td>
+      <td>-0.00</td>
+      <td>0.00</td>
+      <td>0.01</td>
+      <td>0.02</td>
+      <td>0.03</td>
+      <td>0.03</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>0.03</td>
+      <td>0.03</td>
+      <td>0.03</td>
+      <td>0.03</td>
+      <td>0.03</td>
+      <td>0.03</td>
+      <td>0.03</td>
+      <td>0.03</td>
+      <td>0.03</td>
+      <td>0.04</td>
+      <td>0.04</td>
+      <td>0.05</td>
+      <td>0.05</td>
+      <td>0.05</td>
+      <td>0.06</td>
+      <td>0.06</td>
+      <td>0.06</td>
+      <td>0.07</td>
+      <td>0.07</td>
+      <td>0.08</td>
+      <td>0.08</td>
+      <td>0.09</td>
+      <td>0.09</td>
+      <td>0.10</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>0.10</td>
+      <td>0.10</td>
+      <td>0.09</td>
+      <td>0.08</td>
+      <td>0.06</td>
+      <td>0.05</td>
+      <td>0.05</td>
+      <td>0.04</td>
+      <td>0.03</td>
+      <td>0.02</td>
+      <td>0.01</td>
+      <td>0.01</td>
+      <td>0.00</td>
+      <td>-0.01</td>
+      <td>-0.02</td>
+      <td>-0.03</td>
+      <td>-0.03</td>
+      <td>-0.04</td>
+      <td>-0.05</td>
+      <td>-0.06</td>
+      <td>-0.06</td>
+      <td>-0.07</td>
+      <td>-0.07</td>
+      <td>-0.07</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>-0.08</td>
+      <td>-0.08</td>
+      <td>-0.08</td>
+      <td>-0.09</td>
+      <td>-0.09</td>
+      <td>-0.09</td>
+      <td>-0.09</td>
+      <td>-0.10</td>
+      <td>-0.10</td>
+      <td>-0.10</td>
+      <td>-0.10</td>
+      <td>-0.11</td>
+      <td>-0.11</td>
+      <td>-0.11</td>
+      <td>-0.12</td>
+      <td>-0.12</td>
+      <td>-0.13</td>
+      <td>-0.13</td>
+      <td>-0.13</td>
+      <td>-0.14</td>
+      <td>-0.15</td>
+      <td>-0.15</td>
+      <td>-0.16</td>
+      <td>-0.16</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>-0.17</td>
+      <td>-0.16</td>
+      <td>-0.16</td>
+      <td>-0.15</td>
+      <td>-0.15</td>
+      <td>-0.14</td>
+      <td>-0.14</td>
+      <td>-0.13</td>
+      <td>-0.13</td>
+      <td>-0.12</td>
+      <td>-0.12</td>
+      <td>-0.11</td>
+      <td>-0.11</td>
+      <td>-0.10</td>
+      <td>-0.10</td>
+      <td>-0.09</td>
+      <td>-0.09</td>
+      <td>-0.08</td>
+      <td>-0.08</td>
+      <td>-0.08</td>
+      <td>-0.07</td>
+      <td>-0.07</td>
+      <td>-0.06</td>
+      <td>-0.06</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>-0.06</td>
+      <td>-0.05</td>
+      <td>-0.05</td>
+      <td>-0.05</td>
+      <td>-0.05</td>
+      <td>-0.05</td>
+      <td>-0.04</td>
+      <td>-0.04</td>
+      <td>-0.04</td>
+      <td>-0.04</td>
+      <td>-0.04</td>
+      <td>-0.04</td>
+      <td>-0.04</td>
+      <td>-0.04</td>
+      <td>-0.04</td>
+      <td>-0.03</td>
+      <td>-0.03</td>
+      <td>-0.03</td>
+      <td>-0.03</td>
+      <td>-0.02</td>
+      <td>-0.02</td>
+      <td>-0.02</td>
+      <td>-0.01</td>
+      <td>-0.01</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>-0.01</td>
+      <td>-0.01</td>
+      <td>-0.01</td>
+      <td>-0.01</td>
+      <td>-0.01</td>
+      <td>-0.01</td>
+      <td>-0.01</td>
+      <td>-0.01</td>
+      <td>-0.01</td>
+      <td>-0.02</td>
+      <td>-0.02</td>
+      <td>-0.02</td>
+      <td>-0.03</td>
+      <td>-0.03</td>
+      <td>-0.03</td>
+      <td>-0.03</td>
+      <td>-0.03</td>
+      <td>-0.04</td>
+      <td>-0.04</td>
+      <td>-0.04</td>
+      <td>-0.05</td>
+      <td>-0.05</td>
+      <td>-0.06</td>
+      <td>-0.06</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>-0.07</td>
+      <td>-0.07</td>
+      <td>-0.06</td>
+      <td>-0.06</td>
+      <td>-0.06</td>
+      <td>-0.06</td>
+      <td>-0.06</td>
+      <td>-0.05</td>
+      <td>-0.05</td>
+      <td>-0.05</td>
+      <td>-0.05</td>
+      <td>-0.04</td>
+      <td>-0.04</td>
+      <td>-0.03</td>
+      <td>-0.03</td>
+      <td>-0.02</td>
+      <td>-0.01</td>
+      <td>-0.01</td>
+      <td>0.00</td>
+      <td>0.01</td>
+      <td>0.02</td>
+      <td>0.03</td>
+      <td>0.04</td>
+      <td>0.04</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>0.05</td>
+      <td>0.06</td>
+      <td>0.06</td>
+      <td>0.07</td>
+      <td>0.08</td>
+      <td>0.08</td>
+      <td>0.09</td>
+      <td>0.10</td>
+      <td>0.11</td>
+      <td>0.12</td>
+      <td>0.13</td>
+      <td>0.14</td>
+      <td>0.15</td>
+      <td>0.16</td>
+      <td>0.17</td>
+      <td>0.18</td>
+      <td>0.19</td>
+      <td>0.20</td>
+      <td>0.22</td>
+      <td>0.23</td>
+      <td>0.25</td>
+      <td>0.26</td>
+      <td>0.28</td>
+      <td>0.29</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>0.29</td>
+      <td>0.29</td>
+      <td>0.27</td>
+      <td>0.26</td>
+      <td>0.24</td>
+      <td>0.23</td>
+      <td>0.21</td>
+      <td>0.20</td>
+      <td>0.19</td>
+      <td>0.18</td>
+      <td>0.17</td>
+      <td>0.16</td>
+      <td>0.15</td>
+      <td>0.14</td>
+      <td>0.13</td>
+      <td>0.12</td>
+      <td>0.11</td>
+      <td>0.10</td>
+      <td>0.09</td>
+      <td>0.08</td>
+      <td>0.07</td>
+      <td>0.07</td>
+      <td>0.06</td>
+      <td>0.06</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>0.05</td>
+      <td>0.04</td>
+      <td>0.03</td>
+      <td>0.02</td>
+      <td>0.01</td>
+      <td>-0.00</td>
+      <td>-0.01</td>
+      <td>-0.02</td>
+      <td>-0.03</td>
+      <td>-0.04</td>
+      <td>-0.05</td>
+      <td>-0.06</td>
+      <td>-0.06</td>
+      <td>-0.07</td>
+      <td>-0.08</td>
+      <td>-0.08</td>
+      <td>-0.09</td>
+      <td>-0.10</td>
+      <td>-0.10</td>
+      <td>-0.11</td>
+      <td>-0.11</td>
+      <td>-0.11</td>
+      <td>-0.12</td>
+      <td>-0.12</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>-0.13</td>
+      <td>-0.13</td>
+      <td>-0.12</td>
+      <td>-0.12</td>
+      <td>-0.11</td>
+      <td>-0.11</td>
+      <td>-0.11</td>
+      <td>-0.10</td>
+      <td>-0.10</td>
+      <td>-0.10</td>
+      <td>-0.10</td>
+      <td>-0.09</td>
+      <td>-0.09</td>
+      <td>-0.08</td>
+      <td>-0.08</td>
+      <td>-0.07</td>
+      <td>-0.07</td>
+      <td>-0.06</td>
+      <td>-0.06</td>
+      <td>-0.05</td>
+      <td>-0.05</td>
+      <td>-0.04</td>
+      <td>-0.04</td>
+      <td>-0.04</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>-0.03</td>
+      <td>-0.03</td>
+      <td>-0.03</td>
+      <td>-0.03</td>
+      <td>-0.03</td>
+      <td>-0.03</td>
+      <td>-0.03</td>
+      <td>-0.03</td>
+      <td>-0.03</td>
+      <td>-0.03</td>
+      <td>-0.03</td>
+      <td>-0.03</td>
+      <td>-0.03</td>
+      <td>-0.03</td>
+      <td>-0.03</td>
+      <td>-0.03</td>
+      <td>-0.03</td>
+      <td>-0.03</td>
+      <td>-0.03</td>
+      <td>-0.03</td>
+      <td>-0.03</td>
+      <td>-0.04</td>
+      <td>-0.04</td>
+      <td>-0.04</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>-0.05</td>
+      <td>-0.05</td>
+      <td>-0.06</td>
+      <td>-0.06</td>
+      <td>-0.06</td>
+      <td>-0.07</td>
+      <td>-0.07</td>
+      <td>-0.08</td>
+      <td>-0.08</td>
+      <td>-0.09</td>
+      <td>-0.09</td>
+      <td>-0.10</td>
+      <td>-0.10</td>
+      <td>-0.10</td>
+      <td>-0.11</td>
+      <td>-0.11</td>
+      <td>-0.12</td>
+      <td>-0.12</td>
+      <td>-0.12</td>
+      <td>-0.13</td>
+      <td>-0.13</td>
+      <td>-0.14</td>
+      <td>-0.14</td>
+      <td>-0.14</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>-0.14</td>
+      <td>-0.14</td>
+      <td>-0.13</td>
+      <td>-0.13</td>
+      <td>-0.12</td>
+      <td>-0.11</td>
+      <td>-0.11</td>
+      <td>-0.10</td>
+      <td>-0.10</td>
+      <td>-0.09</td>
+      <td>-0.08</td>
+      <td>-0.08</td>
+      <td>-0.07</td>
+      <td>-0.06</td>
+      <td>-0.06</td>
+      <td>-0.05</td>
+      <td>-0.04</td>
+      <td>-0.03</td>
+      <td>-0.02</td>
+      <td>-0.01</td>
+      <td>-0.00</td>
+      <td>0.01</td>
+      <td>0.01</td>
+      <td>0.02</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>0.03</td>
+      <td>0.03</td>
+      <td>0.04</td>
+      <td>0.04</td>
+      <td>0.05</td>
+      <td>0.05</td>
+      <td>0.06</td>
+      <td>0.07</td>
+      <td>0.07</td>
+      <td>0.08</td>
+      <td>0.09</td>
+      <td>0.10</td>
+      <td>0.11</td>
+      <td>0.12</td>
+      <td>0.13</td>
+      <td>0.14</td>
+      <td>0.15</td>
+      <td>0.16</td>
+      <td>0.17</td>
+      <td>0.19</td>
+      <td>0.20</td>
+      <td>0.22</td>
+      <td>0.23</td>
+      <td>0.24</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>0.25</td>
+      <td>0.24</td>
+      <td>0.23</td>
+      <td>0.22</td>
+      <td>0.20</td>
+      <td>0.19</td>
+      <td>0.17</td>
+      <td>0.16</td>
+      <td>0.14</td>
+      <td>0.13</td>
+      <td>0.12</td>
+      <td>0.11</td>
+      <td>0.11</td>
+      <td>0.10</td>
+      <td>0.09</td>
+      <td>0.08</td>
+      <td>0.07</td>
+      <td>0.06</td>
+      <td>0.06</td>
+      <td>0.05</td>
+      <td>0.05</td>
+      <td>0.04</td>
+      <td>0.04</td>
+      <td>0.04</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>0.04</td>
+      <td>0.03</td>
+      <td>0.02</td>
+      <td>0.02</td>
+      <td>0.01</td>
+      <td>0.00</td>
+      <td>-0.01</td>
+      <td>-0.01</td>
+      <td>-0.02</td>
+      <td>-0.03</td>
+      <td>-0.03</td>
+      <td>-0.04</td>
+      <td>-0.04</td>
+      <td>-0.05</td>
+      <td>-0.05</td>
+      <td>-0.05</td>
+      <td>-0.06</td>
+      <td>-0.06</td>
+      <td>-0.07</td>
+      <td>-0.07</td>
+      <td>-0.08</td>
+      <td>-0.08</td>
+      <td>-0.09</td>
+      <td>-0.09</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>-0.10</td>
+      <td>-0.10</td>
+      <td>-0.09</td>
+      <td>-0.09</td>
+      <td>-0.09</td>
+      <td>-0.08</td>
+      <td>-0.08</td>
+      <td>-0.08</td>
+      <td>-0.07</td>
+      <td>-0.07</td>
+      <td>-0.07</td>
+      <td>-0.07</td>
+      <td>-0.07</td>
+      <td>-0.06</td>
+      <td>-0.06</td>
+      <td>-0.06</td>
+      <td>-0.06</td>
+      <td>-0.05</td>
+      <td>-0.05</td>
+      <td>-0.05</td>
+      <td>-0.05</td>
+      <td>-0.05</td>
+      <td>-0.05</td>
+      <td>-0.05</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>-0.05</td>
+      <td>-0.05</td>
+      <td>-0.05</td>
+      <td>-0.05</td>
+      <td>-0.05</td>
+      <td>-0.05</td>
+      <td>-0.06</td>
+      <td>-0.06</td>
+      <td>-0.06</td>
+      <td>-0.06</td>
+      <td>-0.06</td>
+      <td>-0.06</td>
+      <td>-0.06</td>
+      <td>-0.06</td>
+      <td>-0.06</td>
+      <td>-0.06</td>
+      <td>-0.06</td>
+      <td>-0.06</td>
+      <td>-0.06</td>
+      <td>-0.05</td>
+      <td>-0.05</td>
+      <td>-0.05</td>
+      <td>-0.05</td>
+      <td>-0.05</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>-0.05</td>
+      <td>-0.05</td>
+      <td>-0.05</td>
+      <td>-0.05</td>
+      <td>-0.05</td>
+      <td>-0.06</td>
+      <td>-0.06</td>
+      <td>-0.06</td>
+      <td>-0.07</td>
+      <td>-0.07</td>
+      <td>-0.08</td>
+      <td>-0.08</td>
+      <td>-0.09</td>
+      <td>-0.09</td>
+      <td>-0.09</td>
+      <td>-0.09</td>
+      <td>-0.10</td>
+      <td>-0.10</td>
+      <td>-0.10</td>
+      <td>-0.11</td>
+      <td>-0.11</td>
+      <td>-0.12</td>
+      <td>-0.12</td>
+      <td>-0.13</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>-0.13</td>
+      <td>-0.13</td>
+      <td>-0.12</td>
+      <td>-0.12</td>
+      <td>-0.11</td>
+      <td>-0.11</td>
+      <td>-0.10</td>
+      <td>-0.10</td>
+      <td>-0.09</td>
+      <td>-0.09</td>
+      <td>-0.08</td>
+      <td>-0.08</td>
+      <td>-0.07</td>
+      <td>-0.07</td>
+      <td>-0.06</td>
+      <td>-0.06</td>
+      <td>-0.05</td>
+      <td>-0.04</td>
+      <td>-0.03</td>
+      <td>-0.02</td>
+      <td>-0.02</td>
+      <td>-0.01</td>
+      <td>0.00</td>
+      <td>0.01</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>0.02</td>
+      <td>0.03</td>
+      <td>0.03</td>
+      <td>0.04</td>
+      <td>0.05</td>
+      <td>0.06</td>
+      <td>0.06</td>
+      <td>0.07</td>
+      <td>0.08</td>
+      <td>0.10</td>
+      <td>0.11</td>
+      <td>0.12</td>
+      <td>0.13</td>
+      <td>0.14</td>
+      <td>0.15</td>
+      <td>0.16</td>
+      <td>0.17</td>
+      <td>0.18</td>
+      <td>0.20</td>
+      <td>0.21</td>
+      <td>0.23</td>
+      <td>0.24</td>
+      <td>0.25</td>
+      <td>0.27</td>
+    </tr>
+    <tr>
+      <th>28</th>
+      <td>0.27</td>
+      <td>0.27</td>
+      <td>0.25</td>
+      <td>0.24</td>
+      <td>0.22</td>
+      <td>0.21</td>
+      <td>0.19</td>
+      <td>0.18</td>
+      <td>0.17</td>
+      <td>0.15</td>
+      <td>0.14</td>
+      <td>0.14</td>
+      <td>0.13</td>
+      <td>0.12</td>
+      <td>0.11</td>
+      <td>0.10</td>
+      <td>0.09</td>
+      <td>0.08</td>
+      <td>0.08</td>
+      <td>0.07</td>
+      <td>0.06</td>
+      <td>0.06</td>
+      <td>0.05</td>
+      <td>0.05</td>
+    </tr>
+    <tr>
+      <th>29</th>
+      <td>0.04</td>
+      <td>0.03</td>
+      <td>0.02</td>
+      <td>0.02</td>
+      <td>0.01</td>
+      <td>-0.00</td>
+      <td>-0.01</td>
+      <td>-0.02</td>
+      <td>-0.03</td>
+      <td>-0.04</td>
+      <td>-0.04</td>
+      <td>-0.05</td>
+      <td>-0.06</td>
+      <td>-0.07</td>
+      <td>-0.07</td>
+      <td>-0.08</td>
+      <td>-0.08</td>
+      <td>-0.09</td>
+      <td>-0.09</td>
+      <td>-0.10</td>
+      <td>-0.10</td>
+      <td>-0.11</td>
+      <td>-0.12</td>
+      <td>-0.12</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+      <button class="colab-df-convert" onclick="convertToInteractive('df-7af1cb09-b27b-4b1e-b81a-6e7fc99ab6a8')" title="Convert this dataframe to an interactive table." style="display:none;">
+        
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewbox="0 0 24 24" width="24px">
+    <path d="M0 0h24v24H0V0z" fill="none"></path>
+    <path d="M18.56 5.44l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94zm-11 1L8.5 8.5l.94-2.06 2.06-.94-2.06-.94L8.5 2.5l-.94 2.06-2.06.94zm10 10l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94z"></path><path d="M17.41 7.96l-1.37-1.37c-.4-.4-.92-.59-1.43-.59-.52 0-1.04.2-1.43.59L10.3 9.45l-7.72 7.72c-.78.78-.78 2.05 0 2.83L4 21.41c.39.39.9.59 1.41.59.51 0 1.02-.2 1.41-.59l7.78-7.78 2.81-2.81c.8-.78.8-2.07 0-2.86zM5.41 20L4 18.59l7.72-7.72 1.47 1.35L5.41 20z"></path>
+  </svg>
+      </button>
+      
+  <style>
+    .colab-df-container {
+      display:flex;
+      flex-wrap:wrap;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+      <script>
+        const buttonEl =
+          document.querySelector('#df-7af1cb09-b27b-4b1e-b81a-6e7fc99ab6a8 button.colab-df-convert');
+        buttonEl.style.display =
+          google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+        async function convertToInteractive(key) {
+          const element = document.querySelector('#df-7af1cb09-b27b-4b1e-b81a-6e7fc99ab6a8');
+          const dataTable =
+            await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                     [key], {});
+          if (!dataTable) return;
+
+          const docLinkHtml = 'Like what you see? Visit the ' +
+            '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+            + ' to learn more about interactive tables.';
+          element.innerHTML = '';
+          dataTable['output_type'] = 'display_data';
+          await google.colab.output.renderOutput(dataTable, element);
+          const docLink = document.createElement('div');
+          docLink.innerHTML = docLinkHtml;
+          element.appendChild(docLink);
+        }
+      </script>
+    </div>
+  </div>
+  
+</div>
+</div>
+<div class="cell" data-outputid="a44557e2-f8c9-4021-9c4a-a6f0637d21ab">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>plt_residual_lag(res, <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="Lec6_Autocorrelation_files/figure-html/cell-23-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="cell" data-outputid="9beeab5e-5170-42f1-ccda-bf47059af77b">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>plt_residual_lag(res, <span class="dv">24</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="Lec6_Autocorrelation_files/figure-html/cell-24-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="cell" data-outputid="63a5b309-54ff-48f6-d32c-1c00e63f6a48">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>plt_residual_lag(res, <span class="dv">24</span><span class="op">*</span><span class="dv">7</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="Lec6_Autocorrelation_files/figure-html/cell-25-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="cell" data-outputid="66da8cb6-6325-4a13-e71b-d305a73d31eb">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>plt_residual_lag(res, <span class="dv">24</span><span class="op">*</span><span class="dv">7</span><span class="op">*</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="Lec6_Autocorrelation_files/figure-html/cell-26-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+</section>
+<section id="predictors-temperature-1-day-lag-of-power-1-week-lag-of-power-2-weeks-lag-of-power" class="level2" data-number="6.6">
+<h2 data-number="6.6" class="anchored" data-anchor-id="predictors-temperature-1-day-lag-of-power-1-week-lag-of-power-2-weeks-lag-of-power"><span class="header-section-number">6.6</span> Predictors: Temperature + 1 day lag of power + 1 week lag of power + 2 weeks lag of power</h2>
+<p>Although the data shows there is a significant (but not strong) correlation, we need to be cautious to use this feature because there are no simple reasons for this relationship.</p>
+<p>For 1-day-lag feature, the correlation is easily understood.</p>
+<p>For 1-week-lag feature, we could argue that the behaviour is different between weekday and weekend.</p>
+<p>But for 2-week-lag feature, it is hard to understand especially when we have included 1-day-lag and 1-week-lag features. The relation is spurious.</p>
+<div class="cell" data-outputid="d913fdde-539d-444b-d590-11789f920363">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'power_lag_2_week'</span>]<span class="op">=</span>df[<span class="st">'power'</span>].shift(<span class="dv">24</span><span class="op">*</span><span class="dv">7</span><span class="op">*</span><span class="dv">2</span>)</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>df.tail()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="26">
+
+
+  <div id="df-2aeebe58-4e5b-4162-b989-66c323920f0d">
+    <div class="colab-df-container">
+      <div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>key</th>
+      <th>Date</th>
+      <th>Hour</th>
+      <th>power</th>
+      <th>temperature</th>
+      <th>temp_hot</th>
+      <th>temp_cold</th>
+      <th>power_lag_1_day</th>
+      <th>power_lag_1_week</th>
+      <th>power_lag_2_week</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>35059</th>
+      <td>20201231:19</td>
+      <td>2020-12-31</td>
+      <td>19</td>
+      <td>5948</td>
+      <td>4.9</td>
+      <td>0.0</td>
+      <td>4.9</td>
+      <td>6163.0</td>
+      <td>5833.0</td>
+      <td>6826.0</td>
+    </tr>
+    <tr>
+      <th>35060</th>
+      <td>20201231:20</td>
+      <td>2020-12-31</td>
+      <td>20</td>
+      <td>5741</td>
+      <td>4.5</td>
+      <td>0.0</td>
+      <td>4.5</td>
+      <td>5983.0</td>
+      <td>5665.0</td>
+      <td>6663.0</td>
+    </tr>
+    <tr>
+      <th>35061</th>
+      <td>20201231:21</td>
+      <td>2020-12-31</td>
+      <td>21</td>
+      <td>5527</td>
+      <td>3.7</td>
+      <td>0.0</td>
+      <td>3.7</td>
+      <td>5727.0</td>
+      <td>5474.0</td>
+      <td>6407.0</td>
+    </tr>
+    <tr>
+      <th>35062</th>
+      <td>20201231:22</td>
+      <td>2020-12-31</td>
+      <td>22</td>
+      <td>5301</td>
+      <td>2.9</td>
+      <td>0.0</td>
+      <td>2.9</td>
+      <td>5428.0</td>
+      <td>5273.0</td>
+      <td>6068.0</td>
+    </tr>
+    <tr>
+      <th>35063</th>
+      <td>20201231:23</td>
+      <td>2020-12-31</td>
+      <td>23</td>
+      <td>5094</td>
+      <td>2.1</td>
+      <td>0.0</td>
+      <td>2.1</td>
+      <td>5104.0</td>
+      <td>5010.0</td>
+      <td>5709.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+      <button class="colab-df-convert" onclick="convertToInteractive('df-2aeebe58-4e5b-4162-b989-66c323920f0d')" title="Convert this dataframe to an interactive table." style="display:none;">
+        
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewbox="0 0 24 24" width="24px">
+    <path d="M0 0h24v24H0V0z" fill="none"></path>
+    <path d="M18.56 5.44l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94zm-11 1L8.5 8.5l.94-2.06 2.06-.94-2.06-.94L8.5 2.5l-.94 2.06-2.06.94zm10 10l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94z"></path><path d="M17.41 7.96l-1.37-1.37c-.4-.4-.92-.59-1.43-.59-.52 0-1.04.2-1.43.59L10.3 9.45l-7.72 7.72c-.78.78-.78 2.05 0 2.83L4 21.41c.39.39.9.59 1.41.59.51 0 1.02-.2 1.41-.59l7.78-7.78 2.81-2.81c.8-.78.8-2.07 0-2.86zM5.41 20L4 18.59l7.72-7.72 1.47 1.35L5.41 20z"></path>
+  </svg>
+      </button>
+      
+  <style>
+    .colab-df-container {
+      display:flex;
+      flex-wrap:wrap;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+      <script>
+        const buttonEl =
+          document.querySelector('#df-2aeebe58-4e5b-4162-b989-66c323920f0d button.colab-df-convert');
+        buttonEl.style.display =
+          google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+        async function convertToInteractive(key) {
+          const element = document.querySelector('#df-2aeebe58-4e5b-4162-b989-66c323920f0d');
+          const dataTable =
+            await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                     [key], {});
+          if (!dataTable) return;
+
+          const docLinkHtml = 'Like what you see? Visit the ' +
+            '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+            + ' to learn more about interactive tables.';
+          element.innerHTML = '';
+          dataTable['output_type'] = 'display_data';
+          await google.colab.output.renderOutput(dataTable, element);
+          const docLink = document.createElement('div');
+          docLink.innerHTML = docLinkHtml;
+          element.appendChild(docLink);
+        }
+      </script>
+    </div>
+  </div>
+  
+</div>
+</div>
+<div class="cell" data-outputid="56c033c5-ba5e-4ddb-defd-1808519765b7">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>res<span class="op">=</span>build_model([<span class="st">'temp_hot'</span>, <span class="st">'temp_cold'</span>, <span class="st">'power_lag_1_day'</span>,<span class="st">'power_lag_1_week'</span>, <span class="st">'power_lag_2_week'</span> ])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/usr/local/lib/python3.8/dist-packages/statsmodels/tsa/tsatools.py:142: FutureWarning: In a future version of pandas all arguments of concat except for the argument 'objs' will be keyword-only
+  x = pd.concat(x[::order], 1)</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+
+<table class="simpletable">
+<caption>OLS Regression Results</caption>
+<tbody><tr>
+  <th>Dep. Variable:</th>          <td>power</td>      <th>  R-squared:         </th>  <td>   0.848</td>  
+</tr>
+<tr>
+  <th>Model:</th>                   <td>OLS</td>       <th>  Adj. R-squared:    </th>  <td>   0.847</td>  
+</tr>
+<tr>
+  <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th>  <td>3.860e+04</td> 
+</tr>
+<tr>
+  <th>Date:</th>             <td>Sun, 22 Jan 2023</td> <th>  Prob (F-statistic):</th>   <td>  0.00</td>   
+</tr>
+<tr>
+  <th>Time:</th>                 <td>19:25:04</td>     <th>  Log-Likelihood:    </th> <td>-2.5626e+05</td>
+</tr>
+<tr>
+  <th>No. Observations:</th>      <td> 34728</td>      <th>  AIC:               </th>  <td>5.125e+05</td> 
+</tr>
+<tr>
+  <th>Df Residuals:</th>          <td> 34722</td>      <th>  BIC:               </th>  <td>5.126e+05</td> 
+</tr>
+<tr>
+  <th>Df Model:</th>              <td>     5</td>      <th>                     </th>      <td> </td>     
+</tr>
+<tr>
+  <th>Covariance Type:</th>      <td>nonrobust</td>    <th>                     </th>      <td> </td>     
+</tr>
+</tbody></table>
+<table class="simpletable">
+<tbody><tr>
+          <td></td>            <th>coef</th>     <th>std err</th>      <th>t</th>      <th>P&gt;|t|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>const</th>            <td>  200.8402</td> <td>   14.046</td> <td>   14.298</td> <td> 0.000</td> <td>  173.309</td> <td>  228.371</td>
+</tr>
+<tr>
+  <th>temp_hot</th>         <td>    3.2508</td> <td>    0.217</td> <td>   14.983</td> <td> 0.000</td> <td>    2.826</td> <td>    3.676</td>
+</tr>
+<tr>
+  <th>temp_cold</th>        <td>   -5.6865</td> <td>    0.379</td> <td>  -15.005</td> <td> 0.000</td> <td>   -6.429</td> <td>   -4.944</td>
+</tr>
+<tr>
+  <th>power_lag_1_day</th>  <td>    0.5637</td> <td>    0.004</td> <td>  152.597</td> <td> 0.000</td> <td>    0.556</td> <td>    0.571</td>
+</tr>
+<tr>
+  <th>power_lag_1_week</th> <td>    0.2415</td> <td>    0.004</td> <td>   60.139</td> <td> 0.000</td> <td>    0.234</td> <td>    0.249</td>
+</tr>
+<tr>
+  <th>power_lag_2_week</th> <td>    0.1565</td> <td>    0.004</td> <td>   40.465</td> <td> 0.000</td> <td>    0.149</td> <td>    0.164</td>
+</tr>
+</tbody></table>
+<table class="simpletable">
+<tbody><tr>
+  <th>Omnibus:</th>       <td>2229.659</td> <th>  Durbin-Watson:     </th> <td>   0.036</td>
+</tr>
+<tr>
+  <th>Prob(Omnibus):</th>  <td> 0.000</td>  <th>  Jarque-Bera (JB):  </th> <td>7850.238</td>
+</tr>
+<tr>
+  <th>Skew:</th>           <td> 0.262</td>  <th>  Prob(JB):          </th> <td>    0.00</td>
+</tr>
+<tr>
+  <th>Kurtosis:</th>       <td> 5.270</td>  <th>  Cond. No.          </th> <td>6.72e+04</td>
+</tr>
+</tbody></table><br><br>Notes:<br>[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.<br>[2] The condition number is large, 6.72e+04. This might indicate that there are<br>strong multicollinearity or other numerical problems.
+</div>
+</div>
+<div class="cell" data-outputid="d3c655d2-6f28-43dd-8ed0-b793ebd1aa6c">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>plt_acf(res)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/usr/local/lib/python3.8/dist-packages/statsmodels/tsa/stattools.py:667: FutureWarning: fft=True will become the default after the release of the 0.12 release of statsmodels. To suppress this warning, explicitly set fft=False.
+  warnings.warn(</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Lec6_Autocorrelation_files/figure-html/cell-29-output-2.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+
+
+  <div id="df-8717d510-e7e3-44ef-9c5e-6eee1b631bd7">
+    <div class="colab-df-container">
+      <div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>0</th>
+      <th>1</th>
+      <th>2</th>
+      <th>3</th>
+      <th>4</th>
+      <th>5</th>
+      <th>6</th>
+      <th>7</th>
+      <th>8</th>
+      <th>9</th>
+      <th>10</th>
+      <th>11</th>
+      <th>12</th>
+      <th>13</th>
+      <th>14</th>
+      <th>15</th>
+      <th>16</th>
+      <th>17</th>
+      <th>18</th>
+      <th>19</th>
+      <th>20</th>
+      <th>21</th>
+      <th>22</th>
+      <th>23</th>
+    </tr>
+    <tr>
+      <th>day</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1.00</td>
+      <td>0.98</td>
+      <td>0.94</td>
+      <td>0.90</td>
+      <td>0.85</td>
+      <td>0.80</td>
+      <td>0.75</td>
+      <td>0.71</td>
+      <td>0.67</td>
+      <td>0.63</td>
+      <td>0.59</td>
+      <td>0.56</td>
+      <td>0.53</td>
+      <td>0.50</td>
+      <td>0.47</td>
+      <td>0.44</td>
+      <td>0.41</td>
+      <td>0.39</td>
+      <td>0.37</td>
+      <td>0.35</td>
+      <td>0.33</td>
+      <td>0.30</td>
+      <td>0.28</td>
+      <td>0.25</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.23</td>
+      <td>0.21</td>
+      <td>0.20</td>
+      <td>0.18</td>
+      <td>0.16</td>
+      <td>0.14</td>
+      <td>0.13</td>
+      <td>0.11</td>
+      <td>0.10</td>
+      <td>0.08</td>
+      <td>0.07</td>
+      <td>0.06</td>
+      <td>0.05</td>
+      <td>0.05</td>
+      <td>0.04</td>
+      <td>0.04</td>
+      <td>0.03</td>
+      <td>0.03</td>
+      <td>0.02</td>
+      <td>0.02</td>
+      <td>0.01</td>
+      <td>0.01</td>
+      <td>0.00</td>
+      <td>-0.00</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>-0.01</td>
+      <td>-0.01</td>
+      <td>-0.01</td>
+      <td>-0.01</td>
+      <td>-0.01</td>
+      <td>-0.01</td>
+      <td>-0.01</td>
+      <td>-0.01</td>
+      <td>-0.01</td>
+      <td>-0.01</td>
+      <td>-0.01</td>
+      <td>-0.01</td>
+      <td>-0.00</td>
+      <td>-0.00</td>
+      <td>0.00</td>
+      <td>0.01</td>
+      <td>0.01</td>
+      <td>0.02</td>
+      <td>0.02</td>
+      <td>0.02</td>
+      <td>0.03</td>
+      <td>0.03</td>
+      <td>0.03</td>
+      <td>0.03</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0.03</td>
+      <td>0.03</td>
+      <td>0.03</td>
+      <td>0.03</td>
+      <td>0.02</td>
+      <td>0.02</td>
+      <td>0.02</td>
+      <td>0.01</td>
+      <td>0.01</td>
+      <td>0.01</td>
+      <td>0.00</td>
+      <td>0.00</td>
+      <td>0.00</td>
+      <td>-0.00</td>
+      <td>-0.00</td>
+      <td>-0.00</td>
+      <td>0.00</td>
+      <td>0.00</td>
+      <td>0.00</td>
+      <td>0.00</td>
+      <td>0.01</td>
+      <td>0.01</td>
+      <td>0.01</td>
+      <td>0.01</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0.01</td>
+      <td>0.01</td>
+      <td>0.00</td>
+      <td>0.00</td>
+      <td>0.00</td>
+      <td>-0.00</td>
+      <td>-0.00</td>
+      <td>-0.01</td>
+      <td>-0.01</td>
+      <td>-0.01</td>
+      <td>-0.02</td>
+      <td>-0.02</td>
+      <td>-0.02</td>
+      <td>-0.02</td>
+      <td>-0.03</td>
+      <td>-0.03</td>
+      <td>-0.03</td>
+      <td>-0.03</td>
+      <td>-0.03</td>
+      <td>-0.04</td>
+      <td>-0.04</td>
+      <td>-0.04</td>
+      <td>-0.05</td>
+      <td>-0.05</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>-0.05</td>
+      <td>-0.05</td>
+      <td>-0.04</td>
+      <td>-0.04</td>
+      <td>-0.04</td>
+      <td>-0.03</td>
+      <td>-0.03</td>
+      <td>-0.03</td>
+      <td>-0.02</td>
+      <td>-0.02</td>
+      <td>-0.02</td>
+      <td>-0.01</td>
+      <td>-0.01</td>
+      <td>-0.00</td>
+      <td>0.01</td>
+      <td>0.01</td>
+      <td>0.02</td>
+      <td>0.03</td>
+      <td>0.03</td>
+      <td>0.04</td>
+      <td>0.05</td>
+      <td>0.05</td>
+      <td>0.06</td>
+      <td>0.07</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>0.07</td>
+      <td>0.07</td>
+      <td>0.07</td>
+      <td>0.07</td>
+      <td>0.07</td>
+      <td>0.07</td>
+      <td>0.07</td>
+      <td>0.07</td>
+      <td>0.08</td>
+      <td>0.08</td>
+      <td>0.09</td>
+      <td>0.09</td>
+      <td>0.10</td>
+      <td>0.10</td>
+      <td>0.11</td>
+      <td>0.11</td>
+      <td>0.12</td>
+      <td>0.12</td>
+      <td>0.13</td>
+      <td>0.14</td>
+      <td>0.14</td>
+      <td>0.15</td>
+      <td>0.16</td>
+      <td>0.16</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>0.17</td>
+      <td>0.16</td>
+      <td>0.15</td>
+      <td>0.14</td>
+      <td>0.13</td>
+      <td>0.12</td>
+      <td>0.11</td>
+      <td>0.10</td>
+      <td>0.09</td>
+      <td>0.09</td>
+      <td>0.08</td>
+      <td>0.07</td>
+      <td>0.07</td>
+      <td>0.06</td>
+      <td>0.05</td>
+      <td>0.04</td>
+      <td>0.03</td>
+      <td>0.03</td>
+      <td>0.02</td>
+      <td>0.02</td>
+      <td>0.01</td>
+      <td>0.01</td>
+      <td>0.00</td>
+      <td>-0.00</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>-0.00</td>
+      <td>-0.01</td>
+      <td>-0.01</td>
+      <td>-0.02</td>
+      <td>-0.02</td>
+      <td>-0.02</td>
+      <td>-0.03</td>
+      <td>-0.03</td>
+      <td>-0.03</td>
+      <td>-0.04</td>
+      <td>-0.04</td>
+      <td>-0.04</td>
+      <td>-0.05</td>
+      <td>-0.05</td>
+      <td>-0.05</td>
+      <td>-0.06</td>
+      <td>-0.06</td>
+      <td>-0.06</td>
+      <td>-0.07</td>
+      <td>-0.07</td>
+      <td>-0.08</td>
+      <td>-0.08</td>
+      <td>-0.09</td>
+      <td>-0.09</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>-0.10</td>
+      <td>-0.10</td>
+      <td>-0.09</td>
+      <td>-0.09</td>
+      <td>-0.09</td>
+      <td>-0.08</td>
+      <td>-0.08</td>
+      <td>-0.08</td>
+      <td>-0.07</td>
+      <td>-0.07</td>
+      <td>-0.06</td>
+      <td>-0.06</td>
+      <td>-0.06</td>
+      <td>-0.05</td>
+      <td>-0.05</td>
+      <td>-0.04</td>
+      <td>-0.04</td>
+      <td>-0.03</td>
+      <td>-0.03</td>
+      <td>-0.03</td>
+      <td>-0.02</td>
+      <td>-0.02</td>
+      <td>-0.02</td>
+      <td>-0.01</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>-0.01</td>
+      <td>-0.01</td>
+      <td>-0.01</td>
+      <td>-0.01</td>
+      <td>-0.00</td>
+      <td>-0.00</td>
+      <td>-0.00</td>
+      <td>-0.00</td>
+      <td>-0.00</td>
+      <td>-0.00</td>
+      <td>0.00</td>
+      <td>0.00</td>
+      <td>0.00</td>
+      <td>0.00</td>
+      <td>0.00</td>
+      <td>0.00</td>
+      <td>0.01</td>
+      <td>0.01</td>
+      <td>0.01</td>
+      <td>0.01</td>
+      <td>0.02</td>
+      <td>0.02</td>
+      <td>0.02</td>
+      <td>0.02</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>0.02</td>
+      <td>0.02</td>
+      <td>0.02</td>
+      <td>0.02</td>
+      <td>0.02</td>
+      <td>0.02</td>
+      <td>0.02</td>
+      <td>0.02</td>
+      <td>0.02</td>
+      <td>0.02</td>
+      <td>0.01</td>
+      <td>0.01</td>
+      <td>0.01</td>
+      <td>0.01</td>
+      <td>0.01</td>
+      <td>0.00</td>
+      <td>0.00</td>
+      <td>-0.00</td>
+      <td>-0.00</td>
+      <td>-0.01</td>
+      <td>-0.01</td>
+      <td>-0.02</td>
+      <td>-0.02</td>
+      <td>-0.03</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>-0.03</td>
+      <td>-0.03</td>
+      <td>-0.03</td>
+      <td>-0.03</td>
+      <td>-0.03</td>
+      <td>-0.03</td>
+      <td>-0.03</td>
+      <td>-0.03</td>
+      <td>-0.02</td>
+      <td>-0.02</td>
+      <td>-0.02</td>
+      <td>-0.02</td>
+      <td>-0.01</td>
+      <td>-0.01</td>
+      <td>-0.01</td>
+      <td>-0.00</td>
+      <td>0.00</td>
+      <td>0.01</td>
+      <td>0.01</td>
+      <td>0.02</td>
+      <td>0.02</td>
+      <td>0.03</td>
+      <td>0.04</td>
+      <td>0.04</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>0.05</td>
+      <td>0.05</td>
+      <td>0.05</td>
+      <td>0.05</td>
+      <td>0.06</td>
+      <td>0.06</td>
+      <td>0.06</td>
+      <td>0.07</td>
+      <td>0.07</td>
+      <td>0.08</td>
+      <td>0.08</td>
+      <td>0.09</td>
+      <td>0.09</td>
+      <td>0.10</td>
+      <td>0.10</td>
+      <td>0.11</td>
+      <td>0.11</td>
+      <td>0.12</td>
+      <td>0.13</td>
+      <td>0.13</td>
+      <td>0.14</td>
+      <td>0.15</td>
+      <td>0.16</td>
+      <td>0.16</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>0.16</td>
+      <td>0.16</td>
+      <td>0.15</td>
+      <td>0.14</td>
+      <td>0.13</td>
+      <td>0.12</td>
+      <td>0.11</td>
+      <td>0.10</td>
+      <td>0.09</td>
+      <td>0.08</td>
+      <td>0.08</td>
+      <td>0.07</td>
+      <td>0.06</td>
+      <td>0.06</td>
+      <td>0.05</td>
+      <td>0.04</td>
+      <td>0.03</td>
+      <td>0.02</td>
+      <td>0.01</td>
+      <td>0.01</td>
+      <td>0.00</td>
+      <td>-0.01</td>
+      <td>-0.01</td>
+      <td>-0.02</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>-0.02</td>
+      <td>-0.03</td>
+      <td>-0.03</td>
+      <td>-0.04</td>
+      <td>-0.05</td>
+      <td>-0.05</td>
+      <td>-0.06</td>
+      <td>-0.06</td>
+      <td>-0.07</td>
+      <td>-0.08</td>
+      <td>-0.08</td>
+      <td>-0.09</td>
+      <td>-0.09</td>
+      <td>-0.10</td>
+      <td>-0.10</td>
+      <td>-0.11</td>
+      <td>-0.11</td>
+      <td>-0.12</td>
+      <td>-0.12</td>
+      <td>-0.13</td>
+      <td>-0.13</td>
+      <td>-0.14</td>
+      <td>-0.14</td>
+      <td>-0.15</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>-0.15</td>
+      <td>-0.15</td>
+      <td>-0.14</td>
+      <td>-0.14</td>
+      <td>-0.13</td>
+      <td>-0.13</td>
+      <td>-0.12</td>
+      <td>-0.12</td>
+      <td>-0.11</td>
+      <td>-0.11</td>
+      <td>-0.11</td>
+      <td>-0.10</td>
+      <td>-0.10</td>
+      <td>-0.10</td>
+      <td>-0.09</td>
+      <td>-0.09</td>
+      <td>-0.08</td>
+      <td>-0.08</td>
+      <td>-0.07</td>
+      <td>-0.07</td>
+      <td>-0.06</td>
+      <td>-0.06</td>
+      <td>-0.06</td>
+      <td>-0.06</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>-0.05</td>
+      <td>-0.05</td>
+      <td>-0.05</td>
+      <td>-0.04</td>
+      <td>-0.04</td>
+      <td>-0.04</td>
+      <td>-0.04</td>
+      <td>-0.04</td>
+      <td>-0.03</td>
+      <td>-0.03</td>
+      <td>-0.03</td>
+      <td>-0.03</td>
+      <td>-0.03</td>
+      <td>-0.03</td>
+      <td>-0.03</td>
+      <td>-0.03</td>
+      <td>-0.03</td>
+      <td>-0.03</td>
+      <td>-0.03</td>
+      <td>-0.04</td>
+      <td>-0.04</td>
+      <td>-0.04</td>
+      <td>-0.04</td>
+      <td>-0.05</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>-0.05</td>
+      <td>-0.05</td>
+      <td>-0.06</td>
+      <td>-0.06</td>
+      <td>-0.06</td>
+      <td>-0.07</td>
+      <td>-0.07</td>
+      <td>-0.07</td>
+      <td>-0.07</td>
+      <td>-0.08</td>
+      <td>-0.08</td>
+      <td>-0.09</td>
+      <td>-0.09</td>
+      <td>-0.09</td>
+      <td>-0.10</td>
+      <td>-0.10</td>
+      <td>-0.10</td>
+      <td>-0.11</td>
+      <td>-0.11</td>
+      <td>-0.11</td>
+      <td>-0.12</td>
+      <td>-0.12</td>
+      <td>-0.13</td>
+      <td>-0.13</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>-0.13</td>
+      <td>-0.13</td>
+      <td>-0.12</td>
+      <td>-0.11</td>
+      <td>-0.11</td>
+      <td>-0.10</td>
+      <td>-0.09</td>
+      <td>-0.09</td>
+      <td>-0.08</td>
+      <td>-0.08</td>
+      <td>-0.07</td>
+      <td>-0.07</td>
+      <td>-0.06</td>
+      <td>-0.05</td>
+      <td>-0.05</td>
+      <td>-0.04</td>
+      <td>-0.03</td>
+      <td>-0.03</td>
+      <td>-0.02</td>
+      <td>-0.01</td>
+      <td>-0.00</td>
+      <td>0.00</td>
+      <td>0.01</td>
+      <td>0.02</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>0.02</td>
+      <td>0.03</td>
+      <td>0.03</td>
+      <td>0.04</td>
+      <td>0.04</td>
+      <td>0.05</td>
+      <td>0.05</td>
+      <td>0.06</td>
+      <td>0.07</td>
+      <td>0.07</td>
+      <td>0.08</td>
+      <td>0.09</td>
+      <td>0.10</td>
+      <td>0.10</td>
+      <td>0.11</td>
+      <td>0.12</td>
+      <td>0.13</td>
+      <td>0.14</td>
+      <td>0.15</td>
+      <td>0.16</td>
+      <td>0.17</td>
+      <td>0.18</td>
+      <td>0.20</td>
+      <td>0.21</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>0.21</td>
+      <td>0.20</td>
+      <td>0.19</td>
+      <td>0.18</td>
+      <td>0.17</td>
+      <td>0.16</td>
+      <td>0.15</td>
+      <td>0.13</td>
+      <td>0.12</td>
+      <td>0.11</td>
+      <td>0.11</td>
+      <td>0.10</td>
+      <td>0.09</td>
+      <td>0.09</td>
+      <td>0.08</td>
+      <td>0.07</td>
+      <td>0.06</td>
+      <td>0.06</td>
+      <td>0.05</td>
+      <td>0.05</td>
+      <td>0.04</td>
+      <td>0.04</td>
+      <td>0.04</td>
+      <td>0.03</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>0.03</td>
+      <td>0.03</td>
+      <td>0.02</td>
+      <td>0.02</td>
+      <td>0.01</td>
+      <td>0.00</td>
+      <td>-0.00</td>
+      <td>-0.01</td>
+      <td>-0.01</td>
+      <td>-0.02</td>
+      <td>-0.02</td>
+      <td>-0.03</td>
+      <td>-0.03</td>
+      <td>-0.04</td>
+      <td>-0.04</td>
+      <td>-0.04</td>
+      <td>-0.05</td>
+      <td>-0.05</td>
+      <td>-0.05</td>
+      <td>-0.06</td>
+      <td>-0.06</td>
+      <td>-0.07</td>
+      <td>-0.07</td>
+      <td>-0.08</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>-0.08</td>
+      <td>-0.08</td>
+      <td>-0.08</td>
+      <td>-0.08</td>
+      <td>-0.07</td>
+      <td>-0.07</td>
+      <td>-0.07</td>
+      <td>-0.06</td>
+      <td>-0.06</td>
+      <td>-0.06</td>
+      <td>-0.06</td>
+      <td>-0.05</td>
+      <td>-0.05</td>
+      <td>-0.05</td>
+      <td>-0.05</td>
+      <td>-0.05</td>
+      <td>-0.05</td>
+      <td>-0.04</td>
+      <td>-0.04</td>
+      <td>-0.04</td>
+      <td>-0.04</td>
+      <td>-0.04</td>
+      <td>-0.04</td>
+      <td>-0.04</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>-0.04</td>
+      <td>-0.04</td>
+      <td>-0.04</td>
+      <td>-0.04</td>
+      <td>-0.04</td>
+      <td>-0.04</td>
+      <td>-0.05</td>
+      <td>-0.05</td>
+      <td>-0.05</td>
+      <td>-0.05</td>
+      <td>-0.05</td>
+      <td>-0.05</td>
+      <td>-0.05</td>
+      <td>-0.05</td>
+      <td>-0.05</td>
+      <td>-0.05</td>
+      <td>-0.05</td>
+      <td>-0.05</td>
+      <td>-0.05</td>
+      <td>-0.04</td>
+      <td>-0.04</td>
+      <td>-0.04</td>
+      <td>-0.04</td>
+      <td>-0.04</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>-0.04</td>
+      <td>-0.04</td>
+      <td>-0.05</td>
+      <td>-0.05</td>
+      <td>-0.05</td>
+      <td>-0.05</td>
+      <td>-0.05</td>
+      <td>-0.06</td>
+      <td>-0.06</td>
+      <td>-0.06</td>
+      <td>-0.07</td>
+      <td>-0.07</td>
+      <td>-0.07</td>
+      <td>-0.08</td>
+      <td>-0.08</td>
+      <td>-0.08</td>
+      <td>-0.08</td>
+      <td>-0.09</td>
+      <td>-0.09</td>
+      <td>-0.10</td>
+      <td>-0.10</td>
+      <td>-0.10</td>
+      <td>-0.11</td>
+      <td>-0.11</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>-0.11</td>
+      <td>-0.11</td>
+      <td>-0.11</td>
+      <td>-0.10</td>
+      <td>-0.10</td>
+      <td>-0.09</td>
+      <td>-0.09</td>
+      <td>-0.08</td>
+      <td>-0.08</td>
+      <td>-0.08</td>
+      <td>-0.07</td>
+      <td>-0.07</td>
+      <td>-0.06</td>
+      <td>-0.06</td>
+      <td>-0.05</td>
+      <td>-0.05</td>
+      <td>-0.04</td>
+      <td>-0.03</td>
+      <td>-0.03</td>
+      <td>-0.02</td>
+      <td>-0.01</td>
+      <td>-0.01</td>
+      <td>0.00</td>
+      <td>0.01</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>0.02</td>
+      <td>0.02</td>
+      <td>0.03</td>
+      <td>0.04</td>
+      <td>0.04</td>
+      <td>0.05</td>
+      <td>0.06</td>
+      <td>0.07</td>
+      <td>0.07</td>
+      <td>0.09</td>
+      <td>0.10</td>
+      <td>0.11</td>
+      <td>0.11</td>
+      <td>0.12</td>
+      <td>0.13</td>
+      <td>0.14</td>
+      <td>0.15</td>
+      <td>0.16</td>
+      <td>0.17</td>
+      <td>0.18</td>
+      <td>0.20</td>
+      <td>0.21</td>
+      <td>0.22</td>
+      <td>0.23</td>
+    </tr>
+    <tr>
+      <th>28</th>
+      <td>0.23</td>
+      <td>0.23</td>
+      <td>0.22</td>
+      <td>0.20</td>
+      <td>0.19</td>
+      <td>0.18</td>
+      <td>0.17</td>
+      <td>0.16</td>
+      <td>0.15</td>
+      <td>0.14</td>
+      <td>0.13</td>
+      <td>0.12</td>
+      <td>0.11</td>
+      <td>0.11</td>
+      <td>0.10</td>
+      <td>0.09</td>
+      <td>0.08</td>
+      <td>0.08</td>
+      <td>0.07</td>
+      <td>0.06</td>
+      <td>0.06</td>
+      <td>0.05</td>
+      <td>0.04</td>
+      <td>0.04</td>
+    </tr>
+    <tr>
+      <th>29</th>
+      <td>0.03</td>
+      <td>0.03</td>
+      <td>0.02</td>
+      <td>0.01</td>
+      <td>0.01</td>
+      <td>-0.00</td>
+      <td>-0.01</td>
+      <td>-0.01</td>
+      <td>-0.02</td>
+      <td>-0.03</td>
+      <td>-0.03</td>
+      <td>-0.04</td>
+      <td>-0.05</td>
+      <td>-0.05</td>
+      <td>-0.06</td>
+      <td>-0.06</td>
+      <td>-0.07</td>
+      <td>-0.07</td>
+      <td>-0.08</td>
+      <td>-0.08</td>
+      <td>-0.09</td>
+      <td>-0.09</td>
+      <td>-0.10</td>
+      <td>-0.10</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+      <button class="colab-df-convert" onclick="convertToInteractive('df-8717d510-e7e3-44ef-9c5e-6eee1b631bd7')" title="Convert this dataframe to an interactive table." style="display:none;">
+        
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewbox="0 0 24 24" width="24px">
+    <path d="M0 0h24v24H0V0z" fill="none"></path>
+    <path d="M18.56 5.44l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94zm-11 1L8.5 8.5l.94-2.06 2.06-.94-2.06-.94L8.5 2.5l-.94 2.06-2.06.94zm10 10l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94z"></path><path d="M17.41 7.96l-1.37-1.37c-.4-.4-.92-.59-1.43-.59-.52 0-1.04.2-1.43.59L10.3 9.45l-7.72 7.72c-.78.78-.78 2.05 0 2.83L4 21.41c.39.39.9.59 1.41.59.51 0 1.02-.2 1.41-.59l7.78-7.78 2.81-2.81c.8-.78.8-2.07 0-2.86zM5.41 20L4 18.59l7.72-7.72 1.47 1.35L5.41 20z"></path>
+  </svg>
+      </button>
+      
+  <style>
+    .colab-df-container {
+      display:flex;
+      flex-wrap:wrap;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+      <script>
+        const buttonEl =
+          document.querySelector('#df-8717d510-e7e3-44ef-9c5e-6eee1b631bd7 button.colab-df-convert');
+        buttonEl.style.display =
+          google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+        async function convertToInteractive(key) {
+          const element = document.querySelector('#df-8717d510-e7e3-44ef-9c5e-6eee1b631bd7');
+          const dataTable =
+            await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                     [key], {});
+          if (!dataTable) return;
+
+          const docLinkHtml = 'Like what you see? Visit the ' +
+            '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+            + ' to learn more about interactive tables.';
+          element.innerHTML = '';
+          dataTable['output_type'] = 'display_data';
+          await google.colab.output.renderOutput(dataTable, element);
+          const docLink = document.createElement('div');
+          docLink.innerHTML = docLinkHtml;
+          element.appendChild(docLink);
+        }
+      </script>
+    </div>
+  </div>
+  
+</div>
+</div>
+<div class="cell" data-outputid="7b43409d-bbf9-4b92-a84a-f9cfe1c88352">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>plt_residual_lag(res, <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="Lec6_Autocorrelation_files/figure-html/cell-30-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="cell" data-outputid="f0806361-1d5b-4db6-cf61-e6d7b59037be">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>plt_residual_lag(res, <span class="dv">24</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="Lec6_Autocorrelation_files/figure-html/cell-31-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="cell" data-outputid="8de65c27-eb4f-4a3a-bb47-b0a17710649a">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>plt_residual_lag(res, <span class="dv">24</span><span class="op">*</span><span class="dv">7</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="Lec6_Autocorrelation_files/figure-html/cell-32-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="cell" data-outputid="49fb5aee-3d70-4e81-8e06-af589f193f9b">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>plt_residual_lag(res, <span class="dv">24</span><span class="op">*</span><span class="dv">7</span><span class="op">*</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="Lec6_Autocorrelation_files/figure-html/cell-33-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+</section>
+<section id="remark" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> Remark</h1>
+<p>We saw that with 2-week-lag feature, the <span class="math inline">\(R^2\)</span> only increased a little. The model summary seems still good so we could keep it. However, from the viewpoint of interpretation I may remove it.</p>
+<p>One may also notice that the 1-day-lag correlation becomes bigger although 1-day-lag feature is already in the model. It is probably because of the multicollinearity between the lag features.</p>
+<p>The following table shows the correlation between lag features.</p>
+<div class="cell" data-outputid="ad47d268-53aa-4bea-b993-7ab2b034dd1a">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>df[[<span class="st">'power_lag_1_day'</span>,<span class="st">'power_lag_1_week'</span>, <span class="st">'power_lag_2_week'</span> ]].corr()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="33">
+
+
+  <div id="df-c976b4ba-8cb2-4350-83ed-89c087d72a96">
+    <div class="colab-df-container">
+      <div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>power_lag_1_day</th>
+      <th>power_lag_1_week</th>
+      <th>power_lag_2_week</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>power_lag_1_day</th>
+      <td>1.000000</td>
+      <td>0.768394</td>
+      <td>0.745817</td>
+    </tr>
+    <tr>
+      <th>power_lag_1_week</th>
+      <td>0.768394</td>
+      <td>1.000000</td>
+      <td>0.819955</td>
+    </tr>
+    <tr>
+      <th>power_lag_2_week</th>
+      <td>0.745817</td>
+      <td>0.819955</td>
+      <td>1.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+      <button class="colab-df-convert" onclick="convertToInteractive('df-c976b4ba-8cb2-4350-83ed-89c087d72a96')" title="Convert this dataframe to an interactive table." style="display:none;">
+        
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewbox="0 0 24 24" width="24px">
+    <path d="M0 0h24v24H0V0z" fill="none"></path>
+    <path d="M18.56 5.44l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94zm-11 1L8.5 8.5l.94-2.06 2.06-.94-2.06-.94L8.5 2.5l-.94 2.06-2.06.94zm10 10l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94z"></path><path d="M17.41 7.96l-1.37-1.37c-.4-.4-.92-.59-1.43-.59-.52 0-1.04.2-1.43.59L10.3 9.45l-7.72 7.72c-.78.78-.78 2.05 0 2.83L4 21.41c.39.39.9.59 1.41.59.51 0 1.02-.2 1.41-.59l7.78-7.78 2.81-2.81c.8-.78.8-2.07 0-2.86zM5.41 20L4 18.59l7.72-7.72 1.47 1.35L5.41 20z"></path>
+  </svg>
+      </button>
+      
+  <style>
+    .colab-df-container {
+      display:flex;
+      flex-wrap:wrap;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+      <script>
+        const buttonEl =
+          document.querySelector('#df-c976b4ba-8cb2-4350-83ed-89c087d72a96 button.colab-df-convert');
+        buttonEl.style.display =
+          google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+        async function convertToInteractive(key) {
+          const element = document.querySelector('#df-c976b4ba-8cb2-4350-83ed-89c087d72a96');
+          const dataTable =
+            await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                     [key], {});
+          if (!dataTable) return;
+
+          const docLinkHtml = 'Like what you see? Visit the ' +
+            '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+            + ' to learn more about interactive tables.';
+          element.innerHTML = '';
+          dataTable['output_type'] = 'display_data';
+          await google.colab.output.renderOutput(dataTable, element);
+          const docLink = document.createElement('div');
+          docLink.innerHTML = docLinkHtml;
+          element.appendChild(docLink);
+        }
+      </script>
+    </div>
+  </div>
+  
+</div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./Lec5_Potential_issues.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Potential issues</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./Lec7_logistic_regression.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Logistic regression</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>

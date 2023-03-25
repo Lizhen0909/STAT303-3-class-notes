@@ -1,0 +1,1417 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.0.37">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Data Science II with python (Class notes) - 8&nbsp; Best subset and Stepwise selection</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./Lec9_RidgeRegression_Lasso.html" rel="next">
+<link href="./Lec7_logistic_regression.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Best subset and Stepwise selection</span></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="./" class="sidebar-logo-link">
+      <img src="./NU_Stat_logo.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
+      </a>
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Data Science II with python (Class notes)</a> 
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">Preface</a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">Linear regression</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lec1_SimpleLinearRegression.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Simple Linear Regression</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lec2_MultipleLinearRegression.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Multiple Linear Regression</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lec3_VariableTransformations_and_Interactions.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Variable interactions and transformations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lec4_ModelAssumptions.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Model assumptions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lec5_Potential_issues.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Potential issues</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lec6_Autocorrelation.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Autocorrelation</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">Logistic regression</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lec7_logistic_regression.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Logistic regression</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">Variable selection &amp; Regularization</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lec8_ModelSelection_BestSubset_FwdBwd_stepwise.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Best subset and Stepwise selection</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lec9_RidgeRegression_Lasso.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Ridge regression and Lasso</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">Appendices</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Assignment 1.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Assignment A</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Assignment B.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Assignment B</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Assignment C.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Assignment C</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Assignment D.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">Assignment D</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Assignment E.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">E</span>&nbsp; <span class="chapter-title">Assignment E</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Assignment E_updated.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">F</span>&nbsp; <span class="chapter-title">Assignment E (Section 22)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Practice_Final_Answer_Key.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">G</span>&nbsp; <span class="chapter-title">Practice Final Solutions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Datasets.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">H</span>&nbsp; <span class="chapter-title">Datasets, assignment and project files</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">References</a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#best-subsets-selection" id="toc-best-subsets-selection" class="nav-link active" data-scroll-target="#best-subsets-selection"> <span class="header-section-number">8.1</span> Best subsets selection</a>
+  <ul class="collapse">
+  <li><a href="#best-subset-selection-algorithm" id="toc-best-subset-selection-algorithm" class="nav-link" data-scroll-target="#best-subset-selection-algorithm"> <span class="header-section-number">8.1.1</span> Best subset selection algorithm</a></li>
+  <li><a href="#including-interactions-for-best-subset-selection" id="toc-including-interactions-for-best-subset-selection" class="nav-link" data-scroll-target="#including-interactions-for-best-subset-selection"> <span class="header-section-number">8.1.2</span> Including interactions for best subset selection</a></li>
+  </ul></li>
+  <li><a href="#stepwise-selection" id="toc-stepwise-selection" class="nav-link" data-scroll-target="#stepwise-selection"> <span class="header-section-number">8.2</span> Stepwise selection</a></li>
+  <li><a href="#forward-stepwise-selection" id="toc-forward-stepwise-selection" class="nav-link" data-scroll-target="#forward-stepwise-selection"> <span class="header-section-number">8.3</span> Forward stepwise selection</a></li>
+  <li><a href="#backward-stepwise-selection" id="toc-backward-stepwise-selection" class="nav-link" data-scroll-target="#backward-stepwise-selection"> <span class="header-section-number">8.4</span> Backward Stepwise Selection</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Best subset and Stepwise selection</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    
+  </div>
+  
+
+</header>
+
+<p><em>Read section 6.1 of the book before using these notes.</em></p>
+<p><em>Note that in this course, lecture notes are not sufficient, you must read the book for better understanding. Lecture notes are just implementing the concepts of the book on a dataset, but not explaining the concepts elaborately.</em></p>
+<section id="best-subsets-selection" class="level2" data-number="8.1">
+<h2 data-number="8.1" class="anchored" data-anchor-id="best-subsets-selection"><span class="header-section-number">8.1</span> Best subsets selection</h2>
+<div class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.formula.api <span class="im">as</span> sm</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> itertools</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>trainf <span class="op">=</span> pd.read_csv(<span class="st">'./Datasets/house_feature_train.csv'</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>trainp <span class="op">=</span> pd.read_csv(<span class="st">'./Datasets/house_price_train.csv'</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>testf <span class="op">=</span> pd.read_csv(<span class="st">'./Datasets/house_feature_test.csv'</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>testp <span class="op">=</span> pd.read_csv(<span class="st">'./Datasets/house_price_test.csv'</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>train <span class="op">=</span> pd.merge(trainf,trainp)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>test <span class="op">=</span> pd.merge(testf,testp)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>train.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="6">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>house_id</th>
+      <th>house_age</th>
+      <th>distance_MRT</th>
+      <th>number_convenience_stores</th>
+      <th>latitude</th>
+      <th>longitude</th>
+      <th>house_price</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>210</td>
+      <td>5.2</td>
+      <td>390.5684</td>
+      <td>5</td>
+      <td>24.97937</td>
+      <td>121.54245</td>
+      <td>2724.84</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>190</td>
+      <td>35.3</td>
+      <td>616.5735</td>
+      <td>8</td>
+      <td>24.97945</td>
+      <td>121.53642</td>
+      <td>1789.29</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>328</td>
+      <td>15.9</td>
+      <td>1497.7130</td>
+      <td>3</td>
+      <td>24.97003</td>
+      <td>121.51696</td>
+      <td>556.96</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>5</td>
+      <td>7.1</td>
+      <td>2175.0300</td>
+      <td>3</td>
+      <td>24.96305</td>
+      <td>121.51254</td>
+      <td>1030.41</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>412</td>
+      <td>8.1</td>
+      <td>104.8101</td>
+      <td>5</td>
+      <td>24.96674</td>
+      <td>121.54067</td>
+      <td>2756.25</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+<p>Develop a model to predict house price using the rest of the columns as predictors (except <code>house_id</code>).</p>
+<div class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Model with log house price as the response and the remaining variables as predictors</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> sm.ols(<span class="st">'np.log(house_price)~house_age+distance_MRT+number_convenience_stores+latitude+</span><span class="ch">\</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="st">longitude'</span>, data <span class="op">=</span> train).fit()</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>model.summary()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="7">
+
+<table class="simpletable">
+<caption>OLS Regression Results</caption>
+<tbody><tr>
+  <th>Dep. Variable:</th>    <td>np.log(house_price)</td> <th>  R-squared:         </th> <td>   0.772</td>
+</tr>
+<tr>
+  <th>Model:</th>                    <td>OLS</td>         <th>  Adj. R-squared:    </th> <td>   0.767</td>
+</tr>
+<tr>
+  <th>Method:</th>              <td>Least Squares</td>    <th>  F-statistic:       </th> <td>   181.8</td>
+</tr>
+<tr>
+  <th>Date:</th>              <td>Thu, 16 Feb 2023</td>   <th>  Prob (F-statistic):</th> <td>4.47e-84</td>
+</tr>
+<tr>
+  <th>Time:</th>                  <td>18:31:07</td>       <th>  Log-Likelihood:    </th> <td> -118.47</td>
+</tr>
+<tr>
+  <th>No. Observations:</th>       <td>   275</td>        <th>  AIC:               </th> <td>   248.9</td>
+</tr>
+<tr>
+  <th>Df Residuals:</th>           <td>   269</td>        <th>  BIC:               </th> <td>   270.6</td>
+</tr>
+<tr>
+  <th>Df Model:</th>               <td>     5</td>        <th>                     </th>     <td> </td>   
+</tr>
+<tr>
+  <th>Covariance Type:</th>       <td>nonrobust</td>      <th>                     </th>     <td> </td>   
+</tr>
+</tbody></table>
+<table class="simpletable">
+<tbody><tr>
+              <td></td>                 <th>coef</th>     <th>std err</th>      <th>t</th>      <th>P&gt;|t|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>Intercept</th>                 <td> -482.9401</td> <td>  312.000</td> <td>   -1.548</td> <td> 0.123</td> <td>-1097.212</td> <td>  131.332</td>
+</tr>
+<tr>
+  <th>house_age</th>                 <td>   -0.0131</td> <td>    0.002</td> <td>   -6.437</td> <td> 0.000</td> <td>   -0.017</td> <td>   -0.009</td>
+</tr>
+<tr>
+  <th>distance_MRT</th>              <td>   -0.0003</td> <td> 3.69e-05</td> <td>   -8.318</td> <td> 0.000</td> <td>   -0.000</td> <td>   -0.000</td>
+</tr>
+<tr>
+  <th>number_convenience_stores</th> <td>    0.0598</td> <td>    0.010</td> <td>    6.247</td> <td> 0.000</td> <td>    0.041</td> <td>    0.079</td>
+</tr>
+<tr>
+  <th>latitude</th>                  <td>   18.7044</td> <td>    2.353</td> <td>    7.951</td> <td> 0.000</td> <td>   14.073</td> <td>   23.336</td>
+</tr>
+<tr>
+  <th>longitude</th>                 <td>    0.1923</td> <td>    2.465</td> <td>    0.078</td> <td> 0.938</td> <td>   -4.660</td> <td>    5.045</td>
+</tr>
+</tbody></table>
+<table class="simpletable">
+<tbody><tr>
+  <th>Omnibus:</th>       <td> 4.413</td> <th>  Durbin-Watson:     </th> <td>   2.260</td>
+</tr>
+<tr>
+  <th>Prob(Omnibus):</th> <td> 0.110</td> <th>  Jarque-Bera (JB):  </th> <td>   5.515</td>
+</tr>
+<tr>
+  <th>Skew:</th>          <td> 0.077</td> <th>  Prob(JB):          </th> <td>  0.0634</td>
+</tr>
+<tr>
+  <th>Kurtosis:</th>      <td> 3.677</td> <th>  Cond. No.          </th> <td>2.28e+07</td>
+</tr>
+</tbody></table><br><br>Notes:<br>[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.<br>[2] The condition number is large, 2.28e+07. This might indicate that there are<br>strong multicollinearity or other numerical problems.
+</div>
+</div>
+<p><strong>Find the best subset of predictors that can predict house price in a linear regression model.</strong></p>
+<div class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Creating a set of predictors from which we need to find the best subset of predictors</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> train[[<span class="st">'house_age'</span>,<span class="st">'number_convenience_stores'</span>,<span class="st">'latitude'</span>, <span class="st">'longitude'</span>,<span class="st">'distance_MRT'</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="best-subset-selection-algorithm" class="level3" data-number="8.1.1">
+<h3 data-number="8.1.1" class="anchored" data-anchor-id="best-subset-selection-algorithm"><span class="header-section-number">8.1.1</span> Best subset selection algorithm</h3>
+<p>Now, we will implement the algorithm of finding the best subset of predictors from amongst all sets of predictors.</p>
+<div class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Function to develop a model based on all predictors in predictor_subset</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> processSubset(predictor_subset):</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Fit model on feature_set and calculate R-squared</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    model <span class="op">=</span> sm.ols(<span class="st">'np.log(house_price)~'</span> <span class="op">+</span> <span class="st">'+'</span>.join(predictor_subset),data <span class="op">=</span> train).fit()</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    Rsquared <span class="op">=</span> model.rsquared</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> {<span class="st">"model"</span>:model, <span class="st">"Rsquared"</span>:Rsquared}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Function to select the best model amongst all models with 'k' predictors</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> getBest_model(k):</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    tic <span class="op">=</span> time.time()</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    results <span class="op">=</span> []</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> combo <span class="kw">in</span> itertools.combinations(X.columns, k):</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>        results.append(processSubset((<span class="bu">list</span>(combo))))</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Wrap everything up in a dataframe</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    models <span class="op">=</span> pd.DataFrame(results)</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Choose the model with the highest RSS</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>    best_model <span class="op">=</span> models.loc[models[<span class="st">'Rsquared'</span>].argmax()]</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>    toc <span class="op">=</span> time.time()</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Processed"</span>, models.shape[<span class="dv">0</span>], <span class="st">"models on"</span>, k, <span class="st">"predictors in"</span>, (toc<span class="op">-</span>tic), <span class="st">"seconds."</span>)</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> best_model</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="14">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Function to select the best model amongst the best models for 'k' predictors, where k = 1,2,3,..</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>models_best <span class="op">=</span> pd.DataFrame(columns<span class="op">=</span>[<span class="st">"Rsquared"</span>, <span class="st">"model"</span>])</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>tic <span class="op">=</span> time.time()</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>,<span class="dv">1</span><span class="op">+</span>X.shape[<span class="dv">1</span>]):</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    models_best.loc[i] <span class="op">=</span> getBest_model(i)</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>toc <span class="op">=</span> time.time()</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Total elapsed time:"</span>, (toc<span class="op">-</span>tic), <span class="st">"seconds."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Processed 5 models on 1 predictors in 0.02393651008605957 seconds.
+Processed 10 models on 2 predictors in 0.04688239097595215 seconds.
+Processed 10 models on 3 predictors in 0.04986691474914551 seconds.
+Processed 5 models on 4 predictors in 0.029920578002929688 seconds.
+Processed 1 models on 5 predictors in 0.008975982666015625 seconds.
+Total elapsed time: 0.17253828048706055 seconds.</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="22">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> best_sub_plots():</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    plt.figure(figsize<span class="op">=</span>(<span class="dv">20</span>,<span class="dv">10</span>))</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    plt.rcParams.update({<span class="st">'font.size'</span>: <span class="dv">18</span>, <span class="st">'lines.markersize'</span>: <span class="dv">10</span>})</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Set up a 2x2 grid so we can look at 4 plots at once</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    plt.subplot(<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">1</span>)</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># We will now plot a red dot to indicate the model with the largest adjusted R^2 statistic.</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>    <span class="co"># The argmax() function can be used to identify the location of the maximum point of a vector</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>    plt.plot(models_best[<span class="st">"Rsquared"</span>])</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>    plt.xlabel(<span class="st">'# Predictors'</span>)</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>    plt.ylabel(<span class="st">'Rsquared'</span>)</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># We will now plot a red dot to indicate the model with the largest adjusted R^2 statistic.</span></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>    <span class="co"># The argmax() function can be used to identify the location of the maximum point of a vector</span></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>    rsquared_adj <span class="op">=</span> models_best.<span class="bu">apply</span>(<span class="kw">lambda</span> row: row[<span class="dv">1</span>].rsquared_adj, axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>    plt.subplot(<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>)</span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>    plt.plot(rsquared_adj)</span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>    plt.plot(<span class="dv">1</span><span class="op">+</span>rsquared_adj.argmax(), rsquared_adj.<span class="bu">max</span>(), <span class="st">"or"</span>)</span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>    plt.xlabel(<span class="st">'# Predictors'</span>)</span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>    plt.ylabel(<span class="st">'adjusted rsquared'</span>)</span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>    <span class="co"># We'll do the same for AIC and BIC, this time looking for the models with the SMALLEST statistic</span></span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>    aic <span class="op">=</span> models_best.<span class="bu">apply</span>(<span class="kw">lambda</span> row: row[<span class="dv">1</span>].aic, axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a>    plt.subplot(<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">3</span>)</span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a>    plt.plot(aic)</span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a>    plt.plot(<span class="dv">1</span><span class="op">+</span>aic.argmin(), aic.<span class="bu">min</span>(), <span class="st">"or"</span>)</span>
+<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a>    plt.xlabel(<span class="st">'# Predictors'</span>)</span>
+<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a>    plt.ylabel(<span class="st">'AIC'</span>)</span>
+<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a>    bic <span class="op">=</span> models_best.<span class="bu">apply</span>(<span class="kw">lambda</span> row: row[<span class="dv">1</span>].bic, axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a>    plt.subplot(<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">4</span>)</span>
+<span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a>    plt.plot(bic)</span>
+<span id="cb9-38"><a href="#cb9-38" aria-hidden="true" tabindex="-1"></a>    plt.plot(<span class="dv">1</span><span class="op">+</span>bic.argmin(), bic.<span class="bu">min</span>(), <span class="st">"or"</span>)</span>
+<span id="cb9-39"><a href="#cb9-39" aria-hidden="true" tabindex="-1"></a>    plt.xlabel(<span class="st">'# Predictors'</span>)</span>
+<span id="cb9-40"><a href="#cb9-40" aria-hidden="true" tabindex="-1"></a>    plt.ylabel(<span class="st">'BIC'</span>)</span>
+<span id="cb9-41"><a href="#cb9-41" aria-hidden="true" tabindex="-1"></a>best_sub_plots()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="Lec8_ModelSelection_BestSubset_FwdBwd_stepwise_files/figure-html/cell-9-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<p>The model with 4 predictors is the best model, according to all 3 criteria - Adjusted R-squared, AIC and BIC.</p>
+<p>Note that we have not considered the null model (i.e., the model with only the intercept and no predictors) explicitly in the best subsets algorithm. However, the null model is considered when selecting the best model. The R-squared and the adjusted R-squared for the null model is 0. So, if the adjusted R-squared of all the models with at least one predictor is negative, then the null model will be the best model.</p>
+<div class="cell" data-execution_count="23">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>best_subset_model <span class="op">=</span> models_best.loc[<span class="dv">4</span>,<span class="st">'model'</span>]</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>models_best.loc[<span class="dv">4</span>,<span class="st">'model'</span>].summary()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="23">
+
+<table class="simpletable">
+<caption>OLS Regression Results</caption>
+<tbody><tr>
+  <th>Dep. Variable:</th>    <td>np.log(house_price)</td> <th>  R-squared:         </th> <td>   0.772</td>
+</tr>
+<tr>
+  <th>Model:</th>                    <td>OLS</td>         <th>  Adj. R-squared:    </th> <td>   0.768</td>
+</tr>
+<tr>
+  <th>Method:</th>              <td>Least Squares</td>    <th>  F-statistic:       </th> <td>   228.0</td>
+</tr>
+<tr>
+  <th>Date:</th>              <td>Thu, 16 Feb 2023</td>   <th>  Prob (F-statistic):</th> <td>2.79e-85</td>
+</tr>
+<tr>
+  <th>Time:</th>                  <td>19:51:50</td>       <th>  Log-Likelihood:    </th> <td> -118.47</td>
+</tr>
+<tr>
+  <th>No. Observations:</th>       <td>   275</td>        <th>  AIC:               </th> <td>   246.9</td>
+</tr>
+<tr>
+  <th>Df Residuals:</th>           <td>   270</td>        <th>  BIC:               </th> <td>   265.0</td>
+</tr>
+<tr>
+  <th>Df Model:</th>               <td>     4</td>        <th>                     </th>     <td> </td>   
+</tr>
+<tr>
+  <th>Covariance Type:</th>       <td>nonrobust</td>      <th>                     </th>     <td> </td>   
+</tr>
+</tbody></table>
+<table class="simpletable">
+<tbody><tr>
+              <td></td>                 <th>coef</th>     <th>std err</th>      <th>t</th>      <th>P&gt;|t|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>Intercept</th>                 <td> -459.0262</td> <td>   58.231</td> <td>   -7.883</td> <td> 0.000</td> <td> -573.671</td> <td> -344.381</td>
+</tr>
+<tr>
+  <th>house_age</th>                 <td>   -0.0131</td> <td>    0.002</td> <td>   -6.451</td> <td> 0.000</td> <td>   -0.017</td> <td>   -0.009</td>
+</tr>
+<tr>
+  <th>number_convenience_stores</th> <td>    0.0597</td> <td>    0.010</td> <td>    6.271</td> <td> 0.000</td> <td>    0.041</td> <td>    0.078</td>
+</tr>
+<tr>
+  <th>latitude</th>                  <td>   18.6828</td> <td>    2.332</td> <td>    8.012</td> <td> 0.000</td> <td>   14.092</td> <td>   23.274</td>
+</tr>
+<tr>
+  <th>distance_MRT</th>              <td>   -0.0003</td> <td> 2.53e-05</td> <td>  -12.221</td> <td> 0.000</td> <td>   -0.000</td> <td>   -0.000</td>
+</tr>
+</tbody></table>
+<table class="simpletable">
+<tbody><tr>
+  <th>Omnibus:</th>       <td> 4.422</td> <th>  Durbin-Watson:     </th> <td>   2.261</td>
+</tr>
+<tr>
+  <th>Prob(Omnibus):</th> <td> 0.110</td> <th>  Jarque-Bera (JB):  </th> <td>   5.555</td>
+</tr>
+<tr>
+  <th>Skew:</th>          <td> 0.073</td> <th>  Prob(JB):          </th> <td>  0.0622</td>
+</tr>
+<tr>
+  <th>Kurtosis:</th>      <td> 3.681</td> <th>  Cond. No.          </th> <td>4.25e+06</td>
+</tr>
+</tbody></table><br><br>Notes:<br>[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.<br>[2] The condition number is large, 4.25e+06. This might indicate that there are<br>strong multicollinearity or other numerical problems.
+</div>
+</div>
+<div class="cell" data-execution_count="24">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Finding the RMSE of the model selected using the best subset selection procedure</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>pred_price <span class="op">=</span> np.exp(best_subset_model.predict(test))</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>np.sqrt(((pred_price <span class="op">-</span> test.house_price)<span class="op">**</span><span class="dv">2</span>).mean())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="24">
+<pre><code>403.4635674362065</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="25">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co">#RMSE of the model using all the predictors</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> sm.ols(<span class="st">'np.log(house_price)~'</span> <span class="op">+</span> <span class="st">'+'</span>.join(X.columns),data <span class="op">=</span> train).fit()</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>pred_price <span class="op">=</span> np.exp(model.predict(test))</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>np.sqrt(((pred_price <span class="op">-</span> test.house_price)<span class="op">**</span><span class="dv">2</span>).mean())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="25">
+<pre><code>403.8409399214197</code></pre>
+</div>
+</div>
+<p>The RMSE of the best subset model is similar to the RMSE of the model with all the predictors. This is because longitude varies only in [121.47, 121.57]. The coefficient of longitude is 0.1923 in the model with all the predictors. So, the change in the response due to longitude is in [23.36, 23.38 ]. This change in the response due to longitude is almost a constant, and hence is adjusted in the intercept of the model without longitude. Note the intercept of the model without longitude is 23.91 more than the intercept of the model with longitude.</p>
+<div class="cell" data-execution_count="26">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>[<span class="fl">0.1923</span><span class="op">*</span>train.longitude.<span class="bu">min</span>(),<span class="fl">0.1923</span><span class="op">*</span>train.longitude.<span class="bu">max</span>()]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="26">
+<pre><code>[23.359359818999998, 23.377193721]</code></pre>
+</div>
+</div>
+</section>
+<section id="including-interactions-for-best-subset-selection" class="level3" data-number="8.1.2">
+<h3 data-number="8.1.2" class="anchored" data-anchor-id="including-interactions-for-best-subset-selection"><span class="header-section-number">8.1.2</span> Including interactions for best subset selection</h3>
+<p><strong>Let’s perform best subset selection including all the predictors and their 2-factor interactions</strong></p>
+<div class="cell" data-execution_count="36">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Creating a dataframe with all the predictors</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> train[[<span class="st">'house_age'</span>, <span class="st">'distance_MRT'</span>, <span class="st">'number_convenience_stores'</span>,<span class="st">'latitude'</span>,<span class="st">'longitude'</span>]]</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Since 'X' will change when we include interactions, we need a backup containing all individual predictors</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>X_backup <span class="op">=</span> train[[<span class="st">'house_age'</span>, <span class="st">'distance_MRT'</span>, <span class="st">'number_convenience_stores'</span>,<span class="st">'latitude'</span>,<span class="st">'longitude'</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="38">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Including 2-factor interactions of predictors in train and 'X'. Note that we need train to develop the model, and X to </span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="co">#find 'k' variable subsets from amongst all the predictors under consideration</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> combo <span class="kw">in</span> itertools.combinations(X_backup.columns, <span class="dv">2</span>):    </span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>    train[<span class="st">'_'</span>.join(combo)] <span class="op">=</span> train[combo[<span class="dv">0</span>]]<span class="op">*</span>train[combo[<span class="dv">1</span>]]</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>    test[<span class="st">'_'</span>.join(combo)] <span class="op">=</span> test[combo[<span class="dv">0</span>]]<span class="op">*</span>test[combo[<span class="dv">1</span>]]</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>    X.loc[:,<span class="st">'_'</span>.join(combo)] <span class="op">=</span> train.loc[:,<span class="st">'_'</span>.join(combo)] </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="41">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>models_best <span class="op">=</span> pd.DataFrame(columns<span class="op">=</span>[<span class="st">"Rsquared"</span>, <span class="st">"model"</span>])</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>tic <span class="op">=</span> time.time()</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>,<span class="dv">1</span><span class="op">+</span>X.shape[<span class="dv">1</span>]):</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>    models_best.loc[i] <span class="op">=</span> getBest_model(i)</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>toc <span class="op">=</span> time.time()</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Total elapsed time:"</span>, (toc<span class="op">-</span>tic), <span class="st">"seconds."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Processed 15 models on 1 predictors in 0.07200050354003906 seconds.
+Processed 105 models on 2 predictors in 0.536522388458252 seconds.
+Processed 455 models on 3 predictors in 2.6639997959136963 seconds.
+Processed 1365 models on 4 predictors in 9.176022052764893 seconds.
+Processed 3003 models on 5 predictors in 24.184194803237915 seconds.
+Processed 5005 models on 6 predictors in 43.54697918891907 seconds.
+Processed 6435 models on 7 predictors in 65.83688187599182 seconds.
+Processed 6435 models on 8 predictors in 78.97277760505676 seconds.
+Processed 5005 models on 9 predictors in 64.53991365432739 seconds.
+Processed 3003 models on 10 predictors in 38.39328980445862 seconds.
+Processed 1365 models on 11 predictors in 18.715795755386353 seconds.
+Processed 455 models on 12 predictors in 6.93279504776001 seconds.
+Processed 105 models on 13 predictors in 1.6240253448486328 seconds.
+Processed 15 models on 14 predictors in 0.256000280380249 seconds.
+Processed 1 models on 15 predictors in 0.024001121520996094 seconds.
+Total elapsed time: 356.2638840675354 seconds.</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="42">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>best_sub_plots()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="Lec8_ModelSelection_BestSubset_FwdBwd_stepwise_files/figure-html/cell-17-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<p>The model with 7 predictors is the best model based on the BIC criterion, and very close to the best model based on the AIC and Adjusted R-squared criteria. Let us select the model with 7 predictors.</p>
+<div class="cell" data-scrolled="true" data-execution_count="53">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>best_interaction_model <span class="op">=</span> models_best[<span class="st">'model'</span>][<span class="dv">7</span>]</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>best_interaction_model.summary()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="53">
+
+<table class="simpletable">
+<caption>OLS Regression Results</caption>
+<tbody><tr>
+  <th>Dep. Variable:</th>    <td>np.log(house_price)</td> <th>  R-squared:         </th> <td>   0.818</td>
+</tr>
+<tr>
+  <th>Model:</th>                    <td>OLS</td>         <th>  Adj. R-squared:    </th> <td>   0.814</td>
+</tr>
+<tr>
+  <th>Method:</th>              <td>Least Squares</td>    <th>  F-statistic:       </th> <td>   171.7</td>
+</tr>
+<tr>
+  <th>Date:</th>              <td>Thu, 16 Feb 2023</td>   <th>  Prob (F-statistic):</th> <td>5.29e-95</td>
+</tr>
+<tr>
+  <th>Time:</th>                  <td>20:17:02</td>       <th>  Log-Likelihood:    </th> <td> -87.046</td>
+</tr>
+<tr>
+  <th>No. Observations:</th>       <td>   275</td>        <th>  AIC:               </th> <td>   190.1</td>
+</tr>
+<tr>
+  <th>Df Residuals:</th>           <td>   267</td>        <th>  BIC:               </th> <td>   219.0</td>
+</tr>
+<tr>
+  <th>Df Model:</th>               <td>     7</td>        <th>                     </th>     <td> </td>   
+</tr>
+<tr>
+  <th>Covariance Type:</th>       <td>nonrobust</td>      <th>                     </th>     <td> </td>   
+</tr>
+</tbody></table>
+<table class="simpletable">
+<tbody><tr>
+                     <td></td>                       <th>coef</th>     <th>std err</th>      <th>t</th>      <th>P&gt;|t|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>Intercept</th>                              <td>-1316.6156</td> <td>  135.152</td> <td>   -9.742</td> <td> 0.000</td> <td>-1582.716</td> <td>-1050.515</td>
+</tr>
+<tr>
+  <th>distance_MRT</th>                           <td>    0.2424</td> <td>    0.044</td> <td>    5.539</td> <td> 0.000</td> <td>    0.156</td> <td>    0.329</td>
+</tr>
+<tr>
+  <th>number_convenience_stores</th>              <td>  152.0179</td> <td>   23.356</td> <td>    6.509</td> <td> 0.000</td> <td>  106.033</td> <td>  198.003</td>
+</tr>
+<tr>
+  <th>latitude</th>                               <td>   53.0284</td> <td>    5.413</td> <td>    9.797</td> <td> 0.000</td> <td>   42.371</td> <td>   63.686</td>
+</tr>
+<tr>
+  <th>house_age_longitude</th>                    <td>   -0.0001</td> <td> 1.51e-05</td> <td>   -6.842</td> <td> 0.000</td> <td>   -0.000</td> <td>-7.36e-05</td>
+</tr>
+<tr>
+  <th>distance_MRT_number_convenience_stores</th> <td>-5.691e-05</td> <td> 1.19e-05</td> <td>   -4.763</td> <td> 0.000</td> <td>-8.04e-05</td> <td>-3.34e-05</td>
+</tr>
+<tr>
+  <th>distance_MRT_latitude</th>                  <td>   -0.0097</td> <td>    0.002</td> <td>   -5.544</td> <td> 0.000</td> <td>   -0.013</td> <td>   -0.006</td>
+</tr>
+<tr>
+  <th>number_convenience_stores_latitude</th>     <td>   -6.0847</td> <td>    0.935</td> <td>   -6.506</td> <td> 0.000</td> <td>   -7.926</td> <td>   -4.243</td>
+</tr>
+</tbody></table>
+<table class="simpletable">
+<tbody><tr>
+  <th>Omnibus:</th>       <td> 5.350</td> <th>  Durbin-Watson:     </th> <td>   2.136</td>
+</tr>
+<tr>
+  <th>Prob(Omnibus):</th> <td> 0.069</td> <th>  Jarque-Bera (JB):  </th> <td>   7.524</td>
+</tr>
+<tr>
+  <th>Skew:</th>          <td> 0.045</td> <th>  Prob(JB):          </th> <td>  0.0232</td>
+</tr>
+<tr>
+  <th>Kurtosis:</th>      <td> 3.805</td> <th>  Cond. No.          </th> <td>2.78e+08</td>
+</tr>
+</tbody></table><br><br>Notes:<br>[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.<br>[2] The condition number is large, 2.78e+08. This might indicate that there are<br>strong multicollinearity or other numerical problems.
+</div>
+</div>
+<p>Note that only 3 of the 10 two factor interactions are included in the best subset model, and the predictor <code>longitude</code> has been dropped.</p>
+<div class="cell" data-execution_count="54">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Finding the RMSE of the model selected using the best subset selection procedure, where the predictors</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="co">#include 2-factor interactions</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>pred_price <span class="op">=</span> np.exp(best_interaction_model.predict(test))</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>np.sqrt(((pred_price <span class="op">-</span> test.house_price)<span class="op">**</span><span class="dv">2</span>).mean())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="54">
+<pre><code>346.4100962681362</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="45">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Model with the predictors and all their 2-factor interactions</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> sm.ols(<span class="st">'np.log(house_price)~'</span> <span class="op">+</span> <span class="st">'+'</span>.join(X.columns),data <span class="op">=</span> train).fit()</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>model.summary()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="45">
+
+<table class="simpletable">
+<caption>OLS Regression Results</caption>
+<tbody><tr>
+  <th>Dep. Variable:</th>    <td>np.log(house_price)</td> <th>  R-squared:         </th> <td>   0.825</td>
+</tr>
+<tr>
+  <th>Model:</th>                    <td>OLS</td>         <th>  Adj. R-squared:    </th> <td>   0.814</td>
+</tr>
+<tr>
+  <th>Method:</th>              <td>Least Squares</td>    <th>  F-statistic:       </th> <td>   81.14</td>
+</tr>
+<tr>
+  <th>Date:</th>              <td>Thu, 16 Feb 2023</td>   <th>  Prob (F-statistic):</th> <td>1.33e-88</td>
+</tr>
+<tr>
+  <th>Time:</th>                  <td>20:13:01</td>       <th>  Log-Likelihood:    </th> <td> -82.228</td>
+</tr>
+<tr>
+  <th>No. Observations:</th>       <td>   275</td>        <th>  AIC:               </th> <td>   196.5</td>
+</tr>
+<tr>
+  <th>Df Residuals:</th>           <td>   259</td>        <th>  BIC:               </th> <td>   254.3</td>
+</tr>
+<tr>
+  <th>Df Model:</th>               <td>    15</td>        <th>                     </th>     <td> </td>   
+</tr>
+<tr>
+  <th>Covariance Type:</th>       <td>nonrobust</td>      <th>                     </th>     <td> </td>   
+</tr>
+</tbody></table>
+<table class="simpletable">
+<tbody><tr>
+                     <td></td>                       <th>coef</th>     <th>std err</th>      <th>t</th>      <th>P&gt;|t|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>Intercept</th>                              <td> 7.455e+05</td> <td> 1.03e+06</td> <td>    0.725</td> <td> 0.469</td> <td>-1.28e+06</td> <td> 2.77e+06</td>
+</tr>
+<tr>
+  <th>house_age</th>                              <td>   83.1021</td> <td>   40.562</td> <td>    2.049</td> <td> 0.041</td> <td>    3.228</td> <td>  162.976</td>
+</tr>
+<tr>
+  <th>distance_MRT</th>                           <td>    0.1391</td> <td>    0.174</td> <td>    0.798</td> <td> 0.425</td> <td>   -0.204</td> <td>    0.482</td>
+</tr>
+<tr>
+  <th>number_convenience_stores</th>              <td>  252.5261</td> <td>  212.276</td> <td>    1.190</td> <td> 0.235</td> <td> -165.481</td> <td>  670.533</td>
+</tr>
+<tr>
+  <th>latitude</th>                               <td>-2.992e+04</td> <td> 4.12e+04</td> <td>   -0.727</td> <td> 0.468</td> <td>-1.11e+05</td> <td> 5.12e+04</td>
+</tr>
+<tr>
+  <th>longitude</th>                              <td>-6144.1732</td> <td> 8454.331</td> <td>   -0.727</td> <td> 0.468</td> <td>-2.28e+04</td> <td> 1.05e+04</td>
+</tr>
+<tr>
+  <th>house_age_distance_MRT</th>                 <td>-2.904e-06</td> <td> 4.44e-06</td> <td>   -0.654</td> <td> 0.514</td> <td>-1.16e-05</td> <td> 5.84e-06</td>
+</tr>
+<tr>
+  <th>house_age_number_convenience_stores</th>    <td>    0.0011</td> <td>    0.001</td> <td>    1.409</td> <td> 0.160</td> <td>   -0.000</td> <td>    0.003</td>
+</tr>
+<tr>
+  <th>house_age_latitude</th>                     <td>    0.2119</td> <td>    0.261</td> <td>    0.811</td> <td> 0.418</td> <td>   -0.303</td> <td>    0.726</td>
+</tr>
+<tr>
+  <th>house_age_longitude</th>                    <td>   -0.7274</td> <td>    0.330</td> <td>   -2.207</td> <td> 0.028</td> <td>   -1.376</td> <td>   -0.078</td>
+</tr>
+<tr>
+  <th>distance_MRT_number_convenience_stores</th> <td>-6.192e-05</td> <td> 1.99e-05</td> <td>   -3.115</td> <td> 0.002</td> <td>   -0.000</td> <td>-2.28e-05</td>
+</tr>
+<tr>
+  <th>distance_MRT_latitude</th>                  <td>   -0.0082</td> <td>    0.003</td> <td>   -2.387</td> <td> 0.018</td> <td>   -0.015</td> <td>   -0.001</td>
+</tr>
+<tr>
+  <th>distance_MRT_longitude</th>                 <td>    0.0005</td> <td>    0.001</td> <td>    0.417</td> <td> 0.677</td> <td>   -0.002</td> <td>    0.003</td>
+</tr>
+<tr>
+  <th>number_convenience_stores_latitude</th>     <td>   -6.4014</td> <td>    1.113</td> <td>   -5.753</td> <td> 0.000</td> <td>   -8.592</td> <td>   -4.210</td>
+</tr>
+<tr>
+  <th>number_convenience_stores_longitude</th>    <td>   -0.7620</td> <td>    1.700</td> <td>   -0.448</td> <td> 0.654</td> <td>   -4.109</td> <td>    2.585</td>
+</tr>
+<tr>
+  <th>latitude_longitude</th>                     <td>  246.5995</td> <td>  338.773</td> <td>    0.728</td> <td> 0.467</td> <td> -420.500</td> <td>  913.699</td>
+</tr>
+</tbody></table>
+<table class="simpletable">
+<tbody><tr>
+  <th>Omnibus:</th>       <td> 3.911</td> <th>  Durbin-Watson:     </th> <td>   2.134</td>
+</tr>
+<tr>
+  <th>Prob(Omnibus):</th> <td> 0.142</td> <th>  Jarque-Bera (JB):  </th> <td>   4.552</td>
+</tr>
+<tr>
+  <th>Skew:</th>          <td> 0.090</td> <th>  Prob(JB):          </th> <td>   0.103</td>
+</tr>
+<tr>
+  <th>Kurtosis:</th>      <td> 3.604</td> <th>  Cond. No.          </th> <td>1.05e+13</td>
+</tr>
+</tbody></table><br><br>Notes:<br>[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.<br>[2] The smallest eigenvalue is 1.07e-13. This might indicate that there are<br>strong multicollinearity problems or that the design matrix is singular.
+</div>
+</div>
+<div class="cell" data-execution_count="46">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># RMSE of the model using all the predictors and their 2-factor interactions</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>pred_price <span class="op">=</span> np.exp(model.predict(test))</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>np.sqrt(((pred_price <span class="op">-</span> test.house_price)<span class="op">**</span><span class="dv">2</span>).mean())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="46">
+<pre><code>360.40099598821615</code></pre>
+</div>
+</div>
+<p>The best subset model seems to be slightly better than the model with all the predictors, based on the RMSE on test data.</p>
+</section>
+</section>
+<section id="stepwise-selection" class="level2" data-number="8.2">
+<h2 data-number="8.2" class="anchored" data-anchor-id="stepwise-selection"><span class="header-section-number">8.2</span> Stepwise selection</h2>
+<p>Best subset selection cannot be used in case of even a slightly large number of predictors. In the previous example, we had 15 predictors. The number of models that we developed to find the best subset of predictors from the set of 15 predictors was <span class="math inline">\(2^{15} \approx 32,000\)</span>. In case of 20 predictors, the number of models to use the best subset selection approach will be <span class="math inline">\(2^{20} \approx 1\)</span> million, which is computationally too expensive. Due to this limitation of the best subsets selection method, we will use stepwise regression, which explores a far more restricted set of models, and thus is an attractive alternative to the best subset selection method.</p>
+</section>
+<section id="forward-stepwise-selection" class="level2" data-number="8.3">
+<h2 data-number="8.3" class="anchored" data-anchor-id="forward-stepwise-selection"><span class="header-section-number">8.3</span> Forward stepwise selection</h2>
+<p>Source - Page 229: “Forward stepwise selection is a computationally efficient alternative to best subset selection. While the best subset selection procedure considers all <span class="math inline">\(2^p\)</span> possible models containing subsets of the <span class="math inline">\(p\)</span> predictors, forward stepwise considers a much smaller set of models. Forward stepwise selection begins with a model containing no predictors, and then adds predictors to the model, one-at-a-time, until all of the predictors are in the model. In particular, at each step the variable that gives the greatest additional improvement to the fit is added to the model.”</p>
+<div class="cell" data-execution_count="56">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Function to find the best predictor out of p-k predictors and add it to the model containing the k predictors</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> forward(predictors):</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Pull out predictors we still need to process</span></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>    remaining_predictors <span class="op">=</span> [p <span class="cf">for</span> p <span class="kw">in</span> X.columns <span class="cf">if</span> p <span class="kw">not</span> <span class="kw">in</span> predictors]</span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>    tic <span class="op">=</span> time.time()</span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>    results <span class="op">=</span> []</span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> p <span class="kw">in</span> remaining_predictors:</span>
+<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a>        results.append(processSubset(predictors<span class="op">+</span>[p]))</span>
+<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Wrap everything up in a nice dataframe</span></span>
+<span id="cb28-15"><a href="#cb28-15" aria-hidden="true" tabindex="-1"></a>    models <span class="op">=</span> pd.DataFrame(results)</span>
+<span id="cb28-16"><a href="#cb28-16" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb28-17"><a href="#cb28-17" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Choose the model with the highest RSS</span></span>
+<span id="cb28-18"><a href="#cb28-18" aria-hidden="true" tabindex="-1"></a>    best_model <span class="op">=</span> models.loc[models[<span class="st">'Rsquared'</span>].argmax()]</span>
+<span id="cb28-19"><a href="#cb28-19" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb28-20"><a href="#cb28-20" aria-hidden="true" tabindex="-1"></a>    toc <span class="op">=</span> time.time()</span>
+<span id="cb28-21"><a href="#cb28-21" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Processed "</span>, models.shape[<span class="dv">0</span>], <span class="st">"models on"</span>, <span class="bu">len</span>(predictors)<span class="op">+</span><span class="dv">1</span>, <span class="st">"predictors in"</span>, (toc<span class="op">-</span>tic), <span class="st">"seconds."</span>)</span>
+<span id="cb28-22"><a href="#cb28-22" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb28-23"><a href="#cb28-23" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Return the best model, along with some other useful information about the model</span></span>
+<span id="cb28-24"><a href="#cb28-24" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> best_model</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="57">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> forward_selection():</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>    models_best <span class="op">=</span> pd.DataFrame(columns<span class="op">=</span>[<span class="st">"Rsquared"</span>, <span class="st">"model"</span>])</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>    tic <span class="op">=</span> time.time()</span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>    predictors <span class="op">=</span> []</span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>,<span class="bu">len</span>(X.columns)<span class="op">+</span><span class="dv">1</span>):    </span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>        models_best.loc[i] <span class="op">=</span> forward(predictors)</span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>        predictors <span class="op">=</span> <span class="bu">list</span>(models_best.loc[i][<span class="st">"model"</span>].params.index[<span class="dv">1</span>:])</span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a>    toc <span class="op">=</span> time.time()</span>
+<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Total elapsed time:"</span>, (toc<span class="op">-</span>tic), <span class="st">"seconds."</span>)</span>
+<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> models_best</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="64">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>models_best <span class="op">=</span> forward_selection()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Processed  15 models on 1 predictors in 0.06280803680419922 seconds.
+Processed  14 models on 2 predictors in 0.054885149002075195 seconds.
+Processed  13 models on 3 predictors in 0.05983686447143555 seconds.
+Processed  12 models on 4 predictors in 0.06781768798828125 seconds.
+Processed  11 models on 5 predictors in 0.07380270957946777 seconds.
+Processed  10 models on 6 predictors in 0.07380390167236328 seconds.
+Processed  9 models on 7 predictors in 0.06981182098388672 seconds.
+Processed  8 models on 8 predictors in 0.07480072975158691 seconds.
+Processed  7 models on 9 predictors in 0.0718071460723877 seconds.
+Processed  6 models on 10 predictors in 0.06380081176757812 seconds.
+Processed  5 models on 11 predictors in 0.054854631423950195 seconds.
+Processed  4 models on 12 predictors in 0.05385565757751465 seconds.
+Processed  3 models on 13 predictors in 0.04188799858093262 seconds.
+Processed  2 models on 14 predictors in 0.027925491333007812 seconds.
+Processed  1 models on 15 predictors in 0.016956090927124023 seconds.
+Total elapsed time: 0.9055600166320801 seconds.</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="65">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>best_sub_plots()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="Lec8_ModelSelection_BestSubset_FwdBwd_stepwise_files/figure-html/cell-25-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<p>The model with 8 predictors is the best model based on the BIC criterion, and very close to the best model based on the AIC and Adjusted R-squared criteria. Let us select the model with 8 predictors.</p>
+<div class="cell" data-execution_count="76">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>best_fwd_reg_model <span class="op">=</span> models_best[<span class="st">'model'</span>][<span class="dv">8</span>]</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>best_fwd_reg_model.summary()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="76">
+
+<table class="simpletable">
+<caption>OLS Regression Results</caption>
+<tbody><tr>
+  <th>Dep. Variable:</th>    <td>np.log(house_price)</td> <th>  R-squared:         </th> <td>   0.820</td>
+</tr>
+<tr>
+  <th>Model:</th>                    <td>OLS</td>         <th>  Adj. R-squared:    </th> <td>   0.815</td>
+</tr>
+<tr>
+  <th>Method:</th>              <td>Least Squares</td>    <th>  F-statistic:       </th> <td>   151.6</td>
+</tr>
+<tr>
+  <th>Date:</th>              <td>Thu, 16 Feb 2023</td>   <th>  Prob (F-statistic):</th> <td>1.91e-94</td>
+</tr>
+<tr>
+  <th>Time:</th>                  <td>20:35:14</td>       <th>  Log-Likelihood:    </th> <td> -85.667</td>
+</tr>
+<tr>
+  <th>No. Observations:</th>       <td>   275</td>        <th>  AIC:               </th> <td>   189.3</td>
+</tr>
+<tr>
+  <th>Df Residuals:</th>           <td>   266</td>        <th>  BIC:               </th> <td>   221.9</td>
+</tr>
+<tr>
+  <th>Df Model:</th>               <td>     8</td>        <th>                     </th>     <td> </td>   
+</tr>
+<tr>
+  <th>Covariance Type:</th>       <td>nonrobust</td>      <th>                     </th>     <td> </td>   
+</tr>
+</tbody></table>
+<table class="simpletable">
+<tbody><tr>
+                     <td></td>                       <th>coef</th>     <th>std err</th>      <th>t</th>      <th>P&gt;|t|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>Intercept</th>                              <td>-1365.5045</td> <td>  154.113</td> <td>   -8.860</td> <td> 0.000</td> <td>-1668.942</td> <td>-1062.067</td>
+</tr>
+<tr>
+  <th>distance_MRT_longitude</th>                 <td>    0.0021</td> <td>    0.000</td> <td>    5.062</td> <td> 0.000</td> <td>    0.001</td> <td>    0.003</td>
+</tr>
+<tr>
+  <th>latitude</th>                               <td>   54.9844</td> <td>    6.171</td> <td>    8.909</td> <td> 0.000</td> <td>   42.833</td> <td>   67.136</td>
+</tr>
+<tr>
+  <th>house_age_longitude</th>                    <td>   -0.3240</td> <td>    0.119</td> <td>   -2.725</td> <td> 0.007</td> <td>   -0.558</td> <td>   -0.090</td>
+</tr>
+<tr>
+  <th>number_convenience_stores_longitude</th>    <td>    1.3242</td> <td>    0.212</td> <td>    6.246</td> <td> 0.000</td> <td>    0.907</td> <td>    1.742</td>
+</tr>
+<tr>
+  <th>distance_MRT_number_convenience_stores</th> <td>-4.805e-05</td> <td> 1.21e-05</td> <td>   -3.973</td> <td> 0.000</td> <td>-7.19e-05</td> <td>-2.42e-05</td>
+</tr>
+<tr>
+  <th>number_convenience_stores_latitude</th>     <td>   -6.4419</td> <td>    1.032</td> <td>   -6.243</td> <td> 0.000</td> <td>   -8.473</td> <td>   -4.410</td>
+</tr>
+<tr>
+  <th>distance_MRT_latitude</th>                  <td>   -0.0101</td> <td>    0.002</td> <td>   -5.067</td> <td> 0.000</td> <td>   -0.014</td> <td>   -0.006</td>
+</tr>
+<tr>
+  <th>house_age</th>                              <td>   39.3625</td> <td>   14.450</td> <td>    2.724</td> <td> 0.007</td> <td>   10.911</td> <td>   67.814</td>
+</tr>
+</tbody></table>
+<table class="simpletable">
+<tbody><tr>
+  <th>Omnibus:</th>       <td> 5.017</td> <th>  Durbin-Watson:     </th> <td>   2.176</td>
+</tr>
+<tr>
+  <th>Prob(Omnibus):</th> <td> 0.081</td> <th>  Jarque-Bera (JB):  </th> <td>   6.923</td>
+</tr>
+<tr>
+  <th>Skew:</th>          <td> 0.022</td> <th>  Prob(JB):          </th> <td>  0.0314</td>
+</tr>
+<tr>
+  <th>Kurtosis:</th>      <td> 3.776</td> <th>  Cond. No.          </th> <td>1.56e+09</td>
+</tr>
+</tbody></table><br><br>Notes:<br>[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.<br>[2] The condition number is large, 1.56e+09. This might indicate that there are<br>strong multicollinearity or other numerical problems.
+</div>
+</div>
+<div class="cell" data-execution_count="77">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Finding the RMSE of the model selected using the forward selection procedure, where the predictors</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="co">#include 2-factor interactions</span></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>pred_price <span class="op">=</span> np.exp(best_fwd_reg_model.predict(test))</span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>np.sqrt(((pred_price <span class="op">-</span> test.house_price)<span class="op">**</span><span class="dv">2</span>).mean())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="77">
+<pre><code>364.2004089481364</code></pre>
+</div>
+</div>
+<p>We get a different model than what we got with the best subsets selection method. However, we got it in 0.9 seconds, instead of 6 minutes taken by the best subset selection algorithm. Note that this model has a higher RMSE as compared to the model obtained with the best subset selection procedure, which is expected. However, the RMSE is even slightly higher than the model that includes all the two factor interactions. This may be due to the following reasons:</p>
+<ul>
+<li><p>This may be due to chance - the test data set may be biased.</p></li>
+<li><p>The stepwise variable selection algorithms are greedy algorithms, and certainly don’t guarantee the best model, or even a model better than the one without variable selection. However, in general, they are likely to provide a better model than the base model that includes all the predictors, especially if there are several predictors that are not associated with the response.</p></li>
+<li><p>For metrics such as adjusted R-squared, the adjustment is not directly tied to the model being more accurate on test data. The adjustment only ensures that the adjusted R-squared increases if the added predictor sufficiently reduces the RSS (Residual sum of squares) on training data.</p></li>
+<li><p>AIC is an unbiased estimate of test error. However, AIC will have some variance as we are using sample data for training the model.</p></li>
+</ul>
+</section>
+<section id="backward-stepwise-selection" class="level2" data-number="8.4">
+<h2 data-number="8.4" class="anchored" data-anchor-id="backward-stepwise-selection"><span class="header-section-number">8.4</span> Backward Stepwise Selection</h2>
+<p>Source - Page 231: “Like forward stepwise selection, backward stepwise selection provides an efficient alternative to best subset selection. However, unlike forward stepwise selection, it begins with the full least squares model containing all <span class="math inline">\(p\)</span> predictors, and then iteratively removes the least useful predictor, one-at-a-time.”</p>
+<p>Let us try the backward selection procedure on the model with 15 predictors - <em>house_age, distance_MRT, number_convenience_stores, latitude, longitude</em> and their 2-factor interactions.</p>
+<div class="cell" data-execution_count="83">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> backward(predictors):</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>    tic <span class="op">=</span> time.time()</span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>    results <span class="op">=</span> []</span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> combo <span class="kw">in</span> itertools.combinations(predictors, <span class="bu">len</span>(predictors)<span class="op">-</span><span class="dv">1</span>):</span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a>        results.append(processSubset(combo))</span>
+<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Wrap everything up in a nice dataframe</span></span>
+<span id="cb36-11"><a href="#cb36-11" aria-hidden="true" tabindex="-1"></a>    models <span class="op">=</span> pd.DataFrame(results)</span>
+<span id="cb36-12"><a href="#cb36-12" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb36-13"><a href="#cb36-13" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Choose the model with the highest RSS</span></span>
+<span id="cb36-14"><a href="#cb36-14" aria-hidden="true" tabindex="-1"></a>    best_model <span class="op">=</span> models.loc[models[<span class="st">'Rsquared'</span>].argmax()]</span>
+<span id="cb36-15"><a href="#cb36-15" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb36-16"><a href="#cb36-16" aria-hidden="true" tabindex="-1"></a>    toc <span class="op">=</span> time.time()</span>
+<span id="cb36-17"><a href="#cb36-17" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Processed "</span>, models.shape[<span class="dv">0</span>], <span class="st">"models on"</span>, <span class="bu">len</span>(predictors)<span class="op">-</span><span class="dv">1</span>, <span class="st">"predictors in"</span>, (toc<span class="op">-</span>tic), <span class="st">"seconds."</span>)</span>
+<span id="cb36-18"><a href="#cb36-18" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb36-19"><a href="#cb36-19" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Return the best model, along with some other useful information about the model</span></span>
+<span id="cb36-20"><a href="#cb36-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> best_model</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="84">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> backward_selection():</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>    models_best <span class="op">=</span> pd.DataFrame(columns<span class="op">=</span>[<span class="st">"Rsquared"</span>, <span class="st">"model"</span>], index <span class="op">=</span> <span class="bu">range</span>(<span class="dv">1</span>,<span class="bu">len</span>(X.columns)))</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>    tic <span class="op">=</span> time.time()</span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>    predictors <span class="op">=</span> X.columns</span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>    models_best.loc[<span class="bu">len</span>(predictors)] <span class="op">=</span> processSubset(predictors)</span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span>(<span class="bu">len</span>(predictors) <span class="op">&gt;</span> <span class="dv">1</span>):  </span>
+<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a>        models_best.loc[<span class="bu">len</span>(predictors)<span class="op">-</span><span class="dv">1</span>] <span class="op">=</span> backward(predictors)</span>
+<span id="cb37-10"><a href="#cb37-10" aria-hidden="true" tabindex="-1"></a>        predictors <span class="op">=</span> models_best.loc[<span class="bu">len</span>(predictors)<span class="op">-</span><span class="dv">1</span>][<span class="st">"model"</span>].params.index[<span class="dv">1</span>:]</span>
+<span id="cb37-11"><a href="#cb37-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-12"><a href="#cb37-12" aria-hidden="true" tabindex="-1"></a>    toc <span class="op">=</span> time.time()</span>
+<span id="cb37-13"><a href="#cb37-13" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Total elapsed time:"</span>, (toc<span class="op">-</span>tic), <span class="st">"seconds."</span>)</span>
+<span id="cb37-14"><a href="#cb37-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> models_best</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="85">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>models_best <span class="op">=</span> backward_selection()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Processed  15 models on 14 predictors in 0.24733757972717285 seconds.
+Processed  14 models on 13 predictors in 0.1765275001525879 seconds.
+Processed  13 models on 12 predictors in 0.16356277465820312 seconds.
+Processed  12 models on 11 predictors in 0.13364267349243164 seconds.
+Processed  11 models on 10 predictors in 0.11968183517456055 seconds.
+Processed  10 models on 9 predictors in 0.09571337699890137 seconds.
+Processed  9 models on 8 predictors in 0.08377647399902344 seconds.
+Processed  8 models on 7 predictors in 0.06981253623962402 seconds.
+Processed  7 models on 6 predictors in 0.048902273178100586 seconds.
+Processed  6 models on 5 predictors in 0.04088902473449707 seconds.
+Processed  5 models on 4 predictors in 0.029920101165771484 seconds.
+Processed  4 models on 3 predictors in 0.020944595336914062 seconds.
+Processed  3 models on 2 predictors in 0.013962507247924805 seconds.
+Processed  2 models on 1 predictors in 0.007978677749633789 seconds.
+Total elapsed time: 1.286529779434204 seconds.</code></pre>
+</div>
+</div>
+<div class="cell" data-scrolled="true" data-execution_count="86">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>best_sub_plots()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="Lec8_ModelSelection_BestSubset_FwdBwd_stepwise_files/figure-html/cell-31-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="cell" data-execution_count="87">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>best_bwd_reg_model <span class="op">=</span> models_best[<span class="st">'model'</span>][<span class="dv">8</span>]</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>best_bwd_reg_model.summary()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="87">
+
+<table class="simpletable">
+<caption>OLS Regression Results</caption>
+<tbody><tr>
+  <th>Dep. Variable:</th>    <td>np.log(house_price)</td> <th>  R-squared:         </th> <td>   0.820</td>
+</tr>
+<tr>
+  <th>Model:</th>                    <td>OLS</td>         <th>  Adj. R-squared:    </th> <td>   0.815</td>
+</tr>
+<tr>
+  <th>Method:</th>              <td>Least Squares</td>    <th>  F-statistic:       </th> <td>   151.5</td>
+</tr>
+<tr>
+  <th>Date:</th>              <td>Thu, 16 Feb 2023</td>   <th>  Prob (F-statistic):</th> <td>2.00e-94</td>
+</tr>
+<tr>
+  <th>Time:</th>                  <td>20:40:43</td>       <th>  Log-Likelihood:    </th> <td> -85.714</td>
+</tr>
+<tr>
+  <th>No. Observations:</th>       <td>   275</td>        <th>  AIC:               </th> <td>   189.4</td>
+</tr>
+<tr>
+  <th>Df Residuals:</th>           <td>   266</td>        <th>  BIC:               </th> <td>   222.0</td>
+</tr>
+<tr>
+  <th>Df Model:</th>               <td>     8</td>        <th>                     </th>     <td> </td>   
+</tr>
+<tr>
+  <th>Covariance Type:</th>       <td>nonrobust</td>      <th>                     </th>     <td> </td>   
+</tr>
+</tbody></table>
+<table class="simpletable">
+<tbody><tr>
+                     <td></td>                       <th>coef</th>     <th>std err</th>      <th>t</th>      <th>P&gt;|t|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>Intercept</th>                              <td>-1317.5329</td> <td>  145.605</td> <td>   -9.049</td> <td> 0.000</td> <td>-1604.218</td> <td>-1030.847</td>
+</tr>
+<tr>
+  <th>house_age</th>                              <td>   57.3124</td> <td>   14.583</td> <td>    3.930</td> <td> 0.000</td> <td>   28.600</td> <td>   86.025</td>
+</tr>
+<tr>
+  <th>distance_MRT</th>                           <td>    0.2365</td> <td>    0.047</td> <td>    5.044</td> <td> 0.000</td> <td>    0.144</td> <td>    0.329</td>
+</tr>
+<tr>
+  <th>number_convenience_stores</th>              <td>  154.8362</td> <td>   24.984</td> <td>    6.197</td> <td> 0.000</td> <td>  105.644</td> <td>  204.029</td>
+</tr>
+<tr>
+  <th>house_age_longitude</th>                    <td>   -0.4717</td> <td>    0.120</td> <td>   -3.931</td> <td> 0.000</td> <td>   -0.708</td> <td>   -0.235</td>
+</tr>
+<tr>
+  <th>distance_MRT_number_convenience_stores</th> <td>-4.789e-05</td> <td> 1.24e-05</td> <td>   -3.869</td> <td> 0.000</td> <td>-7.23e-05</td> <td>-2.35e-05</td>
+</tr>
+<tr>
+  <th>distance_MRT_latitude</th>                  <td>   -0.0095</td> <td>    0.002</td> <td>   -5.050</td> <td> 0.000</td> <td>   -0.013</td> <td>   -0.006</td>
+</tr>
+<tr>
+  <th>number_convenience_stores_latitude</th>     <td>   -6.1977</td> <td>    1.001</td> <td>   -6.194</td> <td> 0.000</td> <td>   -8.168</td> <td>   -4.228</td>
+</tr>
+<tr>
+  <th>latitude_longitude</th>                     <td>    0.4366</td> <td>    0.048</td> <td>    9.100</td> <td> 0.000</td> <td>    0.342</td> <td>    0.531</td>
+</tr>
+</tbody></table>
+<table class="simpletable">
+<tbody><tr>
+  <th>Omnibus:</th>       <td> 4.945</td> <th>  Durbin-Watson:     </th> <td>   2.137</td>
+</tr>
+<tr>
+  <th>Prob(Omnibus):</th> <td> 0.084</td> <th>  Jarque-Bera (JB):  </th> <td>   6.228</td>
+</tr>
+<tr>
+  <th>Skew:</th>          <td> 0.110</td> <th>  Prob(JB):          </th> <td>  0.0444</td>
+</tr>
+<tr>
+  <th>Kurtosis:</th>      <td> 3.703</td> <th>  Cond. No.          </th> <td>3.01e+08</td>
+</tr>
+</tbody></table><br><br>Notes:<br>[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.<br>[2] The condition number is large, 3.01e+08. This might indicate that there are<br>strong multicollinearity or other numerical problems.
+</div>
+</div>
+<p>We get a slightly different model than what we got with the best subsets selection method and the forward selection method. As in forward selection, we got it relatively very quickly (in 1.28 seconds), instead of 6 minutes taken by the best subset selection algorithm.</p>
+<div class="cell" data-execution_count="88">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Finding the RMSE of the model selected using the backward selection procedure, where the predictors</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="co">#include 2-factor interactions</span></span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>pred_price <span class="op">=</span> np.exp(best_bwd_reg_model.predict(test))</span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>np.sqrt(((pred_price <span class="op">-</span> test.house_price)<span class="op">**</span><span class="dv">2</span>).mean())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="88">
+<pre><code>363.63365786020694</code></pre>
+</div>
+</div>
+<p>Note that we have not considered the null model (i.e., the model with only the intercept and no predictors) explicitly in the forward and backward stepwise algorithms. However, the null model is considered when selecting the best model. The R-squared and the adjusted R-squared for the null model is 0. So, if the adjusted R-squared of all the models with at least one predictor is negative, then the null model will be the best model.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./Lec7_logistic_regression.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Logistic regression</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./Lec9_RidgeRegression_Lasso.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Ridge regression and Lasso</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>

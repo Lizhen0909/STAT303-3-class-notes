@@ -1,5 +1,5 @@
 # Preface {.unnumbered}
 
-These are class notes for the course STAT303-2. This is not the course text-book. You are required to read the relevant sections of the book as mentioned on the course website. 
+These are class notes for the course STAT303-3. This is not the course text-book. You are required to read the relevant sections of the book as mentioned on the course website. 
 
-The course notes are currently being written, and will continue to being developed as the course progresses (just like the course textbook last quarter). Please report any typos / mistakes / inconsistencies / issues with the class notes / class presentations in your comments [here](https://campuswire.com/c/G13B6AABE/feed/1). Thank you!
+The course notes are currently being written, and will continue to being developed as the course progresses (just like the class notes last quarter). Please report any typos / mistakes / inconsistencies / issues with the class notes / class presentations in your comments [here](https://campuswire.com/c/G4E1FDA4E/feed/1). Thank you!

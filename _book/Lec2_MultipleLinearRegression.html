@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Data Science II with python (Class notes) - 2&nbsp; Multiple Linear Regression</title>
+<title>Data Science III with python (Class notes) - 2&nbsp; Multiple Linear Regression</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -88,7 +88,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./Assignment 1.html" rel="next">
+<link href="./Datasets.html" rel="next">
 <link href="./Lec1_SimpleLinearRegression.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -147,7 +147,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <img src="./NU_Stat_logo.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
       </a>
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">Data Science II with python (Class notes)</a> 
+      <a href="./">Data Science III with python (Class notes)</a> 
     </div>
       </div>
       <div class="mt-2 flex-shrink-0 align-items-center">
@@ -192,12 +192,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Assignment 1.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Assignment A</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./Datasets.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Datasets</span></a>
+  <a href="./Datasets.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Datasets, assignment and project files</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -212,7 +207,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </nav>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#multiple-linear-regression" id="toc-multiple-linear-regression" class="nav-link active" data-scroll-target="#multiple-linear-regression"> <span class="header-section-number">2.1</span> Multiple Linear Regression</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -233,6 +234,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </header>
 
+<p><em>Read section 3.2 of the book before using these notes.</em></p>
+<p><em>Note that in this course, lecture notes are not sufficient, you must read the book for better understanding. Lecture notes are just implementing the concepts of the book on a dataset, but not explaining the concepts elaborately.</em></p>
+<section id="multiple-linear-regression" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="multiple-linear-regression"><span class="header-section-number">2.1</span> Multiple Linear Regression</h2>
 <div class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -424,7 +429,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Using the predict() function associated with the 'model' object to make predictions of car price on test (unknown) data</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>pred_price <span class="op">=</span> model.predict(testf)<span class="co">#Note that the predict() function finds the predictor 'engineSize' in the testf dataframe, and plugs it's values in the regression equation for prediction.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>pred_price <span class="op">=</span> model.predict(testf)<span class="co">#Note that the predict() function finds the predictor 'engineSize' in the testf dataframe, and plugs its values in the regression equation for prediction.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><strong>Make a visualization that compares the predicted car prices with the actual car prices</strong></p>
 <div class="cell" data-execution_count="6">
@@ -550,6 +555,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Adding a variable with random values to the model (<em>rand_col</em>) increased the explained variation (R-squared). This is because the model has one more parameter to tune to reduce the residual squared error (RSS). However, the p-value of <em>rand_col</em> suggests that its coefficient is zero. Thus, using the model with <em>rand_col</em> may give poorer performance on unknown data, as compared to the model without <em>rand_col</em>. This implies that it is not a good idea to blindly add variables in the model to increase R-squared.</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -656,8 +662,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./Assignment 1.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Assignment A</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./Datasets.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Datasets, assignment and project files</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

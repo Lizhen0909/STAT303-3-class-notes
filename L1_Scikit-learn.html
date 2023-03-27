@@ -216,7 +216,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <ul>
   <li><a href="#splitting-data-into-train-and-test" id="toc-splitting-data-into-train-and-test" class="nav-link active" data-scroll-target="#splitting-data-into-train-and-test"><span class="toc-section-number">1.1</span>  Splitting data into <code>train</code> and <code>test</code></a>
   <ul>
-  <li><a href="#stratified-splitting" id="toc-stratified-splitting" class="nav-link" data-scroll-target="#stratified-splitting"><span class="toc-section-number">1.1.1</span>  Stratified splitting</a></li>
+  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"><span class="toc-section-number">1.1.1</span>  </a></li>
+  <li><a href="#stratified-splitting" id="toc-stratified-splitting" class="nav-link" data-scroll-target="#stratified-splitting"><span class="toc-section-number">1.1.2</span>  Stratified splitting</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -241,6 +242,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </header>
 
+<p>In this chapter, we’ll learn some scikit-learn functions that will be useful in:</p>
+<ol type="1">
+<li><p>Splitting the data into <code>train</code> and <code>test</code></p></li>
+<li><p>Fitting a model</p></li>
+<li><p>Tune model hyperparameters to optimize the desired performance metric</p></li>
+</ol>
+<p>We’ll use a classfication problem to illustrate the functions. However, similar functions can be used for regression problems, i.e., prediction problems with a continuous response.</p>
 <div class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Importing necessary libraries</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -248,6 +256,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p>Let us import the scikit-learn libraries useful in developing statistical models.</p>
 <div class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># sklearn has 100s of models - grouped in sublibraries, such as linear_model</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LogisticRegression, LinearRegression</span>
@@ -256,8 +265,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> accuracy_score, mean_absolute_error, mean_squared_error, r2_score</span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> StandardScaler</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pd.read_csv(<span class="st">'./Datasets/diabetes.csv'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="29">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Reading data</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pd.read_csv(<span class="st">'./Datasets/diabetes.csv'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Scikit-learn doesn’t support the formula-like syntax of specifying the response and the predictors as in the <code>statsmodels</code> library. We need to create separate objects for predictors and response, which should be <em>array-like</em>. A Pandas DataFrame / Series or a Numpy array are <em>array-like</em> objects.</p>
 <p>Let us reference our predictors as object <code>X</code>, and the response as object <code>y</code>.</p>
@@ -304,9 +314,12 @@ Name: Outcome, dtype: float64</code></pre>
 Name: Outcome, dtype: float64</code></pre>
 </div>
 </div>
-<p>We observe that the proportion of 0s and 1s in the <code>train</code> and <code>test</code> dataset are slightly different from that in the complete <code>data</code>. In order for these datasets to be more representative of the population, they should have a proportion of 0s and 1s similar to that in the complete dataset.</p>
-<section id="stratified-splitting" class="level3" data-number="1.1.1">
-<h3 data-number="1.1.1" class="anchored" data-anchor-id="stratified-splitting"><span class="header-section-number">1.1.1</span> Stratified splitting</h3>
+<p>We observe that the proportion of 0s and 1s in the <code>train</code> and <code>test</code> dataset are slightly different from that in the complete <code>data</code>. In order for these datasets to be more representative of the population, they should have a proportion of 0s and 1s similar to that in the complete dataset. This is especially critical in case of imbalanced datasets, where one class is represented by a significantly smaller number of instances than the other(s).</p>
+<section id="section" class="level3" data-number="1.1.1">
+<h3 data-number="1.1.1" class="anchored" data-anchor-id="section"><span class="header-section-number">1.1.1</span> </h3>
+</section>
+<section id="stratified-splitting" class="level3" data-number="1.1.2">
+<h3 data-number="1.1.2" class="anchored" data-anchor-id="stratified-splitting"><span class="header-section-number">1.1.2</span> Stratified splitting</h3>
 <p>We will use the argument <code>stratify</code> to obtain a proportion of 0s and 1s in the <code>train</code> and <code>test</code> datasets that is similar to the proportion in the complete `data.</p>
 <div class="cell" data-execution_count="26">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Stratified train-test split</span></span>

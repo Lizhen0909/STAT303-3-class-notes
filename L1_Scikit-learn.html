@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Data Science III with python (Class notes) - 1&nbsp; Introduction to Scikit-learn</title>
+<title>Data Science III with python (Class notes) - 1&nbsp; Introduction to scikit-learn</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -134,7 +134,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction to Scikit-learn</span></h1>
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction to scikit-learn</span></h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -175,7 +175,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./L1_Scikit-learn.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction to Scikit-learn</span></a>
+  <a href="./L1_Scikit-learn.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction to scikit-learn</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -216,8 +216,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <ul>
   <li><a href="#splitting-data-into-train-and-test" id="toc-splitting-data-into-train-and-test" class="nav-link active" data-scroll-target="#splitting-data-into-train-and-test"><span class="toc-section-number">1.1</span>  Splitting data into <code>train</code> and <code>test</code></a>
   <ul>
-  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"><span class="toc-section-number">1.1.1</span>  </a></li>
-  <li><a href="#stratified-splitting" id="toc-stratified-splitting" class="nav-link" data-scroll-target="#stratified-splitting"><span class="toc-section-number">1.1.2</span>  Stratified splitting</a></li>
+  <li><a href="#splitting-data-for-imblanced-classification" id="toc-splitting-data-for-imblanced-classification" class="nav-link" data-scroll-target="#splitting-data-for-imblanced-classification">Splitting data for imblanced classification</a></li>
+  <li><a href="#stratified-splitting" id="toc-stratified-splitting" class="nav-link" data-scroll-target="#stratified-splitting"><span class="toc-section-number">1.1.1</span>  Stratified splitting</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -227,7 +227,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction to Scikit-learn</span></h1>
+<h1 class="title d-none d-lg-block"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction to scikit-learn</span></h1>
 </div>
 
 
@@ -242,13 +242,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </header>
 
-<p>In this chapter, we’ll learn some scikit-learn functions that will be useful in:</p>
+<p>In this chapter, we’ll learn some functions from the library <code>sklearn</code> that will be useful in:</p>
 <ol type="1">
 <li><p>Splitting the data into <code>train</code> and <code>test</code></p></li>
 <li><p>Fitting a model</p></li>
 <li><p>Tune model hyperparameters* to optimize the desired performance metric</p></li>
 </ol>
-<p><em>In machine learning, a model hyperparameter is a parameter that cannot be learned from training data and must be set before training the model. Hyperparameters control aspects of the model’s behavior and can greatly impact its performance. For example, the regularization parameter <span class="math inline">\(\lambda\)</span>, in linear regression is a hyperparameter. You need to specify it before fitting the model. On the other hand, the beta coefficients in linear regression are parameters, as you learn them while training the model, and don’t need to specify their values beforehand.</em></p>
+<p>*<em>In machine learning, a model hyperparameter is a parameter that cannot be learned from training data and must be set before training the model. Hyperparameters control aspects of the model’s behavior and can greatly impact its performance. For example, the regularization parameter <span class="math inline">\(\lambda\)</span>, in linear regression is a hyperparameter. You need to specify it before fitting the model. On the other hand, the beta coefficients in linear regression are parameters, as you learn them while training the model, and don’t need to specify their values beforehand.</em></p>
 <p>We’ll use a classfication problem to illustrate the functions. However, similar functions can be used for regression problems, i.e., prediction problems with a continuous response.</p>
 <div class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Importing necessary libraries</span></span>
@@ -316,11 +316,12 @@ Name: Outcome, dtype: float64</code></pre>
 </div>
 </div>
 <p>We observe that the proportion of 0s and 1s in the <code>train</code> and <code>test</code> dataset are slightly different from that in the complete <code>data</code>. In order for these datasets to be more representative of the population, they should have a proportion of 0s and 1s similar to that in the complete dataset. This is especially critical in case of imbalanced datasets, where one class is represented by a significantly smaller number of instances than the other(s).</p>
-<section id="section" class="level3" data-number="1.1.1">
-<h3 data-number="1.1.1" class="anchored" data-anchor-id="section"><span class="header-section-number">1.1.1</span> </h3>
+<p>When training a classification model on an imbalanced dataset, the model might not learn enough about the minority class, which can lead to poor generalization performance on new data. This happens because the model is biased towards the majority class, and it might even predict all instances as belonging to the majority class.</p>
+<section id="splitting-data-for-imblanced-classification" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="splitting-data-for-imblanced-classification">Splitting data for imblanced classification</h3>
 </section>
-<section id="stratified-splitting" class="level3" data-number="1.1.2">
-<h3 data-number="1.1.2" class="anchored" data-anchor-id="stratified-splitting"><span class="header-section-number">1.1.2</span> Stratified splitting</h3>
+<section id="stratified-splitting" class="level3" data-number="1.1.1">
+<h3 data-number="1.1.1" class="anchored" data-anchor-id="stratified-splitting"><span class="header-section-number">1.1.1</span> Stratified splitting</h3>
 <p>We will use the argument <code>stratify</code> to obtain a proportion of 0s and 1s in the <code>train</code> and <code>test</code> datasets that is similar to the proportion in the complete `data.</p>
 <div class="cell" data-execution_count="26">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Stratified train-test split</span></span>
@@ -345,10 +346,8 @@ Name: Outcome, dtype: float64</code></pre>
 </div>
 </div>
 <p>The proportion of the classes in the stratified split mimics the proportion in the complete dataset more closely.</p>
-<p>Stratified splitting is particularly useful when dealing with imbalanced datasets, where one class is represented by a significantly smaller number of instances than the other(s).</p>
-<p>When training a classification model on an imbalanced dataset, the model might not learn enough about the minority class, which can lead to poor generalization performance on new data. This happens because the model is biased towards the majority class, and it might even predict all instances as belonging to the majority class.</p>
 <p>By using stratified splitting, we ensure that both the <code>train</code> and <code>test</code> data sets have the same proportion of instances from each class, which means that the model will see enough instances from the minority class during training. This, in turn, helps the model learn to distinguish between the classes better, leading to better performance on new data.</p>
-<p>In summary, stratified splitting helps to ensure that the model sees enough instances from each class during training, which can improve the model’s ability to generalize to new data, particularly in cases where one class is underrepresented in the dataset.</p>
+<p>Thus, stratified splitting helps to ensure that the model sees enough instances from each class during training, which can improve the model’s ability to generalize to new data, particularly in cases where one class is underrepresented in the dataset.</p>
 <div class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># With linear/logistic regression in scikit-learn, especially when the predictors have different orders </span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="co"># of magn., scaling is necessary. This is to enable the training algo. which we did not cover. (Gradient Descent)</span></span>

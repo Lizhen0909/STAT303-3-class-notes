@@ -246,8 +246,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ol type="1">
 <li><p>Splitting the data into <code>train</code> and <code>test</code></p></li>
 <li><p>Fitting a model</p></li>
-<li><p>Tune model hyperparameters to optimize the desired performance metric</p></li>
+<li><p>Tune model hyperparameters* to optimize the desired performance metric</p></li>
 </ol>
+<p><em>In machine learning, a model hyperparameter is a parameter that cannot be learned from training data and must be set before training the model. Hyperparameters control aspects of the model’s behavior and can greatly impact its performance. For example, the regularization parameter <span class="math inline">\(\lambda\)</span>, in linear regression is a hyperparameter. You need to specify it before fitting the model. On the other hand, the beta coefficients in linear regression are parameters, as you learn them while training the model, and don’t need to specify their values beforehand.</em></p>
 <p>We’ll use a classfication problem to illustrate the functions. However, similar functions can be used for regression problems, i.e., prediction problems with a continuous response.</p>
 <div class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Importing necessary libraries</span></span>

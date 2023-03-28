@@ -230,6 +230,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <ul>
   <li><a href="#tuning-decision-threshold-probability" id="toc-tuning-decision-threshold-probability" class="nav-link" data-scroll-target="#tuning-decision-threshold-probability"><span class="toc-section-number">1.5.1</span>  Tuning decision threshold probability</a></li>
   <li><a href="#tuning-the-regularization-parameter" id="toc-tuning-the-regularization-parameter" class="nav-link" data-scroll-target="#tuning-the-regularization-parameter"><span class="toc-section-number">1.5.2</span>  Tuning the regularization parameter</a></li>
+  <li><a href="#tuning-the-decision-threshold-probability-and-the-regularization-parameter-simultaneously" id="toc-tuning-the-decision-threshold-probability-and-the-regularization-parameter-simultaneously" class="nav-link" data-scroll-target="#tuning-the-decision-threshold-probability-and-the-regularization-parameter-simultaneously"><span class="toc-section-number">1.5.3</span>  Tuning the decision threshold probability and the regularization parameter simultaneously</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -264,7 +265,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ol>
 <p>*<em>In machine learning, a model hyperparameter is a parameter that cannot be learned from training data and must be set before training the model. Hyperparameters control aspects of the model’s behavior and can greatly impact its performance. For example, the regularization parameter <span class="math inline">\(\lambda\)</span>, in linear regression is a hyperparameter. You need to specify it before fitting the model. On the other hand, the beta coefficients in linear regression are parameters, as you learn them while training the model, and don’t need to specify their values beforehand.</em></p>
 <p>We’ll use a classfication problem to illustrate the functions. However, similar functions can be used for regression problems, i.e., prediction problems with a continuous response.</p>
-<div class="cell" data-execution_count="67">
+<div class="cell" data-execution_count="214">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Importing necessary libraries</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -273,7 +274,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>sns.<span class="bu">set</span>(font_scale<span class="op">=</span><span class="fl">1.35</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Let us import the <code>sklearn</code> modules useful in developing statistical models.</p>
-<div class="cell" data-execution_count="119">
+<div class="cell" data-execution_count="215">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># sklearn has 100s of models - grouped in sublibraries, such as linear_model</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LogisticRegression, LinearRegression</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -288,13 +289,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> accuracy_score, mean_absolute_error, mean_squared_error, r2_score, <span class="op">\</span></span>
 <span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>roc_curve, auc, precision_score, recall_score, confusion_matrix</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-execution_count="69">
+<div class="cell" data-execution_count="216">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Reading data</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pd.read_csv(<span class="st">'./Datasets/diabetes.csv'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Scikit-learn doesn’t support the formula-like syntax of specifying the response and the predictors as in the <code>statsmodels</code> library. We need to create separate objects for predictors and response, which should be <em>array-like</em>. A Pandas DataFrame / Series or a Numpy array are <em>array-like</em> objects.</p>
 <p>Let us reference our predictors as object <code>X</code>, and the response as object <code>y</code>.</p>
-<div class="cell" data-execution_count="70">
+<div class="cell" data-execution_count="217">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Separating the predictors and response - THIS IS HOW ALL SKLEARN OBJECTS ACCEPT DATA (different from statsmodels)</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> data.Outcome</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> data.drop(<span class="st">"Outcome"</span>, axis <span class="op">=</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -302,36 +303,36 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <section id="splitting-data-into-train-and-test" class="level2" data-number="1.1">
 <h2 data-number="1.1" class="anchored" data-anchor-id="splitting-data-into-train-and-test"><span class="header-section-number">1.1</span> Splitting data into <code>train</code> and <code>test</code></h2>
 <p>Let us create train and test datasets for developing a model to predict if a person has diabetes.</p>
-<div class="cell" data-execution_count="71">
+<div class="cell" data-execution_count="218">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Creating training and test data</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 80-20 split, which is usual - 70-30 split is also fine, 90-10 is fine if the dataset is large</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># random_state to set a random seed for the splitting - reproducible results</span></span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(X, y, test_size <span class="op">=</span> <span class="fl">0.2</span>, random_state <span class="op">=</span> <span class="dv">45</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Let us find the proportion of classes (<em>‘having diabetes’ (<span class="math inline">\(y = 1\)</span>) or ‘not having diabetes’ (<span class="math inline">\(y = 0\)</span>)</em>) in the complete dataset.</p>
-<div class="cell" data-execution_count="72">
+<div class="cell" data-execution_count="219">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Proportion of 0s and 1s in the complete data</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>y.value_counts()<span class="op">/</span>y.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="72">
+<div class="cell-output cell-output-display" data-execution_count="219">
 <pre><code>0    0.651042
 1    0.348958
 Name: Outcome, dtype: float64</code></pre>
 </div>
 </div>
 <p>Let us find the proportion of classes (<em>‘having diabetes’ (<span class="math inline">\(y = 1\)</span>) or ‘not having diabetes’ (<span class="math inline">\(y = 0\)</span>)</em>) in the train dataset.</p>
-<div class="cell" data-execution_count="73">
+<div class="cell" data-execution_count="220">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Proportion of 0s and 1s in train data</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>y_train.value_counts()<span class="op">/</span>y_train.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="73">
+<div class="cell-output cell-output-display" data-execution_count="220">
 <pre><code>0    0.644951
 1    0.355049
 Name: Outcome, dtype: float64</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="74">
+<div class="cell" data-execution_count="221">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Proportion of 0s and 1s in test data</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>y_test.value_counts()<span class="op">/</span>y_test.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="74">
+<div class="cell-output cell-output-display" data-execution_count="221">
 <pre><code>0    0.675325
 1    0.324675
 Name: Outcome, dtype: float64</code></pre>
@@ -342,24 +343,24 @@ Name: Outcome, dtype: float64</code></pre>
 <section id="stratified-splitting" class="level3" data-number="1.1.1">
 <h3 data-number="1.1.1" class="anchored" data-anchor-id="stratified-splitting"><span class="header-section-number">1.1.1</span> Stratified splitting</h3>
 <p>We will use the argument <code>stratify</code> to obtain a proportion of 0s and 1s in the <code>train</code> and <code>test</code> datasets that is similar to the proportion in the complete `data.</p>
-<div class="cell" data-execution_count="75">
+<div class="cell" data-execution_count="222">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Stratified train-test split</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>X_train_stratified, X_test_stratified, y_train_stratified,<span class="op">\</span></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>y_test_stratified <span class="op">=</span> train_test_split(X, y, test_size <span class="op">=</span> <span class="fl">0.2</span>, random_state <span class="op">=</span> <span class="dv">45</span>, stratify<span class="op">=</span>y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-execution_count="76">
+<div class="cell" data-execution_count="223">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Proportion of 0s and 1s in train data with stratified split</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>y_train_stratified.value_counts()<span class="op">/</span>y_train.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="76">
+<div class="cell-output cell-output-display" data-execution_count="223">
 <pre><code>0    0.651466
 1    0.348534
 Name: Outcome, dtype: float64</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="77">
+<div class="cell" data-execution_count="224">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Proportion of 0s and 1s in test data with stratified split</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>y_test_stratified.value_counts()<span class="op">/</span>y_test.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="77">
+<div class="cell-output cell-output-display" data-execution_count="224">
 <pre><code>0    0.649351
 1    0.350649
 Name: Outcome, dtype: float64</code></pre>
@@ -374,7 +375,7 @@ Name: Outcome, dtype: float64</code></pre>
 <section id="scaling-data" class="level2" data-number="1.2">
 <h2 data-number="1.2" class="anchored" data-anchor-id="scaling-data"><span class="header-section-number">1.2</span> Scaling data</h2>
 <p>In certain models, it may be important to scale data for various reasons. In a logistic regression model, scaling can help with model convergence. Scikit-learn uses a method known as gradient-descent <em>(not in scope of the syllabus of this course)</em> to obtain a solution. In case the predictors have different orders of magnitude, the alogrithm may fail to converge. In such cases, it is useful to standaridize the predictors so that all of them are at the same scale.</p>
-<div class="cell" data-execution_count="78">
+<div class="cell" data-execution_count="225">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># With linear/logistic regression in scikit-learn, especially when the predictors have different orders </span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="co"># of magn., scaling is necessary. This is to enable the training algo. which we did not cover. (Gradient Descent)</span></span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>scaler <span class="op">=</span> StandardScaler().fit(X_train)</span>
@@ -385,7 +386,7 @@ Name: Outcome, dtype: float64</code></pre>
 <section id="fitting-a-model" class="level2" data-number="1.3">
 <h2 data-number="1.3" class="anchored" data-anchor-id="fitting-a-model"><span class="header-section-number">1.3</span> Fitting a model</h2>
 <p>Let us fit a logistic regression model for predicting if a person has diabetes. Let us try fitting a model with the un-scaled data.</p>
-<div class="cell" data-execution_count="79">
+<div class="cell" data-execution_count="226">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a model object - not trained yet</span></span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>logreg <span class="op">=</span> LogisticRegression()</span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -401,25 +402,25 @@ Please also refer to the documentation for alternative solver options:
     https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression
   n_iter_i = _check_optimize_result(</code></pre>
 </div>
-<div class="cell-output cell-output-display" data-execution_count="79">
+<div class="cell-output cell-output-display" data-execution_count="226">
 <pre><code>LogisticRegression()</code></pre>
 </div>
 </div>
 <p>Note that the model with the un-scaled predictors fails to converge. Check out the data <code>X_train</code> to see that this may be probably due to the predictors have different orders of magnitude. For example, the predictor <code>DiabetesPedigreeFunction</code> has values in [0.078, 2.42], while the predictor <code>Insulin</code> has values in [0, 800].</p>
 <p>Let us fit the model to the scaled data.</p>
-<div class="cell" data-execution_count="80">
+<div class="cell" data-execution_count="227">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a model - not trained yet</span></span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>logreg <span class="op">=</span> LogisticRegression()</span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Train the model</span></span>
 <span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>logreg.fit(X_train_scaled, y_train)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="80">
+<div class="cell-output cell-output-display" data-execution_count="227">
 <pre><code>LogisticRegression()</code></pre>
 </div>
 </div>
 <p>The model converges to a solution with the scaled data!</p>
 <p>The coefficients of the model can be returned with the <code>coef_</code> attribute of the <code>LogisticRegression()</code> object. However, the output is not as well formatted as in the case of the <code>statsmodels</code> library since <code>sklearn</code> is developed primarily for the purpose of prediction, and not inference.</p>
-<div class="cell" data-execution_count="81">
+<div class="cell" data-execution_count="228">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Use coef_ to return the coefficients - only log reg inference you can do with sklearn</span></span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(logreg.coef_) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -434,7 +435,7 @@ Please also refer to the documentation for alternative solver options:
 <h3 data-number="1.4.1" class="anchored" data-anchor-id="accuracy"><span class="header-section-number">1.4.1</span> Accuracy</h3>
 <p>Let us test the model prediction accuracy on the test data. We’ll demonstrate two different functions that can be used to compute model accuracy - <code>accurace_score()</code>, and <code>score()</code>.</p>
 <p>The <code>accuracy_score()</code> function from the <code>metrics</code> module of the <code>sklearn</code> library is general, and can be used for any classification model. We’ll use it along with the <code>predict()</code> method of the <code>LogisticRegression()</code> object, which returns the predicted class based on a threshold probability of 0.5.</p>
-<div class="cell" data-execution_count="82">
+<div class="cell" data-execution_count="229">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get the predicted classes first</span></span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>y_pred <span class="op">=</span> logreg.predict(X_test_scaled)</span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -445,7 +446,7 @@ Please also refer to the documentation for alternative solver options:
 </div>
 </div>
 <p>The <code>score()</code> method of the <code>LogisticRegression()</code> object can be used to compute the accuracy only for a logistic regression model. Note that for a <code>LinearRegression()</code> object, the <code>score()</code> method will return the model <span class="math inline">\(R\)</span>-squared.</p>
-<div class="cell" data-execution_count="83">
+<div class="cell" data-execution_count="230">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Use .score with test predictors and response to get the accuracy</span></span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Implements the same thing under the hood</span></span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(logreg.score(X_test_scaled, y_test)<span class="op">*</span><span class="dv">100</span>)  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -457,7 +458,7 @@ Please also refer to the documentation for alternative solver options:
 <section id="roc-auc" class="level3" data-number="1.4.2">
 <h3 data-number="1.4.2" class="anchored" data-anchor-id="roc-auc"><span class="header-section-number">1.4.2</span> ROC-AUC</h3>
 <p>The <code>roc_curve()</code> and <code>auc()</code> functions from the <code>metrics</code> module of the <code>sklearn</code> library can be used to compute the ROC-AUC, or the area under the ROC curve. Note that for computing ROC-AUC, we need the predicted probability, instead of the predicted class. Thus, we’ll use the <code>predict_proba()</code> method of the <code>LogisticRegression()</code> object, which returns the predicted probability for the observation to belong to each of the classes, instead of using the <code>predict()</code> method, which returns the predicted class based on threshold probability of 0.5.</p>
-<div class="cell" data-execution_count="86">
+<div class="cell" data-execution_count="231">
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Computing the predicted probability for the observation to belong to the positive class (y=1);</span></span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="co">#The 2nd column in the output of predict_proba() consists of the probability of the observation to </span></span>
 <span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="co">#belong to the positive class (y=1)</span></span>
@@ -474,7 +475,7 @@ Please also refer to the documentation for alternative solver options:
 <section id="confusion-matrix-precision-recall" class="level3" data-number="1.4.3">
 <h3 data-number="1.4.3" class="anchored" data-anchor-id="confusion-matrix-precision-recall"><span class="header-section-number">1.4.3</span> Confusion matrix &amp; precision-recall</h3>
 <p>The <code>confusion_matrix()</code>, <code>precision_score()</code>, and <code>recall_score()</code> functions from the <code>metrics</code> module of the <code>sklearn</code> library can be used to compute the confusion matrix, precision, and recall respectively.</p>
-<div class="cell" data-execution_count="87">
+<div class="cell" data-execution_count="232">
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Confusion matrix</span></span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>cm <span class="op">=</span> pd.DataFrame(confusion_matrix(y_test, y_pred), columns<span class="op">=</span>[<span class="st">'Predicted 0'</span>, <span class="st">'Predicted 1'</span>], </span>
 <span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>            index <span class="op">=</span> [<span class="st">'Actual 0'</span>, <span class="st">'Actual 1'</span>])</span>
@@ -483,7 +484,7 @@ Please also refer to the documentation for alternative solver options:
 <p><img src="L1_Scikit-learn_files/figure-html/cell-20-output-1.png" class="img-fluid"></p>
 </div>
 </div>
-<div class="cell" data-execution_count="88">
+<div class="cell" data-execution_count="233">
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Precision: "</span>, precision_score(y_test, y_pred))</span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Recall: "</span>, recall_score(y_test, y_pred))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -492,7 +493,7 @@ Recall:  0.52</code></pre>
 </div>
 </div>
 <p>Let us compute the performance metrics if we develop the model using stratified splitting.</p>
-<div class="cell" data-execution_count="111">
+<div class="cell" data-execution_count="234">
 <div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Developing the model with stratified splitting</span></span>
 <span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Scaling data</span></span>
@@ -541,7 +542,7 @@ Recall:  0.5555555555555556</code></pre>
 <li><p>Regularization parameter</p></li>
 </ol>
 <p>The performance metrics can be computed using a desired value of the threshold probability. Let us compute the performance metrics for a desired threshold probability of 0.3.</p>
-<div class="cell" data-execution_count="58">
+<div class="cell" data-execution_count="235">
 <div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Performance metrics computation for a desired threshold probability of 0.3</span></span>
 <span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>desired_threshold <span class="op">=</span> <span class="fl">0.3</span></span>
 <span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -579,66 +580,63 @@ Recall:  0.8148148148148148</code></pre>
 <h3 data-number="1.5.1" class="anchored" data-anchor-id="tuning-decision-threshold-probability"><span class="header-section-number">1.5.1</span> Tuning decision threshold probability</h3>
 <p>Suppose we wish to find the optimal decision threshold probability to maximize accuracy. Note that we cannot use the test dataset to optimize model hyperparameters, as that may lead to overfitting on the test data. We’ll use <span class="math inline">\(K\)</span>-fold cross validation on train data to find the optimal decision threshold probability.</p>
 <p>We’ll use the <code>cross_val_predict()</code> function from the <code>model_selection</code> module of <code>sklearn</code> to compute the <span class="math inline">\(K\)</span>-fold cross validated predicted probabilities. Note that this function simlifies the task of manually creating the <span class="math inline">\(K\)</span>-folds, training the model <span class="math inline">\(K\)</span>-times, and computing the predicted probabilites on each of the <span class="math inline">\(K\)</span>-folds. Thereafter, the predicted probabilities will be used to find the one the optimal threshold probability that maximizes the classification accuracy.</p>
-<div class="cell" data-execution_count="114">
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>val_scores <span class="op">=</span> []</span>
-<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>hyperparam_vals <span class="op">=</span> np.arange(<span class="dv">0</span>,<span class="fl">1.01</span>,<span class="fl">0.01</span>)</span>
-<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>accuracy_iter <span class="op">=</span> []</span>
-<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>predicted_probability <span class="op">=</span> cross_val_predict(LogisticRegression(), X_train_stratified_scaled, </span>
-<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>                                              y_train_stratified, cv <span class="op">=</span> <span class="dv">5</span>, method <span class="op">=</span> <span class="st">'predict_proba'</span>)</span>
-<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> threshold_prob <span class="kw">in</span> hyperparam_vals:</span>
-<span id="cb38-10"><a href="#cb38-10" aria-hidden="true" tabindex="-1"></a>    predicted_class <span class="op">=</span> predicted_probability[:,<span class="dv">1</span>] <span class="op">&gt;</span> threshold_prob</span>
-<span id="cb38-11"><a href="#cb38-11" aria-hidden="true" tabindex="-1"></a>    predicted_class <span class="op">=</span> predicted_class.astype(<span class="bu">int</span>)</span>
-<span id="cb38-12"><a href="#cb38-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-13"><a href="#cb38-13" aria-hidden="true" tabindex="-1"></a>    <span class="co">#Computing the accuracy</span></span>
-<span id="cb38-14"><a href="#cb38-14" aria-hidden="true" tabindex="-1"></a>    accuracy <span class="op">=</span> accuracy_score(predicted_class, y_train_stratified)<span class="op">*</span><span class="dv">100</span></span>
-<span id="cb38-15"><a href="#cb38-15" aria-hidden="true" tabindex="-1"></a>    accuracy_iter.append(accuracy)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="236">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>hyperparam_vals <span class="op">=</span> np.arange(<span class="dv">0</span>,<span class="fl">1.01</span>,<span class="fl">0.01</span>)</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>accuracy_iter <span class="op">=</span> []</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>predicted_probability <span class="op">=</span> cross_val_predict(LogisticRegression(), X_train_stratified_scaled, </span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>                                              y_train_stratified, cv <span class="op">=</span> <span class="dv">5</span>, method <span class="op">=</span> <span class="st">'predict_proba'</span>)</span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> threshold_prob <span class="kw">in</span> hyperparam_vals:</span>
+<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a>    predicted_class <span class="op">=</span> predicted_probability[:,<span class="dv">1</span>] <span class="op">&gt;</span> threshold_prob</span>
+<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a>    predicted_class <span class="op">=</span> predicted_class.astype(<span class="bu">int</span>)</span>
+<span id="cb38-10"><a href="#cb38-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-11"><a href="#cb38-11" aria-hidden="true" tabindex="-1"></a>    <span class="co">#Computing the accuracy</span></span>
+<span id="cb38-12"><a href="#cb38-12" aria-hidden="true" tabindex="-1"></a>    accuracy <span class="op">=</span> accuracy_score(predicted_class, y_train_stratified)<span class="op">*</span><span class="dv">100</span></span>
+<span id="cb38-13"><a href="#cb38-13" aria-hidden="true" tabindex="-1"></a>    accuracy_iter.append(accuracy)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Let us visualize the accuracy with change in decision threshold probability.</p>
-<div class="cell" data-execution_count="118">
+<div class="cell" data-execution_count="237">
 <div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Accuracy vs decision threshold probability</span></span>
-<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>sns.scatterplot(x <span class="op">=</span> hyperparam_vals, y <span class="op">=</span> accuracy_iter)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="118">
-<pre><code>&lt;AxesSubplot:&gt;</code></pre>
-</div>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>sns.scatterplot(x <span class="op">=</span> hyperparam_vals, y <span class="op">=</span> accuracy_iter)</span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Decision threshold probability'</span>)</span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Average 5-fold CV accuracy'</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<p><img src="L1_Scikit-learn_files/figure-html/cell-25-output-2.png" class="img-fluid"></p>
+<p><img src="L1_Scikit-learn_files/figure-html/cell-25-output-1.png" class="img-fluid"></p>
 </div>
 </div>
 <p>The optimal decision threshold probability is the one that maximizes the <span class="math inline">\(K\)</span>-fold cross validation accuracy.</p>
-<div class="cell" data-execution_count="116">
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Optimal decision threshold probability</span></span>
-<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>hyperparam_vals[accuracy_iter.index(<span class="bu">max</span>(accuracy_iter))]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="116">
+<div class="cell" data-execution_count="238">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Optimal decision threshold probability</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>hyperparam_vals[accuracy_iter.index(<span class="bu">max</span>(accuracy_iter))]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="238">
 <pre><code>0.46</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="110">
-<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Performance metrics computation for the optimium decision threshold probability</span></span>
-<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>desired_threshold <span class="op">=</span> <span class="fl">0.46</span></span>
-<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Classifying observations in the positive class (y = 1) if the predicted probability is greater</span></span>
-<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a><span class="co"># than the desired decision threshold probability</span></span>
-<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a>y_pred_desired_threshold <span class="op">=</span> y_pred_stratified_prob <span class="op">&gt;</span> desired_threshold</span>
-<span id="cb43-7"><a href="#cb43-7" aria-hidden="true" tabindex="-1"></a>y_pred_desired_threshold <span class="op">=</span> y_pred_desired_threshold.astype(<span class="bu">int</span>)</span>
-<span id="cb43-8"><a href="#cb43-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-9"><a href="#cb43-9" aria-hidden="true" tabindex="-1"></a><span class="co">#Computing the accuracy</span></span>
-<span id="cb43-10"><a href="#cb43-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Accuracy: "</span>,accuracy_score(y_pred_desired_threshold, y_test_stratified)<span class="op">*</span><span class="dv">100</span>)  </span>
-<span id="cb43-11"><a href="#cb43-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-12"><a href="#cb43-12" aria-hidden="true" tabindex="-1"></a><span class="co">#Computing the ROC-AUC</span></span>
-<span id="cb43-13"><a href="#cb43-13" aria-hidden="true" tabindex="-1"></a>fpr, tpr, auc_thresholds <span class="op">=</span> roc_curve(y_test_stratified, y_pred_stratified_prob)</span>
-<span id="cb43-14"><a href="#cb43-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"ROC-AUC: "</span>,auc(fpr, tpr))<span class="co"># AUC of ROC</span></span>
-<span id="cb43-15"><a href="#cb43-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-16"><a href="#cb43-16" aria-hidden="true" tabindex="-1"></a><span class="co">#Computing the precision and recall</span></span>
-<span id="cb43-17"><a href="#cb43-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Precision: "</span>, precision_score(y_test_stratified, y_pred_desired_threshold))</span>
-<span id="cb43-18"><a href="#cb43-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Recall: "</span>, recall_score(y_test_stratified, y_pred_desired_threshold))</span>
-<span id="cb43-19"><a href="#cb43-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-20"><a href="#cb43-20" aria-hidden="true" tabindex="-1"></a><span class="co">#Confusion matrix</span></span>
-<span id="cb43-21"><a href="#cb43-21" aria-hidden="true" tabindex="-1"></a>cm <span class="op">=</span> pd.DataFrame(confusion_matrix(y_test_stratified, y_pred_desired_threshold), </span>
-<span id="cb43-22"><a href="#cb43-22" aria-hidden="true" tabindex="-1"></a>                  columns<span class="op">=</span>[<span class="st">'Predicted 0'</span>, <span class="st">'Predicted 1'</span>], index <span class="op">=</span> [<span class="st">'Actual 0'</span>, <span class="st">'Actual 1'</span>])</span>
-<span id="cb43-23"><a href="#cb43-23" aria-hidden="true" tabindex="-1"></a>sns.heatmap(cm, annot<span class="op">=</span><span class="va">True</span>, cmap<span class="op">=</span><span class="st">'Blues'</span>, fmt<span class="op">=</span><span class="st">'g'</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="239">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Performance metrics computation for the optimium decision threshold probability</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>desired_threshold <span class="op">=</span> <span class="fl">0.46</span></span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Classifying observations in the positive class (y = 1) if the predicted probability is greater</span></span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a><span class="co"># than the desired decision threshold probability</span></span>
+<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a>y_pred_desired_threshold <span class="op">=</span> y_pred_stratified_prob <span class="op">&gt;</span> desired_threshold</span>
+<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a>y_pred_desired_threshold <span class="op">=</span> y_pred_desired_threshold.astype(<span class="bu">int</span>)</span>
+<span id="cb42-8"><a href="#cb42-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-9"><a href="#cb42-9" aria-hidden="true" tabindex="-1"></a><span class="co">#Computing the accuracy</span></span>
+<span id="cb42-10"><a href="#cb42-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Accuracy: "</span>,accuracy_score(y_pred_desired_threshold, y_test_stratified)<span class="op">*</span><span class="dv">100</span>)  </span>
+<span id="cb42-11"><a href="#cb42-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-12"><a href="#cb42-12" aria-hidden="true" tabindex="-1"></a><span class="co">#Computing the ROC-AUC</span></span>
+<span id="cb42-13"><a href="#cb42-13" aria-hidden="true" tabindex="-1"></a>fpr, tpr, auc_thresholds <span class="op">=</span> roc_curve(y_test_stratified, y_pred_stratified_prob)</span>
+<span id="cb42-14"><a href="#cb42-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"ROC-AUC: "</span>,auc(fpr, tpr))<span class="co"># AUC of ROC</span></span>
+<span id="cb42-15"><a href="#cb42-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-16"><a href="#cb42-16" aria-hidden="true" tabindex="-1"></a><span class="co">#Computing the precision and recall</span></span>
+<span id="cb42-17"><a href="#cb42-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Precision: "</span>, precision_score(y_test_stratified, y_pred_desired_threshold))</span>
+<span id="cb42-18"><a href="#cb42-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Recall: "</span>, recall_score(y_test_stratified, y_pred_desired_threshold))</span>
+<span id="cb42-19"><a href="#cb42-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-20"><a href="#cb42-20" aria-hidden="true" tabindex="-1"></a><span class="co">#Confusion matrix</span></span>
+<span id="cb42-21"><a href="#cb42-21" aria-hidden="true" tabindex="-1"></a>cm <span class="op">=</span> pd.DataFrame(confusion_matrix(y_test_stratified, y_pred_desired_threshold), </span>
+<span id="cb42-22"><a href="#cb42-22" aria-hidden="true" tabindex="-1"></a>                  columns<span class="op">=</span>[<span class="st">'Predicted 0'</span>, <span class="st">'Predicted 1'</span>], index <span class="op">=</span> [<span class="st">'Actual 0'</span>, <span class="st">'Actual 1'</span>])</span>
+<span id="cb42-23"><a href="#cb42-23" aria-hidden="true" tabindex="-1"></a>sns.heatmap(cm, annot<span class="op">=</span><span class="va">True</span>, cmap<span class="op">=</span><span class="st">'Blues'</span>, fmt<span class="op">=</span><span class="st">'g'</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Accuracy:  79.87012987012987
 ROC-AUC:  0.8505555555555556
@@ -654,63 +652,63 @@ Recall:  0.5925925925925926</code></pre>
 <section id="tuning-the-regularization-parameter" class="level3" data-number="1.5.2">
 <h3 data-number="1.5.2" class="anchored" data-anchor-id="tuning-the-regularization-parameter"><span class="header-section-number">1.5.2</span> Tuning the regularization parameter</h3>
 <p>The <code>LogisticRegression()</code> method has a default <em>L2</em> regularization penalty, which means ridge regression.<code>C</code> is <span class="math inline">\(1/\lambda\)</span>, where <span class="math inline">\(\lambda\)</span> is the hyperparameter that is multiplied with the ridge penalty. <code>C</code> is 1 by default.</p>
-<div class="cell" data-execution_count="138">
-<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>accuracy_iter <span class="op">=</span> []</span>
-<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>hyperparam_vals <span class="op">=</span> <span class="dv">10</span><span class="op">**</span>np.linspace(<span class="op">-</span><span class="fl">3.5</span>, <span class="dv">1</span>)</span>
-<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> c_val <span class="kw">in</span> hyperparam_vals: <span class="co"># For each possible C value in your grid</span></span>
-<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a>    logreg_model <span class="op">=</span> LogisticRegression(C<span class="op">=</span>c_val) <span class="co"># Create a model with the C value</span></span>
-<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a>    accuracy_iter.append(cross_val_score(logreg_model, X_train_stratified_scaled, y_train_stratified,</span>
-<span id="cb45-8"><a href="#cb45-8" aria-hidden="true" tabindex="-1"></a>                                      scoring<span class="op">=</span><span class="st">'accuracy'</span>, cv<span class="op">=</span><span class="dv">5</span>)) <span class="co"># Find the cv results</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="240">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>accuracy_iter <span class="op">=</span> []</span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>hyperparam_vals <span class="op">=</span> <span class="dv">10</span><span class="op">**</span>np.linspace(<span class="op">-</span><span class="fl">3.5</span>, <span class="dv">1</span>)</span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> c_val <span class="kw">in</span> hyperparam_vals: <span class="co"># For each possible C value in your grid</span></span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a>    logreg_model <span class="op">=</span> LogisticRegression(C<span class="op">=</span>c_val) <span class="co"># Create a model with the C value</span></span>
+<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a>    accuracy_iter.append(cross_val_score(logreg_model, X_train_stratified_scaled, y_train_stratified,</span>
+<span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a>                                      scoring<span class="op">=</span><span class="st">'accuracy'</span>, cv<span class="op">=</span><span class="dv">5</span>)) <span class="co"># Find the cv results</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-execution_count="162">
-<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>plt.plot(hyperparam_vals, np.mean(np.array(accuracy_iter), axis<span class="op">=</span><span class="dv">1</span>))</span>
-<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'C'</span>)</span>
-<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Average 5-fold CV accuracy'</span>)</span>
-<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a>plt.xscale(<span class="st">'log'</span>)</span>
-<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="241">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>plt.plot(hyperparam_vals, np.mean(np.array(accuracy_iter), axis<span class="op">=</span><span class="dv">1</span>))</span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'C'</span>)</span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Average 5-fold CV accuracy'</span>)</span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>plt.xscale(<span class="st">'log'</span>)</span>
+<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <p><img src="L1_Scikit-learn_files/figure-html/cell-29-output-1.png" class="img-fluid"></p>
 </div>
 </div>
-<div class="cell" data-execution_count="156">
-<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Optimal value of the regularization parameter 'C'</span></span>
-<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>optimal_C <span class="op">=</span> hyperparam_vals[np.argmax(np.array(accuracy_iter).mean(axis<span class="op">=</span><span class="dv">1</span>))]</span>
-<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>optimal_C</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="156">
+<div class="cell" data-execution_count="242">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Optimal value of the regularization parameter 'C'</span></span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>optimal_C <span class="op">=</span> hyperparam_vals[np.argmax(np.array(accuracy_iter).mean(axis<span class="op">=</span><span class="dv">1</span>))]</span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>optimal_C</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="242">
 <pre><code>0.11787686347935879</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="157">
-<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Developing the model with stratified splitting and optimal 'C'</span></span>
-<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Scaling data</span></span>
-<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a>scaler <span class="op">=</span> StandardScaler().fit(X_train_stratified)</span>
-<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a>X_train_stratified_scaled <span class="op">=</span> scaler.transform(X_train_stratified)</span>
-<span id="cb49-6"><a href="#cb49-6" aria-hidden="true" tabindex="-1"></a>X_test_stratified_scaled <span class="op">=</span> scaler.transform(X_test_stratified) </span>
-<span id="cb49-7"><a href="#cb49-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-8"><a href="#cb49-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Training the model</span></span>
-<span id="cb49-9"><a href="#cb49-9" aria-hidden="true" tabindex="-1"></a>logreg <span class="op">=</span> LogisticRegression(C <span class="op">=</span> optimal_C)</span>
-<span id="cb49-10"><a href="#cb49-10" aria-hidden="true" tabindex="-1"></a>logreg.fit(X_train_stratified_scaled, y_train_stratified)</span>
-<span id="cb49-11"><a href="#cb49-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-12"><a href="#cb49-12" aria-hidden="true" tabindex="-1"></a><span class="co">#Computing the accuracy</span></span>
-<span id="cb49-13"><a href="#cb49-13" aria-hidden="true" tabindex="-1"></a>y_pred_stratified <span class="op">=</span> logreg.predict(X_test_stratified_scaled)</span>
-<span id="cb49-14"><a href="#cb49-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Accuracy: "</span>,accuracy_score(y_pred_stratified, y_test_stratified)<span class="op">*</span><span class="dv">100</span>)  </span>
-<span id="cb49-15"><a href="#cb49-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-16"><a href="#cb49-16" aria-hidden="true" tabindex="-1"></a><span class="co">#Computing the ROC-AUC</span></span>
-<span id="cb49-17"><a href="#cb49-17" aria-hidden="true" tabindex="-1"></a>y_pred_stratified_prob <span class="op">=</span> logreg.predict_proba(X_test_stratified_scaled)[:,<span class="dv">1</span>]</span>
-<span id="cb49-18"><a href="#cb49-18" aria-hidden="true" tabindex="-1"></a>fpr, tpr, auc_thresholds <span class="op">=</span> roc_curve(y_test_stratified, y_pred_stratified_prob)</span>
-<span id="cb49-19"><a href="#cb49-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"ROC-AUC: "</span>,auc(fpr, tpr))<span class="co"># AUC of ROC</span></span>
-<span id="cb49-20"><a href="#cb49-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-21"><a href="#cb49-21" aria-hidden="true" tabindex="-1"></a><span class="co">#Computing the precision and recall</span></span>
-<span id="cb49-22"><a href="#cb49-22" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Precision: "</span>, precision_score(y_test_stratified, y_pred_stratified))</span>
-<span id="cb49-23"><a href="#cb49-23" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Recall: "</span>, recall_score(y_test_stratified, y_pred_stratified))</span>
-<span id="cb49-24"><a href="#cb49-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-25"><a href="#cb49-25" aria-hidden="true" tabindex="-1"></a><span class="co">#Confusion matrix</span></span>
-<span id="cb49-26"><a href="#cb49-26" aria-hidden="true" tabindex="-1"></a>cm <span class="op">=</span> pd.DataFrame(confusion_matrix(y_test_stratified, y_pred_stratified), columns<span class="op">=</span>[<span class="st">'Predicted 0'</span>, <span class="st">'Predicted 1'</span>], </span>
-<span id="cb49-27"><a href="#cb49-27" aria-hidden="true" tabindex="-1"></a>            index <span class="op">=</span> [<span class="st">'Actual 0'</span>, <span class="st">'Actual 1'</span>])</span>
-<span id="cb49-28"><a href="#cb49-28" aria-hidden="true" tabindex="-1"></a>sns.heatmap(cm, annot<span class="op">=</span><span class="va">True</span>, cmap<span class="op">=</span><span class="st">'Blues'</span>, fmt<span class="op">=</span><span class="st">'g'</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="243">
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Developing the model with stratified splitting and optimal 'C'</span></span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Scaling data</span></span>
+<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a>scaler <span class="op">=</span> StandardScaler().fit(X_train_stratified)</span>
+<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a>X_train_stratified_scaled <span class="op">=</span> scaler.transform(X_train_stratified)</span>
+<span id="cb48-6"><a href="#cb48-6" aria-hidden="true" tabindex="-1"></a>X_test_stratified_scaled <span class="op">=</span> scaler.transform(X_test_stratified) </span>
+<span id="cb48-7"><a href="#cb48-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-8"><a href="#cb48-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Training the model</span></span>
+<span id="cb48-9"><a href="#cb48-9" aria-hidden="true" tabindex="-1"></a>logreg <span class="op">=</span> LogisticRegression(C <span class="op">=</span> optimal_C)</span>
+<span id="cb48-10"><a href="#cb48-10" aria-hidden="true" tabindex="-1"></a>logreg.fit(X_train_stratified_scaled, y_train_stratified)</span>
+<span id="cb48-11"><a href="#cb48-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-12"><a href="#cb48-12" aria-hidden="true" tabindex="-1"></a><span class="co">#Computing the accuracy</span></span>
+<span id="cb48-13"><a href="#cb48-13" aria-hidden="true" tabindex="-1"></a>y_pred_stratified <span class="op">=</span> logreg.predict(X_test_stratified_scaled)</span>
+<span id="cb48-14"><a href="#cb48-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Accuracy: "</span>,accuracy_score(y_pred_stratified, y_test_stratified)<span class="op">*</span><span class="dv">100</span>)  </span>
+<span id="cb48-15"><a href="#cb48-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-16"><a href="#cb48-16" aria-hidden="true" tabindex="-1"></a><span class="co">#Computing the ROC-AUC</span></span>
+<span id="cb48-17"><a href="#cb48-17" aria-hidden="true" tabindex="-1"></a>y_pred_stratified_prob <span class="op">=</span> logreg.predict_proba(X_test_stratified_scaled)[:,<span class="dv">1</span>]</span>
+<span id="cb48-18"><a href="#cb48-18" aria-hidden="true" tabindex="-1"></a>fpr, tpr, auc_thresholds <span class="op">=</span> roc_curve(y_test_stratified, y_pred_stratified_prob)</span>
+<span id="cb48-19"><a href="#cb48-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"ROC-AUC: "</span>,auc(fpr, tpr))<span class="co"># AUC of ROC</span></span>
+<span id="cb48-20"><a href="#cb48-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-21"><a href="#cb48-21" aria-hidden="true" tabindex="-1"></a><span class="co">#Computing the precision and recall</span></span>
+<span id="cb48-22"><a href="#cb48-22" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Precision: "</span>, precision_score(y_test_stratified, y_pred_stratified))</span>
+<span id="cb48-23"><a href="#cb48-23" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Recall: "</span>, recall_score(y_test_stratified, y_pred_stratified))</span>
+<span id="cb48-24"><a href="#cb48-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-25"><a href="#cb48-25" aria-hidden="true" tabindex="-1"></a><span class="co">#Confusion matrix</span></span>
+<span id="cb48-26"><a href="#cb48-26" aria-hidden="true" tabindex="-1"></a>cm <span class="op">=</span> pd.DataFrame(confusion_matrix(y_test_stratified, y_pred_stratified), columns<span class="op">=</span>[<span class="st">'Predicted 0'</span>, <span class="st">'Predicted 1'</span>], </span>
+<span id="cb48-27"><a href="#cb48-27" aria-hidden="true" tabindex="-1"></a>            index <span class="op">=</span> [<span class="st">'Actual 0'</span>, <span class="st">'Actual 1'</span>])</span>
+<span id="cb48-28"><a href="#cb48-28" aria-hidden="true" tabindex="-1"></a>sns.heatmap(cm, annot<span class="op">=</span><span class="va">True</span>, cmap<span class="op">=</span><span class="st">'Blues'</span>, fmt<span class="op">=</span><span class="st">'g'</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Accuracy:  78.57142857142857
 ROC-AUC:  0.8516666666666666
@@ -721,7 +719,87 @@ Recall:  0.5370370370370371</code></pre>
 <p><img src="L1_Scikit-learn_files/figure-html/cell-31-output-2.png" class="img-fluid"></p>
 </div>
 </div>
-<p>Throughout the course, we will create many different models in <code>sklearn</code>, all of them will have <code>fit()</code>, <code>predict()</code>, <code>score()</code>, and <code>predict_proba()</code> methods, among others that are specific to them.</p>
+</section>
+<section id="tuning-the-decision-threshold-probability-and-the-regularization-parameter-simultaneously" class="level3" data-number="1.5.3">
+<h3 data-number="1.5.3" class="anchored" data-anchor-id="tuning-the-decision-threshold-probability-and-the-regularization-parameter-simultaneously"><span class="header-section-number">1.5.3</span> Tuning the decision threshold probability and the regularization parameter simultaneously</h3>
+<div class="cell" data-execution_count="244">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>threshold_hyperparam_vals <span class="op">=</span> np.arange(<span class="dv">0</span>,<span class="fl">1.01</span>,<span class="fl">0.01</span>)</span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>C_hyperparam_vals <span class="op">=</span> <span class="dv">10</span><span class="op">**</span>np.linspace(<span class="op">-</span><span class="fl">3.5</span>, <span class="dv">1</span>)</span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>accuracy_iter <span class="op">=</span> []</span>
+<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> c_val <span class="kw">in</span> C_hyperparam_vals:</span>
+<span id="cb50-6"><a href="#cb50-6" aria-hidden="true" tabindex="-1"></a>    predicted_probability <span class="op">=</span> cross_val_predict(LogisticRegression(C <span class="op">=</span> c_val), X_train_stratified_scaled, </span>
+<span id="cb50-7"><a href="#cb50-7" aria-hidden="true" tabindex="-1"></a>                                                  y_train_stratified, cv <span class="op">=</span> <span class="dv">5</span>, method <span class="op">=</span> <span class="st">'predict_proba'</span>)</span>
+<span id="cb50-8"><a href="#cb50-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-9"><a href="#cb50-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> threshold_prob <span class="kw">in</span> threshold_hyperparam_vals:</span>
+<span id="cb50-10"><a href="#cb50-10" aria-hidden="true" tabindex="-1"></a>        predicted_class <span class="op">=</span> predicted_probability[:,<span class="dv">1</span>] <span class="op">&gt;</span> threshold_prob</span>
+<span id="cb50-11"><a href="#cb50-11" aria-hidden="true" tabindex="-1"></a>        predicted_class <span class="op">=</span> predicted_class.astype(<span class="bu">int</span>)</span>
+<span id="cb50-12"><a href="#cb50-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-13"><a href="#cb50-13" aria-hidden="true" tabindex="-1"></a>        <span class="co">#Computing the accuracy</span></span>
+<span id="cb50-14"><a href="#cb50-14" aria-hidden="true" tabindex="-1"></a>        accuracy <span class="op">=</span> accuracy_score(predicted_class, y_train_stratified)<span class="op">*</span><span class="dv">100</span></span>
+<span id="cb50-15"><a href="#cb50-15" aria-hidden="true" tabindex="-1"></a>        accuracy_iter.append(accuracy)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="245">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>max_acc_iter <span class="op">=</span> np.argmax(accuracy_iter)</span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Optimal decision threshold probability</span></span>
+<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a>optimal_threshold <span class="op">=</span> threshold_hyperparam_vals[max_acc_iter<span class="op">%</span><span class="bu">len</span>(threshold_hyperparam_vals)]</span>
+<span id="cb51-5"><a href="#cb51-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Optimal decision threshold = "</span>, optimal_threshold)</span>
+<span id="cb51-6"><a href="#cb51-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-7"><a href="#cb51-7" aria-hidden="true" tabindex="-1"></a><span class="co">#Optimal C</span></span>
+<span id="cb51-8"><a href="#cb51-8" aria-hidden="true" tabindex="-1"></a>optimal_C <span class="op">=</span> C_hyperparam_vals[<span class="bu">int</span>(max_acc_iter<span class="op">/</span><span class="bu">len</span>(threshold_hyperparam_vals))]</span>
+<span id="cb51-9"><a href="#cb51-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Optimal C = "</span>, optimal_C)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Optimal decision threshold =  0.46
+Optimal C =  2.2758459260747887</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="246">
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Developing the model with stratified splitting, optimal decision threshold probability, and optimal 'C'</span></span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Scaling data</span></span>
+<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a>scaler <span class="op">=</span> StandardScaler().fit(X_train_stratified)</span>
+<span id="cb53-5"><a href="#cb53-5" aria-hidden="true" tabindex="-1"></a>X_train_stratified_scaled <span class="op">=</span> scaler.transform(X_train_stratified)</span>
+<span id="cb53-6"><a href="#cb53-6" aria-hidden="true" tabindex="-1"></a>X_test_stratified_scaled <span class="op">=</span> scaler.transform(X_test_stratified) </span>
+<span id="cb53-7"><a href="#cb53-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-8"><a href="#cb53-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Training the model</span></span>
+<span id="cb53-9"><a href="#cb53-9" aria-hidden="true" tabindex="-1"></a>logreg <span class="op">=</span> LogisticRegression(C <span class="op">=</span> optimal_C)</span>
+<span id="cb53-10"><a href="#cb53-10" aria-hidden="true" tabindex="-1"></a>logreg.fit(X_train_stratified_scaled, y_train_stratified)</span>
+<span id="cb53-11"><a href="#cb53-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-12"><a href="#cb53-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Performance metrics computation for the optimal threshold probability</span></span>
+<span id="cb53-13"><a href="#cb53-13" aria-hidden="true" tabindex="-1"></a>y_pred_stratified_prob <span class="op">=</span> logreg.predict_proba(X_test_stratified_scaled)[:,<span class="dv">1</span>]</span>
+<span id="cb53-14"><a href="#cb53-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-15"><a href="#cb53-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Classifying observations in the positive class (y = 1) if the predicted probability is greater</span></span>
+<span id="cb53-16"><a href="#cb53-16" aria-hidden="true" tabindex="-1"></a><span class="co"># than the desired decision threshold probability</span></span>
+<span id="cb53-17"><a href="#cb53-17" aria-hidden="true" tabindex="-1"></a>y_pred_desired_threshold <span class="op">=</span> y_pred_stratified_prob <span class="op">&gt;</span> optimal_threshold</span>
+<span id="cb53-18"><a href="#cb53-18" aria-hidden="true" tabindex="-1"></a>y_pred_desired_threshold <span class="op">=</span> y_pred_desired_threshold.astype(<span class="bu">int</span>)</span>
+<span id="cb53-19"><a href="#cb53-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-20"><a href="#cb53-20" aria-hidden="true" tabindex="-1"></a><span class="co">#Computing the accuracy</span></span>
+<span id="cb53-21"><a href="#cb53-21" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Accuracy: "</span>,accuracy_score(y_pred_desired_threshold, y_test_stratified)<span class="op">*</span><span class="dv">100</span>)  </span>
+<span id="cb53-22"><a href="#cb53-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-23"><a href="#cb53-23" aria-hidden="true" tabindex="-1"></a><span class="co">#Computing the ROC-AUC</span></span>
+<span id="cb53-24"><a href="#cb53-24" aria-hidden="true" tabindex="-1"></a>fpr, tpr, auc_thresholds <span class="op">=</span> roc_curve(y_test_stratified, y_pred_stratified_prob)</span>
+<span id="cb53-25"><a href="#cb53-25" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"ROC-AUC: "</span>,auc(fpr, tpr))<span class="co"># AUC of ROC</span></span>
+<span id="cb53-26"><a href="#cb53-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-27"><a href="#cb53-27" aria-hidden="true" tabindex="-1"></a><span class="co">#Computing the precision and recall</span></span>
+<span id="cb53-28"><a href="#cb53-28" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Precision: "</span>, precision_score(y_test_stratified, y_pred_desired_threshold))</span>
+<span id="cb53-29"><a href="#cb53-29" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Recall: "</span>, recall_score(y_test_stratified, y_pred_desired_threshold))</span>
+<span id="cb53-30"><a href="#cb53-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-31"><a href="#cb53-31" aria-hidden="true" tabindex="-1"></a><span class="co">#Confusion matrix</span></span>
+<span id="cb53-32"><a href="#cb53-32" aria-hidden="true" tabindex="-1"></a>cm <span class="op">=</span> pd.DataFrame(confusion_matrix(y_test_stratified, y_pred_desired_threshold), columns<span class="op">=</span>[<span class="st">'Predicted 0'</span>, <span class="st">'Predicted 1'</span>], </span>
+<span id="cb53-33"><a href="#cb53-33" aria-hidden="true" tabindex="-1"></a>            index <span class="op">=</span> [<span class="st">'Actual 0'</span>, <span class="st">'Actual 1'</span>])</span>
+<span id="cb53-34"><a href="#cb53-34" aria-hidden="true" tabindex="-1"></a>sns.heatmap(cm, annot<span class="op">=</span><span class="va">True</span>, cmap<span class="op">=</span><span class="st">'Blues'</span>, fmt<span class="op">=</span><span class="st">'g'</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Accuracy:  79.87012987012987
+ROC-AUC:  0.8507407407407408
+Precision:  0.7804878048780488
+Recall:  0.5925925925925926</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="L1_Scikit-learn_files/figure-html/cell-34-output-2.png" class="img-fluid"></p>
+</div>
+</div>
+<p>Later in the course, we’ll see the <code>sklearn</code> function <code>GridSearchCV</code>, which is used to optimize several model hyperparameters simultaneously with <span class="math inline">\(K\)</span>-fold cross validation, while avoiding <code>for</code> loops.</p>
 
 
 </section>

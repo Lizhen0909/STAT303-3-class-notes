@@ -264,7 +264,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>Tuning model hyperparameters* to optimize the desired performance metric</p></li>
 </ol>
 <p>*<em>In machine learning, a model hyperparameter is a parameter that cannot be learned from training data and must be set before training the model. Hyperparameters control aspects of the model’s behavior and can greatly impact its performance. For example, the regularization parameter <span class="math inline">\(\lambda\)</span>, in linear regression is a hyperparameter. You need to specify it before fitting the model. On the other hand, the beta coefficients in linear regression are parameters, as you learn them while training the model, and don’t need to specify their values beforehand.</em></p>
-<p>We’ll use a classfication problem to illustrate the functions. However, similar functions can be used for regression problems, i.e., prediction problems with a continuous response.</p>
+<p>We’ll use a classification problem to illustrate the functions. However, similar functions can be used for regression problems, i.e., prediction problems with a continuous response.</p>
 <div class="cell" data-execution_count="214">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Importing necessary libraries</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -285,7 +285,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co">#sklearn module for scaling data</span></span>
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> StandardScaler</span>
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co">#sklearn modules for comuting the performance metrics</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co">#sklearn modules for computing the performance metrics</span></span>
 <span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> accuracy_score, mean_absolute_error, mean_squared_error, r2_score, <span class="op">\</span></span>
 <span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>roc_curve, auc, precision_score, recall_score, confusion_matrix</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -374,7 +374,7 @@ Name: Outcome, dtype: float64</code></pre>
 </section>
 <section id="scaling-data" class="level2" data-number="1.2">
 <h2 data-number="1.2" class="anchored" data-anchor-id="scaling-data"><span class="header-section-number">1.2</span> Scaling data</h2>
-<p>In certain models, it may be important to scale data for various reasons. In a logistic regression model, scaling can help with model convergence. Scikit-learn uses a method known as gradient-descent <em>(not in scope of the syllabus of this course)</em> to obtain a solution. In case the predictors have different orders of magnitude, the alogrithm may fail to converge. In such cases, it is useful to standaridize the predictors so that all of them are at the same scale.</p>
+<p>In certain models, it may be important to scale data for various reasons. In a logistic regression model, scaling can help with model convergence. Scikit-learn uses a method known as gradient-descent <em>(not in scope of the syllabus of this course)</em> to obtain a solution. In case the predictors have different orders of magnitude, the algorithm may fail to converge. In such cases, it is useful to standardize the predictors so that all of them are at the same scale.</p>
 <div class="cell" data-execution_count="225">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># With linear/logistic regression in scikit-learn, especially when the predictors have different orders </span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="co"># of magn., scaling is necessary. This is to enable the training algo. which we did not cover. (Gradient Descent)</span></span>
@@ -433,7 +433,7 @@ Please also refer to the documentation for alternative solver options:
 <h2 data-number="1.4" class="anchored" data-anchor-id="computing-performance-metrics"><span class="header-section-number">1.4</span> Computing performance metrics</h2>
 <section id="accuracy" class="level3" data-number="1.4.1">
 <h3 data-number="1.4.1" class="anchored" data-anchor-id="accuracy"><span class="header-section-number">1.4.1</span> Accuracy</h3>
-<p>Let us test the model prediction accuracy on the test data. We’ll demonstrate two different functions that can be used to compute model accuracy - <code>accurace_score()</code>, and <code>score()</code>.</p>
+<p>Let us test the model prediction accuracy on the test data. We’ll demonstrate two different functions that can be used to compute model accuracy - <code>accuracy_score()</code>, and <code>score()</code>.</p>
 <p>The <code>accuracy_score()</code> function from the <code>metrics</code> module of the <code>sklearn</code> library is general, and can be used for any classification model. We’ll use it along with the <code>predict()</code> method of the <code>LogisticRegression()</code> object, which returns the predicted class based on a threshold probability of 0.5.</p>
 <div class="cell" data-execution_count="229">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get the predicted classes first</span></span>
@@ -538,7 +538,7 @@ Recall:  0.5555555555555556</code></pre>
 <h2 data-number="1.5" class="anchored" data-anchor-id="tuning-the-model-hyperparameters"><span class="header-section-number">1.5</span> Tuning the model hyperparameters</h2>
 <p>A couple of hyperparameters (among others) that can be trained in a logistic regression model are:</p>
 <ol type="1">
-<li><p>Decision thershold probability</p></li>
+<li><p>Decision threshold probability</p></li>
 <li><p>Regularization parameter</p></li>
 </ol>
 <p>The performance metrics can be computed using a desired value of the threshold probability. Let us compute the performance metrics for a desired threshold probability of 0.3.</p>
@@ -579,7 +579,7 @@ Recall:  0.8148148148148148</code></pre>
 <section id="tuning-decision-threshold-probability" class="level3" data-number="1.5.1">
 <h3 data-number="1.5.1" class="anchored" data-anchor-id="tuning-decision-threshold-probability"><span class="header-section-number">1.5.1</span> Tuning decision threshold probability</h3>
 <p>Suppose we wish to find the optimal decision threshold probability to maximize accuracy. Note that we cannot use the test dataset to optimize model hyperparameters, as that may lead to overfitting on the test data. We’ll use <span class="math inline">\(K\)</span>-fold cross validation on train data to find the optimal decision threshold probability.</p>
-<p>We’ll use the <code>cross_val_predict()</code> function from the <code>model_selection</code> module of <code>sklearn</code> to compute the <span class="math inline">\(K\)</span>-fold cross validated predicted probabilities. Note that this function simlifies the task of manually creating the <span class="math inline">\(K\)</span>-folds, training the model <span class="math inline">\(K\)</span>-times, and computing the predicted probabilites on each of the <span class="math inline">\(K\)</span>-folds. Thereafter, the predicted probabilities will be used to find the one the optimal threshold probability that maximizes the classification accuracy.</p>
+<p>We’ll use the <code>cross_val_predict()</code> function from the <code>model_selection</code> module of <code>sklearn</code> to compute the <span class="math inline">\(K\)</span>-fold cross validated predicted probabilities. Note that this function simplifies the task of manually creating the <span class="math inline">\(K\)</span>-folds, training the model <span class="math inline">\(K\)</span>-times, and computing the predicted probabilities on each of the <span class="math inline">\(K\)</span>-folds. Thereafter, the predicted probabilities will be used to find the one the optimal threshold probability that maximizes the classification accuracy.</p>
 <div class="cell" data-execution_count="236">
 <div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>hyperparam_vals <span class="op">=</span> np.arange(<span class="dv">0</span>,<span class="fl">1.01</span>,<span class="fl">0.01</span>)</span>
 <span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>accuracy_iter <span class="op">=</span> []</span>
@@ -614,7 +614,7 @@ Recall:  0.8148148148148148</code></pre>
 </div>
 </div>
 <div class="cell" data-execution_count="239">
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Performance metrics computation for the optimium decision threshold probability</span></span>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Performance metrics computation for the optimum decision threshold probability</span></span>
 <span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>desired_threshold <span class="op">=</span> <span class="fl">0.46</span></span>
 <span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Classifying observations in the positive class (y = 1) if the predicted probability is greater</span></span>

@@ -262,7 +262,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <p><em>Read sections 7.1-7.4 of the book before using these notes.</em></p>
 <p><em>Note that in this course, lecture notes are not sufficient, you must read the book for better understanding. Lecture notes are just implementing the concepts of the book on a dataset, but not explaining the concepts elaborately.</em></p>
-<div class="cell" data-execution_count="1">
+<div class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.formula.api <span class="im">as</span> smf</span>
@@ -274,17 +274,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co"># install the py-earth library first: https://anaconda.org/conda-forge/sklearn-contrib-py-earth</span></span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyearth <span class="im">import</span> Earth</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-execution_count="2">
+<div class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Using the same datasets as used for linear regression in STAT303-2, </span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co">#so that we can compare the non-linear models with linear regression</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>trainf <span class="op">=</span> pd.read_csv(<span class="st">'Car_features_train.csv'</span>)</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>trainp <span class="op">=</span> pd.read_csv(<span class="st">'Car_prices_train.csv'</span>)</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>testf <span class="op">=</span> pd.read_csv(<span class="st">'Car_features_test.csv'</span>)</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>testp <span class="op">=</span> pd.read_csv(<span class="st">'Car_prices_test.csv'</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>trainf <span class="op">=</span> pd.read_csv(<span class="st">'./Datasets/Car_features_train.csv'</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>trainp <span class="op">=</span> pd.read_csv(<span class="st">'./Datasets/Car_prices_train.csv'</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>testf <span class="op">=</span> pd.read_csv(<span class="st">'./Datasets/Car_features_test.csv'</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>testp <span class="op">=</span> pd.read_csv(<span class="st">'./Datasets/Car_prices_test.csv'</span>)</span>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>train <span class="op">=</span> pd.merge(trainf,trainp)</span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>test <span class="op">=</span> pd.merge(testf,testp)</span>
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>train.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="2">
+<div class="cell-output cell-output-display" data-execution_count="6">
 
 <div>
 
@@ -927,15 +927,24 @@ Regression splines: 13666.943224268975</code></pre>
 </section>
 <section id="mars-multivariate-adaptive-regression-splines" class="level2" data-number="2.5">
 <h2 data-number="2.5" class="anchored" data-anchor-id="mars-multivariate-adaptive-regression-splines"><span class="header-section-number">2.5</span> MARS (Multivariate Adaptive Regression Splines)</h2>
-<div class="cell" data-execution_count="11">
+<div class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>X<span class="op">=</span>train[<span class="st">'mileage'</span>]</span>
 <span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>y<span class="op">=</span>train[<span class="st">'price'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>Earth()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="10">
+<pre><code>Earth()</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyearth <span class="im">import</span> Earth</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <section id="mars-of-degree-1" class="level3" data-number="2.5.1">
 <h3 data-number="2.5.1" class="anchored" data-anchor-id="mars-of-degree-1"><span class="header-section-number">2.5.1</span> MARS of degree 1</h3>
 <div class="cell" data-execution_count="12">
-<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> Earth(max_terms<span class="op">=</span><span class="dv">500</span>, max_degree<span class="op">=</span><span class="dv">1</span>) <span class="co"># note, terms in brackets are the hyperparameters </span></span>
-<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>model.fit(X,y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> Earth(max_terms<span class="op">=</span><span class="dv">500</span>, max_degree<span class="op">=</span><span class="dv">1</span>) <span class="co"># note, terms in brackets are the hyperparameters </span></span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>model.fit(X,y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>C:\Users\akl0407\Anaconda3\lib\site-packages\pyearth\earth.py:813: FutureWarning: `rcond` parameter will change to the default of machine precision times ``max(M, N)`` where M and N are the input matrix dimensions.
 To use the future default and silence this warning we advise to pass `rcond=None`, to keep using the old, explicitly pass `rcond=-1`.
@@ -949,7 +958,7 @@ To use the future default and silence this warning we advise to pass `rcond=None
 </div>
 </div>
 <div class="cell" data-execution_count="13">
-<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(model.summary())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(model.summary())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Earth Model
 -------------------------------------
@@ -978,29 +987,29 @@ MSE: 188429705.7549, GCV: 190035470.5664, RSQ: 0.2998, GRSQ: 0.2942</code></pre>
 </div>
 <p>Model equation: <span class="math display">\[-553155 -6.23(h(x0-3354)) -36.96(h(x0-15413) + .......... -7.04(h(2456-x0)\]</span></p>
 <div class="cell" data-execution_count="14">
-<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>pred <span class="op">=</span> model.predict(test.mileage)</span>
-<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>np.sqrt(mean_squared_error(pred,test.price))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>pred <span class="op">=</span> model.predict(test.mileage)</span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>np.sqrt(mean_squared_error(pred,test.price))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="14">
 <pre><code>13650.2113154515</code></pre>
 </div>
 </div>
 <div class="cell" data-execution_count="15">
-<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>sns.scatterplot(x <span class="op">=</span> <span class="st">'mileage'</span>, y <span class="op">=</span> <span class="st">'price'</span>, data <span class="op">=</span> train, color <span class="op">=</span> <span class="st">'orange'</span>)</span>
-<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>sns.lineplot(x <span class="op">=</span> train.mileage, y <span class="op">=</span> model.predict(train.mileage), color <span class="op">=</span> <span class="st">'blue'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>sns.scatterplot(x <span class="op">=</span> <span class="st">'mileage'</span>, y <span class="op">=</span> <span class="st">'price'</span>, data <span class="op">=</span> train, color <span class="op">=</span> <span class="st">'orange'</span>)</span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>sns.lineplot(x <span class="op">=</span> train.mileage, y <span class="op">=</span> model.predict(train.mileage), color <span class="op">=</span> <span class="st">'blue'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="15">
 <pre><code>&lt;AxesSubplot:xlabel='mileage', ylabel='price'&gt;</code></pre>
 </div>
 <div class="cell-output cell-output-display">
-<p><img src="Lec2_Regression_splines_files/figure-html/cell-37-output-2.png" class="img-fluid"></p>
+<p><img src="Lec2_Regression_splines_files/figure-html/cell-39-output-2.png" class="img-fluid"></p>
 </div>
 </div>
 </section>
 <section id="mars-of-degree-2" class="level3" data-number="2.5.2">
 <h3 data-number="2.5.2" class="anchored" data-anchor-id="mars-of-degree-2"><span class="header-section-number">2.5.2</span> MARS of degree 2</h3>
 <div class="cell" data-execution_count="12">
-<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> Earth(max_terms<span class="op">=</span><span class="dv">500</span>, max_degree<span class="op">=</span><span class="dv">2</span>) <span class="co"># note, terms in brackets are the hyperparameters </span></span>
-<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>model.fit(X,y)</span>
-<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(model.summary())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> Earth(max_terms<span class="op">=</span><span class="dv">500</span>, max_degree<span class="op">=</span><span class="dv">2</span>) <span class="co"># note, terms in brackets are the hyperparameters </span></span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>model.fit(X,y)</span>
+<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(model.summary())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Earth Model
 -----------------------------------------------
@@ -1029,20 +1038,20 @@ To use the future default and silence this warning we advise to pass `rcond=None
 </div>
 </div>
 <div class="cell" data-execution_count="13">
-<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a>pred <span class="op">=</span> model.predict(test.mileage)</span>
-<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>np.sqrt(mean_squared_error(pred,test.price))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>pred <span class="op">=</span> model.predict(test.mileage)</span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>np.sqrt(mean_squared_error(pred,test.price))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="13">
 <pre><code>13590.995419204985</code></pre>
 </div>
 </div>
 <div class="cell" data-execution_count="14">
-<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>sns.scatterplot(x <span class="op">=</span> <span class="st">'mileage'</span>, y <span class="op">=</span> <span class="st">'price'</span>, data <span class="op">=</span> train, color <span class="op">=</span> <span class="st">'orange'</span>)</span>
-<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>sns.lineplot(x <span class="op">=</span> train.mileage, y <span class="op">=</span> model.predict(train.mileage), color <span class="op">=</span> <span class="st">'blue'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>sns.scatterplot(x <span class="op">=</span> <span class="st">'mileage'</span>, y <span class="op">=</span> <span class="st">'price'</span>, data <span class="op">=</span> train, color <span class="op">=</span> <span class="st">'orange'</span>)</span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>sns.lineplot(x <span class="op">=</span> train.mileage, y <span class="op">=</span> model.predict(train.mileage), color <span class="op">=</span> <span class="st">'blue'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="14">
 <pre><code>&lt;AxesSubplot:xlabel='mileage', ylabel='price'&gt;</code></pre>
 </div>
 <div class="cell-output cell-output-display">
-<p><img src="Lec2_Regression_splines_files/figure-html/cell-40-output-2.png" class="img-fluid"></p>
+<p><img src="Lec2_Regression_splines_files/figure-html/cell-42-output-2.png" class="img-fluid"></p>
 </div>
 </div>
 <p>MARS provides a better fit than the splines that we used above. This is because MARS tunes the positions of the knots and considers interactions (also with tuned knots) to improve the model fit. Tuning of knots may improve the fit of splines as well.</p>
@@ -1050,12 +1059,12 @@ To use the future default and silence this warning we advise to pass `rcond=None
 <section id="mars-including-categorical-variables" class="level3" data-number="2.5.3">
 <h3 data-number="2.5.3" class="anchored" data-anchor-id="mars-including-categorical-variables"><span class="header-section-number">2.5.3</span> MARS including categorical variables</h3>
 <div class="cell" data-execution_count="16">
-<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="co">#A categorical variable can be turned to dummy variables to use the Earth package for fitting MARS model</span></span>
-<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a>train_cat <span class="op">=</span> pd.concat([train,pd.get_dummies(train.fuelType)],axis<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a>test_cat <span class="op">=</span> pd.concat([test,pd.get_dummies(test.fuelType)],axis<span class="op">=</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="co">#A categorical variable can be turned to dummy variables to use the Earth package for fitting MARS model</span></span>
+<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a>train_cat <span class="op">=</span> pd.concat([train,pd.get_dummies(train.fuelType)],axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb62-3"><a href="#cb62-3" aria-hidden="true" tabindex="-1"></a>test_cat <span class="op">=</span> pd.concat([test,pd.get_dummies(test.fuelType)],axis<span class="op">=</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell" data-execution_count="17">
-<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>train_cat.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a>train_cat.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="17">
 
 <div>
@@ -1184,13 +1193,13 @@ To use the future default and silence this warning we advise to pass `rcond=None
 </div>
 </div>
 <div class="cell" data-execution_count="18">
-<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> train_cat[[<span class="st">'mileage'</span>,<span class="st">'mpg'</span>,<span class="st">'engineSize'</span>,<span class="st">'year'</span>,<span class="st">'Diesel'</span>,<span class="st">'Electric'</span>,<span class="st">'Hybrid'</span>,<span class="st">'Petrol'</span>]]</span>
-<span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a>Xtest <span class="op">=</span> test_cat[[<span class="st">'mileage'</span>,<span class="st">'mpg'</span>,<span class="st">'engineSize'</span>,<span class="st">'year'</span>,<span class="st">'Diesel'</span>,<span class="st">'Electric'</span>,<span class="st">'Hybrid'</span>,<span class="st">'Petrol'</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> train_cat[[<span class="st">'mileage'</span>,<span class="st">'mpg'</span>,<span class="st">'engineSize'</span>,<span class="st">'year'</span>,<span class="st">'Diesel'</span>,<span class="st">'Electric'</span>,<span class="st">'Hybrid'</span>,<span class="st">'Petrol'</span>]]</span>
+<span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a>Xtest <span class="op">=</span> test_cat[[<span class="st">'mileage'</span>,<span class="st">'mpg'</span>,<span class="st">'engineSize'</span>,<span class="st">'year'</span>,<span class="st">'Diesel'</span>,<span class="st">'Electric'</span>,<span class="st">'Hybrid'</span>,<span class="st">'Petrol'</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell" data-execution_count="13">
-<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> Earth(max_terms<span class="op">=</span><span class="dv">500</span>, max_degree<span class="op">=</span><span class="dv">2</span>) <span class="co"># note, terms in brackets are the hyperparameters </span></span>
-<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a>model.fit(X,y)</span>
-<span id="cb62-3"><a href="#cb62-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(model.summary())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> Earth(max_terms<span class="op">=</span><span class="dv">500</span>, max_degree<span class="op">=</span><span class="dv">2</span>) <span class="co"># note, terms in brackets are the hyperparameters </span></span>
+<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a>model.fit(X,y)</span>
+<span id="cb65-3"><a href="#cb65-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(model.summary())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>C:\Users\akl0407\Anaconda3\lib\site-packages\pyearth\earth.py:813: FutureWarning: `rcond` parameter will change to the default of machine precision times ``max(M, N)`` where M and N are the input matrix dimensions.
 To use the future default and silence this warning we advise to pass `rcond=None`, to keep using the old, explicitly pass `rcond=-1`.
@@ -1272,20 +1281,20 @@ To use the future default and silence this warning we advise to pass `rcond=None
 </div>
 </div>
 <div class="cell" data-execution_count="19">
-<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a>pred <span class="op">=</span> model.predict(Xtest)</span>
-<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a>np.sqrt(mean_squared_error(pred,test2.price))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a>pred <span class="op">=</span> model.predict(Xtest)</span>
+<span id="cb69-2"><a href="#cb69-2" aria-hidden="true" tabindex="-1"></a>np.sqrt(mean_squared_error(pred,test2.price))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="19">
 <pre><code>7499.709075454322</code></pre>
 </div>
 </div>
 <p>Let us compare the RMSE of a MARS model with <em>mileage, mpg, engineSize</em> and <em>year</em> with a linear regression model having the same predictors.</p>
 <div class="cell" data-execution_count="20">
-<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> train[[<span class="st">'mileage'</span>,<span class="st">'mpg'</span>,<span class="st">'engineSize'</span>,<span class="st">'year'</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> train[[<span class="st">'mileage'</span>,<span class="st">'mpg'</span>,<span class="st">'engineSize'</span>,<span class="st">'year'</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell" data-execution_count="21">
-<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> Earth(max_terms<span class="op">=</span><span class="dv">500</span>, max_degree<span class="op">=</span><span class="dv">2</span>) <span class="co"># note, terms in brackets are the hyperparameters </span></span>
-<span id="cb69-2"><a href="#cb69-2" aria-hidden="true" tabindex="-1"></a>model.fit(X,y)</span>
-<span id="cb69-3"><a href="#cb69-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(model.summary())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> Earth(max_terms<span class="op">=</span><span class="dv">500</span>, max_degree<span class="op">=</span><span class="dv">2</span>) <span class="co"># note, terms in brackets are the hyperparameters </span></span>
+<span id="cb72-2"><a href="#cb72-2" aria-hidden="true" tabindex="-1"></a>model.fit(X,y)</span>
+<span id="cb72-3"><a href="#cb72-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(model.summary())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>C:\Users\akl0407\Anaconda3\lib\site-packages\pyearth\earth.py:813: FutureWarning: `rcond` parameter will change to the default of machine precision times ``max(M, N)`` where M and N are the input matrix dimensions.
 To use the future default and silence this warning we advise to pass `rcond=None`, to keep using the old, explicitly pass `rcond=-1`.
@@ -1359,18 +1368,18 @@ To use the future default and silence this warning we advise to pass `rcond=None
 </div>
 </div>
 <div class="cell" data-execution_count="22">
-<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a>Xtest <span class="op">=</span> test[[<span class="st">'mileage'</span>,<span class="st">'mpg'</span>,<span class="st">'engineSize'</span>,<span class="st">'year'</span>]]</span>
-<span id="cb73-2"><a href="#cb73-2" aria-hidden="true" tabindex="-1"></a>pred <span class="op">=</span> model.predict(Xtest)</span>
-<span id="cb73-3"><a href="#cb73-3" aria-hidden="true" tabindex="-1"></a>np.sqrt(mean_squared_error(pred,test.price))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a>Xtest <span class="op">=</span> test[[<span class="st">'mileage'</span>,<span class="st">'mpg'</span>,<span class="st">'engineSize'</span>,<span class="st">'year'</span>]]</span>
+<span id="cb76-2"><a href="#cb76-2" aria-hidden="true" tabindex="-1"></a>pred <span class="op">=</span> model.predict(Xtest)</span>
+<span id="cb76-3"><a href="#cb76-3" aria-hidden="true" tabindex="-1"></a>np.sqrt(mean_squared_error(pred,test.price))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="22">
 <pre><code>7614.158359050244</code></pre>
 </div>
 </div>
 <div class="cell" data-execution_count="23">
-<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a>ols_object <span class="op">=</span> smf.ols(formula <span class="op">=</span> <span class="st">'price~(year+engineSize+mileage+mpg)**2'</span>, data <span class="op">=</span> train)</span>
-<span id="cb75-2"><a href="#cb75-2" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> ols_object.fit()</span>
-<span id="cb75-3"><a href="#cb75-3" aria-hidden="true" tabindex="-1"></a>pred <span class="op">=</span> model.predict(test)</span>
-<span id="cb75-4"><a href="#cb75-4" aria-hidden="true" tabindex="-1"></a>np.sqrt(mean_squared_error(pred,test.price))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a>ols_object <span class="op">=</span> smf.ols(formula <span class="op">=</span> <span class="st">'price~(year+engineSize+mileage+mpg)**2'</span>, data <span class="op">=</span> train)</span>
+<span id="cb78-2"><a href="#cb78-2" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> ols_object.fit()</span>
+<span id="cb78-3"><a href="#cb78-3" aria-hidden="true" tabindex="-1"></a>pred <span class="op">=</span> model.predict(test)</span>
+<span id="cb78-4"><a href="#cb78-4" aria-hidden="true" tabindex="-1"></a>np.sqrt(mean_squared_error(pred,test.price))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="23">
 <pre><code>8729.912066822455</code></pre>
 </div>

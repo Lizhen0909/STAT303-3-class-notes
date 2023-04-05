@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Data Science III with python (Class notes) - Appendix A — Stratified splitting (classification problem)</title>
+<title>Data Science III with python (Class notes) - Appendix B — Stratified splitting (classification problem)</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -94,7 +94,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
 <link href="./Datasets.html" rel="next">
-<link href="./Lec2_Regression_splines.html" rel="prev">
+<link href="./Assignment A.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -136,7 +136,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title">Appendix A — Stratified splitting (classification problem)</h1>
+      <h1 class="quarto-secondary-nav-title">Appendix B — Stratified splitting (classification problem)</h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -197,12 +197,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Stratified splitting.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Stratified splitting (classification problem)</span></a>
+  <a href="./Assignment A.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Assignment A</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Datasets.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Datasets, assignment and project files</span></a>
+  <a href="./Stratified splitting.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Stratified splitting (classification problem)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Datasets.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Datasets, assignment and project files</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -221,14 +226,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#stratified-splitting-with-respect-to-response" id="toc-stratified-splitting-with-respect-to-response" class="nav-link active" data-scroll-target="#stratified-splitting-with-respect-to-response"><span class="toc-section-number">A.1</span>  Stratified splitting with respect to response</a></li>
-  <li><a href="#stratified-splitting-with-respect-to-response-and-categorical-predictors" id="toc-stratified-splitting-with-respect-to-response-and-categorical-predictors" class="nav-link" data-scroll-target="#stratified-splitting-with-respect-to-response-and-categorical-predictors"><span class="toc-section-number">A.2</span>  Stratified splitting with respect to response and categorical predictors</a></li>
-  <li><a href="#example-1" id="toc-example-1" class="nav-link" data-scroll-target="#example-1"><span class="toc-section-number">A.3</span>  Example 1</a></li>
-  <li><a href="#example-2-simulation-results" id="toc-example-2-simulation-results" class="nav-link" data-scroll-target="#example-2-simulation-results"><span class="toc-section-number">A.4</span>  Example 2: Simulation results</a>
+  <li><a href="#stratified-splitting-with-respect-to-response" id="toc-stratified-splitting-with-respect-to-response" class="nav-link active" data-scroll-target="#stratified-splitting-with-respect-to-response"><span class="toc-section-number">B.1</span>  Stratified splitting with respect to response</a></li>
+  <li><a href="#stratified-splitting-with-respect-to-response-and-categorical-predictors" id="toc-stratified-splitting-with-respect-to-response-and-categorical-predictors" class="nav-link" data-scroll-target="#stratified-splitting-with-respect-to-response-and-categorical-predictors"><span class="toc-section-number">B.2</span>  Stratified splitting with respect to response and categorical predictors</a></li>
+  <li><a href="#example-1" id="toc-example-1" class="nav-link" data-scroll-target="#example-1"><span class="toc-section-number">B.3</span>  Example 1</a></li>
+  <li><a href="#example-2-simulation-results" id="toc-example-2-simulation-results" class="nav-link" data-scroll-target="#example-2-simulation-results"><span class="toc-section-number">B.4</span>  Example 2: Simulation results</a>
   <ul class="collapse">
   <li><a href="#distribution-of-train-and-test-accuracies" id="toc-distribution-of-train-and-test-accuracies" class="nav-link" data-scroll-target="#distribution-of-train-and-test-accuracies">Distribution of train and test accuracies</a></li>
-  <li><a href="#stratified-splitting-only-with-respect-to-the-response" id="toc-stratified-splitting-only-with-respect-to-the-response" class="nav-link" data-scroll-target="#stratified-splitting-only-with-respect-to-the-response"><span class="toc-section-number">A.4.1</span>  Stratified splitting only with respect to the response</a></li>
-  <li><a href="#stratified-splitting-with-respect-to-the-response-and-categorical-predictors" id="toc-stratified-splitting-with-respect-to-the-response-and-categorical-predictors" class="nav-link" data-scroll-target="#stratified-splitting-with-respect-to-the-response-and-categorical-predictors"><span class="toc-section-number">A.4.2</span>  Stratified splitting with respect to the response and categorical predictors</a></li>
+  <li><a href="#stratified-splitting-only-with-respect-to-the-response" id="toc-stratified-splitting-only-with-respect-to-the-response" class="nav-link" data-scroll-target="#stratified-splitting-only-with-respect-to-the-response"><span class="toc-section-number">B.4.1</span>  Stratified splitting only with respect to the response</a></li>
+  <li><a href="#stratified-splitting-with-respect-to-the-response-and-categorical-predictors" id="toc-stratified-splitting-with-respect-to-the-response-and-categorical-predictors" class="nav-link" data-scroll-target="#stratified-splitting-with-respect-to-the-response-and-categorical-predictors"><span class="toc-section-number">B.4.2</span>  Stratified splitting with respect to the response and categorical predictors</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -238,7 +243,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block">Appendix A — Stratified splitting (classification problem)</h1>
+<h1 class="title d-none d-lg-block">Appendix B — Stratified splitting (classification problem)</h1>
 </div>
 
 
@@ -253,8 +258,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </header>
 
-<section id="stratified-splitting-with-respect-to-response" class="level2" data-number="A.1">
-<h2 data-number="A.1" class="anchored" data-anchor-id="stratified-splitting-with-respect-to-response"><span class="header-section-number">A.1</span> Stratified splitting with respect to response</h2>
+<section id="stratified-splitting-with-respect-to-response" class="level2" data-number="B.1">
+<h2 data-number="B.1" class="anchored" data-anchor-id="stratified-splitting-with-respect-to-response"><span class="header-section-number">B.1</span> Stratified splitting with respect to response</h2>
 <p><strong>Q: When splitting data into train and test for developing and assessing a classification model, it is recommended to stratify the split with respect to the response. Why?</strong></p>
 <p><strong>A:</strong> The main advantage of stratified splitting is that it can help ensure that the training and testing sets have similar distributions of the target variable, which can lead to more accurate and reliable model performance estimates.</p>
 <p>In many real-world datasets, the target variable may be imbalanced, meaning that one class is more prevalent than the other(s). For example, in a medical dataset, the majority of patients may not have a particular disease, while only a small fraction may have the disease. If a random split is used to divide the dataset into training and testing sets, there is a risk that the testing set may not have enough samples from the minority class, which can lead to biased model performance estimates.</p>
@@ -262,15 +267,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Another advantage of stratified splitting is that it can help ensure that the model is not overfitting to a particular class. If a random split is used and one class is overrepresented in the training set, the model may learn to predict that class well but perform poorly on the other class(es). Stratified splitting can help ensure that the model is exposed to a representative sample of all classes during training, which can improve its generalization performance on new, unseen data.</p>
 <p>In summary, the advantages of stratified splitting are that it can lead to more accurate and reliable model performance estimates, especially for imbalanced datasets, and can help prevent overfitting to a particular class.</p>
 </section>
-<section id="stratified-splitting-with-respect-to-response-and-categorical-predictors" class="level2" data-number="A.2">
-<h2 data-number="A.2" class="anchored" data-anchor-id="stratified-splitting-with-respect-to-response-and-categorical-predictors"><span class="header-section-number">A.2</span> Stratified splitting with respect to response and categorical predictors</h2>
+<section id="stratified-splitting-with-respect-to-response-and-categorical-predictors" class="level2" data-number="B.2">
+<h2 data-number="B.2" class="anchored" data-anchor-id="stratified-splitting-with-respect-to-response-and-categorical-predictors"><span class="header-section-number">B.2</span> Stratified splitting with respect to response and categorical predictors</h2>
 <p><strong>Q: Will it be better to stratify the split with respect to the response as well as categorical predictors, instead of only the response? In that case, the train and test datasets will be even more representative of the complete data.</strong></p>
 <p><strong>A:</strong> It is not recommended to stratify with respect to both the response and categorical predictors simultaneously, while splitting a dataset into train and test, because doing so may result in the test data being very similar to train data, thereby defeating the purpose of assessing the model on unseen data. This kind of a stratified splitting will tend to make the relationships between the response and predictors in train data also appear in test data, which will result in the performance on test data being very similar to that in train data. Thus, in this case, the ability of the model to generalize to new, unseen data won’t be assessed by test data.</p>
 <p>Therefore, it is generally recommended to only stratify the response variable when splitting the data for model training, and to use random sampling for the predictor variables. This helps to ensure that the model is able to capture the underlying relationships between the predictor variables and the response variable, while still being able to generalize well to new, unseen data.</p>
-<p>In the extreme scenario, when there are no continuous predictors, and there are enough observations for stratification with respect to the respone and the categorical predictors, the train and test datasets may turn out to be exactly the same. Example 1 below illustrates this scenario.</p>
+<p>In the extreme scenario, when there are no continuous predictors, and there are enough observations for stratification with respect to the response and the categorical predictors, the train and test datasets may turn out to be exactly the same. Example 1 below illustrates this scenario.</p>
 </section>
-<section id="example-1" class="level2" data-number="A.3">
-<h2 data-number="A.3" class="anchored" data-anchor-id="example-1"><span class="header-section-number">A.3</span> Example 1</h2>
+<section id="example-1" class="level2" data-number="B.3">
+<h2 data-number="B.3" class="anchored" data-anchor-id="example-1"><span class="header-section-number">B.3</span> Example 1</h2>
 <p>The example below shows that the train and test data can be exactly the same if we stratify the split with respect to response and the categorical predictors.</p>
 <div class="cell" data-execution_count="166">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Importing necessary libraries</span></span>
@@ -404,8 +409,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <p>Note that the train and test datasets are exactly the same! Stratified splitting tends to have the same proportion of observations corresponding to each strata in both the train and test datasets, where each strata is a unique combination of values of <code>x1</code>, <code>x2</code>, and <code>y</code>. This will tend to make the train and test datasets quite similar!</p>
 </section>
-<section id="example-2-simulation-results" class="level2" data-number="A.4">
-<h2 data-number="A.4" class="anchored" data-anchor-id="example-2-simulation-results"><span class="header-section-number">A.4</span> Example 2: Simulation results</h2>
+<section id="example-2-simulation-results" class="level2" data-number="B.4">
+<h2 data-number="B.4" class="anchored" data-anchor-id="example-2-simulation-results"><span class="header-section-number">B.4</span> Example 2: Simulation results</h2>
 <p>The example below shows that train and test set performance will tend to be quite similar if we stratify the datasets with respect to the predictors and the response.</p>
 <p>We’ll simulate a dataset consisting of 1000 observations, 2 categorical predictors <code>x1</code> and <code>x2</code>, a continuous predictor <code>x3</code>, and a binary response <code>y</code>.</p>
 <div class="cell" data-execution_count="204">
@@ -431,7 +436,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <p>We’ll comparing model performance metrics when the data is split into train and test by performing stratified splitting</p>
 <ol type="1">
-<li><p>Only with repect to the response</p></li>
+<li><p>Only with respect to the response</p></li>
 <li><p>With respect to the response and categorical predictors</p></li>
 </ol>
 <p>We’ll perform 1000 simulations, where the data is split using a different seed in each simulation.</p>
@@ -442,7 +447,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div class="cell" data-execution_count="206">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Comparing model performance metrics when the data is split into train and test by performing stratified splitting</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co"># (1) only with repect to the response</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co"># (1) only with respect to the response</span></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co"># (2) with respect to the response and categorical predictors</span></span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Stratified splitting is performed 1000 times and the results are compared</span></span>
@@ -478,7 +483,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3 class="unnumbered anchored" data-anchor-id="distribution-of-train-and-test-accuracies">Distribution of train and test accuracies</h3>
 <p>The table below shows the distribution of train and test accuracies when the data is split into train and test by performing stratified splitting:</p>
 <ol type="1">
-<li><p>Only with repect to the response (see <code>train_y_stratified</code> and <code>test_y_stratified</code>)</p></li>
+<li><p>Only with respect to the response (see <code>train_y_stratified</code> and <code>test_y_stratified</code>)</p></li>
 <li><p>With respect to the response and categorical predictors (see <code>train_y_CatPredictors_stratified</code> and <code>test_y_CatPredictors_stratified</code>)</p></li>
 </ol>
 <div class="cell" data-execution_count="200">
@@ -561,8 +566,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <p>Let us visualize the distribution of these accuracies.</p>
 </section>
-<section id="stratified-splitting-only-with-respect-to-the-response" class="level3" data-number="A.4.1">
-<h3 data-number="A.4.1" class="anchored" data-anchor-id="stratified-splitting-only-with-respect-to-the-response"><span class="header-section-number">A.4.1</span> Stratified splitting only with respect to the response</h3>
+<section id="stratified-splitting-only-with-respect-to-the-response" class="level3" data-number="B.4.1">
+<h3 data-number="B.4.1" class="anchored" data-anchor-id="stratified-splitting-only-with-respect-to-the-response"><span class="header-section-number">B.4.1</span> Stratified splitting only with respect to the response</h3>
 <div class="cell" data-execution_count="198">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>sns.histplot(data<span class="op">=</span>accuracy_iter, x<span class="op">=</span><span class="st">"train_y_stratified"</span>, color<span class="op">=</span><span class="st">"red"</span>, label<span class="op">=</span><span class="st">"Train accuracy"</span>, kde<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>sns.histplot(data<span class="op">=</span>accuracy_iter, x<span class="op">=</span><span class="st">"test_y_stratified"</span>, color<span class="op">=</span><span class="st">"skyblue"</span>, label<span class="op">=</span><span class="st">"Test accuracy"</span>, kde<span class="op">=</span><span class="va">True</span>)<span class="op">;</span></span>
@@ -575,10 +580,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><img src="Stratified splitting_files/figure-html/cell-10-output-2.png" class="img-fluid"></p>
 </div>
 </div>
-<p>Note the variability in train and test accuracies when the data is stratified only with respect to the response. The train accuracy varies betweem 81.2% and 85.5%, while the test accuracy varies between 75.5% and 92.5%.</p>
+<p>Note the variability in train and test accuracies when the data is stratified only with respect to the response. The train accuracy varies between 81.2% and 85.5%, while the test accuracy varies between 75.5% and 92.5%.</p>
 </section>
-<section id="stratified-splitting-with-respect-to-the-response-and-categorical-predictors" class="level3" data-number="A.4.2">
-<h3 data-number="A.4.2" class="anchored" data-anchor-id="stratified-splitting-with-respect-to-the-response-and-categorical-predictors"><span class="header-section-number">A.4.2</span> Stratified splitting with respect to the response and categorical predictors</h3>
+<section id="stratified-splitting-with-respect-to-the-response-and-categorical-predictors" class="level3" data-number="B.4.2">
+<h3 data-number="B.4.2" class="anchored" data-anchor-id="stratified-splitting-with-respect-to-the-response-and-categorical-predictors"><span class="header-section-number">B.4.2</span> Stratified splitting with respect to the response and categorical predictors</h3>
 <div class="cell" data-execution_count="207">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>sns.histplot(data<span class="op">=</span>accuracy_iter, x<span class="op">=</span><span class="st">"train_y_CatPredictors_stratified"</span>, color<span class="op">=</span><span class="st">"red"</span>, label<span class="op">=</span><span class="st">"Train accuracy"</span>, kde<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>sns.histplot(data<span class="op">=</span>accuracy_iter, x<span class="op">=</span><span class="st">"test_y_CatPredictors_stratified"</span>, color<span class="op">=</span><span class="st">"skyblue"</span>, label<span class="op">=</span><span class="st">"Test accuracy"</span>, kde<span class="op">=</span><span class="va">True</span>)<span class="op">;</span></span>
@@ -591,7 +596,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><img src="Stratified splitting_files/figure-html/cell-11-output-2.png" class="img-fluid"></p>
 </div>
 </div>
-<p>The train and test accuracies are between 85% and 85.5% for all the simulations. As a results of startifying the splitting with respect to both the response and the categorical predictors, the train and test datasets are almost the same because the datasets are engineered to be quite similar, thereby making the test dataset inappropriate for assessing accuracy on unseen data. Thus, it is recommended to stratify the splitting only with respect to the response.</p>
+<p>The train and test accuracies are between 85% and 85.5% for all the simulations. As a results of stratifying the splitting with respect to both the response and the categorical predictors, the train and test datasets are almost the same because the datasets are engineered to be quite similar, thereby making the test dataset inappropriate for assessing accuracy on unseen data. Thus, it is recommended to stratify the splitting only with respect to the response.</p>
 
 
 </section>
@@ -733,13 +738,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./Lec2_Regression_splines.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Regression splines</span></span>
+      <a href="./Assignment A.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Assignment A</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./Datasets.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Datasets, assignment and project files</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Datasets, assignment and project files</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

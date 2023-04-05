@@ -20,6 +20,7 @@ book:
         - L1_Scikit-learn.ipynb
         - Lec2_Regression_splines.ipynb
   appendices: 
+    - Assignment A.ipynb
     - Stratified splitting.ipynb
     - Datasets.ipynb
     - references.qmd  

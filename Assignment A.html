@@ -4143,7 +4143,7 @@ MSE = [Bias(\hat{f}(.))]^2 + Var(\hat{f}(.)) + \sigma^2, \qquad
  \qquad(A.5)</annotation></semantics></math></span></p>
 <p><em>(4 points)</em></p>
 <p><strong>VII.</strong> Repeat steps II - VI for all degrees <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>d</mi><annotation encoding="application/x-tex">d</annotation></semantics></math> in <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">{</mo><mn>1</mn><mo>,</mo><mn>2</mn><mo>,</mo><mi>.</mi><mi>.</mi><mi>.</mi><mo>,</mo><mn>7</mn><mo stretchy="false" form="postfix">}</mo></mrow><annotation encoding="application/x-tex">\{1, 2, ..., 7\}</annotation></semantics></math></p>
-<p><em>(3 points)</em></p>
+<p><em>(2 points)</em></p>
 <p><strong>VIII.</strong> Plot the overall expected squared bias, overall expected variance, and overall expected test MSE <em>(as obtained from <a href="#eq-bias_overall">Equation&nbsp;<span>A.3</span></a>, <a href="#eq-variance">Equation&nbsp;<span>A.4</span></a>, and <a href="#eq-mse">Equation&nbsp;<span>A.5</span></a> respectively)</em> against the degree <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>d</mi><annotation encoding="application/x-tex">d</annotation></semantics></math> (or flexibility / complexity) of the model . Your plot should look like one of the plots in Fig. 2.12 of the book.</p>
 <p><em>(3 points)</em></p>
 <p><strong>IX.</strong> What is the degree of the optimal model?</p>
@@ -4173,6 +4173,7 @@ MSE = [Bias(\hat{f}(.))]^2 + Var(\hat{f}(.)) + \sigma^2, \qquad
 <h3 data-number="A.2.2" class="anchored" data-anchor-id="scaling-predictors"><span class="header-section-number">A.2.2</span> Scaling predictors</h3>
 <p>Scale the predictors to avoid convergence errors when fitting the logistic regression model.</p>
 <p><em>Note that last quarter, we were focusing on inference (along with prediction), so we avoided scaling. It is a bit inconvenient to interpret odds with scaled predictors. However, avoiding scaling may lead to convergence errors as some of you saw in your course projects. So, it is a good practice to scale, especially when your focus is prediction.</em></p>
+<p><em>(3 points)</em></p>
 </section>
 <section id="tuning-the-degree" class="level3" data-number="A.2.3">
 <h3 data-number="A.2.3" class="anchored" data-anchor-id="tuning-the-degree"><span class="header-section-number">A.2.3</span> Tuning the degree</h3>
@@ -4198,12 +4199,12 @@ MSE = [Bias(\hat{f}(.))]^2 + Var(\hat{f}(.)) + \sigma^2, \qquad
 <section id="tuning-c" class="level3" data-number="A.2.5">
 <h3 data-number="A.2.5" class="anchored" data-anchor-id="tuning-c"><span class="header-section-number">A.2.5</span> Tuning <code>C</code></h3>
 <p>With the optimal degree identified in the previous question, find the optimal regularization parameter <code>C</code>. Again use the <code>cross_val_score</code> function.</p>
-<p><em>(4 points)</em></p>
+<p><em>(3 points)</em></p>
 </section>
 <section id="test-accuracy-with-optimal-degree-and-c" class="level3" data-number="A.2.6">
 <h3 data-number="A.2.6" class="anchored" data-anchor-id="test-accuracy-with-optimal-degree-and-c"><span class="header-section-number">A.2.6</span> Test accuracy with optimal degree and <code>C</code></h3>
 <p>For the optimal degree and optimal <code>C</code> identified in the previous questions, compute the test accuracy.</p>
-<p><em>(4 points)</em></p>
+<p><em>(3 points)</em></p>
 </section>
 <section id="tuning-decision-threshold-probability" class="level3" data-number="A.2.7">
 <h3 data-number="A.2.7" class="anchored" data-anchor-id="tuning-decision-threshold-probability"><span class="header-section-number">A.2.7</span> Tuning decision threshold probability</h3>

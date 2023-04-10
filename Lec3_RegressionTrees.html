@@ -232,14 +232,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#building-a-regression-tree" id="toc-building-a-regression-tree" class="nav-link active" data-scroll-target="#building-a-regression-tree"><span class="toc-section-number">4</span>  Building a regression tree</a>
+  <li><a href="#building-a-regression-tree" id="toc-building-a-regression-tree" class="nav-link active" data-scroll-target="#building-a-regression-tree"><span class="toc-section-number">3.1</span>  Building a regression tree</a></li>
+  <li><a href="#optimizing-parameters-to-improve-the-regression-tree" id="toc-optimizing-parameters-to-improve-the-regression-tree" class="nav-link" data-scroll-target="#optimizing-parameters-to-improve-the-regression-tree"><span class="toc-section-number">3.2</span>  Optimizing parameters to improve the regression tree</a></li>
+  <li><a href="#cost-complexity-pruning" id="toc-cost-complexity-pruning" class="nav-link" data-scroll-target="#cost-complexity-pruning"><span class="toc-section-number">3.3</span>  Cost complexity pruning</a>
   <ul>
-  <li><a href="#optimizing-parameters-to-improve-the-regression-tree" id="toc-optimizing-parameters-to-improve-the-regression-tree" class="nav-link" data-scroll-target="#optimizing-parameters-to-improve-the-regression-tree"><span class="toc-section-number">4.1</span>  Optimizing parameters to improve the regression tree</a></li>
-  <li><a href="#cost-complexity-pruning" id="toc-cost-complexity-pruning" class="nav-link" data-scroll-target="#cost-complexity-pruning"><span class="toc-section-number">4.2</span>  Cost complexity pruning</a>
-  <ul class="collapse">
-  <li><a href="#depth-vs-alpha-node-counts-vs-alpha" id="toc-depth-vs-alpha-node-counts-vs-alpha" class="nav-link" data-scroll-target="#depth-vs-alpha-node-counts-vs-alpha"><span class="toc-section-number">4.2.1</span>  Depth vs alpha; Node counts vs alpha</a></li>
-  <li><a href="#train-and-test-accuracies-r-squared-vs-alpha" id="toc-train-and-test-accuracies-r-squared-vs-alpha" class="nav-link" data-scroll-target="#train-and-test-accuracies-r-squared-vs-alpha"><span class="toc-section-number">4.2.2</span>  Train and test accuracies (R-squared) vs alpha</a></li>
-  </ul></li>
+  <li><a href="#depth-vs-alpha-node-counts-vs-alpha" id="toc-depth-vs-alpha-node-counts-vs-alpha" class="nav-link" data-scroll-target="#depth-vs-alpha-node-counts-vs-alpha"><span class="toc-section-number">3.3.1</span>  Depth vs alpha; Node counts vs alpha</a></li>
+  <li><a href="#train-and-test-accuracies-r-squared-vs-alpha" id="toc-train-and-test-accuracies-r-squared-vs-alpha" class="nav-link" data-scroll-target="#train-and-test-accuracies-r-squared-vs-alpha"><span class="toc-section-number">3.3.2</span>  Train and test accuracies (R-squared) vs alpha</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -392,8 +390,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 </div>
-<section id="building-a-regression-tree" class="level1" data-number="4">
-<h1 data-number="4"><span class="header-section-number">4</span> Building a regression tree</h1>
+<section id="building-a-regression-tree" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="building-a-regression-tree"><span class="header-section-number">3.1</span> Building a regression tree</h2>
 <p>Develop a regression tree to predict car price based on mileage</p>
 <div class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> train[<span class="st">'mileage'</span>]</span>
@@ -463,8 +461,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><img src="Lec3_RegressionTrees_files/figure-html/cell-10-output-1.png" class="img-fluid"></p>
 </div>
 </div>
-<section id="optimizing-parameters-to-improve-the-regression-tree" class="level2" data-number="4.1">
-<h2 data-number="4.1" class="anchored" data-anchor-id="optimizing-parameters-to-improve-the-regression-tree"><span class="header-section-number">4.1</span> Optimizing parameters to improve the regression tree</h2>
+</section>
+<section id="optimizing-parameters-to-improve-the-regression-tree" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="optimizing-parameters-to-improve-the-regression-tree"><span class="header-section-number">3.2</span> Optimizing parameters to improve the regression tree</h2>
 <p>Let us find the optimal depth of the tree and the number of terminal nods (leaves) by cross validation.</p>
 <div class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Finding cross validation error for trees ranging from a depth of 1 to 19.</span></span>
@@ -629,8 +628,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <p><em>Engine size</em> is the most important predictor, followed by <em>year</em>, which is followed by <em>mpg</em>, and <em>mileage</em> is the least important predictor.</p>
 </section>
-<section id="cost-complexity-pruning" class="level2" data-number="4.2">
-<h2 data-number="4.2" class="anchored" data-anchor-id="cost-complexity-pruning"><span class="header-section-number">4.2</span> Cost complexity pruning</h2>
+<section id="cost-complexity-pruning" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="cost-complexity-pruning"><span class="header-section-number">3.3</span> Cost complexity pruning</h2>
 <p>While optimizing parameters above, we optimized them within a range that we thought was reasonable. While doing so, we restricted ouverselves to considering only a subset of the unpruned tree. Thus, we could have missed out on finding the optimal tree (or the best model).</p>
 <p>With cost complexity pruning, we first develop an unpruned tree without any restrictions. Then, using cross validation, we find the optimal value of the tuning parameter <span class="math inline">\(\alpha\)</span>. All the non-terminal nodes for which <span class="math inline">\(\alpha_{eff}\)</span> is smaller that the optimal <span class="math inline">\(\alpha\)</span> will be pruned. You will need to check out the link below to understand this better.</p>
 <p>Check out a detailed explanation of how cost complexity pruning is implemented in sklearn at: https://scikit-learn.org/stable/modules/tree.html#minimal-cost-complexity-pruning</p>
@@ -712,8 +711,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><img src="Lec3_RegressionTrees_files/figure-html/cell-25-output-3.png" class="img-fluid"></p>
 </div>
 </div>
-<section id="depth-vs-alpha-node-counts-vs-alpha" class="level3" data-number="4.2.1">
-<h3 data-number="4.2.1" class="anchored" data-anchor-id="depth-vs-alpha-node-counts-vs-alpha"><span class="header-section-number">4.2.1</span> Depth vs alpha; Node counts vs alpha</h3>
+<section id="depth-vs-alpha-node-counts-vs-alpha" class="level3" data-number="3.3.1">
+<h3 data-number="3.3.1" class="anchored" data-anchor-id="depth-vs-alpha-node-counts-vs-alpha"><span class="header-section-number">3.3.1</span> Depth vs alpha; Node counts vs alpha</h3>
 <div class="cell" data-execution_count="80">
 <div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>stime <span class="op">=</span> time.time()</span>
 <span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>trees<span class="op">=</span>[]</span>
@@ -750,9 +749,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 </section>
-<section id="train-and-test-accuracies-r-squared-vs-alpha" class="level3" data-number="4.2.2">
-<h3 data-number="4.2.2" class="anchored" data-anchor-id="train-and-test-accuracies-r-squared-vs-alpha"><span class="header-section-number">4.2.2</span> Train and test accuracies (R-squared) vs alpha</h3>
-<div class="cell" data-execution_count="84">
+<section id="train-and-test-accuracies-r-squared-vs-alpha" class="level3" data-number="3.3.2">
+<h3 data-number="3.3.2" class="anchored" data-anchor-id="train-and-test-accuracies-r-squared-vs-alpha"><span class="header-section-number">3.3.2</span> Train and test accuracies (R-squared) vs alpha</h3>
+<div class="cell">
 <div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>train_scores <span class="op">=</span> [clf.score(X, y) <span class="cf">for</span> clf <span class="kw">in</span> trees]</span>
 <span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>test_scores <span class="op">=</span> [clf.score(Xtest, test.price) <span class="cf">for</span> clf <span class="kw">in</span> trees]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -771,7 +770,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 
 
-</section>
 </section>
 </section>
 

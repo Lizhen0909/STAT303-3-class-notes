@@ -267,7 +267,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <p><em>Read sections 7.1-7.4 of the book before using these notes.</em></p>
 <p><em>Note that in this course, lecture notes are not sufficient, you must read the book for better understanding. Lecture notes are just implementing the concepts of the book on a dataset, but not explaining the concepts elaborately.</em></p>
-<div class="cell" data-execution_count="19">
+<div class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.formula.api <span class="im">as</span> smf</span>
@@ -280,7 +280,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyearth <span class="im">import</span> Earth</span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LinearRegression</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-execution_count="20">
+<div class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Using the same datasets as used for linear regression in STAT303-2, </span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co">#so that we can compare the non-linear models with linear regression</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>trainf <span class="op">=</span> pd.read_csv(<span class="st">'./Datasets/Car_features_train.csv'</span>)</span>
@@ -290,7 +290,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>train <span class="op">=</span> pd.merge(trainf,trainp)</span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>test <span class="op">=</span> pd.merge(testf,testp)</span>
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>train.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="20">
+<div class="cell-output cell-output-display" data-execution_count="2">
 
 <div>
 
@@ -391,7 +391,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2 data-number="2.1" class="anchored" data-anchor-id="polynomial-regression-vs-regression-splines"><span class="header-section-number">2.1</span> Polynomial regression vs Regression splines</h2>
 <section id="model-of-degree-1" class="level3" data-number="2.1.1">
 <h3 data-number="2.1.1" class="anchored" data-anchor-id="model-of-degree-1"><span class="header-section-number">2.1.1</span> Model of degree 1</h3>
-<div class="cell" data-execution_count="21">
+<div class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> pd.DataFrame(train[<span class="st">'mileage'</span>])</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>X_test <span class="op">=</span> pd.DataFrame(test[<span class="st">'mileage'</span>])</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> train[<span class="st">'price'</span>]</span>
@@ -403,63 +403,131 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Creating basis functions for splines of degree 1</span></span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>transformed_x <span class="op">=</span> dmatrix(<span class="st">"bs(mileage , knots=(33000,66000,100000), degree = 1, include_intercept = False)"</span>,</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>                        data <span class="op">=</span> trainf,return_type <span class="op">=</span> <span class="st">'dataframe'</span>)</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co">#Developing a linear regression model on the spline basis functions - this is the regression splines model</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>reg_spline_model <span class="op">=</span> LinearRegression()</span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>reg_spline_model.fit(transformed_x, train[<span class="st">'price'</span>])<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>                        data <span class="op">=</span> trainf,return_type <span class="op">=</span> <span class="st">'dataframe'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-scrolled="true" data-execution_count="36">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Visualizing polynomial model and the regression spline model of degree 1</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>knots <span class="op">=</span> [<span class="dv">33000</span>,<span class="dv">66000</span>,<span class="dv">100000</span>] <span class="co">#Knots for the spline</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>d<span class="op">=</span><span class="dv">1</span> <span class="co">#Degree of predictor in the model</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co">#Writing a function to visualize polynomial model and the regression spline model of degree d</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> viz_models():</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    fig, axes <span class="op">=</span> plt.subplots(<span class="dv">1</span>,<span class="dv">2</span>,figsize <span class="op">=</span> (<span class="dv">15</span>,<span class="dv">5</span>))</span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    plt.subplots_adjust(wspace<span class="op">=</span><span class="fl">0.2</span>)</span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    <span class="co">#Visualizing the linear regression model</span></span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>    pred_price <span class="op">=</span> lr_model.predict(X)</span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>    sns.scatterplot(ax <span class="op">=</span> axes[<span class="dv">0</span>],x <span class="op">=</span> <span class="st">'mileage'</span>, y <span class="op">=</span> <span class="st">'price'</span>, data <span class="op">=</span> train, color <span class="op">=</span> <span class="st">'orange'</span>)</span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>    sns.lineplot(ax <span class="op">=</span> axes[<span class="dv">0</span>],x <span class="op">=</span> train.mileage, y <span class="op">=</span> pred_price, color <span class="op">=</span> <span class="st">'blue'</span>)</span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>    axes[<span class="dv">0</span>].set_title(<span class="st">'Polynomial regression model of degree '</span><span class="op">+</span><span class="bu">str</span>(d))</span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>    <span class="co">#Visualizing the regression splines model of degree 'd'    </span></span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>    axes[<span class="dv">1</span>].set_title(<span class="st">'Regression splines model of degree '</span><span class="op">+</span> <span class="bu">str</span>(d))</span>
-<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>    sns.scatterplot(ax<span class="op">=</span>axes[<span class="dv">1</span>],x <span class="op">=</span> <span class="st">'mileage'</span>, y <span class="op">=</span> <span class="st">'price'</span>, data <span class="op">=</span> train, color <span class="op">=</span> <span class="st">'orange'</span>)</span>
-<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>    sns.lineplot(ax<span class="op">=</span>axes[<span class="dv">1</span>],x <span class="op">=</span> train.mileage, y <span class="op">=</span> reg_spline_model.predict(transformed_x), color <span class="op">=</span> <span class="st">'blue'</span>)</span>
-<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">3</span>):</span>
-<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>        plt.axvline(knots[i], <span class="dv">0</span>,<span class="dv">100</span>,color<span class="op">=</span><span class="st">'red'</span>)</span>
-<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>viz_models()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="23">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>transformed_x.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="23">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Intercept</th>
+      <th>bs(mileage, knots=(33000, 66000, 100000), degree=1, include_intercept=False)[0]</th>
+      <th>bs(mileage, knots=(33000, 66000, 100000), degree=1, include_intercept=False)[1]</th>
+      <th>bs(mileage, knots=(33000, 66000, 100000), degree=1, include_intercept=False)[2]</th>
+      <th>bs(mileage, knots=(33000, 66000, 100000), degree=1, include_intercept=False)[3]</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1.0</td>
+      <td>0.000303</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1.0</td>
+      <td>0.327646</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1.0</td>
+      <td>0.000152</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1.0</td>
+      <td>0.572563</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1.0</td>
+      <td>0.092333</td>
+      <td>0.907667</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+<p>Note that the truncated power basis in the class presentation is conceptually simple to understand, it may run into numerical issues as powers of large numbers can lead to severe rounding errors. The <code>bs()</code> function generates the <a href="https://pages.mtu.edu/~shene/COURSES/cs3621/NOTES/spline/B-spline/bspline-basis.html">B-sline basis</a>, which allows for efficient computation, especially in case of a large number of knots. All the basis function values are normalized to be in [0, 1] in the B-spline basis. Although we’ll use the B-spline basis functions to fit splines, details regarding the B-spline basis functions are not included in the syllabus.</p>
+<p>We actually don’t need to separately generate basis functions, and then fit the model. We can do it in the same line of code using the <code>statsmodels</code> <code>OLS</code> method.</p>
+<div class="cell" data-execution_count="25">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Regression spline model with linear splines</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>reg_spline_model <span class="op">=</span> smf.ols(<span class="st">'price~bs(mileage, knots = (33000,66000,100000), degree = 1, include_intercept = False)'</span>, </span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>                           data <span class="op">=</span> train).fit()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-scrolled="true" data-execution_count="26">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Visualizing polynomial model and the regression spline model of degree 1</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>knots <span class="op">=</span> [<span class="dv">33000</span>,<span class="dv">66000</span>,<span class="dv">100000</span>] <span class="co">#Knots for the spline</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>d<span class="op">=</span><span class="dv">1</span> <span class="co">#Degree of predictor in the model</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co">#Writing a function to visualize polynomial model and the regression spline model of degree d</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> viz_models():</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    fig, axes <span class="op">=</span> plt.subplots(<span class="dv">1</span>,<span class="dv">2</span>,figsize <span class="op">=</span> (<span class="dv">15</span>,<span class="dv">5</span>))</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    plt.subplots_adjust(wspace<span class="op">=</span><span class="fl">0.2</span>)</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    <span class="co">#Visualizing the linear regression model</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>    pred_price <span class="op">=</span> lr_model.predict(X)</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>    sns.scatterplot(ax <span class="op">=</span> axes[<span class="dv">0</span>],x <span class="op">=</span> <span class="st">'mileage'</span>, y <span class="op">=</span> <span class="st">'price'</span>, data <span class="op">=</span> train, color <span class="op">=</span> <span class="st">'orange'</span>)</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>    sns.lineplot(ax <span class="op">=</span> axes[<span class="dv">0</span>],x <span class="op">=</span> train.mileage, y <span class="op">=</span> pred_price, color <span class="op">=</span> <span class="st">'blue'</span>)</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>    axes[<span class="dv">0</span>].set_title(<span class="st">'Polynomial regression model of degree '</span><span class="op">+</span><span class="bu">str</span>(d))</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>    <span class="co">#Visualizing the regression splines model of degree 'd'    </span></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>    axes[<span class="dv">1</span>].set_title(<span class="st">'Regression splines model of degree '</span><span class="op">+</span> <span class="bu">str</span>(d))</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>    sns.scatterplot(ax<span class="op">=</span>axes[<span class="dv">1</span>],x <span class="op">=</span> <span class="st">'mileage'</span>, y <span class="op">=</span> <span class="st">'price'</span>, data <span class="op">=</span> train, color <span class="op">=</span> <span class="st">'orange'</span>)</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>    sns.lineplot(ax<span class="op">=</span>axes[<span class="dv">1</span>],x <span class="op">=</span> train.mileage, y <span class="op">=</span> reg_spline_model.predict(), color <span class="op">=</span> <span class="st">'blue'</span>)</span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">3</span>):</span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>        plt.axvline(knots[i], <span class="dv">0</span>,<span class="dv">100</span>,color<span class="op">=</span><span class="st">'red'</span>)</span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>viz_models()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<p><img src="Lec2_Regression_splines_files/figure-html/cell-6-output-1.png" class="img-fluid"></p>
+<p><img src="Lec2_Regression_splines_files/figure-html/cell-8-output-1.png" class="img-fluid"></p>
 </div>
 </div>
 <p>We observe the regression splines model better fits the data as compared to the polynomial regression model. This is because regression splines of degree 1 fit piecewise polynomials, or linear models on sub-sections of the predictor, which helps better capture the trend. However, this added flexibility may also lead to overfitting. Hence, one must be careful to check for overfitting when using splines. Overfitting may be checked by k-fold cross validation or comparing test and train errors.</p>
 <p>The red lines in the plot on the right denote the position of knots. Knots separate distinct splines.</p>
+<p>Although, we can separately generate the basis functions for test data, it may lead to incaccurate results if the distribution of the predictor values in test data is different from that in the train data. This is because the B-spline basis functions of train data are generated after normalizing the predictor values. If the basis functions of test data are generated independently, their values may be inaccurate, as they will depend on the domain space spanned by the test data.</p>
 <div class="cell" data-execution_count="43">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Creating basis functions for test data for prediction</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>test_x <span class="op">=</span> dmatrix(<span class="st">"bs(mileage , knots=(33000,66000,100000), degree = 1, include_intercept = False)"</span>,data <span class="op">=</span> test,</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>                                                                                                  return_type <span class="op">=</span> <span class="st">'dataframe'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Basis functions for test data - avoid generating basis functions separately for test data</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co"># as the test data normailization may be different from the train data normalization</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>test_x <span class="op">=</span> dmatrix(<span class="st">"bs(mileage , knots=(33000,66000,100000), degree = 1, include_intercept = False)"</span>,data <span class="op">=</span> test,</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>                                                                                                  return_type <span class="op">=</span> <span class="st">'dataframe'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-execution_count="44">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Function to compute RMSE (root mean squared error on train and test datasets)</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> rmse():</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">#Error on train data for the linear regression model</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"RMSE on train data:"</span>)</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Linear regression:"</span>, np.sqrt(mean_squared_error(lr_model.predict(X),train.price)))</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    <span class="co">#Error on train data for the regression spline model</span></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Regression splines:"</span>, np.sqrt(mean_squared_error(reg_spline_model.predict(transformed_x),train.price)))</span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    <span class="co">#Error on test data for the linear regression model</span></span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">RMSE on test data:"</span>)</span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Linear regression:"</span>,np.sqrt(mean_squared_error(lr_model.predict(X_test),test.price)))</span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>    <span class="co">#Error on test data for the regression spline model</span></span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Regression splines:"</span>,np.sqrt(mean_squared_error(reg_spline_model.predict(test_x),test.price)))    </span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>rmse()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="27">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Function to compute RMSE (root mean squared error on train and test datasets)</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> rmse():</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">#Error on train data for the linear regression model</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"RMSE on train data:"</span>)</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Linear regression:"</span>, np.sqrt(mean_squared_error(lr_model.predict(X),train.price)))</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    <span class="co">#Error on train data for the regression spline model</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Regression splines:"</span>, np.sqrt(mean_squared_error(reg_spline_model.predict(),train.price)))</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>    <span class="co">#Error on test data for the linear regression model</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">RMSE on test data:"</span>)</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Linear regression:"</span>,np.sqrt(mean_squared_error(lr_model.predict(X_test),test.price)))</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>    <span class="co">#Error on test data for the regression spline model</span></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Regression splines:"</span>,np.sqrt(mean_squared_error(reg_spline_model.predict(X_test),test.price)))    </span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>rmse()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>RMSE on train data:
 Linear regression: 14403.250083261853
@@ -467,53 +535,32 @@ Regression splines: 13859.640716531134
 
 RMSE on test data:
 Linear regression: 14370.94086395544
-Regression splines: 13770.133025694671</code></pre>
-</div>
-</div>
-<p>We actually don’t need to separately generate basis functions, and then fit the model. We can do it in the same line of code, and compute the RMSE on test data more concisely as follows:</p>
-<div class="cell" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Error on test data for the regression spline model</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>reg_spline_model <span class="op">=</span> smf.ols(<span class="st">'price~bs(mileage, knots = (33000,66000,100000), degree = 1, include_intercept = False)'</span>, </span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>                           data <span class="op">=</span> train).fit()</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>np.sqrt(mean_squared_error(reg_spline_model.predict(X_test), test.price))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="7">
-<pre><code>13770.118474361932</code></pre>
+Regression splines: 13770.118474361932</code></pre>
 </div>
 </div>
 </section>
 <section id="model-of-degree-2" class="level3" data-number="2.1.2">
 <h3 data-number="2.1.2" class="anchored" data-anchor-id="model-of-degree-2"><span class="header-section-number">2.1.2</span> Model of degree 2</h3>
 <p>A higher degree model will lead to additional flexibility for both polynomial and regression splines models.</p>
-<div class="cell" data-execution_count="45">
+<div class="cell" data-execution_count="28">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Including mileage squared as a predictor and developing the model</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>ols_object <span class="op">=</span> smf.ols(formula <span class="op">=</span> <span class="st">'price~mileage+I(mileage**2)'</span>, data <span class="op">=</span> train)</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>lr_model <span class="op">=</span> ols_object.fit()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>lr_model <span class="op">=</span> ols_object.fit()</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="co">#Regression spline of degree 2</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>reg_spline_model <span class="op">=</span> smf.ols(<span class="st">'price~bs(mileage, knots = (33000,66000,100000), degree = 2, include_intercept = False)'</span>, </span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>                           data <span class="op">=</span> train).fit()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-execution_count="47">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Regression spline of degree 2</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Creating basis functions for splines of degree 2</span></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>transformed_x <span class="op">=</span> dmatrix(<span class="st">"bs(mileage , knots=(33000,66000,100000), degree = 2, include_intercept = False)"</span>,</span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>                        data <span class="op">=</span> train,return_type <span class="op">=</span> <span class="st">'dataframe'</span>)</span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="co">#Developing a linear regression model on the spline basis functions - this is the regression splines model</span></span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>reg_spline_model <span class="op">=</span> sm.OLS(train[<span class="st">'price'</span>], transformed_x).fit()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell" data-execution_count="48">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>d<span class="op">=</span><span class="dv">2</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>viz_models()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="29">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>d<span class="op">=</span><span class="dv">2</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>viz_models()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <p><img src="Lec2_Regression_splines_files/figure-html/cell-12-output-1.png" class="img-fluid"></p>
 </div>
 </div>
 <p>Unlike polynomial regression, splines functions avoid imposing a global structure on the non-linear function of X. This provides a better local fit to the data.</p>
-<div class="cell" data-execution_count="49">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Creating basis functions for test data for prediction</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>test_x <span class="op">=</span> dmatrix(<span class="st">"bs(mileage , knots=(33000,66000,100000), degree = 2, include_intercept = False)"</span>,</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>                 data <span class="op">=</span> test, return_type <span class="op">=</span> <span class="st">'dataframe'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell" data-execution_count="50">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>rmse()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="30">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>rmse()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>RMSE on train data:
 Linear regression: 14009.819556665143
@@ -521,50 +568,39 @@ Regression splines: 13818.572654146721
 
 RMSE on test data:
 Linear regression: 13944.20691909441
-Regression splines: 13665.233615079242</code></pre>
+Regression splines: 13660.777953039395</code></pre>
 </div>
 </div>
 </section>
 <section id="model-of-degree-3" class="level3" data-number="2.1.3">
 <h3 data-number="2.1.3" class="anchored" data-anchor-id="model-of-degree-3"><span class="header-section-number">2.1.3</span> Model of degree 3</h3>
-<div class="cell" data-execution_count="51">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>ols_object <span class="op">=</span> smf.ols(formula <span class="op">=</span> <span class="st">'price~mileage+I(mileage**2)+I(mileage**3)'</span>, data <span class="op">=</span> train)</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>lr_model <span class="op">=</span> ols_object.fit()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="37">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Including mileage cube squared as a predictor and developing the model</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>ols_object <span class="op">=</span> smf.ols(formula <span class="op">=</span> <span class="st">'price~mileage+I(mileage**2)+I(mileage**3)'</span>, data <span class="op">=</span> train)</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>lr_model <span class="op">=</span> ols_object.fit()</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="co">#Regression spline of degree 3</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>reg_spline_model <span class="op">=</span> smf.ols(<span class="st">'price~bs(mileage, knots = (33000,66000,100000), degree = 3, include_intercept = False)'</span>, </span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>                           data <span class="op">=</span> train).fit()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-execution_count="52">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Regression spline of degree 3</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Creating basis functions for splines of degree 3</span></span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>transformed_x <span class="op">=</span> dmatrix(<span class="st">"bs(mileage , knots=(20000,40000,80000), degree = 3, include_intercept = False)"</span>,</span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>                        data <span class="op">=</span> train,return_type <span class="op">=</span> <span class="st">'dataframe'</span>)</span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="co">#Developing a linear regression model on the spline basis functions - this is the regression splines model</span></span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>reg_spline_model <span class="op">=</span> sm.OLS(train[<span class="st">'price'</span>], transformed_x).fit()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell" data-execution_count="53">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>d<span class="op">=</span><span class="dv">3</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>knots<span class="op">=</span>[<span class="dv">20000</span>,<span class="dv">40000</span>,<span class="dv">80000</span>]</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>viz_models()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="38">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>d<span class="op">=</span><span class="dv">3</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>viz_models()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<p><img src="Lec2_Regression_splines_files/figure-html/cell-17-output-1.png" class="img-fluid"></p>
+<p><img src="Lec2_Regression_splines_files/figure-html/cell-15-output-1.png" class="img-fluid"></p>
 </div>
 </div>
 <p>Unlike polynomial regression, splines functions avoid imposing a global structure on the non-linear function of X. This provides a better local fit to the data.</p>
-<div class="cell" data-execution_count="54">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Creating basis functions for test data for prediction</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>test_x <span class="op">=</span> dmatrix(<span class="st">"bs(mileage , knots=(20000,40000,80000), degree = 3, include_intercept = False)"</span>,</span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>                 data <span class="op">=</span> test, return_type <span class="op">=</span> <span class="st">'dataframe'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell" data-execution_count="55">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>rmse()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="39">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>rmse()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>RMSE on train data:
 Linear regression: 13891.962447594644
-Regression splines: 13792.371446327243
+Regression splines: 13822.70511947823
 
 RMSE on test data:
 Linear regression: 13789.708418357186
-Regression splines: 13651.288965905529</code></pre>
+Regression splines: 13683.776494331632</code></pre>
 </div>
 </div>
 </section>
@@ -572,33 +608,26 @@ Regression splines: 13651.288965905529</code></pre>
 <section id="regression-splines-with-knots-at-uniform-quantiles-of-data" class="level2" data-number="2.2">
 <h2 data-number="2.2" class="anchored" data-anchor-id="regression-splines-with-knots-at-uniform-quantiles-of-data"><span class="header-section-number">2.2</span> Regression splines with knots at uniform quantiles of data</h2>
 <p>If degrees of freedom are provided instead of knots, the knots are by default chosen at uniform quantiles of data. For example if there are 7 degrees of freedom (including the intercept), then there will be 7-4 = 3 knots. These knots will be chosen at the 255h, 50th and 75th quantiles of the data.</p>
-<div class="cell" data-execution_count="56">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Regression spline of degree 3</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Creating basis functions for splines of degree 3</span></span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>transformed_x <span class="op">=</span> dmatrix(<span class="st">"bs(mileage , df=6, degree = 3, include_intercept = False)"</span>,</span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>                        data <span class="op">=</span> train,return_type <span class="op">=</span> <span class="st">'dataframe'</span>)</span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a><span class="co">#Developing a linear regression model on the spline basis functions - this is the regression splines model</span></span>
-<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>reg_spline_model <span class="op">=</span> sm.OLS(train[<span class="st">'price'</span>], transformed_x).fit()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="40">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Regression spline of degree 3</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Regression spline of degree 3 with knots at uniform quantiles of data</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>reg_spline_model <span class="op">=</span> smf.ols(<span class="st">'price~bs(mileage, df = 6, degree = 3, include_intercept = False)'</span>, </span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>                           data <span class="op">=</span> train).fit()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-execution_count="57">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>d<span class="op">=</span><span class="dv">3</span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>unif_knots <span class="op">=</span> pd.qcut(train.mileage,<span class="dv">4</span>,retbins<span class="op">=</span><span class="va">True</span>)[<span class="dv">1</span>][<span class="dv">1</span>:<span class="dv">4</span>]</span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>knots<span class="op">=</span>unif_knots</span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>viz_models()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="41">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>d<span class="op">=</span><span class="dv">3</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>unif_knots <span class="op">=</span> pd.qcut(train.mileage,<span class="dv">4</span>,retbins<span class="op">=</span><span class="va">True</span>)[<span class="dv">1</span>][<span class="dv">1</span>:<span class="dv">4</span>]</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>knots<span class="op">=</span>unif_knots</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>viz_models()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<p><img src="Lec2_Regression_splines_files/figure-html/cell-21-output-1.png" class="img-fluid"></p>
+<p><img src="Lec2_Regression_splines_files/figure-html/cell-18-output-1.png" class="img-fluid"></p>
 </div>
 </div>
-<p>Splines can be unstable at the outer range of predictors. In the figure (on the right), the left-most spline may be overfitting.</p>
-<div class="cell" data-execution_count="58">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Creating basis functions for test data for prediction</span></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>test_x <span class="op">=</span> dmatrix(<span class="st">"bs(mileage , knots="</span> <span class="op">+</span><span class="bu">str</span>(<span class="bu">tuple</span>(unif_knots)) <span class="op">+</span> <span class="st">", degree = 3, include_intercept = False)"</span>,</span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>                 data <span class="op">=</span> test, return_type <span class="op">=</span> <span class="st">'dataframe'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell" data-execution_count="59">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>rmse()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Splines can be unstable at the outer range of predictors. Note that splines are themselves piecewise polynomials with no constraints at the 2 extreme ends of the predictor space. Thus, they may become unstable at those 2 ends. In the right scatter plot, we can see that price has a decreasing trend with mileage. However on the extreme left of the plot, we see the trend reversing with regard to the model, which suggests potential overfitting. Also, from the domain knowledge about cars we know that there is no reason why price will reduce if the car is relatively new. Thus, there may be overfitting with cubic splines at / near the extreme points of the domain space. In the figure (on the right), the left-most spline may be overfitting.</p>
+<p>This motivates us to introduce natural cubic splines (below), which help with the stability at extreme points by enforcing the spline to be linear at those points. We may also think about it as another kind of a “knot” being put at the two ends to make the spline stable at these points.</p>
+<div class="cell" data-execution_count="42">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>rmse()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>RMSE on train data:
 Linear regression: 13891.962447594644
@@ -606,115 +635,74 @@ Regression splines: 13781.79102252679
 
 RMSE on test data:
 Linear regression: 13789.708418357186
-Regression splines: 13676.271829882426</code></pre>
+Regression splines: 13605.726076704668</code></pre>
 </div>
 </div>
 </section>
 <section id="natural-cubic-splines" class="level2" data-number="2.3">
 <h2 data-number="2.3" class="anchored" data-anchor-id="natural-cubic-splines"><span class="header-section-number">2.3</span> Natural cubic splines</h2>
 <p>Page 298: “A natural spline is a regression spline with additional boundary constraints: the function is required to be linear at the boundary (in the region where X is smaller than the smallest knot, or larger than the largest knot). This additional constraint means that natural splines generally produce more stable estimates at the boundaries.”</p>
-<div class="cell" data-execution_count="60">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Natural cubic spline</span></span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Creating basis functions for the natural cubic spline</span></span>
-<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>transformed_x <span class="op">=</span> dmatrix(<span class="st">"cr(mileage , df=4,constraints='center')"</span>,</span>
-<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>                        data <span class="op">=</span> train,return_type <span class="op">=</span> <span class="st">'dataframe'</span>)</span>
-<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>reg_spline_model <span class="op">=</span> sm.GLM(train[<span class="st">'price'</span>], transformed_x).fit()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="43">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Natural cubic spline</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Creating basis functions for the natural cubic spline</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>reg_spline_model <span class="op">=</span> smf.ols(<span class="st">'price~cr(mileage, df = 4)'</span>, </span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>                           data <span class="op">=</span> train).fit()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-execution_count="61">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>d<span class="op">=</span><span class="dv">3</span><span class="op">;</span></span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>unif_knots <span class="op">=</span> pd.qcut(train.mileage,<span class="dv">4</span>,retbins<span class="op">=</span><span class="va">True</span>)[<span class="dv">1</span>][<span class="dv">1</span>:<span class="dv">4</span>]</span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>knots<span class="op">=</span>unif_knots</span>
-<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>viz_models()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="44">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>d<span class="op">=</span><span class="dv">3</span><span class="op">;</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>unif_knots <span class="op">=</span> pd.qcut(train.mileage,<span class="dv">4</span>,retbins<span class="op">=</span><span class="va">True</span>)[<span class="dv">1</span>][<span class="dv">1</span>:<span class="dv">4</span>]</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>knots<span class="op">=</span>unif_knots</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>viz_models()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<p><img src="Lec2_Regression_splines_files/figure-html/cell-25-output-1.png" class="img-fluid"></p>
+<p><img src="Lec2_Regression_splines_files/figure-html/cell-21-output-1.png" class="img-fluid"></p>
 </div>
 </div>
 <p>Note that the natural cubic spline is more stable than a cubic splines with knots at uniformly distributed quantiles.</p>
-<div class="cell" data-execution_count="62">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Creating basis functions for test data for prediction</span></span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>test_x <span class="op">=</span> dmatrix(<span class="st">"cr(mileage , knots="</span><span class="op">+</span><span class="bu">str</span>(<span class="bu">tuple</span>(unif_knots))<span class="op">+</span><span class="st">",constraints='center')"</span>,</span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>                 data <span class="op">=</span> test,   return_type <span class="op">=</span> <span class="st">'dataframe'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell" data-execution_count="63">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>rmse()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="45">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>rmse()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>RMSE on train data:
 Linear regression: 13891.962447594644
-Regression splines: 13805.022189679756
+Regression splines: 13826.125469174143
 
 RMSE on test data:
 Linear regression: 13789.708418357186
-Regression splines: 13666.943224268975</code></pre>
-</div>
-</div>
-<div class="cell" data-execution_count="15">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Error on test data for the regression spline model</span></span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>reg_spline_model <span class="op">=</span> smf.ols(<span class="st">"price~cr(mileage, df = 4, constraints='center')"</span>, </span>
-<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>                           data <span class="op">=</span> train).fit()</span>
-<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>np.sqrt(mean_squared_error(reg_spline_model.predict(X_test), test.price))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="15">
-<pre><code>13656.956840339468</code></pre>
+Regression splines: 13660.35327661836</code></pre>
 </div>
 </div>
 </section>
 <section id="generalized-additive-model-gam" class="level2" data-number="2.4">
 <h2 data-number="2.4" class="anchored" data-anchor-id="generalized-additive-model-gam"><span class="header-section-number">2.4</span> Generalized additive model (GAM)</h2>
 <p>GAM allow for flexible nonlinearities in several variables, but retain the additive structure of linear models. In a GAM, non-linear basis functions of predictors can be used as predictors of a linear regression model. For example, <span class="math display">\[y = f_1(X_1) + f_2(X_2) + \epsilon\]</span> is a GAM, where <span class="math inline">\(f_1(.)\)</span> may be a cubic spline based on the predictor <span class="math inline">\(X_1\)</span>, and <span class="math inline">\(f_2(.)\)</span> may be a step function based on the predictor <span class="math inline">\(X_2\)</span>.</p>
-<div class="cell" data-execution_count="26">
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>sns.distplot(train.year)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>C:\Users\akl0407\Anaconda3\lib\site-packages\seaborn\distributions.py:2557: FutureWarning: `distplot` is a deprecated function and will be removed in a future version. Please adapt your code to use either `displot` (a figure-level function with similar flexibility) or `histplot` (an axes-level function for histograms).
-  warnings.warn(msg, FutureWarning)</code></pre>
-</div>
-<div class="cell-output cell-output-display" data-execution_count="26">
-<pre><code>&lt;AxesSubplot:xlabel='year', ylabel='Density'&gt;</code></pre>
-</div>
-<div class="cell-output cell-output-display">
-<p><img src="Lec2_Regression_splines_files/figure-html/cell-29-output-3.png" class="img-fluid"></p>
+<div class="cell" data-execution_count="47">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co">#GAM</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="co">#GAM includes cubic splines for mileage. Other predictors are year, engineSize, mpg, mileage and their interactions</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>model_gam <span class="op">=</span> smf.ols(<span class="st">'price~bs(mileage,df=6,degree = 3)+year*engineSize*mpg*mileage'</span>, data <span class="op">=</span> train).fit()</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>preds <span class="op">=</span> model_gam.predict(test)</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>np.sqrt(mean_squared_error(preds,test.price))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="47">
+<pre><code>8393.773177637542</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="64">
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co">#GAM</span></span>
-<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="co">#GAM includes cubic splines for mileage. Other predictors are year, engineSize, mpg, mileage and their interactions</span></span>
-<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>X_transformed <span class="op">=</span> dmatrix(<span class="st">'bs(mileage,df=6,degree = 3)+year*engineSize*mpg*mileage'</span>, </span>
-<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>                data <span class="op">=</span> train, return_type <span class="op">=</span> <span class="st">'dataframe'</span>)</span>
-<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a><span class="co"># fit the model</span></span>
-<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>model_gam <span class="op">=</span> sm.OLS(train[<span class="st">'price'</span>],X_transformed).fit()</span>
-<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a><span class="co">#Creating basis functions for test data for prediction</span></span>
-<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a>X_test <span class="op">=</span> dmatrix(<span class="st">'bs(mileage,df=6,degree = 3, include_intercept = False)+year*engineSize*mpg*mileage'</span>, </span>
-<span id="cb38-10"><a href="#cb38-10" aria-hidden="true" tabindex="-1"></a>                data <span class="op">=</span> test, return_type <span class="op">=</span> <span class="st">'dataframe'</span>)</span>
-<span id="cb38-11"><a href="#cb38-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-12"><a href="#cb38-12" aria-hidden="true" tabindex="-1"></a>preds <span class="op">=</span> model_gam.predict(X_test)</span>
-<span id="cb38-13"><a href="#cb38-13" aria-hidden="true" tabindex="-1"></a>np.sqrt(mean_squared_error(preds,test.price))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="64">
-<pre><code>8434.756663328963</code></pre>
+<div class="cell" data-execution_count="51">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co">#GAM</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="co">#GAM includes cubic splines for mileage, year, engineSize, mpg, and interactions of all predictors</span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>model_gam <span class="op">=</span> smf.ols(<span class="st">'price~bs(mileage,df=6,degree = 3)+bs(mpg,df=6,degree = 3)+</span><span class="ch">\</span></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="st">bs(engineSize,df=6,degree = 3)+year*engineSize*mpg*mileage'</span>, data <span class="op">=</span> train).fit()</span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>preds <span class="op">=</span> model_gam.predict(test)</span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>np.sqrt(mean_squared_error(preds,test.price))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="51">
+<pre><code>7981.100853841914</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="65">
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co">#GAM</span></span>
-<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="co">#GAM includes cubic splines for mileage, year, engineSize, mpg, and interactions of all predictors</span></span>
-<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>X_transformed <span class="op">=</span> dmatrix(<span class="st">'bs(mileage,df=6,degree = 3)+bs(mpg,df=6,degree = 3)+bs(engineSize,df=6,degree = 3)+year*engineSize*mpg*mileage'</span>, </span>
-<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>                data <span class="op">=</span> train, return_type <span class="op">=</span> <span class="st">'dataframe'</span>)</span>
-<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a><span class="co"># fit the model</span></span>
-<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>model_gam <span class="op">=</span> sm.OLS(train[<span class="st">'price'</span>],X_transformed).fit()</span>
-<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a><span class="co">#Creating basis functions for test data for prediction</span></span>
-<span id="cb40-9"><a href="#cb40-9" aria-hidden="true" tabindex="-1"></a>X_test <span class="op">=</span> dmatrix(<span class="st">'bs(mileage,df=6,degree = 3, include_intercept = False)+bs(mpg,df=6,degree = 3)+bs(engineSize,df=6,degree = 3)+year*engineSize*mpg*mileage'</span>, </span>
-<span id="cb40-10"><a href="#cb40-10" aria-hidden="true" tabindex="-1"></a>                data <span class="op">=</span> test, return_type <span class="op">=</span> <span class="st">'dataframe'</span>)</span>
-<span id="cb40-11"><a href="#cb40-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-12"><a href="#cb40-12" aria-hidden="true" tabindex="-1"></a>preds <span class="op">=</span> model_gam.predict(X_test)</span>
-<span id="cb40-13"><a href="#cb40-13" aria-hidden="true" tabindex="-1"></a>np.sqrt(mean_squared_error(preds,test.price))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="65">
-<pre><code>7997.325718841729</code></pre>
-</div>
-</div>
-<div class="cell" data-execution_count="289">
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>ols_object <span class="op">=</span> smf.ols(formula <span class="op">=</span> <span class="st">'price~(year+engineSize+mileage+mpg)**2+I(mileage**2)+I(mileage**3)'</span>, data <span class="op">=</span> train)</span>
-<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> ols_object.fit()</span>
-<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>model.summary()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="289">
+<div class="cell" data-execution_count="52">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>ols_object <span class="op">=</span> smf.ols(formula <span class="op">=</span> <span class="st">'price~(year+engineSize+mileage+mpg)**2+I(mileage**2)+I(mileage**3)'</span>, data <span class="op">=</span> train)</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> ols_object.fit()</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>model.summary()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="52">
 
 <table class="simpletable">
 <caption>OLS Regression Results</caption>
@@ -728,10 +716,10 @@ Regression splines: 13666.943224268975</code></pre>
   <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th> <td>   1308.</td> 
 </tr>
 <tr>
-  <th>Date:</th>             <td>Sun, 27 Mar 2022</td> <th>  Prob (F-statistic):</th>  <td>  0.00</td>  
+  <th>Date:</th>             <td>Sun, 09 Apr 2023</td> <th>  Prob (F-statistic):</th>  <td>  0.00</td>  
 </tr>
 <tr>
-  <th>Time:</th>                 <td>01:08:50</td>     <th>  Log-Likelihood:    </th> <td> -52157.</td> 
+  <th>Time:</th>                 <td>20:48:35</td>     <th>  Log-Likelihood:    </th> <td> -52157.</td> 
 </tr>
 <tr>
   <th>No. Observations:</th>      <td>  4960</td>      <th>  AIC:               </th> <td>1.043e+05</td>
@@ -806,9 +794,9 @@ Regression splines: 13666.943224268975</code></pre>
 </tbody></table><br><br>Notes:<br>[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.<br>[2] The condition number is large, 2.5e+18. This might indicate that there are<br>strong multicollinearity or other numerical problems.
 </div>
 </div>
-<div class="cell" data-execution_count="290">
-<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>np.sqrt(mean_squared_error(model.predict(test),test.price))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="290">
+<div class="cell" data-execution_count="53">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>np.sqrt(mean_squared_error(model.predict(test),test.price))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="53">
 <pre><code>9026.775740000594</code></pre>
 </div>
 </div>
@@ -816,24 +804,16 @@ Regression splines: 13666.943224268975</code></pre>
 </section>
 <section id="mars-multivariate-adaptive-regression-splines" class="level2" data-number="2.5">
 <h2 data-number="2.5" class="anchored" data-anchor-id="mars-multivariate-adaptive-regression-splines"><span class="header-section-number">2.5</span> MARS (Multivariate Adaptive Regression Splines)</h2>
-<div class="cell" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>X<span class="op">=</span>train[<span class="st">'mileage'</span>]</span>
-<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>y<span class="op">=</span>train[<span class="st">'price'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell" data-execution_count="10">
-<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>Earth()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="10">
-<pre><code>Earth()</code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyearth <span class="im">import</span> Earth</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="56">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyearth <span class="im">import</span> Earth</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>X<span class="op">=</span>train[<span class="st">'mileage'</span>]</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>y<span class="op">=</span>train[<span class="st">'price'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <section id="mars-of-degree-1" class="level3" data-number="2.5.1">
 <h3 data-number="2.5.1" class="anchored" data-anchor-id="mars-of-degree-1"><span class="header-section-number">2.5.1</span> MARS of degree 1</h3>
-<div class="cell" data-execution_count="12">
-<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> Earth(max_terms<span class="op">=</span><span class="dv">500</span>, max_degree<span class="op">=</span><span class="dv">1</span>) <span class="co"># note, terms in brackets are the hyperparameters </span></span>
-<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>model.fit(X,y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="57">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> Earth(max_terms<span class="op">=</span><span class="dv">500</span>, max_degree<span class="op">=</span><span class="dv">1</span>) <span class="co"># note, terms in brackets are the hyperparameters </span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>model.fit(X,y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>C:\Users\akl0407\Anaconda3\lib\site-packages\pyearth\earth.py:813: FutureWarning: `rcond` parameter will change to the default of machine precision times ``max(M, N)`` where M and N are the input matrix dimensions.
 To use the future default and silence this warning we advise to pass `rcond=None`, to keep using the old, explicitly pass `rcond=-1`.
@@ -842,12 +822,12 @@ C:\Users\akl0407\Anaconda3\lib\site-packages\pyearth\earth.py:1066: FutureWarnin
 To use the future default and silence this warning we advise to pass `rcond=None`, to keep using the old, explicitly pass `rcond=-1`.
   coef, resid = np.linalg.lstsq(B, weighted_y[:, i])[0:2]</code></pre>
 </div>
-<div class="cell-output cell-output-display" data-execution_count="12">
+<div class="cell-output cell-output-display" data-execution_count="57">
 <pre><code>Earth(max_degree=1, max_terms=500)</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="13">
-<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(model.summary())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="58">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(model.summary())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Earth Model
 -------------------------------------
@@ -875,30 +855,30 @@ MSE: 188429705.7549, GCV: 190035470.5664, RSQ: 0.2998, GRSQ: 0.2942</code></pre>
 </div>
 </div>
 <p>Model equation: <span class="math display">\[-553155 -6.23(h(x0-3354)) -36.96(h(x0-15413) + .......... -7.04(h(2456-x0)\]</span></p>
-<div class="cell" data-execution_count="14">
-<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>pred <span class="op">=</span> model.predict(test.mileage)</span>
-<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>np.sqrt(mean_squared_error(pred,test.price))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="14">
+<div class="cell" data-execution_count="59">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>pred <span class="op">=</span> model.predict(test.mileage)</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>np.sqrt(mean_squared_error(pred,test.price))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="59">
 <pre><code>13650.2113154515</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="15">
-<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>sns.scatterplot(x <span class="op">=</span> <span class="st">'mileage'</span>, y <span class="op">=</span> <span class="st">'price'</span>, data <span class="op">=</span> train, color <span class="op">=</span> <span class="st">'orange'</span>)</span>
-<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>sns.lineplot(x <span class="op">=</span> train.mileage, y <span class="op">=</span> model.predict(train.mileage), color <span class="op">=</span> <span class="st">'blue'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="15">
+<div class="cell" data-execution_count="60">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>sns.scatterplot(x <span class="op">=</span> <span class="st">'mileage'</span>, y <span class="op">=</span> <span class="st">'price'</span>, data <span class="op">=</span> train, color <span class="op">=</span> <span class="st">'orange'</span>)</span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>sns.lineplot(x <span class="op">=</span> train.mileage, y <span class="op">=</span> model.predict(train.mileage), color <span class="op">=</span> <span class="st">'blue'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="60">
 <pre><code>&lt;AxesSubplot:xlabel='mileage', ylabel='price'&gt;</code></pre>
 </div>
 <div class="cell-output cell-output-display">
-<p><img src="Lec2_Regression_splines_files/figure-html/cell-40-output-2.png" class="img-fluid"></p>
+<p><img src="Lec2_Regression_splines_files/figure-html/cell-31-output-2.png" class="img-fluid"></p>
 </div>
 </div>
 </section>
 <section id="mars-of-degree-2" class="level3" data-number="2.5.2">
 <h3 data-number="2.5.2" class="anchored" data-anchor-id="mars-of-degree-2"><span class="header-section-number">2.5.2</span> MARS of degree 2</h3>
-<div class="cell" data-execution_count="12">
-<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> Earth(max_terms<span class="op">=</span><span class="dv">500</span>, max_degree<span class="op">=</span><span class="dv">2</span>) <span class="co"># note, terms in brackets are the hyperparameters </span></span>
-<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>model.fit(X,y)</span>
-<span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(model.summary())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="61">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> Earth(max_terms<span class="op">=</span><span class="dv">500</span>, max_degree<span class="op">=</span><span class="dv">2</span>) <span class="co"># note, terms in brackets are the hyperparameters </span></span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>model.fit(X,y)</span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(model.summary())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Earth Model
 -----------------------------------------------
@@ -926,35 +906,35 @@ To use the future default and silence this warning we advise to pass `rcond=None
   coef, resid = np.linalg.lstsq(B, weighted_y[:, i])[0:2]</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="13">
-<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a>pred <span class="op">=</span> model.predict(test.mileage)</span>
-<span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a>np.sqrt(mean_squared_error(pred,test.price))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="13">
+<div class="cell" data-execution_count="62">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>pred <span class="op">=</span> model.predict(test.mileage)</span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>np.sqrt(mean_squared_error(pred,test.price))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="62">
 <pre><code>13590.995419204985</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="14">
-<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a>sns.scatterplot(x <span class="op">=</span> <span class="st">'mileage'</span>, y <span class="op">=</span> <span class="st">'price'</span>, data <span class="op">=</span> train, color <span class="op">=</span> <span class="st">'orange'</span>)</span>
-<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a>sns.lineplot(x <span class="op">=</span> train.mileage, y <span class="op">=</span> model.predict(train.mileage), color <span class="op">=</span> <span class="st">'blue'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="14">
+<div class="cell" data-execution_count="63">
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>sns.scatterplot(x <span class="op">=</span> <span class="st">'mileage'</span>, y <span class="op">=</span> <span class="st">'price'</span>, data <span class="op">=</span> train, color <span class="op">=</span> <span class="st">'orange'</span>)</span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>sns.lineplot(x <span class="op">=</span> train.mileage, y <span class="op">=</span> model.predict(train.mileage), color <span class="op">=</span> <span class="st">'blue'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="63">
 <pre><code>&lt;AxesSubplot:xlabel='mileage', ylabel='price'&gt;</code></pre>
 </div>
 <div class="cell-output cell-output-display">
-<p><img src="Lec2_Regression_splines_files/figure-html/cell-43-output-2.png" class="img-fluid"></p>
+<p><img src="Lec2_Regression_splines_files/figure-html/cell-34-output-2.png" class="img-fluid"></p>
 </div>
 </div>
 <p>MARS provides a better fit than the splines that we used above. This is because MARS tunes the positions of the knots and considers interactions (also with tuned knots) to improve the model fit. Tuning of knots may improve the fit of splines as well.</p>
 </section>
 <section id="mars-including-categorical-variables" class="level3" data-number="2.5.3">
 <h3 data-number="2.5.3" class="anchored" data-anchor-id="mars-including-categorical-variables"><span class="header-section-number">2.5.3</span> MARS including categorical variables</h3>
-<div class="cell" data-execution_count="16">
-<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="co">#A categorical variable can be turned to dummy variables to use the Earth package for fitting MARS model</span></span>
-<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a>train_cat <span class="op">=</span> pd.concat([train,pd.get_dummies(train.fuelType)],axis<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb65-3"><a href="#cb65-3" aria-hidden="true" tabindex="-1"></a>test_cat <span class="op">=</span> pd.concat([test,pd.get_dummies(test.fuelType)],axis<span class="op">=</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="64">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="co">#A categorical variable can be turned to dummy variables to use the Earth package for fitting MARS model</span></span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>train_cat <span class="op">=</span> pd.get_dummies(train)</span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>test_cat <span class="op">=</span> pd.get_dummies(test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-execution_count="17">
-<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a>train_cat.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="17">
+<div class="cell" data-execution_count="65">
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>train_cat.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="65">
 
 <div>
 
@@ -963,37 +943,47 @@ To use the future default and silence this warning we advise to pass `rcond=None
     <tr>
       <th></th>
       <th>carID</th>
-      <th>brand</th>
-      <th>model</th>
       <th>year</th>
-      <th>transmission</th>
       <th>mileage</th>
-      <th>fuelType</th>
       <th>tax</th>
       <th>mpg</th>
       <th>engineSize</th>
       <th>price</th>
-      <th>Diesel</th>
-      <th>Electric</th>
-      <th>Hybrid</th>
-      <th>Other</th>
-      <th>Petrol</th>
+      <th>brand_audi</th>
+      <th>brand_bmw</th>
+      <th>brand_ford</th>
+      <th>...</th>
+      <th>model_ i8</th>
+      <th>transmission_Automatic</th>
+      <th>transmission_Manual</th>
+      <th>transmission_Other</th>
+      <th>transmission_Semi-Auto</th>
+      <th>fuelType_Diesel</th>
+      <th>fuelType_Electric</th>
+      <th>fuelType_Hybrid</th>
+      <th>fuelType_Other</th>
+      <th>fuelType_Petrol</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>0</th>
       <td>18473</td>
-      <td>bmw</td>
-      <td>6 Series</td>
       <td>2020</td>
-      <td>Semi-Auto</td>
       <td>11</td>
-      <td>Diesel</td>
       <td>145</td>
       <td>53.3282</td>
       <td>3.0</td>
       <td>37980</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
       <td>1</td>
       <td>0</td>
       <td>0</td>
@@ -1003,16 +993,21 @@ To use the future default and silence this warning we advise to pass `rcond=None
     <tr>
       <th>1</th>
       <td>15064</td>
-      <td>bmw</td>
-      <td>6 Series</td>
       <td>2019</td>
-      <td>Semi-Auto</td>
       <td>10813</td>
-      <td>Diesel</td>
       <td>145</td>
       <td>53.0430</td>
       <td>3.0</td>
       <td>33980</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
       <td>1</td>
       <td>0</td>
       <td>0</td>
@@ -1022,16 +1017,21 @@ To use the future default and silence this warning we advise to pass `rcond=None
     <tr>
       <th>2</th>
       <td>18268</td>
-      <td>bmw</td>
-      <td>6 Series</td>
       <td>2020</td>
-      <td>Semi-Auto</td>
       <td>6</td>
-      <td>Diesel</td>
       <td>145</td>
       <td>53.4379</td>
       <td>3.0</td>
       <td>36850</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
       <td>1</td>
       <td>0</td>
       <td>0</td>
@@ -1041,16 +1041,21 @@ To use the future default and silence this warning we advise to pass `rcond=None
     <tr>
       <th>3</th>
       <td>18480</td>
-      <td>bmw</td>
-      <td>6 Series</td>
       <td>2017</td>
-      <td>Semi-Auto</td>
       <td>18895</td>
-      <td>Diesel</td>
       <td>145</td>
       <td>51.5140</td>
       <td>3.0</td>
       <td>25998</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
       <td>1</td>
       <td>0</td>
       <td>0</td>
@@ -1060,16 +1065,21 @@ To use the future default and silence this warning we advise to pass `rcond=None
     <tr>
       <th>4</th>
       <td>18492</td>
-      <td>bmw</td>
-      <td>6 Series</td>
       <td>2015</td>
-      <td>Automatic</td>
       <td>62953</td>
-      <td>Diesel</td>
       <td>160</td>
       <td>51.4903</td>
       <td>3.0</td>
       <td>18990</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
       <td>1</td>
       <td>0</td>
       <td>0</td>
@@ -1078,17 +1088,20 @@ To use the future default and silence this warning we advise to pass `rcond=None
     </tr>
   </tbody>
 </table>
+<p>5 rows × 115 columns</p>
 </div>
 </div>
 </div>
-<div class="cell" data-execution_count="18">
-<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> train_cat[[<span class="st">'mileage'</span>,<span class="st">'mpg'</span>,<span class="st">'engineSize'</span>,<span class="st">'year'</span>,<span class="st">'Diesel'</span>,<span class="st">'Electric'</span>,<span class="st">'Hybrid'</span>,<span class="st">'Petrol'</span>]]</span>
-<span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a>Xtest <span class="op">=</span> test_cat[[<span class="st">'mileage'</span>,<span class="st">'mpg'</span>,<span class="st">'engineSize'</span>,<span class="st">'year'</span>,<span class="st">'Diesel'</span>,<span class="st">'Electric'</span>,<span class="st">'Hybrid'</span>,<span class="st">'Petrol'</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="76">
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> train_cat[[<span class="st">'mileage'</span>,<span class="st">'mpg'</span>,<span class="st">'engineSize'</span>,<span class="st">'year'</span>,<span class="st">'fuelType_Diesel'</span>,<span class="st">'fuelType_Electric'</span>,</span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>               <span class="st">'fuelType_Hybrid'</span>,<span class="st">'fuelType_Petrol'</span>]]</span>
+<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>Xtest <span class="op">=</span> test_cat[[<span class="st">'mileage'</span>,<span class="st">'mpg'</span>,<span class="st">'engineSize'</span>,<span class="st">'year'</span>,<span class="st">'fuelType_Diesel'</span>,<span class="st">'fuelType_Electric'</span>,</span>
+<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a>                  <span class="st">'fuelType_Hybrid'</span>,<span class="st">'fuelType_Petrol'</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-execution_count="13">
-<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> Earth(max_terms<span class="op">=</span><span class="dv">500</span>, max_degree<span class="op">=</span><span class="dv">2</span>) <span class="co"># note, terms in brackets are the hyperparameters </span></span>
-<span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a>model.fit(X,y)</span>
-<span id="cb68-3"><a href="#cb68-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(model.summary())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="77">
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> Earth(max_terms<span class="op">=</span><span class="dv">500</span>, max_degree<span class="op">=</span><span class="dv">2</span>) <span class="co"># note, terms in brackets are the hyperparameters </span></span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>model.fit(X,y)</span>
+<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(model.summary())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>C:\Users\akl0407\Anaconda3\lib\site-packages\pyearth\earth.py:813: FutureWarning: `rcond` parameter will change to the default of machine precision times ``max(M, N)`` where M and N are the input matrix dimensions.
 To use the future default and silence this warning we advise to pass `rcond=None`, to keep using the old, explicitly pass `rcond=-1`.
@@ -1109,14 +1122,14 @@ h(21050-mileage)*h(5.5-engineSize)  No      -0.224909
 year                                No      4126.41      
 h(mpg-53.3495)                      No      344595       
 h(53.3495-mpg)                      Yes     None         
-Hybrid*h(5.5-engineSize)            No      6124.34      
+fuelType_Hybrid*h(5.5-engineSize)   No      6124.34      
 h(mileage-21050)*year               No      -0.00930239  
 h(21050-mileage)*year               No      0.0886455    
 h(engineSize-5.5)*year              No      -4864.84     
 h(5.5-engineSize)*year              No      -952.92      
 h(mileage-1422)*h(53.3495-mpg)      No      -16.62       
 h(1422-mileage)*h(53.3495-mpg)      No      16.4306      
-Hybrid                              No      -89090.6     
+fuelType_Hybrid                     No      -89090.6     
 h(mpg-21.1063)*h(53.3495-mpg)       Yes     None         
 h(21.1063-mpg)*h(53.3495-mpg)       No      -8815.99     
 h(mpg-23.4808)*h(5.5-engineSize)    No      -3649.97     
@@ -1140,9 +1153,9 @@ h(28.0681-mpg)*h(5.5-engineSize)    Yes     None
 engineSize*h(5.5-engineSize)        No      -2952.65     
 h(mpg-25.3175)*h(mpg-21.1063)       No      -332551      
 h(25.3175-mpg)*h(mpg-21.1063)       No      324298       
-Petrol*year                         No      -1.37031     
-h(mpg-68.9279)*Hybrid               No      -4087.9      
-h(68.9279-mpg)*Hybrid               Yes     None         
+fuelType_Petrol*year                No      -1.37031     
+h(mpg-68.9279)*fuelType_Hybrid      No      -4087.9      
+h(68.9279-mpg)*fuelType_Hybrid      Yes     None         
 h(mpg-31.5043)*h(5.5-engineSize)    Yes     None         
 h(31.5043-mpg)*h(5.5-engineSize)    No      3691.82      
 h(mpg-32.7011)*h(5.5-engineSize)    Yes     None         
@@ -1151,11 +1164,11 @@ h(mpg-44.9122)*h(mpg-22.6767)       No      335577
 h(44.9122-mpg)*h(mpg-22.6767)       No      -335623      
 h(engineSize-5.5)*h(mpg-21.1063)    No      27815        
 h(5.5-engineSize)*h(mpg-21.1063)    Yes     None         
-h(mpg-78.1907)*Hybrid               Yes     None         
-h(78.1907-mpg)*Hybrid               No      2221.49      
+h(mpg-78.1907)*fuelType_Hybrid      Yes     None         
+h(78.1907-mpg)*fuelType_Hybrid      No      2221.49      
 h(mpg-63.1632)*h(mpg-22.6767)       Yes     None         
 h(63.1632-mpg)*h(mpg-22.6767)       No      21.0093      
-Hybrid*h(mpg-53.3495)               No      4121.91      
+fuelType_Hybrid*h(mpg-53.3495)      No      4121.91      
 h(mileage-22058)*h(53.3495-mpg)     No      16.6177      
 h(22058-mileage)*h(53.3495-mpg)     No      -16.6044     
 h(mpg-21.8985)                      Yes     None         
@@ -1169,21 +1182,21 @@ To use the future default and silence this warning we advise to pass `rcond=None
   coef, resid = np.linalg.lstsq(B, weighted_y[:, i])[0:2]</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="19">
-<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a>pred <span class="op">=</span> model.predict(Xtest)</span>
-<span id="cb72-2"><a href="#cb72-2" aria-hidden="true" tabindex="-1"></a>np.sqrt(mean_squared_error(pred,test2.price))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="19">
+<div class="cell" data-execution_count="81">
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>pred <span class="op">=</span> model.predict(Xtest)</span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>np.sqrt(mean_squared_error(pred,test.price))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="81">
 <pre><code>7499.709075454322</code></pre>
 </div>
 </div>
 <p>Let us compare the RMSE of a MARS model with <em>mileage, mpg, engineSize</em> and <em>year</em> with a linear regression model having the same predictors.</p>
-<div class="cell" data-execution_count="20">
-<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> train[[<span class="st">'mileage'</span>,<span class="st">'mpg'</span>,<span class="st">'engineSize'</span>,<span class="st">'year'</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="82">
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> train[[<span class="st">'mileage'</span>,<span class="st">'mpg'</span>,<span class="st">'engineSize'</span>,<span class="st">'year'</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-execution_count="21">
-<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> Earth(max_terms<span class="op">=</span><span class="dv">500</span>, max_degree<span class="op">=</span><span class="dv">2</span>) <span class="co"># note, terms in brackets are the hyperparameters </span></span>
-<span id="cb75-2"><a href="#cb75-2" aria-hidden="true" tabindex="-1"></a>model.fit(X,y)</span>
-<span id="cb75-3"><a href="#cb75-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(model.summary())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="83">
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> Earth(max_terms<span class="op">=</span><span class="dv">500</span>, max_degree<span class="op">=</span><span class="dv">2</span>) <span class="co"># note, terms in brackets are the hyperparameters </span></span>
+<span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a>model.fit(X,y)</span>
+<span id="cb61-3"><a href="#cb61-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(model.summary())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>C:\Users\akl0407\Anaconda3\lib\site-packages\pyearth\earth.py:813: FutureWarning: `rcond` parameter will change to the default of machine precision times ``max(M, N)`` where M and N are the input matrix dimensions.
 To use the future default and silence this warning we advise to pass `rcond=None`, to keep using the old, explicitly pass `rcond=-1`.
@@ -1256,20 +1269,20 @@ To use the future default and silence this warning we advise to pass `rcond=None
   coef, resid = np.linalg.lstsq(B, weighted_y[:, i])[0:2]</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="22">
-<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a>Xtest <span class="op">=</span> test[[<span class="st">'mileage'</span>,<span class="st">'mpg'</span>,<span class="st">'engineSize'</span>,<span class="st">'year'</span>]]</span>
-<span id="cb79-2"><a href="#cb79-2" aria-hidden="true" tabindex="-1"></a>pred <span class="op">=</span> model.predict(Xtest)</span>
-<span id="cb79-3"><a href="#cb79-3" aria-hidden="true" tabindex="-1"></a>np.sqrt(mean_squared_error(pred,test.price))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="22">
+<div class="cell" data-execution_count="84">
+<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a>Xtest <span class="op">=</span> test[[<span class="st">'mileage'</span>,<span class="st">'mpg'</span>,<span class="st">'engineSize'</span>,<span class="st">'year'</span>]]</span>
+<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a>pred <span class="op">=</span> model.predict(Xtest)</span>
+<span id="cb65-3"><a href="#cb65-3" aria-hidden="true" tabindex="-1"></a>np.sqrt(mean_squared_error(pred,test.price))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="84">
 <pre><code>7614.158359050244</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="23">
-<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a>ols_object <span class="op">=</span> smf.ols(formula <span class="op">=</span> <span class="st">'price~(year+engineSize+mileage+mpg)**2'</span>, data <span class="op">=</span> train)</span>
-<span id="cb81-2"><a href="#cb81-2" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> ols_object.fit()</span>
-<span id="cb81-3"><a href="#cb81-3" aria-hidden="true" tabindex="-1"></a>pred <span class="op">=</span> model.predict(test)</span>
-<span id="cb81-4"><a href="#cb81-4" aria-hidden="true" tabindex="-1"></a>np.sqrt(mean_squared_error(pred,test.price))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="23">
+<div class="cell" data-execution_count="85">
+<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a>ols_object <span class="op">=</span> smf.ols(formula <span class="op">=</span> <span class="st">'price~(year+engineSize+mileage+mpg)**2'</span>, data <span class="op">=</span> train)</span>
+<span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> ols_object.fit()</span>
+<span id="cb67-3"><a href="#cb67-3" aria-hidden="true" tabindex="-1"></a>pred <span class="op">=</span> model.predict(test)</span>
+<span id="cb67-4"><a href="#cb67-4" aria-hidden="true" tabindex="-1"></a>np.sqrt(mean_squared_error(pred,test.price))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="85">
 <pre><code>8729.912066822455</code></pre>
 </div>
 </div>

@@ -280,7 +280,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ol>
 <p>*<em>In machine learning, a model hyperparameter is a parameter that cannot be learned from training data and must be set before training the model. Hyperparameters control aspects of the model’s behavior and can greatly impact its performance. For example, the regularization parameter <span class="math inline">\(\lambda\)</span>, in linear regression is a hyperparameter. You need to specify it before fitting the model. On the other hand, the beta coefficients in linear regression are parameters, as you learn them while training the model, and don’t need to specify their values beforehand.</em></p>
 <p>We’ll use a classification problem to illustrate the functions. However, similar functions can be used for regression problems, i.e., prediction problems with a continuous response.</p>
-<div class="cell" data-execution_count="214">
+<div class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Importing necessary libraries</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -289,7 +289,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>sns.<span class="bu">set</span>(font_scale<span class="op">=</span><span class="fl">1.35</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Let us import the <code>sklearn</code> modules useful in developing statistical models.</p>
-<div class="cell" data-execution_count="215">
+<div class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># sklearn has 100s of models - grouped in sublibraries, such as linear_model</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LogisticRegression, LinearRegression</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -304,13 +304,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> accuracy_score, mean_absolute_error, mean_squared_error, r2_score, <span class="op">\</span></span>
 <span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>roc_curve, auc, precision_score, recall_score, confusion_matrix</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-execution_count="216">
+<div class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Reading data</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pd.read_csv(<span class="st">'./Datasets/diabetes.csv'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Scikit-learn doesn’t support the formula-like syntax of specifying the response and the predictors as in the <code>statsmodels</code> library. We need to create separate objects for predictors and response, which should be <em>array-like</em>. A Pandas DataFrame / Series or a Numpy array are <em>array-like</em> objects.</p>
 <p>Let us reference our predictors as object <code>X</code>, and the response as object <code>y</code>.</p>
-<div class="cell" data-execution_count="217">
+<div class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Separating the predictors and response - THIS IS HOW ALL SKLEARN OBJECTS ACCEPT DATA (different from statsmodels)</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> data.Outcome</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> data.drop(<span class="st">"Outcome"</span>, axis <span class="op">=</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -318,36 +318,36 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <section id="splitting-data-into-train-and-test" class="level2" data-number="1.1">
 <h2 data-number="1.1" class="anchored" data-anchor-id="splitting-data-into-train-and-test"><span class="header-section-number">1.1</span> Splitting data into <code>train</code> and <code>test</code></h2>
 <p>Let us create train and test datasets for developing a model to predict if a person has diabetes.</p>
-<div class="cell" data-execution_count="218">
+<div class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Creating training and test data</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 80-20 split, which is usual - 70-30 split is also fine, 90-10 is fine if the dataset is large</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># random_state to set a random seed for the splitting - reproducible results</span></span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(X, y, test_size <span class="op">=</span> <span class="fl">0.2</span>, random_state <span class="op">=</span> <span class="dv">45</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Let us find the proportion of classes (<em>‘having diabetes’ (<span class="math inline">\(y = 1\)</span>) or ‘not having diabetes’ (<span class="math inline">\(y = 0\)</span>)</em>) in the complete dataset.</p>
-<div class="cell" data-execution_count="219">
+<div class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Proportion of 0s and 1s in the complete data</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>y.value_counts()<span class="op">/</span>y.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="219">
+<div class="cell-output cell-output-display" data-execution_count="6">
 <pre><code>0    0.651042
 1    0.348958
 Name: Outcome, dtype: float64</code></pre>
 </div>
 </div>
 <p>Let us find the proportion of classes (<em>‘having diabetes’ (<span class="math inline">\(y = 1\)</span>) or ‘not having diabetes’ (<span class="math inline">\(y = 0\)</span>)</em>) in the train dataset.</p>
-<div class="cell" data-execution_count="220">
+<div class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Proportion of 0s and 1s in train data</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>y_train.value_counts()<span class="op">/</span>y_train.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="220">
+<div class="cell-output cell-output-display" data-execution_count="7">
 <pre><code>0    0.644951
 1    0.355049
 Name: Outcome, dtype: float64</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="221">
+<div class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Proportion of 0s and 1s in test data</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>y_test.value_counts()<span class="op">/</span>y_test.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="221">
+<div class="cell-output cell-output-display" data-execution_count="8">
 <pre><code>0    0.675325
 1    0.324675
 Name: Outcome, dtype: float64</code></pre>
@@ -358,24 +358,24 @@ Name: Outcome, dtype: float64</code></pre>
 <section id="stratified-splitting" class="level3" data-number="1.1.1">
 <h3 data-number="1.1.1" class="anchored" data-anchor-id="stratified-splitting"><span class="header-section-number">1.1.1</span> Stratified splitting</h3>
 <p>We will use the argument <code>stratify</code> to obtain a proportion of 0s and 1s in the <code>train</code> and <code>test</code> datasets that is similar to the proportion in the complete `data.</p>
-<div class="cell" data-execution_count="222">
+<div class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Stratified train-test split</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>X_train_stratified, X_test_stratified, y_train_stratified,<span class="op">\</span></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>y_test_stratified <span class="op">=</span> train_test_split(X, y, test_size <span class="op">=</span> <span class="fl">0.2</span>, random_state <span class="op">=</span> <span class="dv">45</span>, stratify<span class="op">=</span>y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-execution_count="223">
+<div class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Proportion of 0s and 1s in train data with stratified split</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>y_train_stratified.value_counts()<span class="op">/</span>y_train.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="223">
+<div class="cell-output cell-output-display" data-execution_count="10">
 <pre><code>0    0.651466
 1    0.348534
 Name: Outcome, dtype: float64</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="224">
+<div class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Proportion of 0s and 1s in test data with stratified split</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>y_test_stratified.value_counts()<span class="op">/</span>y_test.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="224">
+<div class="cell-output cell-output-display" data-execution_count="11">
 <pre><code>0    0.649351
 1    0.350649
 Name: Outcome, dtype: float64</code></pre>
@@ -390,7 +390,7 @@ Name: Outcome, dtype: float64</code></pre>
 <section id="scaling-data" class="level2" data-number="1.2">
 <h2 data-number="1.2" class="anchored" data-anchor-id="scaling-data"><span class="header-section-number">1.2</span> Scaling data</h2>
 <p>In certain models, it may be important to scale data for various reasons. In a logistic regression model, scaling can help with model convergence. Scikit-learn uses a method known as gradient-descent <em>(not in scope of the syllabus of this course)</em> to obtain a solution. In case the predictors have different orders of magnitude, the algorithm may fail to converge. In such cases, it is useful to standardize the predictors so that all of them are at the same scale.</p>
-<div class="cell" data-execution_count="225">
+<div class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># With linear/logistic regression in scikit-learn, especially when the predictors have different orders </span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="co"># of magn., scaling is necessary. This is to enable the training algo. which we did not cover. (Gradient Descent)</span></span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>scaler <span class="op">=</span> StandardScaler().fit(X_train)</span>
@@ -401,7 +401,7 @@ Name: Outcome, dtype: float64</code></pre>
 <section id="fitting-a-model" class="level2" data-number="1.3">
 <h2 data-number="1.3" class="anchored" data-anchor-id="fitting-a-model"><span class="header-section-number">1.3</span> Fitting a model</h2>
 <p>Let us fit a logistic regression model for predicting if a person has diabetes. Let us try fitting a model with the un-scaled data.</p>
-<div class="cell" data-execution_count="226">
+<div class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a model object - not trained yet</span></span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>logreg <span class="op">=</span> LogisticRegression()</span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -417,25 +417,25 @@ Please also refer to the documentation for alternative solver options:
     https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression
   n_iter_i = _check_optimize_result(</code></pre>
 </div>
-<div class="cell-output cell-output-display" data-execution_count="226">
+<div class="cell-output cell-output-display" data-execution_count="13">
 <pre><code>LogisticRegression()</code></pre>
 </div>
 </div>
 <p>Note that the model with the un-scaled predictors fails to converge. Check out the data <code>X_train</code> to see that this may be probably due to the predictors have different orders of magnitude. For example, the predictor <code>DiabetesPedigreeFunction</code> has values in [0.078, 2.42], while the predictor <code>Insulin</code> has values in [0, 800].</p>
 <p>Let us fit the model to the scaled data.</p>
-<div class="cell" data-execution_count="227">
+<div class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a model - not trained yet</span></span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>logreg <span class="op">=</span> LogisticRegression()</span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Train the model</span></span>
 <span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>logreg.fit(X_train_scaled, y_train)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="227">
+<div class="cell-output cell-output-display" data-execution_count="14">
 <pre><code>LogisticRegression()</code></pre>
 </div>
 </div>
 <p>The model converges to a solution with the scaled data!</p>
 <p>The coefficients of the model can be returned with the <code>coef_</code> attribute of the <code>LogisticRegression()</code> object. However, the output is not as well formatted as in the case of the <code>statsmodels</code> library since <code>sklearn</code> is developed primarily for the purpose of prediction, and not inference.</p>
-<div class="cell" data-execution_count="228">
+<div class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Use coef_ to return the coefficients - only log reg inference you can do with sklearn</span></span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(logreg.coef_) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -450,7 +450,7 @@ Please also refer to the documentation for alternative solver options:
 <h3 data-number="1.4.1" class="anchored" data-anchor-id="accuracy"><span class="header-section-number">1.4.1</span> Accuracy</h3>
 <p>Let us test the model prediction accuracy on the test data. We’ll demonstrate two different functions that can be used to compute model accuracy - <code>accuracy_score()</code>, and <code>score()</code>.</p>
 <p>The <code>accuracy_score()</code> function from the <code>metrics</code> module of the <code>sklearn</code> library is general, and can be used for any classification model. We’ll use it along with the <code>predict()</code> method of the <code>LogisticRegression()</code> object, which returns the predicted class based on a threshold probability of 0.5.</p>
-<div class="cell" data-execution_count="229">
+<div class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get the predicted classes first</span></span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>y_pred <span class="op">=</span> logreg.predict(X_test_scaled)</span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -461,7 +461,7 @@ Please also refer to the documentation for alternative solver options:
 </div>
 </div>
 <p>The <code>score()</code> method of the <code>LogisticRegression()</code> object can be used to compute the accuracy only for a logistic regression model. Note that for a <code>LinearRegression()</code> object, the <code>score()</code> method will return the model <span class="math inline">\(R\)</span>-squared.</p>
-<div class="cell" data-execution_count="230">
+<div class="cell" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Use .score with test predictors and response to get the accuracy</span></span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Implements the same thing under the hood</span></span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(logreg.score(X_test_scaled, y_test)<span class="op">*</span><span class="dv">100</span>)  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -664,7 +664,7 @@ Recall:  0.5925925925925926</code></pre>
 <section id="tuning-the-regularization-parameter" class="level3" data-number="1.5.2">
 <h3 data-number="1.5.2" class="anchored" data-anchor-id="tuning-the-regularization-parameter"><span class="header-section-number">1.5.2</span> Tuning the regularization parameter</h3>
 <p>The <code>LogisticRegression()</code> method has a default <em>L2</em> regularization penalty, which means ridge regression.<code>C</code> is <span class="math inline">\(1/\lambda\)</span>, where <span class="math inline">\(\lambda\)</span> is the hyperparameter that is multiplied with the ridge penalty. <code>C</code> is 1 by default.</p>
-<div class="cell" data-execution_count="240">
+<div class="cell" data-execution_count="20">
 <div class="sourceCode cell-code" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>accuracy_iter <span class="op">=</span> []</span>
 <span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>hyperparam_vals <span class="op">=</span> <span class="dv">10</span><span class="op">**</span>np.linspace(<span class="op">-</span><span class="fl">3.5</span>, <span class="dv">1</span>)</span>
 <span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -674,7 +674,7 @@ Recall:  0.5925925925925926</code></pre>
 <span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a>    accuracy_iter.append(cross_val_score(logreg_model, X_train_stratified_scaled, y_train_stratified,</span>
 <span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a>                                      scoring<span class="op">=</span><span class="st">'accuracy'</span>, cv<span class="op">=</span><span class="dv">5</span>)) <span class="co"># Find the cv results</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-execution_count="241">
+<div class="cell" data-execution_count="21">
 <div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>plt.plot(hyperparam_vals, np.mean(np.array(accuracy_iter), axis<span class="op">=</span><span class="dv">1</span>))</span>
 <span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'C'</span>)</span>
 <span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Average 5-fold CV accuracy'</span>)</span>
@@ -684,15 +684,15 @@ Recall:  0.5925925925925926</code></pre>
 <p><img src="L1_Scikit-learn_files/figure-html/cell-29-output-1.png" class="img-fluid"></p>
 </div>
 </div>
-<div class="cell" data-execution_count="242">
+<div class="cell" data-execution_count="22">
 <div class="sourceCode cell-code" id="cb46"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Optimal value of the regularization parameter 'C'</span></span>
 <span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>optimal_C <span class="op">=</span> hyperparam_vals[np.argmax(np.array(accuracy_iter).mean(axis<span class="op">=</span><span class="dv">1</span>))]</span>
 <span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>optimal_C</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="242">
+<div class="cell-output cell-output-display" data-execution_count="22">
 <pre><code>0.11787686347935879</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="243">
+<div class="cell" data-execution_count="23">
 <div class="sourceCode cell-code" id="cb48"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Developing the model with stratified splitting and optimal 'C'</span></span>
 <span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Scaling data</span></span>
@@ -734,39 +734,43 @@ Recall:  0.5370370370370371</code></pre>
 </section>
 <section id="tuning-the-decision-threshold-probability-and-the-regularization-parameter-simultaneously" class="level3" data-number="1.5.3">
 <h3 data-number="1.5.3" class="anchored" data-anchor-id="tuning-the-decision-threshold-probability-and-the-regularization-parameter-simultaneously"><span class="header-section-number">1.5.3</span> Tuning the decision threshold probability and the regularization parameter simultaneously</h3>
-<div class="cell" data-execution_count="244">
+<div class="cell" data-execution_count="26">
 <div class="sourceCode cell-code" id="cb50"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>threshold_hyperparam_vals <span class="op">=</span> np.arange(<span class="dv">0</span>,<span class="fl">1.01</span>,<span class="fl">0.01</span>)</span>
 <span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>C_hyperparam_vals <span class="op">=</span> <span class="dv">10</span><span class="op">**</span>np.linspace(<span class="op">-</span><span class="fl">3.5</span>, <span class="dv">1</span>)</span>
-<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>accuracy_iter <span class="op">=</span> []</span>
-<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> c_val <span class="kw">in</span> C_hyperparam_vals:</span>
-<span id="cb50-6"><a href="#cb50-6" aria-hidden="true" tabindex="-1"></a>    predicted_probability <span class="op">=</span> cross_val_predict(LogisticRegression(C <span class="op">=</span> c_val), X_train_stratified_scaled, </span>
-<span id="cb50-7"><a href="#cb50-7" aria-hidden="true" tabindex="-1"></a>                                                  y_train_stratified, cv <span class="op">=</span> <span class="dv">5</span>, method <span class="op">=</span> <span class="st">'predict_proba'</span>)</span>
-<span id="cb50-8"><a href="#cb50-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-9"><a href="#cb50-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> threshold_prob <span class="kw">in</span> threshold_hyperparam_vals:</span>
-<span id="cb50-10"><a href="#cb50-10" aria-hidden="true" tabindex="-1"></a>        predicted_class <span class="op">=</span> predicted_probability[:,<span class="dv">1</span>] <span class="op">&gt;</span> threshold_prob</span>
-<span id="cb50-11"><a href="#cb50-11" aria-hidden="true" tabindex="-1"></a>        predicted_class <span class="op">=</span> predicted_class.astype(<span class="bu">int</span>)</span>
-<span id="cb50-12"><a href="#cb50-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-13"><a href="#cb50-13" aria-hidden="true" tabindex="-1"></a>        <span class="co">#Computing the accuracy</span></span>
-<span id="cb50-14"><a href="#cb50-14" aria-hidden="true" tabindex="-1"></a>        accuracy <span class="op">=</span> accuracy_score(predicted_class, y_train_stratified)<span class="op">*</span><span class="dv">100</span></span>
-<span id="cb50-15"><a href="#cb50-15" aria-hidden="true" tabindex="-1"></a>        accuracy_iter.append(accuracy)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>accuracy_iter <span class="op">=</span> pd.DataFrame(columns <span class="op">=</span> {<span class="st">'threshold'</span>, <span class="st">'C'</span>, <span class="st">'accuracy'</span>})</span>
+<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a>iter_number <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-6"><a href="#cb50-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> c_val <span class="kw">in</span> C_hyperparam_vals:</span>
+<span id="cb50-7"><a href="#cb50-7" aria-hidden="true" tabindex="-1"></a>    predicted_probability <span class="op">=</span> cross_val_predict(LogisticRegression(C <span class="op">=</span> c_val), X_train_stratified_scaled, </span>
+<span id="cb50-8"><a href="#cb50-8" aria-hidden="true" tabindex="-1"></a>                                                  y_train_stratified, cv <span class="op">=</span> <span class="dv">5</span>, method <span class="op">=</span> <span class="st">'predict_proba'</span>)</span>
+<span id="cb50-9"><a href="#cb50-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-10"><a href="#cb50-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> threshold_prob <span class="kw">in</span> threshold_hyperparam_vals:</span>
+<span id="cb50-11"><a href="#cb50-11" aria-hidden="true" tabindex="-1"></a>        predicted_class <span class="op">=</span> predicted_probability[:,<span class="dv">1</span>] <span class="op">&gt;</span> threshold_prob</span>
+<span id="cb50-12"><a href="#cb50-12" aria-hidden="true" tabindex="-1"></a>        predicted_class <span class="op">=</span> predicted_class.astype(<span class="bu">int</span>)</span>
+<span id="cb50-13"><a href="#cb50-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-14"><a href="#cb50-14" aria-hidden="true" tabindex="-1"></a>        <span class="co">#Computing the accuracy</span></span>
+<span id="cb50-15"><a href="#cb50-15" aria-hidden="true" tabindex="-1"></a>        accuracy <span class="op">=</span> accuracy_score(predicted_class, y_train_stratified)<span class="op">*</span><span class="dv">100</span></span>
+<span id="cb50-16"><a href="#cb50-16" aria-hidden="true" tabindex="-1"></a>        accuracy_iter.loc[iter_number, <span class="st">'threshold'</span>] <span class="op">=</span> threshold_prob</span>
+<span id="cb50-17"><a href="#cb50-17" aria-hidden="true" tabindex="-1"></a>        accuracy_iter.loc[iter_number, <span class="st">'C'</span>] <span class="op">=</span> c_val</span>
+<span id="cb50-18"><a href="#cb50-18" aria-hidden="true" tabindex="-1"></a>        accuracy_iter.loc[iter_number, <span class="st">'accuracy'</span>] <span class="op">=</span> accuracy</span>
+<span id="cb50-19"><a href="#cb50-19" aria-hidden="true" tabindex="-1"></a>        iter_number <span class="op">=</span> iter_number <span class="op">+</span> <span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-execution_count="245">
-<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>max_acc_iter <span class="op">=</span> np.argmax(accuracy_iter)</span>
-<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Optimal decision threshold probability</span></span>
-<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a>optimal_threshold <span class="op">=</span> threshold_hyperparam_vals[max_acc_iter<span class="op">%</span><span class="bu">len</span>(threshold_hyperparam_vals)]</span>
-<span id="cb51-5"><a href="#cb51-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Optimal decision threshold = "</span>, optimal_threshold)</span>
-<span id="cb51-6"><a href="#cb51-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb51-7"><a href="#cb51-7" aria-hidden="true" tabindex="-1"></a><span class="co">#Optimal C</span></span>
-<span id="cb51-8"><a href="#cb51-8" aria-hidden="true" tabindex="-1"></a>optimal_C <span class="op">=</span> C_hyperparam_vals[<span class="bu">int</span>(max_acc_iter<span class="op">/</span><span class="bu">len</span>(threshold_hyperparam_vals))]</span>
+<div class="cell" data-execution_count="42">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Parameters for highest accuracy</span></span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>optimal_C <span class="op">=</span> accuracy_iter.sort_values(by <span class="op">=</span> <span class="st">'accuracy'</span>, ascending <span class="op">=</span> <span class="va">False</span>).iloc[<span class="dv">0</span>,:][<span class="st">'C'</span>]</span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>optimal_threshold <span class="op">=</span> accuracy_iter.sort_values(by <span class="op">=</span> <span class="st">'accuracy'</span>, ascending <span class="op">=</span> <span class="va">False</span>).iloc[<span class="dv">0</span>, :][<span class="st">'threshold'</span>]</span>
+<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-5"><a href="#cb51-5" aria-hidden="true" tabindex="-1"></a><span class="co">#Optimal decision threshold probability</span></span>
+<span id="cb51-6"><a href="#cb51-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Optimal decision threshold = "</span>, optimal_threshold)</span>
+<span id="cb51-7"><a href="#cb51-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-8"><a href="#cb51-8" aria-hidden="true" tabindex="-1"></a><span class="co">#Optimal C</span></span>
 <span id="cb51-9"><a href="#cb51-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Optimal C = "</span>, optimal_C)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Optimal decision threshold =  0.46
-Optimal C =  2.2758459260747887</code></pre>
+Optimal C =  4.291934260128778</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="246">
+<div class="cell" data-execution_count="43">
 <div class="sourceCode cell-code" id="cb53"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Developing the model with stratified splitting, optimal decision threshold probability, and optimal 'C'</span></span>
 <span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Scaling data</span></span>
@@ -803,7 +807,7 @@ Optimal C =  2.2758459260747887</code></pre>
 <span id="cb53-34"><a href="#cb53-34" aria-hidden="true" tabindex="-1"></a>sns.heatmap(cm, annot<span class="op">=</span><span class="va">True</span>, cmap<span class="op">=</span><span class="st">'Blues'</span>, fmt<span class="op">=</span><span class="st">'g'</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Accuracy:  79.87012987012987
-ROC-AUC:  0.8507407407407408
+ROC-AUC:  0.8509259259259259
 Precision:  0.7804878048780488
 Recall:  0.5925925925925926</code></pre>
 </div>

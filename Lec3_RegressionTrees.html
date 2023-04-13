@@ -213,7 +213,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Tuning a hyperparameter.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Assignment A</span></a>
+  <a href="./Tuning a hyperparameter.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Tuning a hyperparameter</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -635,7 +635,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section>
 <section id="cost-complexity-pruning" class="level2" data-number="3.3">
 <h2 data-number="3.3" class="anchored" data-anchor-id="cost-complexity-pruning"><span class="header-section-number">3.3</span> Cost complexity pruning</h2>
-<p>While optimizing parameters above, we optimized them within a range that we thought was reasonable. While doing so, we restricted ouverselves to considering only a subset of the unpruned tree. Thus, we could have missed out on finding the optimal tree (or the best model).</p>
+<p>While optimizing parameters above, we optimized them within a range that we thought was reasonable. While doing so, we restricted ourselves to considering only a subset of the unpruned tree. Thus, we could have missed out on finding the optimal tree (or the best model).</p>
 <p>With cost complexity pruning, we first develop an unpruned tree without any restrictions. Then, using cross validation, we find the optimal value of the tuning parameter <span class="math inline">\(\alpha\)</span>. All the non-terminal nodes for which <span class="math inline">\(\alpha_{eff}\)</span> is smaller that the optimal <span class="math inline">\(\alpha\)</span> will be pruned. You will need to check out the link below to understand this better.</p>
 <p>Check out a detailed explanation of how cost complexity pruning is implemented in sklearn at: https://scikit-learn.org/stable/modules/tree.html#minimal-cost-complexity-pruning</p>
 <p>Here are some informative visualizations that will help you understand what is happening in cost complexity pruning: https://scikit-learn.org/stable/auto_examples/tree/plot_cost_complexity_pruning.html#sphx-glr-auto-examples-tree-plot-cost-complexity-pruning-py</p>
@@ -681,7 +681,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>7306.592294294368</code></pre>
 </div>
 </div>
-<p>The RMSE for the decision tree with cost complexity pruning is lower than that of linear regression models and spline regression models (including MARS), with these four predictors. However, it is higher than the one obtained with tuning tree parameters using grid search (shown previously). Cost complexity pruning considers a completely unpruned tree unlike the ‘grid search’ method, and thus may seem to be more comprehensive than the ‘grid search’ approach. However, the ‘grid search’ approach consideres several trees unlike cost complexity pruning that considers only one tree and prunes it. Thus, both approaches have advatages over each other, and either one may provide a more accurate model.</p>
+<p>The RMSE for the decision tree with cost complexity pruning is lower than that of linear regression models and spline regression models (including MARS), with these four predictors. However, it is higher than the one obtained with tuning tree parameters using grid search (shown previously). Cost complexity pruning considers a completely unpruned tree unlike the ‘grid search’ method, and thus may seem to be more comprehensive than the ‘grid search’ approach. However, the ‘grid search’ approach considers several trees unlike cost complexity pruning that considers only one tree and prunes it. Thus, both approaches have advantages over each other, and either one may provide a more accurate model.</p>
 <div class="cell" data-execution_count="75">
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>gridcv_results <span class="op">=</span> pd.DataFrame(model.cv_results_)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>

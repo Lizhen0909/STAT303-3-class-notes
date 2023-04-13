@@ -23,6 +23,7 @@ book:
   appendices: 
     - Assignment A.ipynb
     - Stratified splitting.ipynb
+    - Tuning a hyperparameter.ipynb
     - Datasets.ipynb
     - references.qmd  
 

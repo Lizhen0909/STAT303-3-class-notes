@@ -22,6 +22,7 @@ book:
         - Lec3_RegressionTrees.ipynb
   appendices: 
     - Assignment A.ipynb
+    - Assignment B.ipynb
     - Stratified splitting.ipynb
     - Tuning a hyperparameter.ipynb
     - Datasets.ipynb

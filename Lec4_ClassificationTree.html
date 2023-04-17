@@ -602,12 +602,11 @@ Recall:  0.8360655737704918</code></pre>
 <p>Suppose we wish to balance recall with false positive rate. We can optimize the model to maximize ROC-AUC, and then choose a point on the ROC-curve that balances recall with the false positive rate.</p>
 <div class="cell" data-execution_count="114">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Defining parameters and the range of values over which to optimize</span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Let us consider another hyperparameter 'max_features' to optimize. We could have considered it earlier also.</span></span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>param_grid <span class="op">=</span> {    </span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">'max_depth'</span>: <span class="bu">range</span>(<span class="dv">2</span>,<span class="dv">14</span>),</span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">'max_leaf_nodes'</span>: <span class="bu">range</span>(<span class="dv">2</span>,<span class="dv">118</span>),</span>
-<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">'max_features'</span>: <span class="bu">range</span>(<span class="dv">3</span>, <span class="dv">9</span>)</span>
-<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>param_grid <span class="op">=</span> {    </span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'max_depth'</span>: <span class="bu">range</span>(<span class="dv">2</span>,<span class="dv">14</span>),</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">'max_leaf_nodes'</span>: <span class="bu">range</span>(<span class="dv">2</span>,<span class="dv">118</span>),</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">'max_features'</span>: <span class="bu">range</span>(<span class="dv">3</span>, <span class="dv">9</span>)</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell" data-execution_count="115">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Grid search to optimize parameter values</span></span>
@@ -759,7 +758,7 @@ Best params for recall
 <pre><code>DecisionTreeClassifier(ccp_alpha=0.01435396, random_state=1)</code></pre>
 </div>
 </div>
-<p>Now we can tune the decision threshold probability to balance recall with another performance metrics as shown earlier.</p>
+<p>Now we can tune the decision threshold probability to balance recall with another performance metrics as shown earlier in <a href="https://nustat.github.io/STAT303-3-class-notes/Lec4_ClassificationTree.html#optimizing-the-decision-threshold-probability">Section 4.3</a>.</p>
 
 
 </section>

@@ -20,6 +20,7 @@ book:
         - L1_Scikit-learn.ipynb
         - Lec2_Regression_splines.ipynb
         - Lec3_RegressionTrees.ipynb
+        - Lec4_ClassificationTree.ipynb
   appendices: 
     - Assignment A.ipynb
     - Assignment B.ipynb

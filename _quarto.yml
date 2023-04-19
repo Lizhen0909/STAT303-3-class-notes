@@ -21,6 +21,7 @@ book:
         - Lec2_Regression_splines.ipynb
         - Lec3_RegressionTrees.ipynb
         - Lec4_ClassificationTree.ipynb
+        - Lec4_Bagging.ipynb
   appendices: 
     - Assignment A.ipynb
     - Assignment B.ipynb

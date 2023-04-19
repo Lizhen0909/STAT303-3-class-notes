@@ -284,13 +284,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <p><em>Read section 8.1.2 of the book before using these notes.</em></p>
 <p><em>Note that in this course, lecture notes are not sufficient, you must read the book for better understanding. Lecture notes are just implementing the concepts of the book on a dataset, but not explaining the concepts elaborately.</em></p>
-<div class="cell" data-execution_count="1">
+<div class="cell" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> mean_squared_error</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> cross_val_score,train_test_split</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> cross_val_score,train_test_split, cross_val_predict</span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> roc_curve, precision_recall_curve, auc, make_scorer, recall_score, accuracy_score, precision_score, confusion_matrix</span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> StratifiedKFold, KFold</span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.tree <span class="im">import</span> DecisionTreeClassifier</span>
@@ -304,13 +304,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time <span class="im">as</span> time</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-execution_count="2">
+<div class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>train <span class="op">=</span> pd.read_csv(<span class="st">'./Datasets/diabetes_train.csv'</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>test <span class="op">=</span> pd.read_csv(<span class="st">'./Datasets/diabetes_test.csv'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-execution_count="5">
+<div class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>test.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="5">
+<div class="cell-output cell-output-display" data-execution_count="12">
 
 <div>
 
@@ -398,7 +398,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <section id="building-a-classification-tree" class="level2" data-number="4.1">
 <h2 data-number="4.1" class="anchored" data-anchor-id="building-a-classification-tree"><span class="header-section-number">4.1</span> Building a classification tree</h2>
 <p>Develop a classification tree to predict if a person has diabetes.</p>
-<div class="cell" data-execution_count="7">
+<div class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> train.drop(columns <span class="op">=</span> <span class="st">'Outcome'</span>)</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>Xtest <span class="op">=</span> test.drop(columns <span class="op">=</span> <span class="st">'Outcome'</span>)</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> train[<span class="st">'Outcome'</span>]</span>
@@ -461,7 +461,7 @@ Recall:  0.45901639344262296</code></pre>
 <section id="optimizing-hyperparameters-to-optimize-performance" class="level2" data-number="4.2">
 <h2 data-number="4.2" class="anchored" data-anchor-id="optimizing-hyperparameters-to-optimize-performance"><span class="header-section-number">4.2</span> Optimizing hyperparameters to optimize performance</h2>
 <p>In case of diabetes, it is important to reduce FNR (False negative rate) or maximize recall. This is because if a person has diabetes, the consequences of predicting that they don’t have diabetes can be much worse than the other way round.</p>
-<p>Let us find the optimal depth of the tree and the number of terminal nods (leaves) that minimizes the FNR or mazimizes recall.</p>
+<p>Let us find the optimal depth of the tree and the number of terminal nods (leaves) that minimizes the FNR or maximizes recall.</p>
 <p>Find the maximum values of depth and number of leaves.</p>
 <div class="cell" data-execution_count="24">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Defining the object to build a regression tree</span></span>
@@ -538,43 +538,69 @@ Time taken = 36 seconds</code></pre>
 <section id="balancing-recall-with-precision" class="level3" data-number="4.3.1">
 <h3 data-number="4.3.1" class="anchored" data-anchor-id="balancing-recall-with-precision"><span class="header-section-number">4.3.1</span> Balancing recall with precision</h3>
 <p>We can find a threshold probability that balances recall with precision.</p>
-<div class="cell" data-execution_count="122">
+<div class="cell" data-execution_count="25">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> DecisionTreeClassifier(random_state<span class="op">=</span><span class="dv">1</span>, max_depth <span class="op">=</span> <span class="dv">5</span>, max_leaf_nodes<span class="op">=</span><span class="dv">6</span>, max_features<span class="op">=</span><span class="dv">8</span>).fit(X, y)</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>ypred <span class="op">=</span> model.predict_proba(X)[:,<span class="dv">1</span>]</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>p, r, thresholds <span class="op">=</span> precision_recall_curve(y, ypred)</span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plot_precision_recall_vs_threshold(precisions, recalls, thresholds):</span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>    plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">8</span>))</span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>    plt.title(<span class="st">"Precision and Recall Scores as a function of the decision threshold"</span>)</span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>    plt.plot(thresholds, precisions[:<span class="op">-</span><span class="dv">1</span>], <span class="st">"b--"</span>, label<span class="op">=</span><span class="st">"Precision"</span>)</span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>    plt.plot(thresholds, recalls[:<span class="op">-</span><span class="dv">1</span>], <span class="st">"g-"</span>, label<span class="op">=</span><span class="st">"Recall"</span>)</span>
-<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>    plt.plot(thresholds, precisions[:<span class="op">-</span><span class="dv">1</span>], <span class="st">"o"</span>, color <span class="op">=</span> <span class="st">'blue'</span>)</span>
-<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>    plt.plot(thresholds, recalls[:<span class="op">-</span><span class="dv">1</span>], <span class="st">"o"</span>, color <span class="op">=</span> <span class="st">'green'</span>)</span>
-<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>    plt.ylabel(<span class="st">"Score"</span>)</span>
-<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>    plt.xlabel(<span class="st">"Decision Threshold"</span>)</span>
-<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>    plt.legend(loc<span class="op">=</span><span class="st">'best'</span>)</span>
-<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>    plt.legend()</span>
-<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>plot_precision_recall_vs_threshold(p, r, thresholds)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Note that we are using the cross-validated predicted probabilities, instead of directly using the </span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="co"># predicted probabilities on train data, as the model may be overfitting on the train data, and </span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="co"># may lead to misleading results</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>cross_val_ypred <span class="op">=</span> cross_val_predict(DecisionTreeClassifier(random_state<span class="op">=</span><span class="dv">1</span>, max_depth <span class="op">=</span> <span class="dv">5</span>, </span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>                                                        max_leaf_nodes<span class="op">=</span><span class="dv">6</span>, max_features<span class="op">=</span><span class="dv">8</span>), X, </span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>                                              y, cv <span class="op">=</span> <span class="dv">5</span>, method <span class="op">=</span> <span class="st">'predict_proba'</span>)</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>p, r, thresholds <span class="op">=</span> precision_recall_curve(y, cross_val_ypred[:,<span class="dv">1</span>])</span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plot_precision_recall_vs_threshold(precisions, recalls, thresholds):</span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>    plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">8</span>))</span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>    plt.title(<span class="st">"Precision and Recall Scores as a function of the decision threshold"</span>)</span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>    plt.plot(thresholds, precisions[:<span class="op">-</span><span class="dv">1</span>], <span class="st">"b--"</span>, label<span class="op">=</span><span class="st">"Precision"</span>)</span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>    plt.plot(thresholds, recalls[:<span class="op">-</span><span class="dv">1</span>], <span class="st">"g-"</span>, label<span class="op">=</span><span class="st">"Recall"</span>)</span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>    plt.plot(thresholds, precisions[:<span class="op">-</span><span class="dv">1</span>], <span class="st">"o"</span>, color <span class="op">=</span> <span class="st">'blue'</span>)</span>
+<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>    plt.plot(thresholds, recalls[:<span class="op">-</span><span class="dv">1</span>], <span class="st">"o"</span>, color <span class="op">=</span> <span class="st">'green'</span>)</span>
+<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a>    plt.ylabel(<span class="st">"Score"</span>)</span>
+<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a>    plt.xlabel(<span class="st">"Decision Threshold"</span>)</span>
+<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a>    plt.legend(loc<span class="op">=</span><span class="st">'best'</span>)</span>
+<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a>    plt.legend()</span>
+<span id="cb19-22"><a href="#cb19-22" aria-hidden="true" tabindex="-1"></a>plot_precision_recall_vs_threshold(p, r, thresholds)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <p><img src="Lec4_ClassificationTree_files/figure-html/cell-14-output-1.png" class="img-fluid"></p>
 </div>
 </div>
-<div class="cell" data-execution_count="123">
+<div class="cell" data-execution_count="26">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Thresholds with precision and recall</span></span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>np.concatenate([thresholds.reshape(<span class="op">-</span><span class="dv">1</span>,<span class="dv">1</span>), p[:<span class="op">-</span><span class="dv">1</span>].reshape(<span class="op">-</span><span class="dv">1</span>,<span class="dv">1</span>), r[:<span class="op">-</span><span class="dv">1</span>].reshape(<span class="op">-</span><span class="dv">1</span>,<span class="dv">1</span>)], axis <span class="op">=</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="123">
-<pre><code>array([[0.05263158, 0.33713355, 1.        ],
-       [0.12686567, 0.35590278, 0.99033816],
-       [0.28358209, 0.55519481, 0.82608696],
-       [0.35897436, 0.63070539, 0.73429952],
-       [0.58441558, 0.68316832, 0.66666667],
-       [0.744     , 0.744     , 0.44927536]])</code></pre>
+<div class="cell-output cell-output-display" data-execution_count="26">
+<pre><code>array([[0.        , 0.33713355, 1.        ],
+       [0.03703704, 0.34453782, 0.99033816],
+       [0.05511811, 0.34812287, 0.98550725],
+       [0.08241758, 0.36413043, 0.97101449],
+       [0.08743169, 0.38235294, 0.94202899],
+       [0.11557789, 0.40511727, 0.9178744 ],
+       [0.125     , 0.43203883, 0.85990338],
+       [0.14230769, 0.43349754, 0.85024155],
+       [0.20833333, 0.48255814, 0.80193237],
+       [0.25490196, 0.51290323, 0.76811594],
+       [0.26086957, 0.5248227 , 0.71497585],
+       [0.26785714, 0.53136531, 0.69565217],
+       [0.28301887, 0.54724409, 0.67149758],
+       [0.36923077, 0.56504065, 0.67149758],
+       [0.51666667, 0.58008658, 0.647343  ],
+       [0.5483871 , 0.59241706, 0.60386473],
+       [0.59459459, 0.58974359, 0.55555556],
+       [0.64516129, 0.60335196, 0.52173913],
+       [0.65789474, 0.61077844, 0.49275362],
+       [0.67105263, 0.64052288, 0.47342995],
+       [0.68421053, 0.64347826, 0.35748792],
+       [0.68707483, 0.62365591, 0.28019324],
+       [0.69911504, 0.61290323, 0.18357488],
+       [0.728     , 0.61764706, 0.10144928],
+       [1.        , 0.        , 0.        ]])</code></pre>
 </div>
 </div>
-<p>Suppose, we wish to have at least 80% recall, with the highest possible precision. Then, based on the precision-recall curve, we should have a decision threshold probability of 0.28.</p>
-<p>Let’s assess the model’s performance on test data with a threshold probability of 0.28.</p>
-<div class="cell" data-execution_count="124">
+<p>Suppose, we wish to have at least 80% recall, with the highest possible precision. Then, based on the precision-recall curve <em>(or the table above)</em>, we should have a decision threshold probability of 0.2.</p>
+<p>Let’s assess the model’s performance on test data with a threshold probability of 0.2.</p>
+<div class="cell" data-execution_count="27">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Performance metrics computation for the optimum decision threshold probability</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>desired_threshold <span class="op">=</span> <span class="fl">0.23</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>desired_threshold <span class="op">=</span> <span class="fl">0.2</span></span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>y_pred_prob <span class="op">=</span> model.predict_proba(Xtest)[:,<span class="dv">1</span>] </span>
 <span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a></span>
@@ -645,54 +671,53 @@ Best params for recall
 Time taken = 61 seconds</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="125">
+<div class="cell" data-execution_count="43">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> DecisionTreeClassifier(random_state<span class="op">=</span><span class="dv">1</span>, max_depth <span class="op">=</span> <span class="dv">4</span>, max_leaf_nodes<span class="op">=</span><span class="dv">9</span>, max_features<span class="op">=</span><span class="dv">8</span>).fit(X, y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-execution_count="126">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>ypred <span class="op">=</span> model.predict_proba(X)[:,<span class="dv">1</span>]</span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>fpr, tpr, auc_thresholds <span class="op">=</span> roc_curve(y, ypred)</span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(auc(fpr, tpr))<span class="co"># AUC of ROC</span></span>
-<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plot_roc_curve(fpr, tpr, label<span class="op">=</span><span class="va">None</span>):</span>
-<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>    plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>,<span class="dv">8</span>))</span>
-<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>    plt.title(<span class="st">'ROC Curve'</span>)</span>
-<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>    plt.plot(fpr, tpr, linewidth<span class="op">=</span><span class="dv">2</span>, label<span class="op">=</span>label)</span>
-<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>    plt.plot(fpr, tpr, <span class="st">'o'</span>, color <span class="op">=</span> <span class="st">'blue'</span>)</span>
-<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>    plt.plot([<span class="dv">0</span>, <span class="dv">1</span>], [<span class="dv">0</span>, <span class="dv">1</span>], <span class="st">'k--'</span>)</span>
-<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>    plt.axis([<span class="op">-</span><span class="fl">0.005</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="fl">1.005</span>])</span>
-<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a>    plt.xticks(np.arange(<span class="dv">0</span>,<span class="dv">1</span>, <span class="fl">0.05</span>), rotation<span class="op">=</span><span class="dv">90</span>)</span>
-<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a>    plt.xlabel(<span class="st">"False Positive Rate"</span>)</span>
-<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a>    plt.ylabel(<span class="st">"True Positive Rate (Recall)"</span>)</span>
-<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-15"><a href="#cb28-15" aria-hidden="true" tabindex="-1"></a>fpr, tpr, auc_thresholds <span class="op">=</span> roc_curve(y, ypred)</span>
-<span id="cb28-16"><a href="#cb28-16" aria-hidden="true" tabindex="-1"></a>plot_roc_curve(fpr, tpr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="44">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>cross_val_ypred <span class="op">=</span> cross_val_predict(DecisionTreeClassifier(random_state<span class="op">=</span><span class="dv">1</span>, max_depth <span class="op">=</span> <span class="dv">4</span>, </span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>                                                           max_leaf_nodes<span class="op">=</span><span class="dv">9</span>, max_features<span class="op">=</span><span class="dv">8</span>), X, </span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>                                              y, cv <span class="op">=</span> <span class="dv">5</span>, method <span class="op">=</span> <span class="st">'predict_proba'</span>)</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>fpr, tpr, auc_thresholds <span class="op">=</span> roc_curve(y, cross_val_ypred[:,<span class="dv">1</span>])</span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(auc(fpr, tpr))<span class="co"># AUC of ROC</span></span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plot_roc_curve(fpr, tpr, label<span class="op">=</span><span class="va">None</span>):</span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>    plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>,<span class="dv">8</span>))</span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>    plt.title(<span class="st">'ROC Curve'</span>)</span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>    plt.plot(fpr, tpr, linewidth<span class="op">=</span><span class="dv">2</span>, label<span class="op">=</span>label)</span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a>    plt.plot(fpr, tpr, <span class="st">'o'</span>, color <span class="op">=</span> <span class="st">'blue'</span>)</span>
+<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a>    plt.plot([<span class="dv">0</span>, <span class="dv">1</span>], [<span class="dv">0</span>, <span class="dv">1</span>], <span class="st">'k--'</span>)</span>
+<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a>    plt.axis([<span class="op">-</span><span class="fl">0.005</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="fl">1.005</span>])</span>
+<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a>    plt.xticks(np.arange(<span class="dv">0</span>,<span class="dv">1</span>, <span class="fl">0.05</span>), rotation<span class="op">=</span><span class="dv">90</span>)</span>
+<span id="cb28-15"><a href="#cb28-15" aria-hidden="true" tabindex="-1"></a>    plt.xlabel(<span class="st">"False Positive Rate"</span>)</span>
+<span id="cb28-16"><a href="#cb28-16" aria-hidden="true" tabindex="-1"></a>    plt.ylabel(<span class="st">"True Positive Rate (Recall)"</span>)</span>
+<span id="cb28-17"><a href="#cb28-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-18"><a href="#cb28-18" aria-hidden="true" tabindex="-1"></a>fpr, tpr, auc_thresholds <span class="op">=</span> roc_curve(y, cross_val_ypred[:,<span class="dv">1</span>])</span>
+<span id="cb28-19"><a href="#cb28-19" aria-hidden="true" tabindex="-1"></a>plot_roc_curve(fpr, tpr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>0.8311137224180702</code></pre>
+<pre><code>0.7642345903215468</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <p><img src="Lec4_ClassificationTree_files/figure-html/cell-20-output-2.png" class="img-fluid"></p>
 </div>
 </div>
-<div class="cell" data-execution_count="127">
+<div class="cell" data-execution_count="47">
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Thresholds with TPR and FPR</span></span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>np.concatenate([auc_thresholds.reshape(<span class="op">-</span><span class="dv">1</span>,<span class="dv">1</span>), tpr.reshape(<span class="op">-</span><span class="dv">1</span>,<span class="dv">1</span>), fpr.reshape(<span class="op">-</span><span class="dv">1</span>,<span class="dv">1</span>)], axis <span class="op">=</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="127">
-<pre><code>array([[1.89583333, 0.        , 0.        ],
-       [0.89583333, 0.20772947, 0.01228501],
-       [0.75      , 0.41062802, 0.04668305],
-       [0.58441558, 0.62801932, 0.12530713],
-       [0.38095238, 0.66666667, 0.15724816],
-       [0.37037037, 0.71497585, 0.1990172 ],
-       [0.35897436, 0.7826087 , 0.26044226],
-       [0.28358209, 0.87439614, 0.37837838],
-       [0.09958506, 0.99033816, 0.91154791],
-       [0.05263158, 1.        , 1.        ]])</code></pre>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>all_thresholds <span class="op">=</span> np.concatenate([auc_thresholds.reshape(<span class="op">-</span><span class="dv">1</span>,<span class="dv">1</span>), tpr.reshape(<span class="op">-</span><span class="dv">1</span>,<span class="dv">1</span>), fpr.reshape(<span class="op">-</span><span class="dv">1</span>,<span class="dv">1</span>)], axis <span class="op">=</span> <span class="dv">1</span>)</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>recall_more_than_80 <span class="op">=</span> all_thresholds[all_thresholds[:,<span class="dv">1</span>]<span class="op">&gt;</span><span class="fl">0.8</span>,:]</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="co"># As the values in 'recall_more_than_80' are arranged in increasing order of recall and decreasing threshold,</span></span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a><span class="co"># the first value will provide the maximum threshold probabiltiy for the recall to be more than 80%</span></span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a><span class="co"># We wish to find the maximum threshold probability to obtain the minimum possible FPR</span></span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>recall_more_than_80[<span class="dv">0</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="47">
+<pre><code>array([0.25      , 0.80676329, 0.36855037])</code></pre>
 </div>
 </div>
-<p>Suppose, we wish to have at least 80% recall, with the lowest possible precision. Then, based on the ROC-AUC curve, we should have a decision threshold probability of 0.28.</p>
-<p>Let’s assess the model’s performance on test data with a threshold probability of 0.28.</p>
-<div class="cell" data-execution_count="128">
+<p>Suppose, we wish to have at least 80% recall, with the lowest possible precision. Then, based on the ROC-AUC curve, we should have a decision threshold probability of 0.25.</p>
+<p>Let’s assess the model’s performance on test data with a threshold probability of 0.25.</p>
+<div class="cell" data-execution_count="48">
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Performance metrics computation for the optimum decision threshold probability</span></span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>desired_threshold <span class="op">=</span> <span class="fl">0.28</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>desired_threshold <span class="op">=</span> <span class="fl">0.25</span></span>
 <span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>y_pred_prob <span class="op">=</span> model.predict_proba(Xtest)[:,<span class="dv">1</span>] </span>
 <span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a></span>
@@ -726,7 +751,6 @@ Recall:  0.8688524590163934</code></pre>
 <p><img src="Lec4_ClassificationTree_files/figure-html/cell-22-output-2.png" class="img-fluid"></p>
 </div>
 </div>
-<p>Note that in the above tuning of decision threshold probability, we have directly used the train data. However, ideally, we should use k-fold cross validation to tune it.</p>
 </section>
 </section>
 <section id="cost-complexity-pruning" class="level2" data-number="4.4">

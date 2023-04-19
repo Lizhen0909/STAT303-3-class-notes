@@ -829,14 +829,14 @@ Regression splines: 13660.35327661836</code></pre>
 </section>
 <section id="mars-multivariate-adaptive-regression-splines" class="level2" data-number="2.5">
 <h2 data-number="2.5" class="anchored" data-anchor-id="mars-multivariate-adaptive-regression-splines"><span class="header-section-number">2.5</span> MARS (Multivariate Adaptive Regression Splines)</h2>
-<div class="cell" data-execution_count="56">
+<div class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyearth <span class="im">import</span> Earth</span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>X<span class="op">=</span>train[<span class="st">'mileage'</span>]</span>
-<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>y<span class="op">=</span>train[<span class="st">'price'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>X<span class="op">=</span>pd.DataFrame(train[<span class="st">'mileage'</span>])</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>y<span class="op">=</span>pd.DataFrame(train[<span class="st">'price'</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <section id="mars-of-degree-1" class="level3" data-number="2.5.1">
 <h3 data-number="2.5.1" class="anchored" data-anchor-id="mars-of-degree-1"><span class="header-section-number">2.5.1</span> MARS of degree 1</h3>
-<div class="cell" data-execution_count="57">
+<div class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> Earth(max_terms<span class="op">=</span><span class="dv">500</span>, max_degree<span class="op">=</span><span class="dv">1</span>) <span class="co"># note, terms in brackets are the hyperparameters </span></span>
 <span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>model.fit(X,y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
@@ -847,7 +847,7 @@ C:\Users\akl0407\Anaconda3\lib\site-packages\pyearth\earth.py:1066: FutureWarnin
 To use the future default and silence this warning we advise to pass `rcond=None`, to keep using the old, explicitly pass `rcond=-1`.
   coef, resid = np.linalg.lstsq(B, weighted_y[:, i])[0:2]</code></pre>
 </div>
-<div class="cell-output cell-output-display" data-execution_count="57">
+<div class="cell-output cell-output-display" data-execution_count="9">
 <pre><code>Earth(max_degree=1, max_terms=500)</code></pre>
 </div>
 </div>

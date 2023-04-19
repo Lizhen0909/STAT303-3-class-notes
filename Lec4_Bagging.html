@@ -251,13 +251,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#bagging-regression-trees" id="toc-bagging-regression-trees" class="nav-link active" data-scroll-target="#bagging-regression-trees"><span class="toc-section-number">5.1</span>  Bagging regression trees</a></li>
-  <li><a href="#model-accuracy-vs-number-of-trees" id="toc-model-accuracy-vs-number-of-trees" class="nav-link" data-scroll-target="#model-accuracy-vs-number-of-trees"><span class="toc-section-number">5.2</span>  Model accuracy vs number of trees</a></li>
-  <li><a href="#optimizing-bagging-parameters-using-grid-search" id="toc-optimizing-bagging-parameters-using-grid-search" class="nav-link" data-scroll-target="#optimizing-bagging-parameters-using-grid-search"><span class="toc-section-number">5.3</span>  Optimizing bagging parameters using grid search</a></li>
-  <li><a href="#bagging-for-classification" id="toc-bagging-for-classification" class="nav-link" data-scroll-target="#bagging-for-classification"><span class="toc-section-number">5.4</span>  Bagging for classification</a></li>
-  <li><a href="#model-accuracy-vs-number-of-trees-1" id="toc-model-accuracy-vs-number-of-trees-1" class="nav-link" data-scroll-target="#model-accuracy-vs-number-of-trees-1"><span class="toc-section-number">5.5</span>  Model accuracy vs number of trees</a></li>
-  <li><a href="#optimizing-bagging-parameters-using-grid-search-1" id="toc-optimizing-bagging-parameters-using-grid-search-1" class="nav-link" data-scroll-target="#optimizing-bagging-parameters-using-grid-search-1"><span class="toc-section-number">5.6</span>  Optimizing bagging parameters using grid search</a></li>
-  <li><a href="#tuning-the-decision-threshold-probability" id="toc-tuning-the-decision-threshold-probability" class="nav-link" data-scroll-target="#tuning-the-decision-threshold-probability"><span class="toc-section-number">5.7</span>  Tuning the decision threshold probability</a></li>
+  <li><a href="#bagging-regression-trees" id="toc-bagging-regression-trees" class="nav-link active" data-scroll-target="#bagging-regression-trees"><span class="toc-section-number">5.1</span>  Bagging regression trees</a>
+  <ul>
+  <li><a href="#model-accuracy-vs-number-of-trees" id="toc-model-accuracy-vs-number-of-trees" class="nav-link" data-scroll-target="#model-accuracy-vs-number-of-trees"><span class="toc-section-number">5.1.1</span>  Model accuracy vs number of trees</a></li>
+  <li><a href="#optimizing-bagging-hyperparameters-using-grid-search" id="toc-optimizing-bagging-hyperparameters-using-grid-search" class="nav-link" data-scroll-target="#optimizing-bagging-hyperparameters-using-grid-search"><span class="toc-section-number">5.1.2</span>  Optimizing bagging hyperparameters using grid search</a></li>
+  </ul></li>
+  <li><a href="#bagging-for-classification" id="toc-bagging-for-classification" class="nav-link" data-scroll-target="#bagging-for-classification"><span class="toc-section-number">5.2</span>  Bagging for classification</a>
+  <ul>
+  <li><a href="#model-accuracy-vs-number-of-trees-1" id="toc-model-accuracy-vs-number-of-trees-1" class="nav-link" data-scroll-target="#model-accuracy-vs-number-of-trees-1"><span class="toc-section-number">5.2.1</span>  Model accuracy vs number of trees</a></li>
+  <li><a href="#optimizing-bagging-hyperparameters-using-grid-search-1" id="toc-optimizing-bagging-hyperparameters-using-grid-search-1" class="nav-link" data-scroll-target="#optimizing-bagging-hyperparameters-using-grid-search-1"><span class="toc-section-number">5.2.2</span>  Optimizing bagging hyperparameters using grid search</a></li>
+  <li><a href="#tuning-the-decision-threshold-probability" id="toc-tuning-the-decision-threshold-probability" class="nav-link" data-scroll-target="#tuning-the-decision-threshold-probability"><span class="toc-section-number">5.2.3</span>  Tuning the decision threshold probability</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -434,9 +438,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 <p>The RMSE has reduced a lot by averaging the predictions of 10 trees. The RMSE for a single tree model with optimized paramters was around 7000.</p>
-</section>
-<section id="model-accuracy-vs-number-of-trees" class="level2" data-number="5.2">
-<h2 data-number="5.2" class="anchored" data-anchor-id="model-accuracy-vs-number-of-trees"><span class="header-section-number">5.2</span> Model accuracy vs number of trees</h2>
+<section id="model-accuracy-vs-number-of-trees" class="level3" data-number="5.1.1">
+<h3 data-number="5.1.1" class="anchored" data-anchor-id="model-accuracy-vs-number-of-trees"><span class="header-section-number">5.1.1</span> Model accuracy vs number of trees</h3>
 <p>How does the model accuracy vary with the number of trees?</p>
 <p>As we increase the number of trees, it will tend to reduce the variance of individual trees leading to a more accurate prediction.</p>
 <div class="cell" data-execution_count="14">
@@ -514,8 +517,8 @@ C:\Users\akl0407\Anaconda3\lib\site-packages\sklearn\ensemble\_bagging.py:1069: 
 </div>
 </div>
 </section>
-<section id="optimizing-bagging-parameters-using-grid-search" class="level2" data-number="5.3">
-<h2 data-number="5.3" class="anchored" data-anchor-id="optimizing-bagging-parameters-using-grid-search"><span class="header-section-number">5.3</span> Optimizing bagging parameters using grid search</h2>
+<section id="optimizing-bagging-hyperparameters-using-grid-search" class="level3" data-number="5.1.2">
+<h3 data-number="5.1.2" class="anchored" data-anchor-id="optimizing-bagging-hyperparameters-using-grid-search"><span class="header-section-number">5.1.2</span> Optimizing bagging hyperparameters using grid search</h3>
 <p>More parameters of a bagged regression tree model can be optimized using the typical approach of k-fold cross validation over a grid of parameter values.</p>
 <div class="cell" data-execution_count="54">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>n_samples <span class="op">=</span> train.shape[<span class="dv">0</span>]</span>
@@ -566,8 +569,9 @@ Best Parameters :  {'base_estimator': DecisionTreeRegressor(random_state=1), 'bo
 </div>
 </div>
 </section>
-<section id="bagging-for-classification" class="level2" data-number="5.4">
-<h2 data-number="5.4" class="anchored" data-anchor-id="bagging-for-classification"><span class="header-section-number">5.4</span> Bagging for classification</h2>
+</section>
+<section id="bagging-for-classification" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="bagging-for-classification"><span class="header-section-number">5.2</span> Bagging for classification</h2>
 <p>Bag classification tree models to predict if a person has diabetes.</p>
 <div class="cell" data-execution_count="58">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>train <span class="op">=</span> pd.read_csv(<span class="st">'./Datasets/diabetes_train.csv'</span>)</span>
@@ -621,9 +625,8 @@ Recall:  0.9344262295081968</code></pre>
 </div>
 </div>
 <p>As a result of bagging, we obtain a model (with a threshold probabiltiy cutoff of 0.23) that has a better performance on test data in terms of almost all the metrics - accuracy, precision (comparable performance), recall, and ROC-AUC, as compared the single tree classification model (with a threshold probability cutoff of 0.23). Note that we have not yet tuned the model using <code>GridSearchCv</code> here, which is shown towards the end of this chapter.</p>
-</section>
-<section id="model-accuracy-vs-number-of-trees-1" class="level2" data-number="5.5">
-<h2 data-number="5.5" class="anchored" data-anchor-id="model-accuracy-vs-number-of-trees-1"><span class="header-section-number">5.5</span> Model accuracy vs number of trees</h2>
+<section id="model-accuracy-vs-number-of-trees-1" class="level3" data-number="5.2.1">
+<h3 data-number="5.2.1" class="anchored" data-anchor-id="model-accuracy-vs-number-of-trees-1"><span class="header-section-number">5.2.1</span> Model accuracy vs number of trees</h3>
 <div class="cell" data-execution_count="60">
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Finding model accuracy vs number of trees</span></span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>oob_accuracy<span class="op">=</span>{}<span class="op">;</span>test_accuracy<span class="op">=</span>{}<span class="op">;</span>oob_rmse<span class="op">=</span>{}<span class="op">;</span>test_rmse <span class="op">=</span> {}</span>
@@ -707,8 +710,8 @@ C:\Users\akl0407\Anaconda3\lib\site-packages\sklearn\ensemble\_bagging.py:644: R
 </div>
 </div>
 </section>
-<section id="optimizing-bagging-parameters-using-grid-search-1" class="level2" data-number="5.6">
-<h2 data-number="5.6" class="anchored" data-anchor-id="optimizing-bagging-parameters-using-grid-search-1"><span class="header-section-number">5.6</span> Optimizing bagging parameters using grid search</h2>
+<section id="optimizing-bagging-hyperparameters-using-grid-search-1" class="level3" data-number="5.2.2">
+<h3 data-number="5.2.2" class="anchored" data-anchor-id="optimizing-bagging-hyperparameters-using-grid-search-1"><span class="header-section-number">5.2.2</span> Optimizing bagging hyperparameters using grid search</h3>
 <p>More parameters of a bagged classification tree model can be optimized using the typical approach of k-fold cross validation over a grid of parameter values.</p>
 <div class="cell" data-execution_count="67">
 <div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>n_samples <span class="op">=</span> train.shape[<span class="dv">0</span>]</span>
@@ -740,8 +743,8 @@ Best Parameters :  {'base_estimator': DecisionTreeClassifier(random_state=1), 'b
 </div>
 </div>
 </section>
-<section id="tuning-the-decision-threshold-probability" class="level2" data-number="5.7">
-<h2 data-number="5.7" class="anchored" data-anchor-id="tuning-the-decision-threshold-probability"><span class="header-section-number">5.7</span> Tuning the decision threshold probability</h2>
+<section id="tuning-the-decision-threshold-probability" class="level3" data-number="5.2.3">
+<h3 data-number="5.2.3" class="anchored" data-anchor-id="tuning-the-decision-threshold-probability"><span class="header-section-number">5.2.3</span> Tuning the decision threshold probability</h3>
 <p>We’ll find a decision threshold probability that balances recall with precision.</p>
 <div class="cell" data-execution_count="113">
 <div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> BaggingClassifier(base_estimator<span class="op">=</span>DecisionTreeClassifier(random_state<span class="op">=</span><span class="dv">1</span>), n_estimators<span class="op">=</span><span class="dv">200</span>, </span>
@@ -840,6 +843,7 @@ Recall:  0.9344262295081968</code></pre>
 <p>Note that this model has a better performance than the untuned bagged model earlier, and the single tree classification model, as expected.</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->

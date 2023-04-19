@@ -196,6 +196,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <a href="./Lec4_ClassificationTree.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Classification trees</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lec4_Bagging.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Bagging</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -694,7 +699,7 @@ Regression splines: 13660.35327661836</code></pre>
 </section>
 <section id="generalized-additive-model-gam" class="level2" data-number="2.4">
 <h2 data-number="2.4" class="anchored" data-anchor-id="generalized-additive-model-gam"><span class="header-section-number">2.4</span> Generalized additive model (GAM)</h2>
-<p>GAM allow for flexible nonlinearities in several variables, but retain the additive structure of linear models. In a GAM, non-linear basis functions of predictors can be used as predictors of a linear regression model. For example, <span class="math display">\[y = f_1(X_1) + f_2(X_2) + \epsilon\]</span> is a GAM, where <span class="math inline">\(f_1(.)\)</span> may be a cubic spline based on the predictor <span class="math inline">\(X_1\)</span>, and <span class="math inline">\(f_2(.)\)</span> may be a step function based on the predictor <span class="math inline">\(X_2\)</span>.</p>
+<p>GAM allows for flexible nonlinearities in several variables, but retain the additive structure of linear models. In a GAM, non-linear basis functions of predictors can be used as predictors of a linear regression model. For example, <span class="math display">\[y = f_1(X_1) + f_2(X_2) + \epsilon\]</span> is a GAM, where <span class="math inline">\(f_1(.)\)</span> may be a cubic spline based on the predictor <span class="math inline">\(X_1\)</span>, and <span class="math inline">\(f_2(.)\)</span> may be a step function based on the predictor <span class="math inline">\(X_2\)</span>.</p>
 <div class="cell" data-execution_count="47">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co">#GAM</span></span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="co">#GAM includes cubic splines for mileage. Other predictors are year, engineSize, mpg, mileage and their interactions</span></span>

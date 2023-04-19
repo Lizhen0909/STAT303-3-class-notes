@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.475">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Data Science III with python (Class notes) - 5&nbsp; Bagging</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./Assignment A.html" rel="next">
+<link href="./Lec4_ClassificationTree.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Bagging</span></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="./index.html" class="sidebar-logo-link">
+      <img src="./NU_Stat_logo.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
+      </a>
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Data Science III with python (Class notes)</a> 
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">Preface</a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">Moving towards non-linearity</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./L1_Scikit-learn.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction to scikit-learn</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lec2_Regression_splines.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Regression splines</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lec3_RegressionTrees.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Regression trees</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lec4_ClassificationTree.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Classification trees</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lec4_Bagging.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Bagging</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">Appendices</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Assignment A.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Assignment A</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Assignment B.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Assignment B</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Stratified splitting.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Stratified splitting (classification problem)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Tuning a hyperparameter.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">Tuning a hyperparameter</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Datasets.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">E</span>&nbsp; <span class="chapter-title">Datasets, assignment and project files</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">References</a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#bagging-regression-trees" id="toc-bagging-regression-trees" class="nav-link active" data-scroll-target="#bagging-regression-trees"><span class="toc-section-number">5.1</span>  Bagging regression trees</a></li>
+  <li><a href="#model-accuracy-vs-number-of-trees" id="toc-model-accuracy-vs-number-of-trees" class="nav-link" data-scroll-target="#model-accuracy-vs-number-of-trees"><span class="toc-section-number">5.2</span>  Model accuracy vs number of trees</a></li>
+  <li><a href="#optimizing-bagging-parameters-using-grid-search" id="toc-optimizing-bagging-parameters-using-grid-search" class="nav-link" data-scroll-target="#optimizing-bagging-parameters-using-grid-search"><span class="toc-section-number">5.3</span>  Optimizing bagging parameters using grid search</a></li>
+  <li><a href="#bagging-for-classification" id="toc-bagging-for-classification" class="nav-link" data-scroll-target="#bagging-for-classification"><span class="toc-section-number">5.4</span>  Bagging for classification</a></li>
+  <li><a href="#model-accuracy-vs-number-of-trees-1" id="toc-model-accuracy-vs-number-of-trees-1" class="nav-link" data-scroll-target="#model-accuracy-vs-number-of-trees-1"><span class="toc-section-number">5.5</span>  Model accuracy vs number of trees</a></li>
+  <li><a href="#optimizing-bagging-parameters-using-grid-search-1" id="toc-optimizing-bagging-parameters-using-grid-search-1" class="nav-link" data-scroll-target="#optimizing-bagging-parameters-using-grid-search-1"><span class="toc-section-number">5.6</span>  Optimizing bagging parameters using grid search</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Bagging</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<p><em>Read section 8.2.1 of the book before using these notes.</em></p>
+<p><em>Note that in this course, lecture notes are not sufficient, you must read the book for better understanding. Lecture notes are just implementing the concepts of the book on a dataset, but not explaining the concepts elaborately.</em></p>
+<div class="cell" data-execution_count="49">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> mean_squared_error</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> cross_val_score,train_test_split</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> KFold</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.tree <span class="im">import</span> DecisionTreeRegressor,DecisionTreeClassifier</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> GridSearchCV, ParameterGrid</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.ensemble <span class="im">import</span> BaggingRegressor,BaggingClassifier</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LinearRegression,LogisticRegression</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.neighbors <span class="im">import</span> KNeighborsRegressor</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> roc_curve, precision_recall_curve, auc, make_scorer, recall_score, <span class="op">\</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>accuracy_score, precision_score, confusion_matrix, mean_squared_error, r2_score</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co">#Libraries for visualizing trees</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.tree <span class="im">import</span> export_graphviz </span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> six <span class="im">import</span> StringIO</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.display <span class="im">import</span> Image  </span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pydotplus</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time <span class="im">as</span> time</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="50">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Using the same datsasets as used for linear regression in STAT303-2, </span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co">#so that we can compare the non-linear models with linear regression</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>trainf <span class="op">=</span> pd.read_csv(<span class="st">'./Datasets/Car_features_train.csv'</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>trainp <span class="op">=</span> pd.read_csv(<span class="st">'./Datasets/Car_prices_train.csv'</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>testf <span class="op">=</span> pd.read_csv(<span class="st">'./Datasets/Car_features_test.csv'</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>testp <span class="op">=</span> pd.read_csv(<span class="st">'./Datasets/Car_prices_test.csv'</span>)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>train <span class="op">=</span> pd.merge(trainf,trainp)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>test <span class="op">=</span> pd.merge(testf,testp)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>train.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="50">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>carID</th>
+      <th>brand</th>
+      <th>model</th>
+      <th>year</th>
+      <th>transmission</th>
+      <th>mileage</th>
+      <th>fuelType</th>
+      <th>tax</th>
+      <th>mpg</th>
+      <th>engineSize</th>
+      <th>price</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>18473</td>
+      <td>bmw</td>
+      <td>6 Series</td>
+      <td>2020</td>
+      <td>Semi-Auto</td>
+      <td>11</td>
+      <td>Diesel</td>
+      <td>145</td>
+      <td>53.3282</td>
+      <td>3.0</td>
+      <td>37980</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>15064</td>
+      <td>bmw</td>
+      <td>6 Series</td>
+      <td>2019</td>
+      <td>Semi-Auto</td>
+      <td>10813</td>
+      <td>Diesel</td>
+      <td>145</td>
+      <td>53.0430</td>
+      <td>3.0</td>
+      <td>33980</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>18268</td>
+      <td>bmw</td>
+      <td>6 Series</td>
+      <td>2020</td>
+      <td>Semi-Auto</td>
+      <td>6</td>
+      <td>Diesel</td>
+      <td>145</td>
+      <td>53.4379</td>
+      <td>3.0</td>
+      <td>36850</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>18480</td>
+      <td>bmw</td>
+      <td>6 Series</td>
+      <td>2017</td>
+      <td>Semi-Auto</td>
+      <td>18895</td>
+      <td>Diesel</td>
+      <td>145</td>
+      <td>51.5140</td>
+      <td>3.0</td>
+      <td>25998</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>18492</td>
+      <td>bmw</td>
+      <td>6 Series</td>
+      <td>2015</td>
+      <td>Automatic</td>
+      <td>62953</td>
+      <td>Diesel</td>
+      <td>160</td>
+      <td>51.4903</td>
+      <td>3.0</td>
+      <td>18990</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="cell" data-execution_count="51">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> train[[<span class="st">'mileage'</span>,<span class="st">'mpg'</span>,<span class="st">'year'</span>,<span class="st">'engineSize'</span>]]</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>Xtest <span class="op">=</span> test[[<span class="st">'mileage'</span>,<span class="st">'mpg'</span>,<span class="st">'year'</span>,<span class="st">'engineSize'</span>]]</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> train[<span class="st">'price'</span>]</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>ytest <span class="op">=</span> test[<span class="st">'price'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="bagging-regression-trees" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="bagging-regression-trees"><span class="header-section-number">5.1</span> Bagging regression trees</h2>
+<p>Bag regression trees to develop a model to predict car price using the predictors <code>mileage</code>,<code>mpg</code>,<code>year</code>,and <code>engineSize</code>.</p>
+<div class="cell" data-execution_count="52">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Bagging the results of 10 decision trees to predict car price</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> BaggingRegressor(base_estimator<span class="op">=</span>DecisionTreeRegressor(), n_estimators<span class="op">=</span><span class="dv">10</span>, random_state<span class="op">=</span><span class="dv">1</span>,</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>                        n_jobs<span class="op">=-</span><span class="dv">1</span>).fit(X, y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="53">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>np.sqrt(mean_squared_error(test.price, model.predict(Xtest)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="53">
+<pre><code>5752.0779571060875</code></pre>
+</div>
+</div>
+<p>The RMSE has reduced a lot by averaging the predictions of 10 trees. The RMSE for a single tree model with optimized paramters was around 7000.</p>
+</section>
+<section id="model-accuracy-vs-number-of-trees" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="model-accuracy-vs-number-of-trees"><span class="header-section-number">5.2</span> Model accuracy vs number of trees</h2>
+<p>How does the model accuracy vary with the number of trees?</p>
+<p>As we increase the number of trees, it will tend to reduce the variance of individual trees leading to a more accurate prediction.</p>
+<div class="cell" data-execution_count="14">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Finding model accuracy vs number of trees</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>oob_rsquared<span class="op">=</span>{}<span class="op">;</span>test_rsquared<span class="op">=</span>{}<span class="op">;</span>oob_rmse<span class="op">=</span>{}<span class="op">;</span>test_rmse <span class="op">=</span> {}</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> np.linspace(<span class="dv">10</span>,<span class="dv">400</span>,<span class="dv">40</span>,dtype<span class="op">=</span><span class="bu">int</span>):</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    model <span class="op">=</span> BaggingRegressor(base_estimator<span class="op">=</span>DecisionTreeRegressor(), n_estimators<span class="op">=</span>i, random_state<span class="op">=</span><span class="dv">1</span>,</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>                        n_jobs<span class="op">=-</span><span class="dv">1</span>,oob_score<span class="op">=</span><span class="va">True</span>).fit(X, y)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    oob_rsquared[i]<span class="op">=</span>model.oob_score_  <span class="co">#Returns the out-of_bag R-squared of the model</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    test_rsquared[i]<span class="op">=</span>model.score(Xtest,ytest) <span class="co">#Returns the test R-squared of the model</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    oob_rmse[i]<span class="op">=</span>np.sqrt(mean_squared_error(model.oob_prediction_,y))</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    test_rmse[i]<span class="op">=</span>np.sqrt(mean_squared_error(model.predict(Xtest),ytest))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>C:\Users\akl0407\Anaconda3\lib\site-packages\sklearn\ensemble\_bagging.py:1069: UserWarning: Some inputs do not have OOB scores. This probably means too few estimators were used to compute any reliable oob estimates.
+  warn("Some inputs do not have OOB scores. "
+C:\Users\akl0407\Anaconda3\lib\site-packages\sklearn\ensemble\_bagging.py:1069: UserWarning: Some inputs do not have OOB scores. This probably means too few estimators were used to compute any reliable oob estimates.
+  warn("Some inputs do not have OOB scores. "</code></pre>
+</div>
+</div>
+<p>As we are bagging only 10 trees in the first iteration, some of the observations are selected in every bootstrapped sample, and thus they don’t have an out-of-bag error, which is producing the warning. For every observation to have an out-of-bag error, the number of trees must be sufficiently large.</p>
+<p>Let us visualize the out-of-bag (OOB) R-squared and R-squared on test data vs the number of trees.</p>
+<div class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>plt.rcParams.update({<span class="st">'font.size'</span>: <span class="dv">15</span>})</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>), dpi<span class="op">=</span><span class="dv">80</span>)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>plt.plot(oob_rsquared.keys(),oob_rsquared.values(),label <span class="op">=</span> <span class="st">'Out of bag R-squared'</span>)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>plt.plot(oob_rsquared.keys(),oob_rsquared.values(),<span class="st">'o'</span>,color <span class="op">=</span> <span class="st">'blue'</span>)</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>plt.plot(test_rsquared.keys(),test_rsquared.values(), label <span class="op">=</span> <span class="st">'Test data R-squared'</span>)</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Number of trees'</span>)</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Rsquared'</span>)</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>plt.legend()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="8">
+<pre><code>&lt;matplotlib.legend.Legend at 0x26f886f1610&gt;</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Lec4_Bagging_files/figure-html/cell-8-output-2.png" class="img-fluid"></p>
+</div>
+</div>
+<p>The out-of-bag R-squared initially increases, and then stabilizes after a certain number of trees (around 150 in this case). Note that increasing the number of trees further will not lead to overfitting. However, increasing the number of trees will increase the computations. Thus, we don’t need to develop more trees once the R-squared stabilizes.</p>
+<div class="cell" data-execution_count="107">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Visualizing out-of-bag RMSE and test data RMSE</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>plt.rcParams.update({<span class="st">'font.size'</span>: <span class="dv">15</span>})</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>), dpi<span class="op">=</span><span class="dv">80</span>)</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>plt.plot(oob_rmse.keys(),oob_rmse.values(),label <span class="op">=</span> <span class="st">'Out of bag RMSE'</span>)</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>plt.plot(oob_rmse.keys(),oob_rmse.values(),<span class="st">'o'</span>,color <span class="op">=</span> <span class="st">'blue'</span>)</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>plt.plot(test_rmse.keys(),test_rmse.values(), label <span class="op">=</span> <span class="st">'Test data RMSE'</span>)</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Number of trees'</span>)</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'RMSE'</span>)</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>plt.legend()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="107">
+<pre><code>&lt;matplotlib.legend.Legend at 0x13712485df0&gt;</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Lec4_Bagging_files/figure-html/cell-9-output-2.png" class="img-fluid"></p>
+</div>
+</div>
+<p>A similar trend can be seen by plotting out-of-bag RMSE and test RMSE. Note that RMSE is proportional to R-squared. We only need to visualize one of RMSE or R-squared to find the optimal number of trees.</p>
+<div class="cell" data-execution_count="15">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Bagging with 150 trees</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> BaggingRegressor(base_estimator<span class="op">=</span>DecisionTreeRegressor(), n_estimators<span class="op">=</span><span class="dv">150</span>, random_state<span class="op">=</span><span class="dv">1</span>,</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>                        oob_score<span class="op">=</span><span class="va">True</span>,n_jobs<span class="op">=-</span><span class="dv">1</span>).fit(X, y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="16">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co">#OOB R-squared</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>model.oob_score_</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="16">
+<pre><code>0.897561533100511</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="17">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co">#RMSE on test data</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>pred <span class="op">=</span> model.predict(Xtest)</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>np.sqrt(mean_squared_error(test.price, pred))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="17">
+<pre><code>5673.756466489405</code></pre>
+</div>
+</div>
+</section>
+<section id="optimizing-bagging-parameters-using-grid-search" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="optimizing-bagging-parameters-using-grid-search"><span class="header-section-number">5.3</span> Optimizing bagging parameters using grid search</h2>
+<p>More parameters of a bagged regression tree model can be optimized using the typical approach of k-fold cross validation over a grid of parameter values.</p>
+<div class="cell" data-execution_count="54">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>n_samples <span class="op">=</span> train.shape[<span class="dv">0</span>]</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>n_features <span class="op">=</span> train.shape[<span class="dv">1</span>]</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>params <span class="op">=</span> {<span class="st">'base_estimator'</span>: [DecisionTreeRegressor(random_state <span class="op">=</span> <span class="dv">1</span>),LinearRegression()],<span class="co">#Comparing bagging with a linear regression model as well</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>          <span class="st">'n_estimators'</span>: [<span class="dv">150</span>,<span class="dv">200</span>,<span class="dv">250</span>],</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>          <span class="st">'max_samples'</span>: [<span class="fl">0.5</span>,<span class="fl">1.0</span>],</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>          <span class="st">'max_features'</span>: [<span class="fl">0.5</span>,<span class="fl">1.0</span>],</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>          <span class="st">'bootstrap'</span>: [<span class="va">True</span>, <span class="va">False</span>],</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>          <span class="st">'bootstrap_features'</span>: [<span class="va">True</span>, <span class="va">False</span>]}</span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>cv <span class="op">=</span> KFold(n_splits<span class="op">=</span><span class="dv">5</span>,shuffle<span class="op">=</span><span class="va">True</span>,random_state<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>bagging_regressor_grid <span class="op">=</span> GridSearchCV(BaggingRegressor(random_state<span class="op">=</span><span class="dv">1</span>, n_jobs<span class="op">=-</span><span class="dv">1</span>), </span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>                                      param_grid <span class="op">=</span>params, cv<span class="op">=</span>cv, n_jobs<span class="op">=-</span><span class="dv">1</span>, verbose<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>bagging_regressor_grid.fit(X, y)</span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Train R^2 Score : </span><span class="sc">%.3f</span><span class="st">'</span><span class="op">%</span>bagging_regressor_grid.best_estimator_.score(X, y))</span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Test R^2 Score : </span><span class="sc">%.3f</span><span class="st">'</span><span class="op">%</span>bagging_regressor_grid.best_estimator_.score(Xtest, ytest))</span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Best R^2 Score Through Grid Search : </span><span class="sc">%.3f</span><span class="st">'</span><span class="op">%</span>bagging_regressor_grid.best_score_)</span>
+<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Best Parameters : '</span>,bagging_regressor_grid.best_params_)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Fitting 5 folds for each of 96 candidates, totalling 480 fits
+Train R^2 Score : 0.986
+Test R^2 Score : 0.885
+Best R^2 Score Through Grid Search : 0.893
+Best Parameters :  {'base_estimator': DecisionTreeRegressor(random_state=1), 'bootstrap': True, 'bootstrap_features': False, 'max_features': 1.0, 'max_samples': 1.0, 'n_estimators': 200}</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="55">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Model with optimal parameters</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> BaggingRegressor(base_estimator<span class="op">=</span>DecisionTreeRegressor(), n_estimators<span class="op">=</span><span class="dv">200</span>, random_state<span class="op">=</span><span class="dv">1</span>,</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>                        oob_score<span class="op">=</span><span class="va">True</span>,n_jobs<span class="op">=-</span><span class="dv">1</span>,bootstrap_features<span class="op">=</span><span class="va">False</span>,bootstrap<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>                        max_features<span class="op">=</span><span class="fl">1.0</span>,max_samples<span class="op">=</span><span class="fl">1.0</span>).fit(X, y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="56">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co">#RMSE on test data</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>np.sqrt(mean_squared_error(test.price, model.predict(Xtest)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="56">
+<pre><code>5638.330995970236</code></pre>
+</div>
+</div>
+<p>You may also use the object <code>bagging_regressor_grid</code> to directly make the prediction.</p>
+<div class="cell" data-execution_count="57">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>np.sqrt(mean_squared_error(test.price, bagging_regressor_grid.predict(Xtest)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="57">
+<pre><code>5638.330995970236</code></pre>
+</div>
+</div>
+</section>
+<section id="bagging-for-classification" class="level2" data-number="5.4">
+<h2 data-number="5.4" class="anchored" data-anchor-id="bagging-for-classification"><span class="header-section-number">5.4</span> Bagging for classification</h2>
+<p>Bag classification tree models to predict if a person has diabetes.</p>
+<div class="cell" data-execution_count="58">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>train <span class="op">=</span> pd.read_csv(<span class="st">'./Datasets/diabetes_train.csv'</span>)</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>test <span class="op">=</span> pd.read_csv(<span class="st">'./Datasets/diabetes_test.csv'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="59">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> train.drop(columns <span class="op">=</span> <span class="st">'Outcome'</span>)</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>Xtest <span class="op">=</span> test.drop(columns <span class="op">=</span> <span class="st">'Outcome'</span>)</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> train[<span class="st">'Outcome'</span>]</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>ytest <span class="op">=</span> test[<span class="st">'Outcome'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="22">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Bagging the results of 10 decision trees to predict car price</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> BaggingClassifier(base_estimator<span class="op">=</span>DecisionTreeClassifier(), n_estimators<span class="op">=</span><span class="dv">150</span>, random_state<span class="op">=</span><span class="dv">1</span>,</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>                        n_jobs<span class="op">=-</span><span class="dv">1</span>).fit(X, y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="38">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Performance metrics computation for the optimum decision threshold probability</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>desired_threshold <span class="op">=</span> <span class="fl">0.23</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>y_pred_prob <span class="op">=</span> model.predict_proba(Xtest)[:,<span class="dv">1</span>] </span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Classifying observations in the positive class (y = 1) if the predicted probability is greater</span></span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a><span class="co"># than the desired decision threshold probability</span></span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>y_pred <span class="op">=</span> y_pred_prob <span class="op">&gt;</span> desired_threshold</span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>y_pred <span class="op">=</span> y_pred.astype(<span class="bu">int</span>)</span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a><span class="co">#Computing the accuracy</span></span>
+<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Accuracy: "</span>,accuracy_score(y_pred, ytest)<span class="op">*</span><span class="dv">100</span>)  </span>
+<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a><span class="co">#Computing the ROC-AUC</span></span>
+<span id="cb28-15"><a href="#cb28-15" aria-hidden="true" tabindex="-1"></a>fpr, tpr, auc_thresholds <span class="op">=</span> roc_curve(ytest, y_pred_prob)</span>
+<span id="cb28-16"><a href="#cb28-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"ROC-AUC: "</span>,auc(fpr, tpr))<span class="co"># AUC of ROC</span></span>
+<span id="cb28-17"><a href="#cb28-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-18"><a href="#cb28-18" aria-hidden="true" tabindex="-1"></a><span class="co">#Computing the precision and recall</span></span>
+<span id="cb28-19"><a href="#cb28-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Precision: "</span>, precision_score(ytest, y_pred))</span>
+<span id="cb28-20"><a href="#cb28-20" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Recall: "</span>, recall_score(ytest, y_pred))</span>
+<span id="cb28-21"><a href="#cb28-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-22"><a href="#cb28-22" aria-hidden="true" tabindex="-1"></a><span class="co">#Confusion matrix</span></span>
+<span id="cb28-23"><a href="#cb28-23" aria-hidden="true" tabindex="-1"></a>cm <span class="op">=</span> pd.DataFrame(confusion_matrix(ytest, y_pred), </span>
+<span id="cb28-24"><a href="#cb28-24" aria-hidden="true" tabindex="-1"></a>                  columns<span class="op">=</span>[<span class="st">'Predicted 0'</span>, <span class="st">'Predicted 1'</span>], index <span class="op">=</span> [<span class="st">'Actual 0'</span>, <span class="st">'Actual 1'</span>])</span>
+<span id="cb28-25"><a href="#cb28-25" aria-hidden="true" tabindex="-1"></a>sns.heatmap(cm, annot<span class="op">=</span><span class="va">True</span>, cmap<span class="op">=</span><span class="st">'Blues'</span>, fmt<span class="op">=</span><span class="st">'g'</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Accuracy:  76.62337662337663
+ROC-AUC:  0.8766084963863917
+Precision:  0.6404494382022472
+Recall:  0.9344262295081968</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Lec4_Bagging_files/figure-html/cell-20-output-2.png" class="img-fluid"></p>
+</div>
+</div>
+<p>As a result of bagging, we obtain a model (with a threshold probabiltiy cutoff of 0.23) that has a better performance on test data in terms of almost all the metrics - accuracy, precision (comparable performance), recall, and ROC-AUC, as compared the single tree classification model (with a threshold probability cutoff of 0.23). Note that we have not demonstrated tuning the model using <code>GridSearchCv</code> here, which is shown later.</p>
+</section>
+<section id="model-accuracy-vs-number-of-trees-1" class="level2" data-number="5.5">
+<h2 data-number="5.5" class="anchored" data-anchor-id="model-accuracy-vs-number-of-trees-1"><span class="header-section-number">5.5</span> Model accuracy vs number of trees</h2>
+<div class="cell" data-execution_count="60">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Finding model accuracy vs number of trees</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>oob_accuracy<span class="op">=</span>{}<span class="op">;</span>test_accuracy<span class="op">=</span>{}<span class="op">;</span>oob_rmse<span class="op">=</span>{}<span class="op">;</span>test_rmse <span class="op">=</span> {}</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> np.linspace(<span class="dv">10</span>,<span class="dv">400</span>,<span class="dv">40</span>,dtype<span class="op">=</span><span class="bu">int</span>):</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>    model <span class="op">=</span> BaggingClassifier(base_estimator<span class="op">=</span>DecisionTreeClassifier(), n_estimators<span class="op">=</span>i, random_state<span class="op">=</span><span class="dv">1</span>,</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>                        n_jobs<span class="op">=-</span><span class="dv">1</span>,oob_score<span class="op">=</span><span class="va">True</span>).fit(X, y)</span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>    oob_accuracy[i]<span class="op">=</span>model.oob_score_  <span class="co">#Returns the out-of_bag R-squared of the model</span></span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>    test_accuracy[i]<span class="op">=</span>model.score(Xtest,ytest) <span class="co">#Returns the test R-squared of the model</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>C:\Users\akl0407\Anaconda3\lib\site-packages\sklearn\ensemble\_bagging.py:640: UserWarning: Some inputs do not have OOB scores. This probably means too few estimators were used to compute any reliable oob estimates.
+  warn("Some inputs do not have OOB scores. "
+C:\Users\akl0407\Anaconda3\lib\site-packages\sklearn\ensemble\_bagging.py:644: RuntimeWarning: invalid value encountered in true_divide
+  oob_decision_function = (predictions /</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="62">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>plt.rcParams.update({<span class="st">'font.size'</span>: <span class="dv">15</span>})</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>), dpi<span class="op">=</span><span class="dv">80</span>)</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>plt.plot(oob_accuracy.keys(),oob_accuracy.values(),label <span class="op">=</span> <span class="st">'Out of bag accuracy'</span>)</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>plt.plot(oob_accuracy.keys(),oob_accuracy.values(),<span class="st">'o'</span>,color <span class="op">=</span> <span class="st">'blue'</span>)</span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>plt.plot(test_accuracy.keys(),test_accuracy.values(), label <span class="op">=</span> <span class="st">'Test data accuracy'</span>)</span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Number of trees'</span>)</span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Rsquared'</span>)</span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>plt.legend()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="62">
+<pre><code>&lt;matplotlib.legend.Legend at 0x223302e62e0&gt;</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Lec4_Bagging_files/figure-html/cell-22-output-2.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="cell" data-execution_count="63">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co">#ROC curve on training data</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>ypred <span class="op">=</span> model.predict_proba(X)[:, <span class="dv">1</span>]</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>fpr, tpr, auc_thresholds <span class="op">=</span> roc_curve(y, ypred)</span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(auc(fpr, tpr))<span class="co"># AUC of ROC</span></span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plot_roc_curve(fpr, tpr, label<span class="op">=</span><span class="va">None</span>):</span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>    plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>,<span class="dv">8</span>))</span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>    plt.title(<span class="st">'ROC Curve'</span>)</span>
+<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a>    plt.plot(fpr, tpr, linewidth<span class="op">=</span><span class="dv">2</span>, label<span class="op">=</span>label)</span>
+<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a>    plt.plot([<span class="dv">0</span>, <span class="dv">1</span>], [<span class="dv">0</span>, <span class="dv">1</span>], <span class="st">'k--'</span>)</span>
+<span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a>    plt.axis([<span class="op">-</span><span class="fl">0.005</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="fl">1.005</span>])</span>
+<span id="cb34-12"><a href="#cb34-12" aria-hidden="true" tabindex="-1"></a>    plt.xticks(np.arange(<span class="dv">0</span>,<span class="dv">1</span>, <span class="fl">0.05</span>), rotation<span class="op">=</span><span class="dv">90</span>)</span>
+<span id="cb34-13"><a href="#cb34-13" aria-hidden="true" tabindex="-1"></a>    plt.xlabel(<span class="st">"False Positive Rate"</span>)</span>
+<span id="cb34-14"><a href="#cb34-14" aria-hidden="true" tabindex="-1"></a>    plt.ylabel(<span class="st">"True Positive Rate (Recall)"</span>)</span>
+<span id="cb34-15"><a href="#cb34-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-16"><a href="#cb34-16" aria-hidden="true" tabindex="-1"></a>fpr, tpr, auc_thresholds <span class="op">=</span> roc_curve(y, ypred)</span>
+<span id="cb34-17"><a href="#cb34-17" aria-hidden="true" tabindex="-1"></a>plot_roc_curve(fpr, tpr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>1.0</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Lec4_Bagging_files/figure-html/cell-23-output-2.png" class="img-fluid"></p>
+</div>
+</div>
+<p>Note that there is perfect separation in train data as ROC-AUC = 1. This shows that the model is probably overfitting. However, this also shows that, despite the reduced variance <em>(as compared to a single tree)</em>, the bagged tree model is flexibly enough to perfectly separate the classes.</p>
+<div class="cell" data-execution_count="65">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co">#ROC curve on test data</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>ypred <span class="op">=</span> model.predict_proba(Xtest)[:, <span class="dv">1</span>]</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>fpr, tpr, auc_thresholds <span class="op">=</span> roc_curve(ytest, ypred)</span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"ROC-AUC = "</span>,auc(fpr, tpr))<span class="co"># AUC of ROC</span></span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plot_roc_curve(fpr, tpr, label<span class="op">=</span><span class="va">None</span>):</span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>    plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>,<span class="dv">8</span>))</span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a>    plt.title(<span class="st">'ROC Curve'</span>)</span>
+<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a>    plt.plot(fpr, tpr, linewidth<span class="op">=</span><span class="dv">2</span>, label<span class="op">=</span>label)</span>
+<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a>    plt.plot([<span class="dv">0</span>, <span class="dv">1</span>], [<span class="dv">0</span>, <span class="dv">1</span>], <span class="st">'k--'</span>)</span>
+<span id="cb36-11"><a href="#cb36-11" aria-hidden="true" tabindex="-1"></a>    plt.axis([<span class="op">-</span><span class="fl">0.005</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="fl">1.005</span>])</span>
+<span id="cb36-12"><a href="#cb36-12" aria-hidden="true" tabindex="-1"></a>    plt.xticks(np.arange(<span class="dv">0</span>,<span class="dv">1</span>, <span class="fl">0.05</span>), rotation<span class="op">=</span><span class="dv">90</span>)</span>
+<span id="cb36-13"><a href="#cb36-13" aria-hidden="true" tabindex="-1"></a>    plt.xlabel(<span class="st">"False Positive Rate"</span>)</span>
+<span id="cb36-14"><a href="#cb36-14" aria-hidden="true" tabindex="-1"></a>    plt.ylabel(<span class="st">"True Positive Rate (Recall)"</span>)</span>
+<span id="cb36-15"><a href="#cb36-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-16"><a href="#cb36-16" aria-hidden="true" tabindex="-1"></a>fpr, tpr, auc_thresholds <span class="op">=</span> roc_curve(ytest, ypred)</span>
+<span id="cb36-17"><a href="#cb36-17" aria-hidden="true" tabindex="-1"></a>plot_roc_curve(fpr, tpr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>ROC-AUC =  0.8781949585757096</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Lec4_Bagging_files/figure-html/cell-24-output-2.png" class="img-fluid"></p>
+</div>
+</div>
+</section>
+<section id="optimizing-bagging-parameters-using-grid-search-1" class="level2" data-number="5.6">
+<h2 data-number="5.6" class="anchored" data-anchor-id="optimizing-bagging-parameters-using-grid-search-1"><span class="header-section-number">5.6</span> Optimizing bagging parameters using grid search</h2>
+<p>More parameters of a bagged classification tree model can be optimized using the typical approach of k-fold cross validation over a grid of parameter values.</p>
+<div class="cell" data-execution_count="67">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>n_samples <span class="op">=</span> train.shape[<span class="dv">0</span>]</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>n_features <span class="op">=</span> train.shape[<span class="dv">1</span>]</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>params <span class="op">=</span> {<span class="st">'base_estimator'</span>: [DecisionTreeClassifier(random_state <span class="op">=</span> <span class="dv">1</span>),LogisticRegression()],<span class="co">#Comparing bagging with a linear regression model as well</span></span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>          <span class="st">'n_estimators'</span>: [<span class="dv">150</span>,<span class="dv">200</span>,<span class="dv">250</span>],</span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>          <span class="st">'max_samples'</span>: [<span class="fl">0.5</span>,<span class="fl">1.0</span>],</span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>          <span class="st">'max_features'</span>: [<span class="fl">0.5</span>,<span class="fl">1.0</span>],</span>
+<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a>          <span class="st">'bootstrap'</span>: [<span class="va">True</span>, <span class="va">False</span>],</span>
+<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a>          <span class="st">'bootstrap_features'</span>: [<span class="va">True</span>, <span class="va">False</span>]}</span>
+<span id="cb38-10"><a href="#cb38-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-11"><a href="#cb38-11" aria-hidden="true" tabindex="-1"></a>cv <span class="op">=</span> KFold(n_splits<span class="op">=</span><span class="dv">5</span>,shuffle<span class="op">=</span><span class="va">True</span>,random_state<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb38-12"><a href="#cb38-12" aria-hidden="true" tabindex="-1"></a>bagging_classifier_grid <span class="op">=</span> GridSearchCV(BaggingClassifier(random_state<span class="op">=</span><span class="dv">1</span>, n_jobs<span class="op">=-</span><span class="dv">1</span>), </span>
+<span id="cb38-13"><a href="#cb38-13" aria-hidden="true" tabindex="-1"></a>                                      param_grid <span class="op">=</span>params, cv<span class="op">=</span>cv, n_jobs<span class="op">=-</span><span class="dv">1</span>, verbose<span class="op">=</span><span class="dv">1</span>,</span>
+<span id="cb38-14"><a href="#cb38-14" aria-hidden="true" tabindex="-1"></a>                                      scoring <span class="op">=</span> [<span class="st">'precision'</span>, <span class="st">'recall'</span>], refit<span class="op">=</span><span class="st">'recall'</span>)</span>
+<span id="cb38-15"><a href="#cb38-15" aria-hidden="true" tabindex="-1"></a>bagging_classifier_grid.fit(X, y)</span>
+<span id="cb38-16"><a href="#cb38-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-17"><a href="#cb38-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Train accuracy : </span><span class="sc">%.3f</span><span class="st">'</span><span class="op">%</span>bagging_classifier_grid.best_estimator_.score(X, y))</span>
+<span id="cb38-18"><a href="#cb38-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Test accuracy : </span><span class="sc">%.3f</span><span class="st">'</span><span class="op">%</span>bagging_classifier_grid.best_estimator_.score(Xtest, ytest))</span>
+<span id="cb38-19"><a href="#cb38-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Best accuracy Through Grid Search : </span><span class="sc">%.3f</span><span class="st">'</span><span class="op">%</span>bagging_classifier_grid.best_score_)</span>
+<span id="cb38-20"><a href="#cb38-20" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Best Parameters : '</span>,bagging_classifier_grid.best_params_)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Fitting 5 folds for each of 96 candidates, totalling 480 fits
+Train accuracy : 1.000
+Test accuracy : 0.786
+Best accuracy Through Grid Search : 0.573
+Best Parameters :  {'base_estimator': DecisionTreeClassifier(random_state=1), 'bootstrap': True, 'bootstrap_features': False, 'max_features': 1.0, 'max_samples': 1.0, 'n_estimators': 200}</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="68">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Bagging the results of 10 decision trees to predict car price</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> BaggingClassifier(base_estimator<span class="op">=</span>DecisionTreeClassifier(random_state<span class="op">=</span><span class="dv">1</span>), n_estimators<span class="op">=</span><span class="dv">200</span>, </span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>                          random_state<span class="op">=</span><span class="dv">1</span>,max_features<span class="op">=</span><span class="fl">1.0</span>,</span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>                        max_samples<span class="op">=</span><span class="fl">1.0</span>,n_jobs<span class="op">=-</span><span class="dv">1</span>,bootstrap<span class="op">=</span><span class="va">True</span>,bootstrap_features<span class="op">=</span><span class="va">False</span>).fit(X, y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="73">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Performance metrics computation for the optimum decision threshold probability</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>desired_threshold <span class="op">=</span> <span class="fl">0.23</span></span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>y_pred_prob <span class="op">=</span> model.predict_proba(Xtest)[:,<span class="dv">1</span>] </span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Classifying observations in the positive class (y = 1) if the predicted probability is greater</span></span>
+<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a><span class="co"># than the desired decision threshold probability</span></span>
+<span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a>y_pred <span class="op">=</span> y_pred_prob <span class="op">&gt;</span> desired_threshold</span>
+<span id="cb41-9"><a href="#cb41-9" aria-hidden="true" tabindex="-1"></a>y_pred <span class="op">=</span> y_pred.astype(<span class="bu">int</span>)</span>
+<span id="cb41-10"><a href="#cb41-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-11"><a href="#cb41-11" aria-hidden="true" tabindex="-1"></a><span class="co">#Computing the accuracy</span></span>
+<span id="cb41-12"><a href="#cb41-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Accuracy: "</span>,accuracy_score(y_pred, ytest)<span class="op">*</span><span class="dv">100</span>)  </span>
+<span id="cb41-13"><a href="#cb41-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-14"><a href="#cb41-14" aria-hidden="true" tabindex="-1"></a><span class="co">#Computing the ROC-AUC</span></span>
+<span id="cb41-15"><a href="#cb41-15" aria-hidden="true" tabindex="-1"></a>fpr, tpr, auc_thresholds <span class="op">=</span> roc_curve(ytest, y_pred_prob)</span>
+<span id="cb41-16"><a href="#cb41-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"ROC-AUC: "</span>,auc(fpr, tpr))<span class="co"># AUC of ROC</span></span>
+<span id="cb41-17"><a href="#cb41-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-18"><a href="#cb41-18" aria-hidden="true" tabindex="-1"></a><span class="co">#Computing the precision and recall</span></span>
+<span id="cb41-19"><a href="#cb41-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Precision: "</span>, precision_score(ytest, y_pred))</span>
+<span id="cb41-20"><a href="#cb41-20" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Recall: "</span>, recall_score(ytest, y_pred))</span>
+<span id="cb41-21"><a href="#cb41-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-22"><a href="#cb41-22" aria-hidden="true" tabindex="-1"></a><span class="co">#Confusion matrix</span></span>
+<span id="cb41-23"><a href="#cb41-23" aria-hidden="true" tabindex="-1"></a>cm <span class="op">=</span> pd.DataFrame(confusion_matrix(ytest, y_pred), </span>
+<span id="cb41-24"><a href="#cb41-24" aria-hidden="true" tabindex="-1"></a>                  columns<span class="op">=</span>[<span class="st">'Predicted 0'</span>, <span class="st">'Predicted 1'</span>], index <span class="op">=</span> [<span class="st">'Actual 0'</span>, <span class="st">'Actual 1'</span>])</span>
+<span id="cb41-25"><a href="#cb41-25" aria-hidden="true" tabindex="-1"></a>sns.heatmap(cm, annot<span class="op">=</span><span class="va">True</span>, cmap<span class="op">=</span><span class="st">'Blues'</span>, fmt<span class="op">=</span><span class="st">'g'</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Accuracy:  77.27272727272727
+ROC-AUC:  0.8802221047065044
+Precision:  0.6477272727272727
+Recall:  0.9344262295081968</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Lec4_Bagging_files/figure-html/cell-27-output-2.png" class="img-fluid"></p>
+</div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./Lec4_ClassificationTree.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Classification trees</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./Assignment A.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Assignment A</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>

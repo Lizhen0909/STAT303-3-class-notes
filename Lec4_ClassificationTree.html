@@ -93,7 +93,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./Assignment A.html" rel="next">
+<link href="./Lec4_Bagging.html" rel="next">
 <link href="./Lec3_RegressionTrees.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -193,6 +193,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Lec4_ClassificationTree.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Classification trees</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lec4_Bagging.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Bagging</span></a>
   </div>
 </li>
       </ul>
@@ -299,7 +304,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time <span class="im">as</span> time</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-execution_count="4">
+<div class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>train <span class="op">=</span> pd.read_csv(<span class="st">'./Datasets/diabetes_train.csv'</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>test <span class="op">=</span> pd.read_csv(<span class="st">'./Datasets/diabetes_test.csv'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -393,7 +398,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <section id="building-a-classification-tree" class="level2" data-number="4.1">
 <h2 data-number="4.1" class="anchored" data-anchor-id="building-a-classification-tree"><span class="header-section-number">4.1</span> Building a classification tree</h2>
 <p>Develop a classification tree to predict if a person has diabetes.</p>
-<div class="cell" data-execution_count="6">
+<div class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> train.drop(columns <span class="op">=</span> <span class="st">'Outcome'</span>)</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>Xtest <span class="op">=</span> test.drop(columns <span class="op">=</span> <span class="st">'Outcome'</span>)</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> train[<span class="st">'Outcome'</span>]</span>
@@ -482,7 +487,7 @@ Recall:  0.45901639344262296</code></pre>
 <pre><code>14</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="99">
+<div class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Defining parameters and the range of values over which to optimize</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>param_grid <span class="op">=</span> {    </span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'max_depth'</span>: <span class="bu">range</span>(<span class="dv">2</span>,<span class="dv">14</span>),</span>
@@ -490,7 +495,7 @@ Recall:  0.45901639344262296</code></pre>
 <span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">'max_features'</span>: <span class="bu">range</span>(<span class="dv">3</span>, <span class="dv">8</span>)</span>
 <span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-execution_count="121">
+<div class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Grid search to optimize parameter values</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>start_time <span class="op">=</span> time.time()</span>
@@ -504,15 +509,22 @@ Recall:  0.45901639344262296</code></pre>
 <span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a><span class="co"># make the predictions</span></span>
 <span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>y_pred <span class="op">=</span> grid_search.predict(Xtest)</span>
 <span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Best params for recall'</span>)</span>
-<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(grid_search.best_params_)</span>
-<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Time taken ="</span>, <span class="bu">round</span>((time.time() <span class="op">-</span> start_time)), <span class="st">"seconds"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Train accuracy : </span><span class="sc">%.3f</span><span class="st">'</span><span class="op">%</span>grid_search.best_estimator_.score(X, y))</span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Test accuracy : </span><span class="sc">%.3f</span><span class="st">'</span><span class="op">%</span>grid_search.best_estimator_.score(Xtest, ytest))</span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Best accuracy Through Grid Search : </span><span class="sc">%.3f</span><span class="st">'</span><span class="op">%</span>grid_search.best_score_)</span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Best params for recall'</span>)</span>
+<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(grid_search.best_params_)</span>
+<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Time taken ="</span>, <span class="bu">round</span>((time.time() <span class="op">-</span> start_time)), <span class="st">"seconds"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Fitting 5 folds for each of 8352 candidates, totalling 41760 fits
+<pre><code>Fitting 5 folds for each of 6960 candidates, totalling 34800 fits
+Train accuracy : 0.915
+Test accuracy : 0.747
+Best accuracy Through Grid Search : 0.624
 Best params for recall
-{'max_depth': 5, 'max_features': 8, 'max_leaf_nodes': 6}
-Time taken = 40 seconds</code></pre>
+{'max_depth': 10, 'max_features': 4, 'max_leaf_nodes': 59}
+Time taken = 36 seconds</code></pre>
 </div>
 </div>
 </section>
@@ -714,6 +726,7 @@ Recall:  0.8688524590163934</code></pre>
 <p><img src="Lec4_ClassificationTree_files/figure-html/cell-22-output-2.png" class="img-fluid"></p>
 </div>
 </div>
+<p>Note that in the above tuning of decision threshold probability, we have directly used the train data. However, ideally, we should use k-fold cross validation to tune it.</p>
 </section>
 </section>
 <section id="cost-complexity-pruning" class="level2" data-number="4.4">
@@ -904,8 +917,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./Assignment A.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Assignment A</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./Lec4_Bagging.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Bagging</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

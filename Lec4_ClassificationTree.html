@@ -200,6 +200,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <a href="./Lec4_Bagging.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Bagging</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lec6_RandomForest.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Random Forest</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -706,7 +711,7 @@ Time taken = 61 seconds</code></pre>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>all_thresholds <span class="op">=</span> np.concatenate([auc_thresholds.reshape(<span class="op">-</span><span class="dv">1</span>,<span class="dv">1</span>), tpr.reshape(<span class="op">-</span><span class="dv">1</span>,<span class="dv">1</span>), fpr.reshape(<span class="op">-</span><span class="dv">1</span>,<span class="dv">1</span>)], axis <span class="op">=</span> <span class="dv">1</span>)</span>
 <span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>recall_more_than_80 <span class="op">=</span> all_thresholds[all_thresholds[:,<span class="dv">1</span>]<span class="op">&gt;</span><span class="fl">0.8</span>,:]</span>
 <span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="co"># As the values in 'recall_more_than_80' are arranged in increasing order of recall and decreasing threshold,</span></span>
-<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a><span class="co"># the first value will provide the maximum threshold probabiltiy for the recall to be more than 80%</span></span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a><span class="co"># the first value will provide the maximum threshold probability for the recall to be more than 80%</span></span>
 <span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a><span class="co"># We wish to find the maximum threshold probability to obtain the minimum possible FPR</span></span>
 <span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>recall_more_than_80[<span class="dv">0</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="47">

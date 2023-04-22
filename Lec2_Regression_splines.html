@@ -201,6 +201,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <a href="./Lec4_Bagging.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Bagging</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lec6_RandomForest.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Random Forest</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -632,7 +637,7 @@ Regression splines: 13683.776494331632</code></pre>
 </section>
 <section id="regression-splines-with-knots-at-uniform-quantiles-of-data" class="level2" data-number="2.2">
 <h2 data-number="2.2" class="anchored" data-anchor-id="regression-splines-with-knots-at-uniform-quantiles-of-data"><span class="header-section-number">2.2</span> Regression splines with knots at uniform quantiles of data</h2>
-<p>If degrees of freedom are provided instead of knots, the knots are by default chosen at uniform quantiles of data. For example if there are 7 degrees of freedom (including the intercept), then there will be 7-4 = 3 knots. These knots will be chosen at the 255h, 50th and 75th quantiles of the data.</p>
+<p>If degrees of freedom are provided instead of knots, the knots are by default chosen at uniform quantiles of data. For example if there are 7 degrees of freedom (including the intercept), then there will be 7-4 = 3 knots. These knots will be chosen at the 25th, 50th and 75th quantiles of the data.</p>
 <div class="cell" data-execution_count="40">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Regression spline of degree 3</span></span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>

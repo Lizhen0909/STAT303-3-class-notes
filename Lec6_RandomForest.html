@@ -260,15 +260,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#random-forest-for-regression" id="toc-random-forest-for-regression" class="nav-link active" data-scroll-target="#random-forest-for-regression"><span class="toc-section-number">6.1</span>  Random Forest for regression</a>
   <ul>
   <li><a href="#model-accuracy-vs-number-of-trees" id="toc-model-accuracy-vs-number-of-trees" class="nav-link" data-scroll-target="#model-accuracy-vs-number-of-trees"><span class="toc-section-number">6.1.1</span>  Model accuracy vs number of trees</a></li>
+  <li><a href="#tuning-random-forest" id="toc-tuning-random-forest" class="nav-link" data-scroll-target="#tuning-random-forest"><span class="toc-section-number">6.1.2</span>  Tuning random forest</a></li>
   </ul></li>
-  <li><a href="#tuning-random-forests" id="toc-tuning-random-forests" class="nav-link" data-scroll-target="#tuning-random-forests"><span class="toc-section-number">6.2</span>  Tuning random forests</a></li>
-  <li><a href="#random-forest-for-classification" id="toc-random-forest-for-classification" class="nav-link" data-scroll-target="#random-forest-for-classification"><span class="toc-section-number">6.3</span>  Random forest for classification</a>
+  <li><a href="#random-forest-for-classification" id="toc-random-forest-for-classification" class="nav-link" data-scroll-target="#random-forest-for-classification"><span class="toc-section-number">6.2</span>  Random forest for classification</a>
   <ul>
-  <li><a href="#model-accuracy-vs-number-of-trees-1" id="toc-model-accuracy-vs-number-of-trees-1" class="nav-link" data-scroll-target="#model-accuracy-vs-number-of-trees-1"><span class="toc-section-number">6.3.1</span>  Model accuracy vs number of trees</a></li>
-  <li><a href="#tuning-random-forest-parameters" id="toc-tuning-random-forest-parameters" class="nav-link" data-scroll-target="#tuning-random-forest-parameters"><span class="toc-section-number">6.3.2</span>  Tuning random forest parameters</a></li>
+  <li><a href="#model-accuracy-vs-number-of-trees-1" id="toc-model-accuracy-vs-number-of-trees-1" class="nav-link" data-scroll-target="#model-accuracy-vs-number-of-trees-1"><span class="toc-section-number">6.2.1</span>  Model accuracy vs number of trees</a></li>
+  <li><a href="#tuning-random-forest-1" id="toc-tuning-random-forest-1" class="nav-link" data-scroll-target="#tuning-random-forest-1"><span class="toc-section-number">6.2.2</span>  Tuning random forest</a></li>
   </ul></li>
-  <li><a href="#random-forest-vs-bagging" id="toc-random-forest-vs-bagging" class="nav-link" data-scroll-target="#random-forest-vs-bagging"><span class="toc-section-number">6.4</span>  Random forest vs Bagging</a></li>
-  <li><a href="#tuning-random-forest" id="toc-tuning-random-forest" class="nav-link" data-scroll-target="#tuning-random-forest">Tuning random forest</a></li>
+  <li><a href="#random-forest-vs-bagging" id="toc-random-forest-vs-bagging" class="nav-link" data-scroll-target="#random-forest-vs-bagging"><span class="toc-section-number">6.3</span>  Random forest vs Bagging</a></li>
+  <li><a href="#tuning-random-forest-2" id="toc-tuning-random-forest-2" class="nav-link" data-scroll-target="#tuning-random-forest-2">Tuning random forest</a></li>
   </ul>
 </nav>
     </div>
@@ -451,7 +451,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><img src="Lec6_RandomForest_files/figure-html/cell-6-output-1.png" class="img-fluid"></p>
 </div>
 </div>
-<p>Each of the 10 bagged trees seems to be dominated by the <em>engineSize</em> predictor, thereby making the trees highly correlated. Average of highly correlated random variables has a higher variance than the average of lesser correlated random variables. Thus, highly correlated trees will tend to have a relatively high prediction variance despite averaging their predictions.</p>
+<p>Each of the 10 bagged trees seems to be dominated by the <code>engineSize</code> predictor, thereby making the trees highly correlated. Average of highly correlated random variables has a higher variance than the average of lesser correlated random variables. Thus, highly correlated trees will tend to have a relatively high prediction variance despite averaging their predictions.</p>
 <div class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Feature importance can be found by averaging the feature importance in indivudual trees</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>feature_importances <span class="op">=</span> np.mean([</span>
@@ -485,7 +485,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><img src="Lec6_RandomForest_files/figure-html/cell-9-output-1.png" class="img-fluid"></p>
 </div>
 </div>
-<p>As two of the four predictors are randomly selected for splitting each node, <em>engineSize</em> no longer seems to dominate the trees. This will tend to reduce correlation among trees, thereby reducing the prediction variance, which in turn will tend to improve prediction accuracy.</p>
+<p>As two of the four predictors are randomly selected for splitting each node, <code>engineSize</code> no longer seems to dominate the trees. This will tend to reduce correlation among trees, thereby reducing the prediction variance, which in turn will tend to improve prediction accuracy.</p>
 <div class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Averaging the results of 10 decision trees, while randomly considering sqrt(4)=2 predictors at each node</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co">#to split, to predict car price</span></span>
@@ -586,9 +586,8 @@ C:\Users\akl0407\Anaconda3\lib\site-packages\sklearn\ensemble\_forest.py:833: Us
 </div>
 </div>
 </section>
-</section>
-<section id="tuning-random-forests" class="level2" data-number="6.2">
-<h2 data-number="6.2" class="anchored" data-anchor-id="tuning-random-forests"><span class="header-section-number">6.2</span> Tuning random forests</h2>
+<section id="tuning-random-forest" class="level3" data-number="6.1.2">
+<h3 data-number="6.1.2" class="anchored" data-anchor-id="tuning-random-forest"><span class="header-section-number">6.1.2</span> Tuning random forest</h3>
 <p>The Random forest object has options to set parameters such as depth, leaves, minimum number of observations in a leaf etc., for individual trees. These parameters are useful to prune a decion tree model consisting of a single tree, in order to avoid overfitting due to high variance of an unpruned tree.</p>
 <p>Pruning individual trees in random forests is not likely to add much value, since averaging a sufficient number of unpruned trees reduces the variance of the trees, which enhances prediction accuracy. Pruning individual trees is unlikely to further reduce the prediction variance.</p>
 <p>Here is a comment from page 596 of the <a href="https://hastie.su.domains/ElemStatLearn/printings/ESLII_print12_toc.pdf">The Elements of Statistical Learning</a> that supports the above statement: <em>Segal (2004) demonstrates small gains in performance by controlling the depths of the individual trees grown in random forests. Our experience is that using full-grown trees seldom costs much, and results in one less tuning parameter.</em></p>
@@ -679,8 +678,9 @@ Best score (R-squared) =  0.9005106776136418</code></pre>
 </div>
 </div>
 </section>
-<section id="random-forest-for-classification" class="level2" data-number="6.3">
-<h2 data-number="6.3" class="anchored" data-anchor-id="random-forest-for-classification"><span class="header-section-number">6.3</span> Random forest for classification</h2>
+</section>
+<section id="random-forest-for-classification" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="random-forest-for-classification"><span class="header-section-number">6.2</span> Random forest for classification</h2>
 <p>Random forest model to predict if a person has diabetes.</p>
 <div class="cell" data-execution_count="87">
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>train <span class="op">=</span> pd.read_csv(<span class="st">'./Datasets/diabetes_train.csv'</span>)</span>
@@ -741,8 +741,8 @@ Recall:  0.9180327868852459</code></pre>
 </div>
 </div>
 <p>The model obtained above is similar to the one obtained by bagging. We’ll discuss the comparison later.</p>
-<section id="model-accuracy-vs-number-of-trees-1" class="level3" data-number="6.3.1">
-<h3 data-number="6.3.1" class="anchored" data-anchor-id="model-accuracy-vs-number-of-trees-1"><span class="header-section-number">6.3.1</span> Model accuracy vs number of trees</h3>
+<section id="model-accuracy-vs-number-of-trees-1" class="level3" data-number="6.2.1">
+<h3 data-number="6.2.1" class="anchored" data-anchor-id="model-accuracy-vs-number-of-trees-1"><span class="header-section-number">6.2.1</span> Model accuracy vs number of trees</h3>
 <div class="cell" data-execution_count="56">
 <div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Finding model accuracy vs number of trees</span></span>
 <span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>oob_accuracy<span class="op">=</span>{}<span class="op">;</span>test_accuracy<span class="op">=</span>{}<span class="op">;</span>oob_precision<span class="op">=</span>{}<span class="op">;</span> test_precision <span class="op">=</span> {}</span>
@@ -786,8 +786,8 @@ Recall:  0.9180327868852459</code></pre>
 </div>
 </div>
 </section>
-<section id="tuning-random-forest-parameters" class="level3" data-number="6.3.2">
-<h3 data-number="6.3.2" class="anchored" data-anchor-id="tuning-random-forest-parameters"><span class="header-section-number">6.3.2</span> Tuning random forest parameters</h3>
+<section id="tuning-random-forest-1" class="level3" data-number="6.2.2">
+<h3 data-number="6.2.2" class="anchored" data-anchor-id="tuning-random-forest-1"><span class="header-section-number">6.2.2</span> Tuning random forest</h3>
 <p>Here we tune the number of predictors to be considered at each node for the split to maximize recall.</p>
 <div class="cell" data-execution_count="89">
 <div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>start_time <span class="op">=</span> time.time()</span>
@@ -866,8 +866,8 @@ Recall:  0.9344262295081968</code></pre>
 </div>
 </section>
 </section>
-<section id="random-forest-vs-bagging" class="level2" data-number="6.4">
-<h2 data-number="6.4" class="anchored" data-anchor-id="random-forest-vs-bagging"><span class="header-section-number">6.4</span> Random forest vs Bagging</h2>
+<section id="random-forest-vs-bagging" class="level2" data-number="6.3">
+<h2 data-number="6.3" class="anchored" data-anchor-id="random-forest-vs-bagging"><span class="header-section-number">6.3</span> Random forest vs Bagging</h2>
 <p>We saw in the above examples that the performance of random forest was similar to that of bagged trees. This may happen in some cases including but not limited to:</p>
 <ol type="1">
 <li><p>All the predictors are more or less equally important, and the bagged trees are not higly correlated.</p></li>
@@ -1154,8 +1154,8 @@ Recall:  0.9344262295081968</code></pre>
 <span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>Xtrain,Xtest,ytrain,ytest <span class="op">=</span> train_test_split(X,y,train_size <span class="op">=</span> <span class="fl">0.5</span>,random_state<span class="op">=</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="tuning-random-forest" class="level2 unnumbered">
-<h2 class="unnumbered anchored" data-anchor-id="tuning-random-forest">Tuning random forest</h2>
+<section id="tuning-random-forest-2" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="tuning-random-forest-2">Tuning random forest</h2>
 <div class="cell" data-execution_count="24">
 <div class="sourceCode cell-code" id="cb57"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Tuning the random forest parameters</span></span>
 <span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>start_time <span class="op">=</span> time.time()</span>

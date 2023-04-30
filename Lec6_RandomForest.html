@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.475">
+<meta name="generator" content="quarto-1.3.340">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -17,9 +17,10 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1.6em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
@@ -46,43 +47,13 @@ pre.numberSource code > span > a:first-child::before
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
     padding: 0 4px; width: 4em;
-    color: #aaaaaa;
   }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
 div.sourceCode
   {   }
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
@@ -127,6 +98,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
 <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 </head>
@@ -135,11 +107,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-    <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Random Forest</span></h1>
-      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
-        <i class="bi bi-chevron-right"></i>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./L1_Scikit-learn.html">Moving towards non-linearity</a></li><li class="breadcrumb-item"><a href="./Lec6_RandomForest.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Random Forest</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
       </button>
     </div>
   </nav>
@@ -147,7 +124,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
       <a href="./index.html" class="sidebar-logo-link">
       <img src="./NU_Stat_logo.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
@@ -156,99 +133,109 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <a href="./">Data Science III with python (Class notes)</a> 
     </div>
       </div>
-      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
         <div id="quarto-search" class="" title="Search"></div>
         </div>
-      </div>
+        </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link">Preface</a>
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">Moving towards non-linearity</a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Moving towards non-linearity</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./L1_Scikit-learn.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction to scikit-learn</span></a>
+  <a href="./L1_Scikit-learn.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction to scikit-learn</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Lec2_Regression_splines.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Regression splines</span></a>
+  <a href="./Lec2_Regression_splines.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Regression splines</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Lec3_RegressionTrees.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Regression trees</span></a>
+  <a href="./Lec3_RegressionTrees.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Regression trees</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Lec4_ClassificationTree.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Classification trees</span></a>
+  <a href="./Lec4_ClassificationTree.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Classification trees</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Lec4_Bagging.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Bagging</span></a>
+  <a href="./Lec4_Bagging.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Bagging</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Lec6_RandomForest.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Random Forest</span></a>
+  <a href="./Lec6_RandomForest.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Random Forest</span></span></a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">Appendices</a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Assignment A.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Assignment A</span></a>
+  <a href="./Assignment A.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Assignment A</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Assignment B.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Assignment B</span></a>
+  <a href="./Assignment B.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Assignment B</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Assignment C.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Assignment C</span></a>
+  <a href="./Assignment C.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Assignment C</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Stratified splitting.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">Stratified splitting (classification problem)</span></a>
+  <a href="./Stratified splitting.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">Stratified splitting (classification problem)</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Tuning a hyperparameter.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">E</span>&nbsp; <span class="chapter-title">Tuning a hyperparameter</span></a>
+  <a href="./Datasets.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">E</span>&nbsp; <span class="chapter-title">Datasets, assignment and project files</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Datasets.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">F</span>&nbsp; <span class="chapter-title">Datasets, assignment and project files</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./references.html" class="sidebar-item-text sidebar-link">References</a>
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
   </div>
 </li>
       </ul>
@@ -256,23 +243,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     </ul>
     </div>
 </nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#random-forest-for-regression" id="toc-random-forest-for-regression" class="nav-link active" data-scroll-target="#random-forest-for-regression"><span class="toc-section-number">6.1</span>  Random Forest for regression</a>
+  <li><a href="#random-forest-for-regression" id="toc-random-forest-for-regression" class="nav-link active" data-scroll-target="#random-forest-for-regression"><span class="header-section-number">6.1</span> Random Forest for regression</a>
   <ul>
-  <li><a href="#model-accuracy-vs-number-of-trees" id="toc-model-accuracy-vs-number-of-trees" class="nav-link" data-scroll-target="#model-accuracy-vs-number-of-trees"><span class="toc-section-number">6.1.1</span>  Model accuracy vs number of trees</a></li>
-  <li><a href="#tuning-random-forest" id="toc-tuning-random-forest" class="nav-link" data-scroll-target="#tuning-random-forest"><span class="toc-section-number">6.1.2</span>  Tuning random forest</a></li>
+  <li><a href="#model-accuracy-vs-number-of-trees" id="toc-model-accuracy-vs-number-of-trees" class="nav-link" data-scroll-target="#model-accuracy-vs-number-of-trees"><span class="header-section-number">6.1.1</span> Model accuracy vs number of trees</a></li>
+  <li><a href="#tuning-random-forest" id="toc-tuning-random-forest" class="nav-link" data-scroll-target="#tuning-random-forest"><span class="header-section-number">6.1.2</span> Tuning random forest</a></li>
   </ul></li>
-  <li><a href="#random-forest-for-classification" id="toc-random-forest-for-classification" class="nav-link" data-scroll-target="#random-forest-for-classification"><span class="toc-section-number">6.2</span>  Random forest for classification</a>
+  <li><a href="#random-forest-for-classification" id="toc-random-forest-for-classification" class="nav-link" data-scroll-target="#random-forest-for-classification"><span class="header-section-number">6.2</span> Random forest for classification</a>
   <ul>
-  <li><a href="#model-accuracy-vs-number-of-trees-1" id="toc-model-accuracy-vs-number-of-trees-1" class="nav-link" data-scroll-target="#model-accuracy-vs-number-of-trees-1"><span class="toc-section-number">6.2.1</span>  Model accuracy vs number of trees</a></li>
-  <li><a href="#tuning-random-forest-1" id="toc-tuning-random-forest-1" class="nav-link" data-scroll-target="#tuning-random-forest-1"><span class="toc-section-number">6.2.2</span>  Tuning random forest</a></li>
+  <li><a href="#model-accuracy-vs-number-of-trees-1" id="toc-model-accuracy-vs-number-of-trees-1" class="nav-link" data-scroll-target="#model-accuracy-vs-number-of-trees-1"><span class="header-section-number">6.2.1</span> Model accuracy vs number of trees</a></li>
+  <li><a href="#tuning-random-forest-1" id="toc-tuning-random-forest-1" class="nav-link" data-scroll-target="#tuning-random-forest-1"><span class="header-section-number">6.2.2</span> Tuning random forest</a></li>
   </ul></li>
-  <li><a href="#random-forest-vs-bagging" id="toc-random-forest-vs-bagging" class="nav-link" data-scroll-target="#random-forest-vs-bagging"><span class="toc-section-number">6.3</span>  Random forest vs Bagging</a></li>
+  <li><a href="#random-forest-vs-bagging" id="toc-random-forest-vs-bagging" class="nav-link" data-scroll-target="#random-forest-vs-bagging"><span class="header-section-number">6.3</span> Random forest vs Bagging</a></li>
   <li><a href="#tuning-random-forest-2" id="toc-tuning-random-forest-2" class="nav-link" data-scroll-target="#tuning-random-forest-2">Tuning random forest</a></li>
   </ul>
 </nav>
@@ -282,7 +270,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Random Forest</span></h1>
+<h1 class="title"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Random Forest</span></h1>
 </div>
 
 
@@ -335,99 +323,100 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>test <span class="op">=</span> pd.merge(testf,testp)</span>
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>train.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="75">
-
 <div>
 
-<table class="dataframe table table-sm table-striped">
-  <thead>
-    <tr>
-      <th></th>
-      <th>carID</th>
-      <th>brand</th>
-      <th>model</th>
-      <th>year</th>
-      <th>transmission</th>
-      <th>mileage</th>
-      <th>fuelType</th>
-      <th>tax</th>
-      <th>mpg</th>
-      <th>engineSize</th>
-      <th>price</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>18473</td>
-      <td>bmw</td>
-      <td>6 Series</td>
-      <td>2020</td>
-      <td>Semi-Auto</td>
-      <td>11</td>
-      <td>Diesel</td>
-      <td>145</td>
-      <td>53.3282</td>
-      <td>3.0</td>
-      <td>37980</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>15064</td>
-      <td>bmw</td>
-      <td>6 Series</td>
-      <td>2019</td>
-      <td>Semi-Auto</td>
-      <td>10813</td>
-      <td>Diesel</td>
-      <td>145</td>
-      <td>53.0430</td>
-      <td>3.0</td>
-      <td>33980</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>18268</td>
-      <td>bmw</td>
-      <td>6 Series</td>
-      <td>2020</td>
-      <td>Semi-Auto</td>
-      <td>6</td>
-      <td>Diesel</td>
-      <td>145</td>
-      <td>53.4379</td>
-      <td>3.0</td>
-      <td>36850</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>18480</td>
-      <td>bmw</td>
-      <td>6 Series</td>
-      <td>2017</td>
-      <td>Semi-Auto</td>
-      <td>18895</td>
-      <td>Diesel</td>
-      <td>145</td>
-      <td>51.5140</td>
-      <td>3.0</td>
-      <td>25998</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>18492</td>
-      <td>bmw</td>
-      <td>6 Series</td>
-      <td>2015</td>
-      <td>Automatic</td>
-      <td>62953</td>
-      <td>Diesel</td>
-      <td>160</td>
-      <td>51.4903</td>
-      <td>3.0</td>
-      <td>18990</td>
-    </tr>
-  </tbody>
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">carID</th>
+<th data-quarto-table-cell-role="th">brand</th>
+<th data-quarto-table-cell-role="th">model</th>
+<th data-quarto-table-cell-role="th">year</th>
+<th data-quarto-table-cell-role="th">transmission</th>
+<th data-quarto-table-cell-role="th">mileage</th>
+<th data-quarto-table-cell-role="th">fuelType</th>
+<th data-quarto-table-cell-role="th">tax</th>
+<th data-quarto-table-cell-role="th">mpg</th>
+<th data-quarto-table-cell-role="th">engineSize</th>
+<th data-quarto-table-cell-role="th">price</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>18473</td>
+<td>bmw</td>
+<td>6 Series</td>
+<td>2020</td>
+<td>Semi-Auto</td>
+<td>11</td>
+<td>Diesel</td>
+<td>145</td>
+<td>53.3282</td>
+<td>3.0</td>
+<td>37980</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>15064</td>
+<td>bmw</td>
+<td>6 Series</td>
+<td>2019</td>
+<td>Semi-Auto</td>
+<td>10813</td>
+<td>Diesel</td>
+<td>145</td>
+<td>53.0430</td>
+<td>3.0</td>
+<td>33980</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>18268</td>
+<td>bmw</td>
+<td>6 Series</td>
+<td>2020</td>
+<td>Semi-Auto</td>
+<td>6</td>
+<td>Diesel</td>
+<td>145</td>
+<td>53.4379</td>
+<td>3.0</td>
+<td>36850</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>18480</td>
+<td>bmw</td>
+<td>6 Series</td>
+<td>2017</td>
+<td>Semi-Auto</td>
+<td>18895</td>
+<td>Diesel</td>
+<td>145</td>
+<td>51.5140</td>
+<td>3.0</td>
+<td>25998</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>18492</td>
+<td>bmw</td>
+<td>6 Series</td>
+<td>2015</td>
+<td>Automatic</td>
+<td>62953</td>
+<td>Diesel</td>
+<td>160</td>
+<td>51.4903</td>
+<td>3.0</td>
+<td>18990</td>
+</tr>
+</tbody>
 </table>
+
 </div>
 </div>
 </div>
@@ -458,7 +447,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <p>Each of the 10 bagged trees seems to be dominated by the <code>engineSize</code> predictor, thereby making the trees highly correlated. Average of highly correlated random variables has a higher variance than the average of lesser correlated random variables. Thus, highly correlated trees will tend to have a relatively high prediction variance despite averaging their predictions.</p>
 <div class="cell" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Feature importance can be found by averaging the feature importance in indivudual trees</span></span>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Feature importance can be found by averaging the feature importance in individual trees</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>feature_importances <span class="op">=</span> np.mean([</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    tree.feature_importances_ <span class="cf">for</span> tree <span class="kw">in</span> model.estimators_</span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>], axis<span class="op">=</span><span class="dv">0</span>)</span>
@@ -593,7 +582,7 @@ C:\Users\akl0407\Anaconda3\lib\site-packages\sklearn\ensemble\_forest.py:833: Us
 </section>
 <section id="tuning-random-forest" class="level3" data-number="6.1.2">
 <h3 data-number="6.1.2" class="anchored" data-anchor-id="tuning-random-forest"><span class="header-section-number">6.1.2</span> Tuning random forest</h3>
-<p>The Random forest object has options to set parameters such as depth, leaves, minimum number of observations in a leaf etc., for individual trees. These parameters are useful to prune a decison tree model consisting of a single tree, in order to avoid overfitting due to high variance of an unpruned tree.</p>
+<p>The Random forest object has options to set parameters such as depth, leaves, minimum number of observations in a leaf etc., for individual trees. These parameters are useful to prune a decision tree model consisting of a single tree, in order to avoid overfitting due to high variance of an unpruned tree.</p>
 <p>Pruning individual trees in random forests is not likely to add much value, since averaging a sufficient number of unpruned trees reduces the variance of the trees, which enhances prediction accuracy. Pruning individual trees is unlikely to further reduce the prediction variance.</p>
 <p>Here is a comment from page 596 of the <a href="https://hastie.su.domains/ElemStatLearn/printings/ESLII_print12_toc.pdf">The Elements of Statistical Learning</a> that supports the above statement: <em>Segal (2004) demonstrates small gains in performance by controlling the depths of the individual trees grown in random forests. Our experience is that using full-grown trees seldom costs much, and results in one less tuning parameter.</em></p>
 <p>Below we attempt to optimize parameters that prune individual trees. However, as expected, it does not result in a substantial increase in prediction accuracy.</p>
@@ -646,7 +635,7 @@ Best score (R-squared) =  0.9018153771851661</code></pre>
 <pre><code>5654.435430858449</code></pre>
 </div>
 </div>
-<p>Optimizing depth and leaves of individual trees didn’t improve the prediction accuracy of the model. Important parameters to optimize in random forests will be the number of trees (<code>n_estimators</code>), and number of predictors considered at each split (<code>max_features</code>). However, we’ll see in the assignment that sometimes indivdual pruning of trees may be useful.</p>
+<p>Optimizing depth and leaves of individual trees didn’t improve the prediction accuracy of the model. Important parameters to optimize in random forests will be the number of trees (<code>n_estimators</code>), and number of predictors considered at each split (<code>max_features</code>). However, we’ll see in the assignment that sometimes individual pruning of trees may be useful.</p>
 <div class="cell" data-execution_count="102">
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Tuning only n_estimators and max_features produces similar results</span></span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>start_time <span class="op">=</span> time.time()</span>
@@ -886,117 +875,118 @@ Recall:  0.9344262295081968</code></pre>
 <span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>data.dropna(inplace <span class="op">=</span> <span class="va">True</span>)</span>
 <span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>data.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="59">
-
 <div>
 
-<table class="dataframe table table-sm table-striped">
-  <thead>
-    <tr>
-      <th></th>
-      <th>Age</th>
-      <th>Sex</th>
-      <th>ChestPain</th>
-      <th>RestBP</th>
-      <th>Chol</th>
-      <th>Fbs</th>
-      <th>RestECG</th>
-      <th>MaxHR</th>
-      <th>ExAng</th>
-      <th>Oldpeak</th>
-      <th>Slope</th>
-      <th>Ca</th>
-      <th>Thal</th>
-      <th>AHD</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>63</td>
-      <td>1</td>
-      <td>typical</td>
-      <td>145</td>
-      <td>233</td>
-      <td>1</td>
-      <td>2</td>
-      <td>150</td>
-      <td>0</td>
-      <td>2.3</td>
-      <td>3</td>
-      <td>0.0</td>
-      <td>fixed</td>
-      <td>No</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>67</td>
-      <td>1</td>
-      <td>asymptomatic</td>
-      <td>160</td>
-      <td>286</td>
-      <td>0</td>
-      <td>2</td>
-      <td>108</td>
-      <td>1</td>
-      <td>1.5</td>
-      <td>2</td>
-      <td>3.0</td>
-      <td>normal</td>
-      <td>Yes</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>67</td>
-      <td>1</td>
-      <td>asymptomatic</td>
-      <td>120</td>
-      <td>229</td>
-      <td>0</td>
-      <td>2</td>
-      <td>129</td>
-      <td>1</td>
-      <td>2.6</td>
-      <td>2</td>
-      <td>2.0</td>
-      <td>reversable</td>
-      <td>Yes</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>37</td>
-      <td>1</td>
-      <td>nonanginal</td>
-      <td>130</td>
-      <td>250</td>
-      <td>0</td>
-      <td>0</td>
-      <td>187</td>
-      <td>0</td>
-      <td>3.5</td>
-      <td>3</td>
-      <td>0.0</td>
-      <td>normal</td>
-      <td>No</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>41</td>
-      <td>0</td>
-      <td>nontypical</td>
-      <td>130</td>
-      <td>204</td>
-      <td>0</td>
-      <td>2</td>
-      <td>172</td>
-      <td>0</td>
-      <td>1.4</td>
-      <td>1</td>
-      <td>0.0</td>
-      <td>normal</td>
-      <td>No</td>
-    </tr>
-  </tbody>
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Age</th>
+<th data-quarto-table-cell-role="th">Sex</th>
+<th data-quarto-table-cell-role="th">ChestPain</th>
+<th data-quarto-table-cell-role="th">RestBP</th>
+<th data-quarto-table-cell-role="th">Chol</th>
+<th data-quarto-table-cell-role="th">Fbs</th>
+<th data-quarto-table-cell-role="th">RestECG</th>
+<th data-quarto-table-cell-role="th">MaxHR</th>
+<th data-quarto-table-cell-role="th">ExAng</th>
+<th data-quarto-table-cell-role="th">Oldpeak</th>
+<th data-quarto-table-cell-role="th">Slope</th>
+<th data-quarto-table-cell-role="th">Ca</th>
+<th data-quarto-table-cell-role="th">Thal</th>
+<th data-quarto-table-cell-role="th">AHD</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>63</td>
+<td>1</td>
+<td>typical</td>
+<td>145</td>
+<td>233</td>
+<td>1</td>
+<td>2</td>
+<td>150</td>
+<td>0</td>
+<td>2.3</td>
+<td>3</td>
+<td>0.0</td>
+<td>fixed</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>67</td>
+<td>1</td>
+<td>asymptomatic</td>
+<td>160</td>
+<td>286</td>
+<td>0</td>
+<td>2</td>
+<td>108</td>
+<td>1</td>
+<td>1.5</td>
+<td>2</td>
+<td>3.0</td>
+<td>normal</td>
+<td>Yes</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>67</td>
+<td>1</td>
+<td>asymptomatic</td>
+<td>120</td>
+<td>229</td>
+<td>0</td>
+<td>2</td>
+<td>129</td>
+<td>1</td>
+<td>2.6</td>
+<td>2</td>
+<td>2.0</td>
+<td>reversable</td>
+<td>Yes</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>37</td>
+<td>1</td>
+<td>nonanginal</td>
+<td>130</td>
+<td>250</td>
+<td>0</td>
+<td>0</td>
+<td>187</td>
+<td>0</td>
+<td>3.5</td>
+<td>3</td>
+<td>0.0</td>
+<td>normal</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>41</td>
+<td>0</td>
+<td>nontypical</td>
+<td>130</td>
+<td>204</td>
+<td>0</td>
+<td>2</td>
+<td>172</td>
+<td>0</td>
+<td>1.4</td>
+<td>1</td>
+<td>0.0</td>
+<td>normal</td>
+<td>No</td>
+</tr>
+</tbody>
 </table>
+
 </div>
 </div>
 </div>
@@ -1010,141 +1000,142 @@ Recall:  0.9344262295081968</code></pre>
 <span id="cb53-6"><a href="#cb53-6" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> pd.concat([X,pd.get_dummies(data[<span class="st">'ChestPain'</span>]),pd.get_dummies(data[<span class="st">'Thal'</span>])],axis<span class="op">=</span><span class="dv">1</span>)</span>
 <span id="cb53-7"><a href="#cb53-7" aria-hidden="true" tabindex="-1"></a>X.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="60">
-
 <div>
 
-<table class="dataframe table table-sm table-striped">
-  <thead>
-    <tr>
-      <th></th>
-      <th>Age</th>
-      <th>Sex</th>
-      <th>RestBP</th>
-      <th>Chol</th>
-      <th>Fbs</th>
-      <th>RestECG</th>
-      <th>MaxHR</th>
-      <th>ExAng</th>
-      <th>Oldpeak</th>
-      <th>Slope</th>
-      <th>Ca</th>
-      <th>asymptomatic</th>
-      <th>nonanginal</th>
-      <th>nontypical</th>
-      <th>typical</th>
-      <th>fixed</th>
-      <th>normal</th>
-      <th>reversable</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>63</td>
-      <td>1</td>
-      <td>145</td>
-      <td>233</td>
-      <td>1</td>
-      <td>2</td>
-      <td>150</td>
-      <td>0</td>
-      <td>2.3</td>
-      <td>3</td>
-      <td>0.0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>67</td>
-      <td>1</td>
-      <td>160</td>
-      <td>286</td>
-      <td>0</td>
-      <td>2</td>
-      <td>108</td>
-      <td>1</td>
-      <td>1.5</td>
-      <td>2</td>
-      <td>3.0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>67</td>
-      <td>1</td>
-      <td>120</td>
-      <td>229</td>
-      <td>0</td>
-      <td>2</td>
-      <td>129</td>
-      <td>1</td>
-      <td>2.6</td>
-      <td>2</td>
-      <td>2.0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>37</td>
-      <td>1</td>
-      <td>130</td>
-      <td>250</td>
-      <td>0</td>
-      <td>0</td>
-      <td>187</td>
-      <td>0</td>
-      <td>3.5</td>
-      <td>3</td>
-      <td>0.0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>41</td>
-      <td>0</td>
-      <td>130</td>
-      <td>204</td>
-      <td>0</td>
-      <td>2</td>
-      <td>172</td>
-      <td>0</td>
-      <td>1.4</td>
-      <td>1</td>
-      <td>0.0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-    </tr>
-  </tbody>
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Age</th>
+<th data-quarto-table-cell-role="th">Sex</th>
+<th data-quarto-table-cell-role="th">RestBP</th>
+<th data-quarto-table-cell-role="th">Chol</th>
+<th data-quarto-table-cell-role="th">Fbs</th>
+<th data-quarto-table-cell-role="th">RestECG</th>
+<th data-quarto-table-cell-role="th">MaxHR</th>
+<th data-quarto-table-cell-role="th">ExAng</th>
+<th data-quarto-table-cell-role="th">Oldpeak</th>
+<th data-quarto-table-cell-role="th">Slope</th>
+<th data-quarto-table-cell-role="th">Ca</th>
+<th data-quarto-table-cell-role="th">asymptomatic</th>
+<th data-quarto-table-cell-role="th">nonanginal</th>
+<th data-quarto-table-cell-role="th">nontypical</th>
+<th data-quarto-table-cell-role="th">typical</th>
+<th data-quarto-table-cell-role="th">fixed</th>
+<th data-quarto-table-cell-role="th">normal</th>
+<th data-quarto-table-cell-role="th">reversable</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>63</td>
+<td>1</td>
+<td>145</td>
+<td>233</td>
+<td>1</td>
+<td>2</td>
+<td>150</td>
+<td>0</td>
+<td>2.3</td>
+<td>3</td>
+<td>0.0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>67</td>
+<td>1</td>
+<td>160</td>
+<td>286</td>
+<td>0</td>
+<td>2</td>
+<td>108</td>
+<td>1</td>
+<td>1.5</td>
+<td>2</td>
+<td>3.0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>67</td>
+<td>1</td>
+<td>120</td>
+<td>229</td>
+<td>0</td>
+<td>2</td>
+<td>129</td>
+<td>1</td>
+<td>2.6</td>
+<td>2</td>
+<td>2.0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>37</td>
+<td>1</td>
+<td>130</td>
+<td>250</td>
+<td>0</td>
+<td>0</td>
+<td>187</td>
+<td>0</td>
+<td>3.5</td>
+<td>3</td>
+<td>0.0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>41</td>
+<td>0</td>
+<td>130</td>
+<td>204</td>
+<td>0</td>
+<td>2</td>
+<td>172</td>
+<td>0</td>
+<td>1.4</td>
+<td>1</td>
+<td>0.0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+</tr>
+</tbody>
 </table>
+
 </div>
 </div>
 </div>
@@ -1247,7 +1238,7 @@ Best value of max_features=  3</code></pre>
 <p><img src="Lec6_RandomForest_files/figure-html/cell-44-output-2.png" class="img-fluid"></p>
 </div>
 </div>
-<p>In the above example we observe that random forest does improve over bagged trees in terms of classification accuracy. Unlike the previous two examples, the optimal value of <code>max_features</code> for random forests is much smaller than the total number of availabe predictors, thereby making the random forest model much different than the bagged tree model.</p>
+<p>In the above example we observe that random forest does improve over bagged trees in terms of classification accuracy. Unlike the previous two examples, the optimal value of <code>max_features</code> for random forests is much smaller than the total number of available predictors, thereby making the random forest model much different than the bagged tree model.</p>
 
 
 </section>
@@ -1280,9 +1271,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
   const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
     }
   });
   clipboard.on('success', function(e) {
@@ -1347,6 +1352,92 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return note.innerHTML;
     });
   }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
   const findCites = (el) => {
     const parentEl = el.parentElement;
     if (parentEl) {

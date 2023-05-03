@@ -29,7 +29,6 @@ book:
     - Assignment B.ipynb
     - Assignment C.ipynb
     - Stratified splitting.ipynb
-    - Tuning a hyperparameter.ipynb
     - Datasets.ipynb
     - references.qmd  
 

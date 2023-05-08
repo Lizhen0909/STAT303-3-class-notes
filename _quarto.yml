@@ -25,6 +25,7 @@ book:
         - Lec6_RandomForest.ipynb
         - Lec7_AdaBoost.ipynb
         - Lec8_Gradient_Boosting.ipynb
+        - Lec9_XGBoost.ipynb
   appendices: 
     - Assignment A.ipynb
     - Assignment B.ipynb

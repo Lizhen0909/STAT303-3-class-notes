@@ -26,6 +26,7 @@ book:
         - Lec7_AdaBoost.ipynb
         - Lec8_Gradient_Boosting.ipynb
         - Lec9_XGBoost.ipynb
+        - Lec10_Ensemble.ipynb
   appendices: 
     - Assignment A.ipynb
     - Assignment B.ipynb

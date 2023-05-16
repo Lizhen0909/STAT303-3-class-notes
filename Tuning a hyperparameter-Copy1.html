@@ -4744,6 +4744,8 @@ vertical-align: -.125em;
 <li>As <code>C</code> = 1/lambda, a value of <code>C</code> = 0 will mean infinite regularization, which corresponds to an intercept-only model. Also, as the <code>LogisticRegression()</code> function computes the value of lambda as <code>1/C</code>, it throws a <em>division by zero error</em> if <code>C = 0</code>. Thus, we should consider <code>C&gt;0</code>.</li>
 <li>Even if <code>C</code> is positive, but very small, the value of lambda will be too high, which gives rise to numerical errors. Thus, we need to find the minimum value of <code>C</code> that is large enough to avoid numerical errors when fitting the model to the given standardized dataset.</li>
 </ul>
+<p>We start with an extremely low value of <code>C = 1e-10</code>, and check if the model converges. It doesn’t converge! If it had converged, we will consider even lower values of <code>C</code>. However, in this case, it fails to converge indicating the possibility that this value of <code>C</code> is too small to avoid numerical errors. We keep increasing the order of <code>C</code> until we don’t see convergence errors. With the code below, we find that for values of <code>C</code> starting from <code>1e-6</code>, the algorithm successfully converges. Thus, the minimum value of <code>C</code> that we consider will be <code>1e-6</code>.</p>
+<p>In the plot below, we also see that as we increase <code>C</code> starting from <code>C = 1e-6</code>, the model coefficients change, which may potentially change model fit and accuracy. Thus, we should consider increasing values of <code>C</code> starting from <code>C = 1e-6</code>.</p>
 
 
 </section>

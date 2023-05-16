@@ -289,6 +289,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#lightgbm" id="toc-lightgbm" class="nav-link active" data-scroll-target="#lightgbm"><span class="header-section-number">11.1</span> LightGBM</a>
   <ul>
   <li><a href="#lightgbm-for-regression" id="toc-lightgbm-for-regression" class="nav-link" data-scroll-target="#lightgbm-for-regression"><span class="header-section-number">11.1.1</span> LightGBM for regression</a></li>
+  <li><a href="#lightgbm-vs-xgboost" id="toc-lightgbm-vs-xgboost" class="nav-link" data-scroll-target="#lightgbm-vs-xgboost"><span class="header-section-number">11.1.2</span> LightGBM vs XGBoost</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -543,6 +544,9 @@ Time taken =  1  minutes</code></pre>
 <pre><code>5400.723918176313</code></pre>
 </div>
 </div>
+</section>
+<section id="lightgbm-vs-xgboost" class="level3" data-number="11.1.2">
+<h3 data-number="11.1.2" class="anchored" data-anchor-id="lightgbm-vs-xgboost"><span class="header-section-number">11.1.2</span> LightGBM vs XGBoost</h3>
 <p>LightGBM model took 1 minute for a random search with 1000 fits as compared to 4 minutes for an XGBoost model with 1000 fits on the same data (as shown below). In terms of prediction accuracy, we observe that the accuracy of LightGBM on test <em>(unseen)</em> data is comparable to that of XGBoost.</p>
 <div class="cell" data-execution_count="45">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">#K-fold cross validation to find optimal parameters for XGBoost</span></span>

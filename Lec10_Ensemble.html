@@ -258,8 +258,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./Tuning a hyperparameter-Copy1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">F</span>&nbsp; <span class="chapter-title">Tuning a hyperparameter</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./Datasets.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">F</span>&nbsp; <span class="chapter-title">Datasets, assignment and project files</span></span></a>
+ <span class="menu-text"><span class="chapter-number">G</span>&nbsp; <span class="chapter-title">Datasets, assignment and project files</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -290,7 +296,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#voting-classifier---hard-voting" id="toc-voting-classifier---hard-voting" class="nav-link" data-scroll-target="#voting-classifier---hard-voting"><span class="header-section-number">10.2.1</span> Voting classifier - hard voting</a></li>
   <li><a href="#voting-classifier---soft-voting" id="toc-voting-classifier---soft-voting" class="nav-link" data-scroll-target="#voting-classifier---soft-voting"><span class="header-section-number">10.2.2</span> Voting classifier - soft voting</a></li>
   <li><a href="#stacking-classifier" id="toc-stacking-classifier" class="nav-link" data-scroll-target="#stacking-classifier"><span class="header-section-number">10.2.3</span> Stacking classifier</a></li>
-  <li><a href="#tuning-all-models-simultanenously" id="toc-tuning-all-models-simultanenously" class="nav-link" data-scroll-target="#tuning-all-models-simultanenously"><span class="header-section-number">10.2.4</span> Tuning all models simultanenously</a></li>
+  <li><a href="#tuning-all-models-simultaneously" id="toc-tuning-all-models-simultaneously" class="nav-link" data-scroll-target="#tuning-all-models-simultaneously"><span class="header-section-number">10.2.4</span> Tuning all models simultaneously</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -317,7 +323,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <p>Ensembling models can help reduce error by leveraging the diversity and collective wisdom of multiple models. When ensembling, several individual models are trained independently and their predictions are combined to make the final prediction.</p>
 <p>We have already seen examples of ensemble models in chapters 5 - 9. The ensembled models may reduce error by reducing the bias <em>(boosting)</em> and / or reducing the variance <em>(bagging / random forests / boosting)</em>.</p>
-<p>However, in this chapter we’ll ensemble different types of models, instead of the same type of model. We may ensemble a linear regression model, a random forest, a gradient boosting model, and as many different types of model as we wish.</p>
+<p>However, in this chapter we’ll ensemble different types of models, instead of the same type of model. We may ensemble a linear regression model, a random forest, a gradient boosting model, and as many different types of models as we wish.</p>
 <p>Below are a couple of reasons why ensembling models can be effective in reducing error:</p>
 <ol type="1">
 <li><p><strong>Bias reduction:</strong> Different models may have different biases and the ensemble can help mitigate the individual biases, leading to a more generalized and accurate prediction. For example, consider that one model has a positive bias, and another model has a negative bias for the same instance. By averaging or combining the predictions of the two models, the biases may cancel out.</p></li>
@@ -327,7 +333,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><span class="math display">\[ MSE_{Ensemble} = E\bigg[\bigg( \frac{1}{m} \sum_{i = 1}^{m} f_i(X) - Y \bigg)^2 \bigg] = \frac{1}{m^2} E \bigg[\big(f_i(X) - Y\big)^2 \bigg] + \frac{1}{m^2} \sum_{i \ne j} E\bigg[\big(f_i(X) - Y\big)\big(f_j(X) - Y\big) \bigg]\]</span></p>
 <p>Assuming the <strong>models are uncorrelated</strong> <em>(i.e., they have a zero correlation)</em>, the second term <em>(covariance of <span class="math inline">\(f_i(.)\)</span> and <span class="math inline">\(f_j(.)\)</span>)</em> reduces to zero, and the expected MSE of the ensemble reduces to:</p>
 <p><span class="math display">\[MSE_{Ensemble} = \frac{1}{m}\bigg(\frac{1}{m} \sum_{i=1}^m MSE_{f_i}\bigg)\]</span></p>
-<p>Thus, the expected MSE of an ensemble model with uncorrelated models is much smaller than the average MSE of all the models. Unless there is a model that is much better than the rest of the models, the MSE of the ensemble model is likely to be lower than the MSE of the individual models. However, there is no gaurantee that the MSE of the ensemble model will be lower than the MSE of the individual models. Consider an extreme case where only one of the models have a zero MSE. The MSE of this model will be lower than the expected MSE of the ensemble model.</p>
+<p>Thus, the expected MSE of an ensemble model with uncorrelated models is much smaller than the average MSE of all the models. Unless there is a model that is much better than the rest of the models, the MSE of the ensemble model is likely to be lower than the MSE of the individual models. However, there is no guarantee that the MSE of the ensemble model will be lower than the MSE of the individual models. Consider an extreme case where only one of the models have a zero MSE. The MSE of this model will be lower than the expected MSE of the ensemble model.</p>
 <div class="cell" data-execution_count="100">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -347,7 +353,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyearth <span class="im">import</span> Earth</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Using the same datsasets as used for linear regression in STAT303-2, </span></span>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Using the same datasets as used for linear regression in STAT303-2, </span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co">#so that we can compare the non-linear models with linear regression</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>trainf <span class="op">=</span> pd.read_csv(<span class="st">'./Datasets/Car_features_train.csv'</span>)</span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>trainp <span class="op">=</span> pd.read_csv(<span class="st">'./Datasets/Car_prices_train.csv'</span>)</span>
@@ -509,8 +515,8 @@ RMSE for Gradient Boosting =  5405.787029062213</code></pre>
 <p>Stacking is a more sophisticated method of ensembling models. The method is as follows:</p>
 <ol type="1">
 <li><p>The training data is split into <em>K</em> folds. Each of the <em>K</em> folds serves as a test data in one of the <em>K</em> iterations, and the rest of the folds serve as train data.</p></li>
-<li><p>Each model is used to make predictions on each of the <em>K</em> folds, after being trainined on the remaining <em>K-1</em> folds. In this manner, each model predicts the response on each train data point - when that train data point was not used to train the model.</p></li>
-<li><p>Predictions at each training data points are generated by each model in step 2 (the above step). These predictions are now used as predictors to train a meta-model (referred by the argument <code>final_estimator</code>), with the original response as the response. The meta-model (or <code>final_estimator</code>) learns to combine predictions of differnt models to make a better prediction.</p></li>
+<li><p>Each model is used to make predictions on each of the <em>K</em> folds, after being trained on the remaining <em>K-1</em> folds. In this manner, each model predicts the response on each train data point - when that train data point was not used to train the model.</p></li>
+<li><p>Predictions at each training data points are generated by each model in step 2 (the above step). These predictions are now used as predictors to train a meta-model (referred by the argument <code>final_estimator</code>), with the original response as the response. The meta-model (or <code>final_estimator</code>) learns to combine predictions of different models to make a better prediction.</p></li>
 </ol>
 <div class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Stacking using LinearRegression as the metamodel</span></span>
@@ -530,7 +536,7 @@ RMSE for Gradient Boosting =  5405.787029062213</code></pre>
 <pre><code>array([0.29641759, 0.25626987, 0.051808  , 0.41978153])</code></pre>
 </div>
 </div>
-<p>Note the above coefficients of the meta-model. The model gives the highest weight to the gradient boosing model, and the lowest weight to the random forest model. Also, note that the coefficients need not sum to one.</p>
+<p>Note the above coefficients of the meta-model. The model gives the highest weight to the gradient boosting model, and the lowest weight to the random forest model. Also, note that the coefficients need not sum to one.</p>
 <div class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Stacking using Lasso as the metamodel</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>en <span class="op">=</span> StackingRegressor(estimators <span class="op">=</span> [(<span class="st">'xgb'</span>, model_xgb),(<span class="st">'ada'</span>, model_ada),(<span class="st">'rf'</span>, model_rf),(<span class="st">'gb'</span>, model_gb)],</span>
@@ -598,7 +604,7 @@ MSE: 25038308.7322, GCV: 25226136.6357, RSQ: 0.9070, GRSQ: 0.9063</code></pre>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Response variable</span></span>
 <span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> pd.get_dummies(data[<span class="st">'AHD'</span>])[<span class="st">'Yes'</span>]</span>
 <span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="co">#Creating a dataframe for predictors with dummy varibles replacing the categorical variables</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="co">#Creating a dataframe for predictors with dummy variables replacing the categorical variables</span></span>
 <span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> data.drop(columns <span class="op">=</span> [<span class="st">'AHD'</span>,<span class="st">'ChestPain'</span>,<span class="st">'Thal'</span>])</span>
 <span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> pd.concat([X,pd.get_dummies(data[<span class="st">'ChestPain'</span>]),pd.get_dummies(data[<span class="st">'Thal'</span>])],axis<span class="op">=</span><span class="dv">1</span>)</span>
 <span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a></span>
@@ -730,7 +736,7 @@ XGBoost model accuracy =  0.7785234899328859</code></pre>
 </section>
 <section id="voting-classifier---soft-voting" class="level3" data-number="10.2.2">
 <h3 data-number="10.2.2" class="anchored" data-anchor-id="voting-classifier---soft-voting"><span class="header-section-number">10.2.2</span> Voting classifier - soft voting</h3>
-<p>In this type of ensembling, the predicted class is the one based on the average predicted probabilities of all the classifiers. The threshold probabiltiy is 0.5.</p>
+<p>In this type of ensembling, the predicted class is the one based on the average predicted probabilities of all the classifiers. The threshold probability is 0.5.</p>
 <div class="cell" data-execution_count="110">
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>ensemble_model <span class="op">=</span> VotingClassifier(estimators<span class="op">=</span>[(<span class="st">'ada'</span>,model_ada),(<span class="st">'rf'</span>,model_rf),(<span class="st">'gb'</span>,model_gb),(<span class="st">'xgb'</span>,model_xgb)],</span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>                                 voting<span class="op">=</span><span class="st">'soft'</span>)</span>
@@ -810,8 +816,8 @@ Best value of max_features=  1</code></pre>
 </div>
 </div>
 </section>
-<section id="tuning-all-models-simultanenously" class="level3" data-number="10.2.4">
-<h3 data-number="10.2.4" class="anchored" data-anchor-id="tuning-all-models-simultanenously"><span class="header-section-number">10.2.4</span> Tuning all models simultanenously</h3>
+<section id="tuning-all-models-simultaneously" class="level3" data-number="10.2.4">
+<h3 data-number="10.2.4" class="anchored" data-anchor-id="tuning-all-models-simultaneously"><span class="header-section-number">10.2.4</span> Tuning all models simultaneously</h3>
 <p>Individual model hyperparameters can be tuned simultaneously while ensembling them with a <code>VotingClassifier()</code>. However, this approach can be too expensive for even moderately-sized datasets.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the param grid with the names of the models as prefixes</span></span>

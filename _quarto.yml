@@ -27,13 +27,13 @@ book:
         - Lec8_Gradient_Boosting.ipynb
         - Lec9_XGBoost.ipynb
         - Lec10_Ensemble.ipynb
+        - Lec11_More boosting models.ipynb
   appendices: 
     - Assignment A.ipynb
     - Assignment B.ipynb
     - Assignment C.ipynb
     - Assignment D.ipynb
     - Stratified splitting.ipynb
-    - Tuning a hyperparameter-Copy1.ipynb
     - Datasets.ipynb
     - references.qmd  
 

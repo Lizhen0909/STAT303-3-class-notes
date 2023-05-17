@@ -291,6 +291,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#lightgbm-for-regression" id="toc-lightgbm-for-regression" class="nav-link" data-scroll-target="#lightgbm-for-regression"><span class="header-section-number">11.1.1</span> LightGBM for regression</a></li>
   <li><a href="#lightgbm-vs-xgboost" id="toc-lightgbm-vs-xgboost" class="nav-link" data-scroll-target="#lightgbm-vs-xgboost"><span class="header-section-number">11.1.2</span> LightGBM vs XGBoost</a></li>
   </ul></li>
+  <li><a href="#catboost" id="toc-catboost" class="nav-link" data-scroll-target="#catboost"><span class="header-section-number">11.2</span> CatBoost</a>
+  <ul>
+  <li><a href="#catboost-for-regression" id="toc-catboost-for-regression" class="nav-link" data-scroll-target="#catboost-for-regression"><span class="header-section-number">11.2.1</span> CatBoost for regression</a></li>
+  <li><a href="#catboost-vs-xgboost" id="toc-catboost-vs-xgboost" class="nav-link" data-scroll-target="#catboost-vs-xgboost"><span class="header-section-number">11.2.2</span> CatBoost vs XGBoost</a></li>
+  <li><a href="#tuning-catboostregressor" id="toc-tuning-catboostregressor" class="nav-link" data-scroll-target="#tuning-catboostregressor"><span class="header-section-number">11.2.3</span> Tuning <code>CatBoostRegressor</code></a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -315,7 +321,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 <p>This chapter is not in syllabus. However, the boosting models here may help in the prediction problem and / or in your future data science projects.</p>
-<div class="cell" data-execution_count="5">
+<div class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
@@ -333,10 +339,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time <span class="im">as</span> time</span>
 <span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> xgboost <span class="im">as</span> xgb</span>
 <span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyearth <span class="im">import</span> Earth</span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> lightgbm <span class="im">import</span> LGBMRegressor</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> lightgbm <span class="im">import</span> LGBMRegressor</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> catboost <span class="im">import</span> CatBoostRegressor</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We’ll continue to use the same datasets that we have been using throughout the course.</p>
-<div class="cell" data-execution_count="2">
+<div class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Using the same datasets as used for linear regression in STAT303-2, </span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co">#so that we can compare the non-linear models with linear regression</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>trainf <span class="op">=</span> pd.read_csv(<span class="st">'./Datasets/Car_features_train.csv'</span>)</span>
@@ -346,7 +353,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>train <span class="op">=</span> pd.merge(trainf,trainp)</span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>test <span class="op">=</span> pd.merge(testf,testp)</span>
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>train.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="2">
+<div class="cell-output cell-output-display" data-execution_count="7">
 <div>
 
 
@@ -444,7 +451,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div class="cell" data-execution_count="3">
+<div class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> train[[<span class="st">'mileage'</span>,<span class="st">'mpg'</span>,<span class="st">'year'</span>,<span class="st">'engineSize'</span>]]</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>Xtest <span class="op">=</span> test[[<span class="st">'mileage'</span>,<span class="st">'mpg'</span>,<span class="st">'year'</span>,<span class="st">'engineSize'</span>]]</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> train[<span class="st">'price'</span>]</span>
@@ -452,7 +459,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <section id="lightgbm" class="level2" data-number="11.1">
 <h2 data-number="11.1" class="anchored" data-anchor-id="lightgbm"><span class="header-section-number">11.1</span> LightGBM</h2>
-<p>LightGBM is a gradient boosting decision tree algorithm, which outperforms XGBoost in terms of compuational speed, and provides comparable accuracy in general. The following two key features in LightGBM that make it faster than XGBoost:</p>
+<p>LightGBM is a gradient boosting decision tree algorithm developed by Microsoft in 2017. LightGBM outperforms XGBoost in terms of compuational speed, and provides comparable accuracy in general. The following two key features in LightGBM that make it faster than XGBoost:</p>
 <p><strong>1. Gradient-based One-Side Sampling</strong> (GOSS): Recall, in gradient boosting, we fit trees on the gradient of the loss function <em>(refer the gradient boosting algorithm in section 10.10.2 of the book, <a href="https://hastie.su.domains/ElemStatLearn/">Elements of Statistical Learning</a>):</em></p>
 <p><span class="math display">\[r_m = -\bigg[ \frac{\partial L(y_i, f(x_i))}{\partial f(x_i)}  \bigg]_{f = f_{m-1}}. \]</span></p>
 <p>Observations that correspond to relatively larger gradients contribute more to minimizing the loss function as compared to observations with smaller gradients. The alogrithm down samples the observations with small gradients, while selecting all the observations with large gradients. As observations with large gradients contribute the most to the reduction in loss function when considering a split, the accuracy of loss reduction estimate is maintained even with a reduced sample size. This leads to similar performance in terms of prediction accuracy while reducing computation speed due to reduction in sample size to fit trees.</p>
@@ -504,7 +511,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 </tbody>
 </table>
-<p>The paper for the algorithm can be accessed <a href="https://proceedings.neurips.cc/paper/2017/file/6449f44a102fde848669bdd9eb6b76fa-Paper.pdf">here</a>.</p>
+<p>Read the <a href="https://proceedings.neurips.cc/paper/2017/file/6449f44a102fde848669bdd9eb6b76fa-Paper.pdf">LightGBM paper</a> for more details.</p>
 <section id="lightgbm-for-regression" class="level3" data-number="11.1.1">
 <h3 data-number="11.1.1" class="anchored" data-anchor-id="lightgbm-for-regression"><span class="header-section-number">11.1.1</span> LightGBM for regression</h3>
 <p>Let us tune a lightGBM model for regression for our problem of predicting car price. We’ll use the function <a href="https://lightgbm.readthedocs.io/en/latest/pythonapi/lightgbm.LGBMRegressor.html"><code>LGBMRegressor</code></a>. For classification problems, <a href="https://lightgbm.readthedocs.io/en/latest/pythonapi/lightgbm.LGBMClassifier.html"><code>LGBMClassifier</code></a> can be used.</p>
@@ -583,6 +590,131 @@ Time taken =  4  minutes</code></pre>
 <pre><code>5497.553788113875</code></pre>
 </div>
 </div>
+</section>
+</section>
+<section id="catboost" class="level2" data-number="11.2">
+<h2 data-number="11.2" class="anchored" data-anchor-id="catboost"><span class="header-section-number">11.2</span> CatBoost</h2>
+<p>CatBoost is a gradient boosting algorithm developed by Yandex <em>(Russian Google)</em> in 2017. Like LightGBM, CatBoost is also faster than XGBoost in training. However, unlike LightGBM, the authors have claimed that it outperforms both LightGBM and XGBoost in terms of prediction accuracy as well.</p>
+<p>The key feature of CatBoost that address the issue with the gradient boosting procedure is the idea of ordered boosting. Classic boosting algorithms are prone to overfitting on small/noisy datasets due to a problem known as prediction shift. Recall, in gradient boosting, we fit trees on the gradient of the loss function <em>(refer the gradient boosting algorithm in section 10.10.2 of the book, <a href="https://hastie.su.domains/ElemStatLearn/">Elements of Statistical Learning</a>):</em></p>
+<p><span class="math display">\[r_m = -\bigg[ \frac{\partial L(y_i, f(x_i))}{\partial f(x_i)}  \bigg]_{f = f_{m-1}}. \]</span></p>
+<p>When calculating the gradient estimate of an observation, these algorithms use the same observations that the model was built with, thus having no chances of experiencing unseen data. CatBoost, on the other hand, uses the concept of ordered boosting, a permutation-driven approach to train model on a subset of data while calculating residuals on another subset, thus preventing “target leakage” and overfitting. The residuals of an observation are computed based on a model developed on the previous observations, where the observations are randomly shuffled at each iteration, i.e., for each tree.</p>
+<p>Thus, the gradient of the loss function is based on test <em>(unseen)</em> data, instead of the data on which the model has been trained, which improves the generalizability of the model, and avoids overfitting on train data.</p>
+<p>The authors have also shown that CatBoost performs better than XGBoost and LightGBM without tuning, i.e., with default hyperparameter settings.</p>
+<p>Read the <a href="https://proceedings.neurips.cc/paper_files/paper/2018/file/14491b756b3a51daac41c24863285549-Paper.pdf">CatBoost paper</a> for more details.</p>
+<p>Here is a good <a href="https://neptune.ai/blog/when-to-choose-catboost-over-xgboost-or-lightgbm">blog</a> listing the key features of CatBoost.</p>
+<section id="catboost-for-regression" class="level3" data-number="11.2.1">
+<h3 data-number="11.2.1" class="anchored" data-anchor-id="catboost-for-regression"><span class="header-section-number">11.2.1</span> CatBoost for regression</h3>
+<p>We’ll use the function <a href="https://catboost.ai/en/docs/concepts/python-reference_catboostregressor">CatBoostRegressor</a> for regression. For classification problems <a href="https://catboost.ai/en/docs/concepts/python-reference_catboostclassifier">CatBoostClassifier</a> can be used.</p>
+<p>Let us check the performance of <code>CatBoostRegressor()</code> without tuning, i.e., with default hyperparameter settings.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>model_cat <span class="op">=</span> CatBoostRegressor().fit(X, y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="18">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>np.sqrt(mean_squared_error(model_cat.predict(Xtest),ytest))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="18">
+<pre><code>5288.82153844634</code></pre>
+</div>
+</div>
+<p>Even with default hyperparameter settings, CatBoost has outperformed both XGBoost and LightGBM in terms of RMSE on test data for our example of predicting car prices.</p>
+</section>
+<section id="catboost-vs-xgboost" class="level3" data-number="11.2.2">
+<h3 data-number="11.2.2" class="anchored" data-anchor-id="catboost-vs-xgboost"><span class="header-section-number">11.2.2</span> CatBoost vs XGBoost</h3>
+<p>Let us see the performance of XGBoost with default hyperparameter settings.</p>
+<div class="cell" data-execution_count="19">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>model_xgb <span class="op">=</span> xgb.XGBRFRegressor().fit(X, y)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>np.sqrt(mean_squared_error(model_xgb.predict(Xtest),ytest))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="19">
+<pre><code>6821.745153860935</code></pre>
+</div>
+</div>
+<p>XGBoost performance deteriorates showing that hyperparameter tuning is more important in XGBoost.</p>
+<p>Let us see the performance of LightGBM with default hyperparameter settings.</p>
+<div class="cell" data-execution_count="20">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>model_lgbm <span class="op">=</span> LGBMRegressor().fit(X, y)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>np.sqrt(mean_squared_error(model_lgbm.predict(Xtest),ytest))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="20">
+<pre><code>5494.0777923513515</code></pre>
+</div>
+</div>
+<p>LightGBM’s default hyperparameter settings also seem to be more robust as compared to those of XGBoost.</p>
+</section>
+<section id="tuning-catboostregressor" class="level3" data-number="11.2.3">
+<h3 data-number="11.2.3" class="anchored" data-anchor-id="tuning-catboostregressor"><span class="header-section-number">11.2.3</span> Tuning <code>CatBoostRegressor</code></h3>
+<p>The CatBoost hyperparameters can be tuned just like the XGBoost hyperparameters. However, there is some difference in the hyperparameters of both the packages. For example, <code>reg_alpha</code> <em>(the L1 penalization on weights of leaves)</em> and <code>colsample_bytree</code> <em>(subsample ratio of columns when constructing each tree)</em> hyperparameters are not there in CatBoost.</p>
+<div class="cell" data-execution_count="26">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co">#K-fold cross validation to find optimal parameters for CatBoost regressor</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>start_time <span class="op">=</span> time.time()</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>param_grid <span class="op">=</span> {<span class="st">'max_depth'</span>: [<span class="dv">4</span>,<span class="dv">6</span>,<span class="dv">8</span>],</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>              <span class="st">'num_leaves'</span>: [<span class="dv">20</span>, <span class="dv">31</span>, <span class="dv">40</span>],</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>              <span class="st">'learning_rate'</span>: [<span class="fl">0.01</span>, <span class="fl">0.05</span>, <span class="fl">0.1</span>],</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>               <span class="st">'reg_lambda'</span>:[<span class="dv">0</span>, <span class="dv">10</span>, <span class="dv">100</span>],</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>                <span class="st">'n_estimators'</span>:[<span class="dv">100</span>, <span class="dv">500</span>, <span class="dv">1000</span>],</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>                <span class="st">'subsample'</span>: [<span class="fl">0.5</span>, <span class="fl">0.75</span>, <span class="fl">1.0</span>]}</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>cv <span class="op">=</span> KFold(n_splits<span class="op">=</span><span class="dv">5</span>,shuffle<span class="op">=</span><span class="va">True</span>,random_state<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>optimal_params <span class="op">=</span> RandomizedSearchCV(estimator<span class="op">=</span>CatBoostRegressor(random_state<span class="op">=</span><span class="dv">1</span>, verbose<span class="op">=</span><span class="va">False</span>),                                                       </span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>                             param_distributions <span class="op">=</span> param_grid, n_iter <span class="op">=</span> <span class="dv">200</span>,</span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>                             verbose <span class="op">=</span> <span class="dv">1</span>,random_state <span class="op">=</span> <span class="dv">1</span>,</span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>                             n_jobs<span class="op">=-</span><span class="dv">1</span>,</span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>                             cv <span class="op">=</span> cv)</span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>optimal_params.fit(X,y)</span>
+<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Optimal parameter values ="</span>, optimal_params.best_params_)</span>
+<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Optimal cross validation R-squared = "</span>,optimal_params.best_score_)</span>
+<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Time taken = "</span>, <span class="bu">round</span>((time.time()<span class="op">-</span>start_time)<span class="op">/</span><span class="dv">60</span>), <span class="st">" minutes"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Fitting 5 folds for each of 200 candidates, totalling 1000 fits</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>C:\Users\akl0407\Anaconda3\lib\site-packages\sklearn\model_selection\_search.py:918: UserWarning: One or more of the test scores are non-finite: [       nan        nan        nan        nan        nan        nan
+        nan 0.86528582        nan        nan 0.84104458 0.79227627
+        nan        nan 0.84395413 0.89887462        nan        nan
+        nan 0.90260407        nan        nan        nan        nan
+        nan        nan 0.86545114        nan 0.84894322        nan
+ 0.8913253         nan        nan 0.90681372 0.90270419 0.84033192
+        nan        nan        nan        nan        nan 0.89897627
+        nan 0.75750273 0.63799634 0.82429155 0.8541958         nan
+ 0.85795537 0.84778687        nan 0.82552044 0.88776603        nan
+ 0.87183014        nan        nan        nan        nan        nan
+        nan        nan        nan        nan 0.868381   0.88627774
+        nan        nan        nan        nan 0.88302748        nan
+        nan        nan 0.87173927 0.90364659        nan 0.68716329
+ 0.86810108        nan 0.90387934 0.86198    0.79482791        nan
+ 0.867492          nan        nan        nan 0.8681382         nan
+        nan        nan        nan        nan        nan 0.82487077
+ 0.54242665        nan        nan        nan        nan        nan
+        nan        nan 0.88919641        nan        nan        nan
+ 0.85336326        nan 0.8619873  0.83934649 0.90477081 0.79750609
+ 0.86543518        nan        nan        nan        nan 0.80115517
+        nan        nan        nan        nan        nan 0.75434919
+ 0.60871141        nan        nan 0.79028956 0.66728925 0.89361737
+        nan        nan        nan        nan        nan 0.89080628
+        nan 0.75063605        nan 0.90090587        nan        nan
+ 0.82573579 0.90680318 0.85290443        nan        nan 0.89928321
+        nan        nan        nan 0.86285405 0.8978184         nan
+        nan 0.84783232        nan        nan        nan        nan
+ 0.86225177        nan        nan 0.8621329         nan        nan
+ 0.54359637        nan        nan 0.8994749  0.84800071        nan
+        nan        nan        nan        nan        nan        nan
+ 0.63020005        nan 0.87308398        nan 0.86614844        nan
+        nan        nan        nan        nan        nan        nan
+ 0.68846678 0.8406747         nan        nan        nan        nan
+ 0.88741464 0.86148835]
+  warnings.warn(</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Optimal parameter values = {'subsample': 0.75, 'reg_lambda': 0, 'num_leaves': 31, 'n_estimators': 1000, 'max_depth': 6, 'learning_rate': 0.05}
+Optimal cross validation R-squared =  0.9068137174802073
+Time taken =  2  minutes</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="27">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co">#RMSE based on the optimal parameter values</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>np.sqrt(mean_squared_error(optimal_params.best_estimator_.predict(Xtest),ytest))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="27">
+<pre><code>5254.902079026533</code></pre>
+</div>
+</div>
+<p>It takes 2 minutes to tune CatBoost, which is higher than LightGBM and lesser than XGBoost. CatBoost falls in between LightGBM and XGBoost in terms of speed. However, it is likely to be more accurate than XGBoost and LighGBM, and likely to require lesser tuning as compared to XGBoost.</p>
 
 
 </section>

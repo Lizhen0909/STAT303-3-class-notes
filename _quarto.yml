@@ -34,6 +34,7 @@ book:
     - Assignment C.ipynb
     - Assignment D.ipynb
     - Stratified splitting.ipynb
+    - App_GridSearchCV_vs_RandomSearchCV.ipynb
     - Datasets.ipynb
     - references.qmd  
 

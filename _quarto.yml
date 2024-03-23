@@ -15,17 +15,7 @@ book:
     
   chapters:
     - index.qmd
-    - L1_Scikit-learn.ipynb
     - Lec2_Regression_splines.ipynb
-    - Lec3_RegressionTrees.ipynb
-    - Lec4_ClassificationTree.ipynb
-    - Lec4_Bagging.ipynb
-    - Lec6_RandomForest.ipynb
-    - Lec7_AdaBoost.ipynb
-    - Lec8_Gradient_Boosting.ipynb
-    - Lec9_XGBoost.ipynb
-    - Lec10_Ensemble.ipynb
-    - Lec11_More boosting models.ipynb
   appendices: 
     - Datasets.ipynb
     - references.qmd  

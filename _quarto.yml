@@ -5,7 +5,7 @@ project:
 book:
   title: "Data Science III with python (Class notes)"
   subtitle: "STAT 303-3"
-  author: "Arvind Krishna, Emre Besler, and Lizhen Shi"
+  author: "Arvind Krishna"
   date: "3/24/2023"
   
   sidebar:
@@ -15,22 +15,18 @@ book:
     
   chapters:
     - index.qmd
-    - part: "Moving towards non-linearity"
-      chapters:
-        - L1_Scikit-learn.ipynb
-        - Lec2_Regression_splines.ipynb
-        - Lec3_RegressionTrees.ipynb
-        - Lec4_ClassificationTree.ipynb
-        - Lec4_Bagging.ipynb
-        - Lec6_RandomForest.ipynb
-        - Lec7_AdaBoost.ipynb
-        - Lec8_Gradient_Boosting.ipynb
-        - Lec9_XGBoost.ipynb
-        - Lec10_Ensemble.ipynb
-        - Lec11_More boosting models.ipynb
+    - L1_Scikit-learn.ipynb
+    - Lec2_Regression_splines.ipynb
+    - Lec3_RegressionTrees.ipynb
+    - Lec4_ClassificationTree.ipynb
+    - Lec4_Bagging.ipynb
+    - Lec6_RandomForest.ipynb
+    - Lec7_AdaBoost.ipynb
+    - Lec8_Gradient_Boosting.ipynb
+    - Lec9_XGBoost.ipynb
+    - Lec10_Ensemble.ipynb
+    - Lec11_More boosting models.ipynb
   appendices: 
-    - Stratified splitting.ipynb
-    - App_GridSearchCV_vs_RandomSearchCV.ipynb
     - Datasets.ipynb
     - references.qmd  
 

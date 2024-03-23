@@ -1,0 +1,34 @@
+project:
+  type: book
+
+
+book:
+  title: "Data Science III with python (Class notes)"
+  subtitle: "STAT 303-3"
+  author: "Arvind Krishna, Emre Besler, and Lizhen Shi"
+  date: "3/24/2023"
+  
+  sidebar:
+    search: true
+    logo: "NU_Stat_logo.png"
+    logo-href: "https://statistics.northwestern.edu/"
+    
+  chapters:
+    - index.qmd
+    - part: "Moving towards non-linearity"
+      chapters:
+        - L1_Scikit-learn.ipynb
+  appendices: 
+    - Datasets.ipynb
+    - references.qmd  
+
+bibliography: references.bib
+
+format:
+  html:
+    theme: cosmo
+  pdf:
+    documentclass: scrreprt
+
+
+

@@ -19,6 +19,7 @@ book:
     - Lec3_RegressionTrees.ipynb
     - Lec4_ClassificationTree.ipynb
   appendices: 
+    - Stratified splitting.ipynb
     - Datasets.ipynb
 
 format:

@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.551">
+<meta name="generator" content="quarto-1.4.552">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Data Science III with python (Class notes) - 2&nbsp; Regression trees</title>
+<title>Data Science III with python (Class notes) - 3&nbsp; Regression trees</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -65,7 +65,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
 <link href="./Lec4_ClassificationTree.html" rel="next">
-<link href="./L1_Scikit-learn.html" rel="prev">
+<link href="./Bias_variance_code.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -147,7 +147,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Lec3_RegressionTrees.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Regression trees</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Lec3_RegressionTrees.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Regression trees</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -189,14 +189,20 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./Bias_variance_code.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Bias-variance tradeoff</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./Lec3_RegressionTrees.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Regression trees</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Regression trees</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Lec4_ClassificationTree.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Classification trees</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Classification trees</span></span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -232,17 +238,17 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#building-a-regression-tree" id="toc-building-a-regression-tree" class="nav-link active" data-scroll-target="#building-a-regression-tree"><span class="header-section-number">2.1</span> Building a regression tree</a></li>
-  <li><a href="#optimizing-parameters-to-improve-the-regression-tree" id="toc-optimizing-parameters-to-improve-the-regression-tree" class="nav-link" data-scroll-target="#optimizing-parameters-to-improve-the-regression-tree"><span class="header-section-number">2.2</span> Optimizing parameters to improve the regression tree</a>
+  <li><a href="#building-a-regression-tree" id="toc-building-a-regression-tree" class="nav-link active" data-scroll-target="#building-a-regression-tree"><span class="header-section-number">3.1</span> Building a regression tree</a></li>
+  <li><a href="#optimizing-parameters-to-improve-the-regression-tree" id="toc-optimizing-parameters-to-improve-the-regression-tree" class="nav-link" data-scroll-target="#optimizing-parameters-to-improve-the-regression-tree"><span class="header-section-number">3.2</span> Optimizing parameters to improve the regression tree</a>
   <ul>
-  <li><a href="#range-of-hyperparameter-values" id="toc-range-of-hyperparameter-values" class="nav-link" data-scroll-target="#range-of-hyperparameter-values"><span class="header-section-number">2.2.1</span> Range of hyperparameter values</a></li>
-  <li><a href="#cross-validation-coarse-grid" id="toc-cross-validation-coarse-grid" class="nav-link" data-scroll-target="#cross-validation-coarse-grid"><span class="header-section-number">2.2.2</span> Cross validation: Coarse grid</a></li>
-  <li><a href="#cross-validation-finer-grid" id="toc-cross-validation-finer-grid" class="nav-link" data-scroll-target="#cross-validation-finer-grid"><span class="header-section-number">2.2.3</span> Cross validation: Finer grid</a></li>
+  <li><a href="#range-of-hyperparameter-values" id="toc-range-of-hyperparameter-values" class="nav-link" data-scroll-target="#range-of-hyperparameter-values"><span class="header-section-number">3.2.1</span> Range of hyperparameter values</a></li>
+  <li><a href="#cross-validation-coarse-grid" id="toc-cross-validation-coarse-grid" class="nav-link" data-scroll-target="#cross-validation-coarse-grid"><span class="header-section-number">3.2.2</span> Cross validation: Coarse grid</a></li>
+  <li><a href="#cross-validation-finer-grid" id="toc-cross-validation-finer-grid" class="nav-link" data-scroll-target="#cross-validation-finer-grid"><span class="header-section-number">3.2.3</span> Cross validation: Finer grid</a></li>
   </ul></li>
-  <li><a href="#cost-complexity-pruning" id="toc-cost-complexity-pruning" class="nav-link" data-scroll-target="#cost-complexity-pruning"><span class="header-section-number">2.3</span> Cost complexity pruning</a>
+  <li><a href="#cost-complexity-pruning" id="toc-cost-complexity-pruning" class="nav-link" data-scroll-target="#cost-complexity-pruning"><span class="header-section-number">3.3</span> Cost complexity pruning</a>
   <ul>
-  <li><a href="#depth-vs-alpha-node-counts-vs-alpha" id="toc-depth-vs-alpha-node-counts-vs-alpha" class="nav-link" data-scroll-target="#depth-vs-alpha-node-counts-vs-alpha"><span class="header-section-number">2.3.1</span> Depth vs alpha; Node counts vs alpha</a></li>
-  <li><a href="#train-and-test-accuracies-r-squared-vs-alpha" id="toc-train-and-test-accuracies-r-squared-vs-alpha" class="nav-link" data-scroll-target="#train-and-test-accuracies-r-squared-vs-alpha"><span class="header-section-number">2.3.2</span> Train and test accuracies (R-squared) vs alpha</a></li>
+  <li><a href="#depth-vs-alpha-node-counts-vs-alpha" id="toc-depth-vs-alpha-node-counts-vs-alpha" class="nav-link" data-scroll-target="#depth-vs-alpha-node-counts-vs-alpha"><span class="header-section-number">3.3.1</span> Depth vs alpha; Node counts vs alpha</a></li>
+  <li><a href="#train-and-test-accuracies-r-squared-vs-alpha" id="toc-train-and-test-accuracies-r-squared-vs-alpha" class="nav-link" data-scroll-target="#train-and-test-accuracies-r-squared-vs-alpha"><span class="header-section-number">3.3.2</span> Train and test accuracies (R-squared) vs alpha</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -252,7 +258,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Regression trees</span></h1>
+<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Regression trees</span></h1>
 </div>
 
 
@@ -400,8 +406,8 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<section id="building-a-regression-tree" class="level2" data-number="2.1">
-<h2 data-number="2.1" class="anchored" data-anchor-id="building-a-regression-tree"><span class="header-section-number">2.1</span> Building a regression tree</h2>
+<section id="building-a-regression-tree" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="building-a-regression-tree"><span class="header-section-number">3.1</span> Building a regression tree</h2>
 <p>Develop a regression tree to predict car price based on mileage</p>
 <div id="c0754fb4" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> train[<span class="st">'mileage'</span>]</span>
@@ -481,11 +487,11 @@ window.Quarto = {
 </div>
 </div>
 </section>
-<section id="optimizing-parameters-to-improve-the-regression-tree" class="level2" data-number="2.2">
-<h2 data-number="2.2" class="anchored" data-anchor-id="optimizing-parameters-to-improve-the-regression-tree"><span class="header-section-number">2.2</span> Optimizing parameters to improve the regression tree</h2>
+<section id="optimizing-parameters-to-improve-the-regression-tree" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="optimizing-parameters-to-improve-the-regression-tree"><span class="header-section-number">3.2</span> Optimizing parameters to improve the regression tree</h2>
 <p>Let us find the optimal depth of the tree and the number of terminal nodes (leaves) by cross validation.</p>
-<section id="range-of-hyperparameter-values" class="level3" data-number="2.2.1">
-<h3 data-number="2.2.1" class="anchored" data-anchor-id="range-of-hyperparameter-values"><span class="header-section-number">2.2.1</span> Range of hyperparameter values</h3>
+<section id="range-of-hyperparameter-values" class="level3" data-number="3.2.1">
+<h3 data-number="3.2.1" class="anchored" data-anchor-id="range-of-hyperparameter-values"><span class="header-section-number">3.2.1</span> Range of hyperparameter values</h3>
 <p>First, we’ll find the minimum and maximum possible values of the depth and leaves, and then find the optimal value in that range.</p>
 <div id="94f4aea3" class="cell" data-execution_count="19">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> DecisionTreeRegressor(random_state<span class="op">=</span><span class="dv">1</span>) </span>
@@ -500,8 +506,8 @@ Maximum leaves = 4845</code></pre>
 </div>
 </div>
 </section>
-<section id="cross-validation-coarse-grid" class="level3" data-number="2.2.2">
-<h3 data-number="2.2.2" class="anchored" data-anchor-id="cross-validation-coarse-grid"><span class="header-section-number">2.2.2</span> Cross validation: Coarse grid</h3>
+<section id="cross-validation-coarse-grid" class="level3" data-number="3.2.2">
+<h3 data-number="3.2.2" class="anchored" data-anchor-id="cross-validation-coarse-grid"><span class="header-section-number">3.2.2</span> Cross validation: Coarse grid</h3>
 <p>We’ll use the <code>sklearn</code> function <a href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GridSearchCV.html"><code>GridSearchCV</code></a> to find the optimal hyperparameter values over a grid of possible values. By default, <code>GridSearchCV</code> returns the optimal hyperparameter values based on the coefficient of determination <a href="https://scikit-learn.org/stable/modules/model_evaluation.html#r2-score"><span class="math inline">\(R^2\)</span></a>. However, the <code>scoring</code> argument of the function can be used to find the optimal parameters based on several different criteria as mentioned in the <a href="https://scikit-learn.org/stable/modules/model_evaluation.html#scoring-parameter">scoring-parameter documentation</a>.</p>
 <div id="069acdb6" class="cell" data-execution_count="73">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Finding cross-validation error for trees </span></span>
@@ -557,8 +563,8 @@ Maximum leaves = 4845</code></pre>
 </div>
 <p>We observe that for a depth of around 8-14, and number of leaves within 1000, we get the lowest <span class="math inline">\(K\)</span>-fold RMSE. So, we should do a finer search in that region to obtain more precise hyperparameter values.</p>
 </section>
-<section id="cross-validation-finer-grid" class="level3" data-number="2.2.3">
-<h3 data-number="2.2.3" class="anchored" data-anchor-id="cross-validation-finer-grid"><span class="header-section-number">2.2.3</span> Cross validation: Finer grid</h3>
+<section id="cross-validation-finer-grid" class="level3" data-number="3.2.3">
+<h3 data-number="3.2.3" class="anchored" data-anchor-id="cross-validation-finer-grid"><span class="header-section-number">3.2.3</span> Cross validation: Finer grid</h3>
 <div id="37cea0cd" class="cell" data-execution_count="110">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Finding cross-validation error for trees</span></span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>start_time <span class="op">=</span> tm.time()</span>
@@ -605,8 +611,8 @@ Time taken = 1 minutes</code></pre>
 <p><em>Engine size</em> is the most important predictor, followed by <em>year</em>, which is followed by <em>mpg</em>, and <em>mileage</em> is the least important predictor.</p>
 </section>
 </section>
-<section id="cost-complexity-pruning" class="level2" data-number="2.3">
-<h2 data-number="2.3" class="anchored" data-anchor-id="cost-complexity-pruning"><span class="header-section-number">2.3</span> Cost complexity pruning</h2>
+<section id="cost-complexity-pruning" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="cost-complexity-pruning"><span class="header-section-number">3.3</span> Cost complexity pruning</h2>
 <p>While optimizing parameters above, we optimized them within a range that we thought was reasonable. While doing so, we restricted ourselves to considering only a subset of the unpruned tree. Thus, we could have missed out on finding the optimal tree (or the best model).</p>
 <p>With cost complexity pruning, we first develop an unpruned tree without any restrictions. Then, using cross validation, we find the optimal value of the tuning parameter <span class="math inline">\(\alpha\)</span>. All the non-terminal nodes for which <span class="math inline">\(\alpha_{eff}\)</span> is smaller that the optimal <span class="math inline">\(\alpha\)</span> will be pruned. You will need to check out the link below to understand this better.</p>
 <p>Check out a detailed explanation of how cost complexity pruning is implemented in sklearn at: <a href="https://scikit-learn.org/stable/modules/tree.html#minimal-cost-complexity-pruning" class="uri">https://scikit-learn.org/stable/modules/tree.html#minimal-cost-complexity-pruning</a></p>
@@ -680,8 +686,8 @@ Time taken = 2 minutes</code></pre>
 </div>
 </div>
 </div>
-<section id="depth-vs-alpha-node-counts-vs-alpha" class="level3" data-number="2.3.1">
-<h3 data-number="2.3.1" class="anchored" data-anchor-id="depth-vs-alpha-node-counts-vs-alpha"><span class="header-section-number">2.3.1</span> Depth vs alpha; Node counts vs alpha</h3>
+<section id="depth-vs-alpha-node-counts-vs-alpha" class="level3" data-number="3.3.1">
+<h3 data-number="3.3.1" class="anchored" data-anchor-id="depth-vs-alpha-node-counts-vs-alpha"><span class="header-section-number">3.3.1</span> Depth vs alpha; Node counts vs alpha</h3>
 <div id="5c17b57e" class="cell" data-execution_count="80">
 <div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>stime <span class="op">=</span> time.time()</span>
 <span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>trees<span class="op">=</span>[]</span>
@@ -722,8 +728,8 @@ Time taken = 2 minutes</code></pre>
 </div>
 </div>
 </section>
-<section id="train-and-test-accuracies-r-squared-vs-alpha" class="level3" data-number="2.3.2">
-<h3 data-number="2.3.2" class="anchored" data-anchor-id="train-and-test-accuracies-r-squared-vs-alpha"><span class="header-section-number">2.3.2</span> Train and test accuracies (R-squared) vs alpha</h3>
+<section id="train-and-test-accuracies-r-squared-vs-alpha" class="level3" data-number="3.3.2">
+<h3 data-number="3.3.2" class="anchored" data-anchor-id="train-and-test-accuracies-r-squared-vs-alpha"><span class="header-section-number">3.3.2</span> Train and test accuracies (R-squared) vs alpha</h3>
 <div id="2794d145" class="cell">
 <div class="sourceCode cell-code" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>train_scores <span class="op">=</span> [clf.score(X, y) <span class="cf">for</span> clf <span class="kw">in</span> trees]</span>
 <span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>test_scores <span class="op">=</span> [clf.score(Xtest, test.price) <span class="cf">for</span> clf <span class="kw">in</span> trees]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1162,13 +1168,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./L1_Scikit-learn.html" class="pagination-link" aria-label="Introduction to scikit-learn">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction to scikit-learn</span></span>
+      <a href="./Bias_variance_code.html" class="pagination-link" aria-label="Bias-variance tradeoff">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Bias-variance tradeoff</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./Lec4_ClassificationTree.html" class="pagination-link" aria-label="Classification trees">
-        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Classification trees</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Classification trees</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

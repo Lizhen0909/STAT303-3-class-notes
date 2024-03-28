@@ -16,6 +16,7 @@ book:
   chapters:
     - index.qmd
     - L1_Scikit-learn.ipynb
+    - Bias_variance_code.ipynb
     - Lec3_RegressionTrees.ipynb
     - Lec4_ClassificationTree.ipynb
   appendices: 

@@ -17,9 +17,9 @@ book:
     - index.qmd
     - part: "Sklearn; Bias & Variance; KNN"
       chapters:
-      - L1_Scikit-learn.ipynb
-      - Bias_variance_code.ipynb
-      - KNN.ipynb
+        - L1_Scikit-learn.ipynb
+        - Bias_variance_code.ipynb
+        - KNN.ipynb
     - part: "Tree based models"
       chapters:
         - Lec3_RegressionTrees.ipynb
@@ -27,8 +27,8 @@ book:
     - part: "Assignments"
       chapters:
         - Assignment1.ipynb
+
   appendices: 
-    - 
     - Stratified splitting.ipynb
     - Datasets.ipynb
 

@@ -24,7 +24,9 @@ book:
       chapters:
         - Lec3_RegressionTrees.ipynb
         - Lec4_ClassificationTree.ipynb
-    
+    - part: "Assignments"
+      chapters:
+        - Assignment1.ipynb
 
   appendices: 
     - Stratified splitting.ipynb

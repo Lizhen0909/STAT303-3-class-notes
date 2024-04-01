@@ -15,12 +15,20 @@ book:
     
   chapters:
     - index.qmd
-    - L1_Scikit-learn.ipynb
-    - Bias_variance_code.ipynb
-    - KNN.ipynb
-    - Lec3_RegressionTrees.ipynb
-    - Lec4_ClassificationTree.ipynb
+    - part: "Sklearn; Bias & Variance; KNN"
+      chapters:
+      - L1_Scikit-learn.ipynb
+      - Bias_variance_code.ipynb
+      - KNN.ipynb
+    - part: "Tree based models"
+      chapters:
+        - Lec3_RegressionTrees.ipynb
+        - Lec4_ClassificationTree.ipynb
+    - part: "Assignments"
+      chapters:
+        - Assignment1.ipynb
   appendices: 
+    - 
     - Stratified splitting.ipynb
     - Datasets.ipynb
 

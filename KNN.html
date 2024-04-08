@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.552">
+<meta name="generator" content="quarto-1.4.553">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -106,6 +106,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -289,7 +318,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <p><em>Read section 4.7.6 of the book before using these notes.</em></p>
 <p><em>Note that in this course, lecture notes are not sufficient, you must read the book for better understanding. Lecture notes are just implementing the concepts of the book on a dataset, but not explaining the concepts elaborately.</em></p>
-<div id="35d5b5b4" class="cell" data-execution_count="1">
+<div id="35d5b5b4" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Importing necessary libraries</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -300,7 +329,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> StandardScaler</span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.neighbors <span class="im">import</span> KNeighborsRegressor, KNeighborsClassifier</span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> mean_squared_error</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> cross_val_score, GridSearchCV, cross_val_predict</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> cross_val_score, GridSearchCV, cross_val_predict, KFold, RepeatedKFold</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <section id="knn-for-regression" class="level2" data-number="3.1">
 <h2 data-number="3.1" class="anchored" data-anchor-id="knn-for-regression"><span class="header-section-number">3.1</span> KNN for regression</h2>
@@ -414,7 +443,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="767dc3c9" class="cell" data-execution_count="11">
+<div id="767dc3c9" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>predictors <span class="op">=</span> [<span class="st">'mpg'</span>, <span class="st">'engineSize'</span>, <span class="st">'year'</span>, <span class="st">'mileage'</span>]</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>X_train <span class="op">=</span> train[predictors]</span>
@@ -426,7 +455,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Let us scale data as we are using KNN.</p>
 <section id="scaling-data" class="level3" data-number="3.1.1">
 <h3 data-number="3.1.1" class="anchored" data-anchor-id="scaling-data"><span class="header-section-number">3.1.1</span> Scaling data</h3>
-<div id="ea6db06d" class="cell" data-execution_count="12">
+<div id="ea6db06d" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Scale</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>sc <span class="op">=</span> StandardScaler()</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -438,7 +467,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="fitting-and-validating-model" class="level3" data-number="3.1.2">
 <h3 data-number="3.1.2" class="anchored" data-anchor-id="fitting-and-validating-model"><span class="header-section-number">3.1.2</span> Fitting and validating model</h3>
-<div id="2efb806f" class="cell" data-execution_count="120">
+<div id="2efb806f" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>knn_model <span class="op">=</span> KNeighborsRegressor() </span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>knn_model.fit(X_train_scaled, (y_train))</span>
@@ -447,11 +476,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>y_pred_train <span class="op">=</span> knn_model.predict(X_train_scaled)</span>
 <span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>mean_squared_error(y_test, (y_pred), squared<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="120">
+<div class="cell-output cell-output-display" data-execution_count="5">
 <pre><code>6329.691192885354</code></pre>
 </div>
 </div>
-<div id="f090da66" class="cell" data-execution_count="121">
+<div id="f090da66" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>knn_model2 <span class="op">=</span> KNeighborsRegressor(n_neighbors <span class="op">=</span> <span class="dv">5</span>, weights<span class="op">=</span><span class="st">'distance'</span>) <span class="co"># Default weights is uniform</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>knn_model2.fit(X_train_scaled, y_train)</span>
@@ -459,7 +488,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>y_pred <span class="op">=</span> knn_model2.predict(X_test_scaled)</span>
 <span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>mean_squared_error(y_test, y_pred, squared<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="121">
+<div class="cell-output cell-output-display" data-execution_count="6">
 <pre><code>6063.327598353961</code></pre>
 </div>
 </div>
@@ -468,7 +497,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="hyperparameter-tuning" class="level3" data-number="3.1.3">
 <h3 data-number="3.1.3" class="anchored" data-anchor-id="hyperparameter-tuning"><span class="header-section-number">3.1.3</span> Hyperparameter tuning</h3>
 <p>We will use cross-validation to find the optimal value of the hyperparameter <code>n_neighbors</code>.</p>
-<div id="00cbca8f" class="cell" data-execution_count="115">
+<div id="00cbca8f" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>Ks <span class="op">=</span> np.arange(<span class="dv">1</span>,<span class="dv">601</span>)</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>cv_scores <span class="op">=</span> []</span>
@@ -478,19 +507,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    score <span class="op">=</span> cross_val_score(model, X_train_scaled, y_train, cv<span class="op">=</span><span class="dv">5</span>, scoring <span class="op">=</span> <span class="st">'neg_root_mean_squared_error'</span>)</span>
 <span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    cv_scores.append(score)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="6ae73057" class="cell" data-execution_count="116">
+<div id="6ae73057" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>np.array(cv_scores).shape</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Each row is a K</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="116">
+<div class="cell-output cell-output-display" data-execution_count="8">
 <pre><code>(600, 5)</code></pre>
 </div>
 </div>
-<div id="afb3bf8f" class="cell" data-execution_count="117">
+<div id="afb3bf8f" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>cv_scores_array <span class="op">=</span> np.array(cv_scores)</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>avg_cv_scores <span class="op">=</span> <span class="op">-</span>cv_scores_array.mean(axis<span class="op">=</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="f8f34a55" class="cell" data-execution_count="119">
+<div id="f8f34a55" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>sns.lineplot(x <span class="op">=</span> <span class="bu">range</span>(<span class="dv">600</span>), y <span class="op">=</span> avg_cv_scores)<span class="op">;</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'K'</span>)</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'5-fold Cross-validated RMSE'</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -502,16 +531,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="f1915edf" class="cell" data-execution_count="118">
+<div id="f1915edf" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>avg_cv_scores.<span class="bu">min</span>() <span class="co"># Best CV score</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a> </span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>Ks[avg_cv_scores.argmin()] <span class="co"># Best hyperparam value</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="118">
+<div class="cell-output cell-output-display" data-execution_count="11">
 <pre><code>366</code></pre>
 </div>
 </div>
 <p>The optimal hyperparameter value is 366. Does it seem to be too high?</p>
-<div id="cf33872b" class="cell" data-execution_count="11">
+<div id="cf33872b" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>best_model <span class="op">=</span> KNeighborsRegressor(n_neighbors <span class="op">=</span> Ks[avg_cv_scores.argmin()], weights<span class="op">=</span><span class="st">'distance'</span>)</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>best_model.fit(X_train_scaled, y_train)</span>
@@ -519,17 +548,84 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>y_pred <span class="op">=</span> best_model.predict(X_test_scaled)</span>
 <span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>mean_squared_error(y_test, y_pred, squared<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="11">
+<div class="cell-output cell-output-display" data-execution_count="12">
 <pre><code>7724.452068618346</code></pre>
 </div>
 </div>
 <p><strong>The test error with the optimal hyperparameter value based on cross-validation is much higher than that based on the default value of the hyperparameter</strong>. Why is that?</p>
+<p>Sometimes this may happen by chance due to the specific observations in the <span class="math inline">\(k\)</span> folds. One option is to shuffle the dataset before splitting into folds.</p>
+<div id="4b462745" class="cell" data-execution_count="16">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>kcv <span class="op">=</span> KFold(n_splits <span class="op">=</span> <span class="dv">5</span>, shuffle <span class="op">=</span> <span class="va">True</span>, random_state <span class="op">=</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Now, let us again try to find the opimal <span class="math inline">\(K\)</span> for KNN, using the new folds, based on shuffled data.</p>
+<div id="6ed6ceed" class="cell" data-execution_count="17">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>Ks <span class="op">=</span> np.arange(<span class="dv">1</span>,<span class="dv">601</span>)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>cv_scores <span class="op">=</span> []</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> K <span class="kw">in</span> Ks:</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>    model <span class="op">=</span> KNeighborsRegressor(n_neighbors <span class="op">=</span> K, weights<span class="op">=</span><span class="st">'distance'</span>)</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>    score <span class="op">=</span> cross_val_score(model, X_train_scaled, y_train, cv <span class="op">=</span> kcv, scoring <span class="op">=</span> <span class="st">'neg_root_mean_squared_error'</span>)</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>    cv_scores.append(score)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="0e9a0004" class="cell" data-execution_count="18">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>cv_scores_array <span class="op">=</span> np.array(cv_scores)</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>avg_cv_scores <span class="op">=</span> <span class="op">-</span>cv_scores_array.mean(axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>sns.lineplot(x <span class="op">=</span> <span class="bu">range</span>(<span class="dv">600</span>), y <span class="op">=</span> avg_cv_scores)<span class="op">;</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'K'</span>)</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'5-fold Cross-validated RMSE'</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="KNN_files/figure-html/cell-16-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The optimal K is:</p>
+<div id="d9694efe" class="cell" data-execution_count="19">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>Ks[avg_cv_scores.argmin()]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="19">
+<pre><code>10</code></pre>
+</div>
+</div>
+<p>RMSE on test data with this optimal value of <span class="math inline">\(K\)</span> is:</p>
+<div id="bbe4dbf6" class="cell" data-execution_count="20">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>knn_model2 <span class="op">=</span> KNeighborsRegressor(n_neighbors <span class="op">=</span> <span class="dv">10</span>, weights<span class="op">=</span><span class="st">'distance'</span>) <span class="co"># Default weights is uniform</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>knn_model2.fit(X_train_scaled, y_train)</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>y_pred <span class="op">=</span> knn_model2.predict(X_test_scaled)</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>mean_squared_error(y_test, y_pred, squared<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="20">
+<pre><code>6043.889393238132</code></pre>
+</div>
+</div>
+<p>In order to avoid these errors due the specific observations in the <span class="math inline">\(k\)</span> folds, it will be better to repeat the <span class="math inline">\(k\)</span>-fold cross-validation multiple times, where the data is shuffled after each <span class="math inline">\(k\)</span>-fold cross-validation, so that the cross-validation takes place on new folds for each repetition.</p>
+<div id="2b8d778e" class="cell" data-execution_count="32">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>kcv <span class="op">=</span> RepeatedKFold(n_splits <span class="op">=</span> <span class="dv">5</span>, random_state <span class="op">=</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="c69bc707" class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>Ks <span class="op">=</span> np.arange(<span class="dv">1</span>,<span class="dv">601</span>)</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>cv_scores <span class="op">=</span> []</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> K <span class="kw">in</span> Ks:</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>    model <span class="op">=</span> KNeighborsRegressor(n_neighbors <span class="op">=</span> K, weights<span class="op">=</span><span class="st">'distance'</span>)</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>    score <span class="op">=</span> cross_val_score(model, X_train_scaled, y_train, cv <span class="op">=</span> kcv, scoring <span class="op">=</span> <span class="st">'neg_root_mean_squared_error'</span>)</span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>    cv_scores.append(score)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="e77585e4" class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>cv_scores_array <span class="op">=</span> np.array(cv_scores)</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>avg_cv_scores <span class="op">=</span> <span class="op">-</span>cv_scores_array.mean(axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>sns.lineplot(x <span class="op">=</span> <span class="bu">range</span>(<span class="dv">600</span>), y <span class="op">=</span> avg_cv_scores)<span class="op">;</span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'K'</span>)</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'5-fold Cross-validated RMSE'</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
 <section id="knn-hyperparameters" class="level3" data-number="3.1.4">
 <h3 data-number="3.1.4" class="anchored" data-anchor-id="knn-hyperparameters"><span class="header-section-number">3.1.4</span> KNN hyperparameters</h3>
 <p>The model hyperparameters can be obtained using the <code>get_params()</code> method. Note that there are other hyperparameters to tune in addition to number of neighbors. However, the number of neighbours may be the most influential hyperparameter in most cases.</p>
 <div id="5d8b82ac" class="cell" data-execution_count="12">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>best_model.get_params()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>best_model.get_params()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="12">
 <pre><code>{'algorithm': 'auto',
  'leaf_size': 30,
@@ -543,10 +639,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>The distances and the indices of the nearest K observations to each test observation can be obtained using the <code>kneighbors()</code> method.</p>
 <div id="2dd8d2f0" class="cell" data-execution_count="13">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>best_model.kneighbors(X_test_scaled, return_distance<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Each row is a test obs</span></span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="co"># The cols are the indices of the K Nearest Neighbors (in the training data) to the test obs</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>best_model.kneighbors(X_test_scaled, return_distance<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Each row is a test obs</span></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="co"># The cols are the indices of the K Nearest Neighbors (in the training data) to the test obs</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="13">
 <pre><code>(array([[1.92799060e-02, 1.31899013e-01, 1.89662146e-01, ...,
          8.38960707e-01, 8.39293053e-01, 8.39947823e-01],

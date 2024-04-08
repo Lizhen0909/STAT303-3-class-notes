@@ -823,7 +823,7 @@ window.Quarto = {
 <section id="randomizedsearchcv" class="level2" data-number="4.2">
 <h2 data-number="4.2" class="anchored" data-anchor-id="randomizedsearchcv"><span class="header-section-number">4.2</span> <a href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.RandomizedSearchCV.html"><code>RandomizedSearchCV()</code></a></h2>
 <p>In case of many possible values of hyperparameters, it may be comptaionally very expensive to use <code>GridSearchCV()</code>. In such cases, <code>RandomizedSearchCV()</code> can be used to compute the cross-validated score on a randomly selected subset of hyperparameter values from the specified grid. The number of values can be fixed by the user, as per the available budget.</p>
-<div id="12d6cc93" class="cell" data-execution_count="73">
+<div id="8bf94bd7" class="cell" data-execution_count="73">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># RandomizedSearchCV works in three steps:</span></span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 1) Create the model</span></span>
@@ -870,7 +870,7 @@ window.Quarto = {
                    verbose=10)</pre></div></div></div><div class="sk-parallel"><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-43" type="checkbox"><label for="sk-estimator-id-43" class="sk-toggleable__label sk-toggleable__label-arrow">estimator: KNeighborsRegressor</label><div class="sk-toggleable__content"><pre>KNeighborsRegressor()</pre></div></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-44" type="checkbox"><label for="sk-estimator-id-44" class="sk-toggleable__label sk-toggleable__label-arrow">KNeighborsRegressor</label><div class="sk-toggleable__content"><pre>KNeighborsRegressor()</pre></div></div></div></div></div></div></div></div></div></div>
 </div>
 </div>
-<div id="59464217" class="cell" data-execution_count="52">
+<div id="feba0f15" class="cell" data-execution_count="52">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>gcv.best_params_</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="52">
 <pre><code>{'metric': 'minkowski',
@@ -879,13 +879,13 @@ window.Quarto = {
  'weights': 'uniform'}</code></pre>
 </div>
 </div>
-<div id="1286fc80" class="cell" data-execution_count="53">
+<div id="321cedb6" class="cell" data-execution_count="53">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>gcv.best_score_</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="53">
 <pre><code>-6239.171627183809</code></pre>
 </div>
 </div>
-<div id="e66e00ae" class="cell" data-execution_count="54">
+<div id="4f77a831" class="cell" data-execution_count="54">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>y_pred <span class="op">=</span> gcv.predict(X_test_scaled)</span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>mean_squared_error(y_test, y_pred, squared<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="54">
@@ -911,7 +911,7 @@ window.Quarto = {
 </ul>
 <p>To summarize, instead of blindly testing the model for the specified hyperparameter values <em>(as in <code>GridSearchCV()</code>)</em>, or randomly testing the model on certain hyperparameter values <em>(as in <code>RandomizedSearchCV()</code>)</em>, <code>BayesSearchCV()</code> smartly tests the model for those hyperparameter values that are likely to reduce the cross-validated score. The algorithm becomes “smarter” as it “learns” more with increasing iterations.</p>
 <p>Here is a nice <a href="https://towardsdatascience.com/a-conceptual-explanation-of-bayesian-model-based-hyperparameter-optimization-for-machine-learning-b8172278050f">blog</a>, if you wish to understand more about the Bayesian optimization procedure.</p>
-<div id="924d97c3" class="cell">
+<div id="408f49bd" class="cell">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># BayesSearchCV works in three steps:</span></span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 1) Create the model</span></span>
@@ -919,32 +919,31 @@ window.Quarto = {
 <span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 2) Create a hyperparameter grid (as a dict)</span></span>
 <span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>    <span class="co"># the keys should be EXACTLY the same as the names of the model inputs</span></span>
-<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># the values should be an array or list of hyperparam values, or distribution of hyperparameter values</span></span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># the values should be an the distribution of hyperparameter values</span></span>
 <span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>    </span>
 <span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>grid <span class="op">=</span> {<span class="st">'n_neighbors'</span>: Integer(<span class="dv">1</span>, <span class="dv">500</span>), <span class="st">'weights'</span>: Categorical([<span class="st">'uniform'</span>, <span class="st">'distance'</span>]), </span>
-<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>       <span class="st">'p'</span>: Real(<span class="dv">1</span>, <span class="dv">10</span>, prior <span class="op">=</span> <span class="st">'uniform'</span>)} <span class="co">#We can specify a distribution </span></span>
-<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>                                                <span class="co">#for continuous hyperparameter values</span></span>
-<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a><span class="co"># 3) Create the Kfold object (Using RepeatedKFold will be more robust, but more expensive, use it if you </span></span>
-<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a><span class="co"># have the budget)</span></span>
-<span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a>kfold <span class="op">=</span> KFold(n_splits <span class="op">=</span> <span class="dv">5</span>, shuffle <span class="op">=</span> <span class="va">True</span>, random_state <span class="op">=</span> <span class="dv">1</span>)</span>
-<span id="cb27-17"><a href="#cb27-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-18"><a href="#cb27-18" aria-hidden="true" tabindex="-1"></a><span class="co"># 4) Create the CV object</span></span>
-<span id="cb27-19"><a href="#cb27-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Look at the documentation to see the order in which the objects must be specified within the function</span></span>
-<span id="cb27-20"><a href="#cb27-20" aria-hidden="true" tabindex="-1"></a>gcv <span class="op">=</span> BayesSearchCV(model, search_spaces <span class="op">=</span> grid, cv <span class="op">=</span> kfold, n_iter <span class="op">=</span> <span class="dv">180</span>, random_state <span class="op">=</span> <span class="dv">10</span>,</span>
-<span id="cb27-21"><a href="#cb27-21" aria-hidden="true" tabindex="-1"></a>                         scoring <span class="op">=</span> <span class="st">'neg_root_mean_squared_error'</span>, n_jobs <span class="op">=</span> <span class="op">-</span><span class="dv">1</span>)</span>
-<span id="cb27-22"><a href="#cb27-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-23"><a href="#cb27-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit the models, and cross-validate</span></span>
-<span id="cb27-24"><a href="#cb27-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-25"><a href="#cb27-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Sometimes the Gaussian process model predicting the cross-validated score is unstable, particularly</span></span>
-<span id="cb27-26"><a href="#cb27-26" aria-hidden="true" tabindex="-1"></a><span class="co"># at the beginning of the iterations as there are less data points. In that case it throws warnings.</span></span>
-<span id="cb27-27"><a href="#cb27-27" aria-hidden="true" tabindex="-1"></a><span class="co"># However, in general, those warnings can be ignored as the model becomes stable after a few iterations.</span></span>
-<span id="cb27-28"><a href="#cb27-28" aria-hidden="true" tabindex="-1"></a>warnings.filterwarnings(<span class="st">"ignore"</span>)</span>
-<span id="cb27-29"><a href="#cb27-29" aria-hidden="true" tabindex="-1"></a>gcv.fit(X_train_scaled, y_train)</span>
-<span id="cb27-30"><a href="#cb27-30" aria-hidden="true" tabindex="-1"></a>warnings.resetwarnings()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>       <span class="st">'p'</span>: Real(<span class="dv">1</span>, <span class="dv">10</span>, prior <span class="op">=</span> <span class="st">'uniform'</span>)} </span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a><span class="co"># 3) Create the Kfold object (Using RepeatedKFold will be more robust, but more expensive, use it if you </span></span>
+<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a><span class="co"># have the budget)</span></span>
+<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a>kfold <span class="op">=</span> KFold(n_splits <span class="op">=</span> <span class="dv">5</span>, shuffle <span class="op">=</span> <span class="va">True</span>, random_state <span class="op">=</span> <span class="dv">1</span>)</span>
+<span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-17"><a href="#cb27-17" aria-hidden="true" tabindex="-1"></a><span class="co"># 4) Create the CV object</span></span>
+<span id="cb27-18"><a href="#cb27-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Look at the documentation to see the order in which the objects must be specified within the function</span></span>
+<span id="cb27-19"><a href="#cb27-19" aria-hidden="true" tabindex="-1"></a>gcv <span class="op">=</span> BayesSearchCV(model, search_spaces <span class="op">=</span> grid, cv <span class="op">=</span> kfold, n_iter <span class="op">=</span> <span class="dv">180</span>, random_state <span class="op">=</span> <span class="dv">10</span>,</span>
+<span id="cb27-20"><a href="#cb27-20" aria-hidden="true" tabindex="-1"></a>                         scoring <span class="op">=</span> <span class="st">'neg_root_mean_squared_error'</span>, n_jobs <span class="op">=</span> <span class="op">-</span><span class="dv">1</span>)</span>
+<span id="cb27-21"><a href="#cb27-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-22"><a href="#cb27-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit the models, and cross-validate</span></span>
+<span id="cb27-23"><a href="#cb27-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-24"><a href="#cb27-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Sometimes the Gaussian process model predicting the cross-validated score is unstable, particularly</span></span>
+<span id="cb27-25"><a href="#cb27-25" aria-hidden="true" tabindex="-1"></a><span class="co"># at the beginning of the iterations as there are less data points. In that case it throws warnings.</span></span>
+<span id="cb27-26"><a href="#cb27-26" aria-hidden="true" tabindex="-1"></a><span class="co"># However, in general, those warnings can be ignored as the model becomes stable after a few iterations.</span></span>
+<span id="cb27-27"><a href="#cb27-27" aria-hidden="true" tabindex="-1"></a>warnings.filterwarnings(<span class="st">"ignore"</span>)</span>
+<span id="cb27-28"><a href="#cb27-28" aria-hidden="true" tabindex="-1"></a>gcv.fit(X_train_scaled, y_train)</span>
+<span id="cb27-29"><a href="#cb27-29" aria-hidden="true" tabindex="-1"></a>warnings.resetwarnings()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The optimal hyperparameter values <em>(based on Bayesian search)</em> on the provided distribution of hyperparameter values are:</p>
-<div id="56dd9bcc" class="cell" data-execution_count="141">
+<div id="808f3c2f" class="cell" data-execution_count="141">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>gcv.best_params_</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="141">
 <pre><code>OrderedDict([('n_neighbors', 9),
@@ -953,14 +952,14 @@ window.Quarto = {
 </div>
 </div>
 <p>The cross-validated root mean squared error for the optimal hyperparameter values is:</p>
-<div id="c6e077f0" class="cell" data-execution_count="143">
+<div id="73ecc1f6" class="cell" data-execution_count="143">
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="op">-</span>gcv.best_score_</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="143">
 <pre><code>5756.172382596493</code></pre>
 </div>
 </div>
 <p>The RMSE on test data for the optimal hyperparameter values is:</p>
-<div id="09b7c72f" class="cell" data-execution_count="77">
+<div id="efb168e0" class="cell" data-execution_count="77">
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>y_pred <span class="op">=</span> gcv.predict(X_test_scaled)</span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>mean_squared_error(y_test, y_pred, squared<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="77">
@@ -969,7 +968,7 @@ window.Quarto = {
 </div>
 <p>Below are the partial dependence plots of the objective function <em>(i.e., the cross-validated score)</em>. The cross-validated score predictions are based on the most recently updated model <em>(i.e., the updated Gaussian Process model at the end of <code>n_iter</code> iterations specified by the user)</em> that predicts the cross-validated score.</p>
 <p>Check the <a href="https://scikit-optimize.github.io/stable/modules/generated/skopt.plots.plot_objective.html"><code>plot_objective()</code></a> documentation to interpret the plots.</p>
-<div id="3a1df92d" class="cell" data-execution_count="139">
+<div id="3cb185cd" class="cell" data-execution_count="139">
 <div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>plot_objective(gcv.optimizer_results_[<span class="dv">0</span>],</span>
 <span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>                   dimensions<span class="op">=</span>[<span class="st">"n_neighbors"</span>, <span class="st">"p"</span>, <span class="st">"weights"</span>], size <span class="op">=</span> <span class="dv">3</span>)</span>
 <span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>plt.show()<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -982,13 +981,13 @@ window.Quarto = {
 </div>
 </div>
 <p>The frequence of individual hyperparameter values considered can also be visualized as below.</p>
-<div id="5b41fac6" class="cell" data-execution_count="191">
+<div id="5f626578" class="cell" data-execution_count="196">
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">3</span>, figsize <span class="op">=</span> (<span class="dv">10</span>, <span class="dv">3</span>))</span>
 <span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>plt.subplots_adjust(wspace<span class="op">=</span><span class="fl">0.4</span>)</span>
 <span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>plot_histogram(gcv.optimizer_results_[<span class="dv">0</span>], <span class="dv">0</span>, ax <span class="op">=</span> ax[<span class="dv">0</span>])</span>
 <span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>plot_histogram(gcv.optimizer_results_[<span class="dv">0</span>], <span class="dv">1</span>, ax <span class="op">=</span> ax[<span class="dv">1</span>])</span>
 <span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>plot_histogram(gcv.optimizer_results_[<span class="dv">0</span>], <span class="dv">2</span>, ax <span class="op">=</span> ax[<span class="dv">2</span>])</span>
-<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>plt.show()<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -998,7 +997,7 @@ window.Quarto = {
 </div>
 </div>
 <p>Below is the plot showing the minimum cross-validated score computed obtained until ‘n’ hyperparameter values are considered for cross-validation.</p>
-<div id="fbb93ae1" class="cell" data-execution_count="195">
+<div id="37240f0e" class="cell" data-execution_count="195">
 <div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>plot_convergence(gcv.optimizer_results_)</span>
 <span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
@@ -1011,14 +1010,14 @@ window.Quarto = {
 </div>
 <p>Note that the cross-validated error is close to the optmial value in the 53rd iteration itself.</p>
 <p>The cross-validated error at the 53rd iteration is:</p>
-<div id="f55d80bc" class="cell" data-execution_count="149">
+<div id="f4843f1e" class="cell" data-execution_count="149">
 <div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>gcv.optimizer_results_[<span class="dv">0</span>][<span class="st">'func_vals'</span>][<span class="dv">53</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="149">
 <pre><code>5831.87280274334</code></pre>
 </div>
 </div>
 <p>The hyperparameter values at the 53rd iterations are:</p>
-<div id="cda7f81e" class="cell" data-execution_count="156">
+<div id="8b28a335" class="cell" data-execution_count="156">
 <div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>gcv.optimizer_results_[<span class="dv">0</span>][<span class="st">'x_iters'</span>][<span class="dv">53</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="156">
 <pre><code>[15, 1.0, 'distance']</code></pre>
@@ -1026,7 +1025,7 @@ window.Quarto = {
 </div>
 <p>Note that this is the 2nd most optimal hyperparameter value based on <code>GridSearchCV()</code>.</p>
 <p>Below is the plot showing the cross-validated score computed at each of the 180 hyperparameter values considered for cross-validation. The plot shows that the algorithm seems to explore new regions of the domain space, instead of just exploting the promising ones. There is a balance between exploration and exploitation for finding the optimal hyperparameter values that minimize the objective function <em>(i.e., the function that models the cross-validated score)</em>.</p>
-<div id="6a760016" class="cell" data-execution_count="155">
+<div id="aa659dc5" class="cell" data-execution_count="155">
 <div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>sns.lineplot(x <span class="op">=</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">181</span>), y <span class="op">=</span> gcv.optimizer_results_[<span class="dv">0</span>][<span class="st">'func_vals'</span>])</span>
 <span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Iteration'</span>)</span>
 <span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Cross-validated score'</span>)</span>

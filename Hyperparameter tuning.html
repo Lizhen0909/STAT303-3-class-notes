@@ -291,6 +291,7 @@ window.Quarto = {
   <ul>
   <li><a href="#gridsearchcv" id="toc-gridsearchcv" class="nav-link active" data-scroll-target="#gridsearchcv"><span class="header-section-number">4.1</span> <code>GridSearchCV</code></a></li>
   <li><a href="#randomizedsearchcv" id="toc-randomizedsearchcv" class="nav-link" data-scroll-target="#randomizedsearchcv"><span class="header-section-number">4.2</span> <code>RandomizedSearchCV()</code></a></li>
+  <li><a href="#bayessearchcv" id="toc-bayessearchcv" class="nav-link" data-scroll-target="#bayessearchcv"><span class="header-section-number">4.3</span> <code>BayesSearchCV()</code></a></li>
   </ul>
 </nav>
     </div>
@@ -317,7 +318,7 @@ window.Quarto = {
 
 
 <p>In this chapter we’ll introduce several functions that help with tuning hyperparameters of a machine learning model.</p>
-<div id="cae4e49e" class="cell" data-execution_count="35">
+<div id="cae4e49e" class="cell" data-execution_count="140">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split, cross_val_score, cross_val_predict, <span class="op">\</span></span>
@@ -325,10 +326,15 @@ window.Quarto = {
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.neighbors <span class="im">import</span> KNeighborsClassifier, KNeighborsRegressor</span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> StandardScaler</span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> accuracy_score, recall_score, mean_squared_error</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.stats <span class="im">import</span> uniform</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.stats <span class="im">import</span> uniform</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> skopt <span class="im">import</span> BayesSearchCV</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> skopt.space <span class="im">import</span> Real, Categorical, Integer</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> skopt.plots <span class="im">import</span> plot_objective</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Let us read and pre-process data first. Then we’ll be ready to tune the model hyperparameters. We’ll use KNN as the model. Note that KNN has multiple hyperparameters to tune, such as number of neighbors, distance metric, weights of neighbours, etc.</p>
-<div id="ee908a2b" class="cell" data-execution_count="5">
+<div id="ee908a2b" class="cell" data-execution_count="62">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Using the same datasets as used for linear regression in STAT303-2, </span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co">#so that we can compare the non-linear models with linear regression</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>trainf <span class="op">=</span> pd.read_csv(<span class="st">'./Datasets/Car_features_train.csv'</span>)</span>
@@ -338,7 +344,7 @@ window.Quarto = {
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>train <span class="op">=</span> pd.merge(trainf,trainp)</span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>test <span class="op">=</span> pd.merge(testf,testp)</span>
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>train.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="5">
+<div class="cell-output cell-output-display" data-execution_count="62">
 <div>
 <div>
 
@@ -438,7 +444,7 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<div id="7cb7914e" class="cell" data-execution_count="6">
+<div id="7cb7914e" class="cell" data-execution_count="63">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>predictors <span class="op">=</span> [<span class="st">'mpg'</span>, <span class="st">'engineSize'</span>, <span class="st">'year'</span>, <span class="st">'mileage'</span>]</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>X_train <span class="op">=</span> train[predictors]</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>y_train <span class="op">=</span> train[<span class="st">'price'</span>]</span>
@@ -455,7 +461,7 @@ window.Quarto = {
 <section id="gridsearchcv" class="level2" data-number="4.1">
 <h2 data-number="4.1" class="anchored" data-anchor-id="gridsearchcv"><span class="header-section-number">4.1</span> <a href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GridSearchCV.html"><code>GridSearchCV</code></a></h2>
 <p>The function is used to compute the cross-validated score <em>(MSE, RMSE, accuracy, etc.)</em> over a grid of hyperparameter values. This helps avoid nested <code>for()</code> loops if multiple hyperparameter values need to be tuned.</p>
-<div id="84e92cbb" class="cell" data-execution_count="10">
+<div id="84e92cbb" class="cell" data-execution_count="64">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># GridSearchCV works in three steps:</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 1) Create the model</span></span>
@@ -481,50 +487,50 @@ window.Quarto = {
 <div class="cell-output cell-output-stdout">
 <pre><code>Fitting 5 folds for each of 180 candidates, totalling 900 fits</code></pre>
 </div>
-<div class="cell-output cell-output-display" data-execution_count="10">
-<style>#sk-container-id-4 {color: black;background-color: white;}#sk-container-id-4 pre{padding: 0;}#sk-container-id-4 div.sk-toggleable {background-color: white;}#sk-container-id-4 label.sk-toggleable__label {cursor: pointer;display: block;width: 100%;margin-bottom: 0;padding: 0.3em;box-sizing: border-box;text-align: center;}#sk-container-id-4 label.sk-toggleable__label-arrow:before {content: "▸";float: left;margin-right: 0.25em;color: #696969;}#sk-container-id-4 label.sk-toggleable__label-arrow:hover:before {color: black;}#sk-container-id-4 div.sk-estimator:hover label.sk-toggleable__label-arrow:before {color: black;}#sk-container-id-4 div.sk-toggleable__content {max-height: 0;max-width: 0;overflow: hidden;text-align: left;background-color: #f0f8ff;}#sk-container-id-4 div.sk-toggleable__content pre {margin: 0.2em;color: black;border-radius: 0.25em;background-color: #f0f8ff;}#sk-container-id-4 input.sk-toggleable__control:checked~div.sk-toggleable__content {max-height: 200px;max-width: 100%;overflow: auto;}#sk-container-id-4 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {content: "▾";}#sk-container-id-4 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-4 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-4 input.sk-hidden--visually {border: 0;clip: rect(1px 1px 1px 1px);clip: rect(1px, 1px, 1px, 1px);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}#sk-container-id-4 div.sk-estimator {font-family: monospace;background-color: #f0f8ff;border: 1px dotted black;border-radius: 0.25em;box-sizing: border-box;margin-bottom: 0.5em;}#sk-container-id-4 div.sk-estimator:hover {background-color: #d4ebff;}#sk-container-id-4 div.sk-parallel-item::after {content: "";width: 100%;border-bottom: 1px solid gray;flex-grow: 1;}#sk-container-id-4 div.sk-label:hover label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-4 div.sk-serial::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: 0;}#sk-container-id-4 div.sk-serial {display: flex;flex-direction: column;align-items: center;background-color: white;padding-right: 0.2em;padding-left: 0.2em;position: relative;}#sk-container-id-4 div.sk-item {position: relative;z-index: 1;}#sk-container-id-4 div.sk-parallel {display: flex;align-items: stretch;justify-content: center;background-color: white;position: relative;}#sk-container-id-4 div.sk-item::before, #sk-container-id-4 div.sk-parallel-item::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: -1;}#sk-container-id-4 div.sk-parallel-item {display: flex;flex-direction: column;z-index: 1;position: relative;background-color: white;}#sk-container-id-4 div.sk-parallel-item:first-child::after {align-self: flex-end;width: 50%;}#sk-container-id-4 div.sk-parallel-item:last-child::after {align-self: flex-start;width: 50%;}#sk-container-id-4 div.sk-parallel-item:only-child::after {width: 0;}#sk-container-id-4 div.sk-dashed-wrapped {border: 1px dashed gray;margin: 0 0.4em 0.5em 0.4em;box-sizing: border-box;padding-bottom: 0.4em;background-color: white;}#sk-container-id-4 div.sk-label label {font-family: monospace;font-weight: bold;display: inline-block;line-height: 1.2em;}#sk-container-id-4 div.sk-label-container {text-align: center;}#sk-container-id-4 div.sk-container {/* jupyter's `normalize.less` sets `[hidden] { display: none; }` but bootstrap.min.css set `[hidden] { display: none !important; }` so we also need the `!important` here to be able to override the default hidden behavior on the sphinx rendered scikit-learn.org. See: https://github.com/scikit-learn/scikit-learn/issues/21755 */display: inline-block !important;position: relative;}#sk-container-id-4 div.sk-text-repr-fallback {display: none;}</style><div id="sk-container-id-4" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>GridSearchCV(cv=KFold(n_splits=5, random_state=1, shuffle=True),
+<div class="cell-output cell-output-display" data-execution_count="64">
+<style>#sk-container-id-14 {color: black;background-color: white;}#sk-container-id-14 pre{padding: 0;}#sk-container-id-14 div.sk-toggleable {background-color: white;}#sk-container-id-14 label.sk-toggleable__label {cursor: pointer;display: block;width: 100%;margin-bottom: 0;padding: 0.3em;box-sizing: border-box;text-align: center;}#sk-container-id-14 label.sk-toggleable__label-arrow:before {content: "▸";float: left;margin-right: 0.25em;color: #696969;}#sk-container-id-14 label.sk-toggleable__label-arrow:hover:before {color: black;}#sk-container-id-14 div.sk-estimator:hover label.sk-toggleable__label-arrow:before {color: black;}#sk-container-id-14 div.sk-toggleable__content {max-height: 0;max-width: 0;overflow: hidden;text-align: left;background-color: #f0f8ff;}#sk-container-id-14 div.sk-toggleable__content pre {margin: 0.2em;color: black;border-radius: 0.25em;background-color: #f0f8ff;}#sk-container-id-14 input.sk-toggleable__control:checked~div.sk-toggleable__content {max-height: 200px;max-width: 100%;overflow: auto;}#sk-container-id-14 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {content: "▾";}#sk-container-id-14 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-14 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-14 input.sk-hidden--visually {border: 0;clip: rect(1px 1px 1px 1px);clip: rect(1px, 1px, 1px, 1px);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}#sk-container-id-14 div.sk-estimator {font-family: monospace;background-color: #f0f8ff;border: 1px dotted black;border-radius: 0.25em;box-sizing: border-box;margin-bottom: 0.5em;}#sk-container-id-14 div.sk-estimator:hover {background-color: #d4ebff;}#sk-container-id-14 div.sk-parallel-item::after {content: "";width: 100%;border-bottom: 1px solid gray;flex-grow: 1;}#sk-container-id-14 div.sk-label:hover label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-14 div.sk-serial::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: 0;}#sk-container-id-14 div.sk-serial {display: flex;flex-direction: column;align-items: center;background-color: white;padding-right: 0.2em;padding-left: 0.2em;position: relative;}#sk-container-id-14 div.sk-item {position: relative;z-index: 1;}#sk-container-id-14 div.sk-parallel {display: flex;align-items: stretch;justify-content: center;background-color: white;position: relative;}#sk-container-id-14 div.sk-item::before, #sk-container-id-14 div.sk-parallel-item::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: -1;}#sk-container-id-14 div.sk-parallel-item {display: flex;flex-direction: column;z-index: 1;position: relative;background-color: white;}#sk-container-id-14 div.sk-parallel-item:first-child::after {align-self: flex-end;width: 50%;}#sk-container-id-14 div.sk-parallel-item:last-child::after {align-self: flex-start;width: 50%;}#sk-container-id-14 div.sk-parallel-item:only-child::after {width: 0;}#sk-container-id-14 div.sk-dashed-wrapped {border: 1px dashed gray;margin: 0 0.4em 0.5em 0.4em;box-sizing: border-box;padding-bottom: 0.4em;background-color: white;}#sk-container-id-14 div.sk-label label {font-family: monospace;font-weight: bold;display: inline-block;line-height: 1.2em;}#sk-container-id-14 div.sk-label-container {text-align: center;}#sk-container-id-14 div.sk-container {/* jupyter's `normalize.less` sets `[hidden] { display: none; }` but bootstrap.min.css set `[hidden] { display: none !important; }` so we also need the `!important` here to be able to override the default hidden behavior on the sphinx rendered scikit-learn.org. See: https://github.com/scikit-learn/scikit-learn/issues/21755 */display: inline-block !important;position: relative;}#sk-container-id-14 div.sk-text-repr-fallback {display: none;}</style><div id="sk-container-id-14" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>GridSearchCV(cv=KFold(n_splits=5, random_state=1, shuffle=True),
              estimator=KNeighborsRegressor(), n_jobs=-1,
              param_grid={'metric': ['manhattan', 'euclidean', 'chebyshev'],
                          'n_neighbors': array([  5,  10,  15,  20,  25,  30,  35,  40,  45,  50,  55,  60,  65,
         70,  75,  80,  85,  90,  95, 100, 105, 110, 115, 120, 125, 130,
        135, 140, 145, 150]),
                          'weights': ['uniform', 'distance']},
-             scoring='neg_root_mean_squared_error', verbose=10)</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br>On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden=""><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-10" type="checkbox"><label for="sk-estimator-id-10" class="sk-toggleable__label sk-toggleable__label-arrow">GridSearchCV</label><div class="sk-toggleable__content"><pre>GridSearchCV(cv=KFold(n_splits=5, random_state=1, shuffle=True),
+             scoring='neg_root_mean_squared_error', verbose=10)</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br>On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden=""><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-38" type="checkbox"><label for="sk-estimator-id-38" class="sk-toggleable__label sk-toggleable__label-arrow">GridSearchCV</label><div class="sk-toggleable__content"><pre>GridSearchCV(cv=KFold(n_splits=5, random_state=1, shuffle=True),
              estimator=KNeighborsRegressor(), n_jobs=-1,
              param_grid={'metric': ['manhattan', 'euclidean', 'chebyshev'],
                          'n_neighbors': array([  5,  10,  15,  20,  25,  30,  35,  40,  45,  50,  55,  60,  65,
         70,  75,  80,  85,  90,  95, 100, 105, 110, 115, 120, 125, 130,
        135, 140, 145, 150]),
                          'weights': ['uniform', 'distance']},
-             scoring='neg_root_mean_squared_error', verbose=10)</pre></div></div></div><div class="sk-parallel"><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-11" type="checkbox"><label for="sk-estimator-id-11" class="sk-toggleable__label sk-toggleable__label-arrow">estimator: KNeighborsRegressor</label><div class="sk-toggleable__content"><pre>KNeighborsRegressor()</pre></div></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-12" type="checkbox"><label for="sk-estimator-id-12" class="sk-toggleable__label sk-toggleable__label-arrow">KNeighborsRegressor</label><div class="sk-toggleable__content"><pre>KNeighborsRegressor()</pre></div></div></div></div></div></div></div></div></div></div>
+             scoring='neg_root_mean_squared_error', verbose=10)</pre></div></div></div><div class="sk-parallel"><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-39" type="checkbox"><label for="sk-estimator-id-39" class="sk-toggleable__label sk-toggleable__label-arrow">estimator: KNeighborsRegressor</label><div class="sk-toggleable__content"><pre>KNeighborsRegressor()</pre></div></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-40" type="checkbox"><label for="sk-estimator-id-40" class="sk-toggleable__label sk-toggleable__label-arrow">KNeighborsRegressor</label><div class="sk-toggleable__content"><pre>KNeighborsRegressor()</pre></div></div></div></div></div></div></div></div></div></div>
 </div>
 </div>
 <p>The optimal estimator based on cross-validation is:</p>
-<div id="87e4d3bc" class="cell" data-execution_count="11">
+<div id="87e4d3bc" class="cell" data-execution_count="65">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>gcv.best_estimator_</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="11">
-<style>#sk-container-id-5 {color: black;background-color: white;}#sk-container-id-5 pre{padding: 0;}#sk-container-id-5 div.sk-toggleable {background-color: white;}#sk-container-id-5 label.sk-toggleable__label {cursor: pointer;display: block;width: 100%;margin-bottom: 0;padding: 0.3em;box-sizing: border-box;text-align: center;}#sk-container-id-5 label.sk-toggleable__label-arrow:before {content: "▸";float: left;margin-right: 0.25em;color: #696969;}#sk-container-id-5 label.sk-toggleable__label-arrow:hover:before {color: black;}#sk-container-id-5 div.sk-estimator:hover label.sk-toggleable__label-arrow:before {color: black;}#sk-container-id-5 div.sk-toggleable__content {max-height: 0;max-width: 0;overflow: hidden;text-align: left;background-color: #f0f8ff;}#sk-container-id-5 div.sk-toggleable__content pre {margin: 0.2em;color: black;border-radius: 0.25em;background-color: #f0f8ff;}#sk-container-id-5 input.sk-toggleable__control:checked~div.sk-toggleable__content {max-height: 200px;max-width: 100%;overflow: auto;}#sk-container-id-5 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {content: "▾";}#sk-container-id-5 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-5 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-5 input.sk-hidden--visually {border: 0;clip: rect(1px 1px 1px 1px);clip: rect(1px, 1px, 1px, 1px);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}#sk-container-id-5 div.sk-estimator {font-family: monospace;background-color: #f0f8ff;border: 1px dotted black;border-radius: 0.25em;box-sizing: border-box;margin-bottom: 0.5em;}#sk-container-id-5 div.sk-estimator:hover {background-color: #d4ebff;}#sk-container-id-5 div.sk-parallel-item::after {content: "";width: 100%;border-bottom: 1px solid gray;flex-grow: 1;}#sk-container-id-5 div.sk-label:hover label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-5 div.sk-serial::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: 0;}#sk-container-id-5 div.sk-serial {display: flex;flex-direction: column;align-items: center;background-color: white;padding-right: 0.2em;padding-left: 0.2em;position: relative;}#sk-container-id-5 div.sk-item {position: relative;z-index: 1;}#sk-container-id-5 div.sk-parallel {display: flex;align-items: stretch;justify-content: center;background-color: white;position: relative;}#sk-container-id-5 div.sk-item::before, #sk-container-id-5 div.sk-parallel-item::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: -1;}#sk-container-id-5 div.sk-parallel-item {display: flex;flex-direction: column;z-index: 1;position: relative;background-color: white;}#sk-container-id-5 div.sk-parallel-item:first-child::after {align-self: flex-end;width: 50%;}#sk-container-id-5 div.sk-parallel-item:last-child::after {align-self: flex-start;width: 50%;}#sk-container-id-5 div.sk-parallel-item:only-child::after {width: 0;}#sk-container-id-5 div.sk-dashed-wrapped {border: 1px dashed gray;margin: 0 0.4em 0.5em 0.4em;box-sizing: border-box;padding-bottom: 0.4em;background-color: white;}#sk-container-id-5 div.sk-label label {font-family: monospace;font-weight: bold;display: inline-block;line-height: 1.2em;}#sk-container-id-5 div.sk-label-container {text-align: center;}#sk-container-id-5 div.sk-container {/* jupyter's `normalize.less` sets `[hidden] { display: none; }` but bootstrap.min.css set `[hidden] { display: none !important; }` so we also need the `!important` here to be able to override the default hidden behavior on the sphinx rendered scikit-learn.org. See: https://github.com/scikit-learn/scikit-learn/issues/21755 */display: inline-block !important;position: relative;}#sk-container-id-5 div.sk-text-repr-fallback {display: none;}</style><div id="sk-container-id-5" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>KNeighborsRegressor(metric='manhattan', n_neighbors=10, weights='distance')</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br>On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden=""><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-13" type="checkbox" checked=""><label for="sk-estimator-id-13" class="sk-toggleable__label sk-toggleable__label-arrow">KNeighborsRegressor</label><div class="sk-toggleable__content"><pre>KNeighborsRegressor(metric='manhattan', n_neighbors=10, weights='distance')</pre></div></div></div></div></div>
+<div class="cell-output cell-output-display" data-execution_count="65">
+<style>#sk-container-id-15 {color: black;background-color: white;}#sk-container-id-15 pre{padding: 0;}#sk-container-id-15 div.sk-toggleable {background-color: white;}#sk-container-id-15 label.sk-toggleable__label {cursor: pointer;display: block;width: 100%;margin-bottom: 0;padding: 0.3em;box-sizing: border-box;text-align: center;}#sk-container-id-15 label.sk-toggleable__label-arrow:before {content: "▸";float: left;margin-right: 0.25em;color: #696969;}#sk-container-id-15 label.sk-toggleable__label-arrow:hover:before {color: black;}#sk-container-id-15 div.sk-estimator:hover label.sk-toggleable__label-arrow:before {color: black;}#sk-container-id-15 div.sk-toggleable__content {max-height: 0;max-width: 0;overflow: hidden;text-align: left;background-color: #f0f8ff;}#sk-container-id-15 div.sk-toggleable__content pre {margin: 0.2em;color: black;border-radius: 0.25em;background-color: #f0f8ff;}#sk-container-id-15 input.sk-toggleable__control:checked~div.sk-toggleable__content {max-height: 200px;max-width: 100%;overflow: auto;}#sk-container-id-15 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {content: "▾";}#sk-container-id-15 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-15 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-15 input.sk-hidden--visually {border: 0;clip: rect(1px 1px 1px 1px);clip: rect(1px, 1px, 1px, 1px);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}#sk-container-id-15 div.sk-estimator {font-family: monospace;background-color: #f0f8ff;border: 1px dotted black;border-radius: 0.25em;box-sizing: border-box;margin-bottom: 0.5em;}#sk-container-id-15 div.sk-estimator:hover {background-color: #d4ebff;}#sk-container-id-15 div.sk-parallel-item::after {content: "";width: 100%;border-bottom: 1px solid gray;flex-grow: 1;}#sk-container-id-15 div.sk-label:hover label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-15 div.sk-serial::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: 0;}#sk-container-id-15 div.sk-serial {display: flex;flex-direction: column;align-items: center;background-color: white;padding-right: 0.2em;padding-left: 0.2em;position: relative;}#sk-container-id-15 div.sk-item {position: relative;z-index: 1;}#sk-container-id-15 div.sk-parallel {display: flex;align-items: stretch;justify-content: center;background-color: white;position: relative;}#sk-container-id-15 div.sk-item::before, #sk-container-id-15 div.sk-parallel-item::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: -1;}#sk-container-id-15 div.sk-parallel-item {display: flex;flex-direction: column;z-index: 1;position: relative;background-color: white;}#sk-container-id-15 div.sk-parallel-item:first-child::after {align-self: flex-end;width: 50%;}#sk-container-id-15 div.sk-parallel-item:last-child::after {align-self: flex-start;width: 50%;}#sk-container-id-15 div.sk-parallel-item:only-child::after {width: 0;}#sk-container-id-15 div.sk-dashed-wrapped {border: 1px dashed gray;margin: 0 0.4em 0.5em 0.4em;box-sizing: border-box;padding-bottom: 0.4em;background-color: white;}#sk-container-id-15 div.sk-label label {font-family: monospace;font-weight: bold;display: inline-block;line-height: 1.2em;}#sk-container-id-15 div.sk-label-container {text-align: center;}#sk-container-id-15 div.sk-container {/* jupyter's `normalize.less` sets `[hidden] { display: none; }` but bootstrap.min.css set `[hidden] { display: none !important; }` so we also need the `!important` here to be able to override the default hidden behavior on the sphinx rendered scikit-learn.org. See: https://github.com/scikit-learn/scikit-learn/issues/21755 */display: inline-block !important;position: relative;}#sk-container-id-15 div.sk-text-repr-fallback {display: none;}</style><div id="sk-container-id-15" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>KNeighborsRegressor(metric='manhattan', n_neighbors=10, weights='distance')</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br>On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden=""><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-41" type="checkbox" checked=""><label for="sk-estimator-id-41" class="sk-toggleable__label sk-toggleable__label-arrow">KNeighborsRegressor</label><div class="sk-toggleable__content"><pre>KNeighborsRegressor(metric='manhattan', n_neighbors=10, weights='distance')</pre></div></div></div></div></div>
 </div>
 </div>
 <p>The optimal hyperparameter values <em>(based on those considered in the grid search)</em> are:</p>
-<div id="63b28c61" class="cell" data-execution_count="12">
+<div id="63b28c61" class="cell" data-execution_count="66">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>gcv.best_params_</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="12">
+<div class="cell-output cell-output-display" data-execution_count="66">
 <pre><code>{'metric': 'manhattan', 'n_neighbors': 10, 'weights': 'distance'}</code></pre>
 </div>
 </div>
 <p>The cross-validated root mean squared error for the optimal hyperparameter values is:</p>
-<div id="a4d8b252" class="cell" data-execution_count="13">
+<div id="a4d8b252" class="cell" data-execution_count="67">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="op">-</span>gcv.best_score_</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="13">
+<div class="cell-output cell-output-display" data-execution_count="67">
 <pre><code>5740.928686723918</code></pre>
 </div>
 </div>
 <p>The RMSE on test data for the optimal hyperparameter values is:</p>
-<div id="5aab6c66" class="cell" data-execution_count="14">
+<div id="5aab6c66" class="cell" data-execution_count="68">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>y_pred <span class="op">=</span> gcv.predict(X_test_scaled)</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>mean_squared_error(y_test, y_pred, squared<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="14">
+<div class="cell-output cell-output-display" data-execution_count="68">
 <pre><code>5747.466851437544</code></pre>
 </div>
 </div>
@@ -816,7 +822,7 @@ window.Quarto = {
 <section id="randomizedsearchcv" class="level2" data-number="4.2">
 <h2 data-number="4.2" class="anchored" data-anchor-id="randomizedsearchcv"><span class="header-section-number">4.2</span> <a href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.RandomizedSearchCV.html"><code>RandomizedSearchCV()</code></a></h2>
 <p>In case of many possible values of hyperparameters, it may be comptaionally very expensive to use <code>GridSearchCV()</code>. In such cases, <code>RandomizedSearchCV()</code> can be used to compute the cross-validated score on a randomly selected subset of hyperparameter values from the specified grid. The number of values can be fixed by the user, as per the available budget.</p>
-<div id="7edec238" class="cell" data-execution_count="51">
+<div id="41a59c9a" class="cell" data-execution_count="73">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># RandomizedSearchCV works in three steps:</span></span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 1) Create the model</span></span>
@@ -845,25 +851,25 @@ window.Quarto = {
 <div class="cell-output cell-output-stdout">
 <pre><code>Fitting 5 folds for each of 180 candidates, totalling 900 fits</code></pre>
 </div>
-<div class="cell-output cell-output-display" data-execution_count="51">
-<style>#sk-container-id-13 {color: black;background-color: white;}#sk-container-id-13 pre{padding: 0;}#sk-container-id-13 div.sk-toggleable {background-color: white;}#sk-container-id-13 label.sk-toggleable__label {cursor: pointer;display: block;width: 100%;margin-bottom: 0;padding: 0.3em;box-sizing: border-box;text-align: center;}#sk-container-id-13 label.sk-toggleable__label-arrow:before {content: "▸";float: left;margin-right: 0.25em;color: #696969;}#sk-container-id-13 label.sk-toggleable__label-arrow:hover:before {color: black;}#sk-container-id-13 div.sk-estimator:hover label.sk-toggleable__label-arrow:before {color: black;}#sk-container-id-13 div.sk-toggleable__content {max-height: 0;max-width: 0;overflow: hidden;text-align: left;background-color: #f0f8ff;}#sk-container-id-13 div.sk-toggleable__content pre {margin: 0.2em;color: black;border-radius: 0.25em;background-color: #f0f8ff;}#sk-container-id-13 input.sk-toggleable__control:checked~div.sk-toggleable__content {max-height: 200px;max-width: 100%;overflow: auto;}#sk-container-id-13 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {content: "▾";}#sk-container-id-13 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-13 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-13 input.sk-hidden--visually {border: 0;clip: rect(1px 1px 1px 1px);clip: rect(1px, 1px, 1px, 1px);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}#sk-container-id-13 div.sk-estimator {font-family: monospace;background-color: #f0f8ff;border: 1px dotted black;border-radius: 0.25em;box-sizing: border-box;margin-bottom: 0.5em;}#sk-container-id-13 div.sk-estimator:hover {background-color: #d4ebff;}#sk-container-id-13 div.sk-parallel-item::after {content: "";width: 100%;border-bottom: 1px solid gray;flex-grow: 1;}#sk-container-id-13 div.sk-label:hover label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-13 div.sk-serial::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: 0;}#sk-container-id-13 div.sk-serial {display: flex;flex-direction: column;align-items: center;background-color: white;padding-right: 0.2em;padding-left: 0.2em;position: relative;}#sk-container-id-13 div.sk-item {position: relative;z-index: 1;}#sk-container-id-13 div.sk-parallel {display: flex;align-items: stretch;justify-content: center;background-color: white;position: relative;}#sk-container-id-13 div.sk-item::before, #sk-container-id-13 div.sk-parallel-item::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: -1;}#sk-container-id-13 div.sk-parallel-item {display: flex;flex-direction: column;z-index: 1;position: relative;background-color: white;}#sk-container-id-13 div.sk-parallel-item:first-child::after {align-self: flex-end;width: 50%;}#sk-container-id-13 div.sk-parallel-item:last-child::after {align-self: flex-start;width: 50%;}#sk-container-id-13 div.sk-parallel-item:only-child::after {width: 0;}#sk-container-id-13 div.sk-dashed-wrapped {border: 1px dashed gray;margin: 0 0.4em 0.5em 0.4em;box-sizing: border-box;padding-bottom: 0.4em;background-color: white;}#sk-container-id-13 div.sk-label label {font-family: monospace;font-weight: bold;display: inline-block;line-height: 1.2em;}#sk-container-id-13 div.sk-label-container {text-align: center;}#sk-container-id-13 div.sk-container {/* jupyter's `normalize.less` sets `[hidden] { display: none; }` but bootstrap.min.css set `[hidden] { display: none !important; }` so we also need the `!important` here to be able to override the default hidden behavior on the sphinx rendered scikit-learn.org. See: https://github.com/scikit-learn/scikit-learn/issues/21755 */display: inline-block !important;position: relative;}#sk-container-id-13 div.sk-text-repr-fallback {display: none;}</style><div id="sk-container-id-13" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>RandomizedSearchCV(cv=KFold(n_splits=5, random_state=1, shuffle=True),
+<div class="cell-output cell-output-display" data-execution_count="73">
+<style>#sk-container-id-16 {color: black;background-color: white;}#sk-container-id-16 pre{padding: 0;}#sk-container-id-16 div.sk-toggleable {background-color: white;}#sk-container-id-16 label.sk-toggleable__label {cursor: pointer;display: block;width: 100%;margin-bottom: 0;padding: 0.3em;box-sizing: border-box;text-align: center;}#sk-container-id-16 label.sk-toggleable__label-arrow:before {content: "▸";float: left;margin-right: 0.25em;color: #696969;}#sk-container-id-16 label.sk-toggleable__label-arrow:hover:before {color: black;}#sk-container-id-16 div.sk-estimator:hover label.sk-toggleable__label-arrow:before {color: black;}#sk-container-id-16 div.sk-toggleable__content {max-height: 0;max-width: 0;overflow: hidden;text-align: left;background-color: #f0f8ff;}#sk-container-id-16 div.sk-toggleable__content pre {margin: 0.2em;color: black;border-radius: 0.25em;background-color: #f0f8ff;}#sk-container-id-16 input.sk-toggleable__control:checked~div.sk-toggleable__content {max-height: 200px;max-width: 100%;overflow: auto;}#sk-container-id-16 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {content: "▾";}#sk-container-id-16 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-16 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-16 input.sk-hidden--visually {border: 0;clip: rect(1px 1px 1px 1px);clip: rect(1px, 1px, 1px, 1px);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}#sk-container-id-16 div.sk-estimator {font-family: monospace;background-color: #f0f8ff;border: 1px dotted black;border-radius: 0.25em;box-sizing: border-box;margin-bottom: 0.5em;}#sk-container-id-16 div.sk-estimator:hover {background-color: #d4ebff;}#sk-container-id-16 div.sk-parallel-item::after {content: "";width: 100%;border-bottom: 1px solid gray;flex-grow: 1;}#sk-container-id-16 div.sk-label:hover label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-16 div.sk-serial::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: 0;}#sk-container-id-16 div.sk-serial {display: flex;flex-direction: column;align-items: center;background-color: white;padding-right: 0.2em;padding-left: 0.2em;position: relative;}#sk-container-id-16 div.sk-item {position: relative;z-index: 1;}#sk-container-id-16 div.sk-parallel {display: flex;align-items: stretch;justify-content: center;background-color: white;position: relative;}#sk-container-id-16 div.sk-item::before, #sk-container-id-16 div.sk-parallel-item::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: -1;}#sk-container-id-16 div.sk-parallel-item {display: flex;flex-direction: column;z-index: 1;position: relative;background-color: white;}#sk-container-id-16 div.sk-parallel-item:first-child::after {align-self: flex-end;width: 50%;}#sk-container-id-16 div.sk-parallel-item:last-child::after {align-self: flex-start;width: 50%;}#sk-container-id-16 div.sk-parallel-item:only-child::after {width: 0;}#sk-container-id-16 div.sk-dashed-wrapped {border: 1px dashed gray;margin: 0 0.4em 0.5em 0.4em;box-sizing: border-box;padding-bottom: 0.4em;background-color: white;}#sk-container-id-16 div.sk-label label {font-family: monospace;font-weight: bold;display: inline-block;line-height: 1.2em;}#sk-container-id-16 div.sk-label-container {text-align: center;}#sk-container-id-16 div.sk-container {/* jupyter's `normalize.less` sets `[hidden] { display: none; }` but bootstrap.min.css set `[hidden] { display: none !important; }` so we also need the `!important` here to be able to override the default hidden behavior on the sphinx rendered scikit-learn.org. See: https://github.com/scikit-learn/scikit-learn/issues/21755 */display: inline-block !important;position: relative;}#sk-container-id-16 div.sk-text-repr-fallback {display: none;}</style><div id="sk-container-id-16" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>RandomizedSearchCV(cv=KFold(n_splits=5, random_state=1, shuffle=True),
                    estimator=KNeighborsRegressor(), n_iter=180, n_jobs=-1,
                    param_distributions={'metric': ['minkowski'],
                                         'n_neighbors': range(1, 500),
-                                        'p': &lt;scipy.stats._distn_infrastructure.rv_continuous_frozen object at 0x00000226D43BA8B0&gt;,
+                                        'p': &lt;scipy.stats._distn_infrastructure.rv_continuous_frozen object at 0x00000226D6E70700&gt;,
                                         'weights': ['uniform', 'distance']},
                    random_state=10, scoring='neg_root_mean_squared_error',
-                   verbose=10)</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br>On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden=""><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-35" type="checkbox"><label for="sk-estimator-id-35" class="sk-toggleable__label sk-toggleable__label-arrow">RandomizedSearchCV</label><div class="sk-toggleable__content"><pre>RandomizedSearchCV(cv=KFold(n_splits=5, random_state=1, shuffle=True),
+                   verbose=10)</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br>On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden=""><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-42" type="checkbox"><label for="sk-estimator-id-42" class="sk-toggleable__label sk-toggleable__label-arrow">RandomizedSearchCV</label><div class="sk-toggleable__content"><pre>RandomizedSearchCV(cv=KFold(n_splits=5, random_state=1, shuffle=True),
                    estimator=KNeighborsRegressor(), n_iter=180, n_jobs=-1,
                    param_distributions={'metric': ['minkowski'],
                                         'n_neighbors': range(1, 500),
-                                        'p': &lt;scipy.stats._distn_infrastructure.rv_continuous_frozen object at 0x00000226D43BA8B0&gt;,
+                                        'p': &lt;scipy.stats._distn_infrastructure.rv_continuous_frozen object at 0x00000226D6E70700&gt;,
                                         'weights': ['uniform', 'distance']},
                    random_state=10, scoring='neg_root_mean_squared_error',
-                   verbose=10)</pre></div></div></div><div class="sk-parallel"><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-36" type="checkbox"><label for="sk-estimator-id-36" class="sk-toggleable__label sk-toggleable__label-arrow">estimator: KNeighborsRegressor</label><div class="sk-toggleable__content"><pre>KNeighborsRegressor()</pre></div></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-37" type="checkbox"><label for="sk-estimator-id-37" class="sk-toggleable__label sk-toggleable__label-arrow">KNeighborsRegressor</label><div class="sk-toggleable__content"><pre>KNeighborsRegressor()</pre></div></div></div></div></div></div></div></div></div></div>
+                   verbose=10)</pre></div></div></div><div class="sk-parallel"><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-43" type="checkbox"><label for="sk-estimator-id-43" class="sk-toggleable__label sk-toggleable__label-arrow">estimator: KNeighborsRegressor</label><div class="sk-toggleable__content"><pre>KNeighborsRegressor()</pre></div></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-44" type="checkbox"><label for="sk-estimator-id-44" class="sk-toggleable__label sk-toggleable__label-arrow">KNeighborsRegressor</label><div class="sk-toggleable__content"><pre>KNeighborsRegressor()</pre></div></div></div></div></div></div></div></div></div></div>
 </div>
 </div>
-<div id="9fcd7e2b" class="cell" data-execution_count="52">
+<div id="39fc1026" class="cell" data-execution_count="52">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>gcv.best_params_</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="52">
 <pre><code>{'metric': 'minkowski',
@@ -872,13 +878,13 @@ window.Quarto = {
  'weights': 'uniform'}</code></pre>
 </div>
 </div>
-<div id="7230a074" class="cell" data-execution_count="53">
+<div id="b9a562d8" class="cell" data-execution_count="53">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>gcv.best_score_</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="53">
 <pre><code>-6239.171627183809</code></pre>
 </div>
 </div>
-<div id="11e796ba" class="cell" data-execution_count="54">
+<div id="1c71d5f8" class="cell" data-execution_count="54">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>y_pred <span class="op">=</span> gcv.predict(X_test_scaled)</span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>mean_squared_error(y_test, y_pred, squared<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="54">
@@ -892,6 +898,339 @@ window.Quarto = {
 <li><p>In case of a hyperparameter having continuous values, the distribution of the hyperparameter can be specified in <code>RandomizedSearchCV()</code>.</p></li>
 <li><p>In case of effect sparsity of hyperparameters, i.e., if only a few hyperparameters significantly effect prediction accuracy, <code>RandomizedSearchCV()</code> is likely to consider more unique values of the influential hyperparameters as compared to <code>GridSearchCV()</code>, and is thus likely to provide more optimal hyperparameter values as compared to <code>GridSearchCV()</code>.</p></li>
 </ol>
+</section>
+<section id="bayessearchcv" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="bayessearchcv"><span class="header-section-number">4.3</span> <a href="https://scikit-optimize.github.io/stable/modules/generated/skopt.BayesSearchCV.html"><code>BayesSearchCV()</code></a></h2>
+<ul>
+<li>The function begins by computing the cross-validated score by randomly selecting a few hyperparameter values from the specified disttribution of hyperparameter values.</li>
+<li>Based on the data of hyperparameter values tested <em>(predictors)</em>, and the cross-validated score <em>(the response)</em>, a Gaussian process model is developed to estimate the cross-validated score &amp; the uncertainty in the estimate in the entire space of the hyperparameter values</li>
+<li>A criterion that “explores” uncertain regions of the space of hyperparameter values <em>(where it is difficult to predict cross-validated score)</em>, and “exploits” promising regions of the space are of hyperparameter values <em>(where the cross-validated score is predicted to minimize)</em> is used to suggest the next hyperparameter value that will potentially minimize the cross-validated score</li>
+<li>Cross-validated score is computed at the suggested hyperparameter value, the Gaussian process model is updated, and the previous step is repeated, until a certain number of iterations specified by the user.</li>
+<li>To summarize, instead of blindly testing the model for the specified hyperparameter values <em>(as in <code>GridSearchCV()</code>)</em>, or randomly testing the model on certain hyperparameter values <em>(as in <code>RandomizedSearchCV()</code>)</em>, <code>BayesSearchCV()</code> smartly tests the model for those hyperparameter values that are likely to reduce the cross-validated score. The algorithm becomes “smarter” as it “learns” more with increasing iterations.</li>
+</ul>
+<div id="e4fc5c08" class="cell" data-execution_count="74">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># BayesSearchCV works in three steps:</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 1) Create the model</span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> KNeighborsRegressor(metric <span class="op">=</span> <span class="st">'minkowski'</span>) <span class="co"># No inputs defined inside the model</span></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 2) Create a hyperparameter grid (as a dict)</span></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>    <span class="co"># the keys should be EXACTLY the same as the names of the model inputs</span></span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># the values should be an array or list of hyperparam values, or distribution of hyperparameter values</span></span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>grid <span class="op">=</span> {<span class="st">'n_neighbors'</span>: Integer(<span class="dv">1</span>, <span class="dv">500</span>), <span class="st">'weights'</span>: Categorical([<span class="st">'uniform'</span>, <span class="st">'distance'</span>]), </span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>       <span class="st">'p'</span>: Real(<span class="dv">1</span>, <span class="dv">10</span>, prior <span class="op">=</span> <span class="st">'uniform'</span>)} <span class="co">#We can specify a distribution </span></span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>                                                <span class="co">#for continuous hyperparameter values</span></span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a><span class="co"># 3) Create the Kfold object (Using RepeatedKFold will be more robust, but more expensive, use it if you </span></span>
+<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a><span class="co"># have the budget)</span></span>
+<span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a>kfold <span class="op">=</span> KFold(n_splits <span class="op">=</span> <span class="dv">5</span>, shuffle <span class="op">=</span> <span class="va">True</span>, random_state <span class="op">=</span> <span class="dv">1</span>)</span>
+<span id="cb27-17"><a href="#cb27-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-18"><a href="#cb27-18" aria-hidden="true" tabindex="-1"></a><span class="co"># 4) Create the CV object</span></span>
+<span id="cb27-19"><a href="#cb27-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Look at the documentation to see the order in which the objects must be specified within the function</span></span>
+<span id="cb27-20"><a href="#cb27-20" aria-hidden="true" tabindex="-1"></a>gcv <span class="op">=</span> BayesSearchCV(model, search_spaces <span class="op">=</span> grid, cv <span class="op">=</span> kfold, n_iter <span class="op">=</span> <span class="dv">180</span>, random_state <span class="op">=</span> <span class="dv">10</span>,</span>
+<span id="cb27-21"><a href="#cb27-21" aria-hidden="true" tabindex="-1"></a>                         scoring <span class="op">=</span> <span class="st">'neg_root_mean_squared_error'</span>, n_jobs <span class="op">=</span> <span class="op">-</span><span class="dv">1</span>, verbose <span class="op">=</span> <span class="dv">10</span>)</span>
+<span id="cb27-22"><a href="#cb27-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-23"><a href="#cb27-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit the models, and cross-validate</span></span>
+<span id="cb27-24"><a href="#cb27-24" aria-hidden="true" tabindex="-1"></a>gcv.fit(X_train_scaled, y_train)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>C:\Users\akl0407\Anaconda3\lib\site-packages\skopt\optimizer\optimizer.py:517: UserWarning: The objective has been evaluated at point [1, 1.0, 'distance'] before, using random point [211, 8.815934618976652, 'distance']
+  warnings.warn(
+C:\Users\akl0407\Anaconda3\lib\site-packages\skopt\optimizer\optimizer.py:517: UserWarning: The objective has been evaluated at point [1, 1.0, 'distance'] before, using random point [142, 9.82730497273874, 'uniform']
+  warnings.warn(
+C:\Users\akl0407\Anaconda3\lib\site-packages\skopt\optimizer\optimizer.py:517: UserWarning: The objective has been evaluated at point [1, 1.0, 'distance'] before, using random point [21, 2.006720981077401, 'uniform']
+  warnings.warn(
+C:\Users\akl0407\Anaconda3\lib\site-packages\skopt\optimizer\optimizer.py:517: UserWarning: The objective has been evaluated at point [1, 1.0, 'distance'] before, using random point [408, 3.5499145423156695, 'distance']
+  warnings.warn(
+C:\Users\akl0407\Anaconda3\lib\site-packages\skopt\optimizer\optimizer.py:517: UserWarning: The objective has been evaluated at point [1, 1.0, 'distance'] before, using random point [64, 6.790443202296786, 'distance']
+  warnings.warn(
+C:\Users\akl0407\Anaconda3\lib\site-packages\skopt\optimizer\optimizer.py:517: UserWarning: The objective has been evaluated at point [1, 1.0, 'distance'] before, using random point [269, 8.548308992520077, 'uniform']
+  warnings.warn(
+C:\Users\akl0407\Anaconda3\lib\site-packages\skopt\optimizer\optimizer.py:517: UserWarning: The objective has been evaluated at point [1, 1.0, 'distance'] before, using random point [115, 8.732749241731103, 'uniform']
+  warnings.warn(
+C:\Users\akl0407\Anaconda3\lib\site-packages\skopt\optimizer\optimizer.py:517: UserWarning: The objective has been evaluated at point [1, 1.0, 'distance'] before, using random point [122, 1.167854579498454, 'uniform']
+  warnings.warn(
+C:\Users\akl0407\Anaconda3\lib\site-packages\skopt\optimizer\optimizer.py:517: UserWarning: The objective has been evaluated at point [1, 1.0, 'distance'] before, using random point [438, 7.315388626386285, 'distance']
+  warnings.warn(
+C:\Users\akl0407\Anaconda3\lib\site-packages\skopt\optimizer\optimizer.py:517: UserWarning: The objective has been evaluated at point [1, 1.0, 'distance'] before, using random point [18, 1.6169720739532245, 'uniform']
+  warnings.warn(
+C:\Users\akl0407\Anaconda3\lib\site-packages\skopt\optimizer\optimizer.py:517: UserWarning: The objective has been evaluated at point [1, 1.0, 'distance'] before, using random point [446, 3.384942066756767, 'distance']
+  warnings.warn(
+C:\Users\akl0407\Anaconda3\lib\site-packages\skopt\optimizer\optimizer.py:517: UserWarning: The objective has been evaluated at point [1, 1.0, 'distance'] before, using random point [98, 8.244307030341862, 'uniform']
+  warnings.warn(
+C:\Users\akl0407\Anaconda3\lib\site-packages\skopt\optimizer\optimizer.py:517: UserWarning: The objective has been evaluated at point [1, 1.0, 'distance'] before, using random point [318, 9.48470780960003, 'uniform']
+  warnings.warn(
+C:\Users\akl0407\Anaconda3\lib\site-packages\skopt\optimizer\optimizer.py:517: UserWarning: The objective has been evaluated at point [1, 1.0, 'distance'] before, using random point [52, 9.302132300621835, 'uniform']
+  warnings.warn(
+C:\Users\akl0407\Anaconda3\lib\site-packages\skopt\optimizer\optimizer.py:517: UserWarning: The objective has been evaluated at point [1, 1.0, 'distance'] before, using random point [299, 5.529842888451138, 'uniform']
+  warnings.warn(</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="74">
+<style>#sk-container-id-17 {color: black;background-color: white;}#sk-container-id-17 pre{padding: 0;}#sk-container-id-17 div.sk-toggleable {background-color: white;}#sk-container-id-17 label.sk-toggleable__label {cursor: pointer;display: block;width: 100%;margin-bottom: 0;padding: 0.3em;box-sizing: border-box;text-align: center;}#sk-container-id-17 label.sk-toggleable__label-arrow:before {content: "▸";float: left;margin-right: 0.25em;color: #696969;}#sk-container-id-17 label.sk-toggleable__label-arrow:hover:before {color: black;}#sk-container-id-17 div.sk-estimator:hover label.sk-toggleable__label-arrow:before {color: black;}#sk-container-id-17 div.sk-toggleable__content {max-height: 0;max-width: 0;overflow: hidden;text-align: left;background-color: #f0f8ff;}#sk-container-id-17 div.sk-toggleable__content pre {margin: 0.2em;color: black;border-radius: 0.25em;background-color: #f0f8ff;}#sk-container-id-17 input.sk-toggleable__control:checked~div.sk-toggleable__content {max-height: 200px;max-width: 100%;overflow: auto;}#sk-container-id-17 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {content: "▾";}#sk-container-id-17 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-17 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-17 input.sk-hidden--visually {border: 0;clip: rect(1px 1px 1px 1px);clip: rect(1px, 1px, 1px, 1px);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}#sk-container-id-17 div.sk-estimator {font-family: monospace;background-color: #f0f8ff;border: 1px dotted black;border-radius: 0.25em;box-sizing: border-box;margin-bottom: 0.5em;}#sk-container-id-17 div.sk-estimator:hover {background-color: #d4ebff;}#sk-container-id-17 div.sk-parallel-item::after {content: "";width: 100%;border-bottom: 1px solid gray;flex-grow: 1;}#sk-container-id-17 div.sk-label:hover label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-17 div.sk-serial::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: 0;}#sk-container-id-17 div.sk-serial {display: flex;flex-direction: column;align-items: center;background-color: white;padding-right: 0.2em;padding-left: 0.2em;position: relative;}#sk-container-id-17 div.sk-item {position: relative;z-index: 1;}#sk-container-id-17 div.sk-parallel {display: flex;align-items: stretch;justify-content: center;background-color: white;position: relative;}#sk-container-id-17 div.sk-item::before, #sk-container-id-17 div.sk-parallel-item::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: -1;}#sk-container-id-17 div.sk-parallel-item {display: flex;flex-direction: column;z-index: 1;position: relative;background-color: white;}#sk-container-id-17 div.sk-parallel-item:first-child::after {align-self: flex-end;width: 50%;}#sk-container-id-17 div.sk-parallel-item:last-child::after {align-self: flex-start;width: 50%;}#sk-container-id-17 div.sk-parallel-item:only-child::after {width: 0;}#sk-container-id-17 div.sk-dashed-wrapped {border: 1px dashed gray;margin: 0 0.4em 0.5em 0.4em;box-sizing: border-box;padding-bottom: 0.4em;background-color: white;}#sk-container-id-17 div.sk-label label {font-family: monospace;font-weight: bold;display: inline-block;line-height: 1.2em;}#sk-container-id-17 div.sk-label-container {text-align: center;}#sk-container-id-17 div.sk-container {/* jupyter's `normalize.less` sets `[hidden] { display: none; }` but bootstrap.min.css set `[hidden] { display: none !important; }` so we also need the `!important` here to be able to override the default hidden behavior on the sphinx rendered scikit-learn.org. See: https://github.com/scikit-learn/scikit-learn/issues/21755 */display: inline-block !important;position: relative;}#sk-container-id-17 div.sk-text-repr-fallback {display: none;}</style><div id="sk-container-id-17" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>BayesSearchCV(cv=KFold(n_splits=5, random_state=1, shuffle=True),
+              estimator=KNeighborsRegressor(), n_iter=180, n_jobs=-1,
+              random_state=10, scoring='neg_root_mean_squared_error',
+              search_spaces={'n_neighbors': Integer(low=1, high=500, prior='uniform', transform='normalize'),
+                             'p': Real(low=1, high=10, prior='uniform', transform='normalize'),
+                             'weights': Categorical(categories=('uniform', 'distance'), prior=None)},
+              verbose=10)</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br>On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden=""><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-45" type="checkbox"><label for="sk-estimator-id-45" class="sk-toggleable__label sk-toggleable__label-arrow">BayesSearchCV</label><div class="sk-toggleable__content"><pre>BayesSearchCV(cv=KFold(n_splits=5, random_state=1, shuffle=True),
+              estimator=KNeighborsRegressor(), n_iter=180, n_jobs=-1,
+              random_state=10, scoring='neg_root_mean_squared_error',
+              search_spaces={'n_neighbors': Integer(low=1, high=500, prior='uniform', transform='normalize'),
+                             'p': Real(low=1, high=10, prior='uniform', transform='normalize'),
+                             'weights': Categorical(categories=('uniform', 'distance'), prior=None)},
+              verbose=10)</pre></div></div></div><div class="sk-parallel"><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-46" type="checkbox"><label for="sk-estimator-id-46" class="sk-toggleable__label sk-toggleable__label-arrow">estimator: KNeighborsRegressor</label><div class="sk-toggleable__content"><pre>KNeighborsRegressor()</pre></div></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-47" type="checkbox"><label for="sk-estimator-id-47" class="sk-toggleable__label sk-toggleable__label-arrow">KNeighborsRegressor</label><div class="sk-toggleable__content"><pre>KNeighborsRegressor()</pre></div></div></div></div></div></div></div></div></div></div>
+</div>
+</div>
+<p>The optimal hyperparameter values <em>(based on Bayesian search)</em> on the provided distribution of hyperparameter values are:</p>
+<div id="040ecbcf" class="cell" data-execution_count="141">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>gcv.best_params_</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="141">
+<pre><code>OrderedDict([('n_neighbors', 9),
+             ('p', 1.0008321732366932),
+             ('weights', 'distance')])</code></pre>
+</div>
+</div>
+<p>The cross-validated root mean squared error for the optimal hyperparameter values is:</p>
+<div id="6c2f2d54" class="cell" data-execution_count="143">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="op">-</span>gcv.best_score_</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="143">
+<pre><code>5756.172382596493</code></pre>
+</div>
+</div>
+<p>The RMSE on test data for the optimal hyperparameter values is:</p>
+<div id="71826856" class="cell" data-execution_count="77">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>y_pred <span class="op">=</span> gcv.predict(X_test_scaled)</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>mean_squared_error(y_test, y_pred, squared<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="77">
+<pre><code>5740.432278861367</code></pre>
+</div>
+</div>
+<p>Below are the partial dependence plots of the objective function <em>(i.e., the cross-validated score)</em>. The cross-validated score predictions are based on the most recently updated model <em>(i.e., the updated Gaussian Process model at the end of <code>n_iter</code> iterations specified by the user)</em> that predicts the cross-validated score.</p>
+<p>Check the <a href="https://scikit-optimize.github.io/stable/modules/generated/skopt.plots.plot_objective.html"><code>plot_objective()</code></a> documentation to interpret the plots.</p>
+<div id="530b1e09" class="cell" data-execution_count="139">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>plot_objective(gcv.optimizer_results_[<span class="dv">0</span>],</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>                   dimensions<span class="op">=</span>[<span class="st">"n_neighbors"</span>, <span class="st">"p"</span>, <span class="st">"weights"</span>], size <span class="op">=</span> <span class="dv">3</span>)</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>plt.show()<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Hyperparameter tuning_files/figure-html/cell-22-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Below is the plot showing the cross-validated score computed at each of the 180 hyperparameter values considered for cross-validation.</p>
+<div id="f0891429" class="cell" data-execution_count="155">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>sns.lineplot(x <span class="op">=</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">181</span>), y <span class="op">=</span> gcv.optimizer_results_[<span class="dv">0</span>][<span class="st">'func_vals'</span>])</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Iteration'</span>)</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Cross-validated score'</span>)</span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>plt.show()<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Hyperparameter tuning_files/figure-html/cell-23-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Note that the cross-validated error is close to the optmial value in the 53rd iteration itself.</p>
+<p>The cross-validated error at the 53rd iteration is:</p>
+<div id="fed5d2d7" class="cell" data-execution_count="149">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>gcv.optimizer_results_[<span class="dv">0</span>][<span class="st">'func_vals'</span>][<span class="dv">53</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="149">
+<pre><code>5831.87280274334</code></pre>
+</div>
+</div>
+<p>The hyperparameter values at the 53rd iterations are:</p>
+<div id="58279a54" class="cell" data-execution_count="156">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>gcv.optimizer_results_[<span class="dv">0</span>][<span class="st">'x_iters'</span>][<span class="dv">53</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="156">
+<pre><code>[15, 1.0, 'distance']</code></pre>
+</div>
+</div>
+<p>Note that this is the 2nd most optimal hyperparameter value based on <code>GridSearchCV()</code>.</p>
 
 
 </section>

@@ -318,7 +318,7 @@ window.Quarto = {
 
 
 <p>In this chapter we’ll introduce several functions that help with tuning hyperparameters of a machine learning model.</p>
-<div id="cae4e49e" class="cell" data-execution_count="140">
+<div id="cae4e49e" class="cell" data-execution_count="158">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split, cross_val_score, cross_val_predict, <span class="op">\</span></span>
@@ -331,7 +331,8 @@ window.Quarto = {
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> skopt.space <span class="im">import</span> Real, Categorical, Integer</span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> skopt.plots <span class="im">import</span> plot_objective</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> warnings</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Let us read and pre-process data first. Then we’ll be ready to tune the model hyperparameters. We’ll use KNN as the model. Note that KNN has multiple hyperparameters to tune, such as number of neighbors, distance metric, weights of neighbours, etc.</p>
 <div id="ee908a2b" class="cell" data-execution_count="62">
@@ -822,7 +823,7 @@ window.Quarto = {
 <section id="randomizedsearchcv" class="level2" data-number="4.2">
 <h2 data-number="4.2" class="anchored" data-anchor-id="randomizedsearchcv"><span class="header-section-number">4.2</span> <a href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.RandomizedSearchCV.html"><code>RandomizedSearchCV()</code></a></h2>
 <p>In case of many possible values of hyperparameters, it may be comptaionally very expensive to use <code>GridSearchCV()</code>. In such cases, <code>RandomizedSearchCV()</code> can be used to compute the cross-validated score on a randomly selected subset of hyperparameter values from the specified grid. The number of values can be fixed by the user, as per the available budget.</p>
-<div id="41a59c9a" class="cell" data-execution_count="73">
+<div id="b8b04ca4" class="cell" data-execution_count="73">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># RandomizedSearchCV works in three steps:</span></span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 1) Create the model</span></span>
@@ -869,7 +870,7 @@ window.Quarto = {
                    verbose=10)</pre></div></div></div><div class="sk-parallel"><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-43" type="checkbox"><label for="sk-estimator-id-43" class="sk-toggleable__label sk-toggleable__label-arrow">estimator: KNeighborsRegressor</label><div class="sk-toggleable__content"><pre>KNeighborsRegressor()</pre></div></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-44" type="checkbox"><label for="sk-estimator-id-44" class="sk-toggleable__label sk-toggleable__label-arrow">KNeighborsRegressor</label><div class="sk-toggleable__content"><pre>KNeighborsRegressor()</pre></div></div></div></div></div></div></div></div></div></div>
 </div>
 </div>
-<div id="39fc1026" class="cell" data-execution_count="52">
+<div id="0b19c128" class="cell" data-execution_count="52">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>gcv.best_params_</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="52">
 <pre><code>{'metric': 'minkowski',
@@ -878,13 +879,13 @@ window.Quarto = {
  'weights': 'uniform'}</code></pre>
 </div>
 </div>
-<div id="b9a562d8" class="cell" data-execution_count="53">
+<div id="ed927306" class="cell" data-execution_count="53">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>gcv.best_score_</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="53">
 <pre><code>-6239.171627183809</code></pre>
 </div>
 </div>
-<div id="1c71d5f8" class="cell" data-execution_count="54">
+<div id="79e08dd5" class="cell" data-execution_count="54">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>y_pred <span class="op">=</span> gcv.predict(X_test_scaled)</span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>mean_squared_error(y_test, y_pred, squared<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="54">
@@ -901,14 +902,16 @@ window.Quarto = {
 </section>
 <section id="bayessearchcv" class="level2" data-number="4.3">
 <h2 data-number="4.3" class="anchored" data-anchor-id="bayessearchcv"><span class="header-section-number">4.3</span> <a href="https://scikit-optimize.github.io/stable/modules/generated/skopt.BayesSearchCV.html"><code>BayesSearchCV()</code></a></h2>
+<p>Unlike the grid search and random search, which treat hyperparameter sets independently, the Bayesian optimization is an informed search method, meaning that it learns from previous iterations. The number of trials in this approach is determined by the user.</p>
 <ul>
 <li>The function begins by computing the cross-validated score by randomly selecting a few hyperparameter values from the specified disttribution of hyperparameter values.</li>
 <li>Based on the data of hyperparameter values tested <em>(predictors)</em>, and the cross-validated score <em>(the response)</em>, a Gaussian process model is developed to estimate the cross-validated score &amp; the uncertainty in the estimate in the entire space of the hyperparameter values</li>
 <li>A criterion that “explores” uncertain regions of the space of hyperparameter values <em>(where it is difficult to predict cross-validated score)</em>, and “exploits” promising regions of the space are of hyperparameter values <em>(where the cross-validated score is predicted to minimize)</em> is used to suggest the next hyperparameter value that will potentially minimize the cross-validated score</li>
 <li>Cross-validated score is computed at the suggested hyperparameter value, the Gaussian process model is updated, and the previous step is repeated, until a certain number of iterations specified by the user.</li>
-<li>To summarize, instead of blindly testing the model for the specified hyperparameter values <em>(as in <code>GridSearchCV()</code>)</em>, or randomly testing the model on certain hyperparameter values <em>(as in <code>RandomizedSearchCV()</code>)</em>, <code>BayesSearchCV()</code> smartly tests the model for those hyperparameter values that are likely to reduce the cross-validated score. The algorithm becomes “smarter” as it “learns” more with increasing iterations.</li>
 </ul>
-<div id="e4fc5c08" class="cell" data-execution_count="74">
+<p>To summarize, instead of blindly testing the model for the specified hyperparameter values <em>(as in <code>GridSearchCV()</code>)</em>, or randomly testing the model on certain hyperparameter values <em>(as in <code>RandomizedSearchCV()</code>)</em>, <code>BayesSearchCV()</code> smartly tests the model for those hyperparameter values that are likely to reduce the cross-validated score. The algorithm becomes “smarter” as it “learns” more with increasing iterations.</p>
+<p>Here is a nice <a href="https://towardsdatascience.com/a-conceptual-explanation-of-bayesian-model-based-hyperparameter-optimization-for-machine-learning-b8172278050f">blog</a>, if you wish to understand more about the Bayesian optimization procedure.</p>
+<div id="69448eef" class="cell">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># BayesSearchCV works in three steps:</span></span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 1) Create the model</span></span>
@@ -929,243 +932,20 @@ window.Quarto = {
 <span id="cb27-18"><a href="#cb27-18" aria-hidden="true" tabindex="-1"></a><span class="co"># 4) Create the CV object</span></span>
 <span id="cb27-19"><a href="#cb27-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Look at the documentation to see the order in which the objects must be specified within the function</span></span>
 <span id="cb27-20"><a href="#cb27-20" aria-hidden="true" tabindex="-1"></a>gcv <span class="op">=</span> BayesSearchCV(model, search_spaces <span class="op">=</span> grid, cv <span class="op">=</span> kfold, n_iter <span class="op">=</span> <span class="dv">180</span>, random_state <span class="op">=</span> <span class="dv">10</span>,</span>
-<span id="cb27-21"><a href="#cb27-21" aria-hidden="true" tabindex="-1"></a>                         scoring <span class="op">=</span> <span class="st">'neg_root_mean_squared_error'</span>, n_jobs <span class="op">=</span> <span class="op">-</span><span class="dv">1</span>, verbose <span class="op">=</span> <span class="dv">10</span>)</span>
+<span id="cb27-21"><a href="#cb27-21" aria-hidden="true" tabindex="-1"></a>                         scoring <span class="op">=</span> <span class="st">'neg_root_mean_squared_error'</span>, n_jobs <span class="op">=</span> <span class="op">-</span><span class="dv">1</span>)</span>
 <span id="cb27-22"><a href="#cb27-22" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb27-23"><a href="#cb27-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit the models, and cross-validate</span></span>
-<span id="cb27-24"><a href="#cb27-24" aria-hidden="true" tabindex="-1"></a>gcv.fit(X_train_scaled, y_train)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits
-Fitting 5 folds for each of 1 candidates, totalling 5 fits</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>C:\Users\akl0407\Anaconda3\lib\site-packages\skopt\optimizer\optimizer.py:517: UserWarning: The objective has been evaluated at point [1, 1.0, 'distance'] before, using random point [211, 8.815934618976652, 'distance']
-  warnings.warn(
-C:\Users\akl0407\Anaconda3\lib\site-packages\skopt\optimizer\optimizer.py:517: UserWarning: The objective has been evaluated at point [1, 1.0, 'distance'] before, using random point [142, 9.82730497273874, 'uniform']
-  warnings.warn(
-C:\Users\akl0407\Anaconda3\lib\site-packages\skopt\optimizer\optimizer.py:517: UserWarning: The objective has been evaluated at point [1, 1.0, 'distance'] before, using random point [21, 2.006720981077401, 'uniform']
-  warnings.warn(
-C:\Users\akl0407\Anaconda3\lib\site-packages\skopt\optimizer\optimizer.py:517: UserWarning: The objective has been evaluated at point [1, 1.0, 'distance'] before, using random point [408, 3.5499145423156695, 'distance']
-  warnings.warn(
-C:\Users\akl0407\Anaconda3\lib\site-packages\skopt\optimizer\optimizer.py:517: UserWarning: The objective has been evaluated at point [1, 1.0, 'distance'] before, using random point [64, 6.790443202296786, 'distance']
-  warnings.warn(
-C:\Users\akl0407\Anaconda3\lib\site-packages\skopt\optimizer\optimizer.py:517: UserWarning: The objective has been evaluated at point [1, 1.0, 'distance'] before, using random point [269, 8.548308992520077, 'uniform']
-  warnings.warn(
-C:\Users\akl0407\Anaconda3\lib\site-packages\skopt\optimizer\optimizer.py:517: UserWarning: The objective has been evaluated at point [1, 1.0, 'distance'] before, using random point [115, 8.732749241731103, 'uniform']
-  warnings.warn(
-C:\Users\akl0407\Anaconda3\lib\site-packages\skopt\optimizer\optimizer.py:517: UserWarning: The objective has been evaluated at point [1, 1.0, 'distance'] before, using random point [122, 1.167854579498454, 'uniform']
-  warnings.warn(
-C:\Users\akl0407\Anaconda3\lib\site-packages\skopt\optimizer\optimizer.py:517: UserWarning: The objective has been evaluated at point [1, 1.0, 'distance'] before, using random point [438, 7.315388626386285, 'distance']
-  warnings.warn(
-C:\Users\akl0407\Anaconda3\lib\site-packages\skopt\optimizer\optimizer.py:517: UserWarning: The objective has been evaluated at point [1, 1.0, 'distance'] before, using random point [18, 1.6169720739532245, 'uniform']
-  warnings.warn(
-C:\Users\akl0407\Anaconda3\lib\site-packages\skopt\optimizer\optimizer.py:517: UserWarning: The objective has been evaluated at point [1, 1.0, 'distance'] before, using random point [446, 3.384942066756767, 'distance']
-  warnings.warn(
-C:\Users\akl0407\Anaconda3\lib\site-packages\skopt\optimizer\optimizer.py:517: UserWarning: The objective has been evaluated at point [1, 1.0, 'distance'] before, using random point [98, 8.244307030341862, 'uniform']
-  warnings.warn(
-C:\Users\akl0407\Anaconda3\lib\site-packages\skopt\optimizer\optimizer.py:517: UserWarning: The objective has been evaluated at point [1, 1.0, 'distance'] before, using random point [318, 9.48470780960003, 'uniform']
-  warnings.warn(
-C:\Users\akl0407\Anaconda3\lib\site-packages\skopt\optimizer\optimizer.py:517: UserWarning: The objective has been evaluated at point [1, 1.0, 'distance'] before, using random point [52, 9.302132300621835, 'uniform']
-  warnings.warn(
-C:\Users\akl0407\Anaconda3\lib\site-packages\skopt\optimizer\optimizer.py:517: UserWarning: The objective has been evaluated at point [1, 1.0, 'distance'] before, using random point [299, 5.529842888451138, 'uniform']
-  warnings.warn(</code></pre>
-</div>
-<div class="cell-output cell-output-display" data-execution_count="74">
-<style>#sk-container-id-17 {color: black;background-color: white;}#sk-container-id-17 pre{padding: 0;}#sk-container-id-17 div.sk-toggleable {background-color: white;}#sk-container-id-17 label.sk-toggleable__label {cursor: pointer;display: block;width: 100%;margin-bottom: 0;padding: 0.3em;box-sizing: border-box;text-align: center;}#sk-container-id-17 label.sk-toggleable__label-arrow:before {content: "▸";float: left;margin-right: 0.25em;color: #696969;}#sk-container-id-17 label.sk-toggleable__label-arrow:hover:before {color: black;}#sk-container-id-17 div.sk-estimator:hover label.sk-toggleable__label-arrow:before {color: black;}#sk-container-id-17 div.sk-toggleable__content {max-height: 0;max-width: 0;overflow: hidden;text-align: left;background-color: #f0f8ff;}#sk-container-id-17 div.sk-toggleable__content pre {margin: 0.2em;color: black;border-radius: 0.25em;background-color: #f0f8ff;}#sk-container-id-17 input.sk-toggleable__control:checked~div.sk-toggleable__content {max-height: 200px;max-width: 100%;overflow: auto;}#sk-container-id-17 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {content: "▾";}#sk-container-id-17 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-17 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-17 input.sk-hidden--visually {border: 0;clip: rect(1px 1px 1px 1px);clip: rect(1px, 1px, 1px, 1px);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}#sk-container-id-17 div.sk-estimator {font-family: monospace;background-color: #f0f8ff;border: 1px dotted black;border-radius: 0.25em;box-sizing: border-box;margin-bottom: 0.5em;}#sk-container-id-17 div.sk-estimator:hover {background-color: #d4ebff;}#sk-container-id-17 div.sk-parallel-item::after {content: "";width: 100%;border-bottom: 1px solid gray;flex-grow: 1;}#sk-container-id-17 div.sk-label:hover label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-17 div.sk-serial::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: 0;}#sk-container-id-17 div.sk-serial {display: flex;flex-direction: column;align-items: center;background-color: white;padding-right: 0.2em;padding-left: 0.2em;position: relative;}#sk-container-id-17 div.sk-item {position: relative;z-index: 1;}#sk-container-id-17 div.sk-parallel {display: flex;align-items: stretch;justify-content: center;background-color: white;position: relative;}#sk-container-id-17 div.sk-item::before, #sk-container-id-17 div.sk-parallel-item::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: -1;}#sk-container-id-17 div.sk-parallel-item {display: flex;flex-direction: column;z-index: 1;position: relative;background-color: white;}#sk-container-id-17 div.sk-parallel-item:first-child::after {align-self: flex-end;width: 50%;}#sk-container-id-17 div.sk-parallel-item:last-child::after {align-self: flex-start;width: 50%;}#sk-container-id-17 div.sk-parallel-item:only-child::after {width: 0;}#sk-container-id-17 div.sk-dashed-wrapped {border: 1px dashed gray;margin: 0 0.4em 0.5em 0.4em;box-sizing: border-box;padding-bottom: 0.4em;background-color: white;}#sk-container-id-17 div.sk-label label {font-family: monospace;font-weight: bold;display: inline-block;line-height: 1.2em;}#sk-container-id-17 div.sk-label-container {text-align: center;}#sk-container-id-17 div.sk-container {/* jupyter's `normalize.less` sets `[hidden] { display: none; }` but bootstrap.min.css set `[hidden] { display: none !important; }` so we also need the `!important` here to be able to override the default hidden behavior on the sphinx rendered scikit-learn.org. See: https://github.com/scikit-learn/scikit-learn/issues/21755 */display: inline-block !important;position: relative;}#sk-container-id-17 div.sk-text-repr-fallback {display: none;}</style><div id="sk-container-id-17" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>BayesSearchCV(cv=KFold(n_splits=5, random_state=1, shuffle=True),
-              estimator=KNeighborsRegressor(), n_iter=180, n_jobs=-1,
-              random_state=10, scoring='neg_root_mean_squared_error',
-              search_spaces={'n_neighbors': Integer(low=1, high=500, prior='uniform', transform='normalize'),
-                             'p': Real(low=1, high=10, prior='uniform', transform='normalize'),
-                             'weights': Categorical(categories=('uniform', 'distance'), prior=None)},
-              verbose=10)</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br>On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden=""><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-45" type="checkbox"><label for="sk-estimator-id-45" class="sk-toggleable__label sk-toggleable__label-arrow">BayesSearchCV</label><div class="sk-toggleable__content"><pre>BayesSearchCV(cv=KFold(n_splits=5, random_state=1, shuffle=True),
-              estimator=KNeighborsRegressor(), n_iter=180, n_jobs=-1,
-              random_state=10, scoring='neg_root_mean_squared_error',
-              search_spaces={'n_neighbors': Integer(low=1, high=500, prior='uniform', transform='normalize'),
-                             'p': Real(low=1, high=10, prior='uniform', transform='normalize'),
-                             'weights': Categorical(categories=('uniform', 'distance'), prior=None)},
-              verbose=10)</pre></div></div></div><div class="sk-parallel"><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-46" type="checkbox"><label for="sk-estimator-id-46" class="sk-toggleable__label sk-toggleable__label-arrow">estimator: KNeighborsRegressor</label><div class="sk-toggleable__content"><pre>KNeighborsRegressor()</pre></div></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-47" type="checkbox"><label for="sk-estimator-id-47" class="sk-toggleable__label sk-toggleable__label-arrow">KNeighborsRegressor</label><div class="sk-toggleable__content"><pre>KNeighborsRegressor()</pre></div></div></div></div></div></div></div></div></div></div>
-</div>
+<span id="cb27-24"><a href="#cb27-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-25"><a href="#cb27-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Sometimes the Gaussian process model predicting the cross-validated score is unstable, particularly</span></span>
+<span id="cb27-26"><a href="#cb27-26" aria-hidden="true" tabindex="-1"></a><span class="co"># at the beginning of the iterations as there are less data points. In that case it throws warnings.</span></span>
+<span id="cb27-27"><a href="#cb27-27" aria-hidden="true" tabindex="-1"></a><span class="co"># However, in general, those warnings can be ignored as the model becomes stable after a few iterations.</span></span>
+<span id="cb27-28"><a href="#cb27-28" aria-hidden="true" tabindex="-1"></a>warnings.filterwarnings(<span class="st">"ignore"</span>)</span>
+<span id="cb27-29"><a href="#cb27-29" aria-hidden="true" tabindex="-1"></a>gcv.fit(X_train_scaled, y_train)</span>
+<span id="cb27-30"><a href="#cb27-30" aria-hidden="true" tabindex="-1"></a>warnings.resetwarnings()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The optimal hyperparameter values <em>(based on Bayesian search)</em> on the provided distribution of hyperparameter values are:</p>
-<div id="040ecbcf" class="cell" data-execution_count="141">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>gcv.best_params_</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="b00d1249" class="cell" data-execution_count="141">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>gcv.best_params_</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="141">
 <pre><code>OrderedDict([('n_neighbors', 9),
              ('p', 1.0008321732366932),
@@ -1173,26 +953,26 @@ C:\Users\akl0407\Anaconda3\lib\site-packages\skopt\optimizer\optimizer.py:517: U
 </div>
 </div>
 <p>The cross-validated root mean squared error for the optimal hyperparameter values is:</p>
-<div id="6c2f2d54" class="cell" data-execution_count="143">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="op">-</span>gcv.best_score_</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="92c36e33" class="cell" data-execution_count="143">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="op">-</span>gcv.best_score_</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="143">
 <pre><code>5756.172382596493</code></pre>
 </div>
 </div>
 <p>The RMSE on test data for the optimal hyperparameter values is:</p>
-<div id="71826856" class="cell" data-execution_count="77">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>y_pred <span class="op">=</span> gcv.predict(X_test_scaled)</span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>mean_squared_error(y_test, y_pred, squared<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="b62ed292" class="cell" data-execution_count="77">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>y_pred <span class="op">=</span> gcv.predict(X_test_scaled)</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>mean_squared_error(y_test, y_pred, squared<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="77">
 <pre><code>5740.432278861367</code></pre>
 </div>
 </div>
 <p>Below are the partial dependence plots of the objective function <em>(i.e., the cross-validated score)</em>. The cross-validated score predictions are based on the most recently updated model <em>(i.e., the updated Gaussian Process model at the end of <code>n_iter</code> iterations specified by the user)</em> that predicts the cross-validated score.</p>
 <p>Check the <a href="https://scikit-optimize.github.io/stable/modules/generated/skopt.plots.plot_objective.html"><code>plot_objective()</code></a> documentation to interpret the plots.</p>
-<div id="530b1e09" class="cell" data-execution_count="139">
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>plot_objective(gcv.optimizer_results_[<span class="dv">0</span>],</span>
-<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>                   dimensions<span class="op">=</span>[<span class="st">"n_neighbors"</span>, <span class="st">"p"</span>, <span class="st">"weights"</span>], size <span class="op">=</span> <span class="dv">3</span>)</span>
-<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>plt.show()<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="554efb5f" class="cell" data-execution_count="139">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>plot_objective(gcv.optimizer_results_[<span class="dv">0</span>],</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>                   dimensions<span class="op">=</span>[<span class="st">"n_neighbors"</span>, <span class="st">"p"</span>, <span class="st">"weights"</span>], size <span class="op">=</span> <span class="dv">3</span>)</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>plt.show()<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -1202,11 +982,11 @@ C:\Users\akl0407\Anaconda3\lib\site-packages\skopt\optimizer\optimizer.py:517: U
 </div>
 </div>
 <p>Below is the plot showing the cross-validated score computed at each of the 180 hyperparameter values considered for cross-validation.</p>
-<div id="f0891429" class="cell" data-execution_count="155">
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>sns.lineplot(x <span class="op">=</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">181</span>), y <span class="op">=</span> gcv.optimizer_results_[<span class="dv">0</span>][<span class="st">'func_vals'</span>])</span>
-<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Iteration'</span>)</span>
-<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Cross-validated score'</span>)</span>
-<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>plt.show()<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="243731de" class="cell" data-execution_count="155">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>sns.lineplot(x <span class="op">=</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">181</span>), y <span class="op">=</span> gcv.optimizer_results_[<span class="dv">0</span>][<span class="st">'func_vals'</span>])</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Iteration'</span>)</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Cross-validated score'</span>)</span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>plt.show()<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -1217,20 +997,31 @@ C:\Users\akl0407\Anaconda3\lib\site-packages\skopt\optimizer\optimizer.py:517: U
 </div>
 <p>Note that the cross-validated error is close to the optmial value in the 53rd iteration itself.</p>
 <p>The cross-validated error at the 53rd iteration is:</p>
-<div id="fed5d2d7" class="cell" data-execution_count="149">
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>gcv.optimizer_results_[<span class="dv">0</span>][<span class="st">'func_vals'</span>][<span class="dv">53</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="77077bff" class="cell" data-execution_count="149">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>gcv.optimizer_results_[<span class="dv">0</span>][<span class="st">'func_vals'</span>][<span class="dv">53</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="149">
 <pre><code>5831.87280274334</code></pre>
 </div>
 </div>
 <p>The hyperparameter values at the 53rd iterations are:</p>
-<div id="58279a54" class="cell" data-execution_count="156">
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>gcv.optimizer_results_[<span class="dv">0</span>][<span class="st">'x_iters'</span>][<span class="dv">53</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="931998d2" class="cell" data-execution_count="156">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>gcv.optimizer_results_[<span class="dv">0</span>][<span class="st">'x_iters'</span>][<span class="dv">53</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="156">
 <pre><code>[15, 1.0, 'distance']</code></pre>
 </div>
 </div>
 <p>Note that this is the 2nd most optimal hyperparameter value based on <code>GridSearchCV()</code>.</p>
+<p>The advantages of <code>BayesSearchCV()</code> over <code>GridSearchCV()</code> and <code>RandomizedSearchCV()</code> are:</p>
+<ol type="1">
+<li><p>The Bayesian Optimization approach gives the benefit that we can give a much larger range of possible values, since over time we identify and exploit the most promising regions and discard the not so promising ones. Plain grid-search would burn computational resources to explore all regions of the domain space with the same granularity, even the not promising ones. Since we search much more effectively in Bayesian search, we can search over a larger domain space.</p></li>
+<li><p>BayesSearch CV may help us identify the optimal hyperparameter value in fewer iterations if the Gaussian process model estimating the cross-validated score is relatively accurate. However, this is not certain. Grid and random search are completely uninformed by past evaluations, and as a result, often spend a significant amount of time evaluating “bad” hyperparameters.</p></li>
+<li><p>BayesSearch CV is more reliable in cases of a large search space, where random selection may miss sampling values from optimal regions of the search space.</p></li>
+</ol>
+<p>The disadvantages of <code>BayesSearchCV()</code> over <code>GridSearchCV()</code> and <code>RandomizedSearchCV()</code> are:</p>
+<ol type="1">
+<li><p><code>BayesSearchCV()</code> has a cost of learning from past data, i.e., updating the model that predicts the cross-validated score after every iteration of evaluating the cross-validated score on a new hyperparameter value. This cost will continue to increase as more and more data is collected. There is no such cost in <code>GridSearchCV()</code> and <code>RandomizedSearchCV()</code> as there is no learning. This implies that each iteration of <code>BayesSearchCV()</code> will take a longer time than each iteration of <code>GridSearchCV()</code> / <code>RandomizedSearchCV()</code>. Thus, even if <code>BayesSearchCV()</code> finds the optimal hyperparameter value in fewer iterations, it may take more time than <code>GridSearchCV()</code> / <code>RandomizedSearchCV()</code> for the same.</p></li>
+<li><p>The success of <code>BayesSearchCV()</code> depends on the predictions and associated uncertainty estimated by the Gaussian process (GP) model that predicts the cross-validated score. The GP model, although works well in general, may not be suitable for certain datasets, or may take a relatively large number of iterations to learn for certain datasets.</p></li>
+</ol>
 
 
 </section>

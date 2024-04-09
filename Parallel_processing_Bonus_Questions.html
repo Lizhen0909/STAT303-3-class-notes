@@ -4857,14 +4857,14 @@ vertical-align: -.125em;
     <h2 id="toc-title">Contents</h2>
    
   <ul>
-  <li><a href="#case-1-no-parallelization" id="toc-case-1-no-parallelization" class="nav-link active" data-scroll-target="#case-1-no-parallelization"><span class="header-section-number">C</span> Case 1: No parallelization</a></li>
-  <li><a href="#case-2-parallelization-in-cross_val_score" id="toc-case-2-parallelization-in-cross_val_score" class="nav-link" data-scroll-target="#case-2-parallelization-in-cross_val_score"><span class="header-section-number">D</span> Case 2: Parallelization in <code>cross_val_score()</code></a></li>
-  <li><a href="#case-3-parallelization-in-kneighborsregressor" id="toc-case-3-parallelization-in-kneighborsregressor" class="nav-link" data-scroll-target="#case-3-parallelization-in-kneighborsregressor"><span class="header-section-number">E</span> Case 3: Parallelization in <code>KNeighborsRegressor()</code></a></li>
-  <li><a href="#case-4-nested-parallelization-both-cross_val_score-and-kneighborsregressor" id="toc-case-4-nested-parallelization-both-cross_val_score-and-kneighborsregressor" class="nav-link" data-scroll-target="#case-4-nested-parallelization-both-cross_val_score-and-kneighborsregressor"><span class="header-section-number">F</span> Case 4: Nested parallelization: Both <code>cross_val_score()</code> and <code>KNeighborsRegressor()</code></a></li>
-  <li><a href="#q1" id="toc-q1" class="nav-link" data-scroll-target="#q1"><span class="header-section-number">G</span> Q1</a></li>
-  <li><a href="#q2" id="toc-q2" class="nav-link" data-scroll-target="#q2"><span class="header-section-number">H</span> Q2</a></li>
-  <li><a href="#q3" id="toc-q3" class="nav-link" data-scroll-target="#q3"><span class="header-section-number">I</span> Q3</a></li>
-  <li><a href="#q4" id="toc-q4" class="nav-link" data-scroll-target="#q4"><span class="header-section-number">J</span> Q4</a></li>
+  <li><a href="#case-1-no-parallelization" id="toc-case-1-no-parallelization" class="nav-link active" data-scroll-target="#case-1-no-parallelization">Case 1: No parallelization</a></li>
+  <li><a href="#case-2-parallelization-in-cross_val_score" id="toc-case-2-parallelization-in-cross_val_score" class="nav-link" data-scroll-target="#case-2-parallelization-in-cross_val_score">Case 2: Parallelization in <code>cross_val_score()</code></a></li>
+  <li><a href="#case-3-parallelization-in-kneighborsregressor" id="toc-case-3-parallelization-in-kneighborsregressor" class="nav-link" data-scroll-target="#case-3-parallelization-in-kneighborsregressor">Case 3: Parallelization in <code>KNeighborsRegressor()</code></a></li>
+  <li><a href="#case-4-nested-parallelization-both-cross_val_score-and-kneighborsregressor" id="toc-case-4-nested-parallelization-both-cross_val_score-and-kneighborsregressor" class="nav-link" data-scroll-target="#case-4-nested-parallelization-both-cross_val_score-and-kneighborsregressor">Case 4: Nested parallelization: Both <code>cross_val_score()</code> and <code>KNeighborsRegressor()</code></a></li>
+  <li><a href="#q1" id="toc-q1" class="nav-link" data-scroll-target="#q1">Q1</a></li>
+  <li><a href="#q2" id="toc-q2" class="nav-link" data-scroll-target="#q2">Q2</a></li>
+  <li><a href="#q3" id="toc-q3" class="nav-link" data-scroll-target="#q3">Q3</a></li>
+  <li><a href="#q4" id="toc-q4" class="nav-link" data-scroll-target="#q4">Q4</a></li>
   </ul>
 </nav>
     </div>
@@ -4930,8 +4930,8 @@ vertical-align: -.125em;
 <span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>X_train_scaled <span class="op">=</span> sc.transform(X_train)</span>
 <span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>X_test_scaled <span class="op">=</span> sc.transform(X_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="case-1-no-parallelization" class="level1" data-number="C">
-<h1 data-number="C"><span class="header-section-number">C</span> Case 1: No parallelization</h1>
+<section id="case-1-no-parallelization" class="level1">
+<h1>Case 1: No parallelization</h1>
 <div id="834924d8" class="cell" data-execution_count="113">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>time_taken_case1 <span class="op">=</span> []</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">50</span>):</span>
@@ -4941,13 +4941,13 @@ vertical-align: -.125em;
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    cross_val_error <span class="op">=</span> []</span>
 <span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> k <span class="kw">in</span> Ks:</span>
 <span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>        cross_val_error.append(<span class="op">-</span>cross_val_score(KNeighborsRegressor(n_neighbors<span class="op">=</span>k), </span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>                                                X_train_scaled, y_train, cv <span class="op">=</span> kfold,</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>                                              scoring<span class="op">=</span><span class="st">"neg_root_mean_squared_error"</span>).mean())</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>                          X_train_scaled, y_train, cv <span class="op">=</span> kfold,</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>                           scoring<span class="op">=</span><span class="st">"neg_root_mean_squared_error"</span>).mean())</span>
 <span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    time_taken_case1.append(tm.time() <span class="op">-</span> start_time)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="case-2-parallelization-in-cross_val_score" class="level1" data-number="D">
-<h1 data-number="D"><span class="header-section-number">D</span> Case 2: Parallelization in <code>cross_val_score()</code></h1>
+<section id="case-2-parallelization-in-cross_val_score" class="level1">
+<h1>Case 2: Parallelization in <code>cross_val_score()</code></h1>
 <div id="5e6b16ad" class="cell" data-execution_count="114">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>time_taken_case2 <span class="op">=</span> []</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">50</span>):</span>
@@ -4957,13 +4957,13 @@ vertical-align: -.125em;
 <span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    cross_val_error <span class="op">=</span> []</span>
 <span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> k <span class="kw">in</span> Ks:</span>
 <span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>        cross_val_error.append(<span class="op">-</span>cross_val_score(KNeighborsRegressor(n_neighbors<span class="op">=</span>k), </span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>                                                X_train_scaled, y_train, cv <span class="op">=</span> kfold, n_jobs <span class="op">=</span> <span class="op">-</span><span class="dv">1</span>,</span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>                                              scoring<span class="op">=</span><span class="st">"neg_root_mean_squared_error"</span>).mean())</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>                         X_train_scaled, y_train, cv <span class="op">=</span> kfold, n_jobs <span class="op">=</span> <span class="op">-</span><span class="dv">1</span>,</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>                                  scoring<span class="op">=</span><span class="st">"neg_root_mean_squared_error"</span>).mean())</span>
 <span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    time_taken_case2.append(tm.time() <span class="op">-</span> start_time)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="case-3-parallelization-in-kneighborsregressor" class="level1" data-number="E">
-<h1 data-number="E"><span class="header-section-number">E</span> Case 3: Parallelization in <code>KNeighborsRegressor()</code></h1>
+<section id="case-3-parallelization-in-kneighborsregressor" class="level1">
+<h1>Case 3: Parallelization in <code>KNeighborsRegressor()</code></h1>
 <div id="1507bd00" class="cell" data-execution_count="115">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>time_taken_case3 <span class="op">=</span> []</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">50</span>):</span>
@@ -4972,14 +4972,14 @@ vertical-align: -.125em;
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    kfold <span class="op">=</span> KFold(n_splits<span class="op">=</span><span class="dv">5</span>, shuffle<span class="op">=</span><span class="va">True</span>, random_state<span class="op">=</span><span class="dv">1</span>)</span>
 <span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    cross_val_error <span class="op">=</span> []</span>
 <span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> k <span class="kw">in</span> Ks:</span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>        cross_val_error.append(<span class="op">-</span>cross_val_score(KNeighborsRegressor(n_neighbors<span class="op">=</span>k, n_jobs<span class="op">=</span> <span class="op">-</span><span class="dv">1</span>), </span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>                                                X_train_scaled, y_train, cv <span class="op">=</span> kfold, </span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>                                              scoring<span class="op">=</span><span class="st">"neg_root_mean_squared_error"</span>).mean())</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>        cross_val_error.append(<span class="op">-</span>cross_val_score(KNeighborsRegressor(n_neighbors<span class="op">=</span>k, </span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>                n_jobs<span class="op">=</span> <span class="op">-</span><span class="dv">1</span>), X_train_scaled, y_train, cv <span class="op">=</span> kfold, </span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>                                  scoring<span class="op">=</span><span class="st">"neg_root_mean_squared_error"</span>).mean())</span>
 <span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>    time_taken_case3.append(tm.time() <span class="op">-</span> start_time)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="case-4-nested-parallelization-both-cross_val_score-and-kneighborsregressor" class="level1" data-number="F">
-<h1 data-number="F"><span class="header-section-number">F</span> Case 4: Nested parallelization: Both <code>cross_val_score()</code> and <code>KNeighborsRegressor()</code></h1>
+<section id="case-4-nested-parallelization-both-cross_val_score-and-kneighborsregressor" class="level1">
+<h1>Case 4: Nested parallelization: Both <code>cross_val_score()</code> and <code>KNeighborsRegressor()</code></h1>
 <div id="8fe53b0c" class="cell" data-execution_count="116">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>time_taken_case4 <span class="op">=</span> []</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">50</span>):</span>
@@ -4988,9 +4988,9 @@ vertical-align: -.125em;
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    kfold <span class="op">=</span> KFold(n_splits<span class="op">=</span><span class="dv">5</span>, shuffle<span class="op">=</span><span class="va">True</span>, random_state<span class="op">=</span><span class="dv">1</span>)</span>
 <span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    cross_val_error <span class="op">=</span> []</span>
 <span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> k <span class="kw">in</span> Ks:</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>        cross_val_error.append(<span class="op">-</span>cross_val_score(KNeighborsRegressor(n_neighbors<span class="op">=</span>k, n_jobs<span class="op">=</span> <span class="op">-</span><span class="dv">1</span>), </span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>                                                X_train_scaled, y_train, cv <span class="op">=</span> kfold, n_jobs <span class="op">=</span> <span class="op">-</span><span class="dv">1</span>,</span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>                                              scoring<span class="op">=</span><span class="st">"neg_root_mean_squared_error"</span>).mean())</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>        cross_val_error.append(<span class="op">-</span>cross_val_score(KNeighborsRegressor(n_neighbors<span class="op">=</span>k, </span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>                n_jobs<span class="op">=</span> <span class="op">-</span><span class="dv">1</span>), X_train_scaled, y_train, cv <span class="op">=</span> kfold, n_jobs <span class="op">=</span> <span class="op">-</span><span class="dv">1</span>,</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>                scoring<span class="op">=</span><span class="st">"neg_root_mean_squared_error"</span>).mean())</span>
 <span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>    time_taken_case4.append(tm.time() <span class="op">-</span> start_time)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div id="3dcd6f1f" class="cell">
@@ -5004,20 +5004,20 @@ vertical-align: -.125em;
 </div>
 </div>
 </section>
-<section id="q1" class="level1" data-number="G">
-<h1 data-number="G"><span class="header-section-number">G</span> Q1</h1>
+<section id="q1" class="level1">
+<h1>Q1</h1>
 <p><strong>Case 1 is without parallelization. Why is Case 3 with parallelization of <code>KNeighborsRegressor()</code> taking more time than case 1?</strong></p>
 </section>
-<section id="q2" class="level1" data-number="H">
-<h1 data-number="H"><span class="header-section-number">H</span> Q2</h1>
+<section id="q2" class="level1">
+<h1>Q2</h1>
 <p><strong>If nested parallelization is worse than parallelization, why is case 4 with nested parallelization taking less time than case 3 with parallelization of KNeighborsRegressor()?</strong></p>
 </section>
-<section id="q3" class="level1" data-number="I">
-<h1 data-number="I"><span class="header-section-number">I</span> Q3</h1>
+<section id="q3" class="level1">
+<h1>Q3</h1>
 <p><strong>If nested parallelization is worse than no parallelization, why is case 4 with nested parallelization taking less time than case 1 with no parallelization?</strong></p>
 </section>
-<section id="q4" class="level1" data-number="J">
-<h1 data-number="J"><span class="header-section-number">J</span> Q4</h1>
+<section id="q4" class="level1">
+<h1>Q4</h1>
 <p><strong>If nested parallelization is the best scenario, why is case 4 with nested parallelization taking more time than case 1 with with parallelization in <code>cross_val_score()</code>?</strong></p>
 
 

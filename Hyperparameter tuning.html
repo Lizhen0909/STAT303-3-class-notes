@@ -905,9 +905,9 @@ window.Quarto = {
 <li><p>In case of a hyperparameter having continuous values, the distribution of the hyperparameter can be specified in <code>RandomizedSearchCV()</code>.</p></li>
 <li><p>In case of effect sparsity of hyperparameters, i.e., if only a few hyperparameters significantly effect prediction accuracy, <code>RandomizedSearchCV()</code> is likely to consider more unique values of the influential hyperparameters as compared to <code>GridSearchCV()</code>, and is thus likely to provide more optimal hyperparameter values as compared to <code>GridSearchCV()</code>. The figure below shows effect sparsity where there are 2 hyperparameters, but only one of them is associated with the cross-validated score, Here, it is more likely that the optimal cross-validated score will be obtained by <code>RandomizedSearchCV()</code>, as it is evaluating the model on 9 unique values of the relevant hyperparameter, instead of just 3.</p></li>
 </ol>
-<div id="fd8dbbd9" class="cell" data-execution_count="198">
-<div class="cell-output cell-output-display" data-execution_count="198">
-<img src="./Datasets/esparsity.jpg" width="500" height="300">
+<div id="fd8dbbd9" class="cell" data-execution_count="199">
+<div class="cell-output cell-output-display" data-execution_count="199">
+<img src="./Datasets/esparsity.jpg" width="500" height="250">
 </div>
 </div>
 </section>

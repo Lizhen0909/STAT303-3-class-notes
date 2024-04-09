@@ -903,8 +903,13 @@ window.Quarto = {
 <ol type="1">
 <li><p><code>RandomizedSearchCV()</code> fixes the computational cost in case of large number of hyperparameters / large number of levels of individual hyperparameters. If there are <span class="math inline">\(n\)</span> hyper parameters, each with 3 levels, the number of all possible hyperparameter values will be <span class="math inline">\(3^n\)</span>. The computational cost increase exponentially with increase in number of hyperparameters.</p></li>
 <li><p>In case of a hyperparameter having continuous values, the distribution of the hyperparameter can be specified in <code>RandomizedSearchCV()</code>.</p></li>
-<li><p>In case of effect sparsity of hyperparameters, i.e., if only a few hyperparameters significantly effect prediction accuracy, <code>RandomizedSearchCV()</code> is likely to consider more unique values of the influential hyperparameters as compared to <code>GridSearchCV()</code>, and is thus likely to provide more optimal hyperparameter values as compared to <code>GridSearchCV()</code>.</p></li>
+<li><p>In case of effect sparsity of hyperparameters, i.e., if only a few hyperparameters significantly effect prediction accuracy, <code>RandomizedSearchCV()</code> is likely to consider more unique values of the influential hyperparameters as compared to <code>GridSearchCV()</code>, and is thus likely to provide more optimal hyperparameter values as compared to <code>GridSearchCV()</code>. The figure below shows effect sparsity where there are 2 hyperparameters, but only one of them is associated with the cross-validated score, Here, it is more likely that the optimal cross-validated score will be obtained by <code>RandomizedSearchCV()</code>, as it is evaluating the model on 9 unique values of the relevant hyperparameter, instead of just 3.</p></li>
 </ol>
+<div id="e87575be" class="cell" data-execution_count="197">
+<div class="cell-output cell-output-display" data-execution_count="197">
+<img src="./Datasets/esparsity.jpg" width="500" height="400">
+</div>
+</div>
 </section>
 <section id="bayessearchcv" class="level2" data-number="4.3">
 <h2 data-number="4.3" class="anchored" data-anchor-id="bayessearchcv"><span class="header-section-number">4.3</span> <a href="https://scikit-optimize.github.io/stable/modules/generated/skopt.BayesSearchCV.html"><code>BayesSearchCV()</code></a></h2>
@@ -989,7 +994,7 @@ window.Quarto = {
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Hyperparameter tuning_files/figure-html/cell-22-output-1.png" class="img-fluid figure-img"></p>
+<p><img src="Hyperparameter tuning_files/figure-html/cell-23-output-1.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
@@ -1005,7 +1010,7 @@ window.Quarto = {
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Hyperparameter tuning_files/figure-html/cell-23-output-1.png" class="img-fluid figure-img"></p>
+<p><img src="Hyperparameter tuning_files/figure-html/cell-24-output-1.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
@@ -1017,7 +1022,7 @@ window.Quarto = {
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Hyperparameter tuning_files/figure-html/cell-24-output-1.png" class="img-fluid figure-img"></p>
+<p><img src="Hyperparameter tuning_files/figure-html/cell-25-output-1.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
@@ -1047,7 +1052,7 @@ window.Quarto = {
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Hyperparameter tuning_files/figure-html/cell-27-output-1.png" class="img-fluid figure-img"></p>
+<p><img src="Hyperparameter tuning_files/figure-html/cell-28-output-1.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>

@@ -298,6 +298,7 @@ window.Quarto = {
   <li><a href="#gridsearchcv" id="toc-gridsearchcv" class="nav-link active" data-scroll-target="#gridsearchcv"><span class="header-section-number">4.1</span> <code>GridSearchCV</code></a></li>
   <li><a href="#randomizedsearchcv" id="toc-randomizedsearchcv" class="nav-link" data-scroll-target="#randomizedsearchcv"><span class="header-section-number">4.2</span> <code>RandomizedSearchCV()</code></a></li>
   <li><a href="#bayessearchcv" id="toc-bayessearchcv" class="nav-link" data-scroll-target="#bayessearchcv"><span class="header-section-number">4.3</span> <code>BayesSearchCV()</code></a></li>
+  <li><a href="#cross_validate" id="toc-cross_validate" class="nav-link" data-scroll-target="#cross_validate"><span class="header-section-number">4.4</span> <code>cross_validate()</code></a></li>
   </ul>
 </nav>
     </div>
@@ -324,7 +325,7 @@ window.Quarto = {
 
 
 <p>In this chapter we’ll introduce several functions that help with tuning hyperparameters of a machine learning model.</p>
-<div id="cae4e49e" class="cell" data-execution_count="162">
+<div id="cae4e49e" class="cell" data-execution_count="200">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split, cross_val_score, cross_val_predict, <span class="op">\</span></span>
@@ -1068,6 +1069,228 @@ window.Quarto = {
 <li><p><code>BayesSearchCV()</code> has a cost of learning from past data, i.e., updating the model that predicts the cross-validated score after every iteration of evaluating the cross-validated score on a new hyperparameter value. This cost will continue to increase as more and more data is collected. There is no such cost in <code>GridSearchCV()</code> and <code>RandomizedSearchCV()</code> as there is no learning. This implies that each iteration of <code>BayesSearchCV()</code> will take a longer time than each iteration of <code>GridSearchCV()</code> / <code>RandomizedSearchCV()</code>. Thus, even if <code>BayesSearchCV()</code> finds the optimal hyperparameter value in fewer iterations, it may take more time than <code>GridSearchCV()</code> / <code>RandomizedSearchCV()</code> for the same.</p></li>
 <li><p>The success of <code>BayesSearchCV()</code> depends on the predictions and associated uncertainty estimated by the Gaussian process (GP) model that predicts the cross-validated score. The GP model, although works well in general, may not be suitable for certain datasets, or may take a relatively large number of iterations to learn for certain datasets.</p></li>
 </ol>
+</section>
+<section id="cross_validate" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="cross_validate"><span class="header-section-number">4.4</span> <a href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.cross_validate.html"><code>cross_validate()</code></a></h2>
+<p>We have used <code>cross_val_score()</code> and <code>cross_val_predict()</code> so far.</p>
+<p><strong>When can we use one over the other?</strong></p>
+<p>The function <code>cross_validate()</code> is similar to <code>cross_val_score()</code> except that it has the option to return multiple cross-validated metrics, instead of a single one.</p>
+<p>Consider the heart disease classification problem, where the response is <code>target</code> <em>(whether the person has a heart disease or not)</em>.</p>
+<div id="9179e151" class="cell" data-execution_count="210">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pd.read_csv(<span class="st">'Datasets/heart_disease_classification.csv'</span>)</span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>data.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="210">
+<div>
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">age</th>
+<th data-quarto-table-cell-role="th">sex</th>
+<th data-quarto-table-cell-role="th">cp</th>
+<th data-quarto-table-cell-role="th">trestbps</th>
+<th data-quarto-table-cell-role="th">chol</th>
+<th data-quarto-table-cell-role="th">fbs</th>
+<th data-quarto-table-cell-role="th">restecg</th>
+<th data-quarto-table-cell-role="th">thalach</th>
+<th data-quarto-table-cell-role="th">exang</th>
+<th data-quarto-table-cell-role="th">oldpeak</th>
+<th data-quarto-table-cell-role="th">slope</th>
+<th data-quarto-table-cell-role="th">ca</th>
+<th data-quarto-table-cell-role="th">thal</th>
+<th data-quarto-table-cell-role="th">target</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>63</td>
+<td>1</td>
+<td>3</td>
+<td>145</td>
+<td>233</td>
+<td>1</td>
+<td>0</td>
+<td>150</td>
+<td>0</td>
+<td>2.3</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>37</td>
+<td>1</td>
+<td>2</td>
+<td>130</td>
+<td>250</td>
+<td>0</td>
+<td>1</td>
+<td>187</td>
+<td>0</td>
+<td>3.5</td>
+<td>0</td>
+<td>0</td>
+<td>2</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>41</td>
+<td>0</td>
+<td>1</td>
+<td>130</td>
+<td>204</td>
+<td>0</td>
+<td>0</td>
+<td>172</td>
+<td>0</td>
+<td>1.4</td>
+<td>2</td>
+<td>0</td>
+<td>2</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>56</td>
+<td>1</td>
+<td>1</td>
+<td>120</td>
+<td>236</td>
+<td>0</td>
+<td>1</td>
+<td>178</td>
+<td>0</td>
+<td>0.8</td>
+<td>2</td>
+<td>0</td>
+<td>2</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>57</td>
+<td>0</td>
+<td>0</td>
+<td>120</td>
+<td>354</td>
+<td>0</td>
+<td>1</td>
+<td>163</td>
+<td>1</td>
+<td>0.6</td>
+<td>2</td>
+<td>0</td>
+<td>2</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</div>
+<p>Let us pre-process the data.</p>
+<div id="4ee2987c" class="cell" data-execution_count="211">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co"># First, separate the response and the predictors</span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> data[<span class="st">'target'</span>]</span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> data.drop(<span class="st">'target'</span>, axis<span class="op">=</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="73f921d0" class="cell" data-execution_count="212">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Separate the data (X,y) into training and test</span></span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Inputs:</span></span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># data</span></span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># train-test ratio</span></span>
+<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># random_state for reproducible code</span></span>
+<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(X, y, test_size<span class="op">=</span><span class="fl">0.2</span>, random_state<span class="op">=</span><span class="dv">20</span>, stratify<span class="op">=</span>y) <span class="co"># 80%-20% split</span></span>
+<span id="cb44-9"><a href="#cb44-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-10"><a href="#cb44-10" aria-hidden="true" tabindex="-1"></a><span class="co"># stratify=y makes sure the class 0 to class 1 ratio in the training and test sets are kept the same as the entire dataset.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="ec73e5b3" class="cell" data-execution_count="213">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> KNeighborsClassifier() </span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>sc <span class="op">=</span> StandardScaler()</span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>sc.fit(X_train)</span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>X_train_scaled <span class="op">=</span> sc.transform(X_train)</span>
+<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a>X_test_scaled <span class="op">=</span> sc.transform(X_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Suppose we want to take recall above a certain threshold with the highest precision possible. <code>cross_validate()</code> computes the cross-validated score for multiple metrics - rest is the same as <code>cross_val_score()</code>.</p>
+<div id="74577b6d" class="cell" data-execution_count="276">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>Ks <span class="op">=</span> np.arange(<span class="dv">10</span>,<span class="dv">200</span>,<span class="dv">10</span>)</span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>scores <span class="op">=</span> []</span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> K <span class="kw">in</span> Ks:</span>
+<span id="cb46-6"><a href="#cb46-6" aria-hidden="true" tabindex="-1"></a>    model <span class="op">=</span> KNeighborsClassifier(n_neighbors<span class="op">=</span>K) <span class="co"># Keeping distance uniform</span></span>
+<span id="cb46-7"><a href="#cb46-7" aria-hidden="true" tabindex="-1"></a>    scores.append(cross_validate(model, X_train_scaled, y_train, cv<span class="op">=</span><span class="dv">5</span>, scoring <span class="op">=</span> [<span class="st">'accuracy'</span>,<span class="st">'recall'</span>, <span class="st">'precision'</span>]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="b44e92fb" class="cell" data-execution_count="277">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>scores</span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a><span class="co"># The output is now a list of dicts - easy to convert to a df</span></span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a>df_scores <span class="op">=</span> pd.DataFrame(scores) <span class="co"># We need to handle test_recall and test_precision cols</span></span>
+<span id="cb47-6"><a href="#cb47-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-7"><a href="#cb47-7" aria-hidden="true" tabindex="-1"></a>df_scores[<span class="st">'CV_recall'</span>] <span class="op">=</span> df_scores[<span class="st">'test_recall'</span>].<span class="bu">apply</span>(np.mean)</span>
+<span id="cb47-8"><a href="#cb47-8" aria-hidden="true" tabindex="-1"></a>df_scores[<span class="st">'CV_precision'</span>] <span class="op">=</span> df_scores[<span class="st">'test_precision'</span>].<span class="bu">apply</span>(np.mean)</span>
+<span id="cb47-9"><a href="#cb47-9" aria-hidden="true" tabindex="-1"></a>df_scores[<span class="st">'CV_accuracy'</span>] <span class="op">=</span> df_scores[<span class="st">'test_accuracy'</span>].<span class="bu">apply</span>(np.mean)</span>
+<span id="cb47-10"><a href="#cb47-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-11"><a href="#cb47-11" aria-hidden="true" tabindex="-1"></a>df_scores.index <span class="op">=</span> Ks <span class="co"># We can set K values as indices for convenience</span></span>
+<span id="cb47-12"><a href="#cb47-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-13"><a href="#cb47-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-14"><a href="#cb47-14" aria-hidden="true" tabindex="-1"></a><span class="co">#df_scores</span></span>
+<span id="cb47-15"><a href="#cb47-15" aria-hidden="true" tabindex="-1"></a><span class="co"># What happens as K increases?</span></span>
+<span id="cb47-16"><a href="#cb47-16" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Recall increases (not monotonically)</span></span>
+<span id="cb47-17"><a href="#cb47-17" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Precision decreases (not monotonically)</span></span>
+<span id="cb47-18"><a href="#cb47-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Why?</span></span>
+<span id="cb47-19"><a href="#cb47-19" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Check the class distribution in the data - more obs with class 1</span></span>
+<span id="cb47-20"><a href="#cb47-20" aria-hidden="true" tabindex="-1"></a>    <span class="co"># As K gets higher, the majority class overrules (visualized in the slides)</span></span>
+<span id="cb47-21"><a href="#cb47-21" aria-hidden="true" tabindex="-1"></a>    <span class="co"># More 1s means less FNs - higher recall</span></span>
+<span id="cb47-22"><a href="#cb47-22" aria-hidden="true" tabindex="-1"></a>    <span class="co"># More 1s means more FPs - lower precision</span></span>
+<span id="cb47-23"><a href="#cb47-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Would this be the case for any dataset?</span></span>
+<span id="cb47-24"><a href="#cb47-24" aria-hidden="true" tabindex="-1"></a>    <span class="co"># NO!! Depends on what the majority class is!</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Suppose we wish to have the maximum possible precision for at least 95% recall.</p>
+<p>The optimal ‘K’ will be:</p>
+<div id="b350736b" class="cell" data-execution_count="278">
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>df_scores.loc[df_scores[<span class="st">'CV_recall'</span>] <span class="op">&gt;</span> <span class="fl">0.95</span>, <span class="st">'CV_precision'</span>].idxmax()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="278">
+<pre><code>120</code></pre>
+</div>
+</div>
+<p>The cross-validated precision, recall and accuracy for the optimal ‘K’ are:</p>
+<div id="76284012" class="cell" data-execution_count="279">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>df_scores.loc[<span class="dv">120</span>, [<span class="st">'CV_recall'</span>, <span class="st">'CV_precision'</span>, <span class="st">'CV_accuracy'</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="279">
+<pre><code>CV_recall       0.954701
+CV_precision    0.734607
+CV_accuracy     0.785374
+Name: 120, dtype: object</code></pre>
+</div>
+</div>
+<div id="1b685ca7" class="cell" data-execution_count="280">
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>sns.lineplot(x <span class="op">=</span> df_scores.index, y <span class="op">=</span> df_scores.CV_precision, color <span class="op">=</span> <span class="st">'blue'</span>, label <span class="op">=</span> <span class="st">'precision'</span>)</span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>sns.lineplot(x <span class="op">=</span> df_scores.index, y <span class="op">=</span> df_scores.CV_recall, color <span class="op">=</span> <span class="st">'red'</span>, label <span class="op">=</span> <span class="st">'recall'</span>)</span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>sns.lineplot(x <span class="op">=</span> df_scores.index, y <span class="op">=</span> df_scores.CV_accuracy, color <span class="op">=</span> <span class="st">'green'</span>, label <span class="op">=</span> <span class="st">'accuracy'</span>)</span>
+<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Metric'</span>)</span>
+<span id="cb52-5"><a href="#cb52-5" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'K'</span>)</span>
+<span id="cb52-6"><a href="#cb52-6" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Hyperparameter tuning_files/figure-html/cell-37-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
 
 
 </section>

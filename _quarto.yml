@@ -28,6 +28,7 @@ book:
     - part: "Assignments"
       chapters:
         - Assignment1.ipynb
+        - Assignment 2 questions.ipynb
 
   appendices: 
     - Stratified splitting.ipynb

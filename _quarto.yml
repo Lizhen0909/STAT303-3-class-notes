@@ -25,6 +25,8 @@ book:
       chapters:
         - Lec3_RegressionTrees.ipynb
         - Lec4_ClassificationTree.ipynb
+        - Lec4_Bagging.ipynb
+        - Lec6_RandomForest.ipynb
     - part: "Assignments"
       chapters:
         - Assignment1.ipynb

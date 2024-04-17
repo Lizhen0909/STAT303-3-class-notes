@@ -345,21 +345,21 @@ window.Quarto = {
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> mean_squared_error</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> cross_val_score,train_test_split</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> mean_squared_error,r2_score</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> KFold</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.tree <span class="im">import</span> DecisionTreeRegressor</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> GridSearchCV, ParameterGrid</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> mean_squared_error, r2_score</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> cross_val_score, train_test_split, KFold, RepeatedKFold, <span class="op">\</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>GridSearchCV, ParameterGrid, RandomizedSearchCV</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.tree <span class="im">import</span> DecisionTreeRegressor</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> skopt <span class="im">import</span> BayesSearchCV</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> skopt.space <span class="im">import</span> Integer, Categorical, Real</span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co">#Libraries for visualizing trees</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.tree <span class="im">import</span> export_graphviz </span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.tree <span class="im">import</span> export_graphviz, export_text </span>
 <span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> six <span class="im">import</span> StringIO</span>
 <span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.display <span class="im">import</span> Image  </span>
 <span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pydotplus</span>
 <span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time <span class="im">as</span> tm</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="41980adc" class="cell" data-execution_count="2">
+<div id="41980adc" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Using the same datasets as used for linear regression in STAT303-2, </span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co">#so that we can compare the non-linear models with linear regression</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>trainf <span class="op">=</span> pd.read_csv(<span class="st">'./Datasets/Car_features_train.csv'</span>)</span>
@@ -369,7 +369,7 @@ window.Quarto = {
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>train <span class="op">=</span> pd.merge(trainf,trainp)</span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>test <span class="op">=</span> pd.merge(testf,testp)</span>
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>train.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="2">
+<div class="cell-output cell-output-display" data-execution_count="14">
 <div>
 <div>
 
@@ -472,30 +472,30 @@ window.Quarto = {
 <section id="building-a-regression-tree" class="level2" data-number="5.1">
 <h2 data-number="5.1" class="anchored" data-anchor-id="building-a-regression-tree"><span class="header-section-number">5.1</span> Building a regression tree</h2>
 <p>Develop a regression tree to predict car price based on mileage</p>
-<div id="c0754fb4" class="cell" data-execution_count="3">
+<div id="c0754fb4" class="cell" data-execution_count="28">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> train[<span class="st">'mileage'</span>]</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> train[<span class="st">'price'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="da318c06" class="cell" data-execution_count="4">
+<div id="da318c06" class="cell" data-execution_count="29">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Defining the object to build a regression tree</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> DecisionTreeRegressor(random_state<span class="op">=</span><span class="dv">1</span>, max_depth<span class="op">=</span><span class="dv">3</span>) </span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co">#Fitting the regression tree to the data</span></span>
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>model.fit(X.values.reshape(<span class="op">-</span><span class="dv">1</span>,<span class="dv">1</span>), y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="4">
-<pre><code>DecisionTreeRegressor(max_depth=3, random_state=1)</code></pre>
+<div class="cell-output cell-output-display" data-execution_count="29">
+<style>#sk-container-id-2 {color: black;}#sk-container-id-2 pre{padding: 0;}#sk-container-id-2 div.sk-toggleable {background-color: white;}#sk-container-id-2 label.sk-toggleable__label {cursor: pointer;display: block;width: 100%;margin-bottom: 0;padding: 0.3em;box-sizing: border-box;text-align: center;}#sk-container-id-2 label.sk-toggleable__label-arrow:before {content: "▸";float: left;margin-right: 0.25em;color: #696969;}#sk-container-id-2 label.sk-toggleable__label-arrow:hover:before {color: black;}#sk-container-id-2 div.sk-estimator:hover label.sk-toggleable__label-arrow:before {color: black;}#sk-container-id-2 div.sk-toggleable__content {max-height: 0;max-width: 0;overflow: hidden;text-align: left;background-color: #f0f8ff;}#sk-container-id-2 div.sk-toggleable__content pre {margin: 0.2em;color: black;border-radius: 0.25em;background-color: #f0f8ff;}#sk-container-id-2 input.sk-toggleable__control:checked~div.sk-toggleable__content {max-height: 200px;max-width: 100%;overflow: auto;}#sk-container-id-2 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {content: "▾";}#sk-container-id-2 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-2 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-2 input.sk-hidden--visually {border: 0;clip: rect(1px 1px 1px 1px);clip: rect(1px, 1px, 1px, 1px);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}#sk-container-id-2 div.sk-estimator {font-family: monospace;background-color: #f0f8ff;border: 1px dotted black;border-radius: 0.25em;box-sizing: border-box;margin-bottom: 0.5em;}#sk-container-id-2 div.sk-estimator:hover {background-color: #d4ebff;}#sk-container-id-2 div.sk-parallel-item::after {content: "";width: 100%;border-bottom: 1px solid gray;flex-grow: 1;}#sk-container-id-2 div.sk-label:hover label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-2 div.sk-serial::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: 0;}#sk-container-id-2 div.sk-serial {display: flex;flex-direction: column;align-items: center;background-color: white;padding-right: 0.2em;padding-left: 0.2em;position: relative;}#sk-container-id-2 div.sk-item {position: relative;z-index: 1;}#sk-container-id-2 div.sk-parallel {display: flex;align-items: stretch;justify-content: center;background-color: white;position: relative;}#sk-container-id-2 div.sk-item::before, #sk-container-id-2 div.sk-parallel-item::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: -1;}#sk-container-id-2 div.sk-parallel-item {display: flex;flex-direction: column;z-index: 1;position: relative;background-color: white;}#sk-container-id-2 div.sk-parallel-item:first-child::after {align-self: flex-end;width: 50%;}#sk-container-id-2 div.sk-parallel-item:last-child::after {align-self: flex-start;width: 50%;}#sk-container-id-2 div.sk-parallel-item:only-child::after {width: 0;}#sk-container-id-2 div.sk-dashed-wrapped {border: 1px dashed gray;margin: 0 0.4em 0.5em 0.4em;box-sizing: border-box;padding-bottom: 0.4em;background-color: white;}#sk-container-id-2 div.sk-label label {font-family: monospace;font-weight: bold;display: inline-block;line-height: 1.2em;}#sk-container-id-2 div.sk-label-container {text-align: center;}#sk-container-id-2 div.sk-container {/* jupyter's `normalize.less` sets `[hidden] { display: none; }` but bootstrap.min.css set `[hidden] { display: none !important; }` so we also need the `!important` here to be able to override the default hidden behavior on the sphinx rendered scikit-learn.org. See: https://github.com/scikit-learn/scikit-learn/issues/21755 */display: inline-block !important;position: relative;}#sk-container-id-2 div.sk-text-repr-fallback {display: none;}</style><div id="sk-container-id-2" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>DecisionTreeRegressor(max_depth=3, random_state=1)</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br>On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden=""><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-2" type="checkbox" checked=""><label for="sk-estimator-id-2" class="sk-toggleable__label sk-toggleable__label-arrow">DecisionTreeRegressor</label><div class="sk-toggleable__content"><pre>DecisionTreeRegressor(max_depth=3, random_state=1)</pre></div></div></div></div></div>
 </div>
 </div>
-<div id="69addc38" class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Visualizing the regression tree</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>dot_data <span class="op">=</span> StringIO()</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>export_graphviz(model, out_file<span class="op">=</span>dot_data,  </span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>                filled<span class="op">=</span><span class="va">True</span>, rounded<span class="op">=</span><span class="va">True</span>,</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>                feature_names <span class="op">=</span>[<span class="st">'mileage'</span>],precision<span class="op">=</span><span class="dv">0</span>)</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>graph <span class="op">=</span> pydotplus.graph_from_dot_data(dot_data.getvalue())  </span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>graph.write_png(<span class="st">'car_price_tree.png'</span>)</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>Image(graph.create_png())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="5">
+<div id="69addc38" class="cell" data-execution_count="30">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Visualizing the regression tree</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>dot_data <span class="op">=</span> StringIO()</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>export_graphviz(model, out_file<span class="op">=</span>dot_data,  </span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>                filled<span class="op">=</span><span class="va">True</span>, rounded<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>                feature_names <span class="op">=</span>[<span class="st">'mileage'</span>],precision<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>graph <span class="op">=</span> pydotplus.graph_from_dot_data(dot_data.getvalue())  </span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>graph.write_png(<span class="st">'car_price_tree.png'</span>)</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>Image(graph.create_png())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="30">
 <div>
 <figure class="figure">
 <p><img src="Lec3_RegressionTrees_files/figure-html/cell-6-output-1.png" class="img-fluid figure-img"></p>
@@ -503,23 +503,23 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<div id="c4b0b376" class="cell" data-execution_count="11">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">#prediction on test data</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>pred<span class="op">=</span>model.predict(test[[<span class="st">'mileage'</span>]])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="c4b0b376" class="cell" data-execution_count="31">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">#prediction on test data</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>pred<span class="op">=</span>model.predict(test[[<span class="st">'mileage'</span>]].values)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="58ee1519" class="cell" data-execution_count="12">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">#RMSE on test data</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>np.sqrt(mean_squared_error(test.price, pred))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="12">
+<div id="58ee1519" class="cell" data-execution_count="32">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">#RMSE on test data</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>np.sqrt(mean_squared_error(test.price, pred))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="32">
 <pre><code>13764.798425410803</code></pre>
 </div>
 </div>
-<div id="edff52da" class="cell" data-execution_count="9">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Visualizing the model fit</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>Xtest <span class="op">=</span> np.linspace(<span class="bu">min</span>(X), <span class="bu">max</span>(X), <span class="dv">100</span>)</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>pred_test <span class="op">=</span> model.predict(Xtest.reshape(<span class="op">-</span><span class="dv">1</span>,<span class="dv">1</span>))</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>sns.scatterplot(x <span class="op">=</span> <span class="st">'mileage'</span>, y <span class="op">=</span> <span class="st">'price'</span>, data <span class="op">=</span> train, color <span class="op">=</span> <span class="st">'orange'</span>)</span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>sns.lineplot(x <span class="op">=</span> Xtest, y <span class="op">=</span> pred_test, color <span class="op">=</span> <span class="st">'blue'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="edff52da" class="cell" data-execution_count="33">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Visualizing the model fit</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>Xtest <span class="op">=</span> np.linspace(<span class="bu">min</span>(X), <span class="bu">max</span>(X), <span class="dv">100</span>)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>pred_test <span class="op">=</span> model.predict(Xtest.reshape(<span class="op">-</span><span class="dv">1</span>,<span class="dv">1</span>))</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>sns.scatterplot(x <span class="op">=</span> <span class="st">'mileage'</span>, y <span class="op">=</span> <span class="st">'price'</span>, data <span class="op">=</span> train, color <span class="op">=</span> <span class="st">'orange'</span>)</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>sns.lineplot(x <span class="op">=</span> Xtest, y <span class="op">=</span> pred_test, color <span class="op">=</span> <span class="st">'blue'</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -530,23 +530,52 @@ window.Quarto = {
 </div>
 <p>All cars falling within the same terminal node have the same predicted price, which is seen as flat line segments in the above model curve.</p>
 <p><strong>Develop a regression tree to predict car price based on <code>mileage</code>, <code>mpg</code>, <code>engineSize</code> and <code>year</code></strong></p>
-<div id="be30810c" class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> train[[<span class="st">'mileage'</span>,<span class="st">'mpg'</span>,<span class="st">'year'</span>,<span class="st">'engineSize'</span>]]</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> DecisionTreeRegressor(random_state<span class="op">=</span><span class="dv">1</span>, max_depth<span class="op">=</span><span class="dv">3</span>) </span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>model.fit(X, y)</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>dot_data <span class="op">=</span> StringIO()</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>export_graphviz(model, out_file<span class="op">=</span>dot_data,  </span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>                filled<span class="op">=</span><span class="va">True</span>, rounded<span class="op">=</span><span class="va">True</span>,</span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>                feature_names <span class="op">=</span>[<span class="st">'mileage'</span>,<span class="st">'mpg'</span>,<span class="st">'year'</span>,<span class="st">'engineSize'</span>],precision<span class="op">=</span><span class="dv">0</span>)</span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>graph <span class="op">=</span> pydotplus.graph_from_dot_data(dot_data.getvalue())  </span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>graph.write_png(<span class="st">'car_price_tree.png'</span>)</span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>Image(graph.create_png())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="4">
+<div id="be30810c" class="cell" data-execution_count="34">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> train[[<span class="st">'mileage'</span>,<span class="st">'mpg'</span>,<span class="st">'year'</span>,<span class="st">'engineSize'</span>]]</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> DecisionTreeRegressor(random_state<span class="op">=</span><span class="dv">1</span>, max_depth<span class="op">=</span><span class="dv">3</span>) </span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>model.fit(X, y)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>dot_data <span class="op">=</span> StringIO()</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>export_graphviz(model, out_file<span class="op">=</span>dot_data,  </span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>                filled<span class="op">=</span><span class="va">True</span>, rounded<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>                feature_names <span class="op">=</span>[<span class="st">'mileage'</span>,<span class="st">'mpg'</span>,<span class="st">'year'</span>,<span class="st">'engineSize'</span>],precision<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>graph <span class="op">=</span> pydotplus.graph_from_dot_data(dot_data.getvalue())  </span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>graph.write_png(<span class="st">'car_price_tree.png'</span>)</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>Image(graph.create_png())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="34">
 <div>
 <figure class="figure">
 <p><img src="Lec3_RegressionTrees_files/figure-html/cell-10-output-1.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
+</div>
+</div>
+<p>The model can also be visualized in the text format as below.</p>
+<div id="3e7c5b08" class="cell" data-execution_count="35">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(export_text(model))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>|--- feature_3 &lt;= 2.75
+|   |--- feature_2 &lt;= 2018.50
+|   |   |--- feature_3 &lt;= 1.75
+|   |   |   |--- value: [9912.24]
+|   |   |--- feature_3 &gt;  1.75
+|   |   |   |--- value: [16599.03]
+|   |--- feature_2 &gt;  2018.50
+|   |   |--- feature_3 &lt;= 1.90
+|   |   |   |--- value: [19363.81]
+|   |   |--- feature_3 &gt;  1.90
+|   |   |   |--- value: [31919.42]
+|--- feature_3 &gt;  2.75
+|   |--- feature_2 &lt;= 2017.50
+|   |   |--- feature_0 &lt;= 53289.00
+|   |   |   |--- value: [31004.63]
+|   |   |--- feature_0 &gt;  53289.00
+|   |   |   |--- value: [15255.91]
+|   |--- feature_2 &gt;  2017.50
+|   |   |--- feature_1 &lt;= 21.79
+|   |   |   |--- value: [122080.00]
+|   |   |--- feature_1 &gt;  21.79
+|   |   |   |--- value: [49350.79]
+</code></pre>
 </div>
 </div>
 </section>
@@ -556,13 +585,13 @@ window.Quarto = {
 <section id="range-of-hyperparameter-values" class="level3" data-number="5.2.1">
 <h3 data-number="5.2.1" class="anchored" data-anchor-id="range-of-hyperparameter-values"><span class="header-section-number">5.2.1</span> Range of hyperparameter values</h3>
 <p>First, we’ll find the minimum and maximum possible values of the depth and leaves, and then find the optimal value in that range.</p>
-<div id="94f4aea3" class="cell" data-execution_count="19">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> DecisionTreeRegressor(random_state<span class="op">=</span><span class="dv">1</span>) </span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>model.fit(X, y)</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Maximum tree depth ="</span>, model.get_depth())</span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Maximum leaves ="</span>, model.get_n_leaves())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="94f4aea3" class="cell" data-execution_count="36">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> DecisionTreeRegressor(random_state<span class="op">=</span><span class="dv">1</span>) </span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>model.fit(X, y)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Maximum tree depth ="</span>, model.get_depth())</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Maximum leaves ="</span>, model.get_n_leaves())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Maximum tree depth = 29
 Maximum leaves = 4845</code></pre>
@@ -572,54 +601,214 @@ Maximum leaves = 4845</code></pre>
 <section id="cross-validation-coarse-grid" class="level3" data-number="5.2.2">
 <h3 data-number="5.2.2" class="anchored" data-anchor-id="cross-validation-coarse-grid"><span class="header-section-number">5.2.2</span> Cross validation: Coarse grid</h3>
 <p>We’ll use the <code>sklearn</code> function <a href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GridSearchCV.html"><code>GridSearchCV</code></a> to find the optimal hyperparameter values over a grid of possible values. By default, <code>GridSearchCV</code> returns the optimal hyperparameter values based on the coefficient of determination <a href="https://scikit-learn.org/stable/modules/model_evaluation.html#r2-score"><span class="math inline">\(R^2\)</span></a>. However, the <code>scoring</code> argument of the function can be used to find the optimal parameters based on several different criteria as mentioned in the <a href="https://scikit-learn.org/stable/modules/model_evaluation.html#scoring-parameter">scoring-parameter documentation</a>.</p>
-<div id="069acdb6" class="cell" data-execution_count="73">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Finding cross-validation error for trees </span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>parameters <span class="op">=</span> {<span class="st">'max_depth'</span>:<span class="bu">range</span>(<span class="dv">2</span>,<span class="dv">30</span>, <span class="dv">3</span>),<span class="st">'max_leaf_nodes'</span>:<span class="bu">range</span>(<span class="dv">2</span>,<span class="dv">4900</span>, <span class="dv">100</span>)}</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>cv <span class="op">=</span> KFold(n_splits <span class="op">=</span> <span class="dv">5</span>,shuffle<span class="op">=</span><span class="va">True</span>,random_state<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> GridSearchCV(DecisionTreeRegressor(random_state<span class="op">=</span><span class="dv">1</span>), parameters, n_jobs<span class="op">=-</span><span class="dv">1</span>,verbose<span class="op">=</span><span class="dv">1</span>,cv<span class="op">=</span>cv)</span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>model.fit(X, y)</span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> (model.best_score_, model.best_params_) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="069acdb6" class="cell" data-execution_count="38">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Finding cross-validation error for trees </span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>parameters <span class="op">=</span> {<span class="st">'max_depth'</span>:<span class="bu">range</span>(<span class="dv">2</span>,<span class="dv">30</span>, <span class="dv">3</span>),<span class="st">'max_leaf_nodes'</span>:<span class="bu">range</span>(<span class="dv">2</span>,<span class="dv">4900</span>, <span class="dv">100</span>)}</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>cv <span class="op">=</span> KFold(n_splits <span class="op">=</span> <span class="dv">5</span>,shuffle<span class="op">=</span><span class="va">True</span>,random_state<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> GridSearchCV(DecisionTreeRegressor(random_state<span class="op">=</span><span class="dv">1</span>), parameters, n_jobs<span class="op">=-</span><span class="dv">1</span>,verbose<span class="op">=</span><span class="dv">1</span>,cv<span class="op">=</span>cv)</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>model.fit(X, y)</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> (model.best_score_, model.best_params_) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Fitting 5 folds for each of 490 candidates, totalling 2450 fits
 0.8433100904754441 {'max_depth': 11, 'max_leaf_nodes': 302}</code></pre>
 </div>
 </div>
-<p>Let us find the optimal hyperparameters based on the mean squared error, instead of <span class="math inline">\(R^2\)</span>. Let us compute <span class="math inline">\(R^2\)</span> as well during cross validation, as we can compute multiple performance metrics using the <code>scoring</code> argument. However, when computing multiple performance metrics, we will need to specify the performance metric used to find the optimal hyperparameters with the <code>refit</code> argument.</p>
-<div id="a0fac80b" class="cell" data-execution_count="92">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Finding cross-validation error for trees </span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>parameters <span class="op">=</span> {<span class="st">'max_depth'</span>:<span class="bu">range</span>(<span class="dv">2</span>,<span class="dv">30</span>, <span class="dv">3</span>),<span class="st">'max_leaf_nodes'</span>:<span class="bu">range</span>(<span class="dv">2</span>,<span class="dv">4900</span>, <span class="dv">100</span>)}</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>cv <span class="op">=</span> KFold(n_splits <span class="op">=</span> <span class="dv">5</span>,shuffle<span class="op">=</span><span class="va">True</span>,random_state<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> GridSearchCV(DecisionTreeRegressor(random_state<span class="op">=</span><span class="dv">1</span>), parameters, n_jobs<span class="op">=-</span><span class="dv">1</span>,verbose<span class="op">=</span><span class="dv">1</span>,cv<span class="op">=</span>cv,</span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>                    scoring<span class="op">=</span>[<span class="st">'neg_mean_squared_error'</span>, <span class="st">'r2'</span>], refit <span class="op">=</span> <span class="st">'neg_mean_squared_error'</span>)</span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>model.fit(X, y)</span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> (model.best_score_, model.best_params_) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Let us find the optimal hyperparameters based on root mean squared error (RMSE), instead of <span class="math inline">\(R^2\)</span>. Let us compute <span class="math inline">\(R^2\)</span> as well during cross validation, as we can compute multiple performance metrics using the <code>scoring</code> argument. However, when computing multiple performance metrics, we will need to specify the performance metric used to find the optimal hyperparameters with the <code>refit</code> argument.</p>
+<div id="a0fac80b" class="cell" data-execution_count="40">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Finding cross-validation error for trees </span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>parameters <span class="op">=</span> {<span class="st">'max_depth'</span>:<span class="bu">range</span>(<span class="dv">2</span>,<span class="dv">30</span>, <span class="dv">3</span>),<span class="st">'max_leaf_nodes'</span>:<span class="bu">range</span>(<span class="dv">2</span>,<span class="dv">4900</span>, <span class="dv">100</span>)}</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>cv <span class="op">=</span> KFold(n_splits <span class="op">=</span> <span class="dv">5</span>,shuffle<span class="op">=</span><span class="va">True</span>,random_state<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> GridSearchCV(DecisionTreeRegressor(random_state<span class="op">=</span><span class="dv">1</span>), parameters, n_jobs<span class="op">=-</span><span class="dv">1</span>,verbose<span class="op">=</span><span class="dv">1</span>,cv<span class="op">=</span>cv,</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>                    scoring<span class="op">=</span>[<span class="st">'neg_root_mean_squared_error'</span>, <span class="st">'r2'</span>], refit <span class="op">=</span> <span class="st">'neg_root_mean_squared_error'</span>)</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>model.fit(X, y)</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> (model.best_score_, model.best_params_) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Fitting 5 folds for each of 490 candidates, totalling 2450 fits
--42064467.15261547 {'max_depth': 11, 'max_leaf_nodes': 302}</code></pre>
+-6475.329183576911 {'max_depth': 11, 'max_leaf_nodes': 302}</code></pre>
 </div>
 </div>
-<p>Note that as the <code>GridSearchCV</code> function maximizes the performance metric to find the optimal hyperparameters, we are maximizing the negative mean squared error (<code>neg_mean_squared_error</code>), and the function returns the optimal negative mean squared error.</p>
+<p>Note that as the <code>GridSearchCV</code> function maximizes the performance metric to find the optimal hyperparameters, we are maximizing the negative root mean squared error (<code>neg_root_mean_squared_error</code>), and the function returns the optimal negative mean squared error.</p>
 <p>Let us visualize the mean squared error based on the hyperparameter values. We’ll use the cross validation results stored in the <code>cv_results_</code> attribute of the <code>GridSearchCV</code> <code>fit()</code> object.</p>
-<div id="c13e9173" class="cell" data-execution_count="94">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Detailed results of k-fold cross validation</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>cv_results <span class="op">=</span> pd.DataFrame(model.cv_results_)</span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>cv_results.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="c13e9173" class="cell" data-execution_count="41">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Detailed results of k-fold cross validation</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>cv_results <span class="op">=</span> pd.DataFrame(model.cv_results_)</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>cv_results.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="41">
+<div>
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">mean_fit_time</th>
+<th data-quarto-table-cell-role="th">std_fit_time</th>
+<th data-quarto-table-cell-role="th">mean_score_time</th>
+<th data-quarto-table-cell-role="th">std_score_time</th>
+<th data-quarto-table-cell-role="th">param_max_depth</th>
+<th data-quarto-table-cell-role="th">param_max_leaf_nodes</th>
+<th data-quarto-table-cell-role="th">params</th>
+<th data-quarto-table-cell-role="th">split0_test_neg_root_mean_squared_error</th>
+<th data-quarto-table-cell-role="th">split1_test_neg_root_mean_squared_error</th>
+<th data-quarto-table-cell-role="th">split2_test_neg_root_mean_squared_error</th>
+<th data-quarto-table-cell-role="th">...</th>
+<th data-quarto-table-cell-role="th">std_test_neg_root_mean_squared_error</th>
+<th data-quarto-table-cell-role="th">rank_test_neg_root_mean_squared_error</th>
+<th data-quarto-table-cell-role="th">split0_test_r2</th>
+<th data-quarto-table-cell-role="th">split1_test_r2</th>
+<th data-quarto-table-cell-role="th">split2_test_r2</th>
+<th data-quarto-table-cell-role="th">split3_test_r2</th>
+<th data-quarto-table-cell-role="th">split4_test_r2</th>
+<th data-quarto-table-cell-role="th">mean_test_r2</th>
+<th data-quarto-table-cell-role="th">std_test_r2</th>
+<th data-quarto-table-cell-role="th">rank_test_r2</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>0.010178</td>
+<td>7.531409e-04</td>
+<td>0.003791</td>
+<td>0.000415</td>
+<td>2</td>
+<td>2</td>
+<td>{'max_depth': 2, 'max_leaf_nodes': 2}</td>
+<td>-13729.979521</td>
+<td>-13508.807583</td>
+<td>-12792.941600</td>
+<td>...</td>
+<td>390.725290</td>
+<td>481</td>
+<td>0.314894</td>
+<td>0.329197</td>
+<td>0.394282</td>
+<td>0.361007</td>
+<td>0.382504</td>
+<td>0.356377</td>
+<td>0.030333</td>
+<td>481</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>0.009574</td>
+<td>1.758238e-03</td>
+<td>0.003782</td>
+<td>0.000396</td>
+<td>2</td>
+<td>102</td>
+<td>{'max_depth': 2, 'max_leaf_nodes': 102}</td>
+<td>-10586.885662</td>
+<td>-11230.674720</td>
+<td>-10682.195189</td>
+<td>...</td>
+<td>321.837965</td>
+<td>433</td>
+<td>0.592662</td>
+<td>0.536369</td>
+<td>0.577671</td>
+<td>0.568705</td>
+<td>0.612407</td>
+<td>0.577563</td>
+<td>0.025368</td>
+<td>433</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>0.009774</td>
+<td>7.458305e-04</td>
+<td>0.003590</td>
+<td>0.000488</td>
+<td>2</td>
+<td>202</td>
+<td>{'max_depth': 2, 'max_leaf_nodes': 202}</td>
+<td>-10586.885662</td>
+<td>-11230.674720</td>
+<td>-10682.195189</td>
+<td>...</td>
+<td>321.837965</td>
+<td>433</td>
+<td>0.592662</td>
+<td>0.536369</td>
+<td>0.577671</td>
+<td>0.568705</td>
+<td>0.612407</td>
+<td>0.577563</td>
+<td>0.025368</td>
+<td>433</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>0.009568</td>
+<td>4.953541e-04</td>
+<td>0.003391</td>
+<td>0.000489</td>
+<td>2</td>
+<td>302</td>
+<td>{'max_depth': 2, 'max_leaf_nodes': 302}</td>
+<td>-10586.885662</td>
+<td>-11230.674720</td>
+<td>-10682.195189</td>
+<td>...</td>
+<td>321.837965</td>
+<td>433</td>
+<td>0.592662</td>
+<td>0.536369</td>
+<td>0.577671</td>
+<td>0.568705</td>
+<td>0.612407</td>
+<td>0.577563</td>
+<td>0.025368</td>
+<td>433</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>0.008976</td>
+<td>6.843901e-07</td>
+<td>0.003192</td>
+<td>0.000399</td>
+<td>2</td>
+<td>402</td>
+<td>{'max_depth': 2, 'max_leaf_nodes': 402}</td>
+<td>-10586.885662</td>
+<td>-11230.674720</td>
+<td>-10682.195189</td>
+<td>...</td>
+<td>321.837965</td>
+<td>433</td>
+<td>0.592662</td>
+<td>0.536369</td>
+<td>0.577671</td>
+<td>0.568705</td>
+<td>0.612407</td>
+<td>0.577563</td>
+<td>0.025368</td>
+<td>433</td>
+</tr>
+</tbody>
+</table>
+
+<p>5 rows × 23 columns</p>
 </div>
-<div id="c9ce4e77" class="cell" data-execution_count="136">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">1</span>,<span class="dv">2</span>,figsize<span class="op">=</span>(<span class="dv">14</span>,<span class="dv">5</span>))</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>plt.subplots_adjust(wspace<span class="op">=</span><span class="fl">0.2</span>)</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].plot(cv_results.param_max_depth, np.sqrt(<span class="op">-</span>cv_results.mean_test_neg_mean_squared_error), <span class="st">'o'</span>)</span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].set_ylim([<span class="dv">6200</span>, <span class="dv">7500</span>])</span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].set_xlabel(<span class="st">'Depth'</span>)</span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].set_ylabel(<span class="st">'K-fold RMSE'</span>)</span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].plot(cv_results.param_max_leaf_nodes, np.sqrt(<span class="op">-</span>cv_results.mean_test_neg_mean_squared_error), <span class="st">'o'</span>)</span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].set_ylim([<span class="dv">6200</span>, <span class="dv">7500</span>])</span>
-<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].set_xlabel(<span class="st">'Leaves'</span>)</span>
-<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].set_ylabel(<span class="st">'K-fold RMSE'</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+<div id="c9ce4e77" class="cell" data-execution_count="44">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">1</span>,<span class="dv">2</span>,figsize<span class="op">=</span>(<span class="dv">14</span>,<span class="dv">5</span>))</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>plt.subplots_adjust(wspace<span class="op">=</span><span class="fl">0.2</span>)</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].plot(cv_results.param_max_depth, (<span class="op">-</span>cv_results.mean_test_neg_root_mean_squared_error), <span class="st">'o'</span>)</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].set_ylim([<span class="dv">6200</span>, <span class="dv">7500</span>])</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].set_xlabel(<span class="st">'Depth'</span>)</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].set_ylabel(<span class="st">'K-fold RMSE'</span>)</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].plot(cv_results.param_max_leaf_nodes, (<span class="op">-</span>cv_results.mean_test_neg_root_mean_squared_error), <span class="st">'o'</span>)</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].set_ylim([<span class="dv">6200</span>, <span class="dv">7500</span>])</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].set_xlabel(<span class="st">'Leaves'</span>)</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].set_ylabel(<span class="st">'K-fold RMSE'</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Lec3_RegressionTrees_files/figure-html/cell-15-output-1.png" class="img-fluid figure-img"></p>
+<p><img src="Lec3_RegressionTrees_files/figure-html/cell-16-output-1.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
@@ -628,39 +817,41 @@ Maximum leaves = 4845</code></pre>
 </section>
 <section id="cross-validation-finer-grid" class="level3" data-number="5.2.3">
 <h3 data-number="5.2.3" class="anchored" data-anchor-id="cross-validation-finer-grid"><span class="header-section-number">5.2.3</span> Cross validation: Finer grid</h3>
-<div id="37cea0cd" class="cell" data-execution_count="110">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Finding cross-validation error for trees</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>start_time <span class="op">=</span> tm.time()</span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>parameters <span class="op">=</span> {<span class="st">'max_depth'</span>:<span class="bu">range</span>(<span class="dv">8</span>,<span class="dv">15</span>),<span class="st">'max_leaf_nodes'</span>:<span class="bu">range</span>(<span class="dv">2</span>,<span class="dv">1000</span>)}</span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>cv <span class="op">=</span> KFold(n_splits <span class="op">=</span> <span class="dv">5</span>,shuffle<span class="op">=</span><span class="va">True</span>,random_state<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> GridSearchCV(DecisionTreeRegressor(random_state<span class="op">=</span><span class="dv">1</span>), parameters, n_jobs<span class="op">=-</span><span class="dv">1</span>,verbose<span class="op">=</span><span class="dv">1</span>,cv<span class="op">=</span>cv)</span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>model.fit(X, y)</span>
-<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> (model.best_score_, model.best_params_) </span>
-<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Time taken ="</span>, <span class="bu">round</span>((tm.time() <span class="op">-</span> start_time)<span class="op">/</span><span class="dv">60</span>), <span class="st">"minutes"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="37cea0cd" class="cell" data-execution_count="46">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Finding cross-validation error for trees</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>start_time <span class="op">=</span> tm.time()</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>parameters <span class="op">=</span> {<span class="st">'max_depth'</span>:<span class="bu">range</span>(<span class="dv">8</span>,<span class="dv">15</span>),<span class="st">'max_leaf_nodes'</span>:<span class="bu">range</span>(<span class="dv">2</span>,<span class="dv">1000</span>)}</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>cv <span class="op">=</span> KFold(n_splits <span class="op">=</span> <span class="dv">5</span>,shuffle<span class="op">=</span><span class="va">True</span>,random_state<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> GridSearchCV(DecisionTreeRegressor(random_state<span class="op">=</span><span class="dv">1</span>), parameters, n_jobs<span class="op">=-</span><span class="dv">1</span>,verbose<span class="op">=</span><span class="dv">1</span>,cv<span class="op">=</span>cv,</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>                    scoring <span class="op">=</span> <span class="st">'neg_root_mean_squared_error'</span>)</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>model.fit(X, y)</span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span> (model.best_score_, model.best_params_) </span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Time taken ="</span>, <span class="bu">round</span>((tm.time() <span class="op">-</span> start_time)<span class="op">/</span><span class="dv">60</span>), <span class="st">"minutes"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Fitting 5 folds for each of 6986 candidates, totalling 34930 fits
-0.8465176078797111 {'max_depth': 10, 'max_leaf_nodes': 262}
-Time taken = 1 minutes</code></pre>
+-6414.468922119372 {'max_depth': 10, 'max_leaf_nodes': 262}
+Time taken = 2 minutes</code></pre>
 </div>
 </div>
-<p>From the above cross-validation, the optimal hyperparameter values are <code>max_depth = 10</code> and <code>max_leaf_nodes = 262</code>.</p>
-<div id="34c6cd42" class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Developing the tree based on optimal hyperparameters found by cross-validation</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> DecisionTreeRegressor(random_state<span class="op">=</span><span class="dv">1</span>, max_depth<span class="op">=</span><span class="dv">10</span>,max_leaf_nodes<span class="op">=</span><span class="dv">262</span>) </span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>model.fit(X, y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="6">
-<pre><code>DecisionTreeRegressor(max_depth=10, max_leaf_nodes=262, random_state=1)</code></pre>
+<p>From the above cross-validation, the optimal hyperparameter values are <code>max_depth = 10</code> and <code>max_leaf_nodes = 262</code>. Note that the cross-validation score with finer grid is only slightly lower than the course grid. However, depending on the dataset, the finer grid may lead to more benefit.</p>
+<div id="34c6cd42" class="cell" data-execution_count="47">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Developing the tree based on optimal hyperparameters found by cross-validation</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> DecisionTreeRegressor(random_state<span class="op">=</span><span class="dv">1</span>, max_depth<span class="op">=</span><span class="dv">10</span>,max_leaf_nodes<span class="op">=</span><span class="dv">262</span>) </span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>model.fit(X, y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="47">
+<style>#sk-container-id-3 {color: black;}#sk-container-id-3 pre{padding: 0;}#sk-container-id-3 div.sk-toggleable {background-color: white;}#sk-container-id-3 label.sk-toggleable__label {cursor: pointer;display: block;width: 100%;margin-bottom: 0;padding: 0.3em;box-sizing: border-box;text-align: center;}#sk-container-id-3 label.sk-toggleable__label-arrow:before {content: "▸";float: left;margin-right: 0.25em;color: #696969;}#sk-container-id-3 label.sk-toggleable__label-arrow:hover:before {color: black;}#sk-container-id-3 div.sk-estimator:hover label.sk-toggleable__label-arrow:before {color: black;}#sk-container-id-3 div.sk-toggleable__content {max-height: 0;max-width: 0;overflow: hidden;text-align: left;background-color: #f0f8ff;}#sk-container-id-3 div.sk-toggleable__content pre {margin: 0.2em;color: black;border-radius: 0.25em;background-color: #f0f8ff;}#sk-container-id-3 input.sk-toggleable__control:checked~div.sk-toggleable__content {max-height: 200px;max-width: 100%;overflow: auto;}#sk-container-id-3 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {content: "▾";}#sk-container-id-3 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-3 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-3 input.sk-hidden--visually {border: 0;clip: rect(1px 1px 1px 1px);clip: rect(1px, 1px, 1px, 1px);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}#sk-container-id-3 div.sk-estimator {font-family: monospace;background-color: #f0f8ff;border: 1px dotted black;border-radius: 0.25em;box-sizing: border-box;margin-bottom: 0.5em;}#sk-container-id-3 div.sk-estimator:hover {background-color: #d4ebff;}#sk-container-id-3 div.sk-parallel-item::after {content: "";width: 100%;border-bottom: 1px solid gray;flex-grow: 1;}#sk-container-id-3 div.sk-label:hover label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-3 div.sk-serial::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: 0;}#sk-container-id-3 div.sk-serial {display: flex;flex-direction: column;align-items: center;background-color: white;padding-right: 0.2em;padding-left: 0.2em;position: relative;}#sk-container-id-3 div.sk-item {position: relative;z-index: 1;}#sk-container-id-3 div.sk-parallel {display: flex;align-items: stretch;justify-content: center;background-color: white;position: relative;}#sk-container-id-3 div.sk-item::before, #sk-container-id-3 div.sk-parallel-item::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: -1;}#sk-container-id-3 div.sk-parallel-item {display: flex;flex-direction: column;z-index: 1;position: relative;background-color: white;}#sk-container-id-3 div.sk-parallel-item:first-child::after {align-self: flex-end;width: 50%;}#sk-container-id-3 div.sk-parallel-item:last-child::after {align-self: flex-start;width: 50%;}#sk-container-id-3 div.sk-parallel-item:only-child::after {width: 0;}#sk-container-id-3 div.sk-dashed-wrapped {border: 1px dashed gray;margin: 0 0.4em 0.5em 0.4em;box-sizing: border-box;padding-bottom: 0.4em;background-color: white;}#sk-container-id-3 div.sk-label label {font-family: monospace;font-weight: bold;display: inline-block;line-height: 1.2em;}#sk-container-id-3 div.sk-label-container {text-align: center;}#sk-container-id-3 div.sk-container {/* jupyter's `normalize.less` sets `[hidden] { display: none; }` but bootstrap.min.css set `[hidden] { display: none !important; }` so we also need the `!important` here to be able to override the default hidden behavior on the sphinx rendered scikit-learn.org. See: https://github.com/scikit-learn/scikit-learn/issues/21755 */display: inline-block !important;position: relative;}#sk-container-id-3 div.sk-text-repr-fallback {display: none;}</style><div id="sk-container-id-3" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>DecisionTreeRegressor(max_depth=10, max_leaf_nodes=262, random_state=1)</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br>On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden=""><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-3" type="checkbox" checked=""><label for="sk-estimator-id-3" class="sk-toggleable__label sk-toggleable__label-arrow">DecisionTreeRegressor</label><div class="sk-toggleable__content"><pre>DecisionTreeRegressor(max_depth=10, max_leaf_nodes=262, random_state=1)</pre></div></div></div></div></div>
 </div>
 </div>
-<div id="89bc6619" class="cell" data-execution_count="7">
+<div id="89bc6619" class="cell" data-execution_count="48">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co">#RMSE on test data</span></span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>Xtest <span class="op">=</span> test[[<span class="st">'mileage'</span>,<span class="st">'mpg'</span>,<span class="st">'year'</span>,<span class="st">'engineSize'</span>]]</span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>np.sqrt(mean_squared_error(test.price, model.predict(Xtest)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="7">
+<div class="cell-output cell-output-display" data-execution_count="48">
 <pre><code>6921.0404660552895</code></pre>
 </div>
 </div>
-<p>The RMSE for the decision tree is lower than that of linear regression models and spline regression models (including MARS), with these four predictors. This may be probably due to car price having a highly non-linear association with the predictors.</p>
+<p>The RMSE for the decision tree is lower than that of linear regression models with these four predictors. This may be probably due to car price having a highly non-linear association with the predictors.</p>
+<p>Note that we may also use <code>RandomizedSearchCV()</code> or <code>BayesSearchCV()</code> to optimze the hyperparameters.</p>
 <p><strong>Predictor importance:</strong> The importance of a predictor is computed as the (normalized) total reduction of the criterion (SSE in case of regression trees) brought by that predictor.</p>
 <p>Warning: impurity-based feature importances can be misleading for high cardinality features (many unique values) <em>Source: https://scikit-learn.org/stable/modules/generated/sklearn.tree.DecisionTreeRegressor.html#sklearn.tree.DecisionTreeRegressor.feature_importances_</em></p>
 <p><strong>Why?</strong></p>
@@ -731,7 +922,7 @@ Time taken = 2 minutes</code></pre>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Lec3_RegressionTrees_files/figure-html/cell-26-output-1.png" class="img-fluid figure-img"></p>
+<p><img src="Lec3_RegressionTrees_files/figure-html/cell-27-output-1.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
@@ -744,7 +935,7 @@ Time taken = 2 minutes</code></pre>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Lec3_RegressionTrees_files/figure-html/cell-27-output-1.png" class="img-fluid figure-img"></p>
+<p><img src="Lec3_RegressionTrees_files/figure-html/cell-28-output-1.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
@@ -785,7 +976,7 @@ Time taken = 2 minutes</code></pre>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Lec3_RegressionTrees_files/figure-html/cell-30-output-2.png" class="img-fluid figure-img"></p>
+<p><img src="Lec3_RegressionTrees_files/figure-html/cell-31-output-2.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
@@ -809,7 +1000,7 @@ Time taken = 2 minutes</code></pre>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Lec3_RegressionTrees_files/figure-html/cell-32-output-1.png" class="img-fluid figure-img"></p>
+<p><img src="Lec3_RegressionTrees_files/figure-html/cell-33-output-1.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>

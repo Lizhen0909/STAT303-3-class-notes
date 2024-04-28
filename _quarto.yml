@@ -31,7 +31,7 @@ book:
       chapters:
         - Assignment1.ipynb
         - Assignment 2 questions.ipynb
-        - Assignment C.ipynb
+        - Assignment 3.ipynb
 
   appendices: 
     - Stratified splitting.ipynb

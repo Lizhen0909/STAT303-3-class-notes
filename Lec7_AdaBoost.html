@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Data Science III with python (Class notes) - 9&nbsp; Adaptive Boosting</title>
+<title>Data Science III with python (Class notes) - 10&nbsp; Adaptive Boosting</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -118,7 +118,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Lec3_RegressionTrees.html">Tree based models</a></li><li class="breadcrumb-item"><a href="./Lec7_AdaBoost.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Adaptive Boosting</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Lec3_RegressionTrees.html">Tree based models</a></li><li class="breadcrumb-item"><a href="./Lec7_AdaBoost.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Adaptive Boosting</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -216,26 +216,32 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./Bagging (OOB vs K-fold cross-validation).html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Bagging (addendum)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./Lec6_RandomForest.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Random Forest</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Random Forest</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Lec7_AdaBoost.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Adaptive Boosting</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Adaptive Boosting</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Lec8_Gradient_Boosting.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Gradient Boosting</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Gradient Boosting</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Lec9_XGBoost.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">XGBoost</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">XGBoost</span></span></a>
   </div>
 </li>
       </ul>
@@ -252,19 +258,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Assignment1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Assignment 1</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Assignment 1</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Assignment 2 questions.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Assignment 2 (Section 21)</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Assignment 2 (Section 21)</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Assignment 3.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Assignment 3 (Sections 21 &amp; 22)</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Assignment 3 (Sections 21 &amp; 22)</span></span></a>
   </div>
 </li>
       </ul>
@@ -308,21 +314,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#hyperparameters" id="toc-hyperparameters" class="nav-link active" data-scroll-target="#hyperparameters"><span class="header-section-number">9.1</span> Hyperparameters</a></li>
-  <li><a href="#adaboost-for-regression" id="toc-adaboost-for-regression" class="nav-link" data-scroll-target="#adaboost-for-regression"><span class="header-section-number">9.2</span> AdaBoost for regression</a>
+  <li><a href="#hyperparameters" id="toc-hyperparameters" class="nav-link active" data-scroll-target="#hyperparameters"><span class="header-section-number">10.1</span> Hyperparameters</a></li>
+  <li><a href="#adaboost-for-regression" id="toc-adaboost-for-regression" class="nav-link" data-scroll-target="#adaboost-for-regression"><span class="header-section-number">10.2</span> AdaBoost for regression</a>
   <ul>
-  <li><a href="#number-of-trees-vs-cross-validation-error" id="toc-number-of-trees-vs-cross-validation-error" class="nav-link" data-scroll-target="#number-of-trees-vs-cross-validation-error"><span class="header-section-number">9.2.1</span> Number of trees vs cross validation error</a></li>
-  <li><a href="#depth-of-tree-vs-cross-validation-error" id="toc-depth-of-tree-vs-cross-validation-error" class="nav-link" data-scroll-target="#depth-of-tree-vs-cross-validation-error"><span class="header-section-number">9.2.2</span> Depth of tree vs cross validation error</a></li>
-  <li><a href="#learning-rate-vs-cross-validation-error" id="toc-learning-rate-vs-cross-validation-error" class="nav-link" data-scroll-target="#learning-rate-vs-cross-validation-error"><span class="header-section-number">9.2.3</span> Learning rate vs cross validation error</a></li>
-  <li><a href="#tuning-adaboost-for-regression" id="toc-tuning-adaboost-for-regression" class="nav-link" data-scroll-target="#tuning-adaboost-for-regression"><span class="header-section-number">9.2.4</span> Tuning AdaBoost for regression</a></li>
+  <li><a href="#number-of-trees-vs-cross-validation-error" id="toc-number-of-trees-vs-cross-validation-error" class="nav-link" data-scroll-target="#number-of-trees-vs-cross-validation-error"><span class="header-section-number">10.2.1</span> Number of trees vs cross validation error</a></li>
+  <li><a href="#depth-of-tree-vs-cross-validation-error" id="toc-depth-of-tree-vs-cross-validation-error" class="nav-link" data-scroll-target="#depth-of-tree-vs-cross-validation-error"><span class="header-section-number">10.2.2</span> Depth of tree vs cross validation error</a></li>
+  <li><a href="#learning-rate-vs-cross-validation-error" id="toc-learning-rate-vs-cross-validation-error" class="nav-link" data-scroll-target="#learning-rate-vs-cross-validation-error"><span class="header-section-number">10.2.3</span> Learning rate vs cross validation error</a></li>
+  <li><a href="#tuning-adaboost-for-regression" id="toc-tuning-adaboost-for-regression" class="nav-link" data-scroll-target="#tuning-adaboost-for-regression"><span class="header-section-number">10.2.4</span> Tuning AdaBoost for regression</a></li>
   </ul></li>
-  <li><a href="#adaboost-for-classification" id="toc-adaboost-for-classification" class="nav-link" data-scroll-target="#adaboost-for-classification"><span class="header-section-number">9.3</span> AdaBoost for classification</a>
+  <li><a href="#adaboost-for-classification" id="toc-adaboost-for-classification" class="nav-link" data-scroll-target="#adaboost-for-classification"><span class="header-section-number">10.3</span> AdaBoost for classification</a>
   <ul>
-  <li><a href="#number-of-trees-vs-cross-validation-accuracy" id="toc-number-of-trees-vs-cross-validation-accuracy" class="nav-link" data-scroll-target="#number-of-trees-vs-cross-validation-accuracy"><span class="header-section-number">9.3.1</span> Number of trees vs cross validation accuracy</a></li>
-  <li><a href="#depth-of-each-tree-vs-cross-validation-accuracy" id="toc-depth-of-each-tree-vs-cross-validation-accuracy" class="nav-link" data-scroll-target="#depth-of-each-tree-vs-cross-validation-accuracy"><span class="header-section-number">9.3.2</span> Depth of each tree vs cross validation accuracy</a></li>
-  <li><a href="#learning-rate-vs-cross-validation-accuracy" id="toc-learning-rate-vs-cross-validation-accuracy" class="nav-link" data-scroll-target="#learning-rate-vs-cross-validation-accuracy"><span class="header-section-number">9.3.3</span> Learning rate vs cross validation accuracy</a></li>
-  <li><a href="#tuning-adaboost-classifier-hyperparameters" id="toc-tuning-adaboost-classifier-hyperparameters" class="nav-link" data-scroll-target="#tuning-adaboost-classifier-hyperparameters"><span class="header-section-number">9.3.4</span> Tuning AdaBoost Classifier hyperparameters</a></li>
-  <li><a href="#tuning-the-decision-threshold-probability" id="toc-tuning-the-decision-threshold-probability" class="nav-link" data-scroll-target="#tuning-the-decision-threshold-probability"><span class="header-section-number">9.3.5</span> Tuning the decision threshold probability</a></li>
+  <li><a href="#number-of-trees-vs-cross-validation-accuracy" id="toc-number-of-trees-vs-cross-validation-accuracy" class="nav-link" data-scroll-target="#number-of-trees-vs-cross-validation-accuracy"><span class="header-section-number">10.3.1</span> Number of trees vs cross validation accuracy</a></li>
+  <li><a href="#depth-of-each-tree-vs-cross-validation-accuracy" id="toc-depth-of-each-tree-vs-cross-validation-accuracy" class="nav-link" data-scroll-target="#depth-of-each-tree-vs-cross-validation-accuracy"><span class="header-section-number">10.3.2</span> Depth of each tree vs cross validation accuracy</a></li>
+  <li><a href="#learning-rate-vs-cross-validation-accuracy" id="toc-learning-rate-vs-cross-validation-accuracy" class="nav-link" data-scroll-target="#learning-rate-vs-cross-validation-accuracy"><span class="header-section-number">10.3.3</span> Learning rate vs cross validation accuracy</a></li>
+  <li><a href="#tuning-adaboost-classifier-hyperparameters" id="toc-tuning-adaboost-classifier-hyperparameters" class="nav-link" data-scroll-target="#tuning-adaboost-classifier-hyperparameters"><span class="header-section-number">10.3.4</span> Tuning AdaBoost Classifier hyperparameters</a></li>
+  <li><a href="#tuning-the-decision-threshold-probability" id="toc-tuning-the-decision-threshold-probability" class="nav-link" data-scroll-target="#tuning-the-decision-threshold-probability"><span class="header-section-number">10.3.5</span> Tuning the decision threshold probability</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -330,9 +336,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Lec3_RegressionTrees.html">Tree based models</a></li><li class="breadcrumb-item"><a href="./Lec7_AdaBoost.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Adaptive Boosting</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Lec3_RegressionTrees.html">Tree based models</a></li><li class="breadcrumb-item"><a href="./Lec7_AdaBoost.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Adaptive Boosting</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Adaptive Boosting</span></h1>
+<h1 class="title"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Adaptive Boosting</span></h1>
 </div>
 
 
@@ -351,8 +357,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <p><em>Read section 8.2.3 of the book before using these notes.</em></p>
 <p><em>Note that in this course, lecture notes are not sufficient, you must read the book for better understanding. Lecture notes are just implementing the concepts of the book on a dataset, but not explaining the concepts elaborately.</em></p>
-<section id="hyperparameters" class="level2" data-number="9.1">
-<h2 data-number="9.1" class="anchored" data-anchor-id="hyperparameters"><span class="header-section-number">9.1</span> Hyperparameters</h2>
+<section id="hyperparameters" class="level2" data-number="10.1">
+<h2 data-number="10.1" class="anchored" data-anchor-id="hyperparameters"><span class="header-section-number">10.1</span> Hyperparameters</h2>
 <p>There are 3 important parameters to tune in AdaBoost:</p>
 <ol type="1">
 <li><p>Number of trees</p></li>
@@ -494,10 +500,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>ytest <span class="op">=</span> test[<span class="st">'price'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="adaboost-for-regression" class="level2" data-number="9.2">
-<h2 data-number="9.2" class="anchored" data-anchor-id="adaboost-for-regression"><span class="header-section-number">9.2</span> AdaBoost for regression</h2>
-<section id="number-of-trees-vs-cross-validation-error" class="level3" data-number="9.2.1">
-<h3 data-number="9.2.1" class="anchored" data-anchor-id="number-of-trees-vs-cross-validation-error"><span class="header-section-number">9.2.1</span> Number of trees vs cross validation error</h3>
+<section id="adaboost-for-regression" class="level2" data-number="10.2">
+<h2 data-number="10.2" class="anchored" data-anchor-id="adaboost-for-regression"><span class="header-section-number">10.2</span> AdaBoost for regression</h2>
+<section id="number-of-trees-vs-cross-validation-error" class="level3" data-number="10.2.1">
+<h3 data-number="10.2.1" class="anchored" data-anchor-id="number-of-trees-vs-cross-validation-error"><span class="header-section-number">10.2.1</span> Number of trees vs cross validation error</h3>
 <p>As the number of trees increases, the prediction bias will decrease, and the prediction variance will increase. Thus, there will be an optimal number of trees that minimizes the prediction error.</p>
 <div id="452c9c3a" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_models():</span>
@@ -553,8 +559,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="depth-of-tree-vs-cross-validation-error" class="level3" data-number="9.2.2">
-<h3 data-number="9.2.2" class="anchored" data-anchor-id="depth-of-tree-vs-cross-validation-error"><span class="header-section-number">9.2.2</span> Depth of tree vs cross validation error</h3>
+<section id="depth-of-tree-vs-cross-validation-error" class="level3" data-number="10.2.2">
+<h3 data-number="10.2.2" class="anchored" data-anchor-id="depth-of-tree-vs-cross-validation-error"><span class="header-section-number">10.2.2</span> Depth of tree vs cross validation error</h3>
 <p>As the depth of each weak learner (decision tree) increases, the complexity of the weak learner will increase. As the complexity increases, the prediction bias will decrease, while the prediction variance will increase. Thus, there will be an optimal depth for each weak learner that minimizes the prediction error.</p>
 <div id="561bab67" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># get a list of models to evaluate</span></span>
@@ -625,8 +631,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="learning-rate-vs-cross-validation-error" class="level3" data-number="9.2.3">
-<h3 data-number="9.2.3" class="anchored" data-anchor-id="learning-rate-vs-cross-validation-error"><span class="header-section-number">9.2.3</span> Learning rate vs cross validation error</h3>
+<section id="learning-rate-vs-cross-validation-error" class="level3" data-number="10.2.3">
+<h3 data-number="10.2.3" class="anchored" data-anchor-id="learning-rate-vs-cross-validation-error"><span class="header-section-number">10.2.3</span> Learning rate vs cross validation error</h3>
 <p>The optimal learning rate will depend on the number of trees, and vice-versa. If the learning rate is too low, it will take several trees to “learn” the response. If the learning rate is high, the response will be “learned” quickly (with fewer) trees. Learning too quickly will be prone to overfitting, while learning too slowly will be computationally expensive. Thus, there will be an optimal learning rate to minimize the prediction error.</p>
 <div id="af8ba680" class="cell" data-execution_count="26">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_models():</span>
@@ -696,8 +702,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="tuning-adaboost-for-regression" class="level3" data-number="9.2.4">
-<h3 data-number="9.2.4" class="anchored" data-anchor-id="tuning-adaboost-for-regression"><span class="header-section-number">9.2.4</span> Tuning AdaBoost for regression</h3>
+<section id="tuning-adaboost-for-regression" class="level3" data-number="10.2.4">
+<h3 data-number="10.2.4" class="anchored" data-anchor-id="tuning-adaboost-for-regression"><span class="header-section-number">10.2.4</span> Tuning AdaBoost for regression</h3>
 <p>As the optimal value of the parameters depend on each other, we need to optimize them simultaneously.</p>
 <div id="15af4ce4" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> AdaBoostRegressor(random_state<span class="op">=</span><span class="dv">1</span>)</span>
@@ -778,8 +784,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Combined, the random forest model and the Adaboost model do better than each of the individual models.</p>
 </section>
 </section>
-<section id="adaboost-for-classification" class="level2" data-number="9.3">
-<h2 data-number="9.3" class="anchored" data-anchor-id="adaboost-for-classification"><span class="header-section-number">9.3</span> AdaBoost for classification</h2>
+<section id="adaboost-for-classification" class="level2" data-number="10.3">
+<h2 data-number="10.3" class="anchored" data-anchor-id="adaboost-for-classification"><span class="header-section-number">10.3</span> AdaBoost for classification</h2>
 <p>Below is the AdaBoost implementation on a classification problem. The takeaways are the same as that of the regression problem above.</p>
 <div id="c9c80eb9" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>train <span class="op">=</span> pd.read_csv(<span class="st">'./Datasets/diabetes_train.csv'</span>)</span>
@@ -791,8 +797,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> train[<span class="st">'Outcome'</span>]</span>
 <span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>ytest <span class="op">=</span> test[<span class="st">'Outcome'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="number-of-trees-vs-cross-validation-accuracy" class="level3" data-number="9.3.1">
-<h3 data-number="9.3.1" class="anchored" data-anchor-id="number-of-trees-vs-cross-validation-accuracy"><span class="header-section-number">9.3.1</span> Number of trees vs cross validation accuracy</h3>
+<section id="number-of-trees-vs-cross-validation-accuracy" class="level3" data-number="10.3.1">
+<h3 data-number="10.3.1" class="anchored" data-anchor-id="number-of-trees-vs-cross-validation-accuracy"><span class="header-section-number">10.3.1</span> Number of trees vs cross validation accuracy</h3>
 <div id="b579f6a9" class="cell" data-execution_count="29">
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_models():</span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>    models <span class="op">=</span> <span class="bu">dict</span>()</span>
@@ -846,8 +852,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="depth-of-each-tree-vs-cross-validation-accuracy" class="level3" data-number="9.3.2">
-<h3 data-number="9.3.2" class="anchored" data-anchor-id="depth-of-each-tree-vs-cross-validation-accuracy"><span class="header-section-number">9.3.2</span> Depth of each tree vs cross validation accuracy</h3>
+<section id="depth-of-each-tree-vs-cross-validation-accuracy" class="level3" data-number="10.3.2">
+<h3 data-number="10.3.2" class="anchored" data-anchor-id="depth-of-each-tree-vs-cross-validation-accuracy"><span class="header-section-number">10.3.2</span> Depth of each tree vs cross validation accuracy</h3>
 <div id="33dfa996" class="cell" data-execution_count="31">
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># get a list of models to evaluate</span></span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_models():</span>
@@ -917,8 +923,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="learning-rate-vs-cross-validation-accuracy" class="level3" data-number="9.3.3">
-<h3 data-number="9.3.3" class="anchored" data-anchor-id="learning-rate-vs-cross-validation-accuracy"><span class="header-section-number">9.3.3</span> Learning rate vs cross validation accuracy</h3>
+<section id="learning-rate-vs-cross-validation-accuracy" class="level3" data-number="10.3.3">
+<h3 data-number="10.3.3" class="anchored" data-anchor-id="learning-rate-vs-cross-validation-accuracy"><span class="header-section-number">10.3.3</span> Learning rate vs cross validation accuracy</h3>
 <div id="8db5eed9" class="cell" data-execution_count="34">
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_models():</span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>    models <span class="op">=</span> <span class="bu">dict</span>()</span>
@@ -987,8 +993,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="tuning-adaboost-classifier-hyperparameters" class="level3" data-number="9.3.4">
-<h3 data-number="9.3.4" class="anchored" data-anchor-id="tuning-adaboost-classifier-hyperparameters"><span class="header-section-number">9.3.4</span> Tuning AdaBoost Classifier hyperparameters</h3>
+<section id="tuning-adaboost-classifier-hyperparameters" class="level3" data-number="10.3.4">
+<h3 data-number="10.3.4" class="anchored" data-anchor-id="tuning-adaboost-classifier-hyperparameters"><span class="header-section-number">10.3.4</span> Tuning AdaBoost Classifier hyperparameters</h3>
 <div id="cf76ce2b" class="cell" data-execution_count="56">
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> AdaBoostClassifier(random_state<span class="op">=</span><span class="dv">1</span>)</span>
 <span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>grid <span class="op">=</span> <span class="bu">dict</span>()</span>
@@ -1017,8 +1023,8 @@ Best: 0.763934 using {'base_estimator': DecisionTreeClassifier(max_depth=3), 'le
 </div>
 </div>
 </section>
-<section id="tuning-the-decision-threshold-probability" class="level3" data-number="9.3.5">
-<h3 data-number="9.3.5" class="anchored" data-anchor-id="tuning-the-decision-threshold-probability"><span class="header-section-number">9.3.5</span> Tuning the decision threshold probability</h3>
+<section id="tuning-the-decision-threshold-probability" class="level3" data-number="10.3.5">
+<h3 data-number="10.3.5" class="anchored" data-anchor-id="tuning-the-decision-threshold-probability"><span class="header-section-number">10.3.5</span> Tuning the decision threshold probability</h3>
 <p>We’ll find a decision threshold probability that balances recall with precision.</p>
 <div id="60066b11" class="cell" data-execution_count="57">
 <div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Model based on the optimal parameters</span></span>
@@ -1531,12 +1537,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./Lec6_RandomForest.html" class="pagination-link" aria-label="Random Forest">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Random Forest</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Random Forest</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./Lec8_Gradient_Boosting.html" class="pagination-link" aria-label="Gradient Boosting">
-        <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Gradient Boosting</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Gradient Boosting</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

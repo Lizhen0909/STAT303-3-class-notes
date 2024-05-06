@@ -28,6 +28,8 @@ book:
         - Lec4_Bagging.ipynb
         - Lec6_RandomForest.ipynb
         - Lec7_AdaBoost.ipynb
+        - Lec8_Gradient_Boosting.ipynb
+        - Lec9_XGBoost.ipynb
     - part: "Assignments"
       chapters:
         - Assignment1.ipynb

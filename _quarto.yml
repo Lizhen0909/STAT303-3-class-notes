@@ -27,6 +27,7 @@ book:
         - Lec4_ClassificationTree.ipynb
         - Lec4_Bagging.ipynb
         - Lec6_RandomForest.ipynb
+        - Lec7_AdaBoost.ipynb
     - part: "Assignments"
       chapters:
         - Assignment1.ipynb

@@ -337,6 +337,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#learning-rate-vs-cross-validation-accuracy" id="toc-learning-rate-vs-cross-validation-accuracy" class="nav-link" data-scroll-target="#learning-rate-vs-cross-validation-accuracy"><span class="header-section-number">11.3.3</span> Learning rate vs cross validation accuracy</a></li>
   <li><a href="#tuning-gradient-boosting-classifier" id="toc-tuning-gradient-boosting-classifier" class="nav-link" data-scroll-target="#tuning-gradient-boosting-classifier"><span class="header-section-number">11.3.4</span> Tuning Gradient boosting Classifier</a></li>
   </ul></li>
+  <li><a href="#faster-algorithms-and-tuning-tips" id="toc-faster-algorithms-and-tuning-tips" class="nav-link" data-scroll-target="#faster-algorithms-and-tuning-tips"><span class="header-section-number">11.4</span> Faster algorithms and tuning tips</a></li>
   </ul>
 </nav>
     </div>
@@ -1177,9 +1178,14 @@ Recall:  0.9016393442622951</code></pre>
 </div>
 </div>
 <p>The model seems to be similar to the Adaboost model. However, gradient boosting algorithms with robust loss functions can perform better than Adaboost in the presence of outliers <em>(in terms of response)</em> in the data.</p>
-
-
 </section>
+</section>
+<section id="faster-algorithms-and-tuning-tips" class="level2" data-number="11.4">
+<h2 data-number="11.4" class="anchored" data-anchor-id="faster-algorithms-and-tuning-tips"><span class="header-section-number">11.4</span> Faster algorithms and tuning tips</h2>
+<p>Check out <a href="https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.HistGradientBoostingRegressor.html"><code>HistGradientBoostingRegressor()</code></a> and <a href="https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.HistGradientBoostingClassifier.html"><code>HistGradientBoostingClassifier()</code></a> for a faster gradient boosting algorithm for big datasets <em>(more than 10,000 observations)</em>.</p>
+<p>Check out tips for faster hyperparameter tuning, such as tuning <code>max_leaf_nodes</code> instead of <code>max_depth</code> <a href="https://scikit-learn.org/stable/modules/ensemble.html#controlling-the-tree-size">here</a>.</p>
+
+
 </section>
 
 </main> <!-- /main -->

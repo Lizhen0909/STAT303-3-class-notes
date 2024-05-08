@@ -769,14 +769,25 @@
     ]
   },
   {
+    "objectID": "Miscellaneous questions.html",
+    "href": "Miscellaneous questions.html",
+    "title": "Appendix C — Miscellaneous questions",
+    "section": "",
+    "text": "Q1\nWhy is boosting inappropriate for linear Regression, but appropriate for decision trees?\nThe question has been well answered in the post. The intuitive explanation is that the weighted average of a sequence of linear regression models will also be a single linear regression model. However, if the weighted average of the sequence of linear regression models results in a linear regression model (say ‘boosted_linear_regression’) that is different from the linear regression model that is obtained by fitting directly to the data (say ‘regular_linear_regression’), then the boosted_linear_regression model will have a higher bias than the regular_linear_regression model as the regular_linear_regression model minimizes the sum of squared errors (SSE). Thus, the boosted_linear_regression model should be the same as regular_linear_regression model for the optimal hyperparameter values of the boosting algorithm. Thus, all the hard-work of tuning the boosting model will at best lead to the linear regression model that can be obtained by fitting it directly to the train data!\nHowever, a sequence of shallow regression trees will not lead to the same regression tree that can be developed directly. A sequence of shallow trees will continuously reduce bias with relative less increase in variance. A single decision tree is likely to have a relatively high variance, and thus boosting with shallow trees may provide a better performance, as it aims to reduce bias by controlling the increase in variance, while a single decision tree has almost zero bias at the cost of having a high variance.\nThe second response in the post provides a mathematical explanation, which is more convincing.",
+    "crumbs": [
+      "Appendices",
+      "<span class='chapter-number'>C</span>  <span class='chapter-title'>Miscellaneous questions</span>"
+    ]
+  },
+  {
     "objectID": "Datasets.html",
     "href": "Datasets.html",
-    "title": "Appendix C — Datasets, assignment and project files",
+    "title": "Appendix D — Datasets, assignment and project files",
     "section": "",
     "text": "Datasets used in the book, assignment files, project files, and prediction problems report tempate can be found here",
     "crumbs": [
       "Appendices",
-      "<span class='chapter-number'>C</span>  <span class='chapter-title'>Datasets, assignment and project files</span>"
+      "<span class='chapter-number'>D</span>  <span class='chapter-title'>Datasets, assignment and project files</span>"
     ]
   }
 ]

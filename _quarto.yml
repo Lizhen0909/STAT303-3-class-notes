@@ -31,6 +31,7 @@ book:
         - Lec7_AdaBoost.ipynb
         - Lec8_Gradient_Boosting.ipynb
         - Lec9_XGBoost.ipynb
+        - Lec11_More boosting models.ipynb
     - part: "Assignments"
       chapters:
         - Assignment1.ipynb

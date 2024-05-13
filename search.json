@@ -791,6 +791,61 @@
     ]
   },
   {
+    "objectID": "HomeworkAssignment4.html",
+    "href": "HomeworkAssignment4.html",
+    "title": "Assignment 4",
+    "section": "",
+    "text": "Instructions",
+    "crumbs": [
+      "Assignments",
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Assignment 4</span>"
+    ]
+  },
+  {
+    "objectID": "HomeworkAssignment4.html#instructions",
+    "href": "HomeworkAssignment4.html#instructions",
+    "title": "Assignment 4",
+    "section": "",
+    "text": "You may talk to a friend, discuss the questions and potential directions for solving them. However, you need to write your own solutions and code separately, and not as a group activity.\nWrite your code in the Code cells and your answers in the Markdown cells of the Jupyter notebook. Ensure that the solution is written neatly enough to for the graders to understand and follow.\nUse Quarto to render the .ipynb file as HTML. You will need to open the command prompt, navigate to the directory containing the file, and use the command: quarto render filename.ipynb --to html. Submit the HTML file.\nThe assignment is worth 100 points, and is due on Friday, 24th May 2024 at 11:59 pm.\nFive points are properly formatting the assignment. The breakdown is as follows:\n\nMust be an HTML file rendered using Quarto (1 point). If you have a Quarto issue, you must mention the issue & quote the error you get when rendering using Quarto in the comments section of Canvas, and submit the ipynb file.\nNo name can be written on the assignment, nor can there be any indicator of the student’s identity—e.g. printouts of the working directory should not be included in the final submission. (1 point)\nThere aren’t excessively long outputs of extraneous information (e.g. no printouts of entire data frames without good reason, there aren’t long printouts of which iteration a loop is on, there aren’t long sections of commented-out code, etc.) (1 point)\nFinal answers to each question are written in the Markdown cells. (1 point)\nThere is no piece of unnecessary / redundant code, and no unnecessary / redundant text. (1 point)",
+    "crumbs": [
+      "Assignments",
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Assignment 4</span>"
+    ]
+  },
+  {
+    "objectID": "HomeworkAssignment4.html#adaboost-vs-bagging-4-points",
+    "href": "HomeworkAssignment4.html#adaboost-vs-bagging-4-points",
+    "title": "Assignment 4",
+    "section": "1) AdaBoost vs Bagging (4 points)",
+    "text": "1) AdaBoost vs Bagging (4 points)\nWhich model among AdaBoost and Random Forest is more sensitive to outliers? (1 point) Explain your reasoning with the theory you learned on the training process of both models. (3 points)",
+    "crumbs": [
+      "Assignments",
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Assignment 4</span>"
+    ]
+  },
+  {
+    "objectID": "HomeworkAssignment4.html#regression-with-boosting-55-points",
+    "href": "HomeworkAssignment4.html#regression-with-boosting-55-points",
+    "title": "Assignment 4",
+    "section": "2) Regression with Boosting (55 points)",
+    "text": "2) Regression with Boosting (55 points)\nFor this question, you will use the miami_housing.csv file. You can find the description for the variables here.\nThe SALE_PRC variable is the regression response and the rest of the variables, except PARCELNO, are the predictors.\n\na)\nRead the dataset. Create the training and test sets with a 60%-40% split and random_state = 1. (1 point)\n\n\nb)\nTune an AdaBoost model to get below a cross-validation MAE of $48000. Keep all the random_states as 1. Getting below the given cutoff with a different random_state in ANY object will not receive any credit. (5 points for a search that makes sense + 5 points for the cutoff = 10 points)\nHints:\n\nRemember how you need to approach the tuning process with coarse and fine grids.\nRemember that you have different cross-validation settings available.\n\n\n\nc)\nFind the test MAE of the tuned AdaBoost model to see if it generalizes well. (1 point)\n\n\nd)\nUsing the tuned AdaBoost model, print the predictor names with their importances in decreasing order. You need to print a DataFrame with the predictor names in the first column and the importances in the second. (1 points)\nNote: Features importances can be taken with pretty much the same line of code for all the models in this assignment. It is asked only for AdaBoost and omitted for the remaining models to avoid repetition.\n\n\ne)\nMoving on to Gradient Boosting, in general, which is the most preferred loss function? (1 point) What are its advantages over other loss functions? (3 points)\n\n\nf)\nTune a Gradient Boosting model to get below a cross-validation MAE of $45000. Keep all the random_states as 1. Getting below the given cutoff with a different random_state in ANY object will not receive any credit. (5 points for a search that makes sense + 5 points for the cutoff = 10 points)\nHints:\n\nRemember how you need to approach the grid of Gradient Boosting.\nRemember that you have different cross-validation settings available.\n\n\n\ng)\nFind the test MAE of the tuned Gradient Boosting model to see if it generalizes well. (1 point)\n\n\nh)\nExplain how the tuned hyperparameters of AdaBoost and Gradient Boosting affect the bias and the variance of their model. Note that most hyperparameters are the same between the models, so give only one explanation for those. (You need to include four hyperparameters in total.) (1x4 = 4 points)\n\n\ni)\nMoving on to XGBoost:\n\nWhat are the additions that makes XGBoost superior to Gradient Boosting? You need to explain this in terms of runtime (1 point) with its reason (1 point) and the hyperparameters (1 point) with their effect of model behavior. (2 points).\nWhat is missing in XGBoost that is well-implemented in Gradient Boosting? (1 point)\n\n\n\nj)\nTune a XGBoost model to get below a cross-validation MAE of $43500. Keep all the random_states as 1. Getting below the given cutoff with a different random_state in ANY object will not receive any credit. (5 points for a search that makes sense + 5 points for the cutoff = 10 points)\nHints:\n\nRemember how you need to approach the grid of XGBoost.\nRemember that you have different cross-validation settings available.\n\n\n\nk)\nFind the test MAE of the tuned XGBoost model to see if it generalizes well. (1 point)",
+    "crumbs": [
+      "Assignments",
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Assignment 4</span>"
+    ]
+  },
+  {
+    "objectID": "HomeworkAssignment4.html#classification-with-boosting-42-points",
+    "href": "HomeworkAssignment4.html#classification-with-boosting-42-points",
+    "title": "Assignment 4",
+    "section": "2) Classification with Boosting (42 points)",
+    "text": "2) Classification with Boosting (42 points)\nFor this question, you will use the train.csv and test.csv files. Each observation is a marketing call from a banking institution. y variable represents if the client subscribed for a term deposit (1) or not (0) and it is the classification response.\nThe predictors are age, day, month, and education. (As mentioned last quarter, duration cannot be used as a predictor - no credit will be given to models that use it.)\n\na)\nPreprocess the data:\n\nRead the files.\nCreate the predictor and response variables.\nConvert the response to 1s and 0s.\nOne-hot-encode the categorical predictors (Do not use drop_first.)\n\n(1 point)\n\n\nb)\nMoving on to LightGBM and CatBoost, what are their advantages compared to Gradient Boosting and XGBoost? (2 points) How are these advantages implemented into the models? (2 points) Does any of them have any disadvantages? Describe if there is any. (1 point)\n\n\nc)\nFor all extensions of Gradient Boosting, (XGBoost/LightGBM/CatBoost) is there an additional input/hyperparameter you can use to handle a certain issue that is specific to classification? (1 point) If yes, describe what it stands for (1 point) and how its value should be handled most efficiently. (1 point)\n\n\nd)\nTune a LightGBM model to get above a cross-validation accuracy of 70% and a cross-validation recall of 65%. Keep all the random_states as 1. Getting above the given cutoffs with a different random_state in ANY object will not receive any credit. (7.5 points for a search that makes sense + 7.5 points for the cutoff = 15 points)\nHints:\n\nHandling the grid efficiently can be useful again.\nRemember that there are cross-validation settings that are specific to classification.\nRemember that for classification, you need to tune the threshold as well.\n\n\n\ne)\nFind the test accuracy and the test recall of the tuned LightGBM model and threshold to see if they generalize well. (2 points)\n\n\nf)\nTune a CatBoost model to get above a cross-validation accuracy of 75% and a cross-validation recall of 65%. Keep all the random_states as 1. Getting above the given cutoffs with a different random_state in ANY object will not receive any credit. (7.5 points for a search that makes sense + 7.5 points for the cutoff = 15 points)\nHints:\n\nHandling the grid efficiently can be useful again.\nRemember that there are cross-validation settings that are specific to classification.\nRemember that for classification, you need to tune the threshold as well. (Use a stepsize of 0.001)\n\n\n\ng)\nFind the test accuracy and the test recall of the tuned CatBoost model and threshold to see if they generalize well. (1 point)",
+    "crumbs": [
+      "Assignments",
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Assignment 4</span>"
+    ]
+  },
+  {
     "objectID": "Stratified splitting.html",
     "href": "Stratified splitting.html",
     "title": "Appendix A — Stratified splitting (classification problem)",

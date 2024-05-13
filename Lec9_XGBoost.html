@@ -523,7 +523,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 data-number="12.2" class="anchored" data-anchor-id="xgboost-for-regression"><span class="header-section-number">12.2</span> XGBoost for regression</h2>
 <section id="number-of-trees-vs-cross-validation-error" class="level3" data-number="12.2.1">
 <h3 data-number="12.2.1" class="anchored" data-anchor-id="number-of-trees-vs-cross-validation-error"><span class="header-section-number">12.2.1</span> Number of trees vs cross validation error</h3>
-<p>As the number of trees increase, the prediction bias will decrease, and the prediction variance will increase. Thus, there will be an optimal number of trees that minimize the prediction error.</p>
+<p>As the number of trees increase, the prediction bias will decrease. Like gradient boosting is relatively robust <em>(as compared to AdaBoost)</em> to over-fitting (why?) so a large number usually results in better performance. Note that the number of trees still need to be tuned for optimal performance.</p>
 <div id="c4e2c439" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_models():</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    models <span class="op">=</span> <span class="bu">dict</span>()</span>

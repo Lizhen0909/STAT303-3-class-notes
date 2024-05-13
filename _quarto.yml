@@ -32,6 +32,7 @@ book:
         - Lec8_Gradient_Boosting.ipynb
         - Lec9_XGBoost.ipynb
         - Lec11_More boosting models.ipynb
+        - Lec10_Ensemble.ipynb
     - part: "Assignments"
       chapters:
         - Assignment1.ipynb

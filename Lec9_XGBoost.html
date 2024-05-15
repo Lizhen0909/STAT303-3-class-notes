@@ -1009,7 +1009,7 @@ Time taken =  4  minutes</code></pre>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>                        n_estimators <span class="op">=</span> <span class="dv">20000</span>,reg_lambda <span class="op">=</span> <span class="dv">1</span>, gamma <span class="op">=</span> <span class="dv">100</span>, subsample <span class="op">=</span> <span class="fl">0.75</span>, colsample_bytree <span class="op">=</span> <span class="fl">1.0</span>)</span>
 <span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>model.fit(X_train_sub, y_train_sub, eval_set <span class="op">=</span> ([(X_test_sub, y_test_sub)]), early_stopping_rounds <span class="op">=</span> <span class="dv">250</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>The results of the code are truncated to save space. A snapshot of the beginning and end of the results is below. The algorithm keeps adding trees to the model until the RMSE ceases to decrease for 10 consecutive iterations.</p>
+<p>The results of the code are truncated to save space. A snapshot of the beginning and end of the results is below. The algorithm keeps adding trees to the model until the RMSE ceases to decrease for 250 consecutive iterations.</p>
 <div id="20e0de6d" class="cell" data-execution_count="54">
 <div class="cell-output cell-output-display" data-execution_count="54">
 <img src="./Datasets/early1.jpg" width="400">
@@ -1039,7 +1039,7 @@ Time taken =  4  minutes</code></pre>
 </div>
 </div>
 <p>Note that the accuracy on this test data has further increased with a lower learning rate.</p>
-<p>#Let us combine the XGBoost model with other tuned models from earlier chapters.</p>
+<p>Let us combine the XGBoost model with other tuned models from earlier chapters.</p>
 <div id="21abb451" class="cell" data-execution_count="66">
 <div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Tuned AdaBoost model from Section 7.2.4</span></span>
 <span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>model_ada <span class="op">=</span> AdaBoostRegressor(base_estimator<span class="op">=</span>DecisionTreeRegressor(max_depth<span class="op">=</span><span class="dv">10</span>),n_estimators<span class="op">=</span><span class="dv">50</span>,learning_rate<span class="op">=</span><span class="fl">1.0</span>,</span>

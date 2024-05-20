@@ -769,7 +769,7 @@ Time taken =  7  minutes</code></pre>
 <div id="17cf8748" class="cell" data-execution_count="97">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>model_cat <span class="op">=</span> CatBoostRegressor(verbose<span class="op">=</span><span class="dv">0</span>).fit(X, y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="b059c1f3" class="cell" data-execution_count="103">
+<div id="74c94582" class="cell" data-execution_count="103">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>cv <span class="op">=</span> KFold(n_splits<span class="op">=</span><span class="dv">5</span>,shuffle<span class="op">=</span><span class="va">True</span>,random_state<span class="op">=</span><span class="dv">1</span>)</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>np.mean(<span class="op">-</span>cross_val_score(CatBoostRegressor(verbose<span class="op">=</span><span class="dv">0</span>), X, y, cv <span class="op">=</span> cv, n_jobs <span class="op">=</span> <span class="op">-</span><span class="dv">1</span>, </span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>                scoring<span class="op">=</span><span class="st">'neg_root_mean_squared_error'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -796,7 +796,7 @@ Time taken =  7  minutes</code></pre>
 <pre><code>6273.043859096154</code></pre>
 </div>
 </div>
-<div id="f06b11eb" class="cell" data-execution_count="107">
+<div id="6d98f7ab" class="cell" data-execution_count="107">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>np.sqrt(mean_squared_error(model_xgb.predict(Xtest),ytest))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="107">
 <pre><code>6821.745153860935</code></pre>
@@ -812,7 +812,7 @@ Time taken =  7  minutes</code></pre>
 <pre><code>5562.149251902867</code></pre>
 </div>
 </div>
-<div id="84bf4d20" class="cell" data-execution_count="113">
+<div id="87284451" class="cell" data-execution_count="113">
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>np.sqrt(mean_squared_error(model_lgbm.predict(Xtest),ytest))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="113">
 <pre><code>5494.0777923513515</code></pre>
@@ -860,7 +860,7 @@ Time taken =  23  minutes</code></pre>
 </div>
 </div>
 <p>It takes 2 minutes to tune CatBoost, which is higher than LightGBM and lesser than XGBoost. CatBoost falls in between LightGBM and XGBoost in terms of speed. However, it is likely to be more accurate than XGBoost and LighGBM, and likely to require lesser tuning as compared to XGBoost.</p>
-<div id="b92dc420" class="cell">
+<div id="7835104c" class="cell">
 <div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> CatBoostRegressor(grow_policy<span class="op">=</span><span class="st">'Lossguide'</span>) </span>
 <span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>grid <span class="op">=</span> {<span class="st">'num_leaves'</span>: Integer(<span class="dv">4</span>, <span class="dv">64</span>),</span>
@@ -885,12 +885,12 @@ Time taken =  23  minutes</code></pre>
 <span id="cb37-22"><a href="#cb37-22" aria-hidden="true" tabindex="-1"></a>    plt.show()</span>
 <span id="cb37-23"><a href="#cb37-23" aria-hidden="true" tabindex="-1"></a>gcv.fit(X, y, callback <span class="op">=</span> monitor)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="e223bab9" class="cell" data-execution_count="133">
-<div class="cell-output cell-output-display" data-execution_count="133">
-<img src="./cat_tune.png" width="900" height="400">
+<div id="426ac4ea" class="cell" data-execution_count="134">
+<div class="cell-output cell-output-display" data-execution_count="134">
+<img src="./cat_tune.png" width="800" height="400">
 </div>
 </div>
-<div id="84212045" class="cell">
+<div id="c7492b92" class="cell">
 <div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Optimal values obtained</span></span>
 <span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="co">#['colsample_bylevel', 'learning_rate', 'n_estimators', 'num_leaves', 'reg_lambda', 'subsample'] = </span></span>
 <span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a><span class="co">#[0.3745508446405472, 0.1000958551500621, 2000, 11, 0.0, 0.3877212027881348] 5132.537839676808</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>

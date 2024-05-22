@@ -374,6 +374,9 @@ window.Quarto = {
   </ul></li>
   <li><a href="#ensembling-classification-models" id="toc-ensembling-classification-models" class="nav-link" data-scroll-target="#ensembling-classification-models"><span class="header-section-number">14.2</span> Ensembling classification models</a>
   <ul class="collapse">
+  <li><a href="#adaboost" id="toc-adaboost" class="nav-link" data-scroll-target="#adaboost">AdaBoost</a></li>
+  <li><a href="#gradient-boosting" id="toc-gradient-boosting" class="nav-link" data-scroll-target="#gradient-boosting">Gradient Boosting</a></li>
+  <li><a href="#xgboost" id="toc-xgboost" class="nav-link" data-scroll-target="#xgboost">XGBoost</a></li>
   <li><a href="#voting-classifier---hard-voting" id="toc-voting-classifier---hard-voting" class="nav-link" data-scroll-target="#voting-classifier---hard-voting"><span class="header-section-number">14.2.1</span> Voting classifier - hard voting</a></li>
   <li><a href="#voting-classifier---soft-voting" id="toc-voting-classifier---soft-voting" class="nav-link" data-scroll-target="#voting-classifier---soft-voting"><span class="header-section-number">14.2.2</span> Voting classifier - soft voting</a></li>
   <li><a href="#stacking-classifier" id="toc-stacking-classifier" class="nav-link" data-scroll-target="#stacking-classifier"><span class="header-section-number">14.2.3</span> Stacking classifier</a></li>
@@ -605,7 +608,7 @@ RMSE for CatBoost =  5271.104736146779</code></pre>
 </div>
 <p>Note that we don’t need to fit the models individually before fitting them simultaneously in the voting ensemble. If we fit them individual, it will unnecessarily waste time.</p>
 <p>Let us ensemble the models using the voting ensemble with equal weights.</p>
-<div id="fc25dfbd" class="cell" data-execution_count="46">
+<div id="90d58af4" class="cell" data-execution_count="46">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Voting ensemble: Averaging the predictions of all models</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Tuned AdaBoost model from Section 7.2.4</span></span>
@@ -647,7 +650,7 @@ Time taken =  0.21 minutes</code></pre>
 </div>
 <p>As expected, RMSE of the ensembled model is less than that of each of the individual models.</p>
 <p>Note that the RMSE can be further removed by removing the weaker models from the ensemble. Let us remove the three weakest models - XGBoost, Random forest, and AdaBoost.</p>
-<div id="a76fc352" class="cell" data-execution_count="50">
+<div id="4a47c870" class="cell" data-execution_count="50">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Voting ensemble: Averaging the predictions of all models</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>start_time <span class="op">=</span> time.time()</span>
@@ -694,7 +697,7 @@ Time taken =  2.03 minutes</code></pre>
        -0.07057344])</code></pre>
 </div>
 </div>
-<div id="293c9624" class="cell" data-execution_count="49">
+<div id="e4631c73" class="cell" data-execution_count="49">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="bu">sum</span>(en.final_estimator_.coef_)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="49">
 <pre><code>1.0198810182715363</code></pre>
@@ -703,7 +706,7 @@ Time taken =  2.03 minutes</code></pre>
 <p>Note the above coefficients of the meta-model. The model gives the <strong>highest weight</strong> to the <strong>gradient boosting</strong> model <em>(with <strong>huber</strong> loss)</em>, and the <strong>catboost</strong> model, and the <strong>lowest weight</strong> to the relatively weak <strong>random forest</strong> model.</p>
 <p>Also, note that the <strong>coefficients need not sum to one.</strong></p>
 <p>Let us try improving the RMSE further by removing the weaker models from the ensemble. Let us remove the three weakest models based on the size of their coefficients in the linear regression metamodel.</p>
-<div id="277c0bc2" class="cell" data-execution_count="58">
+<div id="0749c536" class="cell" data-execution_count="58">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Stacking using LinearRegression as the metamodel</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>en <span class="op">=</span> StackingRegressor(estimators <span class="op">=</span> [(<span class="st">'gb'</span>, model_gb), (<span class="st">'cat'</span>, model_cat), (<span class="st">'ada'</span>, model_ada)],</span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>                     final_estimator<span class="op">=</span>LinearRegression(),                                          </span>
@@ -718,14 +721,14 @@ Time taken =  1.36 minutes</code></pre>
 </div>
 </div>
 <p>The metamodel accuracy <strong>improves further</strong>, when <strong>strong models</strong> are ensembled.</p>
-<div id="909ab396" class="cell" data-execution_count="59">
+<div id="f92f622f" class="cell" data-execution_count="59">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Co-efficients of the meta-model</span></span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>en.final_estimator_.coef_</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="59">
 <pre><code>array([0.31824119, 0.54231032, 0.15998634])</code></pre>
 </div>
 </div>
-<div id="391ed389" class="cell" data-execution_count="60">
+<div id="5085f0a6" class="cell" data-execution_count="60">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="bu">sum</span>(en.final_estimator_.coef_)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="60">
 <pre><code>1.020537847948332</code></pre>
@@ -734,21 +737,20 @@ Time taken =  1.36 minutes</code></pre>
 </section>
 <section id="metamodel-lasso" class="level4" data-number="14.1.2.2">
 <h4 data-number="14.1.2.2" class="anchored" data-anchor-id="metamodel-lasso"><span class="header-section-number">14.1.2.2</span> Metamodel: Lasso</h4>
-<div id="85ed301d" class="cell" data-execution_count="61">
+<div id="85ed301d" class="cell">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Stacking using Lasso as the metamodel</span></span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>en <span class="op">=</span> StackingRegressor(estimators <span class="op">=</span> [(<span class="st">'xgb'</span>, model_xgb),(<span class="st">'ada'</span>, model_ada),(<span class="st">'rf'</span>, model_rf),</span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>                        (<span class="st">'gb'</span>, model_gb),(<span class="st">'cat'</span>, model_cat), (<span class="st">'lgbm'</span>, model_lgbm) ],</span>
 <span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>                     final_estimator <span class="op">=</span> LassoCV(),                                          </span>
 <span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>                    cv <span class="op">=</span> KFold(n_splits <span class="op">=</span> <span class="dv">5</span>, shuffle <span class="op">=</span> <span class="va">True</span>, random_state<span class="op">=</span><span class="dv">1</span>))</span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>en.fit(X,y)</span>
-<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Lasso metamodel RMSE = "</span>, np.sqrt(mean_squared_error(en.predict(Xtest),ytest)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Lasso metamodel RMSE =  5206.021083501416</code></pre>
-</div>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>start_time <span class="op">=</span> time.time()</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>en.fit(X,y)</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Lasso metamodel RMSE = "</span>, np.sqrt(mean_squared_error(en.predict(Xtest),ytest)))</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Time taken = "</span>, np.<span class="bu">round</span>((time.time() <span class="op">-</span> start_time)<span class="op">/</span><span class="dv">60</span>,<span class="dv">2</span>), <span class="st">"minutes"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div id="404a2480" class="cell" data-execution_count="62">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Coefficients of the lasso metamodel</span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>en.final_estimator_.coef_</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Coefficients of the lasso metamodel</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>en.final_estimator_.coef_</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="62">
 <pre><code>array([ 0.03524446,  0.15077605,  0.        ,  0.30392268,  0.52946243,
        -0.        ])</code></pre>
@@ -756,21 +758,23 @@ Time taken =  1.36 minutes</code></pre>
 </div>
 <p>Note that lasso <strong>reduces the weight</strong> of the <strong>weak random forest</strong> model, and <strong>light gbm</strong> model to <strong>0</strong>. Even though light GBM is a strong model, it may be <strong>correlated or collinear</strong> with XGBoost, or other models, and hence is not needed.</p>
 <p>Note that as lasso performs <strong>model selection</strong> on its own, removing models with zero coefficients or weights does not make a difference, as shown below.</p>
-<div id="a0982f22" class="cell" data-execution_count="63">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Stacking using Lasso as the metamodel</span></span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>en <span class="op">=</span> StackingRegressor(estimators <span class="op">=</span> [(<span class="st">'xgb'</span>, model_xgb),(<span class="st">'ada'</span>, model_ada),</span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>                        (<span class="st">'gb'</span>, model_gb),(<span class="st">'cat'</span>, model_cat) ],</span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>                     final_estimator <span class="op">=</span> LassoCV(),                                          </span>
-<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>                    cv <span class="op">=</span> KFold(n_splits <span class="op">=</span> <span class="dv">5</span>, shuffle <span class="op">=</span> <span class="va">True</span>, random_state<span class="op">=</span><span class="dv">1</span>))</span>
-<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>en.fit(X,y)</span>
-<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Lasso metamodel RMSE = "</span>, np.sqrt(mean_squared_error(en.predict(Xtest),ytest)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="77f7474e" class="cell" data-execution_count="63">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Stacking using Lasso as the metamodel</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>en <span class="op">=</span> StackingRegressor(estimators <span class="op">=</span> [(<span class="st">'xgb'</span>, model_xgb),(<span class="st">'ada'</span>, model_ada),</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>                        (<span class="st">'gb'</span>, model_gb),(<span class="st">'cat'</span>, model_cat) ],</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>                     final_estimator <span class="op">=</span> LassoCV(),                                          </span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>                    cv <span class="op">=</span> KFold(n_splits <span class="op">=</span> <span class="dv">5</span>, shuffle <span class="op">=</span> <span class="va">True</span>, random_state<span class="op">=</span><span class="dv">1</span>))</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>start_time <span class="op">=</span> time.time()</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>en.fit(X,y)</span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Lasso metamodel RMSE = "</span>, np.sqrt(mean_squared_error(en.predict(Xtest),ytest)))</span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Time taken = "</span>, np.<span class="bu">round</span>((time.time() <span class="op">-</span> start_time)<span class="op">/</span><span class="dv">60</span>,<span class="dv">2</span>), <span class="st">"minutes"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Lasso metamodel RMSE =  5205.93233977352</code></pre>
 </div>
 </div>
-<div id="3c28e8ab" class="cell" data-execution_count="64">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Coefficients of the lasso metamodel</span></span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>en.final_estimator_.coef_</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="f56ccb77" class="cell" data-execution_count="64">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Coefficients of the lasso metamodel</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>en.final_estimator_.coef_</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="64">
 <pre><code>array([0.03415944, 0.15053122, 0.30464838, 0.53006297])</code></pre>
 </div>
@@ -778,14 +782,30 @@ Time taken =  1.36 minutes</code></pre>
 </section>
 <section id="metamodel-random-forest" class="level4" data-number="14.1.2.3">
 <h4 data-number="14.1.2.3" class="anchored" data-anchor-id="metamodel-random-forest"><span class="header-section-number">14.1.2.3</span> Metamodel: Random forest</h4>
-<div id="228eac9e" class="cell">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Stacking using MARS as the meta-model</span></span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>en <span class="op">=</span> StackingRegressor(estimators <span class="op">=</span> [(<span class="st">'xgb'</span>, model_xgb),(<span class="st">'ada'</span>, model_ada),(<span class="st">'rf'</span>, model_rf),</span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>                        (<span class="st">'gb'</span>, model_gb),(<span class="st">'cat'</span>, model_cat), (<span class="st">'lgbm'</span>, model_lgbm)],</span>
-<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>                     final_estimator <span class="op">=</span> RandomForestRegressor(),                                          </span>
-<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>                    cv <span class="op">=</span> KFold(n_splits <span class="op">=</span> <span class="dv">5</span>, shuffle <span class="op">=</span> <span class="va">True</span>, random_state<span class="op">=</span><span class="dv">1</span>))</span>
-<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>en.fit(X,y)</span>
-<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Random Forest metamodel RMSE = "</span>, np.sqrt(mean_squared_error(en.predict(Xtest),ytest)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>A highly flexible model such as a random forest may not be a good choice for ensembling correlated models.</p>
+<div id="228eac9e" class="cell" data-execution_count="66">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Stacking using MARS as the meta-model</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>en <span class="op">=</span> StackingRegressor(estimators <span class="op">=</span> [(<span class="st">'xgb'</span>, model_xgb),(<span class="st">'ada'</span>, model_ada),(<span class="st">'rf'</span>, model_rf),</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>                        (<span class="st">'gb'</span>, model_gb),(<span class="st">'cat'</span>, model_cat), (<span class="st">'lgbm'</span>, model_lgbm)],</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>                     final_estimator <span class="op">=</span> RandomForestRegressor(max_features <span class="op">=</span> <span class="dv">2</span>),                                          </span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>                    cv <span class="op">=</span> KFold(n_splits <span class="op">=</span> <span class="dv">5</span>, shuffle <span class="op">=</span> <span class="va">True</span>, random_state<span class="op">=</span><span class="dv">1</span>))</span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>start_time <span class="op">=</span> time.time()</span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>en.fit(X,y)</span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Random Forest metamodel RMSE = "</span>, np.sqrt(mean_squared_error(en.predict(Xtest),ytest)))</span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Time taken = "</span>, np.<span class="bu">round</span>((time.time() <span class="op">-</span> start_time)<span class="op">/</span><span class="dv">60</span>,<span class="dv">2</span>), <span class="st">"minutes"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Random Forest metamodel RMSE =  5528.147732853168</code></pre>
+</div>
+</div>
+<div id="c75c9f5d" class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Stacking using MARS as the meta-model</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>en <span class="op">=</span> StackingRegressor(estimators <span class="op">=</span> [(<span class="st">'xgb'</span>, model_xgb),(<span class="st">'ada'</span>, model_ada),(<span class="st">'rf'</span>, model_rf),</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>                        (<span class="st">'gb'</span>, model_gb),(<span class="st">'cat'</span>, model_cat), (<span class="st">'lgbm'</span>, model_lgbm)],</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>                     final_estimator <span class="op">=</span> Ca(max_features <span class="op">=</span> <span class="dv">2</span>),                                          </span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>                    cv <span class="op">=</span> KFold(n_splits <span class="op">=</span> <span class="dv">5</span>, shuffle <span class="op">=</span> <span class="va">True</span>, random_state<span class="op">=</span><span class="dv">1</span>))</span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>start_time <span class="op">=</span> time.time()</span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>en.fit(X,y)</span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Random Forest metamodel RMSE = "</span>, np.sqrt(mean_squared_error(en.predict(Xtest),ytest)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>
@@ -794,89 +814,89 @@ Time taken =  1.36 minutes</code></pre>
 <h2 data-number="14.2" class="anchored" data-anchor-id="ensembling-classification-models"><span class="header-section-number">14.2</span> Ensembling classification models</h2>
 <p>We’ll ensemble models for predicting accuracy of identifying people having a heart disease.</p>
 <div id="8490f743" class="cell" data-execution_count="17">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pd.read_csv(<span class="st">'./Datasets/Heart.csv'</span>)</span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>data.dropna(inplace <span class="op">=</span> <span class="va">True</span>)</span>
-<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Response variable</span></span>
-<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> pd.get_dummies(data[<span class="st">'AHD'</span>])[<span class="st">'Yes'</span>]</span>
-<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a><span class="co">#Creating a dataframe for predictors with dummy variables replacing the categorical variables</span></span>
-<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> data.drop(columns <span class="op">=</span> [<span class="st">'AHD'</span>,<span class="st">'ChestPain'</span>,<span class="st">'Thal'</span>])</span>
-<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> pd.concat([X,pd.get_dummies(data[<span class="st">'ChestPain'</span>]),pd.get_dummies(data[<span class="st">'Thal'</span>])],axis<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a><span class="co">#Creating train and test datasets</span></span>
-<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a>Xtrain,Xtest,ytrain,ytest <span class="op">=</span> train_test_split(X,y,train_size <span class="op">=</span> <span class="fl">0.5</span>,random_state<span class="op">=</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pd.read_csv(<span class="st">'./Datasets/Heart.csv'</span>)</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>data.dropna(inplace <span class="op">=</span> <span class="va">True</span>)</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Response variable</span></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> pd.get_dummies(data[<span class="st">'AHD'</span>])[<span class="st">'Yes'</span>]</span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a><span class="co">#Creating a dataframe for predictors with dummy variables replacing the categorical variables</span></span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> data.drop(columns <span class="op">=</span> [<span class="st">'AHD'</span>,<span class="st">'ChestPain'</span>,<span class="st">'Thal'</span>])</span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> pd.concat([X,pd.get_dummies(data[<span class="st">'ChestPain'</span>]),pd.get_dummies(data[<span class="st">'Thal'</span>])],axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a><span class="co">#Creating train and test datasets</span></span>
+<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a>Xtrain,Xtest,ytrain,ytest <span class="op">=</span> train_test_split(X,y,train_size <span class="op">=</span> <span class="fl">0.5</span>,random_state<span class="op">=</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Let us tune the individual models first.</p>
-<section id="adaboost" class="level4 unnumbered">
-<h4 class="unnumbered anchored" data-anchor-id="adaboost">AdaBoost</h4>
+<section id="adaboost" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="adaboost">AdaBoost</h3>
 <div id="dbf61bcc" class="cell" data-execution_count="18">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Tuning Adaboost for maximizing accuracy</span></span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> AdaBoostClassifier(random_state<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>grid <span class="op">=</span> <span class="bu">dict</span>()</span>
-<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>grid[<span class="st">'n_estimators'</span>] <span class="op">=</span> [<span class="dv">10</span>, <span class="dv">50</span>, <span class="dv">100</span>,<span class="dv">200</span>,<span class="dv">500</span>]</span>
-<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>grid[<span class="st">'learning_rate'</span>] <span class="op">=</span> [<span class="fl">0.0001</span>, <span class="fl">0.001</span>, <span class="fl">0.01</span>,<span class="fl">0.1</span>, <span class="fl">1.0</span>]</span>
-<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>grid[<span class="st">'base_estimator'</span>] <span class="op">=</span> [DecisionTreeClassifier(max_depth<span class="op">=</span><span class="dv">1</span>), DecisionTreeClassifier(max_depth<span class="op">=</span><span class="dv">2</span>), </span>
-<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>                          DecisionTreeClassifier(max_depth<span class="op">=</span><span class="dv">3</span>),DecisionTreeClassifier(max_depth<span class="op">=</span><span class="dv">4</span>)]</span>
-<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a><span class="co"># define the evaluation procedure</span></span>
-<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>cv <span class="op">=</span> StratifiedKFold(n_splits<span class="op">=</span><span class="dv">5</span>, shuffle<span class="op">=</span><span class="va">True</span>, random_state<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a><span class="co"># define the grid search procedure</span></span>
-<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a>grid_search <span class="op">=</span> GridSearchCV(estimator<span class="op">=</span>model, param_grid<span class="op">=</span>grid, n_jobs<span class="op">=-</span><span class="dv">1</span>, cv<span class="op">=</span>cv, scoring<span class="op">=</span><span class="st">'accuracy'</span>,refit<span class="op">=</span><span class="st">'accuracy'</span>)</span>
-<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a><span class="co"># execute the grid search</span></span>
-<span id="cb32-13"><a href="#cb32-13" aria-hidden="true" tabindex="-1"></a>grid_result <span class="op">=</span> grid_search.fit(Xtrain, ytrain)</span>
-<span id="cb32-14"><a href="#cb32-14" aria-hidden="true" tabindex="-1"></a><span class="co"># summarize the best score and configuration</span></span>
-<span id="cb32-15"><a href="#cb32-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Best: </span><span class="sc">%f</span><span class="st"> using </span><span class="sc">%s</span><span class="st">"</span> <span class="op">%</span> (grid_result.best_score_, grid_result.best_params_))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Tuning Adaboost for maximizing accuracy</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> AdaBoostClassifier(random_state<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>grid <span class="op">=</span> <span class="bu">dict</span>()</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>grid[<span class="st">'n_estimators'</span>] <span class="op">=</span> [<span class="dv">10</span>, <span class="dv">50</span>, <span class="dv">100</span>,<span class="dv">200</span>,<span class="dv">500</span>]</span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>grid[<span class="st">'learning_rate'</span>] <span class="op">=</span> [<span class="fl">0.0001</span>, <span class="fl">0.001</span>, <span class="fl">0.01</span>,<span class="fl">0.1</span>, <span class="fl">1.0</span>]</span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>grid[<span class="st">'base_estimator'</span>] <span class="op">=</span> [DecisionTreeClassifier(max_depth<span class="op">=</span><span class="dv">1</span>), DecisionTreeClassifier(max_depth<span class="op">=</span><span class="dv">2</span>), </span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>                          DecisionTreeClassifier(max_depth<span class="op">=</span><span class="dv">3</span>),DecisionTreeClassifier(max_depth<span class="op">=</span><span class="dv">4</span>)]</span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a><span class="co"># define the evaluation procedure</span></span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>cv <span class="op">=</span> StratifiedKFold(n_splits<span class="op">=</span><span class="dv">5</span>, shuffle<span class="op">=</span><span class="va">True</span>, random_state<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a><span class="co"># define the grid search procedure</span></span>
+<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a>grid_search <span class="op">=</span> GridSearchCV(estimator<span class="op">=</span>model, param_grid<span class="op">=</span>grid, n_jobs<span class="op">=-</span><span class="dv">1</span>, cv<span class="op">=</span>cv, scoring<span class="op">=</span><span class="st">'accuracy'</span>,refit<span class="op">=</span><span class="st">'accuracy'</span>)</span>
+<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a><span class="co"># execute the grid search</span></span>
+<span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a>grid_result <span class="op">=</span> grid_search.fit(Xtrain, ytrain)</span>
+<span id="cb33-14"><a href="#cb33-14" aria-hidden="true" tabindex="-1"></a><span class="co"># summarize the best score and configuration</span></span>
+<span id="cb33-15"><a href="#cb33-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Best: </span><span class="sc">%f</span><span class="st"> using </span><span class="sc">%s</span><span class="st">"</span> <span class="op">%</span> (grid_result.best_score_, grid_result.best_params_))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Best: 0.871494 using {'base_estimator': DecisionTreeClassifier(max_depth=1), 'learning_rate': 0.01, 'n_estimators': 200}</code></pre>
 </div>
 </div>
 </section>
-<section id="gradient-boosting" class="level4 unnumbered">
-<h4 class="unnumbered anchored" data-anchor-id="gradient-boosting">Gradient Boosting</h4>
+<section id="gradient-boosting" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="gradient-boosting">Gradient Boosting</h3>
 <div id="d979116a" class="cell" data-execution_count="19">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Tuning gradient boosting for maximizing accuracy</span></span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> GradientBoostingClassifier(random_state<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>grid <span class="op">=</span> <span class="bu">dict</span>()</span>
-<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>grid[<span class="st">'n_estimators'</span>] <span class="op">=</span> [<span class="dv">10</span>, <span class="dv">50</span>, <span class="dv">100</span>,<span class="dv">200</span>,<span class="dv">500</span>]</span>
-<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>grid[<span class="st">'learning_rate'</span>] <span class="op">=</span> [<span class="fl">0.0001</span>, <span class="fl">0.001</span>, <span class="fl">0.01</span>,<span class="fl">0.1</span>, <span class="fl">1.0</span>]</span>
-<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>grid[<span class="st">'max_depth'</span>] <span class="op">=</span> [<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>]</span>
-<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>grid[<span class="st">'subsample'</span>] <span class="op">=</span> [<span class="fl">0.5</span>,<span class="fl">1.0</span>]</span>
-<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a><span class="co"># define the evaluation procedure</span></span>
-<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a>cv <span class="op">=</span> StratifiedKFold(n_splits<span class="op">=</span><span class="dv">5</span>, shuffle<span class="op">=</span><span class="va">True</span>, random_state<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a><span class="co"># define the grid search procedure</span></span>
-<span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a>grid_search <span class="op">=</span> GridSearchCV(estimator<span class="op">=</span>model, param_grid<span class="op">=</span>grid, n_jobs<span class="op">=-</span><span class="dv">1</span>, cv<span class="op">=</span>cv, scoring<span class="op">=</span><span class="st">'accuracy'</span>,refit<span class="op">=</span><span class="st">'accuracy'</span>)</span>
-<span id="cb34-12"><a href="#cb34-12" aria-hidden="true" tabindex="-1"></a><span class="co"># execute the grid search</span></span>
-<span id="cb34-13"><a href="#cb34-13" aria-hidden="true" tabindex="-1"></a>grid_result <span class="op">=</span> grid_search.fit(Xtrain, ytrain)</span>
-<span id="cb34-14"><a href="#cb34-14" aria-hidden="true" tabindex="-1"></a><span class="co"># summarize the best score and configuration</span></span>
-<span id="cb34-15"><a href="#cb34-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Best: </span><span class="sc">%f</span><span class="st"> using </span><span class="sc">%s</span><span class="st">"</span> <span class="op">%</span> (grid_result.best_score_, grid_result.best_params_))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Tuning gradient boosting for maximizing accuracy</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> GradientBoostingClassifier(random_state<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>grid <span class="op">=</span> <span class="bu">dict</span>()</span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>grid[<span class="st">'n_estimators'</span>] <span class="op">=</span> [<span class="dv">10</span>, <span class="dv">50</span>, <span class="dv">100</span>,<span class="dv">200</span>,<span class="dv">500</span>]</span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>grid[<span class="st">'learning_rate'</span>] <span class="op">=</span> [<span class="fl">0.0001</span>, <span class="fl">0.001</span>, <span class="fl">0.01</span>,<span class="fl">0.1</span>, <span class="fl">1.0</span>]</span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>grid[<span class="st">'max_depth'</span>] <span class="op">=</span> [<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>]</span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>grid[<span class="st">'subsample'</span>] <span class="op">=</span> [<span class="fl">0.5</span>,<span class="fl">1.0</span>]</span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a><span class="co"># define the evaluation procedure</span></span>
+<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a>cv <span class="op">=</span> StratifiedKFold(n_splits<span class="op">=</span><span class="dv">5</span>, shuffle<span class="op">=</span><span class="va">True</span>, random_state<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a><span class="co"># define the grid search procedure</span></span>
+<span id="cb35-11"><a href="#cb35-11" aria-hidden="true" tabindex="-1"></a>grid_search <span class="op">=</span> GridSearchCV(estimator<span class="op">=</span>model, param_grid<span class="op">=</span>grid, n_jobs<span class="op">=-</span><span class="dv">1</span>, cv<span class="op">=</span>cv, scoring<span class="op">=</span><span class="st">'accuracy'</span>,refit<span class="op">=</span><span class="st">'accuracy'</span>)</span>
+<span id="cb35-12"><a href="#cb35-12" aria-hidden="true" tabindex="-1"></a><span class="co"># execute the grid search</span></span>
+<span id="cb35-13"><a href="#cb35-13" aria-hidden="true" tabindex="-1"></a>grid_result <span class="op">=</span> grid_search.fit(Xtrain, ytrain)</span>
+<span id="cb35-14"><a href="#cb35-14" aria-hidden="true" tabindex="-1"></a><span class="co"># summarize the best score and configuration</span></span>
+<span id="cb35-15"><a href="#cb35-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Best: </span><span class="sc">%f</span><span class="st"> using </span><span class="sc">%s</span><span class="st">"</span> <span class="op">%</span> (grid_result.best_score_, grid_result.best_params_))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Best: 0.871954 using {'learning_rate': 1.0, 'max_depth': 4, 'n_estimators': 100, 'subsample': 1.0}</code></pre>
 </div>
 </div>
 </section>
-<section id="xgboost" class="level4 unnumbered">
-<h4 class="unnumbered anchored" data-anchor-id="xgboost">XGBoost</h4>
+<section id="xgboost" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="xgboost">XGBoost</h3>
 <div id="e0d4f161" class="cell" data-execution_count="25">
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Tuning XGBoost for maximizing accuracy</span></span>
-<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>start_time <span class="op">=</span> time.time()</span>
-<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>param_grid <span class="op">=</span> {<span class="st">'n_estimators'</span>:[<span class="dv">25</span>, <span class="dv">100</span>,<span class="dv">250</span>,<span class="dv">500</span>],</span>
-<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>                <span class="st">'max_depth'</span>: [<span class="dv">4</span>, <span class="dv">6</span> ,<span class="dv">8</span>],</span>
-<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>              <span class="st">'learning_rate'</span>: [<span class="fl">0.01</span>,<span class="fl">0.1</span>,<span class="fl">0.2</span>],</span>
-<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>               <span class="st">'gamma'</span>: [<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">10</span>, <span class="dv">100</span>],</span>
-<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>               <span class="st">'reg_lambda'</span>:[<span class="dv">0</span>, <span class="dv">10</span>, <span class="dv">100</span>],</span>
-<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a>               <span class="st">'subsample'</span>: [<span class="fl">0.5</span>, <span class="fl">0.75</span>, <span class="fl">1.0</span>]</span>
-<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a>                <span class="st">'scale_pos_weight'</span>:[<span class="fl">1.25</span>,<span class="fl">1.5</span>,<span class="fl">1.75</span>]<span class="co">#Control the balance of positive and negative weights, useful for unbalanced classes. A typical value to consider: sum(negative instances) / sum(positive instances).</span></span>
-<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a>             }</span>
-<span id="cb36-11"><a href="#cb36-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-12"><a href="#cb36-12" aria-hidden="true" tabindex="-1"></a>cv <span class="op">=</span> StratifiedKFold(n_splits<span class="op">=</span><span class="dv">5</span>,shuffle<span class="op">=</span><span class="va">True</span>,random_state<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb36-13"><a href="#cb36-13" aria-hidden="true" tabindex="-1"></a>optimal_params <span class="op">=</span> GridSearchCV(estimator<span class="op">=</span>xgb.XGBClassifier(random_state<span class="op">=</span><span class="dv">1</span>),</span>
-<span id="cb36-14"><a href="#cb36-14" aria-hidden="true" tabindex="-1"></a>                             param_grid <span class="op">=</span> param_grid,</span>
-<span id="cb36-15"><a href="#cb36-15" aria-hidden="true" tabindex="-1"></a>                             scoring <span class="op">=</span> <span class="st">'accuracy'</span>,</span>
-<span id="cb36-16"><a href="#cb36-16" aria-hidden="true" tabindex="-1"></a>                             verbose <span class="op">=</span> <span class="dv">1</span>,</span>
-<span id="cb36-17"><a href="#cb36-17" aria-hidden="true" tabindex="-1"></a>                             n_jobs<span class="op">=-</span><span class="dv">1</span>,</span>
-<span id="cb36-18"><a href="#cb36-18" aria-hidden="true" tabindex="-1"></a>                             cv <span class="op">=</span> cv)</span>
-<span id="cb36-19"><a href="#cb36-19" aria-hidden="true" tabindex="-1"></a>optimal_params.fit(Xtrain,ytrain)</span>
-<span id="cb36-20"><a href="#cb36-20" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(optimal_params.best_params_,optimal_params.best_score_)</span>
-<span id="cb36-21"><a href="#cb36-21" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Time taken = "</span>, (time.time()<span class="op">-</span>start_time)<span class="op">/</span><span class="dv">60</span>, <span class="st">" minutes"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Tuning XGBoost for maximizing accuracy</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>start_time <span class="op">=</span> time.time()</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>param_grid <span class="op">=</span> {<span class="st">'n_estimators'</span>:[<span class="dv">25</span>, <span class="dv">100</span>,<span class="dv">250</span>,<span class="dv">500</span>],</span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>                <span class="st">'max_depth'</span>: [<span class="dv">4</span>, <span class="dv">6</span> ,<span class="dv">8</span>],</span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>              <span class="st">'learning_rate'</span>: [<span class="fl">0.01</span>,<span class="fl">0.1</span>,<span class="fl">0.2</span>],</span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>               <span class="st">'gamma'</span>: [<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">10</span>, <span class="dv">100</span>],</span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>               <span class="st">'reg_lambda'</span>:[<span class="dv">0</span>, <span class="dv">10</span>, <span class="dv">100</span>],</span>
+<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a>               <span class="st">'subsample'</span>: [<span class="fl">0.5</span>, <span class="fl">0.75</span>, <span class="fl">1.0</span>]</span>
+<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a>                <span class="st">'scale_pos_weight'</span>:[<span class="fl">1.25</span>,<span class="fl">1.5</span>,<span class="fl">1.75</span>]<span class="co">#Control the balance of positive and negative weights, useful for unbalanced classes. A typical value to consider: sum(negative instances) / sum(positive instances).</span></span>
+<span id="cb37-10"><a href="#cb37-10" aria-hidden="true" tabindex="-1"></a>             }</span>
+<span id="cb37-11"><a href="#cb37-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-12"><a href="#cb37-12" aria-hidden="true" tabindex="-1"></a>cv <span class="op">=</span> StratifiedKFold(n_splits<span class="op">=</span><span class="dv">5</span>,shuffle<span class="op">=</span><span class="va">True</span>,random_state<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb37-13"><a href="#cb37-13" aria-hidden="true" tabindex="-1"></a>optimal_params <span class="op">=</span> GridSearchCV(estimator<span class="op">=</span>xgb.XGBClassifier(random_state<span class="op">=</span><span class="dv">1</span>),</span>
+<span id="cb37-14"><a href="#cb37-14" aria-hidden="true" tabindex="-1"></a>                             param_grid <span class="op">=</span> param_grid,</span>
+<span id="cb37-15"><a href="#cb37-15" aria-hidden="true" tabindex="-1"></a>                             scoring <span class="op">=</span> <span class="st">'accuracy'</span>,</span>
+<span id="cb37-16"><a href="#cb37-16" aria-hidden="true" tabindex="-1"></a>                             verbose <span class="op">=</span> <span class="dv">1</span>,</span>
+<span id="cb37-17"><a href="#cb37-17" aria-hidden="true" tabindex="-1"></a>                             n_jobs<span class="op">=-</span><span class="dv">1</span>,</span>
+<span id="cb37-18"><a href="#cb37-18" aria-hidden="true" tabindex="-1"></a>                             cv <span class="op">=</span> cv)</span>
+<span id="cb37-19"><a href="#cb37-19" aria-hidden="true" tabindex="-1"></a>optimal_params.fit(Xtrain,ytrain)</span>
+<span id="cb37-20"><a href="#cb37-20" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(optimal_params.best_params_,optimal_params.best_score_)</span>
+<span id="cb37-21"><a href="#cb37-21" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Time taken = "</span>, (time.time()<span class="op">-</span>start_time)<span class="op">/</span><span class="dv">60</span>, <span class="st">" minutes"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Fitting 5 folds for each of 972 candidates, totalling 4860 fits
 {'gamma': 0, 'learning_rate': 0.2, 'max_depth': 4, 'n_estimators': 25, 'reg_lambda': 0, 'scale_pos_weight': 1.25} 0.872183908045977
@@ -884,30 +904,30 @@ Time taken =  0.9524135629336039  minutes</code></pre>
 </div>
 </div>
 <div id="54ccc812" class="cell" data-execution_count="108">
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Tuned Adaboost model</span></span>
-<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>model_ada <span class="op">=</span> AdaBoostClassifier(base_estimator<span class="op">=</span>DecisionTreeClassifier(max_depth<span class="op">=</span><span class="dv">1</span>), n_estimators<span class="op">=</span><span class="dv">200</span>, </span>
-<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>                               random_state<span class="op">=</span><span class="dv">1</span>,learning_rate<span class="op">=</span><span class="fl">0.01</span>).fit(Xtrain, ytrain)    </span>
-<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>test_accuracy_ada <span class="op">=</span> model_ada.score(Xtest,ytest) <span class="co">#Returns the classification accuracy of the model on test data</span></span>
-<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a><span class="co">#Tuned Random forest model from Section 6.3</span></span>
-<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>model_rf <span class="op">=</span> RandomForestClassifier(n_estimators<span class="op">=</span><span class="dv">500</span>, random_state<span class="op">=</span><span class="dv">1</span>,max_features<span class="op">=</span><span class="dv">3</span>,</span>
-<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a>                        n_jobs<span class="op">=-</span><span class="dv">1</span>,oob_score<span class="op">=</span><span class="va">False</span>).fit(Xtrain, ytrain)</span>
-<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a>test_accuracy_rf <span class="op">=</span> model_rf.score(Xtest,ytest) <span class="co">#Returns the classification accuracy of the model on test data</span></span>
-<span id="cb38-10"><a href="#cb38-10" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb38-11"><a href="#cb38-11" aria-hidden="true" tabindex="-1"></a><span class="co">#Tuned gradient boosting model</span></span>
-<span id="cb38-12"><a href="#cb38-12" aria-hidden="true" tabindex="-1"></a>model_gb <span class="op">=</span> GradientBoostingClassifier(n_estimators<span class="op">=</span><span class="dv">100</span>, random_state<span class="op">=</span><span class="dv">1</span>,max_depth<span class="op">=</span><span class="dv">4</span>,learning_rate<span class="op">=</span><span class="fl">1.0</span>,</span>
-<span id="cb38-13"><a href="#cb38-13" aria-hidden="true" tabindex="-1"></a>                                     subsample <span class="op">=</span> <span class="fl">1.0</span>).fit(Xtrain, ytrain)</span>
-<span id="cb38-14"><a href="#cb38-14" aria-hidden="true" tabindex="-1"></a>test_accuracy_gb <span class="op">=</span> model_gb.score(Xtest,ytest) <span class="co">#Returns the classification accuracy of the model on test data</span></span>
-<span id="cb38-15"><a href="#cb38-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-16"><a href="#cb38-16" aria-hidden="true" tabindex="-1"></a><span class="co">#Tuned XGBoost model</span></span>
-<span id="cb38-17"><a href="#cb38-17" aria-hidden="true" tabindex="-1"></a>model_xgb <span class="op">=</span> xgb.XGBClassifier(random_state<span class="op">=</span><span class="dv">1</span>,gamma<span class="op">=</span><span class="dv">0</span>,learning_rate <span class="op">=</span> <span class="fl">0.2</span>,max_depth<span class="op">=</span><span class="dv">4</span>,</span>
-<span id="cb38-18"><a href="#cb38-18" aria-hidden="true" tabindex="-1"></a>                              n_estimators <span class="op">=</span> <span class="dv">25</span>,reg_lambda <span class="op">=</span> <span class="dv">0</span>,scale_pos_weight<span class="op">=</span><span class="fl">1.25</span>).fit(Xtrain,ytrain)</span>
-<span id="cb38-19"><a href="#cb38-19" aria-hidden="true" tabindex="-1"></a>test_accuracy_xgb <span class="op">=</span> model_xgb.score(Xtest,ytest) <span class="co">#Returns the classification accuracy of the model on test data</span></span>
-<span id="cb38-20"><a href="#cb38-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-21"><a href="#cb38-21" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Adaboost accuracy = "</span>,test_accuracy_ada)</span>
-<span id="cb38-22"><a href="#cb38-22" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Random forest accuracy = "</span>,test_accuracy_rf)</span>
-<span id="cb38-23"><a href="#cb38-23" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Gradient boost accuracy = "</span>,test_accuracy_gb)</span>
-<span id="cb38-24"><a href="#cb38-24" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"XGBoost model accuracy = "</span>,test_accuracy_xgb)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Tuned Adaboost model</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>model_ada <span class="op">=</span> AdaBoostClassifier(base_estimator<span class="op">=</span>DecisionTreeClassifier(max_depth<span class="op">=</span><span class="dv">1</span>), n_estimators<span class="op">=</span><span class="dv">200</span>, </span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>                               random_state<span class="op">=</span><span class="dv">1</span>,learning_rate<span class="op">=</span><span class="fl">0.01</span>).fit(Xtrain, ytrain)    </span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>test_accuracy_ada <span class="op">=</span> model_ada.score(Xtest,ytest) <span class="co">#Returns the classification accuracy of the model on test data</span></span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a><span class="co">#Tuned Random forest model from Section 6.3</span></span>
+<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a>model_rf <span class="op">=</span> RandomForestClassifier(n_estimators<span class="op">=</span><span class="dv">500</span>, random_state<span class="op">=</span><span class="dv">1</span>,max_features<span class="op">=</span><span class="dv">3</span>,</span>
+<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a>                        n_jobs<span class="op">=-</span><span class="dv">1</span>,oob_score<span class="op">=</span><span class="va">False</span>).fit(Xtrain, ytrain)</span>
+<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a>test_accuracy_rf <span class="op">=</span> model_rf.score(Xtest,ytest) <span class="co">#Returns the classification accuracy of the model on test data</span></span>
+<span id="cb39-10"><a href="#cb39-10" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb39-11"><a href="#cb39-11" aria-hidden="true" tabindex="-1"></a><span class="co">#Tuned gradient boosting model</span></span>
+<span id="cb39-12"><a href="#cb39-12" aria-hidden="true" tabindex="-1"></a>model_gb <span class="op">=</span> GradientBoostingClassifier(n_estimators<span class="op">=</span><span class="dv">100</span>, random_state<span class="op">=</span><span class="dv">1</span>,max_depth<span class="op">=</span><span class="dv">4</span>,learning_rate<span class="op">=</span><span class="fl">1.0</span>,</span>
+<span id="cb39-13"><a href="#cb39-13" aria-hidden="true" tabindex="-1"></a>                                     subsample <span class="op">=</span> <span class="fl">1.0</span>).fit(Xtrain, ytrain)</span>
+<span id="cb39-14"><a href="#cb39-14" aria-hidden="true" tabindex="-1"></a>test_accuracy_gb <span class="op">=</span> model_gb.score(Xtest,ytest) <span class="co">#Returns the classification accuracy of the model on test data</span></span>
+<span id="cb39-15"><a href="#cb39-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-16"><a href="#cb39-16" aria-hidden="true" tabindex="-1"></a><span class="co">#Tuned XGBoost model</span></span>
+<span id="cb39-17"><a href="#cb39-17" aria-hidden="true" tabindex="-1"></a>model_xgb <span class="op">=</span> xgb.XGBClassifier(random_state<span class="op">=</span><span class="dv">1</span>,gamma<span class="op">=</span><span class="dv">0</span>,learning_rate <span class="op">=</span> <span class="fl">0.2</span>,max_depth<span class="op">=</span><span class="dv">4</span>,</span>
+<span id="cb39-18"><a href="#cb39-18" aria-hidden="true" tabindex="-1"></a>                              n_estimators <span class="op">=</span> <span class="dv">25</span>,reg_lambda <span class="op">=</span> <span class="dv">0</span>,scale_pos_weight<span class="op">=</span><span class="fl">1.25</span>).fit(Xtrain,ytrain)</span>
+<span id="cb39-19"><a href="#cb39-19" aria-hidden="true" tabindex="-1"></a>test_accuracy_xgb <span class="op">=</span> model_xgb.score(Xtest,ytest) <span class="co">#Returns the classification accuracy of the model on test data</span></span>
+<span id="cb39-20"><a href="#cb39-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-21"><a href="#cb39-21" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Adaboost accuracy = "</span>,test_accuracy_ada)</span>
+<span id="cb39-22"><a href="#cb39-22" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Random forest accuracy = "</span>,test_accuracy_rf)</span>
+<span id="cb39-23"><a href="#cb39-23" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Gradient boost accuracy = "</span>,test_accuracy_gb)</span>
+<span id="cb39-24"><a href="#cb39-24" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"XGBoost model accuracy = "</span>,test_accuracy_xgb)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Adaboost accuracy =  0.7986577181208053
 Random forest accuracy =  0.8120805369127517
@@ -920,9 +940,9 @@ XGBoost model accuracy =  0.7785234899328859</code></pre>
 <h3 data-number="14.2.1" class="anchored" data-anchor-id="voting-classifier---hard-voting"><span class="header-section-number">14.2.1</span> Voting classifier - hard voting</h3>
 <p>In this type of ensembling, the predicted class is the one predicted by the majority of the classifiers.</p>
 <div id="d30cc7ad" class="cell" data-execution_count="109">
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>ensemble_model <span class="op">=</span> VotingClassifier(estimators<span class="op">=</span>[(<span class="st">'ada'</span>,model_ada),(<span class="st">'rf'</span>,model_rf),(<span class="st">'gb'</span>,model_gb),(<span class="st">'xgb'</span>,model_xgb)])</span>
-<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>ensemble_model.fit(Xtrain,ytrain)</span>
-<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>ensemble_model.score(Xtest, ytest)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>ensemble_model <span class="op">=</span> VotingClassifier(estimators<span class="op">=</span>[(<span class="st">'ada'</span>,model_ada),(<span class="st">'rf'</span>,model_rf),(<span class="st">'gb'</span>,model_gb),(<span class="st">'xgb'</span>,model_xgb)])</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>ensemble_model.fit(Xtrain,ytrain)</span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>ensemble_model.score(Xtest, ytest)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="109">
 <pre><code>0.825503355704698</code></pre>
 </div>
@@ -933,10 +953,10 @@ XGBoost model accuracy =  0.7785234899328859</code></pre>
 <h3 data-number="14.2.2" class="anchored" data-anchor-id="voting-classifier---soft-voting"><span class="header-section-number">14.2.2</span> Voting classifier - soft voting</h3>
 <p>In this type of ensembling, the predicted class is the one based on the average predicted probabilities of all the classifiers. The threshold probability is 0.5.</p>
 <div id="e7c0f301" class="cell" data-execution_count="110">
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>ensemble_model <span class="op">=</span> VotingClassifier(estimators<span class="op">=</span>[(<span class="st">'ada'</span>,model_ada),(<span class="st">'rf'</span>,model_rf),(<span class="st">'gb'</span>,model_gb),(<span class="st">'xgb'</span>,model_xgb)],</span>
-<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>                                 voting<span class="op">=</span><span class="st">'soft'</span>)</span>
-<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>ensemble_model.fit(Xtrain,ytrain)</span>
-<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>ensemble_model.score(Xtest, ytest)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>ensemble_model <span class="op">=</span> VotingClassifier(estimators<span class="op">=</span>[(<span class="st">'ada'</span>,model_ada),(<span class="st">'rf'</span>,model_rf),(<span class="st">'gb'</span>,model_gb),(<span class="st">'xgb'</span>,model_xgb)],</span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>                                 voting<span class="op">=</span><span class="st">'soft'</span>)</span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>ensemble_model.fit(Xtrain,ytrain)</span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>ensemble_model.score(Xtest, ytest)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="110">
 <pre><code>0.7919463087248322</code></pre>
 </div>
@@ -947,53 +967,53 @@ XGBoost model accuracy =  0.7785234899328859</code></pre>
 <h3 data-number="14.2.3" class="anchored" data-anchor-id="stacking-classifier"><span class="header-section-number">14.2.3</span> Stacking classifier</h3>
 <p>Conceptually, the idea is similar to that of Stacking regressor.</p>
 <div id="20cd5cc2" class="cell" data-execution_count="111">
-<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Using Logistic regression as the meta model (final_estimator)</span></span>
-<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>ensemble_model <span class="op">=</span> StackingClassifier(estimators<span class="op">=</span>[(<span class="st">'ada'</span>,model_ada),(<span class="st">'rf'</span>,model_rf),(<span class="st">'gb'</span>,model_gb),(<span class="st">'xgb'</span>,model_xgb)],</span>
-<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>                                   final_estimator<span class="op">=</span>LogisticRegression(random_state<span class="op">=</span><span class="dv">1</span>,max_iter<span class="op">=</span><span class="dv">10000</span>),n_jobs<span class="op">=-</span><span class="dv">1</span>,</span>
-<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>                                   cv <span class="op">=</span> StratifiedKFold(n_splits<span class="op">=</span><span class="dv">5</span>,shuffle<span class="op">=</span><span class="va">True</span>,random_state<span class="op">=</span><span class="dv">1</span>))</span>
-<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a>ensemble_model.fit(Xtrain,ytrain)</span>
-<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a>ensemble_model.score(Xtest, ytest)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Using Logistic regression as the meta model (final_estimator)</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>ensemble_model <span class="op">=</span> StackingClassifier(estimators<span class="op">=</span>[(<span class="st">'ada'</span>,model_ada),(<span class="st">'rf'</span>,model_rf),(<span class="st">'gb'</span>,model_gb),(<span class="st">'xgb'</span>,model_xgb)],</span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>                                   final_estimator<span class="op">=</span>LogisticRegression(random_state<span class="op">=</span><span class="dv">1</span>,max_iter<span class="op">=</span><span class="dv">10000</span>),n_jobs<span class="op">=-</span><span class="dv">1</span>,</span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>                                   cv <span class="op">=</span> StratifiedKFold(n_splits<span class="op">=</span><span class="dv">5</span>,shuffle<span class="op">=</span><span class="va">True</span>,random_state<span class="op">=</span><span class="dv">1</span>))</span>
+<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a>ensemble_model.fit(Xtrain,ytrain)</span>
+<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a>ensemble_model.score(Xtest, ytest)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="111">
 <pre><code>0.7986577181208053</code></pre>
 </div>
 </div>
 <div id="b48ecdc7" class="cell" data-execution_count="36">
-<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Coefficients of the logistic regression metamodel</span></span>
-<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>ensemble_model.final_estimator_.coef_</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Coefficients of the logistic regression metamodel</span></span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>ensemble_model.final_estimator_.coef_</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="36">
 <pre><code>array([[0.81748051, 1.28663164, 1.64593342, 1.50947087]])</code></pre>
 </div>
 </div>
 <div id="57693cc0" class="cell" data-execution_count="112">
-<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Using random forests as the meta model (final_estimator). Note that random forest will require tuning</span></span>
-<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>ensemble_model <span class="op">=</span> StackingClassifier(estimators<span class="op">=</span>[(<span class="st">'ada'</span>,model_ada),(<span class="st">'rf'</span>,model_rf),(<span class="st">'gb'</span>,model_gb),(<span class="st">'xgb'</span>,model_xgb)],</span>
-<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>                                   final_estimator<span class="op">=</span>RandomForestClassifier(n_estimators<span class="op">=</span><span class="dv">500</span>, max_features<span class="op">=</span><span class="dv">1</span>,</span>
-<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a>                                                                          random_state<span class="op">=</span><span class="dv">1</span>,oob_score<span class="op">=</span><span class="va">True</span>),n_jobs<span class="op">=-</span><span class="dv">1</span>,</span>
-<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a>                                   cv <span class="op">=</span> StratifiedKFold(n_splits<span class="op">=</span><span class="dv">5</span>,shuffle<span class="op">=</span><span class="va">True</span>,random_state<span class="op">=</span><span class="dv">1</span>))</span>
-<span id="cb48-6"><a href="#cb48-6" aria-hidden="true" tabindex="-1"></a>ensemble_model.fit(Xtrain,ytrain)</span>
-<span id="cb48-7"><a href="#cb48-7" aria-hidden="true" tabindex="-1"></a>ensemble_model.score(Xtest, ytest)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Using random forests as the meta model (final_estimator). Note that random forest will require tuning</span></span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>ensemble_model <span class="op">=</span> StackingClassifier(estimators<span class="op">=</span>[(<span class="st">'ada'</span>,model_ada),(<span class="st">'rf'</span>,model_rf),(<span class="st">'gb'</span>,model_gb),(<span class="st">'xgb'</span>,model_xgb)],</span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>                                   final_estimator<span class="op">=</span>RandomForestClassifier(n_estimators<span class="op">=</span><span class="dv">500</span>, max_features<span class="op">=</span><span class="dv">1</span>,</span>
+<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a>                                                                          random_state<span class="op">=</span><span class="dv">1</span>,oob_score<span class="op">=</span><span class="va">True</span>),n_jobs<span class="op">=-</span><span class="dv">1</span>,</span>
+<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a>                                   cv <span class="op">=</span> StratifiedKFold(n_splits<span class="op">=</span><span class="dv">5</span>,shuffle<span class="op">=</span><span class="va">True</span>,random_state<span class="op">=</span><span class="dv">1</span>))</span>
+<span id="cb49-6"><a href="#cb49-6" aria-hidden="true" tabindex="-1"></a>ensemble_model.fit(Xtrain,ytrain)</span>
+<span id="cb49-7"><a href="#cb49-7" aria-hidden="true" tabindex="-1"></a>ensemble_model.score(Xtest, ytest)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="112">
 <pre><code>0.8322147651006712</code></pre>
 </div>
 </div>
 <p>Note that a complex <code>final_estimator</code> such as random forest will require tuning. In the above case, the <code>max_features</code> argument of random forests has been tuned to obtain the maximum OOB score. The tuning is shown below.</p>
 <div id="fc5a6852" class="cell" data-execution_count="47">
-<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Tuning the random forest parameters</span></span>
-<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>start_time <span class="op">=</span> time.time()</span>
-<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>oob_score <span class="op">=</span> {}</span>
-<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a>i<span class="op">=</span><span class="dv">0</span></span>
-<span id="cb50-6"><a href="#cb50-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> pr <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>,<span class="dv">5</span>):</span>
-<span id="cb50-7"><a href="#cb50-7" aria-hidden="true" tabindex="-1"></a>    model <span class="op">=</span> StackingClassifier(estimators<span class="op">=</span>[(<span class="st">'ada'</span>,model_ada),(<span class="st">'rf'</span>,model_rf),(<span class="st">'gb'</span>,model_gb),(<span class="st">'xgb'</span>,model_xgb)],</span>
-<span id="cb50-8"><a href="#cb50-8" aria-hidden="true" tabindex="-1"></a>                                   final_estimator<span class="op">=</span>RandomForestClassifier(n_estimators<span class="op">=</span><span class="dv">500</span>, max_features<span class="op">=</span>pr,</span>
-<span id="cb50-9"><a href="#cb50-9" aria-hidden="true" tabindex="-1"></a>                                    random_state<span class="op">=</span><span class="dv">1</span>,oob_score<span class="op">=</span><span class="va">True</span>),n_jobs<span class="op">=-</span><span class="dv">1</span>,</span>
-<span id="cb50-10"><a href="#cb50-10" aria-hidden="true" tabindex="-1"></a>                                   cv <span class="op">=</span> StratifiedKFold(n_splits<span class="op">=</span><span class="dv">5</span>,shuffle<span class="op">=</span><span class="va">True</span>,random_state<span class="op">=</span><span class="dv">1</span>)).fit(Xtrain, ytrain)</span>
-<span id="cb50-11"><a href="#cb50-11" aria-hidden="true" tabindex="-1"></a>    oob_score[pr] <span class="op">=</span> model.final_estimator_.oob_score_</span>
-<span id="cb50-12"><a href="#cb50-12" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb50-13"><a href="#cb50-13" aria-hidden="true" tabindex="-1"></a>end_time <span class="op">=</span> time.time()</span>
-<span id="cb50-14"><a href="#cb50-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"time taken = "</span>, (end_time<span class="op">-</span>start_time)<span class="op">/</span><span class="dv">60</span>, <span class="st">" minutes"</span>)</span>
-<span id="cb50-15"><a href="#cb50-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"max accuracy = "</span>, np.<span class="bu">max</span>(<span class="bu">list</span>(oob_score.values())))</span>
-<span id="cb50-16"><a href="#cb50-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Best value of max_features= "</span>, np.argmax(<span class="bu">list</span>(oob_score.values()))<span class="op">+</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Tuning the random forest parameters</span></span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>start_time <span class="op">=</span> time.time()</span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>oob_score <span class="op">=</span> {}</span>
+<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-5"><a href="#cb51-5" aria-hidden="true" tabindex="-1"></a>i<span class="op">=</span><span class="dv">0</span></span>
+<span id="cb51-6"><a href="#cb51-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> pr <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>,<span class="dv">5</span>):</span>
+<span id="cb51-7"><a href="#cb51-7" aria-hidden="true" tabindex="-1"></a>    model <span class="op">=</span> StackingClassifier(estimators<span class="op">=</span>[(<span class="st">'ada'</span>,model_ada),(<span class="st">'rf'</span>,model_rf),(<span class="st">'gb'</span>,model_gb),(<span class="st">'xgb'</span>,model_xgb)],</span>
+<span id="cb51-8"><a href="#cb51-8" aria-hidden="true" tabindex="-1"></a>                                   final_estimator<span class="op">=</span>RandomForestClassifier(n_estimators<span class="op">=</span><span class="dv">500</span>, max_features<span class="op">=</span>pr,</span>
+<span id="cb51-9"><a href="#cb51-9" aria-hidden="true" tabindex="-1"></a>                                    random_state<span class="op">=</span><span class="dv">1</span>,oob_score<span class="op">=</span><span class="va">True</span>),n_jobs<span class="op">=-</span><span class="dv">1</span>,</span>
+<span id="cb51-10"><a href="#cb51-10" aria-hidden="true" tabindex="-1"></a>                                   cv <span class="op">=</span> StratifiedKFold(n_splits<span class="op">=</span><span class="dv">5</span>,shuffle<span class="op">=</span><span class="va">True</span>,random_state<span class="op">=</span><span class="dv">1</span>)).fit(Xtrain, ytrain)</span>
+<span id="cb51-11"><a href="#cb51-11" aria-hidden="true" tabindex="-1"></a>    oob_score[pr] <span class="op">=</span> model.final_estimator_.oob_score_</span>
+<span id="cb51-12"><a href="#cb51-12" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb51-13"><a href="#cb51-13" aria-hidden="true" tabindex="-1"></a>end_time <span class="op">=</span> time.time()</span>
+<span id="cb51-14"><a href="#cb51-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"time taken = "</span>, (end_time<span class="op">-</span>start_time)<span class="op">/</span><span class="dv">60</span>, <span class="st">" minutes"</span>)</span>
+<span id="cb51-15"><a href="#cb51-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"max accuracy = "</span>, np.<span class="bu">max</span>(<span class="bu">list</span>(oob_score.values())))</span>
+<span id="cb51-16"><a href="#cb51-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Best value of max_features= "</span>, np.argmax(<span class="bu">list</span>(oob_score.values()))<span class="op">+</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>time taken =  0.33713538646698  minutes
 max accuracy =  0.8445945945945946
@@ -1001,8 +1021,8 @@ Best value of max_features=  1</code></pre>
 </div>
 </div>
 <div id="d4af7c6f" class="cell" data-execution_count="48">
-<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="co">#The final predictor (metamodel) - random forest obtains the maximum oob_score for max_features = 1</span></span>
-<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>oob_score</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="co">#The final predictor (metamodel) - random forest obtains the maximum oob_score for max_features = 1</span></span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>oob_score</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="48">
 <pre><code>{1: 0.8445945945945946,
  2: 0.831081081081081,
@@ -1015,49 +1035,49 @@ Best value of max_features=  1</code></pre>
 <h3 data-number="14.2.4" class="anchored" data-anchor-id="tuning-all-models-simultaneously"><span class="header-section-number">14.2.4</span> Tuning all models simultaneously</h3>
 <p>Individual model hyperparameters can be tuned simultaneously while ensembling them with a <code>VotingClassifier()</code>. However, this approach can be too expensive for even moderately-sized datasets.</p>
 <div id="bc1f1706" class="cell">
-<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the param grid with the names of the models as prefixes</span></span>
-<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a>model_ada <span class="op">=</span> AdaBoostClassifier(base_estimator <span class="op">=</span> DecisionTreeClassifier())</span>
-<span id="cb54-4"><a href="#cb54-4" aria-hidden="true" tabindex="-1"></a>model_rf <span class="op">=</span> RandomForestClassifier()</span>
-<span id="cb54-5"><a href="#cb54-5" aria-hidden="true" tabindex="-1"></a>model_gb <span class="op">=</span> GradientBoostingClassifier()</span>
-<span id="cb54-6"><a href="#cb54-6" aria-hidden="true" tabindex="-1"></a>model_xgb <span class="op">=</span> xgb.XGBClassifier()</span>
-<span id="cb54-7"><a href="#cb54-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb54-8"><a href="#cb54-8" aria-hidden="true" tabindex="-1"></a>ensemble_model <span class="op">=</span> VotingClassifier(estimators<span class="op">=</span>[(<span class="st">'ada'</span>,model_ada),(<span class="st">'rf'</span>,model_rf),(<span class="st">'gb'</span>,model_gb),(<span class="st">'xgb'</span>,model_xgb)])</span>
-<span id="cb54-9"><a href="#cb54-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb54-10"><a href="#cb54-10" aria-hidden="true" tabindex="-1"></a>hp_grid <span class="op">=</span> <span class="bu">dict</span>()</span>
-<span id="cb54-11"><a href="#cb54-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb54-12"><a href="#cb54-12" aria-hidden="true" tabindex="-1"></a><span class="co"># XGBoost</span></span>
-<span id="cb54-13"><a href="#cb54-13" aria-hidden="true" tabindex="-1"></a>hp_grid[<span class="st">'xgb__n_estimators'</span>] <span class="op">=</span> [<span class="dv">25</span>, <span class="dv">100</span>,<span class="dv">250</span>,<span class="dv">50</span>]</span>
-<span id="cb54-14"><a href="#cb54-14" aria-hidden="true" tabindex="-1"></a>hp_grid[<span class="st">'xgb__max_depth'</span>] <span class="op">=</span> [<span class="dv">4</span>, <span class="dv">6</span> ,<span class="dv">8</span>]</span>
-<span id="cb54-15"><a href="#cb54-15" aria-hidden="true" tabindex="-1"></a>hp_grid[<span class="st">'xgb__learning_rate'</span>] <span class="op">=</span> [<span class="fl">0.01</span>, <span class="fl">0.1</span>, <span class="fl">1.0</span>]</span>
-<span id="cb54-16"><a href="#cb54-16" aria-hidden="true" tabindex="-1"></a>hp_grid[<span class="st">'xgb__gamma'</span>] <span class="op">=</span> [<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">10</span>, <span class="dv">100</span>]</span>
-<span id="cb54-17"><a href="#cb54-17" aria-hidden="true" tabindex="-1"></a>hp_grid[<span class="st">'xgb__reg_lambda'</span>] <span class="op">=</span> [<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">10</span>, <span class="dv">100</span>]</span>
-<span id="cb54-18"><a href="#cb54-18" aria-hidden="true" tabindex="-1"></a>hp_grid[<span class="st">'xgb__subsample'</span>] <span class="op">=</span> [<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">10</span>, <span class="dv">100</span>]</span>
-<span id="cb54-19"><a href="#cb54-19" aria-hidden="true" tabindex="-1"></a>hp_grid[<span class="st">'xgb__scale_pos_weight'</span>] <span class="op">=</span> [<span class="fl">1.0</span>, <span class="fl">1.25</span>, <span class="fl">1.5</span>]</span>
-<span id="cb54-20"><a href="#cb54-20" aria-hidden="true" tabindex="-1"></a>hp_grid[<span class="st">'xgb__colsample_bytree'</span>] <span class="op">=</span> [<span class="fl">0.5</span>, <span class="fl">0.75</span>, <span class="fl">1.0</span>]</span>
-<span id="cb54-21"><a href="#cb54-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb54-22"><a href="#cb54-22" aria-hidden="true" tabindex="-1"></a><span class="co"># AdaBoost</span></span>
-<span id="cb54-23"><a href="#cb54-23" aria-hidden="true" tabindex="-1"></a>hp_grid[<span class="st">'ada__n_estimators'</span>] <span class="op">=</span> [<span class="dv">10</span>, <span class="dv">50</span>, <span class="dv">100</span>,<span class="dv">200</span>,<span class="dv">500</span>]</span>
-<span id="cb54-24"><a href="#cb54-24" aria-hidden="true" tabindex="-1"></a>hp_grid[<span class="st">'ada__base_estimator__max_depth'</span>] <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">5</span>]</span>
-<span id="cb54-25"><a href="#cb54-25" aria-hidden="true" tabindex="-1"></a>hp_grid[<span class="st">'ada__learning_rate'</span>] <span class="op">=</span> [<span class="fl">0.01</span>, <span class="fl">0.1</span>, <span class="fl">0.2</span>]</span>
-<span id="cb54-26"><a href="#cb54-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb54-27"><a href="#cb54-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Random Forest</span></span>
-<span id="cb54-28"><a href="#cb54-28" aria-hidden="true" tabindex="-1"></a>hp_grid[<span class="st">'rf__n_estimators'</span>] <span class="op">=</span> [<span class="dv">100</span>]</span>
-<span id="cb54-29"><a href="#cb54-29" aria-hidden="true" tabindex="-1"></a>hp_grid[<span class="st">'rf__max_features'</span>] <span class="op">=</span> [<span class="dv">3</span>, <span class="dv">6</span>, <span class="dv">9</span>, <span class="dv">12</span>, <span class="dv">15</span>]</span>
-<span id="cb54-30"><a href="#cb54-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb54-31"><a href="#cb54-31" aria-hidden="true" tabindex="-1"></a><span class="co"># GradBoost</span></span>
-<span id="cb54-32"><a href="#cb54-32" aria-hidden="true" tabindex="-1"></a>hp_grid[<span class="st">'gb__n_estimators'</span>] <span class="op">=</span> [<span class="dv">10</span>, <span class="dv">50</span>, <span class="dv">100</span>,<span class="dv">200</span>,<span class="dv">500</span>]</span>
-<span id="cb54-33"><a href="#cb54-33" aria-hidden="true" tabindex="-1"></a>hp_grid[<span class="st">'gb__max_depth'</span>] <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">5</span>]</span>
-<span id="cb54-34"><a href="#cb54-34" aria-hidden="true" tabindex="-1"></a>hp_grid[<span class="st">'gb__learning_rate'</span>] <span class="op">=</span> [<span class="fl">0.01</span>, <span class="fl">0.1</span>, <span class="fl">0.2</span>, <span class="fl">1.0</span>]</span>
-<span id="cb54-35"><a href="#cb54-35" aria-hidden="true" tabindex="-1"></a>hp_grid[<span class="st">'gb__subsample'</span>] <span class="op">=</span> [<span class="fl">0.5</span>, <span class="fl">0.75</span>, <span class="fl">1.0</span>]</span>
-<span id="cb54-36"><a href="#cb54-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb54-37"><a href="#cb54-37" aria-hidden="true" tabindex="-1"></a>start_time <span class="op">=</span> time.time()</span>
-<span id="cb54-38"><a href="#cb54-38" aria-hidden="true" tabindex="-1"></a>grid <span class="op">=</span> RandomizedSearchCV(ensemble_model, hp_grid, cv<span class="op">=</span><span class="dv">5</span>, scoring<span class="op">=</span><span class="st">'accuracy'</span>, verbose <span class="op">=</span> <span class="va">True</span>,</span>
-<span id="cb54-39"><a href="#cb54-39" aria-hidden="true" tabindex="-1"></a>                         n_iter <span class="op">=</span> <span class="dv">100</span>, n_jobs<span class="op">=-</span><span class="dv">1</span>).fit(Xtrain, ytrain)</span>
-<span id="cb54-40"><a href="#cb54-40" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Time taken = "</span>, <span class="bu">round</span>((time.time()<span class="op">-</span>start_time)<span class="op">/</span><span class="dv">60</span>), <span class="st">" minutes"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the param grid with the names of the models as prefixes</span></span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a>model_ada <span class="op">=</span> AdaBoostClassifier(base_estimator <span class="op">=</span> DecisionTreeClassifier())</span>
+<span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a>model_rf <span class="op">=</span> RandomForestClassifier()</span>
+<span id="cb55-5"><a href="#cb55-5" aria-hidden="true" tabindex="-1"></a>model_gb <span class="op">=</span> GradientBoostingClassifier()</span>
+<span id="cb55-6"><a href="#cb55-6" aria-hidden="true" tabindex="-1"></a>model_xgb <span class="op">=</span> xgb.XGBClassifier()</span>
+<span id="cb55-7"><a href="#cb55-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-8"><a href="#cb55-8" aria-hidden="true" tabindex="-1"></a>ensemble_model <span class="op">=</span> VotingClassifier(estimators<span class="op">=</span>[(<span class="st">'ada'</span>,model_ada),(<span class="st">'rf'</span>,model_rf),(<span class="st">'gb'</span>,model_gb),(<span class="st">'xgb'</span>,model_xgb)])</span>
+<span id="cb55-9"><a href="#cb55-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-10"><a href="#cb55-10" aria-hidden="true" tabindex="-1"></a>hp_grid <span class="op">=</span> <span class="bu">dict</span>()</span>
+<span id="cb55-11"><a href="#cb55-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-12"><a href="#cb55-12" aria-hidden="true" tabindex="-1"></a><span class="co"># XGBoost</span></span>
+<span id="cb55-13"><a href="#cb55-13" aria-hidden="true" tabindex="-1"></a>hp_grid[<span class="st">'xgb__n_estimators'</span>] <span class="op">=</span> [<span class="dv">25</span>, <span class="dv">100</span>,<span class="dv">250</span>,<span class="dv">50</span>]</span>
+<span id="cb55-14"><a href="#cb55-14" aria-hidden="true" tabindex="-1"></a>hp_grid[<span class="st">'xgb__max_depth'</span>] <span class="op">=</span> [<span class="dv">4</span>, <span class="dv">6</span> ,<span class="dv">8</span>]</span>
+<span id="cb55-15"><a href="#cb55-15" aria-hidden="true" tabindex="-1"></a>hp_grid[<span class="st">'xgb__learning_rate'</span>] <span class="op">=</span> [<span class="fl">0.01</span>, <span class="fl">0.1</span>, <span class="fl">1.0</span>]</span>
+<span id="cb55-16"><a href="#cb55-16" aria-hidden="true" tabindex="-1"></a>hp_grid[<span class="st">'xgb__gamma'</span>] <span class="op">=</span> [<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">10</span>, <span class="dv">100</span>]</span>
+<span id="cb55-17"><a href="#cb55-17" aria-hidden="true" tabindex="-1"></a>hp_grid[<span class="st">'xgb__reg_lambda'</span>] <span class="op">=</span> [<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">10</span>, <span class="dv">100</span>]</span>
+<span id="cb55-18"><a href="#cb55-18" aria-hidden="true" tabindex="-1"></a>hp_grid[<span class="st">'xgb__subsample'</span>] <span class="op">=</span> [<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">10</span>, <span class="dv">100</span>]</span>
+<span id="cb55-19"><a href="#cb55-19" aria-hidden="true" tabindex="-1"></a>hp_grid[<span class="st">'xgb__scale_pos_weight'</span>] <span class="op">=</span> [<span class="fl">1.0</span>, <span class="fl">1.25</span>, <span class="fl">1.5</span>]</span>
+<span id="cb55-20"><a href="#cb55-20" aria-hidden="true" tabindex="-1"></a>hp_grid[<span class="st">'xgb__colsample_bytree'</span>] <span class="op">=</span> [<span class="fl">0.5</span>, <span class="fl">0.75</span>, <span class="fl">1.0</span>]</span>
+<span id="cb55-21"><a href="#cb55-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-22"><a href="#cb55-22" aria-hidden="true" tabindex="-1"></a><span class="co"># AdaBoost</span></span>
+<span id="cb55-23"><a href="#cb55-23" aria-hidden="true" tabindex="-1"></a>hp_grid[<span class="st">'ada__n_estimators'</span>] <span class="op">=</span> [<span class="dv">10</span>, <span class="dv">50</span>, <span class="dv">100</span>,<span class="dv">200</span>,<span class="dv">500</span>]</span>
+<span id="cb55-24"><a href="#cb55-24" aria-hidden="true" tabindex="-1"></a>hp_grid[<span class="st">'ada__base_estimator__max_depth'</span>] <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">5</span>]</span>
+<span id="cb55-25"><a href="#cb55-25" aria-hidden="true" tabindex="-1"></a>hp_grid[<span class="st">'ada__learning_rate'</span>] <span class="op">=</span> [<span class="fl">0.01</span>, <span class="fl">0.1</span>, <span class="fl">0.2</span>]</span>
+<span id="cb55-26"><a href="#cb55-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-27"><a href="#cb55-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Random Forest</span></span>
+<span id="cb55-28"><a href="#cb55-28" aria-hidden="true" tabindex="-1"></a>hp_grid[<span class="st">'rf__n_estimators'</span>] <span class="op">=</span> [<span class="dv">100</span>]</span>
+<span id="cb55-29"><a href="#cb55-29" aria-hidden="true" tabindex="-1"></a>hp_grid[<span class="st">'rf__max_features'</span>] <span class="op">=</span> [<span class="dv">3</span>, <span class="dv">6</span>, <span class="dv">9</span>, <span class="dv">12</span>, <span class="dv">15</span>]</span>
+<span id="cb55-30"><a href="#cb55-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-31"><a href="#cb55-31" aria-hidden="true" tabindex="-1"></a><span class="co"># GradBoost</span></span>
+<span id="cb55-32"><a href="#cb55-32" aria-hidden="true" tabindex="-1"></a>hp_grid[<span class="st">'gb__n_estimators'</span>] <span class="op">=</span> [<span class="dv">10</span>, <span class="dv">50</span>, <span class="dv">100</span>,<span class="dv">200</span>,<span class="dv">500</span>]</span>
+<span id="cb55-33"><a href="#cb55-33" aria-hidden="true" tabindex="-1"></a>hp_grid[<span class="st">'gb__max_depth'</span>] <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">5</span>]</span>
+<span id="cb55-34"><a href="#cb55-34" aria-hidden="true" tabindex="-1"></a>hp_grid[<span class="st">'gb__learning_rate'</span>] <span class="op">=</span> [<span class="fl">0.01</span>, <span class="fl">0.1</span>, <span class="fl">0.2</span>, <span class="fl">1.0</span>]</span>
+<span id="cb55-35"><a href="#cb55-35" aria-hidden="true" tabindex="-1"></a>hp_grid[<span class="st">'gb__subsample'</span>] <span class="op">=</span> [<span class="fl">0.5</span>, <span class="fl">0.75</span>, <span class="fl">1.0</span>]</span>
+<span id="cb55-36"><a href="#cb55-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-37"><a href="#cb55-37" aria-hidden="true" tabindex="-1"></a>start_time <span class="op">=</span> time.time()</span>
+<span id="cb55-38"><a href="#cb55-38" aria-hidden="true" tabindex="-1"></a>grid <span class="op">=</span> RandomizedSearchCV(ensemble_model, hp_grid, cv<span class="op">=</span><span class="dv">5</span>, scoring<span class="op">=</span><span class="st">'accuracy'</span>, verbose <span class="op">=</span> <span class="va">True</span>,</span>
+<span id="cb55-39"><a href="#cb55-39" aria-hidden="true" tabindex="-1"></a>                         n_iter <span class="op">=</span> <span class="dv">100</span>, n_jobs<span class="op">=-</span><span class="dv">1</span>).fit(Xtrain, ytrain)</span>
+<span id="cb55-40"><a href="#cb55-40" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Time taken = "</span>, <span class="bu">round</span>((time.time()<span class="op">-</span>start_time)<span class="op">/</span><span class="dv">60</span>), <span class="st">" minutes"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div id="97a2b9e0" class="cell" data-execution_count="113">
-<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a>grid.best_estimator_.score(Xtest, ytest)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>grid.best_estimator_.score(Xtest, ytest)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="113">
 <pre><code>0.8120805369127517</code></pre>
 </div>

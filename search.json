@@ -846,6 +846,61 @@
     ]
   },
   {
+    "objectID": "Assignment5_questions.html",
+    "href": "Assignment5_questions.html",
+    "title": "Assignment 5",
+    "section": "",
+    "text": "Instructions",
+    "crumbs": [
+      "Assignments",
+      "<span class='chapter-number'>19</span>  <span class='chapter-title'>Assignment 5</span>"
+    ]
+  },
+  {
+    "objectID": "Assignment5_questions.html#instructions",
+    "href": "Assignment5_questions.html#instructions",
+    "title": "Assignment 5",
+    "section": "",
+    "text": "You may talk to a friend, discuss the questions and potential directions for solving them. However, you need to write your own solutions and code separately, and not as a group activity.\nWrite your code in the Code cells and your answers in the Markdown cells of the Jupyter notebook. Ensure that the solution is written neatly enough to for the graders to understand and follow.\nUse Quarto to render the .ipynb file as HTML. You will need to open the command prompt, navigate to the directory containing the file, and use the command: quarto render filename.ipynb --to html. Submit the HTML file.\nThe assignment is worth 100 points, and is due on Tuesday, 4th June 2024 at 11:59 pm.\nFive points are properly formatting the assignment. The breakdown is as follows:\n\nMust be an HTML file rendered using Quarto (1 point). If you have a Quarto issue, you must mention the issue & quote the error you get when rendering using Quarto in the comments section of Canvas, and submit the ipynb file.\nNo name can be written on the assignment, nor can there be any indicator of the student’s identity—e.g. printouts of the working directory should not be included in the final submission. (1 point)\nThere aren’t excessively long outputs of extraneous information (e.g. no printouts of entire data frames without good reason, there aren’t long printouts of which iteration a loop is on, there aren’t long sections of commented-out code, etc.) (1 point)\nFinal answers to each question are written in the Markdown cells. (1 point)\nThere is no piece of unnecessary / redundant code, and no unnecessary / redundant text. (1 point)\n\nThe maximum possible score in the assigment is 95 + 5 = 100 out of 100.",
+    "crumbs": [
+      "Assignments",
+      "<span class='chapter-number'>19</span>  <span class='chapter-title'>Assignment 5</span>"
+    ]
+  },
+  {
+    "objectID": "Assignment5_questions.html#conceptual-9-points",
+    "href": "Assignment5_questions.html#conceptual-9-points",
+    "title": "Assignment 5",
+    "section": "1) Conceptual (9 points)",
+    "text": "1) Conceptual (9 points)\n\na)\nIs it possible for an ensemble model (Voting or Stacking) to perform worse than one or more of its base models? (1 point) Why or why not? (4 points)\n\n\nb)\nIf the ensemble model (Voting or Stacking) does perform worse than one or more of its base models, then what should be the course of action? (4 points)",
+    "crumbs": [
+      "Assignments",
+      "<span class='chapter-number'>19</span>  <span class='chapter-title'>Assignment 5</span>"
+    ]
+  },
+  {
+    "objectID": "Assignment5_questions.html#regression-with-ensembles-45-points",
+    "href": "Assignment5_questions.html#regression-with-ensembles-45-points",
+    "title": "Assignment 5",
+    "section": "2) Regression with Ensembles (45 points)",
+    "text": "2) Regression with Ensembles (45 points)\nFor this question, you will use the miami_housing.csv file. You can find the description for the variables here.\nThe SALE_PRC variable is the regression response and the rest of the variables, except PARCELNO, are the predictors.\n\na)\nRead the dataset. Create the training and test sets with a 60%-40% split and random_state = 1. (1 point)\n\n\nb)\nRecreate and train all the following tuned regression models: (5x0.5 = 2.5 points) Set all random_states to 1.\n\nBagged Trees from Assignment 3\nRandom Forest from Assignment 3\nAdaBoost from Assignment 4\nGradient Boosting from Assignment 4\nXGBoost from Assignment 4\n\nNote that there will not be any cross-validation, since the models are already tuned, i.e. created with the best hyperparameters found in the previous assignments.\nPrint the test MAE of all five tuned models. (5x0.5 = 2.5 points)\n\n\nc)\nTrain a Voting Ensemble Regressor with all the five models in part b. Note that all the models are separately tuned, which means the Voting Ensemble is tuned (in a greedy way.) Print the test MAE of the Voting Ensemble. (5 points) Is it better than all the base models? (1 point)\n\n\nd)\nRetrain the Voting Ensemble Regressor with the two models that return the lowest MAE in part b. Print the test MAE and compare with the results in part b and c. (3 points)\n\n\ne) Stacking ensemble with Linear regression\nDevelop a linear regression metamodel based on the models in Q2(b). Report the MAE of the metamodel on test data. Which model has the highest weight in the ensemble?\nNote:\n\nYou may use the StackingRegressor() function. However, as the next set of questions ask you to develop different metamodels based on the models in 2(b), using the StackingRegressor() will be inefficient as it will involve fitting each of the individual models every time it is called.\nA faster way will be to use the cross_val_predict() function to compute th 5-fold cross-validated predictions from each of the models in 2(b), consider these predictions from the 5 models as 5 different predictors, and fit the metamodel. Once computed, these cross-validated predictions can be used with different metamodels without the need of fitting the individual models repeatedlty with StackingRegressor().\nIf you are using the faster way (in (2)), use a 5-fold KFold object with random_state=1 and shuffle=True for the base model predictions.\n\n(5 points)\n\n\nf)\nPrint the weights of the base models of the Stacking Ensemble in 2(e). (2 points)\n\n\ng)\nTrain and tune a Stacking Ensemble Regressor with all the five models in 2(b) and Lasso as the meta model. Use a 5-fold KFold object with random_state=1 and shuffle=True both for the base model predictions and the cross-validation of the ensemble model. Try out [0.001, 0.01, 0.1, 1, 10, 100] for the Lasso hyperparameter. (3 points)\nPrint the best CV and test MAE. (1 point)\nYou are optimizing for MAE, will you use LassoCV or grid search, why (2 points)?\n\n\nh)\nPrint the weights of the base models of the Stacking Ensemble in part g. (1 point)\n\n\ni)\nTrain and tune a Stacking Ensemble Regressor with all the five models in 2(b) and Decision Tree as the meta model. (random_state=1) Use a 5-fold KFold object with random_state=1 and shuffle=True both for the base model predictions and the cross-validation of the ensemble model. Try out max_depth from 2 to 10 (inclusive) for the tree hyperparameter. (5 points)\nPrint the best CV and test MAE. (1 point)\n\n\nj)\nPrint the importances of the base models of the Stacking Ensemble in part i. (2 points)\n\n\nk)\nCompare the weights and importances you found in 2(f), 2(h), and 2(j). Considering the base model performances, do they make sense? (2 points)\n\n\nl)\nUsing the three Stacking Ensemble models you created in parts 2(e), 2(g), and 2(i), create an “ensemble of ensembles” which will use the three Stacking Ensemble models as base models to a Voting Ensemble Regressor. (5 points) Print the test MAE. (1 point)",
+    "crumbs": [
+      "Assignments",
+      "<span class='chapter-number'>19</span>  <span class='chapter-title'>Assignment 5</span>"
+    ]
+  },
+  {
+    "objectID": "Assignment5_questions.html#classification-with-ensembles-41-points",
+    "href": "Assignment5_questions.html#classification-with-ensembles-41-points",
+    "title": "Assignment 5",
+    "section": "3) Classification with Ensembles (41 points)",
+    "text": "3) Classification with Ensembles (41 points)\nFor this question, you will use the train.csv and test.csv files. Each observation is a marketing call from a banking institution. y variable represents if the client subscribed for a term deposit (1) or not (0) and it is the classification response.\nThe predictors are age, day, month, and education. (As mentioned last quarter, duration cannot be used as a predictor - no credit will be given to models that use it.)\n\na)\nPreprocess the data:\n\nRead the files.\nCreate the predictor and response variables.\nConvert the response to 1s and 0s.\nOne-hot-encode the categorical predictors (Do not use drop_first.)\n\n(1 point)\n\n\nb)\nTrain a hard Voting Ensemble Classifier with all the following tuned models and their tuned thresholds:\n\nRandom Forest from Assignment 3\nLightGBM from Assignment 4\nCatBoost from Assignment 4\n\nPrint the test accuracy and test recall of the ensemble. (8 points)\n\n\nc)\nUsing the base models in part b, train a soft Voting Classifier. Note that you should not use the tuned thresholds for the base models, but tune the threshold by cross-validating the prediction probabilities of the ensemble. (10 points)\nPrint the best cross-validation accuracy with a recall above 60%, along with the threshold that returns that combination. (2 points)\n\n\nd)\nUsing the trained Soft Voting Classifier in part c and the tuned threshold, print the test accuracy and test recall. (2 points)\n\n\ne)\nUsing the base models in 3(b), train a Stacking Classifier using logistic regression as the metamodel. Tune both the hyperparameter and the threshold to reach a cross-validation accuracy of 70% and a cross-validation recall of 60%. Print the optimal value of the regularization parameter and threshold.\n(13 points)\n\n\nf)\nUsing the trained Stacking Classifier in 3(e) and the tuned threshold, print the test accuracy and test recall. (2 points)\n\n\ng)\nReturn the weights of the base models in the Stacking Classifier. (2 points) Which base model seems to be the most important for the ensemble? (1 point)",
+    "crumbs": [
+      "Assignments",
+      "<span class='chapter-number'>19</span>  <span class='chapter-title'>Assignment 5</span>"
+    ]
+  },
+  {
     "objectID": "Stratified splitting.html",
     "href": "Stratified splitting.html",
     "title": "Appendix A — Stratified splitting (classification problem)",

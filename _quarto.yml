@@ -39,6 +39,7 @@ book:
         - Assignment 2 questions.ipynb
         - Assignment 3.ipynb
         - HomeworkAssignment4.ipynb
+        - Assignment5_questions.ipynb
 
   appendices: 
     - Stratified splitting.ipynb

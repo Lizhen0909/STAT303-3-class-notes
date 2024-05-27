@@ -45,6 +45,7 @@ book:
     - Stratified splitting.ipynb
     - Parallel_processing_Bonus_Questions.ipynb
     - Miscellaneous questions.ipynb
+    - Pipeline.ipynb
     - Datasets.ipynb
 
 format:

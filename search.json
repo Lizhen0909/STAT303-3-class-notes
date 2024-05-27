@@ -1044,11 +1044,44 @@
     ]
   },
   {
-    "objectID": "Pipeline.html#i-computed-the-best-mars-features-on-google-collab-and-am-importing-it-as-a-csv",
-    "href": "Pipeline.html#i-computed-the-best-mars-features-on-google-collab-and-am-importing-it-as-a-csv",
+    "objectID": "Pipeline.html#computed-the-best-mars-features-on-google-collab-and-am-importing-it-as-a-csv",
+    "href": "Pipeline.html#computed-the-best-mars-features-on-google-collab-and-am-importing-it-as-a-csv",
     "title": "Appendix D — Best Kaggle submission (Spring 2023)",
-    "section": "D.7 I computed the best MARS features on google collab and am importing it as a csv",
-    "text": "D.7 I computed the best MARS features on google collab and am importing it as a csv\n\nMARS_features = pd.read_csv('features.csv')\n\nfiltered_features = top_50_rf[~top_50_rf['predictor'].isin(MARS_features)]\nnew_df = filtered_features[['predictor']]",
+    "section": "D.7 Computed the best MARS features on google collab and am importing it as a csv",
+    "text": "D.7 Computed the best MARS features on google collab and am importing it as a csv\n\nMARS_features = pd.read_csv('features.csv')\n\nfiltered_features = top_50_rf[~top_50_rf['predictor'].isin(MARS_features)]\nnew_df = filtered_features[['predictor']]",
+    "crumbs": [
+      "Appendices",
+      "<span class='chapter-number'>D</span>  <span class='chapter-title'>Best Kaggle submission (Spring 2023)</span>"
+    ]
+  },
+  {
+    "objectID": "Pipeline.html#above-code-should-only-take-predictors-from-the-random-forest-subset-that-are-not-present-in-mars-i-am-not-sure-if-it-worked-however-so-there-might-be-some-overlap",
+    "href": "Pipeline.html#above-code-should-only-take-predictors-from-the-random-forest-subset-that-are-not-present-in-mars-i-am-not-sure-if-it-worked-however-so-there-might-be-some-overlap",
+    "title": "Appendix D — Best Kaggle submission (Spring 2023)",
+    "section": "D.8 Above code should only take predictors from the random forest subset that are not present in MARS, I am not sure if it worked, however, so there might be some overlap",
+    "text": "D.8 Above code should only take predictors from the random forest subset that are not present in MARS, I am not sure if it worked, however, so there might be some overlap\n\nrf_top_30 = new_df[-30:][::-1]\n\ntop_predictors = rf_top_30['predictor']\nX_top_rf = X.iloc[:,top_predictors]\n\ntop_predictors_MARS = MARS_features['predictor']\nX_top_MARS = X[top_predictors_MARS]",
+    "crumbs": [
+      "Appendices",
+      "<span class='chapter-number'>D</span>  <span class='chapter-title'>Best Kaggle submission (Spring 2023)</span>"
+    ]
+  },
+  {
+    "objectID": "Pipeline.html#get-further-subset-of-features-by-selecting-kbest",
+    "href": "Pipeline.html#get-further-subset-of-features-by-selecting-kbest",
+    "title": "Appendix D — Best Kaggle submission (Spring 2023)",
+    "section": "D.9 Get further subset of features by selecting kbest",
+    "text": "D.9 Get further subset of features by selecting kbest\n\nfrom sklearn.feature_selection import SelectKBest, f_regression\n\n# Assuming X is your feature set and log_y is your target variable\nselector = SelectKBest(f_regression, k=40)\nX_new = selector.fit_transform(X, log_y)\n\n# Get the indices sorted by most important to least important\nindices = np.argsort(selector.scores_)[::-1]\n\n# Get the names of the top 40 features\nX_top_kbest = []\nfor i in range(40):\n    X_top_kbest.append(X.columns[indices[i]])\n    \nX_top_kbest = X[X_top_kbest]",
+    "crumbs": [
+      "Appendices",
+      "<span class='chapter-number'>D</span>  <span class='chapter-title'>Best Kaggle submission (Spring 2023)</span>"
+    ]
+  },
+  {
+    "objectID": "Pipeline.html#test-cleaning",
+    "href": "Pipeline.html#test-cleaning",
+    "title": "Appendix D — Best Kaggle submission (Spring 2023)",
+    "section": "D.10 Test Cleaning",
+    "text": "D.10 Test Cleaning\n\ntest = pd.read_csv('test.csv')\n\ntest_x = test.drop(\"id\", axis=1)\ntest_x = test_x.apply(pd.to_numeric, errors='coerce')\n\nscaler = StandardScaler()\ntest_X_scaled = pd.DataFrame(scaler.fit_transform(test_x), columns=test_x.columns)\n\nimputer_KNN = KNNImputer(n_neighbors=7)\ntest_x = pd.DataFrame(imputer_KNN.fit_transform(test_X_scaled), columns=test_x.columns)",
     "crumbs": [
       "Appendices",
       "<span class='chapter-number'>D</span>  <span class='chapter-title'>Best Kaggle submission (Spring 2023)</span>"

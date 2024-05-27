@@ -978,14 +978,36 @@
     ]
   },
   {
+    "objectID": "Pipeline.html",
+    "href": "Pipeline.html",
+    "title": "Appendix D — Best Kaggle submission (Spring 2023)",
+    "section": "",
+    "text": "E How this model works\nThis model was created in order to introduce bias to the base models of the stacked model. Each of these models individually will not offer a great solution, but a stacked model with these as the base will allow the overall model to work off the strengths of the individual models.\nFour feature sets were used: The top predictors from a random forest model, with the number of features being decided by a forward step-wise 5-fold cv process (not in this code), where the most significant model was added first and the RMSE on the train data was calculated from there.\nThe top predictors from a MARS model: These were the significant predictors in a MARS model where X predicts log_y (no cv and the code is not present as I could only get it to work on Google Collab).\nTop 40 predictors from kbest: I wanted to add another predictor subset, but was sttuggling to think of other ways. K-best is a function from sklearn, and provided different features from the MARS and RF best predictors so I decided to use it.\nThe entire predictor set: This was used to train a catboost regressor on the entire dataset, which is relatively quick and provided higher accuracy for the meta model to learn from.",
+    "crumbs": [
+      "Appendices",
+      "<span class='chapter-number'>D</span>  <span class='chapter-title'>Best Kaggle submission (Spring 2023)</span>"
+    ]
+  },
+  {
+    "objectID": "Pipeline.html#how-to-use-the-pipeline",
+    "href": "Pipeline.html#how-to-use-the-pipeline",
+    "title": "Appendix D — Best Kaggle submission (Spring 2023)",
+    "section": "E.1 How to use the pipeline",
+    "text": "E.1 How to use the pipeline\n\nrf_pipe = Pipeline([\n    ('column_transformer', ColumnTransformer([('rf_transform', 'passthrough', X_top_kbest.columns)], remainder='drop')),\n    ('rf', rf_model)\n])\n\nThe above code is used in the actual model, and is used as an example here. Pipeline is also a feature from sklearn that allows multiple functions to be executed in order. This can be used to streamline many processes.\nIn this case, there are two functions. The first is the ‘column_transformer,’ which looking back, I probably should have created a unique name for every transformation. This works by using ColumnTransformer, which takes the subset of columns specified, in this case X_top_kbest.columns. The ‘passthrough’ indicates that these are the columns to be worked on, with the remainder being dropped. ‘rf’ is the name in the pipeline I gave the rf_model. I gave unique names to every model depending on what subset they were working on. e.g. ‘rf1’ corresponds with the MARS predictors.",
+    "crumbs": [
+      "Appendices",
+      "<span class='chapter-number'>D</span>  <span class='chapter-title'>Best Kaggle submission (Spring 2023)</span>"
+    ]
+  },
+  {
     "objectID": "Datasets.html",
     "href": "Datasets.html",
-    "title": "Appendix D — Datasets, assignment and project files",
+    "title": "Appendix E — Datasets, assignment and project files",
     "section": "",
     "text": "Datasets used in the book, assignment files, project files, and prediction problems report tempate can be found here",
     "crumbs": [
       "Appendices",
-      "<span class='chapter-number'>D</span>  <span class='chapter-title'>Datasets, assignment and project files</span>"
+      "<span class='chapter-number'>E</span>  <span class='chapter-title'>Datasets, assignment and project files</span>"
     ]
   }
 ]

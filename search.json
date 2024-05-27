@@ -982,7 +982,7 @@
     "href": "Pipeline.html",
     "title": "Appendix D — Best Kaggle submission (Spring 2023)",
     "section": "",
-    "text": "E How this model works\nThis model was created in order to introduce bias to the base models of the stacked model. Each of these models individually will not offer a great solution, but a stacked model with these as the base will allow the overall model to work off the strengths of the individual models.\nFour feature sets were used: The top predictors from a random forest model, with the number of features being decided by a forward step-wise 5-fold cv process (not in this code), where the most significant model was added first and the RMSE on the train data was calculated from there.\nThe top predictors from a MARS model: These were the significant predictors in a MARS model where X predicts log_y (no cv and the code is not present as I could only get it to work on Google Collab).\nTop 40 predictors from kbest: I wanted to add another predictor subset, but was sttuggling to think of other ways. K-best is a function from sklearn, and provided different features from the MARS and RF best predictors so I decided to use it.\nThe entire predictor set: This was used to train a catboost regressor on the entire dataset, which is relatively quick and provided higher accuracy for the meta model to learn from.",
+    "text": "D.1 How this model works\nThis model was created in order to introduce bias to the base models of the stacked model. Each of these models individually will not offer a great solution, but a stacked model with these as the base will allow the overall model to work off the strengths of the individual models.\nFour feature sets were used: The top predictors from a random forest model, with the number of features being decided by a forward step-wise 5-fold cv process (not in this code), where the most significant model was added first and the RMSE on the train data was calculated from there.\nThe top predictors from a MARS model: These were the significant predictors in a MARS model where X predicts log_y (no cv and the code is not present as I could only get it to work on Google Collab).\nTop 40 predictors from kbest: I wanted to add another predictor subset, but was sttuggling to think of other ways. K-best is a function from sklearn, and provided different features from the MARS and RF best predictors so I decided to use it.\nThe entire predictor set: This was used to train a catboost regressor on the entire dataset, which is relatively quick and provided higher accuracy for the meta model to learn from.",
     "crumbs": [
       "Appendices",
       "<span class='chapter-number'>D</span>  <span class='chapter-title'>Best Kaggle submission (Spring 2023)</span>"
@@ -992,8 +992,41 @@
     "objectID": "Pipeline.html#how-to-use-the-pipeline",
     "href": "Pipeline.html#how-to-use-the-pipeline",
     "title": "Appendix D — Best Kaggle submission (Spring 2023)",
-    "section": "E.1 How to use the pipeline",
-    "text": "E.1 How to use the pipeline\n\nrf_pipe = Pipeline([\n    ('column_transformer', ColumnTransformer([('rf_transform', 'passthrough', X_top_kbest.columns)], remainder='drop')),\n    ('rf', rf_model)\n])\n\nThe above code is used in the actual model, and is used as an example here. Pipeline is also a feature from sklearn that allows multiple functions to be executed in order. This can be used to streamline many processes.\nIn this case, there are two functions. The first is the ‘column_transformer,’ which looking back, I probably should have created a unique name for every transformation. This works by using ColumnTransformer, which takes the subset of columns specified, in this case X_top_kbest.columns. The ‘passthrough’ indicates that these are the columns to be worked on, with the remainder being dropped. ‘rf’ is the name in the pipeline I gave the rf_model. I gave unique names to every model depending on what subset they were working on. e.g. ‘rf1’ corresponds with the MARS predictors.",
+    "section": "D.2 How to use the pipeline",
+    "text": "D.2 How to use the pipeline\n\nrf_pipe = Pipeline([\n    ('column_transformer', ColumnTransformer([('rf_transform', 'passthrough', X_top_kbest.columns)], remainder='drop')),\n    ('rf', rf_model)\n])\n\nThe above code is used in the actual model, and is used as an example here. Pipeline is also a feature from sklearn that allows multiple functions to be executed in order. This can be used to streamline many processes.\nIn this case, there are two functions. The first is the ‘column_transformer,’ which looking back, I probably should have created a unique name for every transformation. This works by using ColumnTransformer, which takes the subset of columns specified, in this case X_top_kbest.columns. The ‘passthrough’ indicates that these are the columns to be worked on, with the remainder being dropped. ‘rf’ is the name in the pipeline I gave the rf_model. I gave unique names to every model depending on what subset they were working on. e.g. ‘rf1’ corresponds with the MARS predictors.",
+    "crumbs": [
+      "Appendices",
+      "<span class='chapter-number'>D</span>  <span class='chapter-title'>Best Kaggle submission (Spring 2023)</span>"
+    ]
+  },
+  {
+    "objectID": "Pipeline.html#what-the-model-does-overall",
+    "href": "Pipeline.html#what-the-model-does-overall",
+    "title": "Appendix D — Best Kaggle submission (Spring 2023)",
+    "section": "D.3 What the model does overall",
+    "text": "D.3 What the model does overall\nAs mentioned, the purpose of the model is to introduce bias to the base models, which will be overcome by the meta model. A good way to introduct bias is by using different predictors, and different models, which is what I did. I suspect that using other, more different models could work well, but I was not succesful in my attempts. This is a stacking regressor, which is different from a voting one. The difference is that there is a ‘meta model’ that corrects the error for the base models, by learning from the RMSE (or another specified loss function) on the base models. The meta model regressor I used was catboost, as it is the most accurate (I tried many other ways, and I thought that maybe ridge regression would work well, but it did not).\nThe specifics of the model are as follows: (Note, I have lightboost set up to be used in the model, but removing it actually made the model better. I suspect this is because catboost is a very similar model, but provides a lower RMSE)\nThe same, untuned models are run on each predictor subset. The models are random forest, catboost, and adaboost. These are all ran on the MARS subset, the rf subset, and the kbest subset. The catboost model is the only model ran on the entire dataset. 15 fold cross validation is used, which takes around 20-30 minutes to run. This model is not too slow because most of the models are run only on 20-40 predictors. It seems that the higher the k-fold, the better the models, but this is not true as the model gets worse after 15-fold cv. I suspect this is because the model will be testing on very little data for each split, which will not help RMSE, after a point.\nThe exact same model was also ran on a 13-fold cv. The purpose of this was to once again introduce bias. This introduces bias because this will create two different models, each with innacuracies of their own. By themselves, these models are still extremely useful.\nThese models were then combined by simply averaging the output, giving a low RMSE.",
+    "crumbs": [
+      "Appendices",
+      "<span class='chapter-number'>D</span>  <span class='chapter-title'>Best Kaggle submission (Spring 2023)</span>"
+    ]
+  },
+  {
+    "objectID": "Pipeline.html#these-models-are-not-precisely-reproducable",
+    "href": "Pipeline.html#these-models-are-not-precisely-reproducable",
+    "title": "Appendix D — Best Kaggle submission (Spring 2023)",
+    "section": "D.4 These models are not precisely reproducable",
+    "text": "D.4 These models are not precisely reproducable\nBecause these models are untuned, they will give slightly different output every time they are run. To combat this, the models could be tuned for reproducibility, but that could take a very long time. On my first try I got my best RMSE, so it does not take very long. In my case, I saved the model by using pickle, a library to save models. The exact model I used can be uploaded at the very bottom of this under the ‘upload’ section.",
+    "crumbs": [
+      "Appendices",
+      "<span class='chapter-number'>D</span>  <span class='chapter-title'>Best Kaggle submission (Spring 2023)</span>"
+    ]
+  },
+  {
+    "objectID": "Pipeline.html#train-data-cleaning",
+    "href": "Pipeline.html#train-data-cleaning",
+    "title": "Appendix D — Best Kaggle submission (Spring 2023)",
+    "section": "D.5 Train Data Cleaning",
+    "text": "D.5 Train Data Cleaning\n\ntrain = pd.read_csv('train.csv')\n\ny = train.y\nx = train.drop(\"y\", axis=1)\nx = x.drop(\"id\", axis=1)\n\nx = x.apply(pd.to_numeric, errors='coerce')\n\ny = y.apply(pd.to_numeric, errors='coerce')\n\nfrom sklearn.preprocessing import StandardScaler\nscaler = StandardScaler()\nX_scaled = pd.DataFrame(scaler.fit_transform(x), columns=x.columns)\n\nimputer = KNNImputer(n_neighbors=7)\n\nX = pd.DataFrame(imputer.fit_transform(X_scaled), columns=x.columns)\n\nlog_y = np.log(y)",
     "crumbs": [
       "Appendices",
       "<span class='chapter-number'>D</span>  <span class='chapter-title'>Best Kaggle submission (Spring 2023)</span>"

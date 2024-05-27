@@ -1033,6 +1033,28 @@
     ]
   },
   {
+    "objectID": "Pipeline.html#get-top-predictors-from-untuned-random-forest",
+    "href": "Pipeline.html#get-top-predictors-from-untuned-random-forest",
+    "title": "Appendix D — Best Kaggle submission (Spring 2023)",
+    "section": "D.6 Get top predictors from untuned random forest",
+    "text": "D.6 Get top predictors from untuned random forest\n\nmodel = RandomForestRegressor(n_estimators = 100)\nmodel.fit(X,log_y)\n\ntop_50_rf = model.feature_importances_.argsort()[-50:][::-1]\n\ntop_50_rf = pd.DataFrame(top_50_rf)\n\ntop_50_rf.columns = ['predictor']",
+    "crumbs": [
+      "Appendices",
+      "<span class='chapter-number'>D</span>  <span class='chapter-title'>Best Kaggle submission (Spring 2023)</span>"
+    ]
+  },
+  {
+    "objectID": "Pipeline.html#i-computed-the-best-mars-features-on-google-collab-and-am-importing-it-as-a-csv",
+    "href": "Pipeline.html#i-computed-the-best-mars-features-on-google-collab-and-am-importing-it-as-a-csv",
+    "title": "Appendix D — Best Kaggle submission (Spring 2023)",
+    "section": "D.7 I computed the best MARS features on google collab and am importing it as a csv",
+    "text": "D.7 I computed the best MARS features on google collab and am importing it as a csv\n\nMARS_features = pd.read_csv('features.csv')\n\nfiltered_features = top_50_rf[~top_50_rf['predictor'].isin(MARS_features)]\nnew_df = filtered_features[['predictor']]",
+    "crumbs": [
+      "Appendices",
+      "<span class='chapter-number'>D</span>  <span class='chapter-title'>Best Kaggle submission (Spring 2023)</span>"
+    ]
+  },
+  {
     "objectID": "Datasets.html",
     "href": "Datasets.html",
     "title": "Appendix E — Datasets, assignment and project files",

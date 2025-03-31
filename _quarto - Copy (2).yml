@@ -33,6 +33,13 @@ book:
         - Lec9_XGBoost.ipynb
         - Lec11_More boosting models.ipynb
         - Lec10_Ensemble.ipynb
+    - part: "Assignments"
+      chapters:
+        - Assignment1.ipynb
+        - Assignment 2 questions.ipynb
+        - Assignment 3.ipynb
+        - HomeworkAssignment4.ipynb
+        - Assignment5_questions.ipynb
 
   appendices: 
     - Stratified splitting.ipynb

@@ -1,12 +1,13 @@
 project:
   type: book
+  output-dir: docs
 
 
 book:
   title: "Data Science III with python (Class notes)"
   subtitle: "STAT 303-3"
   author: "Arvind Krishna"
-  date: "3/24/2023"
+  date: "4/2/2025"
   
   sidebar:
     search: true
@@ -33,8 +34,8 @@ book:
         - Lec9_XGBoost.ipynb
         - Lec11_More boosting models.ipynb
         - Lec10_Ensemble.ipynb
-
-
+      appendices:
+       - Datasets.ipynb
 
 format:
   html:

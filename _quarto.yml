@@ -35,7 +35,7 @@ book:
         - Lec11_More boosting models.ipynb
         - Lec10_Ensemble.ipynb
       appendices:
-       - Datasets.ipynb
+        - Datasets.ipynb
 
 format:
   html:

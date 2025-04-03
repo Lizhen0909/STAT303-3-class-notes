@@ -6,7 +6,7 @@ project:
 book:
   title: "Data Science III with python (Class notes)"
   subtitle: "STAT 303-3"
-  author: "Arvind Krishna"
+  author: "Lizhen Shi"
   date: "4/2/2025"
   
   sidebar:
@@ -16,9 +16,8 @@ book:
     
   chapters:
     - index.qmd
-    - part: "Sklearn; Bias & Variance; KNN"
+    - part: "Bias & Variance; KNN"
       chapters:
-        - L1_Scikit-learn.ipynb
         - Bias_variance_code.ipynb
         - KNN.ipynb
         - Hyperparameter tuning.ipynb
@@ -34,8 +33,10 @@ book:
         - Lec9_XGBoost.ipynb
         - Lec11_More boosting models.ipynb
         - Lec10_Ensemble.ipynb
-      appendices:
-        - Datasets.ipynb
+  appendices: 
+    - Assignment1_sp25.ipynb
+    #- App_GridSearchCV_vs_RandomSearchCV.ipynb
+    - Datasets.ipynb
 
 format:
   html:

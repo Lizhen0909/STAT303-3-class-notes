@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>12&nbsp; XGBoost – Data Science III with python (Class notes)</title>
+<title>11&nbsp; XGBoost – Data Science III with python (Class notes)</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -118,7 +118,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Lec3_RegressionTrees.html">Tree based models</a></li><li class="breadcrumb-item"><a href="./Lec9_XGBoost.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">XGBoost</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Lec3_RegressionTrees.html">Tree based models</a></li><li class="breadcrumb-item"><a href="./Lec9_XGBoost.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">XGBoost</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -155,7 +155,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
- <span class="menu-text">Sklearn; Bias &amp; Variance; KNN</span></a>
+ <span class="menu-text">Bias &amp; Variance; KNN</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -163,26 +163,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./L1_Scikit-learn.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction to scikit-learn</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./Bias_variance_code.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Bias-variance tradeoff</span></span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Bias-variance tradeoff</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./KNN.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">KNN</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">KNN</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Hyperparameter tuning.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Hyperparameter tuning</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Hyperparameter tuning</span></span></a>
   </div>
 </li>
       </ul>
@@ -199,61 +193,84 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Lec3_RegressionTrees.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Regression trees</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Regression trees</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Lec4_ClassificationTree.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Classification trees</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Classification trees</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Lec4_Bagging.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Bagging</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Bagging</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Bagging (OOB vs K-fold cross-validation).html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Bagging (addendum)</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Bagging (addendum)</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Lec6_RandomForest.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Random Forest</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Random Forest</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Lec7_AdaBoost.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Adaptive Boosting</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Adaptive Boosting</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Lec8_Gradient_Boosting.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Gradient Boosting</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Gradient Boosting</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Lec9_XGBoost.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">XGBoost</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">XGBoost</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Lec11_More boosting models.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">LightGBM and CatBoost</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">LightGBM and CatBoost</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Lec10_Ensemble.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Ensemble modeling</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Ensemble modeling</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Assignment1_sp25.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Assignment 1</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Datasets.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Datasets, assignment and project files</span></span></a>
   </div>
 </li>
       </ul>
@@ -268,20 +285,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#hyperparameters" id="toc-hyperparameters" class="nav-link active" data-scroll-target="#hyperparameters"><span class="header-section-number">12.1</span> Hyperparameters</a></li>
-  <li><a href="#xgboost-for-regression" id="toc-xgboost-for-regression" class="nav-link" data-scroll-target="#xgboost-for-regression"><span class="header-section-number">12.2</span> XGBoost for regression</a>
+  <li><a href="#hyperparameters" id="toc-hyperparameters" class="nav-link active" data-scroll-target="#hyperparameters"><span class="header-section-number">11.1</span> Hyperparameters</a></li>
+  <li><a href="#xgboost-for-regression" id="toc-xgboost-for-regression" class="nav-link" data-scroll-target="#xgboost-for-regression"><span class="header-section-number">11.2</span> XGBoost for regression</a>
   <ul>
-  <li><a href="#number-of-trees-vs-cross-validation-error" id="toc-number-of-trees-vs-cross-validation-error" class="nav-link" data-scroll-target="#number-of-trees-vs-cross-validation-error"><span class="header-section-number">12.2.1</span> Number of trees vs cross validation error</a></li>
-  <li><a href="#depth-of-tree-vs-cross-validation-error" id="toc-depth-of-tree-vs-cross-validation-error" class="nav-link" data-scroll-target="#depth-of-tree-vs-cross-validation-error"><span class="header-section-number">12.2.2</span> Depth of tree vs cross validation error</a></li>
-  <li><a href="#learning-rate-vs-cross-validation-error" id="toc-learning-rate-vs-cross-validation-error" class="nav-link" data-scroll-target="#learning-rate-vs-cross-validation-error"><span class="header-section-number">12.2.3</span> Learning rate vs cross validation error</a></li>
-  <li><a href="#regularization-reg_lambda-vs-cross-validation-error" id="toc-regularization-reg_lambda-vs-cross-validation-error" class="nav-link" data-scroll-target="#regularization-reg_lambda-vs-cross-validation-error"><span class="header-section-number">12.2.4</span> Regularization (<code>reg_lambda</code>) vs cross validation error</a></li>
-  <li><a href="#regularization-gamma-vs-cross-validation-error" id="toc-regularization-gamma-vs-cross-validation-error" class="nav-link" data-scroll-target="#regularization-gamma-vs-cross-validation-error"><span class="header-section-number">12.2.5</span> Regularization (<code>gamma</code>) vs cross validation error</a></li>
-  <li><a href="#tuning-xgboost-regressor" id="toc-tuning-xgboost-regressor" class="nav-link" data-scroll-target="#tuning-xgboost-regressor"><span class="header-section-number">12.2.6</span> Tuning XGboost regressor</a></li>
-  <li><a href="#early-stopping-with-xgboost" id="toc-early-stopping-with-xgboost" class="nav-link" data-scroll-target="#early-stopping-with-xgboost"><span class="header-section-number">12.2.7</span> Early stopping with XGBoost</a></li>
+  <li><a href="#number-of-trees-vs-cross-validation-error" id="toc-number-of-trees-vs-cross-validation-error" class="nav-link" data-scroll-target="#number-of-trees-vs-cross-validation-error"><span class="header-section-number">11.2.1</span> Number of trees vs cross validation error</a></li>
+  <li><a href="#depth-of-tree-vs-cross-validation-error" id="toc-depth-of-tree-vs-cross-validation-error" class="nav-link" data-scroll-target="#depth-of-tree-vs-cross-validation-error"><span class="header-section-number">11.2.2</span> Depth of tree vs cross validation error</a></li>
+  <li><a href="#learning-rate-vs-cross-validation-error" id="toc-learning-rate-vs-cross-validation-error" class="nav-link" data-scroll-target="#learning-rate-vs-cross-validation-error"><span class="header-section-number">11.2.3</span> Learning rate vs cross validation error</a></li>
+  <li><a href="#regularization-reg_lambda-vs-cross-validation-error" id="toc-regularization-reg_lambda-vs-cross-validation-error" class="nav-link" data-scroll-target="#regularization-reg_lambda-vs-cross-validation-error"><span class="header-section-number">11.2.4</span> Regularization (<code>reg_lambda</code>) vs cross validation error</a></li>
+  <li><a href="#regularization-gamma-vs-cross-validation-error" id="toc-regularization-gamma-vs-cross-validation-error" class="nav-link" data-scroll-target="#regularization-gamma-vs-cross-validation-error"><span class="header-section-number">11.2.5</span> Regularization (<code>gamma</code>) vs cross validation error</a></li>
+  <li><a href="#tuning-xgboost-regressor" id="toc-tuning-xgboost-regressor" class="nav-link" data-scroll-target="#tuning-xgboost-regressor"><span class="header-section-number">11.2.6</span> Tuning XGboost regressor</a></li>
+  <li><a href="#early-stopping-with-xgboost" id="toc-early-stopping-with-xgboost" class="nav-link" data-scroll-target="#early-stopping-with-xgboost"><span class="header-section-number">11.2.7</span> Early stopping with XGBoost</a></li>
   </ul></li>
-  <li><a href="#xgboost-for-classification" id="toc-xgboost-for-classification" class="nav-link" data-scroll-target="#xgboost-for-classification"><span class="header-section-number">12.3</span> XGBoost for classification</a>
+  <li><a href="#xgboost-for-classification" id="toc-xgboost-for-classification" class="nav-link" data-scroll-target="#xgboost-for-classification"><span class="header-section-number">11.3</span> XGBoost for classification</a>
   <ul>
-  <li><a href="#precision-recall-vs-scale_pos_weight" id="toc-precision-recall-vs-scale_pos_weight" class="nav-link" data-scroll-target="#precision-recall-vs-scale_pos_weight"><span class="header-section-number">12.3.1</span> Precision &amp; recall vs <code>scale_pos_weight</code></a></li>
+  <li><a href="#precision-recall-vs-scale_pos_weight" id="toc-precision-recall-vs-scale_pos_weight" class="nav-link" data-scroll-target="#precision-recall-vs-scale_pos_weight"><span class="header-section-number">11.3.1</span> Precision &amp; recall vs <code>scale_pos_weight</code></a></li>
   </ul></li>
   </ul>
 </nav>
@@ -289,9 +306,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Lec3_RegressionTrees.html">Tree based models</a></li><li class="breadcrumb-item"><a href="./Lec9_XGBoost.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">XGBoost</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Lec3_RegressionTrees.html">Tree based models</a></li><li class="breadcrumb-item"><a href="./Lec9_XGBoost.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">XGBoost</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">XGBoost</span></h1>
+<h1 class="title"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">XGBoost</span></h1>
 </div>
 
 
@@ -314,8 +331,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><a href="https://dl.acm.org/doi/pdf/10.1145/2939672.2939785">Reference paper</a></p>
 <p><a href="https://www.youtube.com/watch?v=Vly8xGnNiWs">Video by author (Tianqi Chen)</a></p>
 <p><a href="https://www.youtube.com/watch?v=OtD8wVaFm6E">Video by StatQuest</a></p>
-<section id="hyperparameters" class="level2" data-number="12.1">
-<h2 data-number="12.1" class="anchored" data-anchor-id="hyperparameters"><span class="header-section-number">12.1</span> Hyperparameters</h2>
+<section id="hyperparameters" class="level2" data-number="11.1">
+<h2 data-number="11.1" class="anchored" data-anchor-id="hyperparameters"><span class="header-section-number">11.1</span> Hyperparameters</h2>
 <p>The following are some of the important hyperparameters to tune in XGBoost:</p>
 <ol type="1">
 <li><p>Number of trees (<code>n_estimators</code>)</p></li>
@@ -463,10 +480,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>ytest <span class="op">=</span> test[<span class="st">'price'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="xgboost-for-regression" class="level2" data-number="12.2">
-<h2 data-number="12.2" class="anchored" data-anchor-id="xgboost-for-regression"><span class="header-section-number">12.2</span> XGBoost for regression</h2>
-<section id="number-of-trees-vs-cross-validation-error" class="level3" data-number="12.2.1">
-<h3 data-number="12.2.1" class="anchored" data-anchor-id="number-of-trees-vs-cross-validation-error"><span class="header-section-number">12.2.1</span> Number of trees vs cross validation error</h3>
+<section id="xgboost-for-regression" class="level2" data-number="11.2">
+<h2 data-number="11.2" class="anchored" data-anchor-id="xgboost-for-regression"><span class="header-section-number">11.2</span> XGBoost for regression</h2>
+<section id="number-of-trees-vs-cross-validation-error" class="level3" data-number="11.2.1">
+<h3 data-number="11.2.1" class="anchored" data-anchor-id="number-of-trees-vs-cross-validation-error"><span class="header-section-number">11.2.1</span> Number of trees vs cross validation error</h3>
 <p>As the number of trees increase, the prediction bias will decrease. Like gradient boosting is relatively robust <em>(as compared to AdaBoost)</em> to over-fitting (why?) so a large number usually results in better performance. Note that the number of trees still need to be tuned for optimal performance.</p>
 <div id="c4e2c439" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_models():</span>
@@ -523,8 +540,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="depth-of-tree-vs-cross-validation-error" class="level3" data-number="12.2.2">
-<h3 data-number="12.2.2" class="anchored" data-anchor-id="depth-of-tree-vs-cross-validation-error"><span class="header-section-number">12.2.2</span> Depth of tree vs cross validation error</h3>
+<section id="depth-of-tree-vs-cross-validation-error" class="level3" data-number="11.2.2">
+<h3 data-number="11.2.2" class="anchored" data-anchor-id="depth-of-tree-vs-cross-validation-error"><span class="header-section-number">11.2.2</span> Depth of tree vs cross validation error</h3>
 <p>As the depth of each weak learner (decision tree) increases, the complexity of the weak learner will increase. As the complexity increases, the prediction bias will decrease, while the prediction variance will increase. Thus, there will be an optimal depth of each weak learner that minimizes the prediction error.</p>
 <div id="d679fe95" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># get a list of models to evaluate</span></span>
@@ -593,8 +610,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="learning-rate-vs-cross-validation-error" class="level3" data-number="12.2.3">
-<h3 data-number="12.2.3" class="anchored" data-anchor-id="learning-rate-vs-cross-validation-error"><span class="header-section-number">12.2.3</span> Learning rate vs cross validation error</h3>
+<section id="learning-rate-vs-cross-validation-error" class="level3" data-number="11.2.3">
+<h3 data-number="11.2.3" class="anchored" data-anchor-id="learning-rate-vs-cross-validation-error"><span class="header-section-number">11.2.3</span> Learning rate vs cross validation error</h3>
 <p>The optimal learning rate will depend on the number of trees, and vice-versa. If the learning rate is too low, it will take several trees to “learn” the response. If the learning rate is high, the response will be “learned” quickly (with fewer) trees. Learning too quickly will be prone to overfitting, while learning too slowly will be computationally expensive. Thus, there will be an optimal learning rate to minimize the prediction error.</p>
 <div id="3982c702" class="cell" data-execution_count="22">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_models():</span>
@@ -654,8 +671,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="regularization-reg_lambda-vs-cross-validation-error" class="level3" data-number="12.2.4">
-<h3 data-number="12.2.4" class="anchored" data-anchor-id="regularization-reg_lambda-vs-cross-validation-error"><span class="header-section-number">12.2.4</span> Regularization (<code>reg_lambda</code>) vs cross validation error</h3>
+<section id="regularization-reg_lambda-vs-cross-validation-error" class="level3" data-number="11.2.4">
+<h3 data-number="11.2.4" class="anchored" data-anchor-id="regularization-reg_lambda-vs-cross-validation-error"><span class="header-section-number">11.2.4</span> Regularization (<code>reg_lambda</code>) vs cross validation error</h3>
 <p>The parameter <code>reg_lambda</code> penalizes the <em>L2 norm</em> of the leaf scores. For example, in case of classification, it will penalize the summation of the square of log odds of the predicted probability. This penalization will tend to reduce the log odds, thereby reducing the tendency to overfit. “<em>Reducing the log odds</em>” in layman terms will mean not being overly sure about the prediction.</p>
 <p>Without regularization, the algorithm will be closer to the gradient boosting algorithm. Regularization may provide some additional boost to prediction accuracy by reducing over-fitting. In the example below, regularization with <em><code>reg_lambda=1</code> turns out to be better than no regularization </em>(<code>reg_lambda=0</code>)*. Of course, too much regularization may increase bias so much such that it leads to a decrease in prediction accuracy.</p>
 <div id="dffad741" class="cell" data-execution_count="4">
@@ -713,8 +730,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="regularization-gamma-vs-cross-validation-error" class="level3" data-number="12.2.5">
-<h3 data-number="12.2.5" class="anchored" data-anchor-id="regularization-gamma-vs-cross-validation-error"><span class="header-section-number">12.2.5</span> Regularization (<code>gamma</code>) vs cross validation error</h3>
+<section id="regularization-gamma-vs-cross-validation-error" class="level3" data-number="11.2.5">
+<h3 data-number="11.2.5" class="anchored" data-anchor-id="regularization-gamma-vs-cross-validation-error"><span class="header-section-number">11.2.5</span> Regularization (<code>gamma</code>) vs cross validation error</h3>
 <p>The parameter <code>gamma</code> penalizes the tree based on the number of leaves. This is similar to the parameter <code>alpha</code> of cost complexity pruning. As <code>gamma</code> increases, more leaves will be pruned. Note that the previous parameter <code>reg_lambda</code> penalizes the leaf score, but does not prune the tree.</p>
 <p>Without regularization, the algorithm will be closer to the gradient boosting algorithm. Regularization may provide some additional boost to prediction accuracy by reducing over-fitting. However, in the example below, no regularization (in terms of <code>gamma=0</code>) turns out to be better than a non-zero regularization. <em>(<code>reg_lambda=0</code>)</em>.</p>
 <div id="298c9d65" class="cell" data-execution_count="17">
@@ -775,8 +792,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="tuning-xgboost-regressor" class="level3" data-number="12.2.6">
-<h3 data-number="12.2.6" class="anchored" data-anchor-id="tuning-xgboost-regressor"><span class="header-section-number">12.2.6</span> Tuning XGboost regressor</h3>
+<section id="tuning-xgboost-regressor" class="level3" data-number="11.2.6">
+<h3 data-number="11.2.6" class="anchored" data-anchor-id="tuning-xgboost-regressor"><span class="header-section-number">11.2.6</span> Tuning XGboost regressor</h3>
 <p>Along with <code>max_depth</code>, <code>learning_rate</code>, and <code>n_estimators</code>, here we tune <code>reg_lambda</code> - the regularization parameter for penalizing the tree predictions.</p>
 <div id="336194fc" class="cell" data-execution_count="45">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co">#K-fold cross validation to find optimal parameters for XGBoost</span></span>
@@ -925,8 +942,8 @@ Time taken =  4  minutes</code></pre>
 </div>
 </div>
 </section>
-<section id="early-stopping-with-xgboost" class="level3" data-number="12.2.7">
-<h3 data-number="12.2.7" class="anchored" data-anchor-id="early-stopping-with-xgboost"><span class="header-section-number">12.2.7</span> Early stopping with XGBoost</h3>
+<section id="early-stopping-with-xgboost" class="level3" data-number="11.2.7">
+<h3 data-number="11.2.7" class="anchored" data-anchor-id="early-stopping-with-xgboost"><span class="header-section-number">11.2.7</span> Early stopping with XGBoost</h3>
 <p>If we have a test dataset <em>(or we can further split the train data into a smaller train and test data)</em>, we can use it with the <code>early_stopping_rounds</code> argument of XGBoost, where it will stop growing trees once the model accuracy fails to increase for a certain number of consecutive iterations, given as <code>early_stopping_rounds</code>.</p>
 <div id="60f15a09" class="cell" data-execution_count="47">
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>X_train_sub, X_test_sub, y_train_sub, y_test_sub <span class="op">=</span> <span class="op">\</span></span>
@@ -1005,8 +1022,8 @@ Gradient boost RMSE =  5405.787029062213</code></pre>
 <p>Combined, the random forest model, gradient boost, XGBoost and the Adaboost model do better than each of the individual models.</p>
 </section>
 </section>
-<section id="xgboost-for-classification" class="level2" data-number="12.3">
-<h2 data-number="12.3" class="anchored" data-anchor-id="xgboost-for-classification"><span class="header-section-number">12.3</span> XGBoost for classification</h2>
+<section id="xgboost-for-classification" class="level2" data-number="11.3">
+<h2 data-number="11.3" class="anchored" data-anchor-id="xgboost-for-classification"><span class="header-section-number">11.3</span> XGBoost for classification</h2>
 <div id="82a64bd9" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pd.read_csv(<span class="st">'./Datasets/Heart.csv'</span>)</span>
 <span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>data.dropna(inplace <span class="op">=</span> <span class="va">True</span>)</span>
@@ -1530,8 +1547,8 @@ Recall:  0.7910447761194029</code></pre>
 </div>
 </div>
 <p>If we increase the value of <code>scale_pos_weight</code>, the model will focus on classifying positives more correctly. This will increase the recall (true positive rate) since the focus is on identifying all positives. However, this will lead to identifying positives aggressively, and observations ‘similar’ to observations of the positive class will also be predicted as positive resulting in an increase in false positives and a decrease in precision. See the trend below as we increase the value of <code>scale_pos_weight</code>.</p>
-<section id="precision-recall-vs-scale_pos_weight" class="level3" data-number="12.3.1">
-<h3 data-number="12.3.1" class="anchored" data-anchor-id="precision-recall-vs-scale_pos_weight"><span class="header-section-number">12.3.1</span> Precision &amp; recall vs <code>scale_pos_weight</code></h3>
+<section id="precision-recall-vs-scale_pos_weight" class="level3" data-number="11.3.1">
+<h3 data-number="11.3.1" class="anchored" data-anchor-id="precision-recall-vs-scale_pos_weight"><span class="header-section-number">11.3.1</span> Precision &amp; recall vs <code>scale_pos_weight</code></h3>
 <div id="f4bc610a" class="cell" data-execution_count="286">
 <div class="sourceCode cell-code" id="cb52"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_models():</span>
 <span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>    models <span class="op">=</span> <span class="bu">dict</span>()</span>
@@ -2032,12 +2049,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./Lec8_Gradient_Boosting.html" class="pagination-link" aria-label="Gradient Boosting">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Gradient Boosting</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Gradient Boosting</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./Lec11_More boosting models.html" class="pagination-link" aria-label="LightGBM and CatBoost">
-        <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">LightGBM and CatBoost</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">LightGBM and CatBoost</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

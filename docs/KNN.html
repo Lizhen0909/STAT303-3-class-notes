@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>3&nbsp; KNN – Data Science III with python (Class notes)</title>
+<title>2&nbsp; KNN – Data Science III with python (Class notes)</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -147,7 +147,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./L1_Scikit-learn.html">Sklearn; Bias &amp; Variance; KNN</a></li><li class="breadcrumb-item"><a href="./KNN.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">KNN</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Bias_variance_code.html">Bias &amp; Variance; KNN</a></li><li class="breadcrumb-item"><a href="./KNN.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">KNN</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -184,7 +184,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
- <span class="menu-text">Sklearn; Bias &amp; Variance; KNN</span></a>
+ <span class="menu-text">Bias &amp; Variance; KNN</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -192,26 +192,20 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./L1_Scikit-learn.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction to scikit-learn</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./Bias_variance_code.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Bias-variance tradeoff</span></span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Bias-variance tradeoff</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./KNN.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">KNN</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">KNN</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Hyperparameter tuning.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Hyperparameter tuning</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Hyperparameter tuning</span></span></a>
   </div>
 </li>
       </ul>
@@ -228,61 +222,84 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Lec3_RegressionTrees.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Regression trees</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Regression trees</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Lec4_ClassificationTree.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Classification trees</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Classification trees</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Lec4_Bagging.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Bagging</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Bagging</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Bagging (OOB vs K-fold cross-validation).html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Bagging (addendum)</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Bagging (addendum)</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Lec6_RandomForest.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Random Forest</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Random Forest</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Lec7_AdaBoost.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Adaptive Boosting</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Adaptive Boosting</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Lec8_Gradient_Boosting.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Gradient Boosting</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Gradient Boosting</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Lec9_XGBoost.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">XGBoost</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">XGBoost</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Lec11_More boosting models.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">LightGBM and CatBoost</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">LightGBM and CatBoost</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Lec10_Ensemble.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Ensemble modeling</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Ensemble modeling</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Assignment1_sp25.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Assignment 1</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Datasets.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Datasets, assignment and project files</span></span></a>
   </div>
 </li>
       </ul>
@@ -297,27 +314,27 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#knn-for-regression" id="toc-knn-for-regression" class="nav-link active" data-scroll-target="#knn-for-regression"><span class="header-section-number">3.1</span> KNN for regression</a>
+  <li><a href="#knn-for-regression" id="toc-knn-for-regression" class="nav-link active" data-scroll-target="#knn-for-regression"><span class="header-section-number">2.1</span> KNN for regression</a>
   <ul>
-  <li><a href="#scaling-data" id="toc-scaling-data" class="nav-link" data-scroll-target="#scaling-data"><span class="header-section-number">3.1.1</span> Scaling data</a></li>
-  <li><a href="#fitting-and-validating-model" id="toc-fitting-and-validating-model" class="nav-link" data-scroll-target="#fitting-and-validating-model"><span class="header-section-number">3.1.2</span> Fitting and validating model</a></li>
-  <li><a href="#hyperparameter-tuning" id="toc-hyperparameter-tuning" class="nav-link" data-scroll-target="#hyperparameter-tuning"><span class="header-section-number">3.1.3</span> Hyperparameter tuning</a>
+  <li><a href="#scaling-data" id="toc-scaling-data" class="nav-link" data-scroll-target="#scaling-data"><span class="header-section-number">2.1.1</span> Scaling data</a></li>
+  <li><a href="#fitting-and-validating-model" id="toc-fitting-and-validating-model" class="nav-link" data-scroll-target="#fitting-and-validating-model"><span class="header-section-number">2.1.2</span> Fitting and validating model</a></li>
+  <li><a href="#hyperparameter-tuning" id="toc-hyperparameter-tuning" class="nav-link" data-scroll-target="#hyperparameter-tuning"><span class="header-section-number">2.1.3</span> Hyperparameter tuning</a>
   <ul class="collapse">
-  <li><a href="#kfold" id="toc-kfold" class="nav-link" data-scroll-target="#kfold"><span class="header-section-number">3.1.3.1</span> <code>KFold()</code></a></li>
-  <li><a href="#repeatedkfold" id="toc-repeatedkfold" class="nav-link" data-scroll-target="#repeatedkfold"><span class="header-section-number">3.1.3.2</span> <code>RepeatedKFold()</code></a></li>
+  <li><a href="#kfold" id="toc-kfold" class="nav-link" data-scroll-target="#kfold"><span class="header-section-number">2.1.3.1</span> <code>KFold()</code></a></li>
+  <li><a href="#repeatedkfold" id="toc-repeatedkfold" class="nav-link" data-scroll-target="#repeatedkfold"><span class="header-section-number">2.1.3.2</span> <code>RepeatedKFold()</code></a></li>
   </ul></li>
-  <li><a href="#knn-hyperparameters" id="toc-knn-hyperparameters" class="nav-link" data-scroll-target="#knn-hyperparameters"><span class="header-section-number">3.1.4</span> KNN hyperparameters</a></li>
+  <li><a href="#knn-hyperparameters" id="toc-knn-hyperparameters" class="nav-link" data-scroll-target="#knn-hyperparameters"><span class="header-section-number">2.1.4</span> KNN hyperparameters</a></li>
   </ul></li>
-  <li><a href="#knn-for-classification" id="toc-knn-for-classification" class="nav-link" data-scroll-target="#knn-for-classification"><span class="header-section-number">3.2</span> KNN for classification</a></li>
+  <li><a href="#knn-for-classification" id="toc-knn-for-classification" class="nav-link" data-scroll-target="#knn-for-classification"><span class="header-section-number">2.2</span> KNN for classification</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./L1_Scikit-learn.html">Sklearn; Bias &amp; Variance; KNN</a></li><li class="breadcrumb-item"><a href="./KNN.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">KNN</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Bias_variance_code.html">Bias &amp; Variance; KNN</a></li><li class="breadcrumb-item"><a href="./KNN.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">KNN</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">KNN</span></h1>
+<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">KNN</span></h1>
 </div>
 
 
@@ -349,8 +366,8 @@ window.Quarto = {
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> mean_squared_error</span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> cross_val_score, GridSearchCV, cross_val_predict, KFold, RepeatedKFold</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="knn-for-regression" class="level2" data-number="3.1">
-<h2 data-number="3.1" class="anchored" data-anchor-id="knn-for-regression"><span class="header-section-number">3.1</span> KNN for regression</h2>
+<section id="knn-for-regression" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="knn-for-regression"><span class="header-section-number">2.1</span> KNN for regression</h2>
 <div id="348ec4f8" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Using the same datasets as used for linear regression in STAT303-2, </span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co">#so that we can compare the non-linear models with linear regression</span></span>
@@ -469,8 +486,8 @@ window.Quarto = {
 <span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>y_test <span class="op">=</span> test[<span class="st">'price'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Let us scale data as we are using KNN.</p>
-<section id="scaling-data" class="level3" data-number="3.1.1">
-<h3 data-number="3.1.1" class="anchored" data-anchor-id="scaling-data"><span class="header-section-number">3.1.1</span> Scaling data</h3>
+<section id="scaling-data" class="level3" data-number="2.1.1">
+<h3 data-number="2.1.1" class="anchored" data-anchor-id="scaling-data"><span class="header-section-number">2.1.1</span> Scaling data</h3>
 <div id="ea6db06d" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Scale</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>sc <span class="op">=</span> StandardScaler()</span>
@@ -481,8 +498,8 @@ window.Quarto = {
 </div>
 <p>Let fit the model and compute the RMSE on test data. If the number of neighbors is not specified, the default value is taken.</p>
 </section>
-<section id="fitting-and-validating-model" class="level3" data-number="3.1.2">
-<h3 data-number="3.1.2" class="anchored" data-anchor-id="fitting-and-validating-model"><span class="header-section-number">3.1.2</span> Fitting and validating model</h3>
+<section id="fitting-and-validating-model" class="level3" data-number="2.1.2">
+<h3 data-number="2.1.2" class="anchored" data-anchor-id="fitting-and-validating-model"><span class="header-section-number">2.1.2</span> Fitting and validating model</h3>
 <div id="2efb806f" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>knn_model <span class="op">=</span> KNeighborsRegressor() </span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -510,8 +527,8 @@ window.Quarto = {
 </div>
 <p>The model seems to fit better than all the linear models in STAT303-2.</p>
 </section>
-<section id="hyperparameter-tuning" class="level3" data-number="3.1.3">
-<h3 data-number="3.1.3" class="anchored" data-anchor-id="hyperparameter-tuning"><span class="header-section-number">3.1.3</span> Hyperparameter tuning</h3>
+<section id="hyperparameter-tuning" class="level3" data-number="2.1.3">
+<h3 data-number="2.1.3" class="anchored" data-anchor-id="hyperparameter-tuning"><span class="header-section-number">2.1.3</span> Hyperparameter tuning</h3>
 <p>We will use cross-validation to find the optimal value of the hyperparameter <code>n_neighbors</code>.</p>
 <div id="00cbca8f" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>Ks <span class="op">=</span> np.arange(<span class="dv">1</span>,<span class="dv">601</span>)</span>
@@ -571,8 +588,8 @@ window.Quarto = {
 <p><strong>The test error with the optimal hyperparameter value based on cross-validation is much higher than that based on the default value of the hyperparameter</strong>. Why is that?</p>
 <p>Sometimes this may happen by chance due to the specific observations in the <span class="math inline">\(k\)</span> folds. One option is to shuffle the dataset before splitting into folds.</p>
 <p>The function <a href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.KFold.html"><code>KFold()</code></a> can be used to shuffle the data before splitting it into folds.</p>
-<section id="kfold" class="level4" data-number="3.1.3.1">
-<h4 data-number="3.1.3.1" class="anchored" data-anchor-id="kfold"><span class="header-section-number">3.1.3.1</span> <a href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.KFold.html"><code>KFold()</code></a></h4>
+<section id="kfold" class="level4" data-number="2.1.3.1">
+<h4 data-number="2.1.3.1" class="anchored" data-anchor-id="kfold"><span class="header-section-number">2.1.3.1</span> <a href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.KFold.html"><code>KFold()</code></a></h4>
 <div id="2a066fd7" class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>kcv <span class="op">=</span> KFold(n_splits <span class="op">=</span> <span class="dv">5</span>, shuffle <span class="op">=</span> <span class="va">True</span>, random_state <span class="op">=</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -621,8 +638,8 @@ window.Quarto = {
 <p>In order to avoid these errors due the specific observations in the <span class="math inline">\(k\)</span> folds, it will be better to repeat the <span class="math inline">\(k\)</span>-fold cross-validation multiple times, where the data is shuffled after each <span class="math inline">\(k\)</span>-fold cross-validation, so that the cross-validation takes place on new folds for each repetition.</p>
 <p>The function <a href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.RepeatedKFold.html"><code>RepeatedKFold()</code></a> repeats <span class="math inline">\(k\)</span>-fold cross validation multiple times <em>(10 times by default)</em>. Let us use it to have a more robust optimal value of the number of neighbors <span class="math inline">\(K\)</span>.</p>
 </section>
-<section id="repeatedkfold" class="level4" data-number="3.1.3.2">
-<h4 data-number="3.1.3.2" class="anchored" data-anchor-id="repeatedkfold"><span class="header-section-number">3.1.3.2</span> <a href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.RepeatedKFold.html"><code>RepeatedKFold()</code></a></h4>
+<section id="repeatedkfold" class="level4" data-number="2.1.3.2">
+<h4 data-number="2.1.3.2" class="anchored" data-anchor-id="repeatedkfold"><span class="header-section-number">2.1.3.2</span> <a href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.RepeatedKFold.html"><code>RepeatedKFold()</code></a></h4>
 <div id="93c5074d" class="cell" data-execution_count="32">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>kcv <span class="op">=</span> RepeatedKFold(n_splits <span class="op">=</span> <span class="dv">5</span>, random_state <span class="op">=</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -669,8 +686,8 @@ window.Quarto = {
 </div>
 </section>
 </section>
-<section id="knn-hyperparameters" class="level3" data-number="3.1.4">
-<h3 data-number="3.1.4" class="anchored" data-anchor-id="knn-hyperparameters"><span class="header-section-number">3.1.4</span> KNN hyperparameters</h3>
+<section id="knn-hyperparameters" class="level3" data-number="2.1.4">
+<h3 data-number="2.1.4" class="anchored" data-anchor-id="knn-hyperparameters"><span class="header-section-number">2.1.4</span> KNN hyperparameters</h3>
 <p>The model hyperparameters can be obtained using the <code>get_params()</code> method. Note that there are other hyperparameters to tune in addition to number of neighbors. However, the number of neighbours may be the most influential hyperparameter in most cases.</p>
 <div id="5d8b82ac" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>best_model.get_params()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -716,8 +733,8 @@ window.Quarto = {
 </div>
 </section>
 </section>
-<section id="knn-for-classification" class="level2" data-number="3.2">
-<h2 data-number="3.2" class="anchored" data-anchor-id="knn-for-classification"><span class="header-section-number">3.2</span> KNN for classification</h2>
+<section id="knn-for-classification" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="knn-for-classification"><span class="header-section-number">2.2</span> KNN for classification</h2>
 <p>KNN model for classification can developed and tuned in a similar manner using the sklearn function <code>KNeighborsClassifier()</code></p>
 <ul>
 <li>For classification, KNeighborsClassifier</li>
@@ -1152,12 +1169,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./Bias_variance_code.html" class="pagination-link" aria-label="Bias-variance tradeoff">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Bias-variance tradeoff</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Bias-variance tradeoff</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./Hyperparameter tuning.html" class="pagination-link" aria-label="Hyperparameter tuning">
-        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Hyperparameter tuning</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Hyperparameter tuning</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

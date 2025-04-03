@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>7&nbsp; Bagging – Data Science III with python (Class notes)</title>
+<title>6&nbsp; Bagging – Data Science III with python (Class notes)</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -118,7 +118,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Lec3_RegressionTrees.html">Tree based models</a></li><li class="breadcrumb-item"><a href="./Lec4_Bagging.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Bagging</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Lec3_RegressionTrees.html">Tree based models</a></li><li class="breadcrumb-item"><a href="./Lec4_Bagging.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Bagging</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -155,7 +155,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
- <span class="menu-text">Sklearn; Bias &amp; Variance; KNN</span></a>
+ <span class="menu-text">Bias &amp; Variance; KNN</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -163,26 +163,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./L1_Scikit-learn.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction to scikit-learn</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./Bias_variance_code.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Bias-variance tradeoff</span></span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Bias-variance tradeoff</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./KNN.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">KNN</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">KNN</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Hyperparameter tuning.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Hyperparameter tuning</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Hyperparameter tuning</span></span></a>
   </div>
 </li>
       </ul>
@@ -199,61 +193,84 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Lec3_RegressionTrees.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Regression trees</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Regression trees</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Lec4_ClassificationTree.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Classification trees</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Classification trees</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Lec4_Bagging.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Bagging</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Bagging</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Bagging (OOB vs K-fold cross-validation).html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Bagging (addendum)</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Bagging (addendum)</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Lec6_RandomForest.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Random Forest</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Random Forest</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Lec7_AdaBoost.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Adaptive Boosting</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Adaptive Boosting</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Lec8_Gradient_Boosting.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Gradient Boosting</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Gradient Boosting</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Lec9_XGBoost.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">XGBoost</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">XGBoost</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Lec11_More boosting models.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">LightGBM and CatBoost</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">LightGBM and CatBoost</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Lec10_Ensemble.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Ensemble modeling</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Ensemble modeling</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Assignment1_sp25.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Assignment 1</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Datasets.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Datasets, assignment and project files</span></span></a>
   </div>
 </li>
       </ul>
@@ -268,16 +285,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#bagging-regression-trees" id="toc-bagging-regression-trees" class="nav-link active" data-scroll-target="#bagging-regression-trees"><span class="header-section-number">7.1</span> Bagging regression trees</a>
+  <li><a href="#bagging-regression-trees" id="toc-bagging-regression-trees" class="nav-link active" data-scroll-target="#bagging-regression-trees"><span class="header-section-number">6.1</span> Bagging regression trees</a>
   <ul>
-  <li><a href="#model-accuracy-vs-number-of-trees" id="toc-model-accuracy-vs-number-of-trees" class="nav-link" data-scroll-target="#model-accuracy-vs-number-of-trees"><span class="header-section-number">7.1.1</span> Model accuracy vs number of trees</a></li>
-  <li><a href="#optimizing-bagging-hyperparameters-using-grid-search" id="toc-optimizing-bagging-hyperparameters-using-grid-search" class="nav-link" data-scroll-target="#optimizing-bagging-hyperparameters-using-grid-search"><span class="header-section-number">7.1.2</span> Optimizing bagging hyperparameters using grid search</a></li>
+  <li><a href="#model-accuracy-vs-number-of-trees" id="toc-model-accuracy-vs-number-of-trees" class="nav-link" data-scroll-target="#model-accuracy-vs-number-of-trees"><span class="header-section-number">6.1.1</span> Model accuracy vs number of trees</a></li>
+  <li><a href="#optimizing-bagging-hyperparameters-using-grid-search" id="toc-optimizing-bagging-hyperparameters-using-grid-search" class="nav-link" data-scroll-target="#optimizing-bagging-hyperparameters-using-grid-search"><span class="header-section-number">6.1.2</span> Optimizing bagging hyperparameters using grid search</a></li>
   </ul></li>
-  <li><a href="#bagging-for-classification" id="toc-bagging-for-classification" class="nav-link" data-scroll-target="#bagging-for-classification"><span class="header-section-number">7.2</span> Bagging for classification</a>
+  <li><a href="#bagging-for-classification" id="toc-bagging-for-classification" class="nav-link" data-scroll-target="#bagging-for-classification"><span class="header-section-number">6.2</span> Bagging for classification</a>
   <ul>
-  <li><a href="#model-accuracy-vs-number-of-trees-1" id="toc-model-accuracy-vs-number-of-trees-1" class="nav-link" data-scroll-target="#model-accuracy-vs-number-of-trees-1"><span class="header-section-number">7.2.1</span> Model accuracy vs number of trees</a></li>
-  <li><a href="#optimizing-bagging-hyperparameters-using-grid-search-1" id="toc-optimizing-bagging-hyperparameters-using-grid-search-1" class="nav-link" data-scroll-target="#optimizing-bagging-hyperparameters-using-grid-search-1"><span class="header-section-number">7.2.2</span> Optimizing bagging hyperparameters using grid search</a></li>
-  <li><a href="#tuning-the-decision-threshold-probability" id="toc-tuning-the-decision-threshold-probability" class="nav-link" data-scroll-target="#tuning-the-decision-threshold-probability"><span class="header-section-number">7.2.3</span> Tuning the decision threshold probability</a></li>
+  <li><a href="#model-accuracy-vs-number-of-trees-1" id="toc-model-accuracy-vs-number-of-trees-1" class="nav-link" data-scroll-target="#model-accuracy-vs-number-of-trees-1"><span class="header-section-number">6.2.1</span> Model accuracy vs number of trees</a></li>
+  <li><a href="#optimizing-bagging-hyperparameters-using-grid-search-1" id="toc-optimizing-bagging-hyperparameters-using-grid-search-1" class="nav-link" data-scroll-target="#optimizing-bagging-hyperparameters-using-grid-search-1"><span class="header-section-number">6.2.2</span> Optimizing bagging hyperparameters using grid search</a></li>
+  <li><a href="#tuning-the-decision-threshold-probability" id="toc-tuning-the-decision-threshold-probability" class="nav-link" data-scroll-target="#tuning-the-decision-threshold-probability"><span class="header-section-number">6.2.3</span> Tuning the decision threshold probability</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -285,9 +302,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Lec3_RegressionTrees.html">Tree based models</a></li><li class="breadcrumb-item"><a href="./Lec4_Bagging.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Bagging</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Lec3_RegressionTrees.html">Tree based models</a></li><li class="breadcrumb-item"><a href="./Lec4_Bagging.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Bagging</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Bagging</span></h1>
+<h1 class="title"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Bagging</span></h1>
 </div>
 
 
@@ -448,8 +465,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> train[<span class="st">'price'</span>]</span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>ytest <span class="op">=</span> test[<span class="st">'price'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="bagging-regression-trees" class="level2" data-number="7.1">
-<h2 data-number="7.1" class="anchored" data-anchor-id="bagging-regression-trees"><span class="header-section-number">7.1</span> Bagging regression trees</h2>
+<section id="bagging-regression-trees" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="bagging-regression-trees"><span class="header-section-number">6.1</span> Bagging regression trees</h2>
 <p>Bag regression trees to develop a model to predict car price using the predictors <code>mileage</code>,<code>mpg</code>,<code>year</code>,and <code>engineSize</code>.</p>
 <div id="faceabfd" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Bagging the results of 10 decision trees to predict car price</span></span>
@@ -463,8 +480,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>The RMSE has reduced a lot by averaging the predictions of 10 trees. The RMSE for a single tree model with optimized parameters was around 7000.</p>
-<section id="model-accuracy-vs-number-of-trees" class="level3" data-number="7.1.1">
-<h3 data-number="7.1.1" class="anchored" data-anchor-id="model-accuracy-vs-number-of-trees"><span class="header-section-number">7.1.1</span> Model accuracy vs number of trees</h3>
+<section id="model-accuracy-vs-number-of-trees" class="level3" data-number="6.1.1">
+<h3 data-number="6.1.1" class="anchored" data-anchor-id="model-accuracy-vs-number-of-trees"><span class="header-section-number">6.1.1</span> Model accuracy vs number of trees</h3>
 <p>How does the model accuracy vary with the number of trees?</p>
 <p>As we increase the number of trees, it will tend to reduce the variance of individual trees leading to a more accurate prediction.</p>
 <div id="6374fd38" class="cell" data-execution_count="10">
@@ -545,8 +562,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="optimizing-bagging-hyperparameters-using-grid-search" class="level3" data-number="7.1.2">
-<h3 data-number="7.1.2" class="anchored" data-anchor-id="optimizing-bagging-hyperparameters-using-grid-search"><span class="header-section-number">7.1.2</span> Optimizing bagging hyperparameters using grid search</h3>
+<section id="optimizing-bagging-hyperparameters-using-grid-search" class="level3" data-number="6.1.2">
+<h3 data-number="6.1.2" class="anchored" data-anchor-id="optimizing-bagging-hyperparameters-using-grid-search"><span class="header-section-number">6.1.2</span> Optimizing bagging hyperparameters using grid search</h3>
 <p>More parameters of a bagged regression tree model can be optimized using the typical approach of k-fold cross validation over a grid of parameter values.</p>
 <p>Note that we don’t need to tune the number of trees in bagging as we know that the higher the number of trees, the lower will be the expected MSE. So, we will tune all the hyperparameters for a fixed number of trees. Once we have obtained the optimal hyperparameter values, we’ll keep increasing the number of trees until the gains are neglible.</p>
 <div id="4c82d743" class="cell" data-execution_count="11">
@@ -600,8 +617,8 @@ Best Parameters :  {'base_estimator': DecisionTreeRegressor(random_state=1), 'bo
 </div>
 </section>
 </section>
-<section id="bagging-for-classification" class="level2" data-number="7.2">
-<h2 data-number="7.2" class="anchored" data-anchor-id="bagging-for-classification"><span class="header-section-number">7.2</span> Bagging for classification</h2>
+<section id="bagging-for-classification" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="bagging-for-classification"><span class="header-section-number">6.2</span> Bagging for classification</h2>
 <p>Bag classification tree models to predict if a person has diabetes.</p>
 <div id="72e2a4d6" class="cell" data-execution_count="58">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>train <span class="op">=</span> pd.read_csv(<span class="st">'./Datasets/diabetes_train.csv'</span>)</span>
@@ -659,8 +676,8 @@ Recall:  0.9344262295081968</code></pre>
 </div>
 </div>
 <p>As a result of bagging, we obtain a model (with a threshold probabiltiy cutoff of 0.23) that has a better performance on test data in terms of almost all the metrics - accuracy, precision (comparable performance), recall, and ROC-AUC, as compared the single tree classification model (with a threshold probability cutoff of 0.23). Note that we have not yet tuned the model using <code>GridSearchCv</code> here, which is shown towards the end of this chapter.</p>
-<section id="model-accuracy-vs-number-of-trees-1" class="level3" data-number="7.2.1">
-<h3 data-number="7.2.1" class="anchored" data-anchor-id="model-accuracy-vs-number-of-trees-1"><span class="header-section-number">7.2.1</span> Model accuracy vs number of trees</h3>
+<section id="model-accuracy-vs-number-of-trees-1" class="level3" data-number="6.2.1">
+<h3 data-number="6.2.1" class="anchored" data-anchor-id="model-accuracy-vs-number-of-trees-1"><span class="header-section-number">6.2.1</span> Model accuracy vs number of trees</h3>
 <div id="d7fc8d16" class="cell" data-execution_count="60">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Finding model accuracy vs number of trees</span></span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>oob_accuracy<span class="op">=</span>{}<span class="op">;</span>test_accuracy<span class="op">=</span>{}<span class="op">;</span>oob_rmse<span class="op">=</span>{}<span class="op">;</span>test_rmse <span class="op">=</span> {}</span>
@@ -753,8 +770,8 @@ C:\Users\akl0407\Anaconda3\lib\site-packages\sklearn\ensemble\_bagging.py:644: R
 </div>
 </div>
 </section>
-<section id="optimizing-bagging-hyperparameters-using-grid-search-1" class="level3" data-number="7.2.2">
-<h3 data-number="7.2.2" class="anchored" data-anchor-id="optimizing-bagging-hyperparameters-using-grid-search-1"><span class="header-section-number">7.2.2</span> Optimizing bagging hyperparameters using grid search</h3>
+<section id="optimizing-bagging-hyperparameters-using-grid-search-1" class="level3" data-number="6.2.2">
+<h3 data-number="6.2.2" class="anchored" data-anchor-id="optimizing-bagging-hyperparameters-using-grid-search-1"><span class="header-section-number">6.2.2</span> Optimizing bagging hyperparameters using grid search</h3>
 <p>More parameters of a bagged classification tree model can be optimized using the typical approach of k-fold cross validation over a grid of parameter values.</p>
 <div id="c5de7bab" class="cell" data-execution_count="67">
 <div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>n_samples <span class="op">=</span> train.shape[<span class="dv">0</span>]</span>
@@ -786,8 +803,8 @@ Best Parameters :  {'base_estimator': DecisionTreeClassifier(random_state=1), 'b
 </div>
 </div>
 </section>
-<section id="tuning-the-decision-threshold-probability" class="level3" data-number="7.2.3">
-<h3 data-number="7.2.3" class="anchored" data-anchor-id="tuning-the-decision-threshold-probability"><span class="header-section-number">7.2.3</span> Tuning the decision threshold probability</h3>
+<section id="tuning-the-decision-threshold-probability" class="level3" data-number="6.2.3">
+<h3 data-number="6.2.3" class="anchored" data-anchor-id="tuning-the-decision-threshold-probability"><span class="header-section-number">6.2.3</span> Tuning the decision threshold probability</h3>
 <p>We’ll find a decision threshold probability that balances recall with precision.</p>
 <div id="e3ccd309" class="cell" data-execution_count="113">
 <div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> BaggingClassifier(base_estimator<span class="op">=</span>DecisionTreeClassifier(random_state<span class="op">=</span><span class="dv">1</span>), n_estimators<span class="op">=</span><span class="dv">200</span>, </span>
@@ -1322,12 +1339,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./Lec4_ClassificationTree.html" class="pagination-link" aria-label="Classification trees">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Classification trees</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Classification trees</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./Bagging (OOB vs K-fold cross-validation).html" class="pagination-link" aria-label="Bagging (addendum)">
-        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Bagging (addendum)</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Bagging (addendum)</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

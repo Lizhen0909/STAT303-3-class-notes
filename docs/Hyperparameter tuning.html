@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>4&nbsp; Hyperparameter tuning – Data Science III with python (Class notes)</title>
+<title>3&nbsp; Hyperparameter tuning – Data Science III with python (Class notes)</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -147,7 +147,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./L1_Scikit-learn.html">Sklearn; Bias &amp; Variance; KNN</a></li><li class="breadcrumb-item"><a href="./Hyperparameter tuning.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Hyperparameter tuning</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Bias_variance_code.html">Bias &amp; Variance; KNN</a></li><li class="breadcrumb-item"><a href="./Hyperparameter tuning.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Hyperparameter tuning</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -184,7 +184,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
- <span class="menu-text">Sklearn; Bias &amp; Variance; KNN</span></a>
+ <span class="menu-text">Bias &amp; Variance; KNN</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -192,26 +192,20 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./L1_Scikit-learn.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction to scikit-learn</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./Bias_variance_code.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Bias-variance tradeoff</span></span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Bias-variance tradeoff</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./KNN.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">KNN</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">KNN</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Hyperparameter tuning.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Hyperparameter tuning</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Hyperparameter tuning</span></span></a>
   </div>
 </li>
       </ul>
@@ -228,61 +222,84 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Lec3_RegressionTrees.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Regression trees</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Regression trees</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Lec4_ClassificationTree.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Classification trees</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Classification trees</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Lec4_Bagging.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Bagging</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Bagging</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Bagging (OOB vs K-fold cross-validation).html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Bagging (addendum)</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Bagging (addendum)</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Lec6_RandomForest.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Random Forest</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Random Forest</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Lec7_AdaBoost.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Adaptive Boosting</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Adaptive Boosting</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Lec8_Gradient_Boosting.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Gradient Boosting</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Gradient Boosting</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Lec9_XGBoost.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">XGBoost</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">XGBoost</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Lec11_More boosting models.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">LightGBM and CatBoost</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">LightGBM and CatBoost</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Lec10_Ensemble.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Ensemble modeling</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Ensemble modeling</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Assignment1_sp25.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Assignment 1</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Datasets.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Datasets, assignment and project files</span></span></a>
   </div>
 </li>
       </ul>
@@ -297,23 +314,23 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#gridsearchcv" id="toc-gridsearchcv" class="nav-link active" data-scroll-target="#gridsearchcv"><span class="header-section-number">4.1</span> <code>GridSearchCV</code></a></li>
-  <li><a href="#randomizedsearchcv" id="toc-randomizedsearchcv" class="nav-link" data-scroll-target="#randomizedsearchcv"><span class="header-section-number">4.2</span> <code>RandomizedSearchCV()</code></a></li>
-  <li><a href="#bayessearchcv" id="toc-bayessearchcv" class="nav-link" data-scroll-target="#bayessearchcv"><span class="header-section-number">4.3</span> <code>BayesSearchCV()</code></a>
+  <li><a href="#gridsearchcv" id="toc-gridsearchcv" class="nav-link active" data-scroll-target="#gridsearchcv"><span class="header-section-number">3.1</span> <code>GridSearchCV</code></a></li>
+  <li><a href="#randomizedsearchcv" id="toc-randomizedsearchcv" class="nav-link" data-scroll-target="#randomizedsearchcv"><span class="header-section-number">3.2</span> <code>RandomizedSearchCV()</code></a></li>
+  <li><a href="#bayessearchcv" id="toc-bayessearchcv" class="nav-link" data-scroll-target="#bayessearchcv"><span class="header-section-number">3.3</span> <code>BayesSearchCV()</code></a>
   <ul>
-  <li><a href="#diagonosis-of-cross-validated-score-optimization" id="toc-diagonosis-of-cross-validated-score-optimization" class="nav-link" data-scroll-target="#diagonosis-of-cross-validated-score-optimization"><span class="header-section-number">4.3.1</span> Diagonosis of cross-validated score optimization</a></li>
-  <li><a href="#live-monitoring-of-cross-validated-score" id="toc-live-monitoring-of-cross-validated-score" class="nav-link" data-scroll-target="#live-monitoring-of-cross-validated-score"><span class="header-section-number">4.3.2</span> Live monitoring of cross-validated score</a></li>
+  <li><a href="#diagonosis-of-cross-validated-score-optimization" id="toc-diagonosis-of-cross-validated-score-optimization" class="nav-link" data-scroll-target="#diagonosis-of-cross-validated-score-optimization"><span class="header-section-number">3.3.1</span> Diagonosis of cross-validated score optimization</a></li>
+  <li><a href="#live-monitoring-of-cross-validated-score" id="toc-live-monitoring-of-cross-validated-score" class="nav-link" data-scroll-target="#live-monitoring-of-cross-validated-score"><span class="header-section-number">3.3.2</span> Live monitoring of cross-validated score</a></li>
   </ul></li>
-  <li><a href="#cross_validate" id="toc-cross_validate" class="nav-link" data-scroll-target="#cross_validate"><span class="header-section-number">4.4</span> <code>cross_validate()</code></a></li>
+  <li><a href="#cross_validate" id="toc-cross_validate" class="nav-link" data-scroll-target="#cross_validate"><span class="header-section-number">3.4</span> <code>cross_validate()</code></a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./L1_Scikit-learn.html">Sklearn; Bias &amp; Variance; KNN</a></li><li class="breadcrumb-item"><a href="./Hyperparameter tuning.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Hyperparameter tuning</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Bias_variance_code.html">Bias &amp; Variance; KNN</a></li><li class="breadcrumb-item"><a href="./Hyperparameter tuning.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Hyperparameter tuning</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Hyperparameter tuning</span></h1>
+<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Hyperparameter tuning</span></h1>
 </div>
 
 
@@ -471,8 +488,8 @@ window.Quarto = {
 <span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>X_train_scaled <span class="op">=</span> sc.transform(X_train)</span>
 <span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>X_test_scaled <span class="op">=</span> sc.transform(X_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="gridsearchcv" class="level2" data-number="4.1">
-<h2 data-number="4.1" class="anchored" data-anchor-id="gridsearchcv"><span class="header-section-number">4.1</span> <a href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GridSearchCV.html"><code>GridSearchCV</code></a></h2>
+<section id="gridsearchcv" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="gridsearchcv"><span class="header-section-number">3.1</span> <a href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GridSearchCV.html"><code>GridSearchCV</code></a></h2>
 <p>The function is used to compute the cross-validated score <em>(MSE, RMSE, accuracy, etc.)</em> over a grid of hyperparameter values. This helps avoid nested <code>for()</code> loops if multiple hyperparameter values need to be tuned.</p>
 <div id="84e92cbb" class="cell" data-execution_count="64">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># GridSearchCV works in three steps:</span></span>
@@ -828,8 +845,8 @@ window.Quarto = {
 </div>
 <p>We can see that the RMSE corresponding to the 3rd best hyperparameter value is the least. Due to variance in test errors, it may be a good idea to consider the set of top few best hyperparameter values, instead of just considering the best one.</p>
 </section>
-<section id="randomizedsearchcv" class="level2" data-number="4.2">
-<h2 data-number="4.2" class="anchored" data-anchor-id="randomizedsearchcv"><span class="header-section-number">4.2</span> <a href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.RandomizedSearchCV.html"><code>RandomizedSearchCV()</code></a></h2>
+<section id="randomizedsearchcv" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="randomizedsearchcv"><span class="header-section-number">3.2</span> <a href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.RandomizedSearchCV.html"><code>RandomizedSearchCV()</code></a></h2>
 <p>In case of many possible values of hyperparameters, it may be comptaionally very expensive to use <code>GridSearchCV()</code>. In such cases, <code>RandomizedSearchCV()</code> can be used to compute the cross-validated score on a randomly selected subset of hyperparameter values from the specified grid. The number of values can be fixed by the user, as per the available budget.</p>
 <div id="32a044a5" class="cell" data-execution_count="73">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># RandomizedSearchCV works in three steps:</span></span>
@@ -913,8 +930,8 @@ window.Quarto = {
 </div>
 </div>
 </section>
-<section id="bayessearchcv" class="level2" data-number="4.3">
-<h2 data-number="4.3" class="anchored" data-anchor-id="bayessearchcv"><span class="header-section-number">4.3</span> <a href="https://scikit-optimize.github.io/stable/modules/generated/skopt.BayesSearchCV.html"><code>BayesSearchCV()</code></a></h2>
+<section id="bayessearchcv" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="bayessearchcv"><span class="header-section-number">3.3</span> <a href="https://scikit-optimize.github.io/stable/modules/generated/skopt.BayesSearchCV.html"><code>BayesSearchCV()</code></a></h2>
 <p>Unlike the grid search and random search, which treat hyperparameter sets independently, the Bayesian optimization is an informed search method, meaning that it learns from previous iterations. The number of trials in this approach is determined by the user.</p>
 <ul>
 <li>The function begins by computing the cross-validated score by randomly selecting a few hyperparameter values from the specified disttribution of hyperparameter values.</li>
@@ -987,8 +1004,8 @@ window.Quarto = {
 <pre><code>5740.432278861367</code></pre>
 </div>
 </div>
-<section id="diagonosis-of-cross-validated-score-optimization" class="level3" data-number="4.3.1">
-<h3 data-number="4.3.1" class="anchored" data-anchor-id="diagonosis-of-cross-validated-score-optimization"><span class="header-section-number">4.3.1</span> Diagonosis of cross-validated score optimization</h3>
+<section id="diagonosis-of-cross-validated-score-optimization" class="level3" data-number="3.3.1">
+<h3 data-number="3.3.1" class="anchored" data-anchor-id="diagonosis-of-cross-validated-score-optimization"><span class="header-section-number">3.3.1</span> Diagonosis of cross-validated score optimization</h3>
 <p>Below are the partial dependence plots of the objective function <em>(i.e., the cross-validated score)</em>. The cross-validated score predictions are based on the most recently updated model <em>(i.e., the updated Gaussian Process model at the end of <code>n_iter</code> iterations specified by the user)</em> that predicts the cross-validated score.</p>
 <p>Check the <a href="https://scikit-optimize.github.io/stable/modules/generated/skopt.plots.plot_objective.html"><code>plot_objective()</code></a> documentation to interpret the plots.</p>
 <div id="5efcbf9a" class="cell" data-execution_count="139">
@@ -1073,8 +1090,8 @@ window.Quarto = {
 <li><p>The success of <code>BayesSearchCV()</code> depends on the predictions and associated uncertainty estimated by the Gaussian process (GP) model that predicts the cross-validated score. The GP model, although works well in general, may not be suitable for certain datasets, or may take a relatively large number of iterations to learn for certain datasets.</p></li>
 </ol>
 </section>
-<section id="live-monitoring-of-cross-validated-score" class="level3" data-number="4.3.2">
-<h3 data-number="4.3.2" class="anchored" data-anchor-id="live-monitoring-of-cross-validated-score"><span class="header-section-number">4.3.2</span> Live monitoring of cross-validated score</h3>
+<section id="live-monitoring-of-cross-validated-score" class="level3" data-number="3.3.2">
+<h3 data-number="3.3.2" class="anchored" data-anchor-id="live-monitoring-of-cross-validated-score"><span class="header-section-number">3.3.2</span> Live monitoring of cross-validated score</h3>
 <p>Note that it will be useful monitor the cross-validated score while the Bayesian Search CV code is running, and stop the code as soon as the desired accuracy is reached, or the optimal cross-validated score doesn’t seem to improve. The <code>fit()</code> method of the <code>BayesSeaerchCV()</code> object has a <code>callback</code> argument that can be used as follows:</p>
 <div id="94549b42" class="cell" data-execution_count="28">
 <div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> KNeighborsRegressor(metric <span class="op">=</span> <span class="st">'minkowski'</span>) <span class="co"># No inputs defined inside the model</span></span>
@@ -1125,8 +1142,8 @@ window.Quarto = {
 </div>
 </section>
 </section>
-<section id="cross_validate" class="level2" data-number="4.4">
-<h2 data-number="4.4" class="anchored" data-anchor-id="cross_validate"><span class="header-section-number">4.4</span> <a href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.cross_validate.html"><code>cross_validate()</code></a></h2>
+<section id="cross_validate" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="cross_validate"><span class="header-section-number">3.4</span> <a href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.cross_validate.html"><code>cross_validate()</code></a></h2>
 <p>We have used <code>cross_val_score()</code> and <code>cross_val_predict()</code> so far.</p>
 <p><strong>When can we use one over the other?</strong></p>
 <p>The function <code>cross_validate()</code> is similar to <code>cross_val_score()</code> except that it has the option to return multiple cross-validated metrics, instead of a single one.</p>
@@ -1312,14 +1329,14 @@ window.Quarto = {
 <span id="cb51-24"><a href="#cb51-24" aria-hidden="true" tabindex="-1"></a>    <span class="co"># NO!! Depends on what the majority class is!</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Suppose we wish to have the maximum possible precision for at least 95% recall.</p>
-<p>The optimal ‘K’ will be:</p>
+<p>The optimal <em><code>K</code></em> will be:</p>
 <div id="b350736b" class="cell" data-execution_count="278">
 <div class="sourceCode cell-code" id="cb52"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>df_scores.loc[df_scores[<span class="st">'CV_recall'</span>] <span class="op">&gt;</span> <span class="fl">0.95</span>, <span class="st">'CV_precision'</span>].idxmax()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="278">
 <pre><code>120</code></pre>
 </div>
 </div>
-<p>The cross-validated precision, recall and accuracy for the optimal ‘K’ are:</p>
+<p>The cross-validated precision, recall and accuracy for the optimal <em><code>K</code></em> are:</p>
 <div id="76284012" class="cell" data-execution_count="279">
 <div class="sourceCode cell-code" id="cb54"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>df_scores.loc[<span class="dv">120</span>, [<span class="st">'CV_recall'</span>, <span class="st">'CV_precision'</span>, <span class="st">'CV_accuracy'</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="279">
@@ -1769,12 +1786,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./KNN.html" class="pagination-link" aria-label="KNN">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">KNN</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">KNN</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./Lec3_RegressionTrees.html" class="pagination-link" aria-label="Regression trees">
-        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Regression trees</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Regression trees</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

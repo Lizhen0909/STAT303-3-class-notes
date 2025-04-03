@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>6&nbsp; Classification trees – Data Science III with python (Class notes)</title>
+<title>5&nbsp; Classification trees – Data Science III with python (Class notes)</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -118,7 +118,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Lec3_RegressionTrees.html">Tree based models</a></li><li class="breadcrumb-item"><a href="./Lec4_ClassificationTree.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Classification trees</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Lec3_RegressionTrees.html">Tree based models</a></li><li class="breadcrumb-item"><a href="./Lec4_ClassificationTree.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Classification trees</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -155,7 +155,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
- <span class="menu-text">Sklearn; Bias &amp; Variance; KNN</span></a>
+ <span class="menu-text">Bias &amp; Variance; KNN</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -163,26 +163,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./L1_Scikit-learn.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction to scikit-learn</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./Bias_variance_code.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Bias-variance tradeoff</span></span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Bias-variance tradeoff</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./KNN.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">KNN</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">KNN</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Hyperparameter tuning.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Hyperparameter tuning</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Hyperparameter tuning</span></span></a>
   </div>
 </li>
       </ul>
@@ -199,61 +193,84 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Lec3_RegressionTrees.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Regression trees</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Regression trees</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Lec4_ClassificationTree.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Classification trees</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Classification trees</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Lec4_Bagging.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Bagging</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Bagging</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Bagging (OOB vs K-fold cross-validation).html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Bagging (addendum)</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Bagging (addendum)</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Lec6_RandomForest.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Random Forest</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Random Forest</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Lec7_AdaBoost.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Adaptive Boosting</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Adaptive Boosting</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Lec8_Gradient_Boosting.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Gradient Boosting</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Gradient Boosting</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Lec9_XGBoost.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">XGBoost</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">XGBoost</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Lec11_More boosting models.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">LightGBM and CatBoost</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">LightGBM and CatBoost</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Lec10_Ensemble.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Ensemble modeling</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Ensemble modeling</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Assignment1_sp25.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Assignment 1</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Datasets.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Datasets, assignment and project files</span></span></a>
   </div>
 </li>
       </ul>
@@ -268,23 +285,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#building-a-classification-tree" id="toc-building-a-classification-tree" class="nav-link active" data-scroll-target="#building-a-classification-tree"><span class="header-section-number">6.1</span> Building a classification tree</a></li>
-  <li><a href="#optimizing-hyperparameters-to-optimize-performance" id="toc-optimizing-hyperparameters-to-optimize-performance" class="nav-link" data-scroll-target="#optimizing-hyperparameters-to-optimize-performance"><span class="header-section-number">6.2</span> Optimizing hyperparameters to optimize performance</a></li>
-  <li><a href="#optimizing-the-decision-threshold-probability" id="toc-optimizing-the-decision-threshold-probability" class="nav-link" data-scroll-target="#optimizing-the-decision-threshold-probability"><span class="header-section-number">6.3</span> Optimizing the decision threshold probability</a>
+  <li><a href="#building-a-classification-tree" id="toc-building-a-classification-tree" class="nav-link active" data-scroll-target="#building-a-classification-tree"><span class="header-section-number">5.1</span> Building a classification tree</a></li>
+  <li><a href="#optimizing-hyperparameters-to-optimize-performance" id="toc-optimizing-hyperparameters-to-optimize-performance" class="nav-link" data-scroll-target="#optimizing-hyperparameters-to-optimize-performance"><span class="header-section-number">5.2</span> Optimizing hyperparameters to optimize performance</a></li>
+  <li><a href="#optimizing-the-decision-threshold-probability" id="toc-optimizing-the-decision-threshold-probability" class="nav-link" data-scroll-target="#optimizing-the-decision-threshold-probability"><span class="header-section-number">5.3</span> Optimizing the decision threshold probability</a>
   <ul>
-  <li><a href="#balancing-recall-with-precision" id="toc-balancing-recall-with-precision" class="nav-link" data-scroll-target="#balancing-recall-with-precision"><span class="header-section-number">6.3.1</span> Balancing recall with precision</a></li>
-  <li><a href="#balancing-recall-with-false-positive-rate" id="toc-balancing-recall-with-false-positive-rate" class="nav-link" data-scroll-target="#balancing-recall-with-false-positive-rate"><span class="header-section-number">6.3.2</span> Balancing recall with false positive rate</a></li>
+  <li><a href="#balancing-recall-with-precision" id="toc-balancing-recall-with-precision" class="nav-link" data-scroll-target="#balancing-recall-with-precision"><span class="header-section-number">5.3.1</span> Balancing recall with precision</a></li>
+  <li><a href="#balancing-recall-with-false-positive-rate" id="toc-balancing-recall-with-false-positive-rate" class="nav-link" data-scroll-target="#balancing-recall-with-false-positive-rate"><span class="header-section-number">5.3.2</span> Balancing recall with false positive rate</a></li>
   </ul></li>
-  <li><a href="#cost-complexity-pruning" id="toc-cost-complexity-pruning" class="nav-link" data-scroll-target="#cost-complexity-pruning"><span class="header-section-number">6.4</span> Cost complexity pruning</a></li>
+  <li><a href="#cost-complexity-pruning" id="toc-cost-complexity-pruning" class="nav-link" data-scroll-target="#cost-complexity-pruning"><span class="header-section-number">5.4</span> Cost complexity pruning</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Lec3_RegressionTrees.html">Tree based models</a></li><li class="breadcrumb-item"><a href="./Lec4_ClassificationTree.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Classification trees</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Lec3_RegressionTrees.html">Tree based models</a></li><li class="breadcrumb-item"><a href="./Lec4_ClassificationTree.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Classification trees</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Classification trees</span></h1>
+<h1 class="title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Classification trees</span></h1>
 </div>
 
 
@@ -415,8 +432,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<section id="building-a-classification-tree" class="level2" data-number="6.1">
-<h2 data-number="6.1" class="anchored" data-anchor-id="building-a-classification-tree"><span class="header-section-number">6.1</span> Building a classification tree</h2>
+<section id="building-a-classification-tree" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="building-a-classification-tree"><span class="header-section-number">5.1</span> Building a classification tree</h2>
 <p>Develop a classification tree to predict if a person has diabetes.</p>
 <div id="94bd3fab" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> train.drop(columns <span class="op">=</span> <span class="st">'Outcome'</span>)</span>
@@ -486,8 +503,8 @@ Recall:  0.45901639344262296</code></pre>
 </div>
 </div>
 </section>
-<section id="optimizing-hyperparameters-to-optimize-performance" class="level2" data-number="6.2">
-<h2 data-number="6.2" class="anchored" data-anchor-id="optimizing-hyperparameters-to-optimize-performance"><span class="header-section-number">6.2</span> Optimizing hyperparameters to optimize performance</h2>
+<section id="optimizing-hyperparameters-to-optimize-performance" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="optimizing-hyperparameters-to-optimize-performance"><span class="header-section-number">5.2</span> Optimizing hyperparameters to optimize performance</h2>
 <p>In case of diabetes, it is important to reduce FNR (False negative rate) or maximize recall. This is because if a person has diabetes, the consequences of predicting that they don’t have diabetes can be much worse than the other way round.</p>
 <p>Let us find the optimal depth of the tree and the number of terminal nods (leaves) that minimizes the FNR or maximizes recall.</p>
 <p>Find the maximum values of depth and number of leaves.</p>
@@ -556,15 +573,15 @@ Time taken = 70 seconds</code></pre>
 </div>
 </div>
 </section>
-<section id="optimizing-the-decision-threshold-probability" class="level2" data-number="6.3">
-<h2 data-number="6.3" class="anchored" data-anchor-id="optimizing-the-decision-threshold-probability"><span class="header-section-number">6.3</span> Optimizing the decision threshold probability</h2>
+<section id="optimizing-the-decision-threshold-probability" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="optimizing-the-decision-threshold-probability"><span class="header-section-number">5.3</span> Optimizing the decision threshold probability</h2>
 <p>Note that decision threshold probability is not tuned with <code>GridSearchCV</code> because <code>GridSearchCV</code> is a technique used for hyperparameter tuning in machine learning models, and the decision threshold probability is not a hyperparameter of the model.</p>
 <p>The decision threshold is set to 0.5 by default during hyperparameter tuning with <code>GridSearchCV</code>.</p>
 <p><code>GridSearchCV</code> is used to tune hyperparameters that control the internal settings of a machine learning model, such as learning rate, regularization strength, and maximum tree depth, among others. These hyperparameters affect the model’s internal behavior and performance. On the other hand, the decision threshold is an external parameter that is used to interpret the model’s output and make predictions based on the predicted probabilities.</p>
 <p>To tune the decision threshold, one typically needs to manually adjust it after the model has been trained and evaluated using a specific set of hyperparameter values. This can be done using methods, which involve evaluating the model’s performance at different decision threshold values and selecting the one that best meets the desired trade-off between false positives and false negatives based on the specific problem requirements.</p>
 <p>As the recall will always be 100% for a decision threshold probability of zero, we’ll find a decision threshold probability that balances recall with another performance metric such as precision, false positive rate, accuracy, etc. Below are a couple of examples that show we can balance recall with (1) precision or (2) false positive rate.</p>
-<section id="balancing-recall-with-precision" class="level3" data-number="6.3.1">
-<h3 data-number="6.3.1" class="anchored" data-anchor-id="balancing-recall-with-precision"><span class="header-section-number">6.3.1</span> Balancing recall with precision</h3>
+<section id="balancing-recall-with-precision" class="level3" data-number="5.3.1">
+<h3 data-number="5.3.1" class="anchored" data-anchor-id="balancing-recall-with-precision"><span class="header-section-number">5.3.1</span> Balancing recall with precision</h3>
 <p>We can find a threshold probability that balances recall with precision.</p>
 <div id="9c54864e" class="cell" data-execution_count="52">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> DecisionTreeClassifier(random_state<span class="op">=</span><span class="dv">1</span>, max_depth <span class="op">=</span> <span class="dv">4</span>, max_leaf_nodes<span class="op">=</span><span class="dv">8</span>, max_features<span class="op">=</span><span class="dv">2</span>).fit(X, y)</span>
@@ -684,8 +701,8 @@ Recall:  0.8524590163934426</code></pre>
 </div>
 </div>
 </section>
-<section id="balancing-recall-with-false-positive-rate" class="level3" data-number="6.3.2">
-<h3 data-number="6.3.2" class="anchored" data-anchor-id="balancing-recall-with-false-positive-rate"><span class="header-section-number">6.3.2</span> Balancing recall with false positive rate</h3>
+<section id="balancing-recall-with-false-positive-rate" class="level3" data-number="5.3.2">
+<h3 data-number="5.3.2" class="anchored" data-anchor-id="balancing-recall-with-false-positive-rate"><span class="header-section-number">5.3.2</span> Balancing recall with false positive rate</h3>
 <p>Suppose we wish to balance recall with false positive rate. We can optimize the model to maximize ROC-AUC, and then choose a point on the ROC-curve that balances recall with the false positive rate.</p>
 <div id="625b0665" class="cell" data-execution_count="55">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Defining parameters and the range of values over which to optimize</span></span>
@@ -810,8 +827,8 @@ Recall:  0.7868852459016393</code></pre>
 </div>
 </section>
 </section>
-<section id="cost-complexity-pruning" class="level2" data-number="6.4">
-<h2 data-number="6.4" class="anchored" data-anchor-id="cost-complexity-pruning"><span class="header-section-number">6.4</span> Cost complexity pruning</h2>
+<section id="cost-complexity-pruning" class="level2" data-number="5.4">
+<h2 data-number="5.4" class="anchored" data-anchor-id="cost-complexity-pruning"><span class="header-section-number">5.4</span> Cost complexity pruning</h2>
 <p>Just as we did cost complexity pruning in a regression tree, we can do it to optimize the model for a classification tree.</p>
 <div id="a950cc62" class="cell" data-execution_count="129">
 <div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> DecisionTreeClassifier(random_state <span class="op">=</span> <span class="dv">1</span>)<span class="co">#model without any restrictions</span></span>
@@ -1278,12 +1295,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./Lec3_RegressionTrees.html" class="pagination-link" aria-label="Regression trees">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Regression trees</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Regression trees</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./Lec4_Bagging.html" class="pagination-link" aria-label="Bagging">
-        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Bagging</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Bagging</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

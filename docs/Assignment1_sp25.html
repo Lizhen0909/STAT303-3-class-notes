@@ -5069,8 +5069,7 @@ window.Quarto = {
   <li><a href="#b-generate-test-set-no-noise" id="toc-b-generate-test-set-no-noise" class="nav-link" data-scroll-target="#b-generate-test-set-no-noise">b) Generate Test Set (No Noise)</a></li>
   <li><a href="#c-initialize-results-dataframe" id="toc-c-initialize-results-dataframe" class="nav-link" data-scroll-target="#c-initialize-results-dataframe">c) Initialize Results DataFrame</a></li>
   <li><a href="#d-generate-training-sets-with-noise" id="toc-d-generate-training-sets-with-noise" class="nav-link" data-scroll-target="#d-generate-training-sets-with-noise">d) Generate Training Sets (With Noise)</a></li>
-  <li><a href="#reminder-computing-mse-on-the-noiseless-test-set" id="toc-reminder-computing-mse-on-the-noiseless-test-set" class="nav-link" data-scroll-target="#reminder-computing-mse-on-the-noiseless-test-set">💡 Reminder: Computing MSE on the Noiseless Test Set</a></li>
-  <li><a href="#e-visualize-bias-variance-tradeoff" id="toc-e-visualize-bias-variance-tradeoff" class="nav-link" data-scroll-target="#e-visualize-bias-variance-tradeoff">e) Visualize Bias-Variance Tradeoff</a></li>
+  <li><a href="#e-visualize-biasvariance-decomposition" id="toc-e-visualize-biasvariance-decomposition" class="nav-link" data-scroll-target="#e-visualize-biasvariance-decomposition">e) Visualize Bias–Variance Decomposition</a></li>
   <li><a href="#f-identify-the-optimal-model" id="toc-f-identify-the-optimal-model" class="nav-link" data-scroll-target="#f-identify-the-optimal-model">f) Identify the Optimal Model</a></li>
   </ul></li>
   <li><a href="#building-a-low-bias-low-variance-model-via-regularization-50-points" id="toc-building-a-low-bias-low-variance-model-via-regularization-50-points" class="nav-link" data-scroll-target="#building-a-low-bias-low-variance-model-via-regularization-50-points">2) Building a Low-Bias-Low-Variance Model via Regularization (50 points)</a>
@@ -5156,75 +5155,75 @@ window.Quarto = {
 </section>
 <section id="c-initialize-results-dataframe" class="level3">
 <h3 class="anchored" data-anchor-id="c-initialize-results-dataframe">c) Initialize Results DataFrame</h3>
-<p>Create an empty DataFrame with the following columns: <strong>degree</strong>, <strong>bias_sq</strong>, <strong>var</strong>, and <strong>mse</strong>.<br>
+<p>Create an empty DataFrame with the following columns: <strong>degree</strong>, <strong>bias_sq</strong>, <strong>var</strong>, <strong>bias_var_sum</strong>, and <strong>empirical_mse</strong>.<br>
 You will use this DataFrame to store the results of your bias-variance tradeoff analysis, which will be used for generating plots and interpreting model performance.</p>
 <p><strong>(3 points)</strong></p>
 </section>
 <section id="d-generate-training-sets-with-noise" class="level3">
 <h3 class="anchored" data-anchor-id="d-generate-training-sets-with-noise">d) Generate Training Sets (With Noise)</h3>
-<p>To estimate the <strong>bias</strong> and <strong>variance</strong> of a Linear Regression model fitted on noisy data from the underlying Bukin function, follow these steps:</p>
-<p><strong>🔁 Generate 100 Training Sets:</strong></p>
+<p>To estimate the <strong>bias</strong>, <strong>variance</strong>, and <strong>total error (MSE)</strong> of a Linear Regression model trained on noisy data from the underlying Bukin function, follow the steps below.</p>
+<p><strong>🔁 Step 1: Generate 100 Training Sets</strong></p>
 <ul>
-<li>Create <strong>100 independent training datasets</strong>, each containing <strong>100 observations</strong> (same size as the test set).</li>
-<li>For each training set:
+<li>Create <strong>100 independent training datasets</strong>, each with <strong>100 observations</strong> (same size as the test set).</li>
+<li>For each training dataset:
 <ul>
 <li>Use <code>np.random.seed(i)</code> to ensure reproducibility, where <code>i</code> is the dataset index (0 to 99).</li>
-<li>Draw predictors from the same distributions as in the test set.</li>
-<li>Add <strong>Gaussian noise</strong> with mean 0 and <strong>standard deviation 10</strong>, i.e., <span class="math inline">\(\mathcal{N}(0, 10)\)</span>, to the target values.</li>
+<li>Sample predictors from the <strong>same distributions</strong> used to generate the test set.</li>
+<li>Add <strong>Gaussian noise</strong> with mean 0 and standard deviation 10:<br>
+<span class="math inline">\(\varepsilon \sim \mathcal{N}(0, 10)\)</span></li>
 </ul></li>
 </ul>
-<p><strong>📈 Train Polynomial Models (Degrees 1 to 7):</strong></p>
+<p><strong>🧠 Step 2: Train Polynomial Models (Degrees 1 to 7)</strong></p>
 <ul>
-<li>For each training set, train polynomial models of degrees <strong>1 through 7</strong>.</li>
+<li>For each training dataset, train polynomial models with degrees <strong>1 through 7</strong>.</li>
 <li>Use polynomial feature transformations that include both:
 <ul>
 <li><strong>Higher-order terms</strong> (e.g., <span class="math inline">\(x_1^2\)</span>, <span class="math inline">\(x_2^3\)</span>)</li>
 <li><strong>Interaction terms</strong> (e.g., <span class="math inline">\(x_1 \cdot x_2\)</span>)</li>
 </ul></li>
-<li>Use the <strong>same fixed, noiseless test set</strong> to generate predictions from each model.</li>
+<li>Make predictions on the <strong>fixed, noiseless test set</strong> for each trained model.</li>
 </ul>
-<p><strong>📊 Estimate Bias², Variance, and MSE for Each Degree:</strong></p>
+<p><strong>📊 Step 3: Estimate Bias², Variance, and MSE</strong></p>
 <ul>
-<li>For each <strong>test point</strong>, you will obtain <strong>100 predicted values</strong> (one from each trained model).</li>
-<li>Use these predictions to compute the following quantities <strong>per degree</strong> (averaged over all test points):
+<li>For each <strong>degree</strong>, and each <strong>test point</strong>, collect the 100 predicted values from the models trained on the different training sets.</li>
+<li>Using these predictions, compute:
 <ul>
-<li><strong>Bias squared</strong></li>
-<li><strong>Variance</strong></li>
-<li><strong>Mean Squared Error (MSE)</strong></li>
+<li><strong>Bias squared</strong>: squared difference between the mean prediction and the true value.</li>
+<li><strong>Variance</strong>: variance of the predictions.</li>
+<li><strong>Theoretical MSE</strong>: sum of bias squared and variance.</li>
+<li><strong>Empirical MSE</strong>: compute using <code>sklearn.metrics.mean_squared_error</code> between each model’s prediction and the true values, then average over the 100 training runs.</li>
 </ul></li>
-<li>Store these values in your results DataFrame for plotting and analysis.</li>
+<li>Store all four quantities for each degree in your results DataFrame:
+<ul>
+<li><code>degree</code></li>
+<li><code>bias_sq</code></li>
+<li><code>var</code></li>
+<li><code>bias_var_sum</code> (bias squared + variance)</li>
+<li><code>empirical_mse</code></li>
+</ul></li>
 </ul>
 <p><strong>(25 points)</strong></p>
-</section>
-<section id="reminder-computing-mse-on-the-noiseless-test-set" class="level3">
-<h3 class="anchored" data-anchor-id="reminder-computing-mse-on-the-noiseless-test-set">💡 Reminder: Computing MSE on the Noiseless Test Set</h3>
-<p>When computing the <strong>MSE</strong>, you should <strong>not</strong> include the irreducible error (noise variance). Here’s why:</p>
+<p>💡 <strong>Reminder: Comparing Theoretical vs.&nbsp;Empirical MSE</strong></p>
+<p>When evaluating model performance on the <strong>noiseless test set</strong>:</p>
 <ul>
-<li><p>The <strong>irreducible error</strong> (<span class="math inline">\(\sigma^2 = 100\)</span>) comes from the noise <strong>in the training data</strong>.</p></li>
-<li><p>The <strong>test set is noiseless</strong>, so your predictions are evaluated against the <strong>true function values</strong>.</p></li>
-<li><p>Therefore:</p>
+<li><p>The <strong>irreducible error</strong> (i.e., noise in training data) does <strong>not</strong> affect the test targets.</p></li>
+<li><p>Therefore, the test error (MSE) can be decomposed as:</p>
 <p><span class="math inline">\(MSE\)</span> = <span class="math inline">\({Bias}^2\)</span> + <span class="math inline">\({Variance}\)</span></p></li>
+<li><p>The <strong>empirical MSE</strong> (from sklearn) should closely match the <strong>sum of bias² and variance</strong>, since the test data contains no noise.</p></li>
 </ul>
-<p><strong>✅ Conclusion:</strong><br>
-The MSE you compute is the <strong>expected prediction error</strong> on noiseless test data.<br>
-You should <strong>only sum the estimated bias² and variance</strong> — no additional noise term is needed.</p>
 </section>
-<section id="e-visualize-bias-variance-tradeoff" class="level3">
-<h3 class="anchored" data-anchor-id="e-visualize-bias-variance-tradeoff">e) Visualize Bias-Variance Tradeoff</h3>
-<p>Using the results stored in your summary DataFrame, create a line plot showing how the following quantities change with the <strong>degree</strong> of the polynomial model:</p>
-<ul>
-<li>bias squared</li>
-<li>variance</li>
-<li>mse — computed as the sum of bias squared and variance</li>
-</ul>
-<p><strong>(5 points)</strong></p>
-<p><strong>Plot requirements:</strong></p>
-<ul>
-<li>The x-axis should represent the <strong>polynomial degree</strong>.</li>
-<li>The y-axis should represent the <strong>error values</strong>.</li>
-<li>Include a <strong>legend</strong> that clearly labels each line: bias², variance, and mse.<br>
-<strong>(2 points)</strong></li>
-</ul>
+<section id="e-visualize-biasvariance-decomposition" class="level3">
+<h3 class="anchored" data-anchor-id="e-visualize-biasvariance-decomposition">e) Visualize Bias–Variance Decomposition</h3>
+<p>Using the results stored in your DataFrame, create a plot with <strong>four lines</strong>, each plotted against the polynomial <strong>degree</strong>:</p>
+<ol type="1">
+<li><strong>Bias squared</strong></li>
+<li><strong>Variance</strong></li>
+<li><strong>Bias squared + Variance</strong> (i.e., the theoretical decomposition of MSE)</li>
+<li><strong>Empirical MSE</strong> calculated using <code>sklearn.metrics.mean_squared_error()</code><br>
+(computed from the predicted values vs.&nbsp;true function values on the noiseless test set)</li>
+</ol>
+<p><strong>Plot requirements:</strong> - Use a single line plot with the polynomial degree on the x-axis and error values on the y-axis. - Include a <strong>legend</strong> to clearly label each line. - Use different line styles or markers for easy visual comparison.</p>
+<p><strong>Goal:</strong> - Compare the <strong>empirical MSE</strong> to the <strong>sum of bias squared and variance</strong>. - If everything is implemented correctly, the two lines should be very close (or even identical, up to numerical precision).</p>
 </section>
 <section id="f-identify-the-optimal-model" class="level3">
 <h3 class="anchored" data-anchor-id="f-identify-the-optimal-model">f) Identify the Optimal Model</h3>

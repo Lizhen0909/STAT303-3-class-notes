@@ -5072,7 +5072,7 @@ window.Quarto = {
   <li><a href="#e-visualize-biasvariance-decomposition" id="toc-e-visualize-biasvariance-decomposition" class="nav-link" data-scroll-target="#e-visualize-biasvariance-decomposition">e) Visualize Bias–Variance Decomposition</a></li>
   <li><a href="#f-identify-the-optimal-model" id="toc-f-identify-the-optimal-model" class="nav-link" data-scroll-target="#f-identify-the-optimal-model">f) Identify the Optimal Model</a></li>
   </ul></li>
-  <li><a href="#building-a-low-bias-low-variance-model-via-regularization-50-points" id="toc-building-a-low-bias-low-variance-model-via-regularization-50-points" class="nav-link" data-scroll-target="#building-a-low-bias-low-variance-model-via-regularization-50-points">2) Building a Low-Bias-Low-Variance Model via Regularization (50 points)</a>
+  <li><a href="#building-a-low-bias-low-variance-model-via-regularization-50-points" id="toc-building-a-low-bias-low-variance-model-via-regularization-50-points" class="nav-link" data-scroll-target="#building-a-low-bias-low-variance-model-via-regularization-50-points">2) Building a Low-Bias, Low-Variance Model via Regularization (50 points)</a>
   <ul>
   <li><a href="#a-why-regularization" id="toc-a-why-regularization" class="nav-link" data-scroll-target="#a-why-regularization">a) Why Regularization?</a></li>
   <li><a href="#b-which-degrees-to-exclude" id="toc-b-which-degrees-to-exclude" class="nav-link" data-scroll-target="#b-which-degrees-to-exclude">b) Which Degrees to Exclude?</a></li>
@@ -5155,8 +5155,19 @@ window.Quarto = {
 </section>
 <section id="c-initialize-results-dataframe" class="level3">
 <h3 class="anchored" data-anchor-id="c-initialize-results-dataframe">c) Initialize Results DataFrame</h3>
-<p>Create an empty DataFrame with the following columns: <strong>degree</strong>, <strong>bias_sq</strong>, <strong>var</strong>, <strong>bias_var_sum</strong>, and <strong>empirical_mse</strong>.<br>
-You will use this DataFrame to store the results of your bias-variance tradeoff analysis, which will be used for generating plots and interpreting model performance.</p>
+<p>Create an empty DataFrame with the following columns:</p>
+<ul>
+<li><strong>degree</strong>: the degree of the polynomial model<br>
+</li>
+<li><strong>bias_sq</strong>: estimated squared bias (averaged over test points)<br>
+</li>
+<li><strong>var</strong>: estimated variance of predictions<br>
+</li>
+<li><strong>bias_var_sum</strong>: sum of bias squared and variance<br>
+</li>
+<li><strong>empirical_mse</strong>: mean squared error calculated using sklearn’s <code>mean_squared_error()</code> on model predictions vs.&nbsp;true function values</li>
+</ul>
+<p>This DataFrame will be used to store the results of your bias–variance tradeoff analysis and for generating comparison plots.</p>
 <p><strong>(3 points)</strong></p>
 </section>
 <section id="d-generate-training-sets-with-noise" class="level3">
@@ -5228,86 +5239,100 @@ You will use this DataFrame to store the results of your bias-variance tradeoff 
 <section id="f-identify-the-optimal-model" class="level3">
 <h3 class="anchored" data-anchor-id="f-identify-the-optimal-model">f) Identify the Optimal Model</h3>
 <ul>
-<li><p>What is the <strong>optimal polynomial degree</strong> based on the lowest mean squared error (mse)?<br>
+<li><p>What is the <strong>optimal polynomial degree</strong> based on the <strong>lowest empirical MSE</strong> (calculated using sklearn)?<br>
 <strong>(2 points)</strong></p></li>
 <li><p>Report the corresponding values of:</p>
 <ul>
-<li><strong>bias squared</strong><br>
+<li><strong>Bias squared</strong><br>
 </li>
-<li><strong>variance</strong><br>
+<li><strong>Variance</strong><br>
 </li>
-<li><strong>mean squared error (mse)</strong><br>
-for that optimal degree.<br>
+<li><strong>Bias squared + Variance</strong><br>
+</li>
+<li><strong>Empirical MSE</strong><br>
+for that degree.<br>
 <strong>(3 points)</strong></li>
 </ul></li>
 </ul>
 </section>
 </section>
 <section id="building-a-low-bias-low-variance-model-via-regularization-50-points" class="level2">
-<h2 class="anchored" data-anchor-id="building-a-low-bias-low-variance-model-via-regularization-50-points">2) Building a Low-Bias-Low-Variance Model via Regularization (50 points)</h2>
-<p>The main goal of this question is to further reduce the <strong>total error</strong> by applying <strong>regularization</strong>. Specifically, you’ll implement a <strong>low-bias, low-variance</strong> model for the underlying function and the noisy data.</p>
+<h2 class="anchored" data-anchor-id="building-a-low-bias-low-variance-model-via-regularization-50-points">2) Building a Low-Bias, Low-Variance Model via Regularization (50 points)</h2>
+<p>The main goal of this question is to further reduce the <strong>total prediction error</strong> by applying <strong>regularization</strong>.<br>
+Specifically, you’ll use <strong>Ridge regression</strong> to build a <strong>low-bias, low-variance</strong> model for data generated from the underlying Bukin function with noise.</p>
 <section id="a-why-regularization" class="level3">
 <h3 class="anchored" data-anchor-id="a-why-regularization">a) Why Regularization?</h3>
-<p>Explain why the model with the optimal degree (as identified in Question 1) is <strong>not guaranteed</strong> to be the true low-bias-low-variance model.<br>
-Why might <strong>regularization</strong> still be necessary to improve generalization performance?</p>
+<p>Explain why the model with the optimal polynomial degree (as identified in Question 1) is <strong>not guaranteed</strong> to be the true low-bias, low-variance model.</p>
+<p>Why might <strong>regularization</strong> still be necessary to improve generalization performance, even after selecting the degree that minimizes MSE?</p>
 <p><strong>(5 points)</strong></p>
 </section>
 <section id="b-which-degrees-to-exclude" class="level3">
 <h3 class="anchored" data-anchor-id="b-which-degrees-to-exclude">b) Which Degrees to Exclude?</h3>
-<p>Before repeating the process from Question 1, carefully examine the plot and results from <strong>1e</strong> and <strong>1f</strong>. Identify which polynomial degrees should be <strong>excluded</strong> from regularization experiments because they are already too simple or too complex.</p>
-<p>Explain which degrees you will exclude and <strong>why</strong>, considering how <strong>regularization affects bias and variance</strong>.</p>
+<p>Based on your plot and results from <strong>1e</strong> and <strong>1f</strong>, identify which polynomial degrees should be <strong>excluded</strong> from regularization experiments because they are already too simple (high bias) or too complex (high variance).</p>
+<p>Explain which degrees you will exclude and <strong>why</strong>, using your understanding of how <strong>regularization affects bias and variance</strong>.</p>
 <p><strong>(10 points)</strong></p>
 </section>
 <section id="c-apply-ridge-regularization" class="level3">
 <h3 class="anchored" data-anchor-id="c-apply-ridge-regularization">c) Apply Ridge Regularization</h3>
-<p>Repeat the steps from <strong>1c</strong> and <strong>1d</strong>, but this time using <strong>Ridge regression</strong> instead of ordinary least squares.</p>
+<p>Repeat the steps from <strong>1c</strong> and <strong>1d</strong>, but this time use <strong>Ridge regression</strong> instead of ordinary least squares.</p>
 <ul>
-<li><strong>Exclude</strong> the degrees you identified in <strong>2b</strong>, as well as <strong>degree 7</strong> (to avoid extreme overfitting).</li>
-<li>Use <strong>5-fold cross-validation</strong> to tune the regularization hyperparameter.</li>
+<li>Use only the degrees <strong>not excluded</strong> in 2b (and also exclude degree 7 to avoid extreme overfitting).</li>
+<li>Use <strong>5-fold cross-validation</strong> to tune the Ridge regularization strength.</li>
 <li>Use <code>neg_root_mean_squared_error</code> as the scoring metric for cross-validation.</li>
-<li>Try regularization strengths in the range <code>[1, 100]</code>.</li>
+<li>Tune over a range of regularization strengths (e.g., from 1 to 100).</li>
+<li>For each retained degree, compute:
+<ul>
+<li><strong>Bias squared</strong></li>
+<li><strong>Variance</strong></li>
+<li><strong>Bias squared + Variance</strong></li>
+<li><strong>Empirical MSE</strong> (from <code>sklearn.metrics.mean_squared_error</code>)</li>
+</ul></li>
 </ul>
+<p>Store your results in a new DataFrame with the same structure as in Question 1.</p>
 <p><strong>(10 points)</strong></p>
 </section>
 <section id="d-visualize-regularized-results" class="level3">
 <h3 class="anchored" data-anchor-id="d-visualize-regularized-results">d) Visualize Regularized Results</h3>
-<p>Repeat the visualization from <strong>1e</strong>, but using the results obtained from <strong>2c</strong> (Ridge regression).</p>
-<p>Plot:</p>
-<ul>
-<li><strong>bias squared</strong></li>
-<li><strong>variance</strong></li>
-<li><strong>mse</strong></li>
-</ul>
-<p>against the polynomial <strong>degree</strong>, using regularized models.</p>
+<p>Repeat the visualization from <strong>1e</strong>, but using the results from <strong>2c</strong> (Ridge regression).</p>
+<p>Your plot should include <strong>four lines</strong> plotted against polynomial degree:</p>
+<ol type="1">
+<li><strong>Bias squared</strong></li>
+<li><strong>Variance</strong></li>
+<li><strong>Bias squared + Variance</strong></li>
+<li><strong>Empirical MSE</strong> (computed using sklearn)</li>
+</ol>
+<p>Include a clear <strong>legend</strong> and label your axes.<br>
+This will help you visually assess how regularization impacts bias, variance, and overall model error.</p>
 <p><strong>(10 points)</strong></p>
 </section>
 <section id="e-evaluate-the-regularized-model" class="level3">
 <h3 class="anchored" data-anchor-id="e-evaluate-the-regularized-model">e) Evaluate the Regularized Model</h3>
 <ul>
-<li><p>What is the <strong>degree</strong> of the optimal Ridge Regression model based on the lowest total error?<br>
+<li><p>What is the <strong>optimal polynomial degree</strong> for the Ridge Regression model, based on the <strong>lowest empirical MSE</strong>?<br>
 <strong>(3 points)</strong></p></li>
-<li><p>What are the corresponding values of:</p>
+<li><p>Report the corresponding values of:</p>
 <ul>
-<li><strong>bias-squared</strong><br>
+<li><strong>Bias squared</strong><br>
 </li>
-<li><strong>variance</strong><br>
+<li><strong>Variance</strong><br>
 </li>
-<li><strong>mse</strong><br>
-for that optimal Ridge model?<br>
+<li><strong>Empirical MSE</strong><br>
+for that optimal Ridge model.<br>
 <strong>(3 points)</strong></li>
 </ul></li>
 <li><p>Compare these results to those of the optimal <strong>Linear Regression</strong> model from Question 1.<br>
-How did <strong>regularization</strong> affect the bias, variance, and total error?<br>
+Discuss how <strong>regularization</strong> influenced the <strong>bias</strong>, <strong>variance</strong>, and <strong>overall prediction error (MSE)</strong>.<br>
 <strong>(4 points)</strong></p></li>
 </ul>
 </section>
 <section id="f-interpreting-the-impact-of-regularization" class="level3">
 <h3 class="anchored" data-anchor-id="f-interpreting-the-impact-of-regularization">f) Interpreting the Impact of Regularization</h3>
 <ul>
-<li><p>Was the <strong>regularization successful</strong> in reducing the <strong>total error</strong> of the regression model?<br>
+<li><p>Was <strong>regularization successful</strong> in reducing the <strong>total prediction error (MSE)</strong> compared to the unregularized model?<br>
 <strong>(2 points)</strong></p></li>
-<li><p>Based on the results from <strong>2e</strong>, explain how <strong>bias</strong> and <strong>variance</strong> changed with regularization.<br>
-How did these changes contribute to the final total error?<br>
+<li><p>Based on your results from <strong>2e</strong>, explain how <strong>bias</strong> and <strong>variance</strong> changed as a result of regularization.<br>
+How did these changes affect the final total error?<br>
+Support your explanation with values or observations from your analysis.<br>
 <strong>(3 points)</strong></p></li>
 </ul>
 

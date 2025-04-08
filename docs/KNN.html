@@ -286,12 +286,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#knn-for-regression" id="toc-knn-for-regression" class="nav-link active" data-scroll-target="#knn-for-regression"><span class="header-section-number">2.1</span> KNN for regression</a></li>
-  <li><a href="#without-feature-selection" id="toc-without-feature-selection" class="nav-link" data-scroll-target="#without-feature-selection"><span class="header-section-number">2.2</span> Without feature selection</a>
+  <li><a href="#feature-scaling-in-knn" id="toc-feature-scaling-in-knn" class="nav-link" data-scroll-target="#feature-scaling-in-knn"><span class="header-section-number">2.2</span> Feature Scaling in KNN</a></li>
+  <li><a href="#hyperparameters-in-knn" id="toc-hyperparameters-in-knn" class="nav-link" data-scroll-target="#hyperparameters-in-knn"><span class="header-section-number">2.3</span> Hyperparameters in KNN</a>
   <ul>
-  <li><a href="#tuning-k-in-knn" id="toc-tuning-k-in-knn" class="nav-link" data-scroll-target="#tuning-k-in-knn"><span class="header-section-number">2.2.1</span> Tuning <em>K</em> in KNN</a></li>
-  <li><a href="#knn-hyperparameters" id="toc-knn-hyperparameters" class="nav-link" data-scroll-target="#knn-hyperparameters"><span class="header-section-number">2.2.2</span> KNN hyperparameters</a></li>
+  <li><a href="#tuning-k-in-knn" id="toc-tuning-k-in-knn" class="nav-link" data-scroll-target="#tuning-k-in-knn"><span class="header-section-number">2.3.1</span> Tuning <em>k</em> in KNN</a></li>
+  <li><a href="#tuning-other-knn-hyperparameters" id="toc-tuning-other-knn-hyperparameters" class="nav-link" data-scroll-target="#tuning-other-knn-hyperparameters"><span class="header-section-number">2.3.2</span> Tuning Other KNN Hyperparameters</a></li>
   </ul></li>
-  <li><a href="#tuning-more-hyperparameters-of-knn-models" id="toc-tuning-more-hyperparameters-of-knn-models" class="nav-link" data-scroll-target="#tuning-more-hyperparameters-of-knn-models"><span class="header-section-number">2.3</span> Tuning more hyperparameters of KNN models</a></li>
   </ul>
 </nav>
     </div>
@@ -425,8 +425,16 @@ categorical features in the pipeline: ['brand_audi' 'brand_bmw' 'brand_ford' 'br
 </div>
 </div>
 </section>
-<section id="without-feature-selection" class="level2" data-number="2.2">
-<h2 data-number="2.2" class="anchored" data-anchor-id="without-feature-selection"><span class="header-section-number">2.2</span> Without feature selection</h2>
+<section id="feature-scaling-in-knn" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="feature-scaling-in-knn"><span class="header-section-number">2.2</span> Feature Scaling in KNN</h2>
+<p><strong>Feature scaling is essential when using K-Nearest Neighbors (KNN)</strong> because the algorithm relies on calculating distances between data points. If features are measured on different scales (e.g., <code>mileage</code> in thousands and <code>mpg</code> in tens), the features with larger numeric ranges can dominate the distance calculations and distort the results.</p>
+<p>To ensure that all features contribute equally, it’s important to <strong>standardize or normalize</strong> them before applying KNN. Common scaling techniques include:</p>
+<ul>
+<li><strong>Standardization</strong> (zero mean, unit variance) using <code>StandardScaler</code></li>
+<li><strong>Min-max scaling</strong> to bring values into the <code>[0, 1]</code> range</li>
+</ul>
+<p>Without scaling, KNN may produce biased or misleading predictions.<br>
+The example below illustrates how the same KNN model performs <strong>without feature scaling</strong>, highlighting the importance of preprocessing your data.</p>
 <div id="a878f7ef" class="cell" data-execution_count="97">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>preprocessor_no_scaling <span class="op">=</span> ColumnTransformer(</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    transformers<span class="op">=</span>[</span>
@@ -454,8 +462,17 @@ categorical features in the pipeline: ['brand_audi' 'brand_bmw' 'brand_ford' 'br
 R² Score without scaling: 0.35</code></pre>
 </div>
 </div>
-<section id="tuning-k-in-knn" class="level3" data-number="2.2.1">
-<h3 data-number="2.2.1" class="anchored" data-anchor-id="tuning-k-in-knn"><span class="header-section-number">2.2.1</span> Tuning <em>K</em> in KNN</h3>
+</section>
+<section id="hyperparameters-in-knn" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="hyperparameters-in-knn"><span class="header-section-number">2.3</span> Hyperparameters in KNN</h2>
+<p>The most important hyperparameter in K-Nearest Neighbors (KNN) is <strong><em>k</em></strong>, which determines the number of neighbors considered when making predictions. Tuning <em>k</em> helps balance the model’s <strong>bias and variance</strong>:</p>
+<ul>
+<li>A <strong>small <em>k</em></strong> (e.g., 1 or 3) can lead to <strong>low bias but high variance</strong>, making the model sensitive to noise in the training data.</li>
+<li>A <strong>large <em>k</em></strong> results in <strong>higher bias but lower variance</strong>, producing smoother predictions that may underfit the data.</li>
+</ul>
+<section id="tuning-k-in-knn" class="level3" data-number="2.3.1">
+<h3 data-number="2.3.1" class="anchored" data-anchor-id="tuning-k-in-knn"><span class="header-section-number">2.3.1</span> Tuning <em>k</em> in KNN</h3>
+<p>To find the optimal value of <em>k</em>, it’s common to use <strong>cross-validation</strong>, which evaluates model performance on different subsets of the data. A popular tool for this is <strong><code>GridSearchCV</code></strong>, which automates the search process by testing multiple values of <em>k</em> using cross-validation behind the scenes. It selects the value of <em>k</em> that minimizes prediction error on unseen data—helping you achieve a good balance between underfitting and overfitting.</p>
 <div id="a8e5cf9f" class="cell" data-execution_count="102">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create parameter grid for k values</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>param_grid <span class="op">=</span> {</span>
@@ -525,88 +542,21 @@ Test R² Score with k=3: 0.94</code></pre>
 </div>
 </div>
 </div>
-</section>
-<section id="knn-hyperparameters" class="level3" data-number="2.2.2">
-<h3 data-number="2.2.2" class="anchored" data-anchor-id="knn-hyperparameters"><span class="header-section-number">2.2.2</span> KNN hyperparameters</h3>
-<p>The model hyperparameters can be obtained using the <code>get_params()</code> method. Note that there are other hyperparameters to tune in addition to number of neighbors. However, the number of neighbours may be the most influential hyperparameter in most cases.</p>
-<div id="5d8b82ac" class="cell" data-execution_count="104">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>best_model.get_params()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="104">
-<pre><code>{'memory': None,
- 'steps': [('preprocessor',
-   ColumnTransformer(transformers=[('num', 'passthrough',
-                                    ['year', 'mileage', 'tax', 'mpg',
-                                     'engineSize']),
-                                   ('cat',
-                                    OneHotEncoder(handle_unknown='ignore',
-                                                  sparse_output=False),
-                                    ['brand', 'model', 'transmission',
-                                     'fuelType'])])),
-  ('scaler', StandardScaler()),
-  ('knn', KNeighborsRegressor(n_neighbors=3))],
- 'transform_input': None,
- 'verbose': False,
- 'preprocessor': ColumnTransformer(transformers=[('num', 'passthrough',
-                                  ['year', 'mileage', 'tax', 'mpg',
-                                   'engineSize']),
-                                 ('cat',
-                                  OneHotEncoder(handle_unknown='ignore',
-                                                sparse_output=False),
-                                  ['brand', 'model', 'transmission',
-                                   'fuelType'])]),
- 'scaler': StandardScaler(),
- 'knn': KNeighborsRegressor(n_neighbors=3),
- 'preprocessor__force_int_remainder_cols': True,
- 'preprocessor__n_jobs': None,
- 'preprocessor__remainder': 'drop',
- 'preprocessor__sparse_threshold': 0.3,
- 'preprocessor__transformer_weights': None,
- 'preprocessor__transformers': [('num',
-   'passthrough',
-   ['year', 'mileage', 'tax', 'mpg', 'engineSize']),
-  ('cat',
-   OneHotEncoder(handle_unknown='ignore', sparse_output=False),
-   ['brand', 'model', 'transmission', 'fuelType'])],
- 'preprocessor__verbose': False,
- 'preprocessor__verbose_feature_names_out': True,
- 'preprocessor__num': 'passthrough',
- 'preprocessor__cat': OneHotEncoder(handle_unknown='ignore', sparse_output=False),
- 'preprocessor__cat__categories': 'auto',
- 'preprocessor__cat__drop': None,
- 'preprocessor__cat__dtype': numpy.float64,
- 'preprocessor__cat__feature_name_combiner': 'concat',
- 'preprocessor__cat__handle_unknown': 'ignore',
- 'preprocessor__cat__max_categories': None,
- 'preprocessor__cat__min_frequency': None,
- 'preprocessor__cat__sparse_output': False,
- 'scaler__copy': True,
- 'scaler__with_mean': True,
- 'scaler__with_std': True,
- 'knn__algorithm': 'auto',
- 'knn__leaf_size': 30,
- 'knn__metric': 'minkowski',
- 'knn__metric_params': None,
- 'knn__n_jobs': None,
- 'knn__n_neighbors': 3,
- 'knn__p': 2,
- 'knn__weights': 'uniform'}</code></pre>
-</div>
-</div>
 <p>The distances and the indices of the nearest K observations to each test observation can be obtained using the <code>kneighbors()</code> method.</p>
-<div id="2dd8d2f0" class="cell" data-execution_count="105">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get the KNN estimator from the pipeline</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>knn_estimator <span class="op">=</span> best_model.named_steps[<span class="st">'knn'</span>]</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Get indices of K-nearest neighbors for each test observation</span></span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>neighbor_indices <span class="op">=</span> knn_estimator.kneighbors(best_model.named_steps[<span class="st">'preprocessor'</span>].transform(X_test), </span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>                                           return_distance<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="co"># neighbor_indices will contain the indices of the K nearest neighbors for each test observation</span></span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Note: The indices are relative to the training set, not the test set.</span></span>
-<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="co"># To get the actual neighbor observations, you can use these indices to index into the training set</span></span>
-<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="co"># For example, to get the actual neighbor observations for the first test observation:</span></span>
-<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>neighbors <span class="op">=</span> X_train.iloc[neighbor_indices[<span class="dv">0</span>]]</span>
-<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>neighbors</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="105">
+<div id="e6cfeeed" class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get the KNN estimator from the pipeline</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>knn_estimator <span class="op">=</span> best_model.named_steps[<span class="st">'knn'</span>]</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Get indices of K-nearest neighbors for each test observation</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>neighbor_indices <span class="op">=</span> knn_estimator.kneighbors(best_model.named_steps[<span class="st">'preprocessor'</span>].transform(X_test), </span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>                                           return_distance<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="co"># neighbor_indices will contain the indices of the K nearest neighbors for each test observation</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Note: The indices are relative to the training set, not the test set.</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="co"># To get the actual neighbor observations, you can use these indices to index into the training set</span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="co"># For example, to get the actual neighbor observations for the first test observation:</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>neighbors <span class="op">=</span> X_train.iloc[neighbor_indices[<span class="dv">0</span>]]</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>neighbors</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
 <div>
 
 
@@ -669,9 +619,103 @@ Test R² Score with k=3: 0.94</code></pre>
 </div>
 </div>
 </section>
-</section>
-<section id="tuning-more-hyperparameters-of-knn-models" class="level2" data-number="2.3">
-<h2 data-number="2.3" class="anchored" data-anchor-id="tuning-more-hyperparameters-of-knn-models"><span class="header-section-number">2.3</span> Tuning more hyperparameters of KNN models</h2>
+<section id="tuning-other-knn-hyperparameters" class="level3" data-number="2.3.2">
+<h3 data-number="2.3.2" class="anchored" data-anchor-id="tuning-other-knn-hyperparameters"><span class="header-section-number">2.3.2</span> Tuning Other KNN Hyperparameters</h3>
+<p>In addition to the number of neighbors (<em>k</em>), KNN has several other important hyperparameters that can significantly affect the model’s performance. Fine-tuning these settings helps you get the most out of the algorithm. Key hyperparameters include:</p>
+<ul>
+<li><strong><code>weights</code></strong>: Determines how the neighbors contribute to the prediction.
+<ul>
+<li><code>'uniform'</code>: All neighbors are weighted equally (default).<br>
+</li>
+<li><code>'distance'</code>: Closer neighbors have more influence.<br>
+</li>
+<li>Choosing <code>'distance'</code> can improve performance, especially when data points are unevenly distributed.</li>
+</ul></li>
+<li><strong><code>metric</code></strong>: Defines the distance function used to measure similarity between data points.
+<ul>
+<li><code>'minkowski'</code> (default) is a general-purpose metric that includes both Euclidean and Manhattan distances.<br>
+</li>
+<li>Other options include <code>'euclidean'</code>, <code>'manhattan'</code>, or even custom distance functions.</li>
+</ul></li>
+<li><strong><code>p</code></strong>: Used when <code>metric='minkowski'</code>.
+<ul>
+<li><code>p=2</code> gives <strong>Euclidean distance</strong> (standard for continuous features).<br>
+</li>
+<li><code>p=1</code> gives <strong>Manhattan distance</strong> (useful when features are sparse or grid-based).</li>
+</ul></li>
+<li><strong><code>algorithm</code></strong>: Controls the method used to compute nearest neighbors.
+<ul>
+<li><code>'auto'</code>, <code>'ball_tree'</code>, <code>'kd_tree'</code>, or <code>'brute'</code>.<br>
+</li>
+<li>Most users can leave this as <code>'auto'</code>, which lets scikit-learn choose the best algorithm based on the data.</li>
+</ul></li>
+</ul>
+<p>These hyperparameters can be tuned using <code>GridSearchCV</code> to find the combination that yields the best performance on validation data.</p>
+<p>The model hyperparameters can be obtained using the <code>get_params()</code> method. Note that there are other hyperparameters to tune in addition to number of neighbors. However, the number of neighbours may be the most influential hyperparameter in most cases.</p>
+<div id="5d8b82ac" class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get the best model parameters</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>best_model.get_params()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="104">
+<pre><code>{'memory': None,
+ 'steps': [('preprocessor',
+   ColumnTransformer(transformers=[('num', 'passthrough',
+                                    ['year', 'mileage', 'tax', 'mpg',
+                                     'engineSize']),
+                                   ('cat',
+                                    OneHotEncoder(handle_unknown='ignore',
+                                                  sparse_output=False),
+                                    ['brand', 'model', 'transmission',
+                                     'fuelType'])])),
+  ('scaler', StandardScaler()),
+  ('knn', KNeighborsRegressor(n_neighbors=3))],
+ 'transform_input': None,
+ 'verbose': False,
+ 'preprocessor': ColumnTransformer(transformers=[('num', 'passthrough',
+                                  ['year', 'mileage', 'tax', 'mpg',
+                                   'engineSize']),
+                                 ('cat',
+                                  OneHotEncoder(handle_unknown='ignore',
+                                                sparse_output=False),
+                                  ['brand', 'model', 'transmission',
+                                   'fuelType'])]),
+ 'scaler': StandardScaler(),
+ 'knn': KNeighborsRegressor(n_neighbors=3),
+ 'preprocessor__force_int_remainder_cols': True,
+ 'preprocessor__n_jobs': None,
+ 'preprocessor__remainder': 'drop',
+ 'preprocessor__sparse_threshold': 0.3,
+ 'preprocessor__transformer_weights': None,
+ 'preprocessor__transformers': [('num',
+   'passthrough',
+   ['year', 'mileage', 'tax', 'mpg', 'engineSize']),
+  ('cat',
+   OneHotEncoder(handle_unknown='ignore', sparse_output=False),
+   ['brand', 'model', 'transmission', 'fuelType'])],
+ 'preprocessor__verbose': False,
+ 'preprocessor__verbose_feature_names_out': True,
+ 'preprocessor__num': 'passthrough',
+ 'preprocessor__cat': OneHotEncoder(handle_unknown='ignore', sparse_output=False),
+ 'preprocessor__cat__categories': 'auto',
+ 'preprocessor__cat__drop': None,
+ 'preprocessor__cat__dtype': numpy.float64,
+ 'preprocessor__cat__feature_name_combiner': 'concat',
+ 'preprocessor__cat__handle_unknown': 'ignore',
+ 'preprocessor__cat__max_categories': None,
+ 'preprocessor__cat__min_frequency': None,
+ 'preprocessor__cat__sparse_output': False,
+ 'scaler__copy': True,
+ 'scaler__with_mean': True,
+ 'scaler__with_std': True,
+ 'knn__algorithm': 'auto',
+ 'knn__leaf_size': 30,
+ 'knn__metric': 'minkowski',
+ 'knn__metric_params': None,
+ 'knn__n_jobs': None,
+ 'knn__n_neighbors': 3,
+ 'knn__p': 2,
+ 'knn__weights': 'uniform'}</code></pre>
+</div>
+</div>
 <div id="86f6667b" class="cell" data-execution_count="106">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extended parameter grid</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>param_grid <span class="op">=</span> {</span>
@@ -725,6 +769,7 @@ Test RMSE: 3826.94</code></pre>
 </div>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->

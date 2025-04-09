@@ -292,6 +292,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#tuning-k-in-knn" id="toc-tuning-k-in-knn" class="nav-link" data-scroll-target="#tuning-k-in-knn"><span class="header-section-number">2.3.1</span> Tuning <em>k</em> in KNN</a></li>
   <li><a href="#tuning-other-knn-hyperparameters" id="toc-tuning-other-knn-hyperparameters" class="nav-link" data-scroll-target="#tuning-other-knn-hyperparameters"><span class="header-section-number">2.3.2</span> Tuning Other KNN Hyperparameters</a></li>
   </ul></li>
+  <li><a href="#hyperparameter-tuning" id="toc-hyperparameter-tuning" class="nav-link" data-scroll-target="#hyperparameter-tuning"><span class="header-section-number">2.4</span> Hyperparameter Tuning</a>
+  <ul>
+  <li><a href="#randomizedsearchcv" id="toc-randomizedsearchcv" class="nav-link" data-scroll-target="#randomizedsearchcv"><span class="header-section-number">2.4.0.1</span> RandomizedSearchCV</a></li>
+  <li><a href="#bayessearchcv" id="toc-bayessearchcv" class="nav-link" data-scroll-target="#bayessearchcv"><span class="header-section-number">2.4.0.2</span> BayesSearchCV</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -1042,8 +1047,266 @@ Test RMSE: 3826.94</code></pre>
 </div>
 </div>
 <p>The results show that the next two best hyperparameter values yield the same performance as the printed one</p>
-<p>When dealing with a large number of possible hyperparameter values, using <code>GridSearchCV()</code> can become computationally expensive. In such cases, <code>RandomizedSearchCV()</code> offers a more efficient alternative by evaluating a randomly selected subset of hyperparameter combinations. The number of sampled combinations can be controlled by the user, making it suitable for situations with limited computational resources.</p>
+</section>
+</section>
+<section id="hyperparameter-tuning" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="hyperparameter-tuning"><span class="header-section-number">2.4</span> Hyperparameter Tuning</h2>
+<p>We used <code>GridSearchCV</code> to tune the hyperparameters of our KNN model above. Given a relatively simple set of hyperparameters and a limited number of combinations, this approach was sufficient to reduce the RMSE.</p>
+<p>However, when the number of possible hyperparameter values grows large, <code>GridSearchCV</code> can become computationally expensive. In such cases, <code>RandomizedSearchCV</code> provides a more efficient alternative by sampling a fixed number of random combinations from the specified hyperparameter space. This makes it well-suited for scenarios with limited computational resources.</p>
+<section id="randomizedsearchcv" class="level4" data-number="2.4.0.1">
+<h4 data-number="2.4.0.1" class="anchored" data-anchor-id="randomizedsearchcv"><span class="header-section-number">2.4.0.1</span> RandomizedSearchCV</h4>
+<div id="22041a57" class="cell" data-execution_count="20">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> RandomizedSearchCV</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.stats <span class="im">import</span> randint</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Set up RandomizedSearchCV</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Define parameter distributions for randomized search</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>param_distributions <span class="op">=</span> {</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">'knn__n_neighbors'</span>: randint(<span class="dv">1</span>, <span class="dv">20</span>),  <span class="co"># Random ints from 1 to 19</span></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">'knn__weights'</span>: [<span class="st">'uniform'</span>, <span class="st">'distance'</span>],</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">'knn__metric'</span>: [<span class="st">'euclidean'</span>, <span class="st">'manhattan'</span>, <span class="st">'minkowski'</span>],</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">'knn__p'</span>: [<span class="dv">1</span>, <span class="dv">2</span>]  <span class="co"># Only relevant for Minkowski</span></span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="5a7c95d4" class="cell" data-execution_count="21">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set up RandomizedSearchCV</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>random_search <span class="op">=</span> RandomizedSearchCV(</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>    estimator<span class="op">=</span>pipeline,</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>    param_distributions<span class="op">=</span>param_distributions,</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>    n_iter<span class="op">=</span><span class="dv">30</span>,  <span class="co"># Number of random combinations to try</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>    cv<span class="op">=</span><span class="dv">5</span>,</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>    scoring<span class="op">=</span><span class="st">'neg_root_mean_squared_error'</span>,</span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>    n_jobs<span class="op">=-</span><span class="dv">1</span>,</span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>    random_state<span class="op">=</span><span class="dv">42</span>,</span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>    verbose<span class="op">=</span><span class="dv">1</span></span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="ea15e448" class="cell" data-execution_count="22">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit randomized search</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Tuning KNN hyperparameters with RandomizedSearchCV..."</span>)</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>random_search.fit(X_train, y_train)</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Best results</span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>best_params <span class="op">=</span> random_search.best_params_</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>best_score <span class="op">=</span> <span class="op">-</span>random_search.best_score_</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Display results</span></span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Best Parameters (RandomizedSearchCV):"</span>)</span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> param, value <span class="kw">in</span> best_params.items():</span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>param<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>value<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Best CV RMSE: </span><span class="sc">{</span>best_score<span class="sc">:.2f}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Tuning KNN hyperparameters with RandomizedSearchCV...
+Fitting 5 folds for each of 30 candidates, totalling 150 fits
+
+Best Parameters (RandomizedSearchCV):
+knn__metric: manhattan
+knn__n_neighbors: 8
+knn__p: 2
+knn__weights: distance
+Best CV RMSE: 4005.70</code></pre>
+</div>
+</div>
+<div id="9fda6ffd" class="cell" data-execution_count="24">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Evaluate on test set</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>best_model <span class="op">=</span> random_search.best_estimator_</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>y_pred <span class="op">=</span> best_model.predict(X_test)</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate RMSE</span></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>test_rmse <span class="op">=</span> root_mean_squared_error(y_test, y_pred)</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Test RMSE: </span><span class="sc">{</span>test_rmse<span class="sc">:.2f}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Test RMSE: 3811.89</code></pre>
+</div>
+</div>
+<p><strong>Why might <code>RandomizedSearchCV</code> outperform <code>GridSearchCV</code>?</strong></p>
+<p>Although <code>GridSearchCV</code> systematically evaluates all combinations of hyperparameter values from a predefined grid, it doesn’t guarantee the best performance. In some cases, <code>RandomizedSearchCV</code> can actually perform better. Here’s why:</p>
+<ul>
+<li><p><strong>Limited Grid Resolution</strong>:<br>
+<code>GridSearchCV</code> evaluates only the specific values you include in the grid. If the true optimal value lies between grid points, it may be missed entirely.</p></li>
+<li><p><strong>Broader Exploration</strong>:<br>
+<code>RandomizedSearchCV</code> samples from distributions (e.g., continuous or discrete ranges), allowing it to explore a wider range of hyperparameter values, including combinations not explicitly considered in a grid.</p>
+<p>In this case,</p>
+<ul>
+<li><code>list(range(1, 20, 2))</code> in <code>GridSearchCV</code></li>
+<li>But in <code>RandomizedSearchCV</code>, it samples from <code>randint(1, 20)</code></li>
+</ul>
+<p>The best <code>n_neighbors</code> happens to be 11, only <code>RandomizedSearchCV</code> can find it unless you explicitly included it in your grid.</p></li>
+<li><p><strong>Efficiency in High Dimensions</strong>:<br>
+In high-dimensional search spaces, the number of combinations in a grid grows exponentially. <code>RandomizedSearchCV</code> remains efficient by sampling a fixed number of combinations, avoiding the “curse of dimensionality.”</p></li>
+<li><p><strong>Better Use of Time Budget</strong>:<br>
+Given the same computational budget, <code>RandomizedSearchCV</code> may cover more diverse regions of the search space and stumble upon better-performing configurations.</p></li>
+</ul>
+<p>In summary, <code>RandomizedSearchCV</code> is not only faster but can also lead to better models—especially when the hyperparameter space is large, continuous, or contains irrelevant parameters.</p>
+</section>
+<section id="bayessearchcv" class="level4" data-number="2.4.0.2">
+<h4 data-number="2.4.0.2" class="anchored" data-anchor-id="bayessearchcv"><span class="header-section-number">2.4.0.2</span> BayesSearchCV</h4>
 <p>In addition to these methods, <strong><code>BayesSearchCV</code></strong>, based on Bayesian optimization, provides a more intelligent approach to hyperparameter tuning. It models the performance landscape and selects hyperparameter combinations to evaluate based on past results, often requiring fewer evaluations to find optimal or near-optimal values. This makes <code>BayesSearchCV</code> a powerful option, especially when training models is costly.</p>
+<div id="1cc4906d" class="cell" data-execution_count="14">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 1: Install scikit-optimize if not already installed</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>pip install scikit<span class="op">-</span>optimize</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Collecting scikit-optimize
+  Downloading scikit_optimize-0.10.2-py2.py3-none-any.whl.metadata (9.7 kB)
+Requirement already satisfied: joblib&gt;=0.11 in c:\users\lsi8012\appdata\local\anaconda3\lib\site-packages (from scikit-optimize) (1.4.2)
+Collecting pyaml&gt;=16.9 (from scikit-optimize)
+  Downloading pyaml-25.1.0-py3-none-any.whl.metadata (12 kB)
+Requirement already satisfied: numpy&gt;=1.20.3 in c:\users\lsi8012\appdata\local\anaconda3\lib\site-packages (from scikit-optimize) (1.26.4)
+Requirement already satisfied: scipy&gt;=1.1.0 in c:\users\lsi8012\appdata\local\anaconda3\lib\site-packages (from scikit-optimize) (1.13.1)
+Requirement already satisfied: scikit-learn&gt;=1.0.0 in c:\users\lsi8012\appdata\local\anaconda3\lib\site-packages (from scikit-optimize) (1.6.1)
+Requirement already satisfied: packaging&gt;=21.3 in c:\users\lsi8012\appdata\roaming\python\python312\site-packages (from scikit-optimize) (24.2)
+Requirement already satisfied: PyYAML in c:\users\lsi8012\appdata\local\anaconda3\lib\site-packages (from pyaml&gt;=16.9-&gt;scikit-optimize) (6.0.1)
+Requirement already satisfied: threadpoolctl&gt;=3.1.0 in c:\users\lsi8012\appdata\local\anaconda3\lib\site-packages (from scikit-learn&gt;=1.0.0-&gt;scikit-optimize) (3.5.0)
+Downloading scikit_optimize-0.10.2-py2.py3-none-any.whl (107 kB)
+   ---------------------------------------- 0.0/107.8 kB ? eta -:--:--
+   ------------------------------------- -- 102.4/107.8 kB 5.8 MB/s eta 0:00:01
+   ---------------------------------------- 107.8/107.8 kB 3.1 MB/s eta 0:00:00
+Downloading pyaml-25.1.0-py3-none-any.whl (26 kB)
+Installing collected packages: pyaml, scikit-optimize
+Successfully installed pyaml-25.1.0 scikit-optimize-0.10.2</code></pre>
+</div>
+</div>
+<div id="375bf415" class="cell" data-execution_count="15">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> skopt <span class="im">import</span> BayesSearchCV</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> skopt.space <span class="im">import</span> Integer, Categorical</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="a26d6dba" class="cell" data-execution_count="16">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 3: Define search space for Bayesian optimization</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>search_space <span class="op">=</span> {</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'knn__n_neighbors'</span>: Integer(<span class="dv">1</span>, <span class="dv">19</span>),  <span class="co"># Odd values will be sampled if needed</span></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">'knn__weights'</span>: Categorical([<span class="st">'uniform'</span>, <span class="st">'distance'</span>]),</span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">'knn__metric'</span>: Categorical([<span class="st">'euclidean'</span>, <span class="st">'manhattan'</span>, <span class="st">'minkowski'</span>]),</span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">'knn__p'</span>: Integer(<span class="dv">1</span>, <span class="dv">2</span>)  <span class="co"># Used only when metric is minkowski</span></span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="27d58ce9" class="cell" data-execution_count="17">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 4: Set up BayesSearchCV</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>bayes_search <span class="op">=</span> BayesSearchCV(</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>    estimator<span class="op">=</span>pipeline,</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>    search_spaces<span class="op">=</span>search_space,</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>    n_iter<span class="op">=</span><span class="dv">30</span>,  <span class="co"># Number of different combinations to try</span></span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>    scoring<span class="op">=</span><span class="st">'neg_root_mean_squared_error'</span>,</span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>    cv<span class="op">=</span><span class="dv">5</span>,</span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>    n_jobs<span class="op">=-</span><span class="dv">1</span>,</span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>    verbose<span class="op">=</span><span class="dv">1</span>,</span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a>    random_state<span class="op">=</span><span class="dv">42</span></span>
+<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="b9c6222c" class="cell" data-execution_count="18">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 5: Fit BayesSearchCV</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Tuning KNN hyperparameters with Bayesian Optimization..."</span>)</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>bayes_search.fit(X_train, y_train)</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Get best parameters and best score</span></span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>best_params <span class="op">=</span> bayes_search.best_params_</span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>best_score <span class="op">=</span> <span class="op">-</span>bayes_search.best_score_  <span class="co"># Convert negative RMSE to positive</span></span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Display results</span></span>
+<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Best Parameters (Bayesian Optimization):"</span>)</span>
+<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> param, value <span class="kw">in</span> best_params.items():</span>
+<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>param<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>value<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Best CV RMSE: </span><span class="sc">{</span>best_score<span class="sc">:.2f}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Tuning KNN hyperparameters with Bayesian Optimization...
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>c:\Users\lsi8012\AppData\Local\anaconda3\Lib\site-packages\skopt\optimizer\optimizer.py:517: UserWarning: The objective has been evaluated at point ['manhattan', 5, 2, 'distance'] before, using random point ['euclidean', 12, 1, 'distance']
+  warnings.warn(</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Fitting 5 folds for each of 1 candidates, totalling 5 fits</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>c:\Users\lsi8012\AppData\Local\anaconda3\Lib\site-packages\skopt\optimizer\optimizer.py:517: UserWarning: The objective has been evaluated at point ['manhattan', 5, 2, 'distance'] before, using random point ['euclidean', 9, 2, 'distance']
+  warnings.warn(</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Fitting 5 folds for each of 1 candidates, totalling 5 fits</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>c:\Users\lsi8012\AppData\Local\anaconda3\Lib\site-packages\skopt\optimizer\optimizer.py:517: UserWarning: The objective has been evaluated at point ['manhattan', 5, 2, 'distance'] before, using random point ['manhattan', 5, 1, 'distance']
+  warnings.warn(</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>c:\Users\lsi8012\AppData\Local\anaconda3\Lib\site-packages\skopt\optimizer\optimizer.py:517: UserWarning: The objective has been evaluated at point ['manhattan', 5, 1, 'distance'] before, using random point ['manhattan', 4, 2, 'uniform']
+  warnings.warn(</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Fitting 5 folds for each of 1 candidates, totalling 5 fits</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>c:\Users\lsi8012\AppData\Local\anaconda3\Lib\site-packages\skopt\optimizer\optimizer.py:517: UserWarning: The objective has been evaluated at point ['manhattan', 5, 1, 'distance'] before, using random point ['euclidean', 6, 1, 'uniform']
+  warnings.warn(</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Fitting 5 folds for each of 1 candidates, totalling 5 fits</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>c:\Users\lsi8012\AppData\Local\anaconda3\Lib\site-packages\skopt\optimizer\optimizer.py:517: UserWarning: The objective has been evaluated at point ['manhattan', 5, 1, 'distance'] before, using random point ['euclidean', 13, 1, 'distance']
+  warnings.warn(</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Fitting 5 folds for each of 1 candidates, totalling 5 fits</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>c:\Users\lsi8012\AppData\Local\anaconda3\Lib\site-packages\skopt\optimizer\optimizer.py:517: UserWarning: The objective has been evaluated at point ['manhattan', 5, 1, 'distance'] before, using random point ['euclidean', 6, 1, 'uniform']
+  warnings.warn(</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Fitting 5 folds for each of 1 candidates, totalling 5 fits</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>c:\Users\lsi8012\AppData\Local\anaconda3\Lib\site-packages\skopt\optimizer\optimizer.py:517: UserWarning: The objective has been evaluated at point ['manhattan', 5, 1, 'distance'] before, using random point ['manhattan', 2, 2, 'uniform']
+  warnings.warn(</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Fitting 5 folds for each of 1 candidates, totalling 5 fits
+Fitting 5 folds for each of 1 candidates, totalling 5 fits
+
+Best Parameters (Bayesian Optimization):
+knn__metric: manhattan
+knn__n_neighbors: 8
+knn__p: 2
+knn__weights: distance
+Best CV RMSE: 4005.70</code></pre>
+</div>
+</div>
+<div id="7f5608ce" class="cell" data-execution_count="19">
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 6: Evaluate on test set</span></span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>best_model <span class="op">=</span> bayes_search.best_estimator_</span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>y_pred <span class="op">=</span> best_model.predict(X_test)</span>
+<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate RMSE on test set</span></span>
+<span id="cb49-6"><a href="#cb49-6" aria-hidden="true" tabindex="-1"></a>test_rmse <span class="op">=</span> root_mean_squared_error(y_test, y_pred)</span>
+<span id="cb49-7"><a href="#cb49-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Test RMSE: </span><span class="sc">{</span>test_rmse<span class="sc">:.2f}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Test RMSE: 3811.89</code></pre>
+</div>
+</div>
 
 
 </section>

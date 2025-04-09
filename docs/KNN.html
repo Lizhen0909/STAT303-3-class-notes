@@ -319,7 +319,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <p><em>Read section 4.7.6 of the book before using these notes.</em></p>
 <p><em>Note that in this course, lecture notes are not sufficient, you must read the book for better understanding. Lecture notes are just implementing the concepts of the book on a dataset, but not explaining the concepts elaborately.</em></p>
-<div id="35d5b5b4" class="cell">
+<div id="35d5b5b4" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Importing necessary libraries</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -338,7 +338,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <section id="knn-for-regression" class="level2" data-number="2.1">
 <h2 data-number="2.1" class="anchored" data-anchor-id="knn-for-regression"><span class="header-section-number">2.1</span> KNN for regression</h2>
-<div id="df5e47f8" class="cell">
+<div id="df5e47f8" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the dataset</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>car <span class="op">=</span> pd.read_csv(<span class="st">'Datasets/car.csv'</span>)</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -350,14 +350,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(X, y, test_size<span class="op">=</span><span class="fl">0.2</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="08988dfd" class="cell" data-execution_count="89">
+<div id="08988dfd" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># extract the categorical columns and put them in a list</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>cat_cols <span class="op">=</span> X.select_dtypes(include<span class="op">=</span>[<span class="st">'object'</span>]).columns.tolist()</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># extract the numerical columns and put them in a list</span></span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>num_cols <span class="op">=</span> X.select_dtypes(include<span class="op">=</span>[<span class="st">'int64'</span>, <span class="st">'float64'</span>]).columns.tolist()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="49135d29" class="cell" data-execution_count="95">
+<div id="49135d29" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># First transform categorical variables</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>preprocessor <span class="op">=</span> ColumnTransformer(</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    transformers<span class="op">=</span>[</span>
@@ -385,7 +385,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 R² Score: 0.94</code></pre>
 </div>
 </div>
-<div id="8bfe91b3" class="cell" data-execution_count="96">
+<div id="8bfe91b3" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># show the features in the numerical transformer    </span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>pipeline.named_steps[<span class="st">'preprocessor'</span>].transformers_[<span class="dv">0</span>][<span class="dv">1</span>].get_feature_names_out()</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"numerical features in the pipeline:"</span>, pipeline.named_steps[<span class="st">'preprocessor'</span>].transformers_[<span class="dv">0</span>][<span class="dv">1</span>].get_feature_names_out())</span>
@@ -435,7 +435,7 @@ categorical features in the pipeline: ['brand_audi' 'brand_bmw' 'brand_ford' 'br
 </ul>
 <p>Without scaling, KNN may produce biased or misleading predictions.<br>
 The example below illustrates how the same KNN model performs <strong>without feature scaling</strong>, highlighting the importance of preprocessing your data.</p>
-<div id="a878f7ef" class="cell" data-execution_count="97">
+<div id="a878f7ef" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>preprocessor_no_scaling <span class="op">=</span> ColumnTransformer(</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    transformers<span class="op">=</span>[</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>        (<span class="st">'num'</span>, <span class="st">'passthrough'</span>, num_cols),  <span class="co"># Pass numerical features through without scaling</span></span>
@@ -473,7 +473,7 @@ R² Score without scaling: 0.35</code></pre>
 <section id="tuning-k-in-knn" class="level3" data-number="2.3.1">
 <h3 data-number="2.3.1" class="anchored" data-anchor-id="tuning-k-in-knn"><span class="header-section-number">2.3.1</span> Tuning <em>k</em> in KNN</h3>
 <p>To find the optimal value of <em>k</em>, it’s common to use <strong>cross-validation</strong>, which evaluates model performance on different subsets of the data. A popular tool for this is <strong><code>GridSearchCV</code></strong>, which automates the search process by testing multiple values of <em>k</em> using cross-validation behind the scenes. It selects the value of <em>k</em> that minimizes prediction error on unseen data—helping you achieve a good balance between underfitting and overfitting.</p>
-<div id="a8e5cf9f" class="cell" data-execution_count="102">
+<div id="a8e5cf9f" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create parameter grid for k values</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>param_grid <span class="op">=</span> {</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'knn__n_neighbors'</span>: <span class="bu">list</span>(<span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">20</span>))  <span class="co"># Test k values from 1 to 20</span></span>
@@ -517,7 +517,7 @@ Test RMSE with k=3: 4051.06
 Test R² Score with k=3: 0.94</code></pre>
 </div>
 </div>
-<div id="8a3abe8a" class="cell" data-execution_count="103">
+<div id="8a3abe8a" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot performance across different k values</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>cv_results <span class="op">=</span> grid_search.cv_results_</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>k_values <span class="op">=</span> param_grid[<span class="st">'knn__n_neighbors'</span>]</span>
@@ -543,7 +543,7 @@ Test R² Score with k=3: 0.94</code></pre>
 </div>
 </div>
 <p>The distances and the indices of the nearest K observations to each test observation can be obtained using the <code>kneighbors()</code> method.</p>
-<div id="e6cfeeed" class="cell">
+<div id="e6cfeeed" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get the KNN estimator from the pipeline</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>knn_estimator <span class="op">=</span> best_model.named_steps[<span class="st">'knn'</span>]</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -556,7 +556,7 @@ Test R² Score with k=3: 0.94</code></pre>
 <span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="co"># For example, to get the actual neighbor observations for the first test observation:</span></span>
 <span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>neighbors <span class="op">=</span> X_train.iloc[neighbor_indices[<span class="dv">0</span>]]</span>
 <span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>neighbors</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display">
+<div class="cell-output cell-output-display" data-execution_count="9">
 <div>
 
 
@@ -652,10 +652,10 @@ Test R² Score with k=3: 0.94</code></pre>
 </ul>
 <p>These hyperparameters can be tuned using <code>GridSearchCV</code> to find the combination that yields the best performance on validation data.</p>
 <p>The model hyperparameters can be obtained using the <code>get_params()</code> method. Note that there are other hyperparameters to tune in addition to number of neighbors. However, the number of neighbours may be the most influential hyperparameter in most cases.</p>
-<div id="5d8b82ac" class="cell">
+<div id="5d8b82ac" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get the best model parameters</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>best_model.get_params()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="104">
+<div class="cell-output cell-output-display" data-execution_count="10">
 <pre><code>{'memory': None,
  'steps': [('preprocessor',
    ColumnTransformer(transformers=[('num', 'passthrough',
@@ -716,7 +716,7 @@ Test R² Score with k=3: 0.94</code></pre>
  'knn__weights': 'uniform'}</code></pre>
 </div>
 </div>
-<div id="86f6667b" class="cell" data-execution_count="106">
+<div id="86f6667b" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extended parameter grid</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>param_grid <span class="op">=</span> {</span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'knn__n_neighbors'</span>: <span class="bu">list</span>(<span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">20</span>, <span class="dv">2</span>)),  <span class="co"># Test odd k values from 1 to 19 (step=2 for efficiency)</span></span>
@@ -767,6 +767,283 @@ Best CV RMSE: 4001.34
 Test RMSE: 3826.94</code></pre>
 </div>
 </div>
+<p>The results for each cross-validation are stored in the <code>cv_results_</code> attribute.</p>
+<div id="223090cd" class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>pd.DataFrame(grid_search.cv_results_).head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="12">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">mean_fit_time</th>
+<th data-quarto-table-cell-role="th">std_fit_time</th>
+<th data-quarto-table-cell-role="th">mean_score_time</th>
+<th data-quarto-table-cell-role="th">std_score_time</th>
+<th data-quarto-table-cell-role="th">param_knn__metric</th>
+<th data-quarto-table-cell-role="th">param_knn__n_neighbors</th>
+<th data-quarto-table-cell-role="th">param_knn__p</th>
+<th data-quarto-table-cell-role="th">param_knn__weights</th>
+<th data-quarto-table-cell-role="th">params</th>
+<th data-quarto-table-cell-role="th">split0_test_score</th>
+<th data-quarto-table-cell-role="th">split1_test_score</th>
+<th data-quarto-table-cell-role="th">split2_test_score</th>
+<th data-quarto-table-cell-role="th">split3_test_score</th>
+<th data-quarto-table-cell-role="th">split4_test_score</th>
+<th data-quarto-table-cell-role="th">mean_test_score</th>
+<th data-quarto-table-cell-role="th">std_test_score</th>
+<th data-quarto-table-cell-role="th">rank_test_score</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>0.033124</td>
+<td>0.003042</td>
+<td>0.127347</td>
+<td>0.023598</td>
+<td>euclidean</td>
+<td>1</td>
+<td>1</td>
+<td>uniform</td>
+<td>{'knn__metric': 'euclidean', 'knn__n_neighbors...</td>
+<td>-4656.637196</td>
+<td>-3474.998033</td>
+<td>-4250.919748</td>
+<td>-4620.623046</td>
+<td>-4839.806784</td>
+<td>-4368.596961</td>
+<td>485.981480</td>
+<td>64</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>0.035615</td>
+<td>0.010407</td>
+<td>0.179835</td>
+<td>0.013115</td>
+<td>euclidean</td>
+<td>1</td>
+<td>1</td>
+<td>distance</td>
+<td>{'knn__metric': 'euclidean', 'knn__n_neighbors...</td>
+<td>-4656.637196</td>
+<td>-3474.998033</td>
+<td>-4250.919748</td>
+<td>-4620.623046</td>
+<td>-4839.806784</td>
+<td>-4368.596961</td>
+<td>485.981480</td>
+<td>64</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>0.027877</td>
+<td>0.002536</td>
+<td>0.148597</td>
+<td>0.018612</td>
+<td>euclidean</td>
+<td>1</td>
+<td>2</td>
+<td>uniform</td>
+<td>{'knn__metric': 'euclidean', 'knn__n_neighbors...</td>
+<td>-4656.637196</td>
+<td>-3474.998033</td>
+<td>-4250.919748</td>
+<td>-4620.623046</td>
+<td>-4839.806784</td>
+<td>-4368.596961</td>
+<td>485.981480</td>
+<td>64</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>0.043631</td>
+<td>0.016927</td>
+<td>0.168392</td>
+<td>0.027444</td>
+<td>euclidean</td>
+<td>1</td>
+<td>2</td>
+<td>distance</td>
+<td>{'knn__metric': 'euclidean', 'knn__n_neighbors...</td>
+<td>-4656.637196</td>
+<td>-3474.998033</td>
+<td>-4250.919748</td>
+<td>-4620.623046</td>
+<td>-4839.806784</td>
+<td>-4368.596961</td>
+<td>485.981480</td>
+<td>64</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>0.043071</td>
+<td>0.009615</td>
+<td>0.184532</td>
+<td>0.042681</td>
+<td>euclidean</td>
+<td>3</td>
+<td>1</td>
+<td>uniform</td>
+<td>{'knn__metric': 'euclidean', 'knn__n_neighbors...</td>
+<td>-4227.667178</td>
+<td>-3303.871045</td>
+<td>-3851.430697</td>
+<td>-4603.426146</td>
+<td>-4600.719641</td>
+<td>-4117.422942</td>
+<td>492.858432</td>
+<td>22</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>These results can be useful to see if other hyperparameter values are equally good.</p>
+<div id="0f901218" class="cell" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>pd.DataFrame(grid_search.cv_results_).sort_values(by <span class="op">=</span> <span class="st">'rank_test_score'</span>).head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="13">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">mean_fit_time</th>
+<th data-quarto-table-cell-role="th">std_fit_time</th>
+<th data-quarto-table-cell-role="th">mean_score_time</th>
+<th data-quarto-table-cell-role="th">std_score_time</th>
+<th data-quarto-table-cell-role="th">param_knn__metric</th>
+<th data-quarto-table-cell-role="th">param_knn__n_neighbors</th>
+<th data-quarto-table-cell-role="th">param_knn__p</th>
+<th data-quarto-table-cell-role="th">param_knn__weights</th>
+<th data-quarto-table-cell-role="th">params</th>
+<th data-quarto-table-cell-role="th">split0_test_score</th>
+<th data-quarto-table-cell-role="th">split1_test_score</th>
+<th data-quarto-table-cell-role="th">split2_test_score</th>
+<th data-quarto-table-cell-role="th">split3_test_score</th>
+<th data-quarto-table-cell-role="th">split4_test_score</th>
+<th data-quarto-table-cell-role="th">mean_test_score</th>
+<th data-quarto-table-cell-role="th">std_test_score</th>
+<th data-quarto-table-cell-role="th">rank_test_score</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">87</td>
+<td>0.038193</td>
+<td>0.010690</td>
+<td>0.149261</td>
+<td>0.050225</td>
+<td>minkowski</td>
+<td>3</td>
+<td>2</td>
+<td>distance</td>
+<td>{'knn__metric': 'minkowski', 'knn__n_neighbors...</td>
+<td>-4298.611714</td>
+<td>-3197.944286</td>
+<td>-3735.321059</td>
+<td>-4407.722340</td>
+<td>-4367.108381</td>
+<td>-4001.341556</td>
+<td>469.790238</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5</td>
+<td>0.047902</td>
+<td>0.013181</td>
+<td>0.185623</td>
+<td>0.049865</td>
+<td>euclidean</td>
+<td>3</td>
+<td>1</td>
+<td>distance</td>
+<td>{'knn__metric': 'euclidean', 'knn__n_neighbors...</td>
+<td>-4298.611714</td>
+<td>-3197.944286</td>
+<td>-3735.321059</td>
+<td>-4407.722340</td>
+<td>-4367.108381</td>
+<td>-4001.341556</td>
+<td>469.790238</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">7</td>
+<td>0.040595</td>
+<td>0.005817</td>
+<td>0.132290</td>
+<td>0.009807</td>
+<td>euclidean</td>
+<td>3</td>
+<td>2</td>
+<td>distance</td>
+<td>{'knn__metric': 'euclidean', 'knn__n_neighbors...</td>
+<td>-4298.611714</td>
+<td>-3197.944286</td>
+<td>-3735.321059</td>
+<td>-4407.722340</td>
+<td>-4367.108381</td>
+<td>-4001.341556</td>
+<td>469.790238</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">51</td>
+<td>0.034996</td>
+<td>0.001900</td>
+<td>0.744842</td>
+<td>0.052065</td>
+<td>manhattan</td>
+<td>5</td>
+<td>2</td>
+<td>distance</td>
+<td>{'knn__metric': 'manhattan', 'knn__n_neighbors...</td>
+<td>-4090.438714</td>
+<td>-3258.873954</td>
+<td>-3680.152758</td>
+<td>-4846.570061</td>
+<td>-4192.419206</td>
+<td>-4013.690938</td>
+<td>531.510686</td>
+<td>4</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">49</td>
+<td>0.031465</td>
+<td>0.004676</td>
+<td>0.718503</td>
+<td>0.057517</td>
+<td>manhattan</td>
+<td>5</td>
+<td>1</td>
+<td>distance</td>
+<td>{'knn__metric': 'manhattan', 'knn__n_neighbors...</td>
+<td>-4090.438714</td>
+<td>-3258.873954</td>
+<td>-3680.152758</td>
+<td>-4846.570061</td>
+<td>-4192.419206</td>
+<td>-4013.690938</td>
+<td>531.510686</td>
+<td>4</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>The results show that the next two best hyperparameter values yield the same performance as the printed one</p>
+<p>When dealing with a large number of possible hyperparameter values, using <code>GridSearchCV()</code> can become computationally expensive. In such cases, <code>RandomizedSearchCV()</code> offers a more efficient alternative by evaluating a randomly selected subset of hyperparameter combinations. The number of sampled combinations can be controlled by the user, making it suitable for situations with limited computational resources.</p>
+<p>In addition to these methods, <strong><code>BayesSearchCV</code></strong>, based on Bayesian optimization, provides a more intelligent approach to hyperparameter tuning. It models the performance landscape and selects hyperparameter combinations to evaluate based on past results, often requiring fewer evaluations to find optimal or near-optimal values. This makes <code>BayesSearchCV</code> a powerful option, especially when training models is costly.</p>
 
 
 </section>

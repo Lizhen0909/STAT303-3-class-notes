@@ -23,7 +23,7 @@ book:
         - Hyperparameter tuning.ipynb
     - part: "Tree based models"
       chapters:
-        - Lec3_RegressionTrees.ipynb
+        - regression_tree_sp25.ipynb
         - Lec4_ClassificationTree.ipynb
         - Lec4_Bagging.ipynb
         - Bagging (OOB vs K-fold cross-validation).ipynb

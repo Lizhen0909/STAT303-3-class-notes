@@ -4918,8 +4918,8 @@ vertical-align: -.125em;
   <li><a href="#n-evaluate-final-tuned-model-on-test-set-3-points" id="toc-n-evaluate-final-tuned-model-on-test-set-3-points" class="nav-link" data-scroll-target="#n-evaluate-final-tuned-model-on-test-set-3-points"><span class="header-section-number">B.1.14</span> n) Evaluate Final Tuned Model on Test Set <strong>(3 points)</strong></a></li>
   <li><a href="#o-compare-tuning-strategies-and-computational-cost-3-points" id="toc-o-compare-tuning-strategies-and-computational-cost-3-points" class="nav-link" data-scroll-target="#o-compare-tuning-strategies-and-computational-cost-3-points"><span class="header-section-number">B.1.15</span> o) Compare Tuning Strategies and Computational Cost <strong>(3 points)</strong></a></li>
   <li><a href="#p-tune-k-using-multiple-metrics-5-points" id="toc-p-tune-k-using-multiple-metrics-5-points" class="nav-link" data-scroll-target="#p-tune-k-using-multiple-metrics-5-points"><span class="header-section-number">B.1.16</span> p) Tune K Using Multiple Metrics <strong>(5 points)</strong></a></li>
-  <li><a href="#q-optimize-for-precision-with-recall-constraint-4-point" id="toc-q-optimize-for-precision-with-recall-constraint-4-point" class="nav-link" data-scroll-target="#q-optimize-for-precision-with-recall-constraint-4-point"><span class="header-section-number">B.1.17</span> q) Optimize for Precision with Recall Constraint <strong>(4 point)</strong></a></li>
-  <li><a href="#r-tune-threshold-for-maximum-precision-3-point" id="toc-r-tune-threshold-for-maximum-precision-3-point" class="nav-link" data-scroll-target="#r-tune-threshold-for-maximum-precision-3-point"><span class="header-section-number">B.1.18</span> r) Tune Threshold for Maximum Precision <strong>(3 point)</strong></a></li>
+  <li><a href="#q-optimize-for-recall-with-precision-constraint-4-point" id="toc-q-optimize-for-recall-with-precision-constraint-4-point" class="nav-link" data-scroll-target="#q-optimize-for-recall-with-precision-constraint-4-point"><span class="header-section-number">B.1.17</span> q) Optimize for Recall with Precision Constraint <strong>(4 point)</strong></a></li>
+  <li><a href="#r-tune-threshold-for-maximum-recall-3-point" id="toc-r-tune-threshold-for-maximum-recall-3-point" class="nav-link" data-scroll-target="#r-tune-threshold-for-maximum-recall-3-point"><span class="header-section-number">B.1.18</span> r) Tune Threshold for Maximum Recall <strong>(3 point)</strong></a></li>
   <li><a href="#s-evaluate-precision-optimized-model-on-test-set-2-points" id="toc-s-evaluate-precision-optimized-model-on-test-set-2-points" class="nav-link" data-scroll-target="#s-evaluate-precision-optimized-model-on-test-set-2-points"><span class="header-section-number">B.1.19</span> s) Evaluate Precision-Optimized Model on Test Set <strong>(2 points)</strong></a></li>
   <li><a href="#t-final-reflection-comparing-tuning-strategies-3-points" id="toc-t-final-reflection-comparing-tuning-strategies-3-points" class="nav-link" data-scroll-target="#t-final-reflection-comparing-tuning-strategies-3-points"><span class="header-section-number">B.1.20</span> t) Final Reflection: Comparing Tuning Strategies <strong>(3 points)</strong></a></li>
   </ul></li>
@@ -5147,43 +5147,47 @@ vertical-align: -.125em;
 </section>
 <section id="p-tune-k-using-multiple-metrics-5-points" class="level3" data-number="B.1.16">
 <h3 data-number="B.1.16" class="anchored" data-anchor-id="p-tune-k-using-multiple-metrics-5-points"><span class="header-section-number">B.1.16</span> p) Tune K Using Multiple Metrics <strong>(5 points)</strong></h3>
-<p><code>GridSearchCV</code> or <code>cross_val_score</code> only allows tuning based on a <strong>single metric</strong>. In this part, you’ll practice tuning hyperparameters while evaluating <strong>multiple metrics</strong> simultaneously.</p>
+<p><code>GridSearchCV</code> and <code>cross_val_score</code> are designed to optimize based on a <strong>single metric</strong>.<br>
+In this section, you’ll practice tuning hyperparameters while evaluating <strong>multiple metrics</strong> simultaneously using <code>cross_validate</code>.</p>
+<p>For this imbalanced classification task, instead of optimizing the F1 score directly, we’ll focus on <strong>precision</strong> and <strong>recall</strong> together.<br>
+Keep in mind that the F1 score is the <strong>harmonic mean</strong> of precision and recall—it balances the trade-off between the two.</p>
 <p>Cross-validate a <strong>KNN classifier</strong> using the following specifications:</p>
 <ul>
-<li>Use <strong>every odd K value from 1 to 50</strong> (inclusive), and keep all other hyperparameters at their default settings.</li>
-<li>Apply the <strong>cross-validation settings</strong> from part (f).</li>
-<li>Evaluate the model using <strong>accuracy</strong>, <strong>precision</strong>, and <strong>recall</strong> as metrics <strong>at the same time</strong>.</li>
+<li>Use the <strong>same cross-validation setting</strong> and <strong>hyperparameter grid</strong> as before</li>
+<li>Evaluate the model using <strong>precision</strong>, <strong>recall</strong>, and <strong>f1-score</strong>, as metrics <strong>at the same time</strong>.</li>
 </ul>
 <p>Save the cross-validation results into a <strong>DataFrame</strong>, and compute the <strong>average score for each metric</strong>, and visualize how these metrics change with different values of K.</p>
 </section>
-<section id="q-optimize-for-precision-with-recall-constraint-4-point" class="level3" data-number="B.1.17">
-<h3 data-number="B.1.17" class="anchored" data-anchor-id="q-optimize-for-precision-with-recall-constraint-4-point"><span class="header-section-number">B.1.17</span> q) Optimize for Precision with Recall Constraint <strong>(4 point)</strong></h3>
+<section id="q-optimize-for-recall-with-precision-constraint-4-point" class="level3" data-number="B.1.17">
+<h3 data-number="B.1.17" class="anchored" data-anchor-id="q-optimize-for-recall-with-precision-constraint-4-point"><span class="header-section-number">B.1.17</span> q) Optimize for Recall with Precision Constraint <strong>(4 point)</strong></h3>
 <p>Identify the <strong>K value</strong> that yields the <strong>highest recall</strong>, while maintaining a <strong>precision of at least 75%</strong>.<br>
 <strong>(3 points)</strong></p>
-<p>Then, print the <strong>average cross-validation metrics</strong> (accuracy, precision, recall) for that K value.<br>
+<p>Then, print the <strong>average cross-validation metrics</strong> (f1-score, precision, recall) for that <em><code>K</code></em> value.<br>
 <strong>(1 point)</strong></p>
 </section>
-<section id="r-tune-threshold-for-maximum-precision-3-point" class="level3" data-number="B.1.18">
-<h3 data-number="B.1.18" class="anchored" data-anchor-id="r-tune-threshold-for-maximum-precision-3-point"><span class="header-section-number">B.1.18</span> r) Tune Threshold for Maximum Precision <strong>(3 point)</strong></h3>
-<p>Using the <strong>optimal K value</strong> identified in part (q), find the <strong>threshold</strong> that maximizes <strong>cross-validation precision</strong>, following the specifications below:</p>
+<section id="r-tune-threshold-for-maximum-recall-3-point" class="level3" data-number="B.1.18">
+<h3 data-number="B.1.18" class="anchored" data-anchor-id="r-tune-threshold-for-maximum-recall-3-point"><span class="header-section-number">B.1.18</span> r) Tune Threshold for Maximum Recall <strong>(3 point)</strong></h3>
+<p>Using the <strong>optimal K value</strong> identified in part (q), find the <strong>threshold</strong> that maximizes <strong>cross-validation Recall</strong>, following the specifications below:</p>
 <ul>
 <li>Evaluate all possible threshold values with a <strong>step size of 0.05</strong>.</li>
 <li>Use the <strong>cross-validation settings</strong> from part (f).</li>
 </ul>
-<p>Then: - Print the <strong>best cross-validation precision</strong>. - Report the <strong>threshold value</strong> that achieves this precision.</p>
+<p>Then: - Print the <strong>best cross-validation recall</strong>. - Report the <strong>threshold value</strong> that achieves this recall.</p>
 <p><strong>Note:</strong> This task is very similar to part (h), but it’s important for the next part.</p>
 </section>
 <section id="s-evaluate-precision-optimized-model-on-test-set-2-points" class="level3" data-number="B.1.19">
 <h3 data-number="B.1.19" class="anchored" data-anchor-id="s-evaluate-precision-optimized-model-on-test-set-2-points"><span class="header-section-number">B.1.19</span> s) Evaluate Precision-Optimized Model on Test Set <strong>(2 points)</strong></h3>
 <p>Using the <strong>tuned classifier and threshold</strong> from parts (q) and (r), evaluate the model on the <strong>test set</strong>. Report the following metrics:</p>
 <ul>
-<li>Test Accuracy<br>
+<li>F1 Score<br>
 </li>
-<li>Test Precision<br>
+<li>Accuracy<br>
 </li>
-<li>Test Recall<br>
+<li>Precision<br>
 </li>
-<li>Test AUC</li>
+<li>Recall<br>
+</li>
+<li>AUC</li>
 </ul>
 </section>
 <section id="t-final-reflection-comparing-tuning-strategies-3-points" class="level3" data-number="B.1.20">

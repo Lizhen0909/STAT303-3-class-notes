@@ -298,7 +298,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#bagging-a-variance-reduction-technique" id="toc-bagging-a-variance-reduction-technique" class="nav-link active" data-scroll-target="#bagging-a-variance-reduction-technique"><span class="header-section-number">6.1</span> Bagging: A Variance Reduction Technique</a></li>
-  <li><a href="#bagging-regression-trees" id="toc-bagging-regression-trees" class="nav-link" data-scroll-target="#bagging-regression-trees"><span class="header-section-number">6.2</span> Bagging regression trees</a></li>
+  <li><a href="#bagging-regression-trees" id="toc-bagging-regression-trees" class="nav-link" data-scroll-target="#bagging-regression-trees"><span class="header-section-number">6.2</span> Bagging Regression Trees</a></li>
   <li><a href="#bagging-doesnt-reduce-bias" id="toc-bagging-doesnt-reduce-bias" class="nav-link" data-scroll-target="#bagging-doesnt-reduce-bias"><span class="header-section-number">6.3</span> Bagging Doesn’t Reduce Bias</a></li>
   <li><a href="#model-performance-vs.-number-of-trees" id="toc-model-performance-vs.-number-of-trees" class="nav-link" data-scroll-target="#model-performance-vs.-number-of-trees"><span class="header-section-number">6.4</span> Model Performance vs.&nbsp;Number of Trees</a></li>
   <li><a href="#oob-sample-and-oob-score-in-bagging" id="toc-oob-sample-and-oob-score-in-bagging" class="nav-link" data-scroll-target="#oob-sample-and-oob-score-in-bagging"><span class="header-section-number">6.5</span> OOB Sample and OOB Score in Bagging</a>
@@ -315,7 +315,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#best-practices-for-imbalanced-classification" id="toc-best-practices-for-imbalanced-classification" class="nav-link" data-scroll-target="#best-practices-for-imbalanced-classification"><span class="header-section-number">6.6.3.1</span> ✅ Best Practices for Imbalanced Classification</a></li>
   </ul></li>
   </ul></li>
-  <li><a href="#bagging-classification-trees" id="toc-bagging-classification-trees" class="nav-link" data-scroll-target="#bagging-classification-trees"><span class="header-section-number">6.7</span> Bagging classification trees</a></li>
+  <li><a href="#bagging-classification-trees" id="toc-bagging-classification-trees" class="nav-link" data-scroll-target="#bagging-classification-trees"><span class="header-section-number">6.7</span> Bagging Classification Trees</a></li>
   </ul>
 </nav>
     </div>
@@ -373,7 +373,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </section>
 <section id="bagging-regression-trees" class="level2" data-number="6.2">
-<h2 data-number="6.2" class="anchored" data-anchor-id="bagging-regression-trees"><span class="header-section-number">6.2</span> Bagging regression trees</h2>
+<h2 data-number="6.2" class="anchored" data-anchor-id="bagging-regression-trees"><span class="header-section-number">6.2</span> Bagging Regression Trees</h2>
 <p>Let’s revisit the same dataset used for building a single regression tree and explore whether we can further improve its performance using bagging</p>
 <div id="8b55fc2f" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the dataset</span></span>
@@ -1144,7 +1144,7 @@ Test R^2 score with best model: 0.96</code></pre>
 </section>
 </section>
 <section id="bagging-classification-trees" class="level2" data-number="6.7">
-<h2 data-number="6.7" class="anchored" data-anchor-id="bagging-classification-trees"><span class="header-section-number">6.7</span> Bagging classification trees</h2>
+<h2 data-number="6.7" class="anchored" data-anchor-id="bagging-classification-trees"><span class="header-section-number">6.7</span> Bagging Classification Trees</h2>
 <p>Let’s revisit the same dataset used for building a single classification tree.<br>
 When using the default settings, the tree tends to <strong>overfit</strong> the data, as shown <a href="https://lizhen0909.github.io/STAT303-3-class-notes/Classification%20_Tree.html#building-a-classification-tree">here</a>.</p>
 <p>In that notebook, we addressed the overfitting issue using both <strong>pre-pruning</strong> and <strong>post-pruning</strong> techniques.<br>

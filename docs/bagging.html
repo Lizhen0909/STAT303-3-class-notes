@@ -291,7 +291,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#bagging" id="toc-bagging" class="nav-link active" data-scroll-target="#bagging"><span class="header-section-number">6.1</span> Bagging</a></li>
+  <li><a href="#bagging-a-variance-reduction-technique" id="toc-bagging-a-variance-reduction-technique" class="nav-link active" data-scroll-target="#bagging-a-variance-reduction-technique"><span class="header-section-number">6.1</span> Bagging: A Variance Reduction Technique</a></li>
   <li><a href="#bagging-regression-trees" id="toc-bagging-regression-trees" class="nav-link" data-scroll-target="#bagging-regression-trees"><span class="header-section-number">6.2</span> Bagging regression trees</a></li>
   <li><a href="#model-performance-vs.-number-of-trees" id="toc-model-performance-vs.-number-of-trees" class="nav-link" data-scroll-target="#model-performance-vs.-number-of-trees"><span class="header-section-number">6.3</span> Model Performance vs.&nbsp;Number of Trees</a></li>
   <li><a href="#bagging-hyperparameter-tuning" id="toc-bagging-hyperparameter-tuning" class="nav-link" data-scroll-target="#bagging-hyperparameter-tuning"><span class="header-section-number">6.4</span> Bagging Hyperparameter Tuning</a></li>
@@ -324,8 +324,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <p><em>Read section 8.2.1 of the book before using these notes.</em></p>
 <p><em>Note that in this course, lecture notes are not sufficient, you must read the book for better understanding. Lecture notes are just implementing the concepts of the book on a dataset, but not explaining the concepts elaborately.</em></p>
-<section id="bagging" class="level2" data-number="6.1">
-<h2 data-number="6.1" class="anchored" data-anchor-id="bagging"><span class="header-section-number">6.1</span> Bagging</h2>
+<section id="bagging-a-variance-reduction-technique" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="bagging-a-variance-reduction-technique"><span class="header-section-number">6.1</span> Bagging: A Variance Reduction Technique</h2>
 <p>Bagging, short for <strong>Bootstrap Aggregating</strong>, is an effective way to reduce overfitting in decision trees. It works by training multiple decision trees—each on a different bootstrap sample of the data—and then aggregating their predictions.</p>
 <p>Each individual decision tree is a <strong>weak learner</strong> and prone to overfitting, but by combining many such trees, bagging produces a <strong>strong learner</strong> with <strong>lower variance</strong> and improved generalization performance.</p>
 <p>The number of trees to include in the ensemble is specified by the <code>n_estimators</code> hyperparameter.</p>

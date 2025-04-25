@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>12&nbsp; LightGBM and CatBoost – Data Science III with python (Class notes)</title>
+<title>11&nbsp; LightGBM and CatBoost – Data Science III with python (Class notes)</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -147,7 +147,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./regression_tree_sp25.html">Tree based models</a></li><li class="breadcrumb-item"><a href="./Lec11_More boosting models.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">LightGBM and CatBoost</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./regression_tree_sp25.html">Tree based models</a></li><li class="breadcrumb-item"><a href="./Lec11_More boosting models.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">LightGBM and CatBoost</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -239,44 +239,38 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Bagging (OOB vs K-fold cross-validation).html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Bagging (addendum)</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./Lec6_RandomForest.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Random Forest</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Random Forest</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Lec7_AdaBoost.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Adaptive Boosting</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Adaptive Boosting</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Lec8_Gradient_Boosting.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Gradient Boosting</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Gradient Boosting</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Lec9_XGBoost.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">XGBoost</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">XGBoost</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Lec11_More boosting models.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">LightGBM and CatBoost</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">LightGBM and CatBoost</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Lec10_Ensemble.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Ensemble modeling</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Ensemble modeling</span></span></a>
   </div>
 </li>
       </ul>
@@ -326,18 +320,18 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#lightgbm" id="toc-lightgbm" class="nav-link active" data-scroll-target="#lightgbm"><span class="header-section-number">12.1</span> LightGBM</a>
+  <li><a href="#lightgbm" id="toc-lightgbm" class="nav-link active" data-scroll-target="#lightgbm"><span class="header-section-number">11.1</span> LightGBM</a>
   <ul>
-  <li><a href="#lightgbm-for-regression" id="toc-lightgbm-for-regression" class="nav-link" data-scroll-target="#lightgbm-for-regression"><span class="header-section-number">12.1.1</span> LightGBM for regression</a></li>
-  <li><a href="#lightgbm-vs-xgboost" id="toc-lightgbm-vs-xgboost" class="nav-link" data-scroll-target="#lightgbm-vs-xgboost"><span class="header-section-number">12.1.2</span> LightGBM vs XGBoost</a></li>
+  <li><a href="#lightgbm-for-regression" id="toc-lightgbm-for-regression" class="nav-link" data-scroll-target="#lightgbm-for-regression"><span class="header-section-number">11.1.1</span> LightGBM for regression</a></li>
+  <li><a href="#lightgbm-vs-xgboost" id="toc-lightgbm-vs-xgboost" class="nav-link" data-scroll-target="#lightgbm-vs-xgboost"><span class="header-section-number">11.1.2</span> LightGBM vs XGBoost</a></li>
   </ul></li>
-  <li><a href="#catboost" id="toc-catboost" class="nav-link" data-scroll-target="#catboost"><span class="header-section-number">12.2</span> CatBoost</a>
+  <li><a href="#catboost" id="toc-catboost" class="nav-link" data-scroll-target="#catboost"><span class="header-section-number">11.2</span> CatBoost</a>
   <ul>
-  <li><a href="#catboost-for-regression" id="toc-catboost-for-regression" class="nav-link" data-scroll-target="#catboost-for-regression"><span class="header-section-number">12.2.1</span> CatBoost for regression</a></li>
-  <li><a href="#target-encoding-with-catboost" id="toc-target-encoding-with-catboost" class="nav-link" data-scroll-target="#target-encoding-with-catboost"><span class="header-section-number">12.2.2</span> Target encoding with CatBoost</a></li>
-  <li><a href="#catboost-vs-xgboost" id="toc-catboost-vs-xgboost" class="nav-link" data-scroll-target="#catboost-vs-xgboost"><span class="header-section-number">12.2.3</span> CatBoost vs XGBoost</a></li>
-  <li><a href="#tuning-catboostregressor" id="toc-tuning-catboostregressor" class="nav-link" data-scroll-target="#tuning-catboostregressor"><span class="header-section-number">12.2.4</span> Tuning <code>CatBoostRegressor</code></a></li>
-  <li><a href="#tuning-tips" id="toc-tuning-tips" class="nav-link" data-scroll-target="#tuning-tips"><span class="header-section-number">12.2.5</span> Tuning Tips</a></li>
+  <li><a href="#catboost-for-regression" id="toc-catboost-for-regression" class="nav-link" data-scroll-target="#catboost-for-regression"><span class="header-section-number">11.2.1</span> CatBoost for regression</a></li>
+  <li><a href="#target-encoding-with-catboost" id="toc-target-encoding-with-catboost" class="nav-link" data-scroll-target="#target-encoding-with-catboost"><span class="header-section-number">11.2.2</span> Target encoding with CatBoost</a></li>
+  <li><a href="#catboost-vs-xgboost" id="toc-catboost-vs-xgboost" class="nav-link" data-scroll-target="#catboost-vs-xgboost"><span class="header-section-number">11.2.3</span> CatBoost vs XGBoost</a></li>
+  <li><a href="#tuning-catboostregressor" id="toc-tuning-catboostregressor" class="nav-link" data-scroll-target="#tuning-catboostregressor"><span class="header-section-number">11.2.4</span> Tuning <code>CatBoostRegressor</code></a></li>
+  <li><a href="#tuning-tips" id="toc-tuning-tips" class="nav-link" data-scroll-target="#tuning-tips"><span class="header-section-number">11.2.5</span> Tuning Tips</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -345,9 +339,9 @@ window.Quarto = {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./regression_tree_sp25.html">Tree based models</a></li><li class="breadcrumb-item"><a href="./Lec11_More boosting models.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">LightGBM and CatBoost</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./regression_tree_sp25.html">Tree based models</a></li><li class="breadcrumb-item"><a href="./Lec11_More boosting models.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">LightGBM and CatBoost</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">LightGBM and CatBoost</span></h1>
+<h1 class="title"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">LightGBM and CatBoost</span></h1>
 </div>
 
 
@@ -504,8 +498,8 @@ window.Quarto = {
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> train[<span class="st">'price'</span>]</span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>ytest <span class="op">=</span> test[<span class="st">'price'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="lightgbm" class="level2" data-number="12.1">
-<h2 data-number="12.1" class="anchored" data-anchor-id="lightgbm"><span class="header-section-number">12.1</span> LightGBM</h2>
+<section id="lightgbm" class="level2" data-number="11.1">
+<h2 data-number="11.1" class="anchored" data-anchor-id="lightgbm"><span class="header-section-number">11.1</span> LightGBM</h2>
 <p>LightGBM is a gradient boosting decision tree algorithm developed by Microsoft in 2017. LightGBM outperforms XGBoost in terms of compuational speed, and provides comparable accuracy in general. The following two key features in LightGBM that make it faster than XGBoost:</p>
 <p><strong>1. Gradient-based One-Side Sampling</strong> (GOSS): Recall, in gradient boosting, we fit trees on the gradient of the loss function <em>(refer the gradient boosting algorithm in section 10.10.2 of the book, <a href="https://hastie.su.domains/ElemStatLearn/">Elements of Statistical Learning</a>):</em></p>
 <p><span class="math display">\[r_m = -\bigg[ \frac{\partial L(y_i, f(x_i))}{\partial f(x_i)}  \bigg]_{f = f_{m-1}}. \]</span></p>
@@ -559,8 +553,8 @@ window.Quarto = {
 </tbody>
 </table>
 <p>Read the <a href="https://proceedings.neurips.cc/paper/2017/file/6449f44a102fde848669bdd9eb6b76fa-Paper.pdf">LightGBM paper</a> for more details.</p>
-<section id="lightgbm-for-regression" class="level3" data-number="12.1.1">
-<h3 data-number="12.1.1" class="anchored" data-anchor-id="lightgbm-for-regression"><span class="header-section-number">12.1.1</span> LightGBM for regression</h3>
+<section id="lightgbm-for-regression" class="level3" data-number="11.1.1">
+<h3 data-number="11.1.1" class="anchored" data-anchor-id="lightgbm-for-regression"><span class="header-section-number">11.1.1</span> LightGBM for regression</h3>
 <p>Let us tune a lightGBM model for regression for our problem of predicting car price. We’ll use the function <a href="https://lightgbm.readthedocs.io/en/latest/pythonapi/lightgbm.LGBMRegressor.html"><code>LGBMRegressor</code></a>. For classification problems, <a href="https://lightgbm.readthedocs.io/en/latest/pythonapi/lightgbm.LGBMClassifier.html"><code>LGBMClassifier</code></a> can be used. Note that we are using the GOSS algorithm to downsample observations with smaller gradients.</p>
 <div id="4787ccf3" class="cell" data-execution_count="31">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">#K-fold cross validation to find optimal parameters for LightGBM regressor</span></span>
@@ -670,8 +664,8 @@ Time taken =  1  minutes</code></pre>
 </div>
 </div>
 </section>
-<section id="lightgbm-vs-xgboost" class="level3" data-number="12.1.2">
-<h3 data-number="12.1.2" class="anchored" data-anchor-id="lightgbm-vs-xgboost"><span class="header-section-number">12.1.2</span> LightGBM vs XGBoost</h3>
+<section id="lightgbm-vs-xgboost" class="level3" data-number="11.1.2">
+<h3 data-number="11.1.2" class="anchored" data-anchor-id="lightgbm-vs-xgboost"><span class="header-section-number">11.1.2</span> LightGBM vs XGBoost</h3>
 <p>LightGBM model took 2 minutes for a random search with 1000 fits as compared to 7 minutes for an XGBoost model with 1000 fits on the same data (as shown below). In terms of prediction accuracy, we observe that the accuracy of LightGBM on test <em>(unseen)</em> data is comparable to that of XGBoost.</p>
 <div id="336194fc" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co">#K-fold cross validation to find optimal parameters for XGBoost</span></span>
@@ -710,8 +704,8 @@ Time taken =  7  minutes</code></pre>
 </div>
 </section>
 </section>
-<section id="catboost" class="level2" data-number="12.2">
-<h2 data-number="12.2" class="anchored" data-anchor-id="catboost"><span class="header-section-number">12.2</span> CatBoost</h2>
+<section id="catboost" class="level2" data-number="11.2">
+<h2 data-number="11.2" class="anchored" data-anchor-id="catboost"><span class="header-section-number">11.2</span> CatBoost</h2>
 <p>CatBoost is a gradient boosting algorithm developed by Yandex <em>(Russian Google)</em> in 2017. Like LightGBM, CatBoost is also faster than XGBoost in training. However, unlike LightGBM, the authors have claimed that it outperforms both LightGBM and XGBoost in terms of prediction accuracy as well.</p>
 <p>The key feature of CatBoost that address the issue with the gradient boosting procedure is the idea of ordered boosting. Classic boosting algorithms are prone to overfitting on small/noisy datasets due to a problem known as prediction shift. Recall, in gradient boosting, we fit trees on the gradient of the loss function <em>(refer the gradient boosting algorithm in section 10.10.2 of the book, <a href="https://hastie.su.domains/ElemStatLearn/">Elements of Statistical Learning</a>):</em></p>
 <p><span class="math display">\[r_m = -\bigg[ \frac{\partial L(y_i, f(x_i))}{\partial f(x_i)}  \bigg]_{f = f_{m-1}}. \]</span></p>
@@ -720,8 +714,8 @@ Time taken =  7  minutes</code></pre>
 <p>The authors have also shown that CatBoost performs better than XGBoost and LightGBM without tuning, i.e., with default hyperparameter settings.</p>
 <p>Read the <a href="https://proceedings.neurips.cc/paper_files/paper/2018/file/14491b756b3a51daac41c24863285549-Paper.pdf">CatBoost paper</a> for more details.</p>
 <p>Here is a good <a href="https://neptune.ai/blog/when-to-choose-catboost-over-xgboost-or-lightgbm">blog</a> listing the key features of CatBoost.</p>
-<section id="catboost-for-regression" class="level3" data-number="12.2.1">
-<h3 data-number="12.2.1" class="anchored" data-anchor-id="catboost-for-regression"><span class="header-section-number">12.2.1</span> CatBoost for regression</h3>
+<section id="catboost-for-regression" class="level3" data-number="11.2.1">
+<h3 data-number="11.2.1" class="anchored" data-anchor-id="catboost-for-regression"><span class="header-section-number">11.2.1</span> CatBoost for regression</h3>
 <p>We’ll use the function <a href="https://catboost.ai/en/docs/concepts/python-reference_catboostregressor">CatBoostRegressor</a> for regression. For classification problems <a href="https://catboost.ai/en/docs/concepts/python-reference_catboostclassifier">CatBoostClassifier</a> can be used.</p>
 <p>Let us check the performance of <code>CatBoostRegressor()</code> without tuning, i.e., with default hyperparameter settings.</p>
 <div id="17cf8748" class="cell" data-execution_count="97">
@@ -743,8 +737,8 @@ Time taken =  7  minutes</code></pre>
 </div>
 <p>Even with default hyperparameter settings, CatBoost has outperformed both XGBoost and LightGBM in terms of cross-validated RMSE, and RMSE on test data for our example of predicting car prices.</p>
 </section>
-<section id="target-encoding-with-catboost" class="level3" data-number="12.2.2">
-<h3 data-number="12.2.2" class="anchored" data-anchor-id="target-encoding-with-catboost"><span class="header-section-number">12.2.2</span> Target encoding with CatBoost</h3>
+<section id="target-encoding-with-catboost" class="level3" data-number="11.2.2">
+<h3 data-number="11.2.2" class="anchored" data-anchor-id="target-encoding-with-catboost"><span class="header-section-number">11.2.2</span> Target encoding with CatBoost</h3>
 <p>Target encoding for categorical variables can be used with CatBoost, that may benefit in terms of both speed and accuracy. However, the benefit is not gauranteed. Let us use target encoding for the categorical predictors <code>brand</code>, <code>model</code>, <code>transmission</code> and <code>fuelType</code>.</p>
 <div id="b6b16c01" class="cell" data-execution_count="35">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> train[[<span class="st">'mileage'</span>,<span class="st">'mpg'</span>,<span class="st">'year'</span>,<span class="st">'engineSize'</span>, <span class="st">'brand'</span>, <span class="st">'model'</span>, <span class="st">'transmission'</span>, <span class="st">'fuelType'</span>]]</span>
@@ -801,8 +795,8 @@ Time taken =  7  minutes</code></pre>
 </div>
 <p>In this case, using target-encoding and one-hot-encoding together does better on test data. Using both the encodings together will help reduce bias while increasing variance. The benefit of using both the encodings together depends on the bias-variance tradeoff.</p>
 </section>
-<section id="catboost-vs-xgboost" class="level3" data-number="12.2.3">
-<h3 data-number="12.2.3" class="anchored" data-anchor-id="catboost-vs-xgboost"><span class="header-section-number">12.2.3</span> CatBoost vs XGBoost</h3>
+<section id="catboost-vs-xgboost" class="level3" data-number="11.2.3">
+<h3 data-number="11.2.3" class="anchored" data-anchor-id="catboost-vs-xgboost"><span class="header-section-number">11.2.3</span> CatBoost vs XGBoost</h3>
 <p>Let us see the performance of XGBoost with default hyperparameter settings.</p>
 <div id="a4cfa0f1" class="cell" data-execution_count="106">
 <div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>model_xgb <span class="op">=</span> xgb.XGBRFRegressor().fit(X, y)</span>
@@ -836,8 +830,8 @@ Time taken =  7  minutes</code></pre>
 </div>
 <p>LightGBM’s default hyperparameter settings also seem to be more robust as compared to those of XGBoost.</p>
 </section>
-<section id="tuning-catboostregressor" class="level3" data-number="12.2.4">
-<h3 data-number="12.2.4" class="anchored" data-anchor-id="tuning-catboostregressor"><span class="header-section-number">12.2.4</span> Tuning <code>CatBoostRegressor</code></h3>
+<section id="tuning-catboostregressor" class="level3" data-number="11.2.4">
+<h3 data-number="11.2.4" class="anchored" data-anchor-id="tuning-catboostregressor"><span class="header-section-number">11.2.4</span> Tuning <code>CatBoostRegressor</code></h3>
 <p>The CatBoost hyperparameters can be tuned just like the XGBoost hyperparameters. However, there is some difference in the hyperparameters of both the packages. For example, <code>reg_alpha</code> <em>(the L1 penalization on weights of leaves)</em> and <code>colsample_bytree</code> <em>(subsample ratio of columns when constructing each tree)</em> hyperparameters are not there in CatBoost.</p>
 <div id="a6403528" class="cell" data-execution_count="121">
 <div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co">#K-fold cross validation to find optimal parameters for CatBoost regressor</span></span>
@@ -912,8 +906,8 @@ Time taken =  23  minutes</code></pre>
 <span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a><span class="co">#[0.3745508446405472, 0.1000958551500621, 2000, 11, 0.0, 0.3877212027881348] 5132.537839676808</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="tuning-tips" class="level3" data-number="12.2.5">
-<h3 data-number="12.2.5" class="anchored" data-anchor-id="tuning-tips"><span class="header-section-number">12.2.5</span> Tuning Tips</h3>
+<section id="tuning-tips" class="level3" data-number="11.2.5">
+<h3 data-number="11.2.5" class="anchored" data-anchor-id="tuning-tips"><span class="header-section-number">11.2.5</span> Tuning Tips</h3>
 <p>Check the <a href="https://catboost.ai/en/docs/references/training-parameters/common">documentation</a> for some tuning tips.</p>
 <ol type="1">
 <li><p>It is not recommended to use values greater than 64 for <code>num_leaves</code>, since it can significantly slow down the training process.</p></li>
@@ -1347,12 +1341,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./Lec9_XGBoost.html" class="pagination-link" aria-label="XGBoost">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">XGBoost</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">XGBoost</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./Lec10_Ensemble.html" class="pagination-link" aria-label="Ensemble modeling">
-        <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Ensemble modeling</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Ensemble modeling</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

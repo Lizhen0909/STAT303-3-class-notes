@@ -26,7 +26,7 @@ book:
         - regression_tree_sp25.ipynb
         - Classification _Tree.ipynb
         - bagging.ipynb
-        - Bagging (OOB vs K-fold cross-validation).ipynb
+        #- Bagging (OOB vs K-fold cross-validation).ipynb
         - Lec6_RandomForest.ipynb
         - Lec7_AdaBoost.ipynb
         - Lec8_Gradient_Boosting.ipynb

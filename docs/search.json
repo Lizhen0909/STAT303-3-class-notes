@@ -789,5 +789,16 @@
       "Tree based models",
       "<span class='chapter-number'>7</span>  <span class='chapter-title'>Random Forests</span>"
     ]
+  },
+  {
+    "objectID": "random_forest.html#next-step",
+    "href": "random_forest.html#next-step",
+    "title": "7  Random Forests",
+    "section": "7.7 Next Step",
+    "text": "7.7 Next Step\nIn the next section, we will explore Boosting methods,\nwhere models are built sequentially, each one focusing on correcting the errors made by the previous models.\nBoosting shifts the focus from reducing variance to reducing bias, offering another powerful strategy for improving model performance.",
+    "crumbs": [
+      "Tree based models",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Random Forests</span>"
+    ]
   }
 ]

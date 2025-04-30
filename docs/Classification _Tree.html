@@ -303,11 +303,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#step-3-visualize-the-results" id="toc-step-3-visualize-the-results" class="nav-link" data-scroll-target="#step-3-visualize-the-results"><span class="header-section-number">5.3.3</span> Step 3: Visualize the results</a></li>
   <li><a href="#step-4-create-the-final-model-with-the-optimal-alpha" id="toc-step-4-create-the-final-model-with-the-optimal-alpha" class="nav-link" data-scroll-target="#step-4-create-the-final-model-with-the-optimal-alpha"><span class="header-section-number">5.3.4</span> Step 4: Create the final model with the optimal alpha</a></li>
   </ul></li>
-  <li><a href="#feature-importance-in-decision-trees" id="toc-feature-importance-in-decision-trees" class="nav-link" data-scroll-target="#feature-importance-in-decision-trees"><span class="header-section-number">5.4</span> Feature Importance in Decision Trees</a></li>
-  <li><a href="#using-bagging-to-combat-overfitting" id="toc-using-bagging-to-combat-overfitting" class="nav-link" data-scroll-target="#using-bagging-to-combat-overfitting"><span class="header-section-number">5.5</span> Using Bagging to Combat Overfitting</a>
+  <li><a href="#feature-importance-in-decision-trees" id="toc-feature-importance-in-decision-trees" class="nav-link" data-scroll-target="#feature-importance-in-decision-trees"><span class="header-section-number">5.4</span> Feature Importance in Decision Trees</a>
   <ul>
-  <li><a href="#takeaway" id="toc-takeaway" class="nav-link" data-scroll-target="#takeaway"><span class="header-section-number">5.5.1</span> ✅ Takeaway:</a></li>
+  <li><a href="#do-we-need-feature-selection-or-regularization-with-tree-models" id="toc-do-we-need-feature-selection-or-regularization-with-tree-models" class="nav-link" data-scroll-target="#do-we-need-feature-selection-or-regularization-with-tree-models"><span class="header-section-number">5.4.1</span> Do We Need Feature Selection or Regularization with Tree Models?</a></li>
+  <li><a href="#bottom-line" id="toc-bottom-line" class="nav-link" data-scroll-target="#bottom-line"><span class="header-section-number">5.4.2</span> Bottom Line</a></li>
   </ul></li>
+  <li><a href="#next-lecture" id="toc-next-lecture" class="nav-link" data-scroll-target="#next-lecture"><span class="header-section-number">5.5</span> Next Lecture</a></li>
   </ul>
 </nav>
     </div>
@@ -959,50 +960,38 @@ Tree depth: 6</code></pre>
 </div>
 </div>
 </div>
+<section id="do-we-need-feature-selection-or-regularization-with-tree-models" class="level3" data-number="5.4.1">
+<h3 data-number="5.4.1" class="anchored" data-anchor-id="do-we-need-feature-selection-or-regularization-with-tree-models"><span class="header-section-number">5.4.1</span> Do We Need Feature Selection or Regularization with Tree Models?</h3>
+<p>When using <strong>tree-based models</strong> (e.g., Decision Trees, Random Forests, Gradient Boosting) and you have a <strong>small number of predictors</strong>, you typically <strong>don’t need to worry much about feature selection or regularization</strong>. Here’s why:</p>
+<ul>
+<li><strong>Tree models inherently ignore uninformative features</strong>. They only split on features that reduce impurity (e.g., Gini or entropy), so irrelevant features tend to receive <strong>zero or very low importance</strong>.</li>
+<li><strong>Ensemble methods</strong> like Random Forest or Boosting average over many trees. Features that don’t help prediction are rarely used across the ensemble.</li>
+<li><strong>Including unimportant features won’t significantly hurt model performance</strong> in small feature spaces. The model will usually ignore them during training.</li>
+<li><strong>However</strong>, even in small feature sets, irrelevant features may slightly:</li>
+<li>Increase model variance</li>
+<li>Increase training time</li>
+<li>Reduce interpretability</li>
+</ul>
 </section>
-<section id="using-bagging-to-combat-overfitting" class="level2" data-number="5.5">
-<h2 data-number="5.5" class="anchored" data-anchor-id="using-bagging-to-combat-overfitting"><span class="header-section-number">5.5</span> Using Bagging to Combat Overfitting</h2>
-<p>Bagging, short for <strong>Bootstrap Aggregating</strong>, is an effective way to reduce overfitting in decision trees. It works by training multiple decision trees—each on a different bootstrap sample of the data—and then aggregating their predictions.</p>
-<p>Each individual decision tree is a <strong>weak learner</strong> and prone to overfitting, but by combining many such trees, bagging produces a <strong>strong learner</strong> with <strong>lower variance</strong> and improved generalization performance.</p>
-<p>The number of trees to include in the ensemble is specified by the <code>n_estimators</code> hyperparameter.</p>
-<div id="7ee18c5e" class="cell" data-execution_count="53">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># using tree bagging to fit the data</span></span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.ensemble <span class="im">import</span> BaggingClassifier</span>
-<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>bagging <span class="op">=</span> BaggingClassifier(DecisionTreeClassifier(), n_estimators<span class="op">=</span><span class="dv">100</span>, random_state<span class="op">=</span><span class="dv">0</span>)</span>
-<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>bagging.fit(X_train, y_train)</span>
-<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>y_pred_train <span class="op">=</span> bagging.predict(X_train)</span>
-<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>cm <span class="op">=</span> pd.DataFrame(confusion_matrix(y_train, y_pred_train).T, index<span class="op">=</span>[<span class="st">'No'</span>, <span class="st">'Yes'</span>], columns<span class="op">=</span>[<span class="st">'No'</span>, <span class="st">'Yes'</span>])</span>
-<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(cm)</span>
-<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a>y_pred <span class="op">=</span> bagging.predict(X_test)</span>
-<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a>cm <span class="op">=</span> pd.DataFrame(confusion_matrix(y_test, y_pred).T, index<span class="op">=</span>[<span class="st">'No'</span>, <span class="st">'Yes'</span>], columns<span class="op">=</span>[<span class="st">'No'</span>, <span class="st">'Yes'</span>])</span>
-<span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-15"><a href="#cb30-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(cm)</span>
-<span id="cb30-16"><a href="#cb30-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-17"><a href="#cb30-17" aria-hidden="true" tabindex="-1"></a><span class="co">#print out the accuracy on test set and training set</span></span>
-<span id="cb30-18"><a href="#cb30-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Train Accuracy is "</span>, accuracy_score(y_train,y_pred_train)<span class="op">*</span><span class="dv">100</span>)</span>
-<span id="cb30-19"><a href="#cb30-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Test Accuracy is "</span>, accuracy_score(y_test,y_pred)<span class="op">*</span><span class="dv">100</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>      No  Yes
-No   109    0
-Yes    0  133
-     No  Yes
-No   25    5
-Yes   4   27
-Train Accuracy is  100.0
-Test Accuracy is  85.24590163934425</code></pre>
-</div>
-</div>
-<section id="takeaway" class="level3" data-number="5.5.1">
-<h3 data-number="5.5.1" class="anchored" data-anchor-id="takeaway"><span class="header-section-number">5.5.1</span> ✅ Takeaway:</h3>
-<p><strong>Bagging reduces variance but does not affect bias.</strong><br>
-By averaging the predictions of multiple high-variance models (like decision trees), bagging stabilizes the model and improves generalization, while the overall bias remains unchanged.</p>
+<section id="bottom-line" class="level3" data-number="5.4.2">
+<h3 data-number="5.4.2" class="anchored" data-anchor-id="bottom-line"><span class="header-section-number">5.4.2</span> Bottom Line</h3>
+<blockquote class="blockquote">
+<p>If the number of predictors is small, you can typically skip feature selection and regularization when using tree-based models — they will handle irrelevant features gracefully.</p>
+</blockquote>
+</section>
+</section>
+<section id="next-lecture" class="level2" data-number="5.5">
+<h2 data-number="5.5" class="anchored" data-anchor-id="next-lecture"><span class="header-section-number">5.5</span> Next Lecture</h2>
+<p>A single decision tree is highly susceptible to <strong>overfitting</strong>, especially on noisy or complex datasets.</p>
+<p>In this notebook, we explored two techniques to reduce variance and improve generalization:</p>
+<ul>
+<li><strong>Pre-pruning</strong> (e.g., setting <code>max_depth</code>, <code>min_samples_split</code>, etc)</li>
+<li><strong>Post-pruning</strong> (e.g., cost-complexity pruning)</li>
+</ul>
+<p>In the next lecture, we’ll introduce another powerful method to combat overfitting:<br>
+👉 <strong>Bagging (Bootstrap Aggregating)</strong> — an ensemble technique that builds multiple trees and averages their predictions to reduce variance and improve robustness.</p>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->

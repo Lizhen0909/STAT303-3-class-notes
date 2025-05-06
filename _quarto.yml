@@ -29,7 +29,7 @@ book:
         #- Bagging (OOB vs K-fold cross-validation).ipynb
         - random_forest.ipynb
         - adaboost.ipynb
-        - Lec8_Gradient_Boosting.ipynb
+        - Gradient_Boosting.ipynb
         - Lec9_XGBoost.ipynb
         - Lec11_More boosting models.ipynb
         - Lec10_Ensemble.ipynb

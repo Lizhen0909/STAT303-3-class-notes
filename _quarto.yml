@@ -30,7 +30,7 @@ book:
         - random_forest.ipynb
         - adaboost.ipynb
         - Gradient_Boosting.ipynb
-        - Lec9_XGBoost.ipynb
+        - XGBoost.ipynb
         - Lec11_More boosting models.ipynb
         - Lec10_Ensemble.ipynb
   appendices: 

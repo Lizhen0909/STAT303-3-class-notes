@@ -339,14 +339,14 @@ window.Quarto = {
   <li><a href="#requirements" id="toc-requirements" class="nav-link" data-scroll-target="#requirements"><span class="header-section-number">10.7.6.2</span> Requirements</a></li>
   </ul></li>
   <li><a href="#gamma-in-xgboost" id="toc-gamma-in-xgboost" class="nav-link" data-scroll-target="#gamma-in-xgboost"><span class="header-section-number">10.7.7</span> <code>gamma</code> in XGBoost</a></li>
-  <li><a href="#reg_lambda-and-reg_alpha-in-xgboost" id="toc-reg_lambda-and-reg_alpha-in-xgboost" class="nav-link" data-scroll-target="#reg_lambda-and-reg_alpha-in-xgboost"><span class="header-section-number">10.7.8</span> <code>reg_lambda</code> and <code>reg_alpha</code> in XGBoost</a>
-  <ul class="collapse">
-  <li><a href="#understanding-them-via-ridge-lasso-and-elasticnet-you-learned-in-stat303-2" id="toc-understanding-them-via-ridge-lasso-and-elasticnet-you-learned-in-stat303-2" class="nav-link" data-scroll-target="#understanding-them-via-ridge-lasso-and-elasticnet-you-learned-in-stat303-2"><span class="header-section-number">10.7.8.1</span> Understanding them via Ridge, Lasso, and ElasticNet you learned in STAT303-2</a></li>
-  </ul></li>
-  <li><a href="#exploring-regularization-parameters-simultaneously" id="toc-exploring-regularization-parameters-simultaneously" class="nav-link" data-scroll-target="#exploring-regularization-parameters-simultaneously"><span class="header-section-number">10.7.9</span> Exploring Regularization Parameters Simultaneously</a></li>
+  <li><a href="#reg_lambda-and-reg_alpha-in-xgboost" id="toc-reg_lambda-and-reg_alpha-in-xgboost" class="nav-link" data-scroll-target="#reg_lambda-and-reg_alpha-in-xgboost"><span class="header-section-number">10.7.8</span> <code>reg_lambda</code> and <code>reg_alpha</code> in XGBoost</a></li>
+  <li><a href="#exploring-regularization-hyperparameters-simultaneously" id="toc-exploring-regularization-hyperparameters-simultaneously" class="nav-link" data-scroll-target="#exploring-regularization-hyperparameters-simultaneously"><span class="header-section-number">10.7.9</span> Exploring Regularization Hyperparameters Simultaneously</a></li>
   <li><a href="#comprehensive-hyperparameter-tuning" id="toc-comprehensive-hyperparameter-tuning" class="nav-link" data-scroll-target="#comprehensive-hyperparameter-tuning"><span class="header-section-number">10.7.10</span> Comprehensive Hyperparameter Tuning</a>
   <ul class="collapse">
-  <li><a href="#gridsearchcv" id="toc-gridsearchcv" class="nav-link" data-scroll-target="#gridsearchcv"><span class="header-section-number">10.7.10.1</span> <code>GridSearchCV</code></a></li>
+  <li><a href="#why-gridsearchcv-is-not-a-practical-option" id="toc-why-gridsearchcv-is-not-a-practical-option" class="nav-link" data-scroll-target="#why-gridsearchcv-is-not-a-practical-option"><span class="header-section-number">10.7.10.1</span> Why <code>GridSearchCV</code> Is Not a Practical Option</a></li>
+  <li><a href="#smarter-tuning-with-optuna-or-bayessearchcv" id="toc-smarter-tuning-with-optuna-or-bayessearchcv" class="nav-link" data-scroll-target="#smarter-tuning-with-optuna-or-bayessearchcv"><span class="header-section-number">10.7.10.2</span> Smarter Tuning with Optuna or BayesSearchCV</a></li>
+  <li><a href="#tuning-with-optuna" id="toc-tuning-with-optuna" class="nav-link" data-scroll-target="#tuning-with-optuna"><span class="header-section-number">10.7.10.3</span> Tuning with Optuna</a></li>
+  <li><a href="#after-training-analyze-and-refine" id="toc-after-training-analyze-and-refine" class="nav-link" data-scroll-target="#after-training-analyze-and-refine"><span class="header-section-number">10.7.10.4</span> After Training: Analyze and Refine</a></li>
   </ul></li>
   </ul></li>
   <li><a href="#xgboost-for-classification" id="toc-xgboost-for-classification" class="nav-link" data-scroll-target="#xgboost-for-classification"><span class="header-section-number">10.8</span> XGBoost for classification</a>
@@ -498,7 +498,7 @@ This makes it easy to integrate XGBoost models into Scikit-learn workflows such 
 <li><code>early_stopping_rounds</code>: Stop if validation score doesn’t improve after N rounds</li>
 </ul>
 <p>However, there are other hyperparameters that can be tuned as well. Check out the list of all hyperparameters in the XGBoost <a href="https://xgboost.readthedocs.io/en/stable/python/python_api.html#">documentation</a>.</p>
-<div id="f819f995" class="cell">
+<div id="f819f995" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -623,61 +623,52 @@ This makes it easy to integrate XGBoost models into Scikit-learn workflows such 
 <span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(X, y, test_size<span class="op">=</span><span class="fl">0.2</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="342fefd3" class="cell" data-execution_count="4">
+<p>Let’s define some helper functions before building any models.</p>
+<div id="342fefd3" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create preprocessing for numerical and categorical features</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>preprocessor <span class="op">=</span> ColumnTransformer(</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    transformers<span class="op">=</span>[</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>        (<span class="st">'num'</span>, StandardScaler(), numerical_cols),</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>        (<span class="st">'num'</span>, <span class="st">'passthrough'</span>, numerical_cols),</span>
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>        (<span class="st">'cat'</span>, OneHotEncoder(handle_unknown<span class="op">=</span><span class="st">'ignore'</span>), categorical_cols)</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    ])</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Function to evaluate model</span></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> evaluate_model(model, X_test, y_test):</span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    y_pred <span class="op">=</span> model.predict(X_test)</span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>    rmse <span class="op">=</span> root_mean_squared_error(y_test, y_pred)</span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>    r2 <span class="op">=</span> r2_score(y_test, y_pred)</span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Root Mean Squared Error: </span><span class="sc">{</span>rmse<span class="sc">:.2f}</span><span class="ss">"</span>)</span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"R² Score: </span><span class="sc">{</span>r2<span class="sc">:.4f}</span><span class="ss">"</span>)</span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> rmse,  r2</span>
-<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Function to plot feature importance</span></span>
-<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plot_feature_importance(model, preprocessor, X):</span>
-<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">hasattr</span>(model, <span class="st">'feature_importances_'</span>):</span>
-<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Get feature names after one-hot encoding</span></span>
-<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>        cat_features <span class="op">=</span> preprocessor.named_transformers_[<span class="st">'cat'</span>].get_feature_names_out(categorical_cols)</span>
-<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>        all_features <span class="op">=</span> np.append(numerical_cols, cat_features)</span>
-<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Get feature importances</span></span>
-<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>        importances <span class="op">=</span> model.feature_importances_</span>
-<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Sort feature importances in descending order</span></span>
-<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>        indices <span class="op">=</span> np.argsort(importances)[::<span class="op">-</span><span class="dv">1</span>]</span>
-<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Create a DataFrame for easier visualization</span></span>
-<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a>        importance_df <span class="op">=</span> pd.DataFrame({</span>
-<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a>            <span class="st">'Feature'</span>: all_features[indices][:<span class="dv">20</span>],  <span class="co"># Top 20 features</span></span>
-<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a>            <span class="st">'Importance'</span>: importances[indices][:<span class="dv">20</span>]</span>
-<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a>        })</span>
-<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Plot feature importances</span></span>
-<span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a>        plt.figure(figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">8</span>))</span>
-<span id="cb5-40"><a href="#cb5-40" aria-hidden="true" tabindex="-1"></a>        sns.barplot(x<span class="op">=</span><span class="st">'Importance'</span>, y<span class="op">=</span><span class="st">'Feature'</span>, data<span class="op">=</span>importance_df)</span>
-<span id="cb5-41"><a href="#cb5-41" aria-hidden="true" tabindex="-1"></a>        plt.title(<span class="st">'Top 20 Feature Importances'</span>)</span>
-<span id="cb5-42"><a href="#cb5-42" aria-hidden="true" tabindex="-1"></a>        plt.tight_layout()</span>
-<span id="cb5-43"><a href="#cb5-43" aria-hidden="true" tabindex="-1"></a>        plt.savefig(<span class="st">'feature_importance.png'</span>)</span>
-<span id="cb5-44"><a href="#cb5-44" aria-hidden="true" tabindex="-1"></a>        plt.close()</span>
-<span id="cb5-45"><a href="#cb5-45" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb5-46"><a href="#cb5-46" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> importance_df</span>
-<span id="cb5-47"><a href="#cb5-47" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
-<span id="cb5-48"><a href="#cb5-48" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"This model doesn't have feature_importances_ attribute."</span>)</span>
-<span id="cb5-49"><a href="#cb5-49" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">None</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    ]</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Function to evaluate model</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> evaluate_model(model, X_test, y_test):</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>    y_pred <span class="op">=</span> model.predict(X_test)</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>    rmse <span class="op">=</span> root_mean_squared_error(y_test, y_pred)</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>    r2 <span class="op">=</span> r2_score(y_test, y_pred)</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Root Mean Squared Error: </span><span class="sc">{</span>rmse<span class="sc">:.2f}</span><span class="ss">"</span>)</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"R² Score: </span><span class="sc">{</span>r2<span class="sc">:.4f}</span><span class="ss">"</span>)</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> rmse,  r2</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Function to plot feature importance</span></span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plot_feature_importance(model, preprocessor, X):</span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">hasattr</span>(model, <span class="st">'feature_importances_'</span>):</span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Get feature names after one-hot encoding</span></span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>        cat_features <span class="op">=</span> preprocessor.named_transformers_[<span class="st">'cat'</span>].get_feature_names_out(categorical_cols)</span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>        all_features <span class="op">=</span> np.append(numerical_cols, cat_features)</span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Get feature importances</span></span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>        importances <span class="op">=</span> model.feature_importances_</span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Sort feature importances in descending order</span></span>
+<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>        indices <span class="op">=</span> np.argsort(importances)[::<span class="op">-</span><span class="dv">1</span>]</span>
+<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Create a DataFrame for easier visualization</span></span>
+<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a>        importance_df <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a>            <span class="st">'Feature'</span>: all_features[indices][:<span class="dv">20</span>],  <span class="co"># Top 20 features</span></span>
+<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a>            <span class="st">'Importance'</span>: importances[indices][:<span class="dv">20</span>]</span>
+<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a>        })</span>
+<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a>        importance_df <span class="op">=</span> importance_df.sort_values(by<span class="op">=</span><span class="st">'Importance'</span>, ascending<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> importance_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="baseline-model" class="level3" data-number="10.7.5">
 <h3 data-number="10.7.5" class="anchored" data-anchor-id="baseline-model"><span class="header-section-number">10.7.5</span> Baseline Model</h3>
-<div id="fb031a85" class="cell" data-execution_count="5">
+<div id="fb031a85" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ===== 1. Baseline Model =====</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">===== Baseline XGBoost Model ====="</span>)</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>baseline_pipeline <span class="op">=</span> Pipeline([</span>
@@ -698,8 +689,8 @@ This makes it easy to integrate XGBoost models into Scikit-learn workflows such 
 ===== Baseline XGBoost Model =====
 
 Baseline Model Evaluation:
-Root Mean Squared Error: 3397.16
-R² Score: 0.9607</code></pre>
+Root Mean Squared Error: 3354.16
+R² Score: 0.9617</code></pre>
 </div>
 </div>
 </section>
@@ -720,7 +711,7 @@ R² Score: 0.9607</code></pre>
 <li>You must provide an <strong><code>eval_set</code></strong> containing a validation set.</li>
 <li>The evaluation metric must be one that XGBoost can track (<code>eval_metric</code> is optional but recommended).</li>
 </ul>
-<div id="53be44ec" class="cell">
+<div id="53be44ec" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ===== 2. Early Stopping =====</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">===== XGBoost with Early Stopping ====="</span>)</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Create validation set for early stopping</span></span>
@@ -741,14 +732,13 @@ R² Score: 0.9607</code></pre>
 <span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>early_stop_model.fit(</span>
 <span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>    X_train_es_transformed, y_train_es,</span>
 <span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>    eval_set<span class="op">=</span>[(X_val_transformed, y_val)],</span>
-<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>    eval_metric<span class="op">=</span><span class="st">'rmse'</span>,</span>
-<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>    verbose<span class="op">=</span><span class="va">False</span></span>
-<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>    verbose<span class="op">=</span><span class="va">False</span></span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 ===== XGBoost with Early Stopping =====</code></pre>
 </div>
-<div class="cell-output cell-output-display" data-execution_count="12">
+<div class="cell-output cell-output-display" data-execution_count="8">
 <style>#sk-container-id-1 {
   /* Definition of color scheme common for light and dark mode */
   --sklearn-color-text: #000;
@@ -1187,7 +1177,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
              n_jobs=None, num_parallel_tree=None, ...)</pre></div> </div></div></div></div>
 </div>
 </div>
-<div id="86c006fd" class="cell" data-execution_count="13">
+<div id="86c006fd" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Update the pipeline with the best model</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>early_stop_pipeline <span class="op">=</span> Pipeline([</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    (<span class="st">'preprocessor'</span>, preprocessor),</span>
@@ -1204,9 +1194,9 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Early Stopping Model Evaluation:
-Root Mean Squared Error: 3386.24
-R² Score: 0.9609
-Best number of iterations: 156</code></pre>
+Root Mean Squared Error: 3332.03
+R² Score: 0.9622
+Best number of iterations: 193</code></pre>
 </div>
 </div>
 </section>
@@ -1262,7 +1252,7 @@ At each split, XGBoost calculates the gain (reduction in regularized loss):</p>
 <p><strong>Use case</strong>: - Tune <code>gamma</code> to <strong>prune noisy or unnecessary splits</strong>. - Helpful when the model is <strong>overfitting</strong>, especially on small datasets.</p>
 <p><strong>Example</strong>:</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>XGBRegressor(gamma<span class="op">=</span><span class="fl">1.0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div id="c05ea353" class="cell" data-execution_count="27">
+<div id="c05ea353" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ===== 3. Regularization Experiments: varying gamma =====</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">===== XGBoost with Regularization: Varying Gamma ====="</span>)</span>
@@ -1277,42 +1267,41 @@ At each split, XGBoost calculates the gain (reduction in regularized loss):</p>
 <span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>])</span>
 <span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Perform grid search with cross-validation</span></span>
-<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>grid_search <span class="op">=</span> GridSearchCV(</span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>grid_search_gamma <span class="op">=</span> GridSearchCV(</span>
 <span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>    regularization_gamma_pipeline,</span>
 <span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>    param_grid,</span>
-<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>    cv<span class="op">=</span><span class="dv">5</span>,</span>
-<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>    scoring<span class="op">=</span><span class="st">'neg_mean_squared_error'</span>,</span>
-<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>    n_jobs<span class="op">=-</span><span class="dv">1</span></span>
-<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a>grid_search.fit(X_train, y_train)</span>
-<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Best Parameters from Regularization Experiment:"</span>)</span>
-<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(grid_search.best_params_)</span>
-<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Best Cross-Validation RMSE: </span><span class="sc">{:.2f}</span><span class="st">"</span>.<span class="bu">format</span>(np.sqrt(<span class="op">-</span>grid_search.best_score_)))</span>
-<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a><span class="co"># Evaluate the best model from grid search</span></span>
-<span id="cb13-29"><a href="#cb13-29" aria-hidden="true" tabindex="-1"></a>best_model <span class="op">=</span> grid_search.best_estimator_</span>
-<span id="cb13-30"><a href="#cb13-30" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Regularization Model Evaluation:"</span>)</span>
-<span id="cb13-31"><a href="#cb13-31" aria-hidden="true" tabindex="-1"></a>regularization_metrics <span class="op">=</span> evaluate_model(best_model, X_test, y_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>    scoring<span class="op">=</span><span class="st">'neg_mean_squared_error'</span>,</span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>    n_jobs<span class="op">=-</span><span class="dv">1</span></span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a>grid_search_gamma.fit(X_train, y_train)</span>
+<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Best Parameters from Regularization Tuning (γ - gamma)::"</span>)</span>
+<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(grid_search_gamma.best_params_)</span>
+<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Best Cross-Validation RMSE: </span><span class="sc">{:.2f}</span><span class="st">"</span>.<span class="bu">format</span>(np.sqrt(<span class="op">-</span>grid_search_gamma.best_score_)))</span>
+<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Evaluate the best model from grid search</span></span>
+<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a>best_gamma_model <span class="op">=</span> grid_search_gamma.best_estimator_</span>
+<span id="cb13-29"><a href="#cb13-29" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Test Set Evaluation for Best Model from Gamma Regularization Tuning:"</span>)</span>
+<span id="cb13-30"><a href="#cb13-30" aria-hidden="true" tabindex="-1"></a>regularization_metrics <span class="op">=</span> evaluate_model(best_gamma_model, X_test, y_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 ===== XGBoost with Regularization: Varying Gamma =====
 
-Best Parameters from Regularization Experiment:
+Best Parameters from Regularization Tuning (γ - gamma)::
 {'regressor__gamma': 100}
-Best Cross-Validation RMSE: 3463.25
+Best Cross-Validation RMSE: 3428.44
 
-Regularization Model Evaluation:
-Root Mean Squared Error: 3338.98
-R² Score: 0.9620</code></pre>
+Test Set Evaluation for Best Model from Gamma Regularization Tuning:
+Root Mean Squared Error: 3332.02
+R² Score: 0.9622</code></pre>
 </div>
 </div>
-<div id="304e0501" class="cell" data-execution_count="28">
+<div id="304e0501" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract gamma values and corresponding mean CV RMSE</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>gamma_values <span class="op">=</span> grid_search.cv_results_[<span class="st">'param_regressor__gamma'</span>].data</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>gamma_values <span class="op">=</span> grid_search_gamma.cv_results_[<span class="st">'param_regressor__gamma'</span>].data</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert mean test scores to RMSE, rounding to 2 decimal places</span></span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>mean_rmse_scores <span class="op">=</span> np.sqrt(<span class="op">-</span>grid_search.cv_results_[<span class="st">'mean_test_score'</span>])</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>mean_rmse_scores <span class="op">=</span> np.sqrt(<span class="op">-</span>grid_search_gamma.cv_results_[<span class="st">'mean_test_score'</span>])</span>
 <span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Round the RMSE scores to 2 decimal places</span></span>
 <span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>mean_rmse_scores <span class="op">=</span> np.<span class="bu">round</span>(mean_rmse_scores, <span class="dv">4</span>)</span>
 <span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a></span>
@@ -1335,8 +1324,11 @@ R² Score: 0.9620</code></pre>
 </div>
 </div>
 <p><strong>Effect of <code>gamma</code> on XGBoost Performance</strong></p>
-<p>As <code>gamma</code> increases, XGBoost becomes more selective about making splits.<br>
-- <strong>Low gamma (0–5)</strong>: Trees grow freely → higher RMSE due to possible overfitting. - <strong>Moderate to high gamma (10–100)</strong>: Blocks weak splits → simpler trees with better validation performance.</p>
+<p>As <code>gamma</code> increases, XGBoost becomes more selective about making splits.</p>
+<ul>
+<li><strong>Low gamma (0–5)</strong>: Trees grow freely → higher RMSE due to possible overfitting.</li>
+<li><strong>Moderate to high gamma (10–100)</strong>: Blocks weak splits → simpler trees with better validation performance.</li>
+</ul>
 <p>In this dataset, higher <code>gamma</code> values improved generalization by preventing unnecessary splits.</p>
 </section>
 <section id="reg_lambda-and-reg_alpha-in-xgboost" class="level3" data-number="10.7.8">
@@ -1360,8 +1352,7 @@ R² Score: 0.9620</code></pre>
 \mathcal{L} = \text{Loss} + \gamma T + \frac{1}{2} \lambda \sum_j w_j^2 + \alpha \sum_j |w_j|
 \]</span></p>
 <p>Where: - <span class="math inline">\(\text{Loss}\)</span>: training loss (e.g., squared error or log loss) - <span class="math inline">\(T\)</span>: number of leaves in the tree - <span class="math inline">\(w_j\)</span>: weight of the <span class="math inline">\(j\)</span>-th leaf - <span class="math inline">\(\lambda\)</span>: L2 regularization (Ridge penalty) - <span class="math inline">\(\alpha\)</span>: L1 regularization (Lasso penalty) - <span class="math inline">\(\gamma\)</span>: cost for adding a new leaf (controls tree growth)</p>
-<section id="understanding-them-via-ridge-lasso-and-elasticnet-you-learned-in-stat303-2" class="level4" data-number="10.7.8.1">
-<h4 data-number="10.7.8.1" class="anchored" data-anchor-id="understanding-them-via-ridge-lasso-and-elasticnet-you-learned-in-stat303-2"><span class="header-section-number">10.7.8.1</span> Understanding them via Ridge, Lasso, and ElasticNet you learned in STAT303-2</h4>
+<p><strong>Understanding them via Ridge, Lasso, and ElasticNet you learned in STAT303-2</strong></p>
 <p>Just like Ridge/Lasso regularization helps linear models generalize better, <code>reg_lambda</code> and <code>reg_alpha</code> help XGBoost prevent overfitting by controlling how complex the trees become through leaf weight penalties.</p>
 <ul>
 <li><code>reg_alpha</code> = 0 → <strong>No L1 penalty</strong>, behaves like Ridge (only L2 used)</li>
@@ -1399,7 +1390,7 @@ R² Score: 0.9620</code></pre>
 </tr>
 </tbody>
 </table>
-<div id="7ad7f33e" class="cell" data-execution_count="29">
+<div id="7ad7f33e" class="cell" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ===== 3. Regularization Experiments: tuning reg_lambda and reg_alpha =====</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">===== Exploring Regularization Parameters: reg_lambda and reg_alpha ====="</span>)</span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1410,64 +1401,63 @@ R² Score: 0.9620</code></pre>
 <span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a new pipeline for the regularization experiment</span></span>
-<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>regularization_pipeline <span class="op">=</span> Pipeline([</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>regularization_lambda_alpha_pipeline <span class="op">=</span> Pipeline([</span>
 <span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>    (<span class="st">'preprocessor'</span>, preprocessor),</span>
 <span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>    (<span class="st">'regressor'</span>, XGBRegressor(random_state<span class="op">=</span><span class="dv">42</span>, n_estimators<span class="op">=</span>early_stop_model.best_iteration))</span>
 <span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>])</span>
 <span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Perform grid search with cross-validation</span></span>
-<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>grid_search_reg <span class="op">=</span> GridSearchCV(</span>
-<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>    regularization_pipeline,</span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>grid_search_lambda_alpha_reg <span class="op">=</span> GridSearchCV(</span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>    regularization_lambda_alpha_pipeline,</span>
 <span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>    param_grid_reg,</span>
-<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a>    cv<span class="op">=</span><span class="dv">5</span>,</span>
-<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a>    scoring<span class="op">=</span><span class="st">'neg_mean_squared_error'</span>,</span>
-<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a>    n_jobs<span class="op">=-</span><span class="dv">1</span></span>
-<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a>grid_search_reg.fit(X_train, y_train)</span>
-<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Best Parameters from Regularization Experiment:"</span>)</span>
-<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(grid_search_reg.best_params_)</span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a>    scoring<span class="op">=</span><span class="st">'neg_mean_squared_error'</span>,</span>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a>    n_jobs<span class="op">=-</span><span class="dv">1</span></span>
+<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a>grid_search_lambda_alpha_reg.fit(X_train, y_train)</span>
+<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Best Parameters from Lambda and Alpha Regularization Tuning:"</span>)</span>
+<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(grid_search_lambda_alpha_reg.best_params_)</span>
+<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Best Cross-Validation RMSE: </span><span class="sc">{:.2f}</span><span class="st">"</span>.<span class="bu">format</span>(np.sqrt(<span class="op">-</span>grid_search_lambda_alpha_reg.best_score_)))</span>
 <span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-28"><a href="#cb16-28" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Best Cross-Validation RMSE: </span><span class="sc">{:.2f}</span><span class="st">"</span>.<span class="bu">format</span>(np.sqrt(<span class="op">-</span>grid_search_reg.best_score_)))</span>
-<span id="cb16-29"><a href="#cb16-29" aria-hidden="true" tabindex="-1"></a><span class="co"># Evaluate the best model from grid search</span></span>
-<span id="cb16-30"><a href="#cb16-30" aria-hidden="true" tabindex="-1"></a>best_model_reg <span class="op">=</span> grid_search_reg.best_estimator_</span>
-<span id="cb16-31"><a href="#cb16-31" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Regularization Model Evaluation:"</span>)</span>
-<span id="cb16-32"><a href="#cb16-32" aria-hidden="true" tabindex="-1"></a>regularization_metrics_reg <span class="op">=</span> evaluate_model(best_model_reg, X_test, y_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb16-28"><a href="#cb16-28" aria-hidden="true" tabindex="-1"></a><span class="co"># Evaluate the best model from grid search</span></span>
+<span id="cb16-29"><a href="#cb16-29" aria-hidden="true" tabindex="-1"></a>best_lambda_alpha_model <span class="op">=</span> grid_search_lambda_alpha_reg.best_estimator_</span>
+<span id="cb16-30"><a href="#cb16-30" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Test Set Evaluation for Best Regularization Model (λ and α):"</span>)</span>
+<span id="cb16-31"><a href="#cb16-31" aria-hidden="true" tabindex="-1"></a>regularization_metrics_reg <span class="op">=</span> evaluate_model(best_lambda_alpha_model, X_test, y_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 ===== Exploring Regularization Parameters: reg_lambda and reg_alpha =====
 
-Best Parameters from Regularization Experiment:
+Best Parameters from Lambda and Alpha Regularization Tuning:
 {'regressor__reg_alpha': 1, 'regressor__reg_lambda': 0}
-Best Cross-Validation RMSE: 3372.28
+Best Cross-Validation RMSE: 3361.75
 
-Regularization Model Evaluation:
-Root Mean Squared Error: 3419.93
-R² Score: 0.9601</code></pre>
+Test Set Evaluation for Best Regularization Model (λ and α):
+Root Mean Squared Error: 3551.09
+R² Score: 0.9570</code></pre>
 </div>
 </div>
-<div id="059b4242" class="cell" data-execution_count="32">
+<div id="059b4242" class="cell" data-execution_count="18">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract reg_lambda and reg_alpha values and corresponding mean CV RMSE</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>reg_lambda_values <span class="op">=</span> grid_search_reg.cv_results_[<span class="st">'param_regressor__reg_lambda'</span>].data</span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>reg_alpha_values <span class="op">=</span> grid_search_reg.cv_results_[<span class="st">'param_regressor__reg_alpha'</span>].data</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>reg_lambda_values <span class="op">=</span> grid_search_lambda_alpha_reg.cv_results_[<span class="st">'param_regressor__reg_lambda'</span>].data</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>reg_alpha_values <span class="op">=</span> grid_search_lambda_alpha_reg.cv_results_[<span class="st">'param_regressor__reg_alpha'</span>].data</span>
 <span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert mean test scores to RMSE, rounding to 2 decimal places</span></span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>mean_rmse_scores_reg <span class="op">=</span> np.sqrt(<span class="op">-</span>grid_search_reg.cv_results_[<span class="st">'mean_test_score'</span>])</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>mean_rmse_scores_reg <span class="op">=</span> np.sqrt(<span class="op">-</span>grid_search_lambda_alpha_reg.cv_results_[<span class="st">'mean_test_score'</span>])</span>
 <span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Round the RMSE scores to 2 decimal places</span></span>
 <span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>mean_rmse_scores_reg <span class="op">=</span> np.<span class="bu">round</span>(mean_rmse_scores_reg, <span class="dv">4</span>)</span>
 <span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a DataFrame for easier plotting</span></span>
-<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>reg_results_df <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>reg_lambda_alpha_results_df <span class="op">=</span> pd.DataFrame({</span>
 <span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">'reg_lambda'</span>: reg_lambda_values,</span>
 <span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">'reg_alpha'</span>: reg_alpha_values,</span>
 <span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">'mean_rmse'</span>: mean_rmse_scores_reg</span>
 <span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>})</span>
 <span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Pivot the DataFrame for heatmap</span></span>
-<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a>reg_pivot_df <span class="op">=</span> reg_results_df.pivot(index<span class="op">=</span><span class="st">'reg_lambda'</span>, columns<span class="op">=</span><span class="st">'reg_alpha'</span>, values<span class="op">=</span><span class="st">'mean_rmse'</span>)</span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a>regreg_lambda_alpha_results_df_pivot_df <span class="op">=</span> reg_lambda_alpha_results_df.pivot(index<span class="op">=</span><span class="st">'reg_lambda'</span>, columns<span class="op">=</span><span class="st">'reg_alpha'</span>, values<span class="op">=</span><span class="st">'mean_rmse'</span>)</span>
 <span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Plotting the heatmap</span></span>
 <span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
-<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a>sns.heatmap(reg_pivot_df, annot<span class="op">=</span><span class="va">True</span>, fmt<span class="op">=</span><span class="st">".2f"</span>, cmap<span class="op">=</span><span class="st">'viridis'</span>, cbar_kws<span class="op">=</span>{<span class="st">'label'</span>: <span class="st">'CV RMSE'</span>})</span>
+<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a>sns.heatmap(regreg_lambda_alpha_results_df_pivot_df, annot<span class="op">=</span><span class="va">True</span>, fmt<span class="op">=</span><span class="st">".2f"</span>, cmap<span class="op">=</span><span class="st">'viridis'</span>, cbar_kws<span class="op">=</span>{<span class="st">'label'</span>: <span class="st">'CV RMSE'</span>})</span>
 <span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Effect of reg_lambda and reg_alpha on XGBoost Performance'</span>, fontsize<span class="op">=</span><span class="dv">14</span>)</span>
 <span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'reg_alpha'</span>, fontsize<span class="op">=</span><span class="dv">12</span>)</span>
 <span id="cb18-25"><a href="#cb18-25" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'reg_lambda'</span>, fontsize<span class="op">=</span><span class="dv">12</span>)</span>
@@ -1481,15 +1471,14 @@ R² Score: 0.9601</code></pre>
 </div>
 </div>
 </section>
-</section>
-<section id="exploring-regularization-parameters-simultaneously" class="level3" data-number="10.7.9">
-<h3 data-number="10.7.9" class="anchored" data-anchor-id="exploring-regularization-parameters-simultaneously"><span class="header-section-number">10.7.9</span> Exploring Regularization Parameters Simultaneously</h3>
+<section id="exploring-regularization-hyperparameters-simultaneously" class="level3" data-number="10.7.9">
+<h3 data-number="10.7.9" class="anchored" data-anchor-id="exploring-regularization-hyperparameters-simultaneously"><span class="header-section-number">10.7.9</span> Exploring Regularization Hyperparameters Simultaneously</h3>
 <p>In addition to <code>gamma</code>, <code>reg_lambda</code>, and <code>reg_alpha</code>, the parameters <code>max_depth</code> and <code>min_child_weight</code> also control the complexity of XGBoost models. These parameters behave similarly to how they work in other tree-based models.</p>
 <p>Rather than tuning them in isolation, it’s important to recognize that these parameters <strong>interact</strong> with one another. In the next step, we will tune them <strong>simultaneously</strong> to better capture their combined effect on model performance.</p>
-<div id="886b8c9d" class="cell" data-execution_count="38">
+<div id="886b8c9d" class="cell" data-execution_count="19">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ===== 3. Regularization Experiments =====</span></span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">===== Exploring Regularization Parameters ====="</span>)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ===== 3. Regularization Experiments: Simultaneous Exploration  =====</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">===== Exploring Regularization Parameters Simultaneously ====="</span>)</span>
 <span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Define regularization parameters to test</span></span>
 <span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>reg_params <span class="op">=</span> [</span>
 <span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>    {<span class="st">'regressor__max_depth'</span>: <span class="dv">3</span>, <span class="st">'regressor__min_child_weight'</span>: <span class="dv">1</span>, <span class="st">'regressor__gamma'</span>: <span class="dv">0</span>, </span>
@@ -1544,56 +1533,78 @@ R² Score: 0.9601</code></pre>
 <span id="cb19-55"><a href="#cb19-55" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Best RMSE: </span><span class="sc">{:.2f}</span><span class="st">"</span>.<span class="bu">format</span>(reg_df[<span class="st">'rmse'</span>].<span class="bu">min</span>()))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
-===== Exploring Regularization Parameters =====
+===== Exploring Regularization Parameters Simultaneously =====
 
 Regularization Test 1:
 {'regressor__max_depth': 3, 'regressor__min_child_weight': 1, 'regressor__gamma': 0, 'regressor__reg_alpha': 0, 'regressor__reg_lambda': 1}
 
 Model Evaluation:
-Root Mean Squared Error: 3884.82
-R² Score: 0.9486
+Root Mean Squared Error: 3774.48
+R² Score: 0.9514
 
 Regularization Test 2:
 {'regressor__max_depth': 3, 'regressor__min_child_weight': 1, 'regressor__gamma': 0, 'regressor__reg_alpha': 1, 'regressor__reg_lambda': 1}
 
 Model Evaluation:
-Root Mean Squared Error: 3884.82
-R² Score: 0.9486
+Root Mean Squared Error: 3774.48
+R² Score: 0.9514
 
 Regularization Test 3:
 {'regressor__max_depth': 5, 'regressor__min_child_weight': 3, 'regressor__gamma': 0.1, 'regressor__reg_alpha': 0, 'regressor__reg_lambda': 1}
 
 Model Evaluation:
-Root Mean Squared Error: 3342.40
-R² Score: 0.9619
+Root Mean Squared Error: 3334.18
+R² Score: 0.9621
 
 Regularization Test 4:
 {'regressor__max_depth': 5, 'regressor__min_child_weight': 3, 'regressor__gamma': 0.1, 'regressor__reg_alpha': 1, 'regressor__reg_lambda': 5}
 
 Model Evaluation:
-Root Mean Squared Error: 3388.26
-R² Score: 0.9609
+Root Mean Squared Error: 3298.88
+R² Score: 0.9629
 
 Regularization Test 5:
 {'regressor__max_depth': 7, 'regressor__min_child_weight': 1, 'regressor__gamma': 0.2, 'regressor__reg_alpha': 5, 'regressor__reg_lambda': 10}
 
 Model Evaluation:
-Root Mean Squared Error: 3208.87
-R² Score: 0.9649
+Root Mean Squared Error: 3222.51
+R² Score: 0.9646
 
 Best Regularization Parameters:
 {'regressor__max_depth': 7, 'regressor__min_child_weight': 1, 'regressor__gamma': 0.2, 'regressor__reg_alpha': 5, 'regressor__reg_lambda': 10}
-Best RMSE: 3208.87</code></pre>
+Best RMSE: 3222.51</code></pre>
 </div>
 </div>
 </section>
 <section id="comprehensive-hyperparameter-tuning" class="level3" data-number="10.7.10">
 <h3 data-number="10.7.10" class="anchored" data-anchor-id="comprehensive-hyperparameter-tuning"><span class="header-section-number">10.7.10</span> Comprehensive Hyperparameter Tuning</h3>
-<section id="gridsearchcv" class="level4" data-number="10.7.10.1">
-<h4 data-number="10.7.10.1" class="anchored" data-anchor-id="gridsearchcv"><span class="header-section-number">10.7.10.1</span> <code>GridSearchCV</code></h4>
-<div id="e1c4ac31" class="cell" data-execution_count="54">
+<p>In this step, we expand our search to include a broader set of influential hyperparameters that govern both <strong>model complexity</strong> and <strong>regularization strength</strong> in XGBoost. These include:</p>
+<ul>
+<li><strong><code>learning_rate</code></strong>: Controls the contribution of each tree in the ensemble.</li>
+<li><strong><code>max_depth</code></strong> and <strong><code>min_child_weight</code></strong>: Control tree complexity and can help prevent overfitting.</li>
+<li><strong><code>gamma</code></strong>: Adds regularization by requiring a minimum loss reduction for a split.</li>
+<li><strong><code>subsample</code></strong> and <strong><code>colsample_bytree</code></strong>: Introduce stochasticity to reduce overfitting by sampling rows and features, respectively.</li>
+<li><strong><code>reg_alpha</code></strong> (L1 regularization) and <strong><code>reg_lambda</code></strong> (L2 regularization): Add penalties to leaf weights to shrink overly complex trees.</li>
+</ul>
+<p>Rather than optimizing these parameters independently, we will <strong>tune them together</strong> using a grid search to capture the complex interactions between them. This comprehensive search aims to identify a well-balanced model that generalizes well to unseen data.</p>
+<p>This comprehensive tuning process helps us identify the most effective combination of hyperparameters for maximizing predictive performance while minimizing overfitting.</p>
+<section id="why-gridsearchcv-is-not-a-practical-option" class="level4" data-number="10.7.10.1">
+<h4 data-number="10.7.10.1" class="anchored" data-anchor-id="why-gridsearchcv-is-not-a-practical-option"><span class="header-section-number">10.7.10.1</span> Why <code>GridSearchCV</code> Is Not a Practical Option</h4>
+<p>While <code>GridSearchCV</code> is a straightforward and exhaustive approach, it can be <strong>extremely time-consuming</strong>, especially when tuning many hyperparameters over multiple values. In our case, the parameter grid includes:</p>
+<ul>
+<li>3 values for <code>learning_rate</code></li>
+<li>3 values for <code>max_depth</code></li>
+<li>3 values for <code>min_child_weight</code></li>
+<li>3 values for <code>gamma</code></li>
+<li>3 values each for <code>subsample</code> and <code>colsample_bytree</code></li>
+<li>3 values for <code>reg_alpha</code></li>
+<li>3 values for <code>reg_lambda</code></li>
+</ul>
+<p>This results in a <strong>total of 3⁸ = 6,561 combinations</strong>. With 3-fold cross-validation, this would involve training and evaluating <strong>over 19,000 models</strong>, making it <strong>computationally expensive and inefficient</strong>.</p>
+<p>The code is included below if you’re curious to try it out — just <strong>uncomment the <code>.fit()</code> line</strong> to experience how long it takes.</p>
+<div id="e1c4ac31" class="cell">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ===== 4. Comprehensive Hyperparameter Tuning =====</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">===== Comprehensive Hyperparameter Tuning ====="</span>)</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">===== Comprehensive Hyperparameter Tuning Using GridSearchCV====="</span>)</span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Define hyperparameter grid</span></span>
 <span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>param_grid <span class="op">=</span> {</span>
 <span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">'regressor__learning_rate'</span>: [<span class="fl">0.01</span>, <span class="fl">0.05</span>, <span class="fl">0.1</span>],</span>
@@ -1632,8 +1643,29 @@ Best RMSE: 3208.87</code></pre>
 ===== Comprehensive Hyperparameter Tuning =====</code></pre>
 </div>
 </div>
-<p>Instead of using <code>GridSearchCV</code>, let’s use <strong>Optuna</strong> or <strong>BayesSearchCV</strong> to perform smarter hyperparameter optimization using Bayesian methods, which can converge to better results with fewer evaluations.</p>
-<div id="050d7a0d" class="cell" data-execution_count="40">
+</section>
+<section id="smarter-tuning-with-optuna-or-bayessearchcv" class="level4" data-number="10.7.10.2">
+<h4 data-number="10.7.10.2" class="anchored" data-anchor-id="smarter-tuning-with-optuna-or-bayessearchcv"><span class="header-section-number">10.7.10.2</span> Smarter Tuning with Optuna or BayesSearchCV</h4>
+<p>Instead of exhaustively evaluating every combination like <code>GridSearchCV</code>, we can use smarter search strategies like:</p>
+<ul>
+<li><p><strong>Optuna</strong>: A powerful hyperparameter optimization framework that uses <strong>Tree-structured Parzen Estimators (TPE)</strong> to efficiently explore the search space. It dynamically chooses the next set of hyperparameters to try based on past performance.</p></li>
+<li><p><strong>BayesSearchCV</strong> (from <code>scikit-optimize</code>): Implements <strong>Bayesian optimization</strong>, which builds a probabilistic model of the objective function and selects the most promising hyperparameters to try next.</p></li>
+</ul>
+<p>These methods are: - <strong>More efficient</strong>: They converge to good solutions with far fewer iterations. - <strong>Flexible</strong>: They support conditional hyperparameter tuning. - <strong>Scalable</strong>: Much better suited for high-dimensional or expensive-to-evaluate models.</p>
+<p>In summary, we commented out the grid search due to its high cost and instead favor more <strong>intelligent, efficient</strong> hyperparameter search methods like <code>Optuna</code> or <code>BayesSearchCV</code> for practical use.</p>
+<section id="bayessearchcv-from-skopt" class="level5" data-number="10.7.10.2.1">
+<h5 data-number="10.7.10.2.1" class="anchored" data-anchor-id="bayessearchcv-from-skopt"><span class="header-section-number">10.7.10.2.1</span> <code>BayesSearchCV</code> (from <code>skopt</code>)</h5>
+<p>You define the search space using a dictionary where:</p>
+<ul>
+<li>For pipelines and scikit-learn integration, <code>BayesSearchCV</code> is simpler</li>
+<li>Keys are hyperparameter names (matching pipeline step names like <code>'regressor__max_depth'</code>)</li>
+<li>Values are distributions or discrete ranges from <code>skopt.space</code></li>
+</ul>
+<blockquote class="blockquote">
+<p>🔹 <strong>Key Tip</strong>: Use <code>Real(..., prior='log-uniform')</code> for parameters like <code>learning_rate</code>, which benefit from exploring small values on a <strong>logarithmic scale</strong>.<br>
+This helps the search algorithm better identify optimal values in ranges where performance is sensitive to small changes (e.g., between 0.01 and 0.1).</p>
+</blockquote>
+<div id="050d7a0d" class="cell">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># define the search space for Bayesian optimization</span></span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>search_space <span class="op">=</span> {</span>
@@ -1659,11 +1691,11 @@ Best RMSE: 3208.87</code></pre>
 <span id="cb23-23"><a href="#cb23-23" aria-hidden="true" tabindex="-1"></a>bayes_search <span class="op">=</span> BayesSearchCV(</span>
 <span id="cb23-24"><a href="#cb23-24" aria-hidden="true" tabindex="-1"></a>    bayes_pipeline,</span>
 <span id="cb23-25"><a href="#cb23-25" aria-hidden="true" tabindex="-1"></a>    search_space,</span>
-<span id="cb23-26"><a href="#cb23-26" aria-hidden="true" tabindex="-1"></a>    n_iter<span class="op">=</span><span class="dv">50</span>,  <span class="co"># Number of iterations for Bayesian optimization</span></span>
-<span id="cb23-27"><a href="#cb23-27" aria-hidden="true" tabindex="-1"></a>    cv<span class="op">=</span><span class="dv">3</span>,</span>
+<span id="cb23-26"><a href="#cb23-26" aria-hidden="true" tabindex="-1"></a>    cv<span class="op">=</span><span class="dv">3</span>,</span>
+<span id="cb23-27"><a href="#cb23-27" aria-hidden="true" tabindex="-1"></a>    n_iter<span class="op">=</span><span class="dv">50</span>,  <span class="co"># Number of iterations for Bayesian optimization</span></span>
 <span id="cb23-28"><a href="#cb23-28" aria-hidden="true" tabindex="-1"></a>    scoring<span class="op">=</span><span class="st">'neg_root_mean_squared_error'</span>,</span>
 <span id="cb23-29"><a href="#cb23-29" aria-hidden="true" tabindex="-1"></a>    n_jobs<span class="op">=-</span><span class="dv">1</span>,</span>
-<span id="cb23-30"><a href="#cb23-30" aria-hidden="true" tabindex="-1"></a>    verbose<span class="op">=</span><span class="dv">1</span></span>
+<span id="cb23-30"><a href="#cb23-30" aria-hidden="true" tabindex="-1"></a>    verbose<span class="op">=</span><span class="dv">0</span></span>
 <span id="cb23-31"><a href="#cb23-31" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb23-32"><a href="#cb23-32" aria-hidden="true" tabindex="-1"></a><span class="co"># Perform Bayesian optimization</span></span>
 <span id="cb23-33"><a href="#cb23-33" aria-hidden="true" tabindex="-1"></a>bayes_search.fit(X_train, y_train)</span>
@@ -1729,41 +1761,33 @@ Fitting 3 folds for each of 1 candidates, totalling 3 fits
 Fitting 3 folds for each of 1 candidates, totalling 3 fits
 
 Best Parameters from Bayesian Optimization:
-OrderedDict({'regressor__colsample_bytree': 0.5473131812035728, 'regressor__gamma': 0.2, 'regressor__learning_rate': 0.18486929627094925, 'regressor__max_depth': 7, 'regressor__min_child_weight': 1, 'regressor__reg_alpha': 2.5293667330208764, 'regressor__reg_lambda': 8.611900885732258, 'regressor__subsample': 0.8611909473100519})
-Best Cross-Validation RMSE: 3284.17
+OrderedDict({'regressor__colsample_bytree': 0.6350099974437949, 'regressor__gamma': 0.0, 'regressor__learning_rate': 0.15012576802968475, 'regressor__max_depth': 7, 'regressor__min_child_weight': 1, 'regressor__reg_alpha': 5.0, 'regressor__reg_lambda': 9.330007518126198, 'regressor__subsample': 0.77576084288087})
+Best Cross-Validation RMSE: 3212.04
 
 Bayesian Optimization Model Evaluation:
-Root Mean Squared Error: 3171.68
-R² Score: 0.9657</code></pre>
+Root Mean Squared Error: 3083.10
+R² Score: 0.9676</code></pre>
 </div>
 </div>
-<div id="8077dfc8" class="cell" data-execution_count="47">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the final model with the best parameters</span></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>final_pipeline <span class="op">=</span> Pipeline([</span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>    (<span class="st">'preprocessor'</span>, preprocessor),</span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>    (<span class="st">'regressor'</span>, XGBRegressor(</span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>        random_state<span class="op">=</span><span class="dv">42</span>,</span>
-<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>        n_estimators<span class="op">=</span>early_stop_model.best_iteration,</span>
-<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>        <span class="op">**</span>{k.replace(<span class="st">'regressor__'</span>, <span class="st">''</span>): v <span class="cf">for</span> k, v <span class="kw">in</span> bayes_search.best_params_.items()}</span>
-<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>    ))</span>
-<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>])</span>
-<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Train the final model</span></span>
-<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>final_pipeline.fit(X_train, y_train)</span>
-<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Evaluate final model</span></span>
-<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Final Model Evaluation:"</span>)</span>
-<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a>final_metrics <span class="op">=</span> evaluate_model(final_pipeline, X_test, y_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-Final Model Evaluation:
-Root Mean Squared Error: 3171.68
-R² Score: 0.9657</code></pre>
+<p>Let’s visualize the search results</p>
+<div id="3ac66ba5" class="cell" data-execution_count="22">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plot convergence</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>plot_convergence(bayes_search.optimizer_results_)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="XGBoost_files/figure-html/cell-16-output-1.png" class="img-fluid figure-img"></p>
+</figure>
 </div>
 </div>
-<div id="3ac66ba5" class="cell" data-execution_count="43">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plot convergence</span></span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>plot_convergence(bayes_search.optimizer_results_)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="205aaa63" class="cell" data-execution_count="23">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the objective function</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>plot_objective(bayes_search.optimizer_results_[<span class="dv">0</span>])</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Bayesian Optimization: Objective Function'</span>)</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Parameter Value'</span>)</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Objective Value (RMSE)'</span>)</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -1772,22 +1796,34 @@ R² Score: 0.9657</code></pre>
 </div>
 </div>
 </div>
-<div id="205aaa63" class="cell" data-execution_count="45">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the objective function</span></span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>plot_objective(bayes_search.optimizer_results_[<span class="dv">0</span>])</span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Bayesian Optimization: Objective Function'</span>)</span>
-<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Parameter Value'</span>)</span>
-<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Objective Value (RMSE)'</span>)</span>
-<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="XGBoost_files/figure-html/cell-18-output-1.png" class="img-fluid figure-img"></p>
-</figure>
+<div id="f4e91ec1" class="cell" data-execution_count="32">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the final model with the best hyperparameters</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">===== Final Model with Best Hyperparameters ====="</span>)</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>final_pipeline <span class="op">=</span> Pipeline([</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>    (<span class="st">'preprocessor'</span>, preprocessor),</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>    (<span class="st">'regressor'</span>, XGBRegressor(</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>        random_state<span class="op">=</span><span class="dv">42</span>,</span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>        n_estimators<span class="op">=</span>early_stop_model.best_iteration,</span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>        <span class="op">**</span>{k.replace(<span class="st">'regressor__'</span>, <span class="st">''</span>): v <span class="cf">for</span> k, v <span class="kw">in</span> bayes_search.best_params_.items()}</span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>    ))</span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>])</span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Train the final model</span></span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a>final_pipeline.fit(X_train, y_train)</span>
+<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Evaluate final model</span></span>
+<span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Final Model Evaluation:"</span>)</span>
+<span id="cb27-17"><a href="#cb27-17" aria-hidden="true" tabindex="-1"></a>final_metrics <span class="op">=</span> evaluate_model(final_pipeline, X_test, y_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+===== Final Model with Best Hyperparameters =====
+
+Final Model Evaluation:
+Root Mean Squared Error: 3083.10
+R² Score: 0.9676</code></pre>
 </div>
 </div>
-</div>
-<div id="45892e6e" class="cell" data-execution_count="53">
+<div id="45892e6e" class="cell" data-execution_count="24">
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Display actual vs predicted values for the final model</span></span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>y_pred <span class="op">=</span> final_pipeline.predict(X_test)</span>
 <span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
@@ -1806,13 +1842,13 @@ R² Score: 0.9657</code></pre>
 </div>
 </div>
 </div>
-<div id="4a4b5c1e" class="cell" data-execution_count="64">
+<div id="4a4b5c1e" class="cell" data-execution_count="25">
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># output the feature importance for the final model</span></span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>final_importance <span class="op">=</span> plot_feature_importance(final_pipeline.named_steps[<span class="st">'regressor'</span>], </span>
 <span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>                                             final_pipeline.named_steps[<span class="st">'preprocessor'</span>], </span>
 <span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>                                             X)</span>
 <span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>final_importance</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="64">
+<div class="cell-output cell-output-display" data-execution_count="25">
 <div>
 
 
@@ -1827,103 +1863,103 @@ R² Score: 0.9657</code></pre>
 <tbody>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">0</td>
-<td>engineSize</td>
-<td>0.077682</td>
+<td>model_ I800</td>
+<td>0.109385</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">1</td>
-<td>model_ I800</td>
-<td>0.076378</td>
+<td>engineSize</td>
+<td>0.085000</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">2</td>
 <td>transmission_Manual</td>
-<td>0.064949</td>
+<td>0.080872</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">3</td>
-<td>brand_ford</td>
-<td>0.062391</td>
+<td>brand_hyundi</td>
+<td>0.045237</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">4</td>
-<td>model_ S Class</td>
-<td>0.043893</td>
+<td>brand_vw</td>
+<td>0.041919</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">5</td>
-<td>brand_vw</td>
-<td>0.041013</td>
+<td>brand_ford</td>
+<td>0.038523</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">6</td>
-<td>model_ Hilux</td>
-<td>0.039502</td>
+<td>model_ Mustang</td>
+<td>0.031646</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">7</td>
-<td>brand_hyundi</td>
-<td>0.035647</td>
+<td>model_ i8</td>
+<td>0.030787</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">8</td>
 <td>brand_bmw</td>
-<td>0.033629</td>
+<td>0.029788</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">9</td>
-<td>model_ X7</td>
-<td>0.031765</td>
+<td>year</td>
+<td>0.025983</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">10</td>
-<td>brand_skoda</td>
-<td>0.030716</td>
+<td>brand_merc</td>
+<td>0.024978</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">11</td>
-<td>brand_audi</td>
-<td>0.029041</td>
+<td>model_ R8</td>
+<td>0.024132</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">12</td>
-<td>model_ R8</td>
-<td>0.028828</td>
+<td>model_ S Class</td>
+<td>0.024024</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">13</td>
-<td>year</td>
-<td>0.026020</td>
+<td>brand_audi</td>
+<td>0.019605</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">14</td>
-<td>brand_merc</td>
-<td>0.023711</td>
+<td>model_ X7</td>
+<td>0.019070</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">15</td>
 <td>model_ V Class</td>
-<td>0.015492</td>
+<td>0.014943</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">16</td>
-<td>fuelType_Hybrid</td>
-<td>0.013138</td>
+<td>model_ X-CLASS</td>
+<td>0.013910</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">17</td>
-<td>mpg</td>
-<td>0.013093</td>
+<td>brand_toyota</td>
+<td>0.013511</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">18</td>
-<td>model_ G Class</td>
-<td>0.012419</td>
+<td>mpg</td>
+<td>0.012854</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">19</td>
-<td>model_ Mustang</td>
-<td>0.011950</td>
+<td>model_ X4</td>
+<td>0.011403</td>
 </tr>
 </tbody>
 </table>
@@ -1931,6 +1967,158 @@ R² Score: 0.9657</code></pre>
 </div>
 </div>
 </div>
+</section>
+</section>
+<section id="tuning-with-optuna" class="level4" data-number="10.7.10.3">
+<h4 data-number="10.7.10.3" class="anchored" data-anchor-id="tuning-with-optuna"><span class="header-section-number">10.7.10.3</span> Tuning with Optuna</h4>
+<p>With Optuna, you define the search space inside an objective function using trial suggestions:</p>
+<div id="0887d5d0" class="cell" data-execution_count="27">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> optuna</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> cross_val_score</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the objective function for Optuna</span></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> objective(trial):</span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Suggest hyperparameters</span></span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>    params <span class="op">=</span> {</span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>        <span class="st">'learning_rate'</span>: trial.suggest_float(<span class="st">'learning_rate'</span>, <span class="fl">0.01</span>, <span class="fl">0.5</span>),</span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>        <span class="st">'max_depth'</span>: trial.suggest_int(<span class="st">'max_depth'</span>, <span class="dv">3</span>, <span class="dv">7</span>),</span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>        <span class="st">'min_child_weight'</span>: trial.suggest_int(<span class="st">'min_child_weight'</span>, <span class="dv">1</span>, <span class="dv">5</span>),</span>
+<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a>        <span class="st">'gamma'</span>: trial.suggest_float(<span class="st">'gamma'</span>, <span class="dv">0</span>, <span class="fl">0.2</span>),</span>
+<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a>        <span class="st">'subsample'</span>: trial.suggest_float(<span class="st">'subsample'</span>, <span class="fl">0.5</span>, <span class="fl">1.0</span>),</span>
+<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a>        <span class="st">'colsample_bytree'</span>: trial.suggest_float(<span class="st">'colsample_bytree'</span>, <span class="fl">0.5</span>, <span class="fl">1.0</span>),</span>
+<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a>        <span class="st">'reg_alpha'</span>: trial.suggest_float(<span class="st">'reg_alpha'</span>, <span class="dv">0</span>, <span class="dv">5</span>),</span>
+<span id="cb31-14"><a href="#cb31-14" aria-hidden="true" tabindex="-1"></a>        <span class="st">'reg_lambda'</span>: trial.suggest_float(<span class="st">'reg_lambda'</span>, <span class="dv">1</span>, <span class="dv">10</span>),</span>
+<span id="cb31-15"><a href="#cb31-15" aria-hidden="true" tabindex="-1"></a>        <span class="st">'random_state'</span>: <span class="dv">42</span>,</span>
+<span id="cb31-16"><a href="#cb31-16" aria-hidden="true" tabindex="-1"></a>        <span class="st">'n_estimators'</span>: <span class="dv">1000</span></span>
+<span id="cb31-17"><a href="#cb31-17" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb31-18"><a href="#cb31-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-19"><a href="#cb31-19" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Define the model</span></span>
+<span id="cb31-20"><a href="#cb31-20" aria-hidden="true" tabindex="-1"></a>    model <span class="op">=</span> XGBRegressor(<span class="op">**</span>params)</span>
+<span id="cb31-21"><a href="#cb31-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-22"><a href="#cb31-22" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Optionally: wrap in pipeline if preprocessing is needed</span></span>
+<span id="cb31-23"><a href="#cb31-23" aria-hidden="true" tabindex="-1"></a>    pipeline <span class="op">=</span> Pipeline([</span>
+<span id="cb31-24"><a href="#cb31-24" aria-hidden="true" tabindex="-1"></a>        (<span class="st">'preprocessor'</span>, preprocessor),  <span class="co"># assumed to be defined earlier</span></span>
+<span id="cb31-25"><a href="#cb31-25" aria-hidden="true" tabindex="-1"></a>        (<span class="st">'regressor'</span>, model)</span>
+<span id="cb31-26"><a href="#cb31-26" aria-hidden="true" tabindex="-1"></a>    ])</span>
+<span id="cb31-27"><a href="#cb31-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-28"><a href="#cb31-28" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Evaluate with cross-validation</span></span>
+<span id="cb31-29"><a href="#cb31-29" aria-hidden="true" tabindex="-1"></a>    score <span class="op">=</span> cross_val_score(pipeline, X_train, y_train, cv<span class="op">=</span><span class="dv">3</span>, scoring<span class="op">=</span><span class="st">'neg_root_mean_squared_error'</span>).mean()</span>
+<span id="cb31-30"><a href="#cb31-30" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> score  <span class="co"># Maximize negative RMSE (i.e., minimize RMSE)</span></span>
+<span id="cb31-31"><a href="#cb31-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-32"><a href="#cb31-32" aria-hidden="true" tabindex="-1"></a><span class="co"># Run the Optuna study</span></span>
+<span id="cb31-33"><a href="#cb31-33" aria-hidden="true" tabindex="-1"></a>study <span class="op">=</span> optuna.create_study(direction<span class="op">=</span><span class="st">'maximize'</span>)  <span class="co"># maximizing negative RMSE</span></span>
+<span id="cb31-34"><a href="#cb31-34" aria-hidden="true" tabindex="-1"></a>study.optimize(objective, n_trials<span class="op">=</span><span class="dv">50</span>, timeout<span class="op">=</span><span class="dv">600</span>)</span>
+<span id="cb31-35"><a href="#cb31-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-36"><a href="#cb31-36" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the best result</span></span>
+<span id="cb31-37"><a href="#cb31-37" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Best trial:"</span>)</span>
+<span id="cb31-38"><a href="#cb31-38" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"  RMSE (CV): </span><span class="sc">{</span><span class="op">-</span>study<span class="sc">.</span>best_value<span class="sc">:.4f}</span><span class="ss">"</span>)</span>
+<span id="cb31-39"><a href="#cb31-39" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"  Best hyperparameters:"</span>)</span>
+<span id="cb31-40"><a href="#cb31-40" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> key, value <span class="kw">in</span> study.best_params.items():</span>
+<span id="cb31-41"><a href="#cb31-41" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"    </span><span class="sc">{</span>key<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>value<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>[I 2025-05-13 11:19:14,931] A new study created in memory with name: no-name-bc3b9566-0dd4-40d2-8bb1-c5b33fb7a560
+[I 2025-05-13 11:19:15,916] Trial 0 finished with value: -3265.123779296875 and parameters: {'learning_rate': 0.45787031964614944, 'max_depth': 3, 'min_child_weight': 4, 'gamma': 0.0946694617339518, 'subsample': 0.7744687281823582, 'colsample_bytree': 0.784667793130764, 'reg_alpha': 3.082791854047468, 'reg_lambda': 9.435016888362387}. Best is trial 0 with value: -3265.123779296875.
+[I 2025-05-13 11:19:17,379] Trial 1 finished with value: -3415.3124186197915 and parameters: {'learning_rate': 0.4415110552719321, 'max_depth': 5, 'min_child_weight': 1, 'gamma': 0.10032416839998025, 'subsample': 0.7561499103141425, 'colsample_bytree': 0.5840775777769043, 'reg_alpha': 1.4441510120815564, 'reg_lambda': 9.904088761378658}. Best is trial 0 with value: -3265.123779296875.
+[I 2025-05-13 11:19:18,613] Trial 2 finished with value: -3478.7412109375 and parameters: {'learning_rate': 0.37474220244838036, 'max_depth': 4, 'min_child_weight': 4, 'gamma': 0.019532894361250386, 'subsample': 0.6968506332800254, 'colsample_bytree': 0.9912681574394773, 'reg_alpha': 0.23969428454848618, 'reg_lambda': 2.317224040627587}. Best is trial 0 with value: -3265.123779296875.
+[I 2025-05-13 11:19:20,246] Trial 3 finished with value: -3402.739013671875 and parameters: {'learning_rate': 0.21658367907632023, 'max_depth': 5, 'min_child_weight': 5, 'gamma': 0.08959629252099346, 'subsample': 0.8441837408540627, 'colsample_bytree': 0.525374056824549, 'reg_alpha': 0.8438856831308517, 'reg_lambda': 2.602494452485666}. Best is trial 0 with value: -3265.123779296875.
+[I 2025-05-13 11:19:22,646] Trial 4 finished with value: -3418.4733072916665 and parameters: {'learning_rate': 0.28563195630766647, 'max_depth': 7, 'min_child_weight': 2, 'gamma': 0.19421248023883333, 'subsample': 0.5052021408008649, 'colsample_bytree': 0.6063220020678526, 'reg_alpha': 4.8309639825740645, 'reg_lambda': 5.941629056360725}. Best is trial 0 with value: -3265.123779296875.
+[I 2025-05-13 11:19:25,946] Trial 5 finished with value: -3390.3438313802085 and parameters: {'learning_rate': 0.1993792048868041, 'max_depth': 7, 'min_child_weight': 4, 'gamma': 0.07200702183702867, 'subsample': 0.7424143179593181, 'colsample_bytree': 0.5099153981008027, 'reg_alpha': 0.09944843367975853, 'reg_lambda': 7.993720438620532}. Best is trial 0 with value: -3265.123779296875.
+[I 2025-05-13 11:19:27,921] Trial 6 finished with value: -3193.7447102864585 and parameters: {'learning_rate': 0.2013176469442617, 'max_depth': 4, 'min_child_weight': 3, 'gamma': 0.07998101169291996, 'subsample': 0.8458771986884688, 'colsample_bytree': 0.5878291885637893, 'reg_alpha': 1.8786284365007777, 'reg_lambda': 9.659271405927688}. Best is trial 6 with value: -3193.7447102864585.
+[I 2025-05-13 11:19:30,896] Trial 7 finished with value: -3713.1673990885415 and parameters: {'learning_rate': 0.4543095867094573, 'max_depth': 6, 'min_child_weight': 3, 'gamma': 0.026654301598632715, 'subsample': 0.552105370495226, 'colsample_bytree': 0.8692245142949306, 'reg_alpha': 3.5386849377700944, 'reg_lambda': 6.349278624747818}. Best is trial 6 with value: -3193.7447102864585.
+[I 2025-05-13 11:19:33,579] Trial 8 finished with value: -3417.8673502604165 and parameters: {'learning_rate': 0.17094378156548573, 'max_depth': 6, 'min_child_weight': 5, 'gamma': 0.1828684697144225, 'subsample': 0.9981085907064859, 'colsample_bytree': 0.6010326788288057, 'reg_alpha': 1.585011759930084, 'reg_lambda': 2.786465458599838}. Best is trial 6 with value: -3193.7447102864585.
+[I 2025-05-13 11:19:35,696] Trial 9 finished with value: -3149.8365071614585 and parameters: {'learning_rate': 0.0911959255829521, 'max_depth': 4, 'min_child_weight': 2, 'gamma': 0.1557224360668063, 'subsample': 0.8968950383586789, 'colsample_bytree': 0.5370801233154088, 'reg_alpha': 1.005570062680755, 'reg_lambda': 2.856436572812353}. Best is trial 9 with value: -3149.8365071614585.
+[I 2025-05-13 11:19:36,946] Trial 10 finished with value: -3817.2229817708335 and parameters: {'learning_rate': 0.02187641113756089, 'max_depth': 3, 'min_child_weight': 1, 'gamma': 0.14860539296137815, 'subsample': 0.970106059052129, 'colsample_bytree': 0.7221106607029031, 'reg_alpha': 2.5085502912421798, 'reg_lambda': 4.259278893828215}. Best is trial 9 with value: -3149.8365071614585.
+[I 2025-05-13 11:19:38,480] Trial 11 finished with value: -3184.9139811197915 and parameters: {'learning_rate': 0.07782427519036465, 'max_depth': 4, 'min_child_weight': 2, 'gamma': 0.13817636147175175, 'subsample': 0.888398783722563, 'colsample_bytree': 0.712328748231537, 'reg_alpha': 1.724179850670038, 'reg_lambda': 1.011883757663437}. Best is trial 9 with value: -3149.8365071614585.
+[I 2025-05-13 11:19:40,049] Trial 12 finished with value: -3232.3959147135415 and parameters: {'learning_rate': 0.03597028507321471, 'max_depth': 4, 'min_child_weight': 2, 'gamma': 0.14274792935194308, 'subsample': 0.8934722593742505, 'colsample_bytree': 0.7051991161510023, 'reg_alpha': 1.040894221783124, 'reg_lambda': 1.0132806754753094}. Best is trial 9 with value: -3149.8365071614585.
+[I 2025-05-13 11:19:42,179] Trial 13 finished with value: -3219.7106119791665 and parameters: {'learning_rate': 0.10620080053965536, 'max_depth': 4, 'min_child_weight': 2, 'gamma': 0.14847413256789466, 'subsample': 0.9214400576773855, 'colsample_bytree': 0.8227174048095364, 'reg_alpha': 2.4195891864107812, 'reg_lambda': 1.0156348474036805}. Best is trial 9 with value: -3149.8365071614585.
+[I 2025-05-13 11:19:44,046] Trial 14 finished with value: -3174.08447265625 and parameters: {'learning_rate': 0.09953404092004366, 'max_depth': 3, 'min_child_weight': 2, 'gamma': 0.1331972072134003, 'subsample': 0.6325915917300361, 'colsample_bytree': 0.6733762425781319, 'reg_alpha': 0.7822107545639629, 'reg_lambda': 4.223042781169153}. Best is trial 9 with value: -3149.8365071614585.
+[I 2025-05-13 11:19:46,085] Trial 15 finished with value: -3157.53125 and parameters: {'learning_rate': 0.11663569185210965, 'max_depth': 3, 'min_child_weight': 1, 'gamma': 0.11989743344498946, 'subsample': 0.609549887301241, 'colsample_bytree': 0.6601712074366294, 'reg_alpha': 0.5887153589828709, 'reg_lambda': 3.954204442542901}. Best is trial 9 with value: -3149.8365071614585.
+[I 2025-05-13 11:19:47,496] Trial 16 finished with value: -3236.7674153645835 and parameters: {'learning_rate': 0.29934236307959566, 'max_depth': 3, 'min_child_weight': 1, 'gamma': 0.17440823854787102, 'subsample': 0.6146130050755328, 'colsample_bytree': 0.652270815693716, 'reg_alpha': 0.5067423143405709, 'reg_lambda': 4.486277856700453}. Best is trial 9 with value: -3149.8365071614585.
+[I 2025-05-13 11:19:48,603] Trial 17 finished with value: -3164.4545084635415 and parameters: {'learning_rate': 0.12941387943937382, 'max_depth': 3, 'min_child_weight': 1, 'gamma': 0.11633454068600094, 'subsample': 0.6650372977720895, 'colsample_bytree': 0.5428226913583925, 'reg_alpha': 4.34711923979044, 'reg_lambda': 3.385839420355466}. Best is trial 9 with value: -3149.8365071614585.
+[I 2025-05-13 11:19:50,989] Trial 18 finished with value: -3192.5550130208335 and parameters: {'learning_rate': 0.15229302419191748, 'max_depth': 5, 'min_child_weight': 1, 'gamma': 0.05172760711136794, 'subsample': 0.5785104132344555, 'colsample_bytree': 0.6425291507208026, 'reg_alpha': 1.0767662379207814, 'reg_lambda': 6.797327550415558}. Best is trial 9 with value: -3149.8365071614585.
+[I 2025-05-13 11:19:52,504] Trial 19 finished with value: -3243.6614583333335 and parameters: {'learning_rate': 0.05404695090352524, 'max_depth': 4, 'min_child_weight': 3, 'gamma': 0.16755995464472617, 'subsample': 0.8114384828833322, 'colsample_bytree': 0.8898963463518882, 'reg_alpha': 2.3238773337731233, 'reg_lambda': 4.969802205133195}. Best is trial 9 with value: -3149.8365071614585.
+[I 2025-05-13 11:19:55,376] Trial 20 finished with value: -3463.8985188802085 and parameters: {'learning_rate': 0.23980599684742906, 'max_depth': 6, 'min_child_weight': 2, 'gamma': 0.11650135048889207, 'subsample': 0.703954647450681, 'colsample_bytree': 0.7642188979005932, 'reg_alpha': 0.12286140880890667, 'reg_lambda': 3.5522917770485414}. Best is trial 9 with value: -3149.8365071614585.
+[I 2025-05-13 11:19:57,036] Trial 21 finished with value: -3196.36767578125 and parameters: {'learning_rate': 0.11464120828525118, 'max_depth': 3, 'min_child_weight': 1, 'gamma': 0.11560902561349201, 'subsample': 0.6717794130065724, 'colsample_bytree': 0.5410800763585846, 'reg_alpha': 4.972554369770508, 'reg_lambda': 3.4785320190705065}. Best is trial 9 with value: -3149.8365071614585.
+[I 2025-05-13 11:19:59,150] Trial 22 finished with value: -3205.7797037760415 and parameters: {'learning_rate': 0.1443937841126663, 'max_depth': 3, 'min_child_weight': 1, 'gamma': 0.11595858448458532, 'subsample': 0.6281276464364041, 'colsample_bytree': 0.5005236491261023, 'reg_alpha': 4.426991432279094, 'reg_lambda': 3.3837817499496934}. Best is trial 9 with value: -3149.8365071614585.
+[I 2025-05-13 11:20:00,979] Trial 23 finished with value: -3242.5750325520835 and parameters: {'learning_rate': 0.06550962455450035, 'max_depth': 3, 'min_child_weight': 1, 'gamma': 0.16447390520453314, 'subsample': 0.6594444838818366, 'colsample_bytree': 0.5602307643296336, 'reg_alpha': 3.529308889817279, 'reg_lambda': 2.1847582190967714}. Best is trial 9 with value: -3149.8365071614585.
+[I 2025-05-13 11:20:03,197] Trial 24 finished with value: -3202.0048014322915 and parameters: {'learning_rate': 0.13725391392057462, 'max_depth': 4, 'min_child_weight': 2, 'gamma': 0.06252168445987127, 'subsample': 0.5691584268325105, 'colsample_bytree': 0.6321632358883312, 'reg_alpha': 4.014622749640192, 'reg_lambda': 5.371868881413542}. Best is trial 9 with value: -3149.8365071614585.
+[I 2025-05-13 11:20:04,623] Trial 25 finished with value: -4309.048258463542 and parameters: {'learning_rate': 0.010332563386398971, 'max_depth': 3, 'min_child_weight': 1, 'gamma': 0.10702406016456742, 'subsample': 0.5032623839600254, 'colsample_bytree': 0.5566879998626928, 'reg_alpha': 2.95409902258816, 'reg_lambda': 1.8595772644569717}. Best is trial 9 with value: -3149.8365071614585.
+[I 2025-05-13 11:20:06,431] Trial 26 finished with value: -3215.84814453125 and parameters: {'learning_rate': 0.174499457670922, 'max_depth': 4, 'min_child_weight': 3, 'gamma': 0.12423170126476556, 'subsample': 0.7265022292412999, 'colsample_bytree': 0.6780741235098926, 'reg_alpha': 1.9687417530192626, 'reg_lambda': 3.0841585327062493}. Best is trial 9 with value: -3149.8365071614585.
+[I 2025-05-13 11:20:07,832] Trial 27 finished with value: -3199.1239420572915 and parameters: {'learning_rate': 0.08684450439416655, 'max_depth': 3, 'min_child_weight': 2, 'gamma': 0.15723901809111288, 'subsample': 0.7935408696991514, 'colsample_bytree': 0.5579714277246832, 'reg_alpha': 1.2969889672369785, 'reg_lambda': 3.9145991796821455}. Best is trial 9 with value: -3149.8365071614585.
+[I 2025-05-13 11:20:09,532] Trial 28 finished with value: -3304.99658203125 and parameters: {'learning_rate': 0.32569984044608896, 'max_depth': 4, 'min_child_weight': 1, 'gamma': 0.03986287075491517, 'subsample': 0.6061361481007612, 'colsample_bytree': 0.6293121817016014, 'reg_alpha': 0.42523254207018196, 'reg_lambda': 4.933512585543889}. Best is trial 9 with value: -3149.8365071614585.
+[I 2025-05-13 11:20:11,350] Trial 29 finished with value: -3174.6245930989585 and parameters: {'learning_rate': 0.12671954424127305, 'max_depth': 3, 'min_child_weight': 1, 'gamma': 0.09089912191559646, 'subsample': 0.6913776065318171, 'colsample_bytree': 0.7933471935549278, 'reg_alpha': 3.0333987985079363, 'reg_lambda': 7.670453946420377}. Best is trial 9 with value: -3149.8365071614585.
+[I 2025-05-13 11:20:13,797] Trial 30 finished with value: -3359.6083170572915 and parameters: {'learning_rate': 0.25934208589061214, 'max_depth': 5, 'min_child_weight': 2, 'gamma': 0.1323584897601648, 'subsample': 0.7816973061840179, 'colsample_bytree': 0.5814786975869672, 'reg_alpha': 3.759747440459634, 'reg_lambda': 1.865809533670955}. Best is trial 9 with value: -3149.8365071614585.
+[I 2025-05-13 11:20:15,616] Trial 31 finished with value: -3162.4217122395835 and parameters: {'learning_rate': 0.10731155605424683, 'max_depth': 3, 'min_child_weight': 3, 'gamma': 0.12432691571433888, 'subsample': 0.6441689967405816, 'colsample_bytree': 0.6703236313608981, 'reg_alpha': 0.7369327072654797, 'reg_lambda': 4.433790238868361}. Best is trial 9 with value: -3149.8365071614585.
+[I 2025-05-13 11:20:17,450] Trial 32 finished with value: -3325.5780436197915 and parameters: {'learning_rate': 0.05141969419453597, 'max_depth': 3, 'min_child_weight': 3, 'gamma': 0.10761107742472541, 'subsample': 0.6529531653504779, 'colsample_bytree': 0.7453431067060973, 'reg_alpha': 0.6697095972153024, 'reg_lambda': 3.7448443231723827}. Best is trial 9 with value: -3149.8365071614585.
+[I 2025-05-13 11:20:18,629] Trial 33 finished with value: -3301.90283203125 and parameters: {'learning_rate': 0.41141524282961023, 'max_depth': 3, 'min_child_weight': 4, 'gamma': 0.0968469686921445, 'subsample': 0.72203188377291, 'colsample_bytree': 0.6927225426597916, 'reg_alpha': 1.2528614766163364, 'reg_lambda': 4.775244522571439}. Best is trial 9 with value: -3149.8365071614585.
+[I 2025-05-13 11:20:20,177] Trial 34 finished with value: -3450.13232421875 and parameters: {'learning_rate': 0.4933993923215235, 'max_depth': 3, 'min_child_weight': 3, 'gamma': 0.12844064148445145, 'subsample': 0.5919549418642511, 'colsample_bytree': 0.6166835802734127, 'reg_alpha': 0.8944140081143345, 'reg_lambda': 2.9310292663812234}. Best is trial 9 with value: -3149.8365071614585.
+[I 2025-05-13 11:20:21,459] Trial 35 finished with value: -3217.4520670572915 and parameters: {'learning_rate': 0.16637187607122728, 'max_depth': 4, 'min_child_weight': 2, 'gamma': 0.1985652965779089, 'subsample': 0.5372960159462644, 'colsample_bytree': 0.5345099959087495, 'reg_alpha': 0.4163445536368029, 'reg_lambda': 5.690185755646103}. Best is trial 9 with value: -3149.8365071614585.
+[I 2025-05-13 11:20:23,696] Trial 36 finished with value: -3195.884033203125 and parameters: {'learning_rate': 0.08587901994820164, 'max_depth': 5, 'min_child_weight': 4, 'gamma': 0.15709907776985735, 'subsample': 0.6415014534288683, 'colsample_bytree': 0.5812686419198099, 'reg_alpha': 2.1007251332041887, 'reg_lambda': 2.388322013277988}. Best is trial 9 with value: -3149.8365071614585.
+[I 2025-05-13 11:20:25,046] Trial 37 finished with value: -3283.5209147135415 and parameters: {'learning_rate': 0.1990392473600896, 'max_depth': 3, 'min_child_weight': 1, 'gamma': 0.08307784368242174, 'subsample': 0.7511927431690919, 'colsample_bytree': 0.9636814653301248, 'reg_alpha': 1.5151229017143322, 'reg_lambda': 3.989528911398151}. Best is trial 9 with value: -3149.8365071614585.
+[I 2025-05-13 11:20:27,183] Trial 38 finished with value: -3279.053955078125 and parameters: {'learning_rate': 0.22869877064491032, 'max_depth': 4, 'min_child_weight': 3, 'gamma': 0.09956545073233117, 'subsample': 0.6853454618672865, 'colsample_bytree': 0.6638405105784876, 'reg_alpha': 4.649108657260262, 'reg_lambda': 6.293681954425854}. Best is trial 9 with value: -3149.8365071614585.
+[I 2025-05-13 11:20:29,582] Trial 39 finished with value: -3274.8002115885415 and parameters: {'learning_rate': 0.12591907666445126, 'max_depth': 5, 'min_child_weight': 2, 'gamma': 0.17934037474785428, 'subsample': 0.5316455873629784, 'colsample_bytree': 0.5154308012084934, 'reg_alpha': 2.8173143301697565, 'reg_lambda': 5.220526877259875}. Best is trial 9 with value: -3149.8365071614585.
+[I 2025-05-13 11:20:31,746] Trial 40 finished with value: -3302.2860514322915 and parameters: {'learning_rate': 0.18539856789584486, 'max_depth': 4, 'min_child_weight': 5, 'gamma': 0.12427466803048379, 'subsample': 0.8193319166494497, 'colsample_bytree': 0.7410025414128854, 'reg_alpha': 0.05190635811460742, 'reg_lambda': 4.543327044456577}. Best is trial 9 with value: -3149.8365071614585.
+[I 2025-05-13 11:20:32,880] Trial 41 finished with value: -3164.5244140625 and parameters: {'learning_rate': 0.09980574215573514, 'max_depth': 3, 'min_child_weight': 2, 'gamma': 0.136492347225264, 'subsample': 0.6319239198545996, 'colsample_bytree': 0.6775604138365868, 'reg_alpha': 0.714616626530638, 'reg_lambda': 4.171003714405457}. Best is trial 9 with value: -3149.8365071614585.
+[I 2025-05-13 11:20:34,312] Trial 42 finished with value: -3217.1847330729165 and parameters: {'learning_rate': 0.06752591381596625, 'max_depth': 3, 'min_child_weight': 3, 'gamma': 0.1442575907987226, 'subsample': 0.6688910609154164, 'colsample_bytree': 0.6066580967015458, 'reg_alpha': 0.6229310952576679, 'reg_lambda': 3.165696214495961}. Best is trial 9 with value: -3149.8365071614585.
+[I 2025-05-13 11:20:35,463] Trial 43 finished with value: -3362.2621256510415 and parameters: {'learning_rate': 0.04163259944673606, 'max_depth': 3, 'min_child_weight': 1, 'gamma': 0.006756574998669065, 'subsample': 0.6044774050108179, 'colsample_bytree': 0.7771050916264326, 'reg_alpha': 0.3104166126978967, 'reg_lambda': 2.7033497959375845}. Best is trial 9 with value: -3149.8365071614585.
+[I 2025-05-13 11:20:37,164] Trial 44 finished with value: -3191.4331868489585 and parameters: {'learning_rate': 0.09450780003963477, 'max_depth': 3, 'min_child_weight': 4, 'gamma': 0.1535033441634696, 'subsample': 0.568257467339449, 'colsample_bytree': 0.6880050437726639, 'reg_alpha': 0.9973992219312178, 'reg_lambda': 4.120049076589122}. Best is trial 9 with value: -3149.8365071614585.
+[I 2025-05-13 11:20:38,549] Trial 45 finished with value: -3177.9778645833335 and parameters: {'learning_rate': 0.11462960748417324, 'max_depth': 3, 'min_child_weight': 2, 'gamma': 0.13749944391206076, 'subsample': 0.7089225860366145, 'colsample_bytree': 0.7270395562433193, 'reg_alpha': 1.7588765429324646, 'reg_lambda': 1.6154081099803477}. Best is trial 9 with value: -3149.8365071614585.
+[I 2025-05-13 11:20:40,599] Trial 46 finished with value: -3198.4611002604165 and parameters: {'learning_rate': 0.154987533584861, 'max_depth': 4, 'min_child_weight': 2, 'gamma': 0.11950006672901424, 'subsample': 0.6314200692456438, 'colsample_bytree': 0.5897132482351755, 'reg_alpha': 1.2070796047528156, 'reg_lambda': 4.4889717521135095}. Best is trial 9 with value: -3149.8365071614585.
+[I 2025-05-13 11:20:41,821] Trial 47 finished with value: -3647.4105631510415 and parameters: {'learning_rate': 0.03125511630372341, 'max_depth': 3, 'min_child_weight': 1, 'gamma': 0.10708223457267818, 'subsample': 0.9459887821681, 'colsample_bytree': 0.6195466280465265, 'reg_alpha': 0.8296471488019127, 'reg_lambda': 9.06266372743431}. Best is trial 9 with value: -3149.8365071614585.
+[I 2025-05-13 11:20:44,962] Trial 48 finished with value: -3190.795654296875 and parameters: {'learning_rate': 0.07500489918458583, 'max_depth': 6, 'min_child_weight': 2, 'gamma': 0.07348726667374908, 'subsample': 0.5917619387639876, 'colsample_bytree': 0.6498062493085334, 'reg_alpha': 1.399891959504513, 'reg_lambda': 3.2662919670593227}. Best is trial 9 with value: -3149.8365071614585.
+[I 2025-05-13 11:20:46,669] Trial 49 finished with value: -3281.265380859375 and parameters: {'learning_rate': 0.21518166313508397, 'max_depth': 4, 'min_child_weight': 3, 'gamma': 0.13776685427993582, 'subsample': 0.8811275333969504, 'colsample_bytree': 0.8083933936590547, 'reg_alpha': 0.6150734998842965, 'reg_lambda': 3.7911853826966246}. Best is trial 9 with value: -3149.8365071614585.</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Best trial:
+  RMSE (CV): 3149.8365
+  Best hyperparameters:
+    learning_rate: 0.0911959255829521
+    max_depth: 4
+    min_child_weight: 2
+    gamma: 0.1557224360668063
+    subsample: 0.8968950383586789
+    colsample_bytree: 0.5370801233154088
+    reg_alpha: 1.005570062680755
+    reg_lambda: 2.856436572812353</code></pre>
+</div>
+</div>
+<p>Let’s visualize the result</p>
+<div id="fd419394" class="cell" data-execution_count="28">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> optuna.visualization <span class="im">as</span> vis</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot optimization history (objective value vs trial)</span></span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>vis.plot_optimization_history(study)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<pre><code>Unable to display output for mime type(s): application/vnd.plotly.v1+json</code></pre>
+</div>
+</div>
+<div id="e15b5478" class="cell" data-execution_count="29">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot importance of each hyperparameter</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>vis.plot_param_importances(study)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<pre><code>Unable to display output for mime type(s): application/vnd.plotly.v1+json</code></pre>
+</div>
+</div>
+<div id="7e4b3a32" class="cell" data-execution_count="30">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot how each hyperparameter affects the objective value</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>vis.plot_slice(study)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<pre><code>Unable to display output for mime type(s): application/vnd.plotly.v1+json</code></pre>
+</div>
+</div>
+</section>
+<section id="after-training-analyze-and-refine" class="level4" data-number="10.7.10.4">
+<h4 data-number="10.7.10.4" class="anchored" data-anchor-id="after-training-analyze-and-refine"><span class="header-section-number">10.7.10.4</span> After Training: Analyze and Refine</h4>
+<p>Once the tuning is complete, <strong>don’t forget to visualize the search results</strong> to understand how different hyperparameters affected performance. This helps you:</p>
+<ul>
+<li>Identify which parameters had the most impact.</li>
+<li>Spot trends (e.g., performance plateaus or sharp drop-offs).</li>
+<li>Detect boundary effects (e.g., best values lie at the edge of the current search space).</li>
+</ul>
+<blockquote class="blockquote">
+<p>🔹 <strong>Key Tip</strong>: If the best values are near the boundary of your current search space, consider <strong>fine-tuning the search space</strong> and re-running the optimization.</p>
+</blockquote>
+<p>You can visualize results using: - <code>Optuna</code>’s built-in plots like <code>plot_optimization_history()</code> and <code>plot_param_importances()</code>. - <code>BayesSearchCV</code>’s <code>cv_results_</code> attribute to create custom plots using <code>pandas</code> or <code>seaborn</code>.</p>
+<p>Effective tuning is often <strong>iterative</strong> — let the data guide you!</p>
 </section>
 </section>
 </section>
@@ -1966,12 +2154,12 @@ R² Score: 0.9657</code></pre>
 <p>This helps the model give more attention to the minority (positive) class by scaling its gradient and Hessian contributions during training.</p>
 <p>Use this as a <strong>starting point</strong>, and then fine-tune through cross-validation for best performance.</p>
 <div id="82a64bd9" class="cell" data-execution_count="61">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>diabetes_train <span class="op">=</span> pd.read_csv(<span class="st">'./Datasets/diabetes_train.csv'</span>)</span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>diabetes_test <span class="op">=</span> pd.read_csv(<span class="st">'./Datasets/diabetes_test.csv'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>diabetes_train <span class="op">=</span> pd.read_csv(<span class="st">'./Datasets/diabetes_train.csv'</span>)</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>diabetes_test <span class="op">=</span> pd.read_csv(<span class="st">'./Datasets/diabetes_test.csv'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div id="5209b9e8" class="cell" data-execution_count="62">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(diabetes_train.shape, diabetes_test.shape)</span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>diabetes_train.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(diabetes_train.shape, diabetes_test.shape)</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>diabetes_train.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>(614, 9) (154, 9)</code></pre>
 </div>
@@ -2062,9 +2250,9 @@ R² Score: 0.9657</code></pre>
 </div>
 </div>
 <div id="261f1bc8" class="cell" data-execution_count="63">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># check the outcome of the distribution in the training set and test set</span></span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(diabetes_train[<span class="st">'Outcome'</span>].value_counts(normalize<span class="op">=</span><span class="va">True</span>))</span>
-<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(diabetes_test[<span class="st">'Outcome'</span>].value_counts(normalize<span class="op">=</span><span class="va">True</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co"># check the outcome of the distribution in the training set and test set</span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(diabetes_train[<span class="st">'Outcome'</span>].value_counts(normalize<span class="op">=</span><span class="va">True</span>))</span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(diabetes_test[<span class="st">'Outcome'</span>].value_counts(normalize<span class="op">=</span><span class="va">True</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Outcome
 0    0.662866
@@ -2077,32 +2265,32 @@ Name: proportion, dtype: float64</code></pre>
 </div>
 </div>
 <div id="c3b00dc0" class="cell">
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Data Preprocessing</span></span>
-<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>X_diabetes <span class="op">=</span> diabetes_train.drop(columns<span class="op">=</span>[<span class="st">'Outcome'</span>])</span>
-<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>y_diabetes <span class="op">=</span> diabetes_train[<span class="st">'Outcome'</span>]</span>
-<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>X_diabetes_test <span class="op">=</span> diabetes_test.drop(columns<span class="op">=</span>[<span class="st">'Outcome'</span>])</span>
-<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>y_diabetes_test <span class="op">=</span> diabetes_test[<span class="st">'Outcome'</span>]</span>
-<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a><span class="co"># define categorical and numerical columns</span></span>
-<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a>categorical_cols_diabetes <span class="op">=</span> X_diabetes.select_dtypes(include<span class="op">=</span>[<span class="st">'object'</span>]).columns.tolist()</span>
-<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a>numerical_cols_diabetes <span class="op">=</span> X_diabetes.select_dtypes(exclude<span class="op">=</span>[<span class="st">'object'</span>]).columns.tolist()</span>
-<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-11"><a href="#cb36-11" aria-hidden="true" tabindex="-1"></a><span class="co"># define the preprocessor, passing the numerical and categorical columns</span></span>
-<span id="cb36-12"><a href="#cb36-12" aria-hidden="true" tabindex="-1"></a>preprocessor_diabetes <span class="op">=</span> ColumnTransformer(</span>
-<span id="cb36-13"><a href="#cb36-13" aria-hidden="true" tabindex="-1"></a>    transformers<span class="op">=</span>[</span>
-<span id="cb36-14"><a href="#cb36-14" aria-hidden="true" tabindex="-1"></a>        (<span class="st">'num'</span>, <span class="st">'passthrough'</span>, numerical_cols_diabetes),  <span class="co"># no scaling</span></span>
-<span id="cb36-15"><a href="#cb36-15" aria-hidden="true" tabindex="-1"></a>        (<span class="st">'cat'</span>, OneHotEncoder(handle_unknown<span class="op">=</span><span class="st">'ignore'</span>), categorical_cols_diabetes)</span>
-<span id="cb36-16"><a href="#cb36-16" aria-hidden="true" tabindex="-1"></a>    ]</span>
-<span id="cb36-17"><a href="#cb36-17" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb36-18"><a href="#cb36-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-19"><a href="#cb36-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a pipeline for the diabetes dataset</span></span>
-<span id="cb36-20"><a href="#cb36-20" aria-hidden="true" tabindex="-1"></a>diabetes_pipeline <span class="op">=</span> Pipeline([</span>
-<span id="cb36-21"><a href="#cb36-21" aria-hidden="true" tabindex="-1"></a>    (<span class="st">'preprocessor'</span>, preprocessor_diabetes),</span>
-<span id="cb36-22"><a href="#cb36-22" aria-hidden="true" tabindex="-1"></a>    (<span class="st">'regressor'</span>, XGBClassifier(random_state<span class="op">=</span><span class="dv">42</span>))</span>
-<span id="cb36-23"><a href="#cb36-23" aria-hidden="true" tabindex="-1"></a>])</span>
-<span id="cb36-24"><a href="#cb36-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-25"><a href="#cb36-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Train the pipeline on the diabetes dataset</span></span>
-<span id="cb36-26"><a href="#cb36-26" aria-hidden="true" tabindex="-1"></a>diabetes_pipeline.fit(X_diabetes, y_diabetes)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Data Preprocessing</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>X_diabetes <span class="op">=</span> diabetes_train.drop(columns<span class="op">=</span>[<span class="st">'Outcome'</span>])</span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>y_diabetes <span class="op">=</span> diabetes_train[<span class="st">'Outcome'</span>]</span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>X_diabetes_test <span class="op">=</span> diabetes_test.drop(columns<span class="op">=</span>[<span class="st">'Outcome'</span>])</span>
+<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a>y_diabetes_test <span class="op">=</span> diabetes_test[<span class="st">'Outcome'</span>]</span>
+<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a><span class="co"># define categorical and numerical columns</span></span>
+<span id="cb45-8"><a href="#cb45-8" aria-hidden="true" tabindex="-1"></a>categorical_cols_diabetes <span class="op">=</span> X_diabetes.select_dtypes(include<span class="op">=</span>[<span class="st">'object'</span>]).columns.tolist()</span>
+<span id="cb45-9"><a href="#cb45-9" aria-hidden="true" tabindex="-1"></a>numerical_cols_diabetes <span class="op">=</span> X_diabetes.select_dtypes(exclude<span class="op">=</span>[<span class="st">'object'</span>]).columns.tolist()</span>
+<span id="cb45-10"><a href="#cb45-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-11"><a href="#cb45-11" aria-hidden="true" tabindex="-1"></a><span class="co"># define the preprocessor, passing the numerical and categorical columns</span></span>
+<span id="cb45-12"><a href="#cb45-12" aria-hidden="true" tabindex="-1"></a>preprocessor_diabetes <span class="op">=</span> ColumnTransformer(</span>
+<span id="cb45-13"><a href="#cb45-13" aria-hidden="true" tabindex="-1"></a>    transformers<span class="op">=</span>[</span>
+<span id="cb45-14"><a href="#cb45-14" aria-hidden="true" tabindex="-1"></a>        (<span class="st">'num'</span>, <span class="st">'passthrough'</span>, numerical_cols_diabetes),  <span class="co"># no scaling</span></span>
+<span id="cb45-15"><a href="#cb45-15" aria-hidden="true" tabindex="-1"></a>        (<span class="st">'cat'</span>, OneHotEncoder(handle_unknown<span class="op">=</span><span class="st">'ignore'</span>), categorical_cols_diabetes)</span>
+<span id="cb45-16"><a href="#cb45-16" aria-hidden="true" tabindex="-1"></a>    ]</span>
+<span id="cb45-17"><a href="#cb45-17" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb45-18"><a href="#cb45-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-19"><a href="#cb45-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a pipeline for the diabetes dataset</span></span>
+<span id="cb45-20"><a href="#cb45-20" aria-hidden="true" tabindex="-1"></a>diabetes_pipeline <span class="op">=</span> Pipeline([</span>
+<span id="cb45-21"><a href="#cb45-21" aria-hidden="true" tabindex="-1"></a>    (<span class="st">'preprocessor'</span>, preprocessor_diabetes),</span>
+<span id="cb45-22"><a href="#cb45-22" aria-hidden="true" tabindex="-1"></a>    (<span class="st">'regressor'</span>, XGBClassifier(random_state<span class="op">=</span><span class="dv">42</span>))</span>
+<span id="cb45-23"><a href="#cb45-23" aria-hidden="true" tabindex="-1"></a>])</span>
+<span id="cb45-24"><a href="#cb45-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-25"><a href="#cb45-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Train the pipeline on the diabetes dataset</span></span>
+<span id="cb45-26"><a href="#cb45-26" aria-hidden="true" tabindex="-1"></a>diabetes_pipeline.fit(X_diabetes, y_diabetes)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="67">
 <style>#sk-container-id-3 {
   /* Definition of color scheme common for light and dark mode */
@@ -2586,19 +2774,19 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 </div>
 </div>
 <div id="3677a990" class="cell" data-execution_count="69">
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># make predictions on the test set</span></span>
-<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">===== Test Performance with Default Setting ====="</span>)</span>
-<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>y_diabetes_pred <span class="op">=</span> diabetes_pipeline.predict(X_diabetes_test)</span>
-<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a><span class="co"># evaluate the model in terms of accuracy, precision, recall, and f1-score</span></span>
-<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>accuracy <span class="op">=</span> np.mean(y_diabetes_pred <span class="op">==</span> y_diabetes_test)</span>
-<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Accuracy on Diabetes Test Set: </span><span class="sc">{</span>accuracy<span class="sc">:.2f}</span><span class="ss">"</span>)</span>
-<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a>precision <span class="op">=</span> precision_score(y_diabetes_test, y_diabetes_pred)</span>
-<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Precision on Diabetes Test Set: </span><span class="sc">{</span>precision<span class="sc">:.2f}</span><span class="ss">"</span>)</span>
-<span id="cb37-10"><a href="#cb37-10" aria-hidden="true" tabindex="-1"></a>recall <span class="op">=</span> recall_score(y_diabetes_test, y_diabetes_pred)</span>
-<span id="cb37-11"><a href="#cb37-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Recall on Diabetes Test Set: </span><span class="sc">{</span>recall<span class="sc">:.2f}</span><span class="ss">"</span>)</span>
-<span id="cb37-12"><a href="#cb37-12" aria-hidden="true" tabindex="-1"></a>f1 <span class="op">=</span> f1_score(y_diabetes_test, y_diabetes_pred)</span>
-<span id="cb37-13"><a href="#cb37-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"F1 Score on Diabetes Test Set: </span><span class="sc">{</span>f1<span class="sc">:.2f}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="co"># make predictions on the test set</span></span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">===== Test Performance with Default Setting ====="</span>)</span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a>y_diabetes_pred <span class="op">=</span> diabetes_pipeline.predict(X_diabetes_test)</span>
+<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a><span class="co"># evaluate the model in terms of accuracy, precision, recall, and f1-score</span></span>
+<span id="cb46-6"><a href="#cb46-6" aria-hidden="true" tabindex="-1"></a>accuracy <span class="op">=</span> np.mean(y_diabetes_pred <span class="op">==</span> y_diabetes_test)</span>
+<span id="cb46-7"><a href="#cb46-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Accuracy on Diabetes Test Set: </span><span class="sc">{</span>accuracy<span class="sc">:.2f}</span><span class="ss">"</span>)</span>
+<span id="cb46-8"><a href="#cb46-8" aria-hidden="true" tabindex="-1"></a>precision <span class="op">=</span> precision_score(y_diabetes_test, y_diabetes_pred)</span>
+<span id="cb46-9"><a href="#cb46-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Precision on Diabetes Test Set: </span><span class="sc">{</span>precision<span class="sc">:.2f}</span><span class="ss">"</span>)</span>
+<span id="cb46-10"><a href="#cb46-10" aria-hidden="true" tabindex="-1"></a>recall <span class="op">=</span> recall_score(y_diabetes_test, y_diabetes_pred)</span>
+<span id="cb46-11"><a href="#cb46-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Recall on Diabetes Test Set: </span><span class="sc">{</span>recall<span class="sc">:.2f}</span><span class="ss">"</span>)</span>
+<span id="cb46-12"><a href="#cb46-12" aria-hidden="true" tabindex="-1"></a>f1 <span class="op">=</span> f1_score(y_diabetes_test, y_diabetes_pred)</span>
+<span id="cb46-13"><a href="#cb46-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"F1 Score on Diabetes Test Set: </span><span class="sc">{</span>f1<span class="sc">:.2f}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 ===== Test Performance with Default Setting =====
@@ -2612,63 +2800,63 @@ F1 Score on Diabetes Test Set: 0.63</code></pre>
 <section id="using-scale_pos_weight" class="level3" data-number="10.8.5">
 <h3 data-number="10.8.5" class="anchored" data-anchor-id="using-scale_pos_weight"><span class="header-section-number">10.8.5</span> Using <code>scale_pos_weight</code></h3>
 <div id="9292c568" class="cell">
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>neg <span class="op">=</span> (diabetes_train[<span class="st">'Outcome'</span>] <span class="op">==</span> <span class="dv">0</span>).<span class="bu">sum</span>()</span>
-<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>pos <span class="op">=</span> (diabetes_train[<span class="st">'Outcome'</span>] <span class="op">==</span> <span class="dv">1</span>).<span class="bu">sum</span>()</span>
-<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>baseline_ratio <span class="op">=</span> neg <span class="op">/</span> pos</span>
-<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a><span class="co"># set a small grid for scale_pos_weight</span></span>
-<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>scale_pos_weight <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">10</span>]</span>
-<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a new pipeline for the diabetes dataset</span></span>
-<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a>diabetes_pipeline_scale <span class="op">=</span> Pipeline([</span>
-<span id="cb39-10"><a href="#cb39-10" aria-hidden="true" tabindex="-1"></a>    (<span class="st">'preprocessor'</span>, preprocessor_diabetes),</span>
-<span id="cb39-11"><a href="#cb39-11" aria-hidden="true" tabindex="-1"></a>    (<span class="st">'regressor'</span>, XGBClassifier(random_state<span class="op">=</span><span class="dv">42</span>))</span>
-<span id="cb39-12"><a href="#cb39-12" aria-hidden="true" tabindex="-1"></a>])</span>
-<span id="cb39-13"><a href="#cb39-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-14"><a href="#cb39-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Store results for comparison</span></span>
-<span id="cb39-15"><a href="#cb39-15" aria-hidden="true" tabindex="-1"></a>diabetes_results <span class="op">=</span> []</span>
-<span id="cb39-16"><a href="#cb39-16" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, weight <span class="kw">in</span> <span class="bu">enumerate</span>(scale_pos_weight):</span>
-<span id="cb39-17"><a href="#cb39-17" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="ss">Scale Pos Weight Test </span><span class="sc">{</span>i<span class="op">+</span><span class="dv">1</span><span class="sc">}</span><span class="ss">:"</span>)</span>
-<span id="cb39-18"><a href="#cb39-18" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"scale_pos_weight = </span><span class="sc">{</span>weight<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb39-19"><a href="#cb39-19" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb39-20"><a href="#cb39-20" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Update the pipeline with the scale_pos_weight parameter</span></span>
-<span id="cb39-21"><a href="#cb39-21" aria-hidden="true" tabindex="-1"></a>    diabetes_pipeline_scale.set_params(regressor__scale_pos_weight<span class="op">=</span>weight)</span>
-<span id="cb39-22"><a href="#cb39-22" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb39-23"><a href="#cb39-23" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Train and evaluate</span></span>
-<span id="cb39-24"><a href="#cb39-24" aria-hidden="true" tabindex="-1"></a>    diabetes_pipeline_scale.fit(X_diabetes, y_diabetes)</span>
-<span id="cb39-25"><a href="#cb39-25" aria-hidden="true" tabindex="-1"></a>    y_diabetes_pred <span class="op">=</span> diabetes_pipeline_scale.predict(X_diabetes_test)</span>
-<span id="cb39-26"><a href="#cb39-26" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb39-27"><a href="#cb39-27" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Evaluate the model</span></span>
-<span id="cb39-28"><a href="#cb39-28" aria-hidden="true" tabindex="-1"></a>    accuracy <span class="op">=</span> np.mean(y_diabetes_pred <span class="op">==</span> y_diabetes_test)</span>
-<span id="cb39-29"><a href="#cb39-29" aria-hidden="true" tabindex="-1"></a>    precision <span class="op">=</span> precision_score(y_diabetes_test, y_diabetes_pred)</span>
-<span id="cb39-30"><a href="#cb39-30" aria-hidden="true" tabindex="-1"></a>    recall <span class="op">=</span> recall_score(y_diabetes_test, y_diabetes_pred)</span>
-<span id="cb39-31"><a href="#cb39-31" aria-hidden="true" tabindex="-1"></a>    f1 <span class="op">=</span> f1_score(y_diabetes_test, y_diabetes_pred)</span>
-<span id="cb39-32"><a href="#cb39-32" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb39-33"><a href="#cb39-33" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Store results</span></span>
-<span id="cb39-34"><a href="#cb39-34" aria-hidden="true" tabindex="-1"></a>    diabetes_results.append({</span>
-<span id="cb39-35"><a href="#cb39-35" aria-hidden="true" tabindex="-1"></a>        <span class="st">'test'</span>: i<span class="op">+</span><span class="dv">1</span>,</span>
-<span id="cb39-36"><a href="#cb39-36" aria-hidden="true" tabindex="-1"></a>        <span class="st">'scale_pos_weight'</span>: weight,</span>
-<span id="cb39-37"><a href="#cb39-37" aria-hidden="true" tabindex="-1"></a>        <span class="st">'accuracy'</span>: accuracy,</span>
-<span id="cb39-38"><a href="#cb39-38" aria-hidden="true" tabindex="-1"></a>        <span class="st">'precision'</span>: precision,</span>
-<span id="cb39-39"><a href="#cb39-39" aria-hidden="true" tabindex="-1"></a>        <span class="st">'recall'</span>: recall,</span>
-<span id="cb39-40"><a href="#cb39-40" aria-hidden="true" tabindex="-1"></a>        <span class="st">'f1'</span>: f1</span>
-<span id="cb39-41"><a href="#cb39-41" aria-hidden="true" tabindex="-1"></a>    })</span>
-<span id="cb39-42"><a href="#cb39-42" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a DataFrame for the results</span></span>
-<span id="cb39-43"><a href="#cb39-43" aria-hidden="true" tabindex="-1"></a>diabetes_results_df <span class="op">=</span> pd.DataFrame(diabetes_results)   </span>
-<span id="cb39-44"><a href="#cb39-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-45"><a href="#cb39-45" aria-hidden="true" tabindex="-1"></a><span class="co"># Find the best scale_pos_weight based on F1 score</span></span>
-<span id="cb39-46"><a href="#cb39-46" aria-hidden="true" tabindex="-1"></a>best_f1_idx <span class="op">=</span> diabetes_results_df[<span class="st">'f1'</span>].idxmax()</span>
-<span id="cb39-47"><a href="#cb39-47" aria-hidden="true" tabindex="-1"></a>best_scale_pos_weight <span class="op">=</span> diabetes_results_df.loc[best_f1_idx, <span class="st">'scale_pos_weight'</span>]</span>
-<span id="cb39-48"><a href="#cb39-48" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">===== Test Performance with Best Scale Pos Weight: ====="</span>)</span>
-<span id="cb39-49"><a href="#cb39-49" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(best_scale_pos_weight)</span>
-<span id="cb39-50"><a href="#cb39-50" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Best F1 Score: </span><span class="sc">{:.2f}</span><span class="st">"</span>.<span class="bu">format</span>(diabetes_results_df[<span class="st">'f1'</span>].<span class="bu">max</span>()))</span>
-<span id="cb39-51"><a href="#cb39-51" aria-hidden="true" tabindex="-1"></a><span class="co"># find the accuracy, precision, and recall for the best scale_pos_weight</span></span>
-<span id="cb39-52"><a href="#cb39-52" aria-hidden="true" tabindex="-1"></a>best_accuracy <span class="op">=</span> diabetes_results_df.loc[best_f1_idx, <span class="st">'accuracy'</span>]</span>
-<span id="cb39-53"><a href="#cb39-53" aria-hidden="true" tabindex="-1"></a>best_precision <span class="op">=</span> diabetes_results_df.loc[best_f1_idx, <span class="st">'precision'</span>]</span>
-<span id="cb39-54"><a href="#cb39-54" aria-hidden="true" tabindex="-1"></a>best_recall <span class="op">=</span> diabetes_results_df.loc[best_f1_idx, <span class="st">'recall'</span>]</span>
-<span id="cb39-55"><a href="#cb39-55" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Best Accuracy: </span><span class="sc">{</span>best_accuracy<span class="sc">:.2f}</span><span class="ss">"</span>)</span>
-<span id="cb39-56"><a href="#cb39-56" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Best Precision: </span><span class="sc">{</span>best_precision<span class="sc">:.2f}</span><span class="ss">"</span>)</span>
-<span id="cb39-57"><a href="#cb39-57" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Best Recall: </span><span class="sc">{</span>best_recall<span class="sc">:.2f}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>neg <span class="op">=</span> (diabetes_train[<span class="st">'Outcome'</span>] <span class="op">==</span> <span class="dv">0</span>).<span class="bu">sum</span>()</span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>pos <span class="op">=</span> (diabetes_train[<span class="st">'Outcome'</span>] <span class="op">==</span> <span class="dv">1</span>).<span class="bu">sum</span>()</span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>baseline_ratio <span class="op">=</span> neg <span class="op">/</span> pos</span>
+<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a><span class="co"># set a small grid for scale_pos_weight</span></span>
+<span id="cb48-6"><a href="#cb48-6" aria-hidden="true" tabindex="-1"></a>scale_pos_weight <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">10</span>]</span>
+<span id="cb48-7"><a href="#cb48-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-8"><a href="#cb48-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a new pipeline for the diabetes dataset</span></span>
+<span id="cb48-9"><a href="#cb48-9" aria-hidden="true" tabindex="-1"></a>diabetes_pipeline_scale <span class="op">=</span> Pipeline([</span>
+<span id="cb48-10"><a href="#cb48-10" aria-hidden="true" tabindex="-1"></a>    (<span class="st">'preprocessor'</span>, preprocessor_diabetes),</span>
+<span id="cb48-11"><a href="#cb48-11" aria-hidden="true" tabindex="-1"></a>    (<span class="st">'regressor'</span>, XGBClassifier(random_state<span class="op">=</span><span class="dv">42</span>))</span>
+<span id="cb48-12"><a href="#cb48-12" aria-hidden="true" tabindex="-1"></a>])</span>
+<span id="cb48-13"><a href="#cb48-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-14"><a href="#cb48-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Store results for comparison</span></span>
+<span id="cb48-15"><a href="#cb48-15" aria-hidden="true" tabindex="-1"></a>diabetes_results <span class="op">=</span> []</span>
+<span id="cb48-16"><a href="#cb48-16" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, weight <span class="kw">in</span> <span class="bu">enumerate</span>(scale_pos_weight):</span>
+<span id="cb48-17"><a href="#cb48-17" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="ss">Scale Pos Weight Test </span><span class="sc">{</span>i<span class="op">+</span><span class="dv">1</span><span class="sc">}</span><span class="ss">:"</span>)</span>
+<span id="cb48-18"><a href="#cb48-18" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"scale_pos_weight = </span><span class="sc">{</span>weight<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb48-19"><a href="#cb48-19" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb48-20"><a href="#cb48-20" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Update the pipeline with the scale_pos_weight parameter</span></span>
+<span id="cb48-21"><a href="#cb48-21" aria-hidden="true" tabindex="-1"></a>    diabetes_pipeline_scale.set_params(regressor__scale_pos_weight<span class="op">=</span>weight)</span>
+<span id="cb48-22"><a href="#cb48-22" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb48-23"><a href="#cb48-23" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Train and evaluate</span></span>
+<span id="cb48-24"><a href="#cb48-24" aria-hidden="true" tabindex="-1"></a>    diabetes_pipeline_scale.fit(X_diabetes, y_diabetes)</span>
+<span id="cb48-25"><a href="#cb48-25" aria-hidden="true" tabindex="-1"></a>    y_diabetes_pred <span class="op">=</span> diabetes_pipeline_scale.predict(X_diabetes_test)</span>
+<span id="cb48-26"><a href="#cb48-26" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb48-27"><a href="#cb48-27" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Evaluate the model</span></span>
+<span id="cb48-28"><a href="#cb48-28" aria-hidden="true" tabindex="-1"></a>    accuracy <span class="op">=</span> np.mean(y_diabetes_pred <span class="op">==</span> y_diabetes_test)</span>
+<span id="cb48-29"><a href="#cb48-29" aria-hidden="true" tabindex="-1"></a>    precision <span class="op">=</span> precision_score(y_diabetes_test, y_diabetes_pred)</span>
+<span id="cb48-30"><a href="#cb48-30" aria-hidden="true" tabindex="-1"></a>    recall <span class="op">=</span> recall_score(y_diabetes_test, y_diabetes_pred)</span>
+<span id="cb48-31"><a href="#cb48-31" aria-hidden="true" tabindex="-1"></a>    f1 <span class="op">=</span> f1_score(y_diabetes_test, y_diabetes_pred)</span>
+<span id="cb48-32"><a href="#cb48-32" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb48-33"><a href="#cb48-33" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Store results</span></span>
+<span id="cb48-34"><a href="#cb48-34" aria-hidden="true" tabindex="-1"></a>    diabetes_results.append({</span>
+<span id="cb48-35"><a href="#cb48-35" aria-hidden="true" tabindex="-1"></a>        <span class="st">'test'</span>: i<span class="op">+</span><span class="dv">1</span>,</span>
+<span id="cb48-36"><a href="#cb48-36" aria-hidden="true" tabindex="-1"></a>        <span class="st">'scale_pos_weight'</span>: weight,</span>
+<span id="cb48-37"><a href="#cb48-37" aria-hidden="true" tabindex="-1"></a>        <span class="st">'accuracy'</span>: accuracy,</span>
+<span id="cb48-38"><a href="#cb48-38" aria-hidden="true" tabindex="-1"></a>        <span class="st">'precision'</span>: precision,</span>
+<span id="cb48-39"><a href="#cb48-39" aria-hidden="true" tabindex="-1"></a>        <span class="st">'recall'</span>: recall,</span>
+<span id="cb48-40"><a href="#cb48-40" aria-hidden="true" tabindex="-1"></a>        <span class="st">'f1'</span>: f1</span>
+<span id="cb48-41"><a href="#cb48-41" aria-hidden="true" tabindex="-1"></a>    })</span>
+<span id="cb48-42"><a href="#cb48-42" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a DataFrame for the results</span></span>
+<span id="cb48-43"><a href="#cb48-43" aria-hidden="true" tabindex="-1"></a>diabetes_results_df <span class="op">=</span> pd.DataFrame(diabetes_results)   </span>
+<span id="cb48-44"><a href="#cb48-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-45"><a href="#cb48-45" aria-hidden="true" tabindex="-1"></a><span class="co"># Find the best scale_pos_weight based on F1 score</span></span>
+<span id="cb48-46"><a href="#cb48-46" aria-hidden="true" tabindex="-1"></a>best_f1_idx <span class="op">=</span> diabetes_results_df[<span class="st">'f1'</span>].idxmax()</span>
+<span id="cb48-47"><a href="#cb48-47" aria-hidden="true" tabindex="-1"></a>best_scale_pos_weight <span class="op">=</span> diabetes_results_df.loc[best_f1_idx, <span class="st">'scale_pos_weight'</span>]</span>
+<span id="cb48-48"><a href="#cb48-48" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">===== Test Performance with Best Scale Pos Weight: ====="</span>)</span>
+<span id="cb48-49"><a href="#cb48-49" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(best_scale_pos_weight)</span>
+<span id="cb48-50"><a href="#cb48-50" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Best F1 Score: </span><span class="sc">{:.2f}</span><span class="st">"</span>.<span class="bu">format</span>(diabetes_results_df[<span class="st">'f1'</span>].<span class="bu">max</span>()))</span>
+<span id="cb48-51"><a href="#cb48-51" aria-hidden="true" tabindex="-1"></a><span class="co"># find the accuracy, precision, and recall for the best scale_pos_weight</span></span>
+<span id="cb48-52"><a href="#cb48-52" aria-hidden="true" tabindex="-1"></a>best_accuracy <span class="op">=</span> diabetes_results_df.loc[best_f1_idx, <span class="st">'accuracy'</span>]</span>
+<span id="cb48-53"><a href="#cb48-53" aria-hidden="true" tabindex="-1"></a>best_precision <span class="op">=</span> diabetes_results_df.loc[best_f1_idx, <span class="st">'precision'</span>]</span>
+<span id="cb48-54"><a href="#cb48-54" aria-hidden="true" tabindex="-1"></a>best_recall <span class="op">=</span> diabetes_results_df.loc[best_f1_idx, <span class="st">'recall'</span>]</span>
+<span id="cb48-55"><a href="#cb48-55" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Best Accuracy: </span><span class="sc">{</span>best_accuracy<span class="sc">:.2f}</span><span class="ss">"</span>)</span>
+<span id="cb48-56"><a href="#cb48-56" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Best Precision: </span><span class="sc">{</span>best_precision<span class="sc">:.2f}</span><span class="ss">"</span>)</span>
+<span id="cb48-57"><a href="#cb48-57" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Best Recall: </span><span class="sc">{</span>best_recall<span class="sc">:.2f}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Scale Pos Weight Test 1:
@@ -2695,23 +2883,23 @@ Best Recall: 0.67</code></pre>
 </div>
 </div>
 <div id="828d54fd" class="cell" data-execution_count="75">
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the results for accuracy, precision, and recall with different colors</span></span>
-<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
-<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>plt.plot(diabetes_results_df[<span class="st">'scale_pos_weight'</span>], diabetes_results_df[<span class="st">'accuracy'</span>], marker<span class="op">=</span><span class="st">'o'</span>, color<span class="op">=</span><span class="st">'blue'</span>, label<span class="op">=</span><span class="st">'Accuracy'</span>)</span>
-<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>plt.plot(diabetes_results_df[<span class="st">'scale_pos_weight'</span>], diabetes_results_df[<span class="st">'precision'</span>], marker<span class="op">=</span><span class="st">'o'</span>, color<span class="op">=</span><span class="st">'orange'</span>, label<span class="op">=</span><span class="st">'Precision'</span>)</span>
-<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>plt.plot(diabetes_results_df[<span class="st">'scale_pos_weight'</span>], diabetes_results_df[<span class="st">'recall'</span>], marker<span class="op">=</span><span class="st">'o'</span>, color<span class="op">=</span><span class="st">'green'</span>, label<span class="op">=</span><span class="st">'Recall'</span>)</span>
-<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Scale Pos Weight'</span>, fontsize<span class="op">=</span><span class="dv">12</span>)</span>
-<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Score'</span>, fontsize<span class="op">=</span><span class="dv">12</span>)</span>
-<span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Effect of Scale Pos Weight on Accuracy, Precision, and Recall'</span>, fontsize<span class="op">=</span><span class="dv">14</span>)</span>
-<span id="cb41-9"><a href="#cb41-9" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>)</span>
-<span id="cb41-10"><a href="#cb41-10" aria-hidden="true" tabindex="-1"></a>plt.xticks(scale_pos_weight)</span>
-<span id="cb41-11"><a href="#cb41-11" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
-<span id="cb41-12"><a href="#cb41-12" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
-<span id="cb41-13"><a href="#cb41-13" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the results for accuracy, precision, and recall with different colors</span></span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>plt.plot(diabetes_results_df[<span class="st">'scale_pos_weight'</span>], diabetes_results_df[<span class="st">'accuracy'</span>], marker<span class="op">=</span><span class="st">'o'</span>, color<span class="op">=</span><span class="st">'blue'</span>, label<span class="op">=</span><span class="st">'Accuracy'</span>)</span>
+<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a>plt.plot(diabetes_results_df[<span class="st">'scale_pos_weight'</span>], diabetes_results_df[<span class="st">'precision'</span>], marker<span class="op">=</span><span class="st">'o'</span>, color<span class="op">=</span><span class="st">'orange'</span>, label<span class="op">=</span><span class="st">'Precision'</span>)</span>
+<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a>plt.plot(diabetes_results_df[<span class="st">'scale_pos_weight'</span>], diabetes_results_df[<span class="st">'recall'</span>], marker<span class="op">=</span><span class="st">'o'</span>, color<span class="op">=</span><span class="st">'green'</span>, label<span class="op">=</span><span class="st">'Recall'</span>)</span>
+<span id="cb50-6"><a href="#cb50-6" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Scale Pos Weight'</span>, fontsize<span class="op">=</span><span class="dv">12</span>)</span>
+<span id="cb50-7"><a href="#cb50-7" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Score'</span>, fontsize<span class="op">=</span><span class="dv">12</span>)</span>
+<span id="cb50-8"><a href="#cb50-8" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Effect of Scale Pos Weight on Accuracy, Precision, and Recall'</span>, fontsize<span class="op">=</span><span class="dv">14</span>)</span>
+<span id="cb50-9"><a href="#cb50-9" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>)</span>
+<span id="cb50-10"><a href="#cb50-10" aria-hidden="true" tabindex="-1"></a>plt.xticks(scale_pos_weight)</span>
+<span id="cb50-11"><a href="#cb50-11" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb50-12"><a href="#cb50-12" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb50-13"><a href="#cb50-13" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="XGBoost_files/figure-html/cell-27-output-1.png" class="img-fluid figure-img"></p>
+<p><img src="XGBoost_files/figure-html/cell-31-output-1.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
@@ -2728,38 +2916,38 @@ Best Recall: 0.67</code></pre>
 <section id="threshold-adjustment" class="level3" data-number="10.8.6">
 <h3 data-number="10.8.6" class="anchored" data-anchor-id="threshold-adjustment"><span class="header-section-number">10.8.6</span> Threshold adjustment</h3>
 <div id="50d25e90" class="cell">
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># get prediction probabilities</span></span>
-<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>y_diabetes_pred_proba <span class="op">=</span> diabetes_pipeline.predict_proba(X_diabetes_test)[:, <span class="dv">1</span>]</span>
-<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a><span class="co"># plot the precision-recall curve</span></span>
-<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>precision, recall, thresholds <span class="op">=</span> precision_recall_curve(y_diabetes_test, y_diabetes_pred_proba)</span>
-<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a><span class="co"># final threshold</span></span>
-<span id="cb42-8"><a href="#cb42-8" aria-hidden="true" tabindex="-1"></a>f1_scores <span class="op">=</span> <span class="dv">2</span> <span class="op">*</span> (precision <span class="op">*</span> recall) <span class="op">/</span> (precision <span class="op">+</span> recall <span class="op">+</span> <span class="fl">1e-9</span>) <span class="co"># avoid division by zero</span></span>
-<span id="cb42-9"><a href="#cb42-9" aria-hidden="true" tabindex="-1"></a>best_f1_threshold <span class="op">=</span> thresholds[np.argmax(f1_scores)]</span>
-<span id="cb42-10"><a href="#cb42-10" aria-hidden="true" tabindex="-1"></a>best_threshold <span class="op">=</span> np.<span class="bu">round</span>(best_f1_threshold, <span class="dv">2</span>)</span>
-<span id="cb42-11"><a href="#cb42-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Best Threshold for F1 Score: </span><span class="sc">{</span>best_threshold<span class="sc">:.2f}</span><span class="ss">"</span>)</span>
-<span id="cb42-12"><a href="#cb42-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb42-13"><a href="#cb42-13" aria-hidden="true" tabindex="-1"></a><span class="co"># adjust the threshold for the predictions</span></span>
-<span id="cb42-14"><a href="#cb42-14" aria-hidden="true" tabindex="-1"></a>y_diabetes_pred_adjusted <span class="op">=</span> (y_diabetes_pred_proba <span class="op">&gt;=</span> best_f1_threshold).astype(<span class="bu">int</span>)</span>
-<span id="cb42-15"><a href="#cb42-15" aria-hidden="true" tabindex="-1"></a><span class="co"># evaluate the model with the adjusted threshold</span></span>
-<span id="cb42-16"><a href="#cb42-16" aria-hidden="true" tabindex="-1"></a>accuracy_adjusted <span class="op">=</span> np.mean(y_diabetes_pred_adjusted <span class="op">==</span> y_diabetes_test)</span>
-<span id="cb42-17"><a href="#cb42-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Accuracy with Adjusted Threshold: </span><span class="sc">{</span>accuracy_adjusted<span class="sc">:.2f}</span><span class="ss">"</span>)</span>
-<span id="cb42-18"><a href="#cb42-18" aria-hidden="true" tabindex="-1"></a>precision_adjusted <span class="op">=</span> precision_score(y_diabetes_test, y_diabetes_pred_adjusted)</span>
-<span id="cb42-19"><a href="#cb42-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Precision with Adjusted Threshold: </span><span class="sc">{</span>precision_adjusted<span class="sc">:.2f}</span><span class="ss">"</span>)</span>
-<span id="cb42-20"><a href="#cb42-20" aria-hidden="true" tabindex="-1"></a>recall_adjusted <span class="op">=</span> recall_score(y_diabetes_test, y_diabetes_pred_adjusted)</span>
-<span id="cb42-21"><a href="#cb42-21" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Recall with Adjusted Threshold: </span><span class="sc">{</span>recall_adjusted<span class="sc">:.2f}</span><span class="ss">"</span>)</span>
-<span id="cb42-22"><a href="#cb42-22" aria-hidden="true" tabindex="-1"></a><span class="co"># plot the precision-recall curve</span></span>
-<span id="cb42-23"><a href="#cb42-23" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
-<span id="cb42-24"><a href="#cb42-24" aria-hidden="true" tabindex="-1"></a>plt.plot(recall, precision, marker<span class="op">=</span><span class="st">'o'</span>)</span>
-<span id="cb42-25"><a href="#cb42-25" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Recall'</span>, fontsize<span class="op">=</span><span class="dv">12</span>)</span>
-<span id="cb42-26"><a href="#cb42-26" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Precision'</span>, fontsize<span class="op">=</span><span class="dv">12</span>)</span>
-<span id="cb42-27"><a href="#cb42-27" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Precision-Recall Curve'</span>, fontsize<span class="op">=</span><span class="dv">14</span>)</span>
-<span id="cb42-28"><a href="#cb42-28" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>)</span>
-<span id="cb42-29"><a href="#cb42-29" aria-hidden="true" tabindex="-1"></a>plt.axvline(x<span class="op">=</span>recall[np.argmax(f1_scores)], color<span class="op">=</span><span class="st">'red'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>, label<span class="op">=</span><span class="st">'Best Threshold'</span>)</span>
-<span id="cb42-30"><a href="#cb42-30" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
-<span id="cb42-31"><a href="#cb42-31" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
-<span id="cb42-32"><a href="#cb42-32" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="co"># get prediction probabilities</span></span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>y_diabetes_pred_proba <span class="op">=</span> diabetes_pipeline.predict_proba(X_diabetes_test)[:, <span class="dv">1</span>]</span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a><span class="co"># plot the precision-recall curve</span></span>
+<span id="cb51-5"><a href="#cb51-5" aria-hidden="true" tabindex="-1"></a>precision, recall, thresholds <span class="op">=</span> precision_recall_curve(y_diabetes_test, y_diabetes_pred_proba)</span>
+<span id="cb51-6"><a href="#cb51-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-7"><a href="#cb51-7" aria-hidden="true" tabindex="-1"></a><span class="co"># final threshold</span></span>
+<span id="cb51-8"><a href="#cb51-8" aria-hidden="true" tabindex="-1"></a>f1_scores <span class="op">=</span> <span class="dv">2</span> <span class="op">*</span> (precision <span class="op">*</span> recall) <span class="op">/</span> (precision <span class="op">+</span> recall <span class="op">+</span> <span class="fl">1e-9</span>) <span class="co"># avoid division by zero</span></span>
+<span id="cb51-9"><a href="#cb51-9" aria-hidden="true" tabindex="-1"></a>best_f1_threshold <span class="op">=</span> thresholds[np.argmax(f1_scores)]</span>
+<span id="cb51-10"><a href="#cb51-10" aria-hidden="true" tabindex="-1"></a>best_threshold <span class="op">=</span> np.<span class="bu">round</span>(best_f1_threshold, <span class="dv">2</span>)</span>
+<span id="cb51-11"><a href="#cb51-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Best Threshold for F1 Score: </span><span class="sc">{</span>best_threshold<span class="sc">:.2f}</span><span class="ss">"</span>)</span>
+<span id="cb51-12"><a href="#cb51-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-13"><a href="#cb51-13" aria-hidden="true" tabindex="-1"></a><span class="co"># adjust the threshold for the predictions</span></span>
+<span id="cb51-14"><a href="#cb51-14" aria-hidden="true" tabindex="-1"></a>y_diabetes_pred_adjusted <span class="op">=</span> (y_diabetes_pred_proba <span class="op">&gt;=</span> best_f1_threshold).astype(<span class="bu">int</span>)</span>
+<span id="cb51-15"><a href="#cb51-15" aria-hidden="true" tabindex="-1"></a><span class="co"># evaluate the model with the adjusted threshold</span></span>
+<span id="cb51-16"><a href="#cb51-16" aria-hidden="true" tabindex="-1"></a>accuracy_adjusted <span class="op">=</span> np.mean(y_diabetes_pred_adjusted <span class="op">==</span> y_diabetes_test)</span>
+<span id="cb51-17"><a href="#cb51-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Accuracy with Adjusted Threshold: </span><span class="sc">{</span>accuracy_adjusted<span class="sc">:.2f}</span><span class="ss">"</span>)</span>
+<span id="cb51-18"><a href="#cb51-18" aria-hidden="true" tabindex="-1"></a>precision_adjusted <span class="op">=</span> precision_score(y_diabetes_test, y_diabetes_pred_adjusted)</span>
+<span id="cb51-19"><a href="#cb51-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Precision with Adjusted Threshold: </span><span class="sc">{</span>precision_adjusted<span class="sc">:.2f}</span><span class="ss">"</span>)</span>
+<span id="cb51-20"><a href="#cb51-20" aria-hidden="true" tabindex="-1"></a>recall_adjusted <span class="op">=</span> recall_score(y_diabetes_test, y_diabetes_pred_adjusted)</span>
+<span id="cb51-21"><a href="#cb51-21" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Recall with Adjusted Threshold: </span><span class="sc">{</span>recall_adjusted<span class="sc">:.2f}</span><span class="ss">"</span>)</span>
+<span id="cb51-22"><a href="#cb51-22" aria-hidden="true" tabindex="-1"></a><span class="co"># plot the precision-recall curve</span></span>
+<span id="cb51-23"><a href="#cb51-23" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
+<span id="cb51-24"><a href="#cb51-24" aria-hidden="true" tabindex="-1"></a>plt.plot(recall, precision, marker<span class="op">=</span><span class="st">'o'</span>)</span>
+<span id="cb51-25"><a href="#cb51-25" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Recall'</span>, fontsize<span class="op">=</span><span class="dv">12</span>)</span>
+<span id="cb51-26"><a href="#cb51-26" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Precision'</span>, fontsize<span class="op">=</span><span class="dv">12</span>)</span>
+<span id="cb51-27"><a href="#cb51-27" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Precision-Recall Curve'</span>, fontsize<span class="op">=</span><span class="dv">14</span>)</span>
+<span id="cb51-28"><a href="#cb51-28" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>)</span>
+<span id="cb51-29"><a href="#cb51-29" aria-hidden="true" tabindex="-1"></a>plt.axvline(x<span class="op">=</span>recall[np.argmax(f1_scores)], color<span class="op">=</span><span class="st">'red'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>, label<span class="op">=</span><span class="st">'Best Threshold'</span>)</span>
+<span id="cb51-30"><a href="#cb51-30" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb51-31"><a href="#cb51-31" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb51-32"><a href="#cb51-32" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Best Threshold for F1 Score: 0.19
 Accuracy with Adjusted Threshold: 0.78
@@ -2769,7 +2957,7 @@ Recall with Adjusted Threshold: 0.82</code></pre>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="XGBoost_files/figure-html/cell-28-output-2.png" class="img-fluid figure-img"></p>
+<p><img src="XGBoost_files/figure-html/cell-32-output-2.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>

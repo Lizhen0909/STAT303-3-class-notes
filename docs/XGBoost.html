@@ -328,10 +328,10 @@ window.Quarto = {
   <li><a href="#using-xgboost" id="toc-using-xgboost" class="nav-link" data-scroll-target="#using-xgboost"><span class="header-section-number">10.6</span> Using XGBoost</a></li>
   <li><a href="#core-hyperparameter-categories" id="toc-core-hyperparameter-categories" class="nav-link" data-scroll-target="#core-hyperparameter-categories"><span class="header-section-number">10.7</span> Core Hyperparameter Categories</a>
   <ul>
-  <li><a href="#model-complexity" id="toc-model-complexity" class="nav-link" data-scroll-target="#model-complexity"><span class="header-section-number">10.7.1</span> 1. Model Complexity</a></li>
-  <li><a href="#learning-and-regularization" id="toc-learning-and-regularization" class="nav-link" data-scroll-target="#learning-and-regularization"><span class="header-section-number">10.7.2</span> 2. Learning and Regularization</a></li>
-  <li><a href="#regularization" id="toc-regularization" class="nav-link" data-scroll-target="#regularization"><span class="header-section-number">10.7.3</span> 3. Regularization</a></li>
-  <li><a href="#optimization-control" id="toc-optimization-control" class="nav-link" data-scroll-target="#optimization-control"><span class="header-section-number">10.7.4</span> 4. Optimization Control</a></li>
+  <li><a href="#model-complexity" id="toc-model-complexity" class="nav-link" data-scroll-target="#model-complexity"><span class="header-section-number">10.7.1</span> Model Complexity</a></li>
+  <li><a href="#learning-and-regularization" id="toc-learning-and-regularization" class="nav-link" data-scroll-target="#learning-and-regularization"><span class="header-section-number">10.7.2</span> Learning and Regularization</a></li>
+  <li><a href="#regularization" id="toc-regularization" class="nav-link" data-scroll-target="#regularization"><span class="header-section-number">10.7.3</span> Regularization</a></li>
+  <li><a href="#optimization-control" id="toc-optimization-control" class="nav-link" data-scroll-target="#optimization-control"><span class="header-section-number">10.7.4</span> Optimization Control</a></li>
   <li><a href="#baseline-model" id="toc-baseline-model" class="nav-link" data-scroll-target="#baseline-model"><span class="header-section-number">10.7.5</span> Baseline Model</a></li>
   <li><a href="#early-stopping-in-xgboost" id="toc-early-stopping-in-xgboost" class="nav-link" data-scroll-target="#early-stopping-in-xgboost"><span class="header-section-number">10.7.6</span> Early Stopping in XGBoost</a>
   <ul class="collapse">
@@ -457,7 +457,7 @@ This makes it easy to integrate XGBoost models into Scikit-learn workflows such 
 <section id="core-hyperparameter-categories" class="level2" data-number="10.7">
 <h2 data-number="10.7" class="anchored" data-anchor-id="core-hyperparameter-categories"><span class="header-section-number">10.7</span> Core Hyperparameter Categories</h2>
 <section id="model-complexity" class="level3" data-number="10.7.1">
-<h3 data-number="10.7.1" class="anchored" data-anchor-id="model-complexity"><span class="header-section-number">10.7.1</span> 1. Model Complexity</h3>
+<h3 data-number="10.7.1" class="anchored" data-anchor-id="model-complexity"><span class="header-section-number">10.7.1</span> Model Complexity</h3>
 <ul>
 <li><code>n_estimators</code>: Number of boosting rounds<br>
 </li>
@@ -467,7 +467,7 @@ This makes it easy to integrate XGBoost models into Scikit-learn workflows such 
 </ul>
 </section>
 <section id="learning-and-regularization" class="level3" data-number="10.7.2">
-<h3 data-number="10.7.2" class="anchored" data-anchor-id="learning-and-regularization"><span class="header-section-number">10.7.2</span> 2. Learning and Regularization</h3>
+<h3 data-number="10.7.2" class="anchored" data-anchor-id="learning-and-regularization"><span class="header-section-number">10.7.2</span> Learning and Regularization</h3>
 <ul>
 <li><code>learning_rate</code> (<code>eta</code>): Shrinkage rate to scale each tree’s contribution<br>
 </li>
@@ -479,7 +479,7 @@ This makes it easy to integrate XGBoost models into Scikit-learn workflows such 
 </ul>
 </section>
 <section id="regularization" class="level3" data-number="10.7.3">
-<h3 data-number="10.7.3" class="anchored" data-anchor-id="regularization"><span class="header-section-number">10.7.3</span> 3. Regularization</h3>
+<h3 data-number="10.7.3" class="anchored" data-anchor-id="regularization"><span class="header-section-number">10.7.3</span> Regularization</h3>
 <ul>
 <li><code>gamma</code>: Minimum loss reduction required to make a further partition<br>
 </li>
@@ -489,7 +489,7 @@ This makes it easy to integrate XGBoost models into Scikit-learn workflows such 
 </ul>
 </section>
 <section id="optimization-control" class="level3" data-number="10.7.4">
-<h3 data-number="10.7.4" class="anchored" data-anchor-id="optimization-control"><span class="header-section-number">10.7.4</span> 4. Optimization Control</h3>
+<h3 data-number="10.7.4" class="anchored" data-anchor-id="optimization-control"><span class="header-section-number">10.7.4</span> Optimization Control</h3>
 <ul>
 <li><code>objective</code>: Loss function (e.g., <code>'reg:squarederror'</code>, <code>'binary:logistic'</code>)<br>
 </li>

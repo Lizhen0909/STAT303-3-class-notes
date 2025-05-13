@@ -345,8 +345,7 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#why-gridsearchcv-is-not-a-practical-option" id="toc-why-gridsearchcv-is-not-a-practical-option" class="nav-link" data-scroll-target="#why-gridsearchcv-is-not-a-practical-option"><span class="header-section-number">10.7.10.1</span> Why <code>GridSearchCV</code> Is Not a Practical Option</a></li>
   <li><a href="#smarter-tuning-with-optuna-or-bayessearchcv" id="toc-smarter-tuning-with-optuna-or-bayessearchcv" class="nav-link" data-scroll-target="#smarter-tuning-with-optuna-or-bayessearchcv"><span class="header-section-number">10.7.10.2</span> Smarter Tuning with Optuna or BayesSearchCV</a></li>
-  <li><a href="#tuning-with-optuna" id="toc-tuning-with-optuna" class="nav-link" data-scroll-target="#tuning-with-optuna"><span class="header-section-number">10.7.10.3</span> Tuning with Optuna</a></li>
-  <li><a href="#after-training-analyze-and-refine" id="toc-after-training-analyze-and-refine" class="nav-link" data-scroll-target="#after-training-analyze-and-refine"><span class="header-section-number">10.7.10.4</span> After Training: Analyze and Refine</a></li>
+  <li><a href="#after-training-analyze-and-refine" id="toc-after-training-analyze-and-refine" class="nav-link" data-scroll-target="#after-training-analyze-and-refine"><span class="header-section-number">10.7.10.3</span> After Training: Analyze and Refine</a></li>
   </ul></li>
   </ul></li>
   <li><a href="#xgboost-for-classification" id="toc-xgboost-for-classification" class="nav-link" data-scroll-target="#xgboost-for-classification"><span class="header-section-number">10.8</span> XGBoost for classification</a>
@@ -1651,7 +1650,12 @@ Best RMSE: 3222.51</code></pre>
 <li><p><strong>Optuna</strong>: A powerful hyperparameter optimization framework that uses <strong>Tree-structured Parzen Estimators (TPE)</strong> to efficiently explore the search space. It dynamically chooses the next set of hyperparameters to try based on past performance.</p></li>
 <li><p><strong>BayesSearchCV</strong> (from <code>scikit-optimize</code>): Implements <strong>Bayesian optimization</strong>, which builds a probabilistic model of the objective function and selects the most promising hyperparameters to try next.</p></li>
 </ul>
-<p>These methods are: - <strong>More efficient</strong>: They converge to good solutions with far fewer iterations. - <strong>Flexible</strong>: They support conditional hyperparameter tuning. - <strong>Scalable</strong>: Much better suited for high-dimensional or expensive-to-evaluate models.</p>
+<p>These methods are:</p>
+<ul>
+<li><strong>More efficient</strong>: They converge to good solutions with far fewer iterations.</li>
+<li><strong>Flexible</strong>: They support conditional hyperparameter tuning.</li>
+<li><strong>Scalable</strong>: Much better suited for high-dimensional or expensive-to-evaluate models.</li>
+</ul>
 <p>In summary, we commented out the grid search due to its high cost and instead favor more <strong>intelligent, efficient</strong> hyperparameter search methods like <code>Optuna</code> or <code>BayesSearchCV</code> for practical use.</p>
 <section id="bayessearchcv-from-skopt" class="level5" data-number="10.7.10.2.1">
 <h5 data-number="10.7.10.2.1" class="anchored" data-anchor-id="bayessearchcv-from-skopt"><span class="header-section-number">10.7.10.2.1</span> <code>BayesSearchCV</code> (from <code>skopt</code>)</h5>
@@ -1968,9 +1972,8 @@ R² Score: 0.9676</code></pre>
 </div>
 </div>
 </section>
-</section>
-<section id="tuning-with-optuna" class="level4" data-number="10.7.10.3">
-<h4 data-number="10.7.10.3" class="anchored" data-anchor-id="tuning-with-optuna"><span class="header-section-number">10.7.10.3</span> Tuning with Optuna</h4>
+<section id="tuning-with-optuna" class="level5" data-number="10.7.10.2.2">
+<h5 data-number="10.7.10.2.2" class="anchored" data-anchor-id="tuning-with-optuna"><span class="header-section-number">10.7.10.2.2</span> Tuning with Optuna</h5>
 <p>With Optuna, you define the search space inside an objective function using trial suggestions:</p>
 <div id="0887d5d0" class="cell" data-execution_count="27">
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> optuna</span>
@@ -2106,8 +2109,9 @@ R² Score: 0.9676</code></pre>
 </div>
 </div>
 </section>
-<section id="after-training-analyze-and-refine" class="level4" data-number="10.7.10.4">
-<h4 data-number="10.7.10.4" class="anchored" data-anchor-id="after-training-analyze-and-refine"><span class="header-section-number">10.7.10.4</span> After Training: Analyze and Refine</h4>
+</section>
+<section id="after-training-analyze-and-refine" class="level4" data-number="10.7.10.3">
+<h4 data-number="10.7.10.3" class="anchored" data-anchor-id="after-training-analyze-and-refine"><span class="header-section-number">10.7.10.3</span> After Training: Analyze and Refine</h4>
 <p>Once the tuning is complete, <strong>don’t forget to visualize the search results</strong> to understand how different hyperparameters affected performance. This helps you:</p>
 <ul>
 <li>Identify which parameters had the most impact.</li>
@@ -2117,7 +2121,11 @@ R² Score: 0.9676</code></pre>
 <blockquote class="blockquote">
 <p>🔹 <strong>Key Tip</strong>: If the best values are near the boundary of your current search space, consider <strong>fine-tuning the search space</strong> and re-running the optimization.</p>
 </blockquote>
-<p>You can visualize results using: - <code>Optuna</code>’s built-in plots like <code>plot_optimization_history()</code> and <code>plot_param_importances()</code>. - <code>BayesSearchCV</code>’s <code>cv_results_</code> attribute to create custom plots using <code>pandas</code> or <code>seaborn</code>.</p>
+<p>You can visualize results using:</p>
+<ul>
+<li><code>Optuna</code>’s built-in plots like <code>plot_optimization_history()</code> and <code>plot_param_importances()</code>.</li>
+<li><code>BayesSearchCV</code>’s <code>cv_results_</code> attribute to create custom plots using <code>pandas</code> or <code>seaborn</code>.</li>
+</ul>
 <p>Effective tuning is often <strong>iterative</strong> — let the data guide you!</p>
 </section>
 </section>

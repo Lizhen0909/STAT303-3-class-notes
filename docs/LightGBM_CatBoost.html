@@ -1231,13 +1231,7 @@ Test R²: 0.9684</code></pre>
 </section>
 <section id="handling-imbalanced-classification-xgboost-vs.-lightgbm-vs.-catboost" class="level2" data-number="11.4">
 <h2 data-number="11.4" class="anchored" data-anchor-id="handling-imbalanced-classification-xgboost-vs.-lightgbm-vs.-catboost"><span class="header-section-number">11.4</span> Handling Imbalanced Classification: XGBoost vs.&nbsp;LightGBM vs.&nbsp;CatBoost</h2>
-<p>Imbalanced classification occurs when one class significantly outnumbers the other (e.g., fraud detection, disease diagnosis). Here are common strategies across all libraries</p>
-<ul>
-<li><strong>Evaluation Metrics:</strong> Use metrics like <strong>F1-score</strong>, <strong>AUC-PR</strong> (Area Under the Precision-Recall Curve), or <strong>Matthews Correlation Coefficient (MCC)</strong> instead of accuracy.</li>
-<li><strong>Threshold Tuning:</strong> Adjust the decision threshold to prioritize precision or recall.</li>
-<li><strong>Stratified Sampling:</strong> Ensure balanced splits during train-test splits or cross-validation.</li>
-</ul>
-<p>Each boosting library offers tools to address this issue:</p>
+<p>Imbalanced classification occurs when one class significantly outnumbers the other (e.g., fraud detection, disease diagnosis). Each boosting library offers tools to address this issue:</p>
 <p><strong>XGBoost</strong>:</p>
 <ul>
 <li><strong>Parameter</strong>: <code>scale_pos_weight</code>

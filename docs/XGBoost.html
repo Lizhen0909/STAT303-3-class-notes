@@ -348,12 +348,17 @@ window.Quarto = {
   </ul></li>
   <li><a href="#xgboost-for-imbalanced-classification" id="toc-xgboost-for-imbalanced-classification" class="nav-link" data-scroll-target="#xgboost-for-imbalanced-classification"><span class="header-section-number">10.6</span> XGBoost for Imbalanced Classification</a>
   <ul>
-  <li><a href="#handling-class-imbalance-with-scale_pos_weight" id="toc-handling-class-imbalance-with-scale_pos_weight" class="nav-link" data-scroll-target="#handling-class-imbalance-with-scale_pos_weight"><span class="header-section-number">10.6.1</span> Handling Class Imbalance with <code>scale_pos_weight</code></a></li>
-  <li><a href="#what-it-does" id="toc-what-it-does" class="nav-link" data-scroll-target="#what-it-does"><span class="header-section-number">10.6.2</span> What it does</a></li>
-  <li><a href="#when-to-use-it" id="toc-when-to-use-it" class="nav-link" data-scroll-target="#when-to-use-it"><span class="header-section-number">10.6.3</span> When to use it</a></li>
-  <li><a href="#how-to-set-it" id="toc-how-to-set-it" class="nav-link" data-scroll-target="#how-to-set-it"><span class="header-section-number">10.6.4</span> How to set it</a></li>
-  <li><a href="#using-scale_pos_weight" id="toc-using-scale_pos_weight" class="nav-link" data-scroll-target="#using-scale_pos_weight"><span class="header-section-number">10.6.5</span> Using <code>scale_pos_weight</code></a></li>
-  <li><a href="#threshold-adjustment" id="toc-threshold-adjustment" class="nav-link" data-scroll-target="#threshold-adjustment"><span class="header-section-number">10.6.6</span> Threshold adjustment</a></li>
+  <li><a href="#common-strategies-across-libraries" id="toc-common-strategies-across-libraries" class="nav-link" data-scroll-target="#common-strategies-across-libraries"><span class="header-section-number">10.6.1</span> Common Strategies Across Libraries</a></li>
+  <li><a href="#handling-class-imbalance-with-scale_pos_weight-in-xgboost" id="toc-handling-class-imbalance-with-scale_pos_weight-in-xgboost" class="nav-link" data-scroll-target="#handling-class-imbalance-with-scale_pos_weight-in-xgboost"><span class="header-section-number">10.6.2</span> Handling Class Imbalance with <code>scale_pos_weight</code> in XGBoost</a>
+  <ul class="collapse">
+  <li><a href="#what-does-scale_pos_weight-do" id="toc-what-does-scale_pos_weight-do" class="nav-link" data-scroll-target="#what-does-scale_pos_weight-do"><span class="header-section-number">10.6.2.1</span> What Does <code>scale_pos_weight</code> Do?</a></li>
+  <li><a href="#when-to-use-it" id="toc-when-to-use-it" class="nav-link" data-scroll-target="#when-to-use-it"><span class="header-section-number">10.6.2.2</span> When to Use It</a></li>
+  </ul></li>
+  <li><a href="#how-to-set-it" id="toc-how-to-set-it" class="nav-link" data-scroll-target="#how-to-set-it"><span class="header-section-number">10.6.3</span> How to Set It</a></li>
+  <li><a href="#using-scale_pos_weight" id="toc-using-scale_pos_weight" class="nav-link" data-scroll-target="#using-scale_pos_weight"><span class="header-section-number">10.6.4</span> Using <code>scale_pos_weight</code></a></li>
+  <li><a href="#threshold-adjustment" id="toc-threshold-adjustment" class="nav-link" data-scroll-target="#threshold-adjustment"><span class="header-section-number">10.6.5</span> Threshold adjustment</a></li>
+  <li><a href="#alternative-method-custom-instance-weights-sample_weight" id="toc-alternative-method-custom-instance-weights-sample_weight" class="nav-link" data-scroll-target="#alternative-method-custom-instance-weights-sample_weight"><span class="header-section-number">10.6.6</span> Alternative Method: Custom Instance Weights (<code>sample_weight</code>)</a></li>
+  <li><a href="#scale_pos_weight-vs.-sample_weight" id="toc-scale_pos_weight-vs.-sample_weight" class="nav-link" data-scroll-target="#scale_pos_weight-vs.-sample_weight"><span class="header-section-number">10.6.7</span> <code>scale_pos_weight</code> vs.&nbsp;<code>sample_weight</code></a></li>
   </ul></li>
   <li><a href="#resources-for-learning-xgboost" id="toc-resources-for-learning-xgboost" class="nav-link" data-scroll-target="#resources-for-learning-xgboost"><span class="header-section-number">10.7</span> Resources for Learning XGBoost</a></li>
   </ul>
@@ -2110,35 +2115,51 @@ R² Score: 0.9676</code></pre>
 </section>
 <section id="xgboost-for-imbalanced-classification" class="level2" data-number="10.6">
 <h2 data-number="10.6" class="anchored" data-anchor-id="xgboost-for-imbalanced-classification"><span class="header-section-number">10.6</span> XGBoost for Imbalanced Classification</h2>
-<section id="handling-class-imbalance-with-scale_pos_weight" class="level3" data-number="10.6.1">
-<h3 data-number="10.6.1" class="anchored" data-anchor-id="handling-class-imbalance-with-scale_pos_weight"><span class="header-section-number">10.6.1</span> Handling Class Imbalance with <code>scale_pos_weight</code></h3>
-<p>In binary classification tasks, when one class is much rarer than the other (e.g., fraud detection, disease diagnosis), XGBoost models can become biased toward the majority class.</p>
-<p>To address this, XGBoost provides the <code>scale_pos_weight</code> parameter:</p>
-</section>
-<section id="what-it-does" class="level3" data-number="10.6.2">
-<h3 data-number="10.6.2" class="anchored" data-anchor-id="what-it-does"><span class="header-section-number">10.6.2</span> What it does</h3>
-<p><code>scale_pos_weight</code> changes the <strong>relative importance</strong> of positive examples during training by multiplying the gradients and Hessians of the <strong>positive class</strong> (label = 1).</p>
+<section id="common-strategies-across-libraries" class="level3" data-number="10.6.1">
+<h3 data-number="10.6.1" class="anchored" data-anchor-id="common-strategies-across-libraries"><span class="header-section-number">10.6.1</span> Common Strategies Across Libraries</h3>
+<p>Imbalanced classification arises when one class is significantly underrepresented—common in applications like <strong>fraud detection</strong>, <strong>rare disease diagnosis</strong>, and <strong>anomaly detection</strong>.</p>
 <ul>
-<li>A higher value <strong>increases the penalty</strong> for misclassifying positive samples.</li>
-<li>This encourages the model to focus more on correctly predicting rare (positive) cases.</li>
+<li><p><strong>Use Better Evaluation Metrics</strong><br>
+Avoid relying on accuracy. Instead, use metrics that reflect class imbalance, such as:</p>
+<ul>
+<li><strong>F1-score</strong></li>
+<li><strong>AUC-PR</strong> (Area Under the Precision-Recall Curve)</li>
+<li><strong>Matthews Correlation Coefficient (MCC)</strong></li>
+</ul></li>
+<li><p><strong>Threshold Tuning</strong><br>
+Adjust the <strong>decision threshold</strong> to balance between precision and recall based on your use case.</p></li>
+<li><p><strong>Stratified Sampling</strong><br>
+When splitting the dataset (for training/validation or cross-validation), use <strong>stratified sampling</strong> to maintain the class distribution in each fold.</p></li>
 </ul>
 </section>
-<section id="when-to-use-it" class="level3" data-number="10.6.3">
-<h3 data-number="10.6.3" class="anchored" data-anchor-id="when-to-use-it"><span class="header-section-number">10.6.3</span> When to use it</h3>
+<section id="handling-class-imbalance-with-scale_pos_weight-in-xgboost" class="level3" data-number="10.6.2">
+<h3 data-number="10.6.2" class="anchored" data-anchor-id="handling-class-imbalance-with-scale_pos_weight-in-xgboost"><span class="header-section-number">10.6.2</span> Handling Class Imbalance with <code>scale_pos_weight</code> in XGBoost</h3>
+<p>While XGBoost (and other gradient boosting libraries) can perform well on imbalanced datasets, models can become biased toward the <strong>majority class</strong> if no corrective strategies are used. One of the most effective built-in solutions in XGBoost is the <code>scale_pos_weight</code> parameter.</p>
+<section id="what-does-scale_pos_weight-do" class="level4" data-number="10.6.2.1">
+<h4 data-number="10.6.2.1" class="anchored" data-anchor-id="what-does-scale_pos_weight-do"><span class="header-section-number">10.6.2.1</span> What Does <code>scale_pos_weight</code> Do?</h4>
+<p>The <code>scale_pos_weight</code> parameter adjusts the <strong>relative importance</strong> of positive class examples (<code>label = 1</code>) by scaling their gradients and Hessians during training.</p>
+<ul>
+<li>A higher value places <strong>more penalty on misclassifying positive samples</strong></li>
+<li>This encourages the model to <strong>focus more on the minority class</strong>, helping improve recall and F1-score</li>
+</ul>
+</section>
+<section id="when-to-use-it" class="level4" data-number="10.6.2.2">
+<h4 data-number="10.6.2.2" class="anchored" data-anchor-id="when-to-use-it"><span class="header-section-number">10.6.2.2</span> When to Use It</h4>
 <p>Use <code>scale_pos_weight &gt; 1</code> when:</p>
 <ul>
-<li>Your data is <strong>heavily imbalanced</strong>, and</li>
-<li>You want to improve <strong>recall</strong> or <strong>F1-score</strong> on the minority (positive) class.</li>
+<li>The dataset is <strong>heavily imbalanced</strong></li>
+<li>You care more about the <strong>positive class performance</strong> (e.g., improving <strong>recall</strong>, <strong>precision</strong>, or <strong>F1-score</strong>)</li>
 </ul>
 </section>
-<section id="how-to-set-it" class="level3" data-number="10.6.4">
-<h3 data-number="10.6.4" class="anchored" data-anchor-id="how-to-set-it"><span class="header-section-number">10.6.4</span> How to set it</h3>
-<p>A common heuristic:</p>
+</section>
+<section id="how-to-set-it" class="level3" data-number="10.6.3">
+<h3 data-number="10.6.3" class="anchored" data-anchor-id="how-to-set-it"><span class="header-section-number">10.6.3</span> How to Set It</h3>
+<p>A commonly used heuristic:</p>
 <p><span class="math display">\[
-\text{scale\_pos\_weight} = \frac{\text{number of negative samples}}{\text{number of positive samples}}
+\text{scale\_pos\_weight} = \frac{\text{Number of negative samples}}{\text{Number of positive samples}}
 \]</span></p>
-<p>This helps the model give more attention to the minority (positive) class by scaling its gradient and Hessian contributions during training.</p>
-<p>Use this as a <strong>starting point</strong>, and then fine-tune through cross-validation for best performance.</p>
+<p>This provides a <strong>balanced gradient contribution</strong> during training and serves as a good <strong>starting point</strong>. You can further fine-tune this value via cross-validation for optimal performance.</p>
+<p><strong>Note</strong>: While <code>scale_pos_weight</code> adjusts learning behavior internally, you should still monitor metrics like <strong>AUC-PR</strong>, <strong>F1-score</strong>, or <strong>recall</strong> to ensure it’s improving your model’s performance on the minority class.</p>
 <div id="82a64bd9" class="cell" data-execution_count="61">
 <div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>diabetes_train <span class="op">=</span> pd.read_csv(<span class="st">'./Datasets/diabetes_train.csv'</span>)</span>
 <span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>diabetes_test <span class="op">=</span> pd.read_csv(<span class="st">'./Datasets/diabetes_test.csv'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -2783,8 +2804,8 @@ F1 Score on Diabetes Test Set: 0.63</code></pre>
 </div>
 </div>
 </section>
-<section id="using-scale_pos_weight" class="level3" data-number="10.6.5">
-<h3 data-number="10.6.5" class="anchored" data-anchor-id="using-scale_pos_weight"><span class="header-section-number">10.6.5</span> Using <code>scale_pos_weight</code></h3>
+<section id="using-scale_pos_weight" class="level3" data-number="10.6.4">
+<h3 data-number="10.6.4" class="anchored" data-anchor-id="using-scale_pos_weight"><span class="header-section-number">10.6.4</span> Using <code>scale_pos_weight</code></h3>
 <div id="9292c568" class="cell">
 <div class="sourceCode cell-code" id="cb46"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>neg <span class="op">=</span> (diabetes_train[<span class="st">'Outcome'</span>] <span class="op">==</span> <span class="dv">0</span>).<span class="bu">sum</span>()</span>
 <span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>pos <span class="op">=</span> (diabetes_train[<span class="st">'Outcome'</span>] <span class="op">==</span> <span class="dv">1</span>).<span class="bu">sum</span>()</span>
@@ -2899,8 +2920,8 @@ Best Recall: 0.67</code></pre>
 </ul>
 <p>✅ This indicates the model was previously <strong>underperforming on the positive class</strong>, and that moderate rebalancing (e.g., <code>scale_pos_weight = 3</code>) helped improve <strong>both recall and precision</strong> — something that can happen when the model is initially biased toward the majority class.</p>
 </section>
-<section id="threshold-adjustment" class="level3" data-number="10.6.6">
-<h3 data-number="10.6.6" class="anchored" data-anchor-id="threshold-adjustment"><span class="header-section-number">10.6.6</span> Threshold adjustment</h3>
+<section id="threshold-adjustment" class="level3" data-number="10.6.5">
+<h3 data-number="10.6.5" class="anchored" data-anchor-id="threshold-adjustment"><span class="header-section-number">10.6.5</span> Threshold adjustment</h3>
 <div id="50d25e90" class="cell">
 <div class="sourceCode cell-code" id="cb49"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="co"># get prediction probabilities</span></span>
 <span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>y_diabetes_pred_proba <span class="op">=</span> diabetes_pipeline.predict_proba(X_diabetes_test)[:, <span class="dv">1</span>]</span>
@@ -2948,6 +2969,69 @@ Recall with Adjusted Threshold: 0.82</code></pre>
 </div>
 </div>
 </div>
+</section>
+<section id="alternative-method-custom-instance-weights-sample_weight" class="level3" data-number="10.6.6">
+<h3 data-number="10.6.6" class="anchored" data-anchor-id="alternative-method-custom-instance-weights-sample_weight"><span class="header-section-number">10.6.6</span> Alternative Method: Custom Instance Weights (<code>sample_weight</code>)</h3>
+<p>You can assign <strong>custom weights to individual training samples</strong> using the <code>sample_weight</code> parameter in <code>fit()</code> (scikit-learn API) or <code>weight</code> in <code>DMatrix</code> (native API). This gives you <strong>fine-grained control</strong> over how much each sample contributes to the loss and gradient during training.</p>
+<p>Example (scikit-learn API):</p>
+<div class="sourceCode" id="cb51"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> xgboost <span class="im">import</span> XGBClassifier</span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Assign higher weights to positive class</span></span>
+<span id="cb51-5"><a href="#cb51-5" aria-hidden="true" tabindex="-1"></a>weights <span class="op">=</span> np.where(y_train <span class="op">==</span> <span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">1</span>)</span>
+<span id="cb51-6"><a href="#cb51-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-7"><a href="#cb51-7" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> XGBClassifier()</span>
+<span id="cb51-8"><a href="#cb51-8" aria-hidden="true" tabindex="-1"></a>model.fit(X_train, y_train, sample_weight<span class="op">=</span>weights)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>When to Use This:</strong></p>
+<ul>
+<li><p>When you want more flexibility than scale_pos_weight allows</p></li>
+<li><p>When the imbalance is complex (e.g., multi-class or cost-sensitive)</p></li>
+<li><p>When you want to incorporate domain knowledge into weight assignments</p></li>
+</ul>
+</section>
+<section id="scale_pos_weight-vs.-sample_weight" class="level3" data-number="10.6.7">
+<h3 data-number="10.6.7" class="anchored" data-anchor-id="scale_pos_weight-vs.-sample_weight"><span class="header-section-number">10.6.7</span> <code>scale_pos_weight</code> vs.&nbsp;<code>sample_weight</code></h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 11%">
+<col style="width: 44%">
+<col style="width: 43%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Feature</strong></th>
+<th><strong><code>scale_pos_weight</code></strong></th>
+<th><strong><code>sample_weight</code></strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Applies to</strong></td>
+<td>Entire positive class (<code>label = 1</code>)</td>
+<td>Individual samples</td>
+</tr>
+<tr class="even">
+<td><strong>How it works</strong></td>
+<td>Multiplies gradients and Hessians of the positive class during training</td>
+<td>Directly scales the loss function per instance</td>
+</tr>
+<tr class="odd">
+<td><strong>Use case</strong></td>
+<td>Binary classification with class imbalance</td>
+<td>Any situation needing custom weighting (e.g., multi-class, domain-driven)</td>
+</tr>
+<tr class="even">
+<td><strong>Flexibility</strong></td>
+<td>One global weight value</td>
+<td>Full per-sample control</td>
+</tr>
+<tr class="odd">
+<td><strong>Where to set</strong></td>
+<td><code>scale_pos_weight</code> parameter in <code>XGBClassifier</code> or <code>DMatrix</code></td>
+<td><code>sample_weight</code> in <code>.fit()</code> or <code>weight=</code> in <code>DMatrix</code></td>
+</tr>
+</tbody>
+</table>
 </section>
 </section>
 <section id="resources-for-learning-xgboost" class="level2" data-number="10.7">

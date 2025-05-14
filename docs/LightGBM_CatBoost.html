@@ -354,21 +354,8 @@ window.Quarto = {
   <li><a href="#tuning-catboostregressor-with-optuna" id="toc-tuning-catboostregressor-with-optuna" class="nav-link" data-scroll-target="#tuning-catboostregressor-with-optuna"><span class="header-section-number">11.3.6</span> Tuning <code>CatBoostRegressor</code> with Optuna</a></li>
   <li><a href="#when-to-use-catboost-over-xgboost" id="toc-when-to-use-catboost-over-xgboost" class="nav-link" data-scroll-target="#when-to-use-catboost-over-xgboost"><span class="header-section-number">11.3.7</span> When to Use <strong>CatBoost</strong> Over <strong>XGBoost</strong></a></li>
   </ul></li>
-  <li><a href="#handling-imbalanced-classification-xgboost-vs.-lightgbm-vs.-catboost" id="toc-handling-imbalanced-classification-xgboost-vs.-lightgbm-vs.-catboost" class="nav-link" data-scroll-target="#handling-imbalanced-classification-xgboost-vs.-lightgbm-vs.-catboost"><span class="header-section-number">11.4</span> Handling Imbalanced Classification: XGBoost vs.&nbsp;LightGBM vs.&nbsp;CatBoost</a>
-  <ul>
-  <li><a href="#xgboost" id="toc-xgboost" class="nav-link" data-scroll-target="#xgboost"><span class="header-section-number">11.4.1</span> XGBoost</a></li>
-  <li><a href="#lightgbm-1" id="toc-lightgbm-1" class="nav-link" data-scroll-target="#lightgbm-1"><span class="header-section-number">11.4.2</span> LightGBM</a></li>
-  <li><a href="#catboost-1" id="toc-catboost-1" class="nav-link" data-scroll-target="#catboost-1"><span class="header-section-number">11.4.3</span> CatBoost</a></li>
-  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">11.4.4</span> Summary</a></li>
-  <li><a href="#common-strategies-across-all-libraries" id="toc-common-strategies-across-all-libraries" class="nav-link" data-scroll-target="#common-strategies-across-all-libraries"><span class="header-section-number">11.4.5</span> Common Strategies Across All Libraries</a></li>
-  </ul></li>
-  <li><a href="#summary-xgboost-vs.-lightgbm-vs.-catboost" id="toc-summary-xgboost-vs.-lightgbm-vs.-catboost" class="nav-link" data-scroll-target="#summary-xgboost-vs.-lightgbm-vs.-catboost"><span class="header-section-number">11.5</span> Summary: XGBoost vs.&nbsp;LightGBM vs.&nbsp;CatBoost</a>
-  <ul>
-  <li><a href="#xgboost-1" id="toc-xgboost-1" class="nav-link" data-scroll-target="#xgboost-1"><span class="header-section-number">11.5.1</span> XGBoost</a></li>
-  <li><a href="#lightgbm-2" id="toc-lightgbm-2" class="nav-link" data-scroll-target="#lightgbm-2"><span class="header-section-number">11.5.2</span> LightGBM</a></li>
-  <li><a href="#catboost-2" id="toc-catboost-2" class="nav-link" data-scroll-target="#catboost-2"><span class="header-section-number">11.5.3</span> CatBoost</a></li>
-  <li><a href="#final-thoughts" id="toc-final-thoughts" class="nav-link" data-scroll-target="#final-thoughts"><span class="header-section-number">11.5.4</span> Final Thoughts</a></li>
-  </ul></li>
+  <li><a href="#handling-imbalanced-classification-xgboost-vs.-lightgbm-vs.-catboost" id="toc-handling-imbalanced-classification-xgboost-vs.-lightgbm-vs.-catboost" class="nav-link" data-scroll-target="#handling-imbalanced-classification-xgboost-vs.-lightgbm-vs.-catboost"><span class="header-section-number">11.4</span> Handling Imbalanced Classification: XGBoost vs.&nbsp;LightGBM vs.&nbsp;CatBoost</a></li>
+  <li><a href="#summary-xgboost-vs.-lightgbm-vs.-catboost" id="toc-summary-xgboost-vs.-lightgbm-vs.-catboost" class="nav-link" data-scroll-target="#summary-xgboost-vs.-lightgbm-vs.-catboost"><span class="header-section-number">11.5</span> Summary: XGBoost vs.&nbsp;LightGBM vs.&nbsp;CatBoost</a></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">11.6</span> References</a></li>
   </ul>
 </nav>
@@ -404,7 +391,12 @@ window.Quarto = {
 </ul>
 <section id="what-they-share-with-xgboost" class="level2" data-number="11.1">
 <h2 data-number="11.1" class="anchored" data-anchor-id="what-they-share-with-xgboost"><span class="header-section-number">11.1</span> What They Share with XGBoost</h2>
-<p>Despite their architectural differences, both LightGBM and CatBoost share key foundations with XGBoost: - They use the <strong>same objective function structure</strong> (loss + regularization) - They apply a <strong>second-order Taylor approximation</strong> for efficient optimization - They implement a <strong>histogram-based split-finding algorithm</strong> to speed up training</p>
+<p>Despite their architectural differences, both LightGBM and CatBoost share key foundations with XGBoost:</p>
+<ul>
+<li>They use the <strong>same objective function structure</strong> (loss + regularization)</li>
+<li>They apply a <strong>second-order Taylor approximation</strong> for efficient optimization</li>
+<li>They implement a <strong>histogram-based split-finding algorithm</strong> to speed up training</li>
+</ul>
 </section>
 <section id="lightgbm" class="level2" data-number="11.2">
 <h2 data-number="11.2" class="anchored" data-anchor-id="lightgbm"><span class="header-section-number">11.2</span> LightGBM</h2>
@@ -541,50 +533,39 @@ This makes it easy to integrate LightGBM models into Scikit-learn workflows such
 </blockquote>
 <section id="core-lightgbm-hyperparameters" class="level4" data-number="11.2.3.1">
 <h4 data-number="11.2.3.1" class="anchored" data-anchor-id="core-lightgbm-hyperparameters"><span class="header-section-number">11.2.3.1</span> Core LightGBM Hyperparameters</h4>
-<section id="core-tree-structure" class="level5" data-number="11.2.3.1.1">
-<h5 data-number="11.2.3.1.1" class="anchored" data-anchor-id="core-tree-structure"><span class="header-section-number">11.2.3.1.1</span> Core Tree Structure</h5>
+<p><strong>Core Tree Structure</strong>:</p>
 <ul>
 <li><code>num_leaves</code>: Maximum number of leaves (terminal nodes) per tree.</li>
 <li><code>min_data_in_leaf</code>: Minimum number of data points required in a leaf.</li>
 <li><code>max_depth</code>: Maximum depth of a tree (used to control overfitting).</li>
 </ul>
-</section>
-<section id="learning-control-and-regularization" class="level5" data-number="11.2.3.1.2">
-<h5 data-number="11.2.3.1.2" class="anchored" data-anchor-id="learning-control-and-regularization"><span class="header-section-number">11.2.3.1.2</span> Learning Control and Regularization</h5>
+<p><strong>Learning Control and Regularization</strong>:</p>
 <ul>
 <li><code>learning_rate (η)</code>: Shrinks the contribution of each tree.</li>
 <li><code>n_estimators</code>: Number of boosting rounds.</li>
 <li><code>lambda_l1</code> / <code>lambda_l2</code>: L1 and L2 regularization on leaf weights.</li>
 <li><code>min_gain_to_split</code>: Minimum loss reduction required to make a further split (structure regularization).</li>
 </ul>
-</section>
-<section id="data-handling" class="level5" data-number="11.2.3.1.3">
-<h5 data-number="11.2.3.1.3" class="anchored" data-anchor-id="data-handling"><span class="header-section-number">11.2.3.1.3</span> Data Handling</h5>
+<p><strong>Data Handling</strong>:</p>
 <ul>
 <li><code>feature_fraction</code>: Fraction of features randomly sampled for each tree (a.k.a. <code>colsample_bytree</code> in XGBoost).</li>
 <li><code>bagging_fraction</code>: Fraction of data randomly sampled for each iteration.</li>
 <li><code>bagging_freq</code>: Frequency (in iterations) to perform bagging.</li>
 <li><code>categorical_feature</code>: Specifies which features are categorical (enables native handling).</li>
 </ul>
-</section>
-<section id="speed-vs.-accuracy-trade-offs" class="level5" data-number="11.2.3.1.4">
-<h5 data-number="11.2.3.1.4" class="anchored" data-anchor-id="speed-vs.-accuracy-trade-offs"><span class="header-section-number">11.2.3.1.4</span> Speed vs.&nbsp;Accuracy Trade-offs</h5>
+<p><strong>Speed vs.&nbsp;Accuracy Trade-offs</strong>:</p>
 <ul>
 <li><code>max_bin</code>: Number of bins used to bucket continuous features.</li>
 <li><code>data_sample_strategy</code> : <code>bagging</code> or <code>goss</code></li>
 <li><code>top_rate</code> <em>(<code>goss</code> only)</em>: Fraction of instances with the largest gradients to keep.</li>
 <li><code>other_rate</code> <em>(<code>goss</code> only)</em>: Fraction of small-gradient instances to randomly sample. -<code>enable_bundle</code>: set this to true to spped up the training for sparse datasets</li>
 </ul>
-</section>
-<section id="optimization-control" class="level5" data-number="11.2.3.1.5">
-<h5 data-number="11.2.3.1.5" class="anchored" data-anchor-id="optimization-control"><span class="header-section-number">11.2.3.1.5</span> Optimization Control</h5>
+<p><strong>Optimization Control</strong>:</p>
 <ul>
 <li><code>boosting</code>: Type of boosting algorithm (<code>gbdt</code>, <code>dart</code>, <code>rf</code>, etc.).</li>
 <li><code>early_stopping_rounds</code>: Stops training if the validation score doesn’t improve over a set number of rounds.</li>
 </ul>
-</section>
-<section id="imbalanced-data" class="level5" data-number="11.2.3.1.6">
-<h5 data-number="11.2.3.1.6" class="anchored" data-anchor-id="imbalanced-data"><span class="header-section-number">11.2.3.1.6</span> Imbalanced Data</h5>
+<p><strong>Imbalanced Data</strong></p>
 <ul>
 <li><code>scale_pos_weight</code>: Manually sets the weight for the positive class in binary classification.</li>
 <li><code>is_unbalance</code>: Automatically adjusts class weights based on the training data distribution.</li>
@@ -726,7 +707,6 @@ This makes it easy to integrate LightGBM models into Scikit-learn workflows such
 <span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Split the data into training and testing sets</span></span>
 <span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(X, y, test_size<span class="op">=</span><span class="fl">0.2</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section>
 </section>
 <section id="building-a-baseline-model-using-lightgbms-native-categorical-feature-support" class="level4" data-number="11.2.3.2">
 <h4 data-number="11.2.3.2" class="anchored" data-anchor-id="building-a-baseline-model-using-lightgbms-native-categorical-feature-support"><span class="header-section-number">11.2.3.2</span> Building a Baseline Model Using LightGBM’s Native Categorical Feature Support</h4>
@@ -1204,7 +1184,7 @@ Test RMSE: 3042.9611
 Test R²: 0.9684</code></pre>
 </div>
 </div>
-<div id="c35df952" class="cell" data-execution_count="43">
+<div id="c35df952" class="cell">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>fig1 <span class="op">=</span> optuna.visualization.plot_optimization_history(study)</span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>fig1.show()</span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>    </span>
@@ -1214,7 +1194,7 @@ Test R²: 0.9684</code></pre>
 <span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot feature importance from the final model</span></span>
 <span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>feature_importance <span class="op">=</span> final_model.get_feature_importance()</span>
 <span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>sorted_idx <span class="op">=</span> np.argsort(feature_importance)</span>
-<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">12</span>))</span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">6</span>, <span class="dv">9</span>))</span>
 <span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>plt.barh(<span class="bu">range</span>(<span class="bu">len</span>(sorted_idx)), feature_importance[sorted_idx])</span>
 <span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>plt.yticks(<span class="bu">range</span>(<span class="bu">len</span>(sorted_idx)), np.array(<span class="bu">range</span>(X.shape[<span class="dv">1</span>]))[sorted_idx])</span>
 <span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'CatBoost Feature Importance'</span>)</span>
@@ -1251,9 +1231,14 @@ Test R²: 0.9684</code></pre>
 </section>
 <section id="handling-imbalanced-classification-xgboost-vs.-lightgbm-vs.-catboost" class="level2" data-number="11.4">
 <h2 data-number="11.4" class="anchored" data-anchor-id="handling-imbalanced-classification-xgboost-vs.-lightgbm-vs.-catboost"><span class="header-section-number">11.4</span> Handling Imbalanced Classification: XGBoost vs.&nbsp;LightGBM vs.&nbsp;CatBoost</h2>
-<p>Imbalanced classification occurs when one class significantly outnumbers the other (e.g., fraud detection, disease diagnosis). Each boosting library offers tools to address this issue.</p>
-<section id="xgboost" class="level3" data-number="11.4.1">
-<h3 data-number="11.4.1" class="anchored" data-anchor-id="xgboost"><span class="header-section-number">11.4.1</span> XGBoost</h3>
+<p>Imbalanced classification occurs when one class significantly outnumbers the other (e.g., fraud detection, disease diagnosis). Here are common strategies across all libraries</p>
+<ul>
+<li><strong>Evaluation Metrics:</strong> Use metrics like <strong>F1-score</strong>, <strong>AUC-PR</strong> (Area Under the Precision-Recall Curve), or <strong>Matthews Correlation Coefficient (MCC)</strong> instead of accuracy.</li>
+<li><strong>Threshold Tuning:</strong> Adjust the decision threshold to prioritize precision or recall.</li>
+<li><strong>Stratified Sampling:</strong> Ensure balanced splits during train-test splits or cross-validation.</li>
+</ul>
+<p>Each boosting library offers tools to address this issue:</p>
+<p><strong>XGBoost</strong>:</p>
 <ul>
 <li><strong>Parameter</strong>: <code>scale_pos_weight</code>
 <ul>
@@ -1269,9 +1254,7 @@ Test R²: 0.9684</code></pre>
 <li>Apply early stopping on validation AUC</li>
 </ul></li>
 </ul>
-</section>
-<section id="lightgbm-1" class="level3" data-number="11.4.2">
-<h3 data-number="11.4.2" class="anchored" data-anchor-id="lightgbm-1"><span class="header-section-number">11.4.2</span> LightGBM</h3>
+<p><strong>LightGBM</strong>:</p>
 <ul>
 <li><strong>Parameter</strong>: <code>scale_pos_weight</code> (same as in XGBoost)</li>
 <li><strong>Alternative</strong>: <code>is_unbalance = TRUE</code>
@@ -1284,9 +1267,7 @@ Test R²: 0.9684</code></pre>
 <li>Resampling techniques also compatible</li>
 </ul></li>
 </ul>
-</section>
-<section id="catboost-1" class="level3" data-number="11.4.3">
-<h3 data-number="11.4.3" class="anchored" data-anchor-id="catboost-1"><span class="header-section-number">11.4.3</span> CatBoost</h3>
+<p><strong>CatBoost</strong>:</p>
 <ul>
 <li><strong>Parameter</strong>: <code>class_weights</code>
 <ul>
@@ -1303,9 +1284,7 @@ Test R²: 0.9684</code></pre>
 <li>Use <code>loss_function = "Logloss"</code> and <code>eval_metric = "AUC"</code> for binary classification</li>
 </ul></li>
 </ul>
-</section>
-<section id="summary" class="level3" data-number="11.4.4">
-<h3 data-number="11.4.4" class="anchored" data-anchor-id="summary"><span class="header-section-number">11.4.4</span> Summary</h3>
+<p>Below is the summary table:</p>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 10%">
@@ -1343,20 +1322,10 @@ Test R²: 0.9684</code></pre>
 </tbody>
 </table>
 </section>
-<section id="common-strategies-across-all-libraries" class="level3" data-number="11.4.5">
-<h3 data-number="11.4.5" class="anchored" data-anchor-id="common-strategies-across-all-libraries"><span class="header-section-number">11.4.5</span> Common Strategies Across All Libraries</h3>
-<ul>
-<li><strong>Evaluation Metrics:</strong> Use metrics like <strong>F1-score</strong>, <strong>AUC-PR</strong> (Area Under the Precision-Recall Curve), or <strong>Matthews Correlation Coefficient (MCC)</strong> instead of accuracy.</li>
-<li><strong>Threshold Tuning:</strong> Adjust the decision threshold to prioritize precision or recall.</li>
-<li><strong>Stratified Sampling:</strong> Ensure balanced splits during train-test splits or cross-validation.</li>
-</ul>
-</section>
-</section>
 <section id="summary-xgboost-vs.-lightgbm-vs.-catboost" class="level2" data-number="11.5">
 <h2 data-number="11.5" class="anchored" data-anchor-id="summary-xgboost-vs.-lightgbm-vs.-catboost"><span class="header-section-number">11.5</span> Summary: XGBoost vs.&nbsp;LightGBM vs.&nbsp;CatBoost</h2>
 <p>Gradient boosting is a powerful ensemble technique, and XGBoost, LightGBM, and CatBoost are three of its most widely used implementations. Each has unique strengths and is well-suited to different use cases.</p>
-<section id="xgboost-1" class="level3" data-number="11.5.1">
-<h3 data-number="11.5.1" class="anchored" data-anchor-id="xgboost-1"><span class="header-section-number">11.5.1</span> XGBoost</h3>
+<p><strong>XGBoost</strong>:</p>
 <ul>
 <li><strong>Strengths</strong>: Robust, well-documented, strong performance on structured/tabular data<br>
 </li>
@@ -1368,9 +1337,7 @@ Test R²: 0.9684</code></pre>
 </li>
 <li><strong>Best for</strong>: General-purpose tabular data, especially when you have time to tune parameters</li>
 </ul>
-</section>
-<section id="lightgbm-2" class="level3" data-number="11.5.2">
-<h3 data-number="11.5.2" class="anchored" data-anchor-id="lightgbm-2"><span class="header-section-number">11.5.2</span> LightGBM</h3>
+<p><strong>LightGBM</strong>:</p>
 <ul>
 <li><strong>Strengths</strong>: Fast training, low memory usage, excellent scalability<br>
 </li>
@@ -1380,9 +1347,7 @@ Test R²: 0.9684</code></pre>
 </li>
 <li><strong>Best for</strong>: Large-scale datasets, high-dimensional features, and when training speed matters</li>
 </ul>
-</section>
-<section id="catboost-2" class="level3" data-number="11.5.3">
-<h3 data-number="11.5.3" class="anchored" data-anchor-id="catboost-2"><span class="header-section-number">11.5.3</span> CatBoost</h3>
+<p><strong>CatBoost</strong>:</p>
 <ul>
 <li><strong>Strengths</strong>: Handles categorical features natively, works well with minimal tuning<br>
 </li>
@@ -1392,16 +1357,13 @@ Test R²: 0.9684</code></pre>
 </li>
 <li><strong>Best for</strong>: Datasets with many categorical variables or limited time for tuning</li>
 </ul>
-</section>
-<section id="final-thoughts" class="level3" data-number="11.5.4">
-<h3 data-number="11.5.4" class="anchored" data-anchor-id="final-thoughts"><span class="header-section-number">11.5.4</span> Final Thoughts</h3>
+<p><strong>Final Thoughts</strong></p>
 <p>All three libraries are powerful and battle-tested. Here’s a rough guideline:</p>
 <ul>
 <li><strong>Use XGBoost</strong> if you want control, flexibility, and a well-documented standard</li>
 <li><strong>Use LightGBM</strong> when training speed and large data scalability are your top priorities</li>
 <li><strong>Use CatBoost</strong> when working with many categorical features or seeking strong baseline results with minimal tuning</li>
 </ul>
-</section>
 </section>
 <section id="references" class="level2" data-number="11.6">
 <h2 data-number="11.6" class="anchored" data-anchor-id="references"><span class="header-section-number">11.6</span> References</h2>

@@ -31,7 +31,7 @@ book:
         - adaboost.ipynb
         - Gradient_Boosting.ipynb
         - XGBoost.ipynb
-        - Lec11_More boosting models.ipynb
+        - LightGBM_CatBoost.ipynb
         - Lec10_Ensemble.ipynb
   appendices: 
     - Assignment1_sp25.ipynb

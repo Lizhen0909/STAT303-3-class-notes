@@ -323,40 +323,39 @@ window.Quarto = {
   <li><a href="#what-is-xgboost" id="toc-what-is-xgboost" class="nav-link active" data-scroll-target="#what-is-xgboost"><span class="header-section-number">10.1</span> What is XGBoost?</a></li>
   <li><a href="#xgboost-intuition" id="toc-xgboost-intuition" class="nav-link" data-scroll-target="#xgboost-intuition"><span class="header-section-number">10.2</span> XGBoost Intuition</a></li>
   <li><a href="#how-xgboost-works-regression-example" id="toc-how-xgboost-works-regression-example" class="nav-link" data-scroll-target="#how-xgboost-works-regression-example"><span class="header-section-number">10.3</span> How XGBoost Works (Regression Example)</a></li>
-  <li><a href="#foundational-paper" id="toc-foundational-paper" class="nav-link" data-scroll-target="#foundational-paper"><span class="header-section-number">10.4</span> Foundational Paper</a></li>
-  <li><a href="#resources-for-learning-xgboost" id="toc-resources-for-learning-xgboost" class="nav-link" data-scroll-target="#resources-for-learning-xgboost"><span class="header-section-number">10.5</span> Resources for Learning XGBoost</a></li>
-  <li><a href="#using-xgboost" id="toc-using-xgboost" class="nav-link" data-scroll-target="#using-xgboost"><span class="header-section-number">10.6</span> Using XGBoost</a></li>
-  <li><a href="#core-hyperparameter-categories" id="toc-core-hyperparameter-categories" class="nav-link" data-scroll-target="#core-hyperparameter-categories"><span class="header-section-number">10.7</span> Core Hyperparameter Categories</a>
+  <li><a href="#using-xgboost" id="toc-using-xgboost" class="nav-link" data-scroll-target="#using-xgboost"><span class="header-section-number">10.4</span> Using XGBoost</a></li>
+  <li><a href="#core-hyperparameter-categories" id="toc-core-hyperparameter-categories" class="nav-link" data-scroll-target="#core-hyperparameter-categories"><span class="header-section-number">10.5</span> Core Hyperparameter Categories</a>
   <ul>
-  <li><a href="#model-complexity" id="toc-model-complexity" class="nav-link" data-scroll-target="#model-complexity"><span class="header-section-number">10.7.1</span> Model Complexity</a></li>
-  <li><a href="#learning-and-regularization" id="toc-learning-and-regularization" class="nav-link" data-scroll-target="#learning-and-regularization"><span class="header-section-number">10.7.2</span> Learning and Regularization</a></li>
-  <li><a href="#regularization" id="toc-regularization" class="nav-link" data-scroll-target="#regularization"><span class="header-section-number">10.7.3</span> Regularization</a></li>
-  <li><a href="#optimization-control" id="toc-optimization-control" class="nav-link" data-scroll-target="#optimization-control"><span class="header-section-number">10.7.4</span> Optimization Control</a></li>
-  <li><a href="#baseline-model" id="toc-baseline-model" class="nav-link" data-scroll-target="#baseline-model"><span class="header-section-number">10.7.5</span> Baseline Model</a></li>
-  <li><a href="#early-stopping-in-xgboost" id="toc-early-stopping-in-xgboost" class="nav-link" data-scroll-target="#early-stopping-in-xgboost"><span class="header-section-number">10.7.6</span> Early Stopping in XGBoost</a>
+  <li><a href="#model-complexity" id="toc-model-complexity" class="nav-link" data-scroll-target="#model-complexity"><span class="header-section-number">10.5.1</span> Model Complexity</a></li>
+  <li><a href="#learning-and-regularization" id="toc-learning-and-regularization" class="nav-link" data-scroll-target="#learning-and-regularization"><span class="header-section-number">10.5.2</span> Learning and Regularization</a></li>
+  <li><a href="#regularization" id="toc-regularization" class="nav-link" data-scroll-target="#regularization"><span class="header-section-number">10.5.3</span> Regularization</a></li>
+  <li><a href="#optimization-control" id="toc-optimization-control" class="nav-link" data-scroll-target="#optimization-control"><span class="header-section-number">10.5.4</span> Optimization Control</a></li>
+  <li><a href="#baseline-model" id="toc-baseline-model" class="nav-link" data-scroll-target="#baseline-model"><span class="header-section-number">10.5.5</span> Baseline Model</a></li>
+  <li><a href="#early-stopping-in-xgboost" id="toc-early-stopping-in-xgboost" class="nav-link" data-scroll-target="#early-stopping-in-xgboost"><span class="header-section-number">10.5.6</span> Early Stopping in XGBoost</a>
   <ul class="collapse">
-  <li><a href="#how-it-works" id="toc-how-it-works" class="nav-link" data-scroll-target="#how-it-works"><span class="header-section-number">10.7.6.1</span> How It Works</a></li>
-  <li><a href="#requirements" id="toc-requirements" class="nav-link" data-scroll-target="#requirements"><span class="header-section-number">10.7.6.2</span> Requirements</a></li>
+  <li><a href="#how-it-works" id="toc-how-it-works" class="nav-link" data-scroll-target="#how-it-works"><span class="header-section-number">10.5.6.1</span> How It Works</a></li>
+  <li><a href="#requirements" id="toc-requirements" class="nav-link" data-scroll-target="#requirements"><span class="header-section-number">10.5.6.2</span> Requirements</a></li>
   </ul></li>
-  <li><a href="#gamma-in-xgboost" id="toc-gamma-in-xgboost" class="nav-link" data-scroll-target="#gamma-in-xgboost"><span class="header-section-number">10.7.7</span> <code>gamma</code> in XGBoost</a></li>
-  <li><a href="#reg_lambda-and-reg_alpha-in-xgboost" id="toc-reg_lambda-and-reg_alpha-in-xgboost" class="nav-link" data-scroll-target="#reg_lambda-and-reg_alpha-in-xgboost"><span class="header-section-number">10.7.8</span> <code>reg_lambda</code> and <code>reg_alpha</code> in XGBoost</a></li>
-  <li><a href="#exploring-regularization-hyperparameters-simultaneously" id="toc-exploring-regularization-hyperparameters-simultaneously" class="nav-link" data-scroll-target="#exploring-regularization-hyperparameters-simultaneously"><span class="header-section-number">10.7.9</span> Exploring Regularization Hyperparameters Simultaneously</a></li>
-  <li><a href="#comprehensive-hyperparameter-tuning" id="toc-comprehensive-hyperparameter-tuning" class="nav-link" data-scroll-target="#comprehensive-hyperparameter-tuning"><span class="header-section-number">10.7.10</span> Comprehensive Hyperparameter Tuning</a>
+  <li><a href="#gamma-in-xgboost" id="toc-gamma-in-xgboost" class="nav-link" data-scroll-target="#gamma-in-xgboost"><span class="header-section-number">10.5.7</span> <code>gamma</code> in XGBoost</a></li>
+  <li><a href="#reg_lambda-and-reg_alpha-in-xgboost" id="toc-reg_lambda-and-reg_alpha-in-xgboost" class="nav-link" data-scroll-target="#reg_lambda-and-reg_alpha-in-xgboost"><span class="header-section-number">10.5.8</span> <code>reg_lambda</code> and <code>reg_alpha</code> in XGBoost</a></li>
+  <li><a href="#exploring-regularization-hyperparameters-simultaneously" id="toc-exploring-regularization-hyperparameters-simultaneously" class="nav-link" data-scroll-target="#exploring-regularization-hyperparameters-simultaneously"><span class="header-section-number">10.5.9</span> Exploring Regularization Hyperparameters Simultaneously</a></li>
+  <li><a href="#comprehensive-hyperparameter-tuning" id="toc-comprehensive-hyperparameter-tuning" class="nav-link" data-scroll-target="#comprehensive-hyperparameter-tuning"><span class="header-section-number">10.5.10</span> Comprehensive Hyperparameter Tuning</a>
   <ul class="collapse">
-  <li><a href="#why-gridsearchcv-is-not-a-practical-option" id="toc-why-gridsearchcv-is-not-a-practical-option" class="nav-link" data-scroll-target="#why-gridsearchcv-is-not-a-practical-option"><span class="header-section-number">10.7.10.1</span> Why <code>GridSearchCV</code> Is Not a Practical Option</a></li>
-  <li><a href="#smarter-tuning-with-optuna-or-bayessearchcv" id="toc-smarter-tuning-with-optuna-or-bayessearchcv" class="nav-link" data-scroll-target="#smarter-tuning-with-optuna-or-bayessearchcv"><span class="header-section-number">10.7.10.2</span> Smarter Tuning with Optuna or BayesSearchCV</a></li>
-  <li><a href="#after-training-analyze-and-refine" id="toc-after-training-analyze-and-refine" class="nav-link" data-scroll-target="#after-training-analyze-and-refine"><span class="header-section-number">10.7.10.3</span> After Training: Analyze and Refine</a></li>
+  <li><a href="#why-gridsearchcv-is-not-a-practical-option" id="toc-why-gridsearchcv-is-not-a-practical-option" class="nav-link" data-scroll-target="#why-gridsearchcv-is-not-a-practical-option"><span class="header-section-number">10.5.10.1</span> Why <code>GridSearchCV</code> Is Not a Practical Option</a></li>
+  <li><a href="#smarter-tuning-with-optuna-or-bayessearchcv" id="toc-smarter-tuning-with-optuna-or-bayessearchcv" class="nav-link" data-scroll-target="#smarter-tuning-with-optuna-or-bayessearchcv"><span class="header-section-number">10.5.10.2</span> Smarter Tuning with Optuna or BayesSearchCV</a></li>
+  <li><a href="#after-training-analyze-and-refine" id="toc-after-training-analyze-and-refine" class="nav-link" data-scroll-target="#after-training-analyze-and-refine"><span class="header-section-number">10.5.10.3</span> After Training: Analyze and Refine</a></li>
   </ul></li>
   </ul></li>
-  <li><a href="#xgboost-for-imbalanced-classification" id="toc-xgboost-for-imbalanced-classification" class="nav-link" data-scroll-target="#xgboost-for-imbalanced-classification"><span class="header-section-number">10.8</span> XGBoost for Imbalanced Classification</a>
+  <li><a href="#xgboost-for-imbalanced-classification" id="toc-xgboost-for-imbalanced-classification" class="nav-link" data-scroll-target="#xgboost-for-imbalanced-classification"><span class="header-section-number">10.6</span> XGBoost for Imbalanced Classification</a>
   <ul>
-  <li><a href="#handling-class-imbalance-with-scale_pos_weight" id="toc-handling-class-imbalance-with-scale_pos_weight" class="nav-link" data-scroll-target="#handling-class-imbalance-with-scale_pos_weight"><span class="header-section-number">10.8.1</span> Handling Class Imbalance with <code>scale_pos_weight</code></a></li>
-  <li><a href="#what-it-does" id="toc-what-it-does" class="nav-link" data-scroll-target="#what-it-does"><span class="header-section-number">10.8.2</span> What it does</a></li>
-  <li><a href="#when-to-use-it" id="toc-when-to-use-it" class="nav-link" data-scroll-target="#when-to-use-it"><span class="header-section-number">10.8.3</span> When to use it</a></li>
-  <li><a href="#how-to-set-it" id="toc-how-to-set-it" class="nav-link" data-scroll-target="#how-to-set-it"><span class="header-section-number">10.8.4</span> How to set it</a></li>
-  <li><a href="#using-scale_pos_weight" id="toc-using-scale_pos_weight" class="nav-link" data-scroll-target="#using-scale_pos_weight"><span class="header-section-number">10.8.5</span> Using <code>scale_pos_weight</code></a></li>
-  <li><a href="#threshold-adjustment" id="toc-threshold-adjustment" class="nav-link" data-scroll-target="#threshold-adjustment"><span class="header-section-number">10.8.6</span> Threshold adjustment</a></li>
+  <li><a href="#handling-class-imbalance-with-scale_pos_weight" id="toc-handling-class-imbalance-with-scale_pos_weight" class="nav-link" data-scroll-target="#handling-class-imbalance-with-scale_pos_weight"><span class="header-section-number">10.6.1</span> Handling Class Imbalance with <code>scale_pos_weight</code></a></li>
+  <li><a href="#what-it-does" id="toc-what-it-does" class="nav-link" data-scroll-target="#what-it-does"><span class="header-section-number">10.6.2</span> What it does</a></li>
+  <li><a href="#when-to-use-it" id="toc-when-to-use-it" class="nav-link" data-scroll-target="#when-to-use-it"><span class="header-section-number">10.6.3</span> When to use it</a></li>
+  <li><a href="#how-to-set-it" id="toc-how-to-set-it" class="nav-link" data-scroll-target="#how-to-set-it"><span class="header-section-number">10.6.4</span> How to set it</a></li>
+  <li><a href="#using-scale_pos_weight" id="toc-using-scale_pos_weight" class="nav-link" data-scroll-target="#using-scale_pos_weight"><span class="header-section-number">10.6.5</span> Using <code>scale_pos_weight</code></a></li>
+  <li><a href="#threshold-adjustment" id="toc-threshold-adjustment" class="nav-link" data-scroll-target="#threshold-adjustment"><span class="header-section-number">10.6.6</span> Threshold adjustment</a></li>
   </ul></li>
+  <li><a href="#resources-for-learning-xgboost" id="toc-resources-for-learning-xgboost" class="nav-link" data-scroll-target="#resources-for-learning-xgboost"><span class="header-section-number">10.7</span> Resources for Learning XGBoost</a></li>
   </ul>
 </nav>
     </div>
@@ -417,28 +416,8 @@ window.Quarto = {
 <p>Where: - <span class="math inline">\(g_i = \frac{\partial l(y_i, \hat{y}_i)}{\partial \hat{y}_i}\)</span> is the first-order derivative (gradient) - <span class="math inline">\(h_i = \frac{\partial^2 l(y_i, \hat{y}_i)}{\partial \hat{y}_i^2}\)</span> is the second-order derivative (hessian)</p>
 <p>XGBoost then chooses the <strong>tree structure and leaf values</strong> that minimize this approximate objective.</p>
 </section>
-<section id="foundational-paper" class="level2" data-number="10.4">
-<h2 data-number="10.4" class="anchored" data-anchor-id="foundational-paper"><span class="header-section-number">10.4</span> Foundational Paper</h2>
-<p>The foundational paper is:</p>
-<p><strong>XGBoost: A Scalable Tree Boosting System</strong><br>
-<em>Authors</em>: Tianqi Chen and Carlos Guestrin<br>
-<em>Conference</em>: KDD 2016<br>
-<a href="https://arxiv.org/abs/1603.02754">Link to paper (PDF)</a><br>
-<a href="https://doi.org/10.1145/2939672.2939785">DOI: 10.1145/2939672.2939785</a></p>
-</section>
-<section id="resources-for-learning-xgboost" class="level2" data-number="10.5">
-<h2 data-number="10.5" class="anchored" data-anchor-id="resources-for-learning-xgboost"><span class="header-section-number">10.5</span> Resources for Learning XGBoost</h2>
-<p>XGBoost is a relatively recent algorithm (2016), and thus not yet included in many standard textbooks. Below are helpful learning resources:</p>
-<ul>
-<li><a href="https://xgboost.readthedocs.io/en/stable/python/python_api.html">Documentation</a></li>
-<li><a href="https://files.speakerdeck.com/presentations/5c6dab45648344208185d2b1ab4fdc95/XGBoost-Newest.pdf">Slides by Tianqi Chen</a></li>
-<li><a href="https://dl.acm.org/doi/pdf/10.1145/2939672.2939785">Reference Paper</a></li>
-<li><a href="https://www.youtube.com/watch?v=Vly8xGnNiWs">Video by Tianqi Chen (author)</a></li>
-<li><a href="https://www.youtube.com/watch?v=OtD8wVaFm6E">StatQuest Video Explanation</a></li>
-</ul>
-</section>
-<section id="using-xgboost" class="level2" data-number="10.6">
-<h2 data-number="10.6" class="anchored" data-anchor-id="using-xgboost"><span class="header-section-number">10.6</span> Using XGBoost</h2>
+<section id="using-xgboost" class="level2" data-number="10.4">
+<h2 data-number="10.4" class="anchored" data-anchor-id="using-xgboost"><span class="header-section-number">10.4</span> Using XGBoost</h2>
 <p>Although <strong>XGBoost is not part of Scikit-learn</strong>, it provides a <strong>Scikit-learn-compatible API</strong> through the <code>xgboost.sklearn</code> module. This allows you to use XGBoost models seamlessly with Scikit-learn tools such as <code>Pipeline</code>, <code>GridSearchCV</code>, and <code>cross_val_score</code>.</p>
 <p>The main classes are:</p>
 <ul>
@@ -453,10 +432,10 @@ window.Quarto = {
 This makes it easy to integrate XGBoost models into Scikit-learn workflows such as <code>Pipeline</code>, <code>GridSearchCV</code>, and <code>cross_val_score</code>.</p>
 </blockquote>
 </section>
-<section id="core-hyperparameter-categories" class="level2" data-number="10.7">
-<h2 data-number="10.7" class="anchored" data-anchor-id="core-hyperparameter-categories"><span class="header-section-number">10.7</span> Core Hyperparameter Categories</h2>
-<section id="model-complexity" class="level3" data-number="10.7.1">
-<h3 data-number="10.7.1" class="anchored" data-anchor-id="model-complexity"><span class="header-section-number">10.7.1</span> Model Complexity</h3>
+<section id="core-hyperparameter-categories" class="level2" data-number="10.5">
+<h2 data-number="10.5" class="anchored" data-anchor-id="core-hyperparameter-categories"><span class="header-section-number">10.5</span> Core Hyperparameter Categories</h2>
+<section id="model-complexity" class="level3" data-number="10.5.1">
+<h3 data-number="10.5.1" class="anchored" data-anchor-id="model-complexity"><span class="header-section-number">10.5.1</span> Model Complexity</h3>
 <ul>
 <li><code>n_estimators</code>: Number of boosting rounds<br>
 </li>
@@ -465,8 +444,8 @@ This makes it easy to integrate XGBoost models into Scikit-learn workflows such 
 <li><code>min_child_weight</code>: Minimum sum of instance weight needed in a child</li>
 </ul>
 </section>
-<section id="learning-and-regularization" class="level3" data-number="10.7.2">
-<h3 data-number="10.7.2" class="anchored" data-anchor-id="learning-and-regularization"><span class="header-section-number">10.7.2</span> Learning and Regularization</h3>
+<section id="learning-and-regularization" class="level3" data-number="10.5.2">
+<h3 data-number="10.5.2" class="anchored" data-anchor-id="learning-and-regularization"><span class="header-section-number">10.5.2</span> Learning and Regularization</h3>
 <ul>
 <li><code>learning_rate</code> (<code>eta</code>): Shrinkage rate to scale each tree’s contribution<br>
 </li>
@@ -477,8 +456,8 @@ This makes it easy to integrate XGBoost models into Scikit-learn workflows such 
 <li><code>colsample_bylevel</code>, <code>colsample_bynode</code>: Further control over feature subsampling</li>
 </ul>
 </section>
-<section id="regularization" class="level3" data-number="10.7.3">
-<h3 data-number="10.7.3" class="anchored" data-anchor-id="regularization"><span class="header-section-number">10.7.3</span> Regularization</h3>
+<section id="regularization" class="level3" data-number="10.5.3">
+<h3 data-number="10.5.3" class="anchored" data-anchor-id="regularization"><span class="header-section-number">10.5.3</span> Regularization</h3>
 <ul>
 <li><code>gamma</code>: Minimum loss reduction required to make a further partition<br>
 </li>
@@ -487,8 +466,8 @@ This makes it easy to integrate XGBoost models into Scikit-learn workflows such 
 <li><code>reg_lambda</code>: L2 regularization term on weights (Ridge)</li>
 </ul>
 </section>
-<section id="optimization-control" class="level3" data-number="10.7.4">
-<h3 data-number="10.7.4" class="anchored" data-anchor-id="optimization-control"><span class="header-section-number">10.7.4</span> Optimization Control</h3>
+<section id="optimization-control" class="level3" data-number="10.5.4">
+<h3 data-number="10.5.4" class="anchored" data-anchor-id="optimization-control"><span class="header-section-number">10.5.4</span> Optimization Control</h3>
 <ul>
 <li><code>objective</code>: Loss function (e.g., <code>'reg:squarederror'</code>, <code>'binary:logistic'</code>)<br>
 </li>
@@ -665,8 +644,8 @@ This makes it easy to integrate XGBoost models into Scikit-learn workflows such 
 <span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> importance_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="baseline-model" class="level3" data-number="10.7.5">
-<h3 data-number="10.7.5" class="anchored" data-anchor-id="baseline-model"><span class="header-section-number">10.7.5</span> Baseline Model</h3>
+<section id="baseline-model" class="level3" data-number="10.5.5">
+<h3 data-number="10.5.5" class="anchored" data-anchor-id="baseline-model"><span class="header-section-number">10.5.5</span> Baseline Model</h3>
 <div id="fb031a85" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ===== 1. Baseline Model =====</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">===== Baseline XGBoost Model ====="</span>)</span>
@@ -693,19 +672,19 @@ R² Score: 0.9617</code></pre>
 </div>
 </div>
 </section>
-<section id="early-stopping-in-xgboost" class="level3" data-number="10.7.6">
-<h3 data-number="10.7.6" class="anchored" data-anchor-id="early-stopping-in-xgboost"><span class="header-section-number">10.7.6</span> Early Stopping in XGBoost</h3>
+<section id="early-stopping-in-xgboost" class="level3" data-number="10.5.6">
+<h3 data-number="10.5.6" class="anchored" data-anchor-id="early-stopping-in-xgboost"><span class="header-section-number">10.5.6</span> Early Stopping in XGBoost</h3>
 <p><strong>Early stopping</strong> is a technique that stops training when the model’s performance on a validation set stops improving, helping to prevent overfitting and reduce training time.</p>
-<section id="how-it-works" class="level4" data-number="10.7.6.1">
-<h4 data-number="10.7.6.1" class="anchored" data-anchor-id="how-it-works"><span class="header-section-number">10.7.6.1</span> How It Works</h4>
+<section id="how-it-works" class="level4" data-number="10.5.6.1">
+<h4 data-number="10.5.6.1" class="anchored" data-anchor-id="how-it-works"><span class="header-section-number">10.5.6.1</span> How It Works</h4>
 <p>At each boosting round, XGBoost tracks a performance metric (e.g., RMSE or log loss) on a <strong>validation set</strong>. If the metric doesn’t improve for a specified number of rounds (<code>early_stopping_rounds</code>), training is halted.</p>
 <ul>
 <li>Saves computation by avoiding unnecessary boosting rounds.</li>
 <li>Returns the model from the best iteration (with the lowest validation error).</li>
 </ul>
 </section>
-<section id="requirements" class="level4" data-number="10.7.6.2">
-<h4 data-number="10.7.6.2" class="anchored" data-anchor-id="requirements"><span class="header-section-number">10.7.6.2</span> Requirements</h4>
+<section id="requirements" class="level4" data-number="10.5.6.2">
+<h4 data-number="10.5.6.2" class="anchored" data-anchor-id="requirements"><span class="header-section-number">10.5.6.2</span> Requirements</h4>
 <ul>
 <li>You must provide an <strong><code>eval_set</code></strong> containing a validation set.</li>
 <li>The evaluation metric must be one that XGBoost can track (<code>eval_metric</code> is optional but recommended).</li>
@@ -1200,8 +1179,8 @@ Best number of iterations: 193</code></pre>
 </div>
 </section>
 </section>
-<section id="gamma-in-xgboost" class="level3" data-number="10.7.7">
-<h3 data-number="10.7.7" class="anchored" data-anchor-id="gamma-in-xgboost"><span class="header-section-number">10.7.7</span> <code>gamma</code> in XGBoost</h3>
+<section id="gamma-in-xgboost" class="level3" data-number="10.5.7">
+<h3 data-number="10.5.7" class="anchored" data-anchor-id="gamma-in-xgboost"><span class="header-section-number">10.5.7</span> <code>gamma</code> in XGBoost</h3>
 <p><strong>Definition</strong>:<br>
 <code>gamma</code> (also called <code>min_split_loss</code>) specifies the <strong>minimum loss reduction required</strong> to make a further partition (split) on a leaf node of the tree.</p>
 <p><strong>How it works</strong>:</p>
@@ -1330,8 +1309,8 @@ R² Score: 0.9622</code></pre>
 </ul>
 <p>In this dataset, higher <code>gamma</code> values improved generalization by preventing unnecessary splits.</p>
 </section>
-<section id="reg_lambda-and-reg_alpha-in-xgboost" class="level3" data-number="10.7.8">
-<h3 data-number="10.7.8" class="anchored" data-anchor-id="reg_lambda-and-reg_alpha-in-xgboost"><span class="header-section-number">10.7.8</span> <code>reg_lambda</code> and <code>reg_alpha</code> in XGBoost</h3>
+<section id="reg_lambda-and-reg_alpha-in-xgboost" class="level3" data-number="10.5.8">
+<h3 data-number="10.5.8" class="anchored" data-anchor-id="reg_lambda-and-reg_alpha-in-xgboost"><span class="header-section-number">10.5.8</span> <code>reg_lambda</code> and <code>reg_alpha</code> in XGBoost</h3>
 <p>XGBoost includes <strong>regularization</strong> to help prevent overfitting by penalizing complex trees.</p>
 <ul>
 <li><code>reg_lambda</code> (L2 regularization):
@@ -1470,8 +1449,8 @@ R² Score: 0.9570</code></pre>
 </div>
 </div>
 </section>
-<section id="exploring-regularization-hyperparameters-simultaneously" class="level3" data-number="10.7.9">
-<h3 data-number="10.7.9" class="anchored" data-anchor-id="exploring-regularization-hyperparameters-simultaneously"><span class="header-section-number">10.7.9</span> Exploring Regularization Hyperparameters Simultaneously</h3>
+<section id="exploring-regularization-hyperparameters-simultaneously" class="level3" data-number="10.5.9">
+<h3 data-number="10.5.9" class="anchored" data-anchor-id="exploring-regularization-hyperparameters-simultaneously"><span class="header-section-number">10.5.9</span> Exploring Regularization Hyperparameters Simultaneously</h3>
 <p>In addition to <code>gamma</code>, <code>reg_lambda</code>, and <code>reg_alpha</code>, the parameters <code>max_depth</code> and <code>min_child_weight</code> also control the complexity of XGBoost models. These parameters behave similarly to how they work in other tree-based models.</p>
 <p>Rather than tuning them in isolation, it’s important to recognize that these parameters <strong>interact</strong> with one another. In the next step, we will tune them <strong>simultaneously</strong> to better capture their combined effect on model performance.</p>
 <div id="886b8c9d" class="cell" data-execution_count="19">
@@ -1575,8 +1554,8 @@ Best RMSE: 3222.51</code></pre>
 </div>
 </div>
 </section>
-<section id="comprehensive-hyperparameter-tuning" class="level3" data-number="10.7.10">
-<h3 data-number="10.7.10" class="anchored" data-anchor-id="comprehensive-hyperparameter-tuning"><span class="header-section-number">10.7.10</span> Comprehensive Hyperparameter Tuning</h3>
+<section id="comprehensive-hyperparameter-tuning" class="level3" data-number="10.5.10">
+<h3 data-number="10.5.10" class="anchored" data-anchor-id="comprehensive-hyperparameter-tuning"><span class="header-section-number">10.5.10</span> Comprehensive Hyperparameter Tuning</h3>
 <p>In this step, we expand our search to include a broader set of influential hyperparameters that govern both <strong>model complexity</strong> and <strong>regularization strength</strong> in XGBoost. These include:</p>
 <ul>
 <li><strong><code>learning_rate</code></strong>: Controls the contribution of each tree in the ensemble.</li>
@@ -1587,8 +1566,8 @@ Best RMSE: 3222.51</code></pre>
 </ul>
 <p>Rather than optimizing these parameters independently, we will <strong>tune them together</strong> using a grid search to capture the complex interactions between them. This comprehensive search aims to identify a well-balanced model that generalizes well to unseen data.</p>
 <p>This comprehensive tuning process helps us identify the most effective combination of hyperparameters for maximizing predictive performance while minimizing overfitting.</p>
-<section id="why-gridsearchcv-is-not-a-practical-option" class="level4" data-number="10.7.10.1">
-<h4 data-number="10.7.10.1" class="anchored" data-anchor-id="why-gridsearchcv-is-not-a-practical-option"><span class="header-section-number">10.7.10.1</span> Why <code>GridSearchCV</code> Is Not a Practical Option</h4>
+<section id="why-gridsearchcv-is-not-a-practical-option" class="level4" data-number="10.5.10.1">
+<h4 data-number="10.5.10.1" class="anchored" data-anchor-id="why-gridsearchcv-is-not-a-practical-option"><span class="header-section-number">10.5.10.1</span> Why <code>GridSearchCV</code> Is Not a Practical Option</h4>
 <p>While <code>GridSearchCV</code> is a straightforward and exhaustive approach, it can be <strong>extremely time-consuming</strong>, especially when tuning many hyperparameters over multiple values. In our case, the parameter grid includes:</p>
 <ul>
 <li>3 values for <code>learning_rate</code></li>
@@ -1643,8 +1622,8 @@ Best RMSE: 3222.51</code></pre>
 </div>
 </div>
 </section>
-<section id="smarter-tuning-with-optuna-or-bayessearchcv" class="level4" data-number="10.7.10.2">
-<h4 data-number="10.7.10.2" class="anchored" data-anchor-id="smarter-tuning-with-optuna-or-bayessearchcv"><span class="header-section-number">10.7.10.2</span> Smarter Tuning with Optuna or BayesSearchCV</h4>
+<section id="smarter-tuning-with-optuna-or-bayessearchcv" class="level4" data-number="10.5.10.2">
+<h4 data-number="10.5.10.2" class="anchored" data-anchor-id="smarter-tuning-with-optuna-or-bayessearchcv"><span class="header-section-number">10.5.10.2</span> Smarter Tuning with Optuna or BayesSearchCV</h4>
 <p>Instead of exhaustively evaluating every combination like <code>GridSearchCV</code>, we can use smarter search strategies like:</p>
 <ul>
 <li><p><strong>Optuna</strong>: A powerful hyperparameter optimization framework that uses <strong>Tree-structured Parzen Estimators (TPE)</strong> to efficiently explore the search space. It dynamically chooses the next set of hyperparameters to try based on past performance.</p></li>
@@ -1657,8 +1636,8 @@ Best RMSE: 3222.51</code></pre>
 <li><strong>Scalable</strong>: Much better suited for high-dimensional or expensive-to-evaluate models.</li>
 </ul>
 <p>In summary, we commented out the grid search due to its high cost and instead favor more <strong>intelligent, efficient</strong> hyperparameter search methods like <code>Optuna</code> or <code>BayesSearchCV</code> for practical use.</p>
-<section id="bayessearchcv-from-skopt" class="level5" data-number="10.7.10.2.1">
-<h5 data-number="10.7.10.2.1" class="anchored" data-anchor-id="bayessearchcv-from-skopt"><span class="header-section-number">10.7.10.2.1</span> <code>BayesSearchCV</code> (from <code>skopt</code>)</h5>
+<section id="bayessearchcv-from-skopt" class="level5" data-number="10.5.10.2.1">
+<h5 data-number="10.5.10.2.1" class="anchored" data-anchor-id="bayessearchcv-from-skopt"><span class="header-section-number">10.5.10.2.1</span> <code>BayesSearchCV</code> (from <code>skopt</code>)</h5>
 <p>You define the search space using a dictionary where:</p>
 <ul>
 <li>For pipelines and scikit-learn integration, <code>BayesSearchCV</code> is simpler</li>
@@ -1972,8 +1951,8 @@ R² Score: 0.9676</code></pre>
 </div>
 </div>
 </section>
-<section id="tuning-with-optuna" class="level5" data-number="10.7.10.2.2">
-<h5 data-number="10.7.10.2.2" class="anchored" data-anchor-id="tuning-with-optuna"><span class="header-section-number">10.7.10.2.2</span> Tuning with Optuna</h5>
+<section id="tuning-with-optuna" class="level5" data-number="10.5.10.2.2">
+<h5 data-number="10.5.10.2.2" class="anchored" data-anchor-id="tuning-with-optuna"><span class="header-section-number">10.5.10.2.2</span> Tuning with Optuna</h5>
 <p>With Optuna, you define the search space inside an objective function using trial suggestions:</p>
 <div id="0887d5d0" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> optuna</span>
@@ -2109,8 +2088,8 @@ R² Score: 0.9676</code></pre>
 </div>
 </section>
 </section>
-<section id="after-training-analyze-and-refine" class="level4" data-number="10.7.10.3">
-<h4 data-number="10.7.10.3" class="anchored" data-anchor-id="after-training-analyze-and-refine"><span class="header-section-number">10.7.10.3</span> After Training: Analyze and Refine</h4>
+<section id="after-training-analyze-and-refine" class="level4" data-number="10.5.10.3">
+<h4 data-number="10.5.10.3" class="anchored" data-anchor-id="after-training-analyze-and-refine"><span class="header-section-number">10.5.10.3</span> After Training: Analyze and Refine</h4>
 <p>Once the tuning is complete, <strong>don’t forget to visualize the search results</strong> to understand how different hyperparameters affected performance. This helps you:</p>
 <ul>
 <li>Identify which parameters had the most impact.</li>
@@ -2129,31 +2108,31 @@ R² Score: 0.9676</code></pre>
 </section>
 </section>
 </section>
-<section id="xgboost-for-imbalanced-classification" class="level2" data-number="10.8">
-<h2 data-number="10.8" class="anchored" data-anchor-id="xgboost-for-imbalanced-classification"><span class="header-section-number">10.8</span> XGBoost for Imbalanced Classification</h2>
-<section id="handling-class-imbalance-with-scale_pos_weight" class="level3" data-number="10.8.1">
-<h3 data-number="10.8.1" class="anchored" data-anchor-id="handling-class-imbalance-with-scale_pos_weight"><span class="header-section-number">10.8.1</span> Handling Class Imbalance with <code>scale_pos_weight</code></h3>
+<section id="xgboost-for-imbalanced-classification" class="level2" data-number="10.6">
+<h2 data-number="10.6" class="anchored" data-anchor-id="xgboost-for-imbalanced-classification"><span class="header-section-number">10.6</span> XGBoost for Imbalanced Classification</h2>
+<section id="handling-class-imbalance-with-scale_pos_weight" class="level3" data-number="10.6.1">
+<h3 data-number="10.6.1" class="anchored" data-anchor-id="handling-class-imbalance-with-scale_pos_weight"><span class="header-section-number">10.6.1</span> Handling Class Imbalance with <code>scale_pos_weight</code></h3>
 <p>In binary classification tasks, when one class is much rarer than the other (e.g., fraud detection, disease diagnosis), XGBoost models can become biased toward the majority class.</p>
 <p>To address this, XGBoost provides the <code>scale_pos_weight</code> parameter:</p>
 </section>
-<section id="what-it-does" class="level3" data-number="10.8.2">
-<h3 data-number="10.8.2" class="anchored" data-anchor-id="what-it-does"><span class="header-section-number">10.8.2</span> What it does</h3>
+<section id="what-it-does" class="level3" data-number="10.6.2">
+<h3 data-number="10.6.2" class="anchored" data-anchor-id="what-it-does"><span class="header-section-number">10.6.2</span> What it does</h3>
 <p><code>scale_pos_weight</code> changes the <strong>relative importance</strong> of positive examples during training by multiplying the gradients and Hessians of the <strong>positive class</strong> (label = 1).</p>
 <ul>
 <li>A higher value <strong>increases the penalty</strong> for misclassifying positive samples.</li>
 <li>This encourages the model to focus more on correctly predicting rare (positive) cases.</li>
 </ul>
 </section>
-<section id="when-to-use-it" class="level3" data-number="10.8.3">
-<h3 data-number="10.8.3" class="anchored" data-anchor-id="when-to-use-it"><span class="header-section-number">10.8.3</span> When to use it</h3>
+<section id="when-to-use-it" class="level3" data-number="10.6.3">
+<h3 data-number="10.6.3" class="anchored" data-anchor-id="when-to-use-it"><span class="header-section-number">10.6.3</span> When to use it</h3>
 <p>Use <code>scale_pos_weight &gt; 1</code> when:</p>
 <ul>
 <li>Your data is <strong>heavily imbalanced</strong>, and</li>
 <li>You want to improve <strong>recall</strong> or <strong>F1-score</strong> on the minority (positive) class.</li>
 </ul>
 </section>
-<section id="how-to-set-it" class="level3" data-number="10.8.4">
-<h3 data-number="10.8.4" class="anchored" data-anchor-id="how-to-set-it"><span class="header-section-number">10.8.4</span> How to set it</h3>
+<section id="how-to-set-it" class="level3" data-number="10.6.4">
+<h3 data-number="10.6.4" class="anchored" data-anchor-id="how-to-set-it"><span class="header-section-number">10.6.4</span> How to set it</h3>
 <p>A common heuristic:</p>
 <p><span class="math display">\[
 \text{scale\_pos\_weight} = \frac{\text{number of negative samples}}{\text{number of positive samples}}
@@ -2804,8 +2783,8 @@ F1 Score on Diabetes Test Set: 0.63</code></pre>
 </div>
 </div>
 </section>
-<section id="using-scale_pos_weight" class="level3" data-number="10.8.5">
-<h3 data-number="10.8.5" class="anchored" data-anchor-id="using-scale_pos_weight"><span class="header-section-number">10.8.5</span> Using <code>scale_pos_weight</code></h3>
+<section id="using-scale_pos_weight" class="level3" data-number="10.6.5">
+<h3 data-number="10.6.5" class="anchored" data-anchor-id="using-scale_pos_weight"><span class="header-section-number">10.6.5</span> Using <code>scale_pos_weight</code></h3>
 <div id="9292c568" class="cell">
 <div class="sourceCode cell-code" id="cb46"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>neg <span class="op">=</span> (diabetes_train[<span class="st">'Outcome'</span>] <span class="op">==</span> <span class="dv">0</span>).<span class="bu">sum</span>()</span>
 <span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>pos <span class="op">=</span> (diabetes_train[<span class="st">'Outcome'</span>] <span class="op">==</span> <span class="dv">1</span>).<span class="bu">sum</span>()</span>
@@ -2920,8 +2899,8 @@ Best Recall: 0.67</code></pre>
 </ul>
 <p>✅ This indicates the model was previously <strong>underperforming on the positive class</strong>, and that moderate rebalancing (e.g., <code>scale_pos_weight = 3</code>) helped improve <strong>both recall and precision</strong> — something that can happen when the model is initially biased toward the majority class.</p>
 </section>
-<section id="threshold-adjustment" class="level3" data-number="10.8.6">
-<h3 data-number="10.8.6" class="anchored" data-anchor-id="threshold-adjustment"><span class="header-section-number">10.8.6</span> Threshold adjustment</h3>
+<section id="threshold-adjustment" class="level3" data-number="10.6.6">
+<h3 data-number="10.6.6" class="anchored" data-anchor-id="threshold-adjustment"><span class="header-section-number">10.6.6</span> Threshold adjustment</h3>
 <div id="50d25e90" class="cell">
 <div class="sourceCode cell-code" id="cb49"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="co"># get prediction probabilities</span></span>
 <span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>y_diabetes_pred_proba <span class="op">=</span> diabetes_pipeline.predict_proba(X_diabetes_test)[:, <span class="dv">1</span>]</span>
@@ -2969,9 +2948,26 @@ Recall with Adjusted Threshold: 0.82</code></pre>
 </div>
 </div>
 </div>
-
-
 </section>
+</section>
+<section id="resources-for-learning-xgboost" class="level2" data-number="10.7">
+<h2 data-number="10.7" class="anchored" data-anchor-id="resources-for-learning-xgboost"><span class="header-section-number">10.7</span> Resources for Learning XGBoost</h2>
+<p>The foundational paper is:</p>
+<p><strong>XGBoost: A Scalable Tree Boosting System</strong><br>
+<em>Authors</em>: Tianqi Chen and Carlos Guestrin<br>
+<em>Conference</em>: KDD 2016<br>
+<a href="https://arxiv.org/abs/1603.02754">Link to paper (PDF)</a><br>
+<a href="https://doi.org/10.1145/2939672.2939785">DOI: 10.1145/2939672.2939785</a></p>
+<p>XGBoost is a relatively recent algorithm (2016), and thus not yet included in many standard textbooks. Below are helpful learning resources:</p>
+<ul>
+<li><a href="https://xgboost.readthedocs.io/en/stable/python/python_api.html">Documentation</a></li>
+<li><a href="https://files.speakerdeck.com/presentations/5c6dab45648344208185d2b1ab4fdc95/XGBoost-Newest.pdf">Slides by Tianqi Chen</a></li>
+<li><a href="https://dl.acm.org/doi/pdf/10.1145/2939672.2939785">Reference Paper</a></li>
+<li><a href="https://www.youtube.com/watch?v=Vly8xGnNiWs">Video by Tianqi Chen (author)</a></li>
+<li><a href="https://www.youtube.com/watch?v=OtD8wVaFm6E">StatQuest Video Explanation</a></li>
+</ul>
+
+
 </section>
 
 </main> <!-- /main -->

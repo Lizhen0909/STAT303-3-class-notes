@@ -330,11 +330,11 @@ window.Quarto = {
   <li><a href="#lightgbm" id="toc-lightgbm" class="nav-link" data-scroll-target="#lightgbm"><span class="header-section-number">11.2</span> LightGBM</a>
   <ul>
   <li><a href="#what-is-lightgbm" id="toc-what-is-lightgbm" class="nav-link" data-scroll-target="#what-is-lightgbm"><span class="header-section-number">11.2.1</span> What is LightGBM?</a></li>
-  <li><a href="#what-makes-lightgbm-unique" id="toc-what-makes-lightgbm-unique" class="nav-link" data-scroll-target="#what-makes-lightgbm-unique"><span class="header-section-number">11.2.2</span> What Makes LightGBM Unique?</a>
+  <li><a href="#what-makes-lightgbm-lighting-fast" id="toc-what-makes-lightgbm-lighting-fast" class="nav-link" data-scroll-target="#what-makes-lightgbm-lighting-fast"><span class="header-section-number">11.2.2</span> What Makes LightGBM Lighting Fast?</a>
   <ul class="collapse">
   <li><a href="#leaf-wise-tree-growth" id="toc-leaf-wise-tree-growth" class="nav-link" data-scroll-target="#leaf-wise-tree-growth"><span class="header-section-number">11.2.2.1</span> Leaf-Wise Tree Growth</a></li>
   <li><a href="#goss-gradient-based-one-side-sampling" id="toc-goss-gradient-based-one-side-sampling" class="nav-link" data-scroll-target="#goss-gradient-based-one-side-sampling"><span class="header-section-number">11.2.2.2</span> GOSS (Gradient-based One-Side Sampling)</a></li>
-  <li><a href="#efb-exclusive-feature-bundling" id="toc-efb-exclusive-feature-bundling" class="nav-link" data-scroll-target="#efb-exclusive-feature-bundling"><span class="header-section-number">11.2.2.3</span> EFB (Exclusive Feature Bundling)</a></li>
+  <li><a href="#exclusive-feature-bundling-efb" id="toc-exclusive-feature-bundling-efb" class="nav-link" data-scroll-target="#exclusive-feature-bundling-efb"><span class="header-section-number">11.2.2.3</span> Exclusive Feature Bundling (EFB)</a></li>
   </ul></li>
   <li><a href="#using-lightgbm" id="toc-using-lightgbm" class="nav-link" data-scroll-target="#using-lightgbm"><span class="header-section-number">11.2.3</span> Using LightGBM</a>
   <ul class="collapse">
@@ -342,7 +342,7 @@ window.Quarto = {
   <li><a href="#building-a-baseline-model-using-lightgbms-native-categorical-feature-support" id="toc-building-a-baseline-model-using-lightgbms-native-categorical-feature-support" class="nav-link" data-scroll-target="#building-a-baseline-model-using-lightgbms-native-categorical-feature-support"><span class="header-section-number">11.2.3.2</span> Building a Baseline Model Using LightGBM’s Native Categorical Feature Support</a></li>
   <li><a href="#enabling-goss-and-efb-in-lightgbm" id="toc-enabling-goss-and-efb-in-lightgbm" class="nav-link" data-scroll-target="#enabling-goss-and-efb-in-lightgbm"><span class="header-section-number">11.2.3.3</span> Enabling GOSS and EFB in LightGBM</a></li>
   <li><a href="#tuning-top_rate-and-other_rate-in-goss" id="toc-tuning-top_rate-and-other_rate-in-goss" class="nav-link" data-scroll-target="#tuning-top_rate-and-other_rate-in-goss"><span class="header-section-number">11.2.3.4</span> Tuning <code>top_rate</code> and <code>other_rate</code> in GOSS</a></li>
-  <li><a href="#optimizing-lightgbm-with-categorical-features-and-bayessearchcv" id="toc-optimizing-lightgbm-with-categorical-features-and-bayessearchcv" class="nav-link" data-scroll-target="#optimizing-lightgbm-with-categorical-features-and-bayessearchcv"><span class="header-section-number">11.2.3.5</span> Optimizing LightGBM with Categorical Features and BayesSearchCV</a></li>
+  <li><a href="#optimizing-lightgbm-with-bayessearchcv" id="toc-optimizing-lightgbm-with-bayessearchcv" class="nav-link" data-scroll-target="#optimizing-lightgbm-with-bayessearchcv"><span class="header-section-number">11.2.3.5</span> Optimizing LightGBM with <code>BayesSearchCV</code></a></li>
   </ul></li>
   </ul></li>
   <li><a href="#catboost" id="toc-catboost" class="nav-link" data-scroll-target="#catboost"><span class="header-section-number">11.3</span> CatBoost</a>
@@ -350,14 +350,20 @@ window.Quarto = {
   <li><a href="#what-is-catboost" id="toc-what-is-catboost" class="nav-link" data-scroll-target="#what-is-catboost"><span class="header-section-number">11.3.1</span> What is CatBoost?</a></li>
   <li><a href="#what-makes-catboost-unique" id="toc-what-makes-catboost-unique" class="nav-link" data-scroll-target="#what-makes-catboost-unique"><span class="header-section-number">11.3.2</span> What Makes CatBoost Unique?</a>
   <ul class="collapse">
-  <li><a href="#native-categorical-feature-encoding" id="toc-native-categorical-feature-encoding" class="nav-link" data-scroll-target="#native-categorical-feature-encoding"><span class="header-section-number">11.3.2.1</span> Native Categorical Feature Encoding</a></li>
-  <li><a href="#ordered-boosting-vs.-standard-boosting" id="toc-ordered-boosting-vs.-standard-boosting" class="nav-link" data-scroll-target="#ordered-boosting-vs.-standard-boosting"><span class="header-section-number">11.3.2.2</span> Ordered Boosting (vs.&nbsp;Standard Boosting)</a></li>
-  <li><a href="#symmetric-oblivious-trees" id="toc-symmetric-oblivious-trees" class="nav-link" data-scroll-target="#symmetric-oblivious-trees"><span class="header-section-number">11.3.2.3</span> Symmetric (Oblivious) Trees</a></li>
+  <li><a href="#symmetric-oblivious-trees" id="toc-symmetric-oblivious-trees" class="nav-link" data-scroll-target="#symmetric-oblivious-trees"><span class="header-section-number">11.3.2.1</span> Symmetric (Oblivious) Trees</a></li>
+  <li><a href="#advanced-categorical-feature-handling" id="toc-advanced-categorical-feature-handling" class="nav-link" data-scroll-target="#advanced-categorical-feature-handling"><span class="header-section-number">11.3.2.2</span> Advanced Categorical Feature Handling</a></li>
+  <li><a href="#ordered-boosting-vs.-standard-boosting" id="toc-ordered-boosting-vs.-standard-boosting" class="nav-link" data-scroll-target="#ordered-boosting-vs.-standard-boosting"><span class="header-section-number">11.3.2.3</span> Ordered Boosting (vs.&nbsp;Standard Boosting)</a></li>
+  <li><a href="#handling-of-text-and-embedding-features" id="toc-handling-of-text-and-embedding-features" class="nav-link" data-scroll-target="#handling-of-text-and-embedding-features"><span class="header-section-number">11.3.2.4</span> Handling of Text and Embedding Features</a></li>
+  <li><a href="#ease-of-use-and-defaults" id="toc-ease-of-use-and-defaults" class="nav-link" data-scroll-target="#ease-of-use-and-defaults"><span class="header-section-number">11.3.2.5</span> Ease of Use and Defaults</a></li>
   </ul></li>
-  <li><a href="#installing-and-using-catboost-with-scikit-learn-api" id="toc-installing-and-using-catboost-with-scikit-learn-api" class="nav-link" data-scroll-target="#installing-and-using-catboost-with-scikit-learn-api"><span class="header-section-number">11.3.3</span> Installing and Using CatBoost with Scikit-Learn API</a></li>
+  <li><a href="#using-catboost" id="toc-using-catboost" class="nav-link" data-scroll-target="#using-catboost"><span class="header-section-number">11.3.3</span> Using CatBoost</a></li>
   <li><a href="#installation" id="toc-installation" class="nav-link" data-scroll-target="#installation"><span class="header-section-number">11.3.4</span> Installation</a></li>
   <li><a href="#catboost-for-regression" id="toc-catboost-for-regression" class="nav-link" data-scroll-target="#catboost-for-regression"><span class="header-section-number">11.3.5</span> CatBoost for Regression</a></li>
-  <li><a href="#tuning-catboostregressor-with-optuna" id="toc-tuning-catboostregressor-with-optuna" class="nav-link" data-scroll-target="#tuning-catboostregressor-with-optuna"><span class="header-section-number">11.3.6</span> Tuning <code>CatBoostRegressor</code> with Optuna</a></li>
+  <li><a href="#tuning-catboostregressor" id="toc-tuning-catboostregressor" class="nav-link" data-scroll-target="#tuning-catboostregressor"><span class="header-section-number">11.3.6</span> Tuning <code>CatBoostRegressor</code></a>
+  <ul class="collapse">
+  <li><a href="#hyperparameters-not-used-in-catboost" id="toc-hyperparameters-not-used-in-catboost" class="nav-link" data-scroll-target="#hyperparameters-not-used-in-catboost"><span class="header-section-number">11.3.6.1</span> ❌ Hyperparameters <strong>not used</strong> in CatBoost:</a></li>
+  <li><a href="#unique-hyperparameters-in-catboost" id="toc-unique-hyperparameters-in-catboost" class="nav-link" data-scroll-target="#unique-hyperparameters-in-catboost"><span class="header-section-number">11.3.6.2</span> ✅ Unique Hyperparameters in CatBoost</a></li>
+  </ul></li>
   <li><a href="#when-to-use-catboost-over-xgboost" id="toc-when-to-use-catboost-over-xgboost" class="nav-link" data-scroll-target="#when-to-use-catboost-over-xgboost"><span class="header-section-number">11.3.7</span> When to Use <strong>CatBoost</strong> Over <strong>XGBoost</strong></a></li>
   </ul></li>
   <li><a href="#handling-imbalanced-classification-xgboost-vs.-lightgbm-vs.-catboost" id="toc-handling-imbalanced-classification-xgboost-vs.-lightgbm-vs.-catboost" class="nav-link" data-scroll-target="#handling-imbalanced-classification-xgboost-vs.-lightgbm-vs.-catboost"><span class="header-section-number">11.4</span> Handling Imbalanced Classification: XGBoost vs.&nbsp;LightGBM vs.&nbsp;CatBoost</a></li>
@@ -388,40 +394,37 @@ window.Quarto = {
 </header>
 
 
-<p>Gradient boosting is one of the most powerful techniques for structured/tabular data, and has become the <strong>go-to choice for many winning solutions in machine learning competitions</strong>.</p>
-<p>In the previous chapter, we explored <strong>XGBoost</strong> in detail — covering its optimization objective, regularization techniques, split finding algorithms, and how it became a cornerstone in modern tabular modeling.</p>
-<p>In this chapter, we turn our attention to two other powerful gradient boosting libraries and focus on their <strong>key innovations</strong>:</p>
+<p>Gradient boosting is one of the most powerful techniques for <strong>structured/tabular data</strong>, often serving as the <strong>go-to choice for tabular data tasks in machine learning competitions</strong>.</p>
+<p>In the previous chapter, we explored <strong>XGBoost</strong> in detail—covering its <strong>optimization objective</strong>, <strong>regularization techniques</strong>, <strong>split finding algorithms</strong>, and its role as a cornerstone in modern <strong>tabular modeling</strong>.</p>
+<p>While <strong>XGBoost</strong> is highly effective, other libraries have introduced innovations to address challenges like scalability and categorical feature handling. In this chapter, we focus on two <strong>advanced gradient boosting libraries</strong> and their <strong>key innovations</strong>:</p>
 <ul>
-<li><p><strong>LightGBM</strong>: Developed by Microsoft, LightGBM is designed for <strong>speed and scalability</strong>. It introduces innovations like <strong>leaf-wise tree growth</strong> and <strong>histogram-based split finding</strong>, making it ideal for <strong>large datasets and high-dimensional features</strong>.</p></li>
-<li><p><strong>CatBoost</strong>: Created by Yandex, CatBoost stands out for its <strong>native support for categorical features</strong> and its use of <strong>ordered boosting</strong> to prevent prediction shift. It often performs well <strong>with minimal tuning</strong>, especially on datasets rich in categorical variables.</p></li>
+<li><p><strong>LightGBM</strong>: Developed by Microsoft, <strong>LightGBM</strong> is optimized for <strong>speed and scalability</strong>. It introduces <strong>Gradient-based One-Side Sampling (GOSS)</strong>, which prioritizes instances with larger gradients for faster training, and <strong>Exclusive Feature Bundling (EFB)</strong>, which reduces memory usage by grouping mutually exclusive features. <strong>LightGBM</strong> also supports <strong>categorical features</strong> efficiently, making it ideal for <strong>large datasets and high-dimensional features</strong>.</p></li>
+<li><p><strong>CatBoost</strong>: Created by Yandex, <strong>CatBoost</strong> excels in its <strong>optimized support for categorical features</strong> through advanced target-based encoding. It uses <strong>ordered boosting</strong> to prevent prediction shift and reduce overfitting, often performing well with <strong>minimal tuning</strong> on datasets rich in <strong>categorical variables</strong>.</p></li>
 </ul>
 <section id="what-they-share-with-xgboost" class="level2" data-number="11.1">
 <h2 data-number="11.1" class="anchored" data-anchor-id="what-they-share-with-xgboost"><span class="header-section-number">11.1</span> What They Share with XGBoost</h2>
-<p>Despite their architectural differences, both LightGBM and CatBoost share key foundations with XGBoost:</p>
+<p>While <strong>LightGBM</strong> and <strong>CatBoost</strong> introduce unique innovations, they build on the same foundational principles as <strong>XGBoost</strong>:</p>
 <ul>
-<li>They use the <strong>same objective function structure</strong> (loss + regularization)</li>
-<li>They apply a <strong>second-order Taylor approximation</strong> for efficient optimization</li>
-<li>They implement a <strong>histogram-based split-finding algorithm</strong> to speed up training</li>
+<li>They use a <strong>similar objective function structure</strong> (loss plus regularization) to balance model fit and complexity.</li>
+<li>They apply a <strong>second-order Taylor approximation</strong> for efficient optimization of the loss function.</li>
+<li>They support <strong>histogram-based split-finding algorithms</strong> to speed up training, with <strong>LightGBM</strong> particularly optimized for this approach.</li>
+<li>They support <strong>parallel tree building</strong>, significantly accelerating training compared to traditional gradient boosting.</li>
+<li>They provide <strong>native support for categorical encoding</strong>, reducing the need for preprocessing (e.g., one-hot encoding), with <strong>XGBoost</strong> introducing this feature starting in version 1.5.0.</li>
 </ul>
 </section>
 <section id="lightgbm" class="level2" data-number="11.2">
 <h2 data-number="11.2" class="anchored" data-anchor-id="lightgbm"><span class="header-section-number">11.2</span> LightGBM</h2>
 <section id="what-is-lightgbm" class="level3" data-number="11.2.1">
 <h3 data-number="11.2.1" class="anchored" data-anchor-id="what-is-lightgbm"><span class="header-section-number">11.2.1</span> What is LightGBM?</h3>
-<p><strong>LightGBM</strong> (Light Gradient Boosting Machine) is a high-performance gradient boosting framework developed by Microsoft in 2017. LightGBM outperforms XGBoost in terms of compuational speed, and provides comparable accuracy in general. It is designed for:</p>
+<p><strong>LightGBM</strong> (Light Gradient Boosting Machine) is a high-performance gradient boosting framework developed by Microsoft in 2017. Designed for <strong>speed and scalability</strong>, it is typically faster than <strong>XGBoost</strong> due to its optimized algorithms, with accuracy that is generally comparable but may require tuning. LightGBM excels in:</p>
 <ul>
-<li><strong>Large-scale datasets</strong> with many rows and features<br>
-</li>
-<li><strong>High speed and memory efficiency</strong>, often outperforming XGBoost in training time<br>
-</li>
-<li><strong>Native support for categorical features</strong> (Note: XGBoost added this starting in version 1.5.0)<br>
-</li>
-<li><strong>Support for parallel, distributed, and GPU training</strong> (XGBoost offers similar capabilities)</li>
+<li><strong>Handling large-scale datasets</strong> with many rows and features</li>
+<li><strong>Achieving high speed and memory efficiency</strong> through innovations like <strong>Gradient-based One-Side Sampling (GOSS)</strong>, <strong>Exclusive Feature Bundling (EFB)</strong>, and <strong>histogram-based splitting</strong></li>
 </ul>
-<p>Read the <a href="https://proceedings.neurips.cc/paper/2017/file/6449f44a102fde848669bdd9eb6b76fa-Paper.pdf">LightGBM paper</a> for more details.</p>
+<p>Like <strong>XGBoost</strong> and <strong>CatBoost</strong>, it supports <strong>native categorical encoding</strong> and <strong>parallel tree building</strong>, enhancing its efficiency for tabular data tasks. See the <a href="https://proceedings.neurips.cc/paper/2017/file/6449f44a102fde848669bdd9eb6b76fa-Paper.pdf">LightGBM paper</a> for details on its algorithmic innovations and performance benchmarks.</p>
 </section>
-<section id="what-makes-lightgbm-unique" class="level3" data-number="11.2.2">
-<h3 data-number="11.2.2" class="anchored" data-anchor-id="what-makes-lightgbm-unique"><span class="header-section-number">11.2.2</span> What Makes LightGBM Unique?</h3>
+<section id="what-makes-lightgbm-lighting-fast" class="level3" data-number="11.2.2">
+<h3 data-number="11.2.2" class="anchored" data-anchor-id="what-makes-lightgbm-lighting-fast"><span class="header-section-number">11.2.2</span> What Makes LightGBM Lighting Fast?</h3>
 <p>LightGBM often outperforms XGBoost in <strong>training speed</strong> and <strong>memory efficiency</strong>, thanks to several key innovations:</p>
 <section id="leaf-wise-tree-growth" class="level4" data-number="11.2.2.1">
 <h4 data-number="11.2.2.1" class="anchored" data-anchor-id="leaf-wise-tree-growth"><span class="header-section-number">11.2.2.1</span> Leaf-Wise Tree Growth</h4>
@@ -449,29 +452,22 @@ window.Quarto = {
 <p><span class="math display">\[
 r_m = -\left[ \frac{\partial L(y_i, f(x_i))}{\partial f(x_i)} \right]_{f = f_{m-1}}
 \]</span></p>
-<p>Observations with larger gradients have more influence on reducing the loss — GOSS prioritizes those.</p>
-<ul>
-<li>Hyperparameters for GOSS:
-<ul>
-<li><code>boosting_type='goss'</code>: activates GOSS instead of traditional random sampling</li>
-<li><code>top_rate</code>: fraction of data with the largest gradients to keep (e.g., <code>0.2</code>)</li>
-<li><code>other_rate</code>: fraction of data with smaller gradients to sample (e.g., <code>0.1</code>)</li>
-</ul></li>
-</ul>
+<p>Observations with larger gradients have more influence on reducing the loss — GOSS prioritizes those. This approach reduces the number of data points processed per iteration, speeding up training while preserving important information.</p>
 </section>
-<section id="efb-exclusive-feature-bundling" class="level4" data-number="11.2.2.3">
-<h4 data-number="11.2.2.3" class="anchored" data-anchor-id="efb-exclusive-feature-bundling"><span class="header-section-number">11.2.2.3</span> EFB (Exclusive Feature Bundling)</h4>
+<section id="exclusive-feature-bundling-efb" class="level4" data-number="11.2.2.3">
+<h4 data-number="11.2.2.3" class="anchored" data-anchor-id="exclusive-feature-bundling-efb"><span class="header-section-number">11.2.2.3</span> Exclusive Feature Bundling (EFB)</h4>
 <ul>
-<li>EFB compresses <strong>high-dimensional sparse feature spaces</strong> by bundling features that are <strong>mutually exclusive</strong> (i.e., rarely non-zero at the same time).</li>
-<li>This is particularly effective in datasets with <strong>many categorical variables</strong> or <strong>one-hot encoded features</strong>.</li>
+<li><strong>EFB</strong> reduces memory usage and accelerates training by bundling <strong>mutually exclusive</strong> features (i.e., features that rarely have non-zero values simultaneously) in <strong>high-dimensional sparse feature spaces</strong>.</li>
+<li>This is particularly effective for datasets with <strong>many categorical variables</strong> or <strong>one-hot encoded features</strong>, avoiding the memory overhead of one-hot encoding and complementing LightGBM’s <strong>native categorical support</strong>.</li>
 </ul>
-<p>Example:</p>
+<p><strong>Example</strong>:<br>
+The table below shows two mutually exclusive features, <code>feature1</code> and <code>feature2</code>, bundled into a single <code>feature_bundle</code> by assigning distinct value ranges (e.g., 1–4 for <code>feature1</code>, 5–6 for <code>feature2</code>):</p>
 <table class="caption-top table">
 <thead>
 <tr class="header">
-<th>feature1</th>
-<th>feature2</th>
-<th>feature_bundle</th>
+<th><code>feature1</code></th>
+<th><code>feature2</code></th>
+<th><code>feature_bundle</code></th>
 </tr>
 </thead>
 <tbody>
@@ -512,14 +508,15 @@ r_m = -\left[ \frac{\partial L(y_i, f(x_i))}{\partial f(x_i)} \right]_{f = f_{m-
 </tr>
 </tbody>
 </table>
-<p>Here, <code>feature1</code> and <code>feature2</code> never overlap in non-zero values, so they can be safely merged into a single bundled feature.</p>
 <ul>
-<li>Hyperparameter for EFB:
+<li><strong>Hyperparameter for EFB</strong>:
 <ul>
-<li><code>enable_bundle</code>: set to <code>true</code> (default) to enable automatic exclusive feature bundling</li>
+<li><code>enable_bundle</code>: Enabled by default to activate automatic bundling.</li>
+<li><code>max_conflict_rate</code>: Controls the maximum conflict rate for bundling (default: 0.0, no conflicts allowed); adjust (e.g., 0.1) to allow minor overlaps.</li>
 </ul></li>
 </ul>
-<p>Together, these optimizations make LightGBM especially well-suited for <strong>large-scale, sparse, tabular datasets</strong>, offering both <strong>speed and scalability</strong> without significant loss in accuracy.</p>
+<p>This approach reduces the number of features processed per iteration, speeding up training while preserving important information.</p>
+<p>Combined with <strong>GOSS</strong>, <strong>EFB</strong> makes <strong>LightGBM</strong> especially well-suited for <strong>large-scale, sparse, tabular datasets</strong>, offering <strong>speed and scalability</strong> while maintaining comparable accuracy with proper tuning.</p>
 </section>
 </section>
 <section id="using-lightgbm" class="level3" data-number="11.2.3">
@@ -580,7 +577,7 @@ This makes it easy to integrate LightGBM models into Scikit-learn workflows such
 <p>⚠️ These two options are <strong>mutually exclusive</strong> — use <strong>only one</strong>. If both are set, <code>scale_pos_weight</code> takes priority.</p>
 </blockquote>
 <p>For full details and advanced options, see the <a href="https://lightgbm.readthedocs.io/en/latest/Parameters.html">LightGBM Parameters Guide</a>.</p>
-<div id="f819f995" class="cell" data-execution_count="2">
+<div id="f819f995" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -599,11 +596,11 @@ This makes it easy to integrate LightGBM models into Scikit-learn workflows such
 <span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> warnings</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We’ll continue to use the same datasets that we have been using throughout the course.</p>
-<div id="a9036ef3" class="cell" data-execution_count="3">
+<div id="a9036ef3" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the dataset</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>car <span class="op">=</span> pd.read_csv(<span class="st">'Datasets/car.csv'</span>)</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>car.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="3">
+<div class="cell-output cell-output-display" data-execution_count="2">
 <div>
 
 
@@ -695,7 +692,7 @@ This makes it easy to integrate LightGBM models into Scikit-learn workflows such
 </div>
 </div>
 </div>
-<div id="db6b5f99" class="cell" data-execution_count="12">
+<div id="db6b5f99" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> car.drop(columns<span class="op">=</span>[<span class="st">'price'</span>])</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> car[<span class="st">'price'</span>]</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -755,47 +752,48 @@ Wall time: 82.6 ms</code></pre>
 </section>
 <section id="enabling-goss-and-efb-in-lightgbm" class="level4" data-number="11.2.3.3">
 <h4 data-number="11.2.3.3" class="anchored" data-anchor-id="enabling-goss-and-efb-in-lightgbm"><span class="header-section-number">11.2.3.3</span> Enabling GOSS and EFB in LightGBM</h4>
-<p>By default, LightGBM uses:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>data_sample_strategy <span class="op">=</span> <span class="st">'bagging'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>To enable <strong>GOSS (Gradient-based One-Side Sampling)</strong> — a faster sampling strategy that prioritizes high-gradient instances — set:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>boosting_type <span class="op">=</span> <span class="st">'goss'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>When using GOSS, you should also configure:</p>
+<section id="goss-is-not-enabled-by-default." class="level5" data-number="11.2.3.3.1">
+<h5 data-number="11.2.3.3.1" class="anchored" data-anchor-id="goss-is-not-enabled-by-default."><span class="header-section-number">11.2.3.3.1</span> GOSS is <strong>not enabled by default</strong>.</h5>
+<p>The default boosting type is <code>gbdt</code> (traditional Gradient Boosting Decision Tree), which uses all data instances for each iteration without sampling based on gradients.</p>
+<p>To use GOSS, you must explicitly set the <code>boosting_type</code> parameter to <code>goss</code> in the model configuration. When you do this, LightGBM uses GOSS with default values for its specific hyperparameters:</p>
 <ul>
-<li><p><code>top_rate</code>: Fraction of data with the largest gradients to retain (e.g., 0.2)</p></li>
-<li><p><code>other_rate</code>: Fraction of small-gradient data to randomly sample (e.g., 0.1)</p></li>
+<li><code>top_rate</code>: 0.2 (keeps 20% of instances with large gradients)</li>
+<li><code>other_rate</code>: 0.1 (randomly samples 10% of instances with small gradients)</li>
 </ul>
-<p>LightGBM also enables <strong>EFB (Exclusive Feature Bundling)</strong> by default:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>enable_bundle <span class="op">=</span> <span class="va">True</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="efb-is-enabled-by-default" class="level5" data-number="11.2.3.3.2">
+<h5 data-number="11.2.3.3.2" class="anchored" data-anchor-id="efb-is-enabled-by-default"><span class="header-section-number">11.2.3.3.2</span> EFB is <strong>enabled by default</strong></h5>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>enable_bundle <span class="op">=</span> <span class="va">True</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>This optimization reduces dimensionality by bundling mutually exclusive sparse features, such as those resulting from one-hot encoding.</p>
 <p>⚠️ Note: In our car dataset, the data size is small and there are only a few categorical features, so these optimizations may not have a noticeable impact. However, for large-scale datasets with many categorical features, enabling GOSS and EFB is highly recommended to improve training efficiency and reduce memory usage.</p>
 <div id="e1677750" class="cell" data-execution_count="18">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>time</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ===== 2. LightGBM with GOSS Sampling =====</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">===== LightGBM with GOSS Sampling ====="</span>)</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize the LightGBM regressor with GOSS</span></span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>model_goss <span class="op">=</span> lgb.LGBMRegressor(</span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    boosting_type<span class="op">=</span><span class="st">'goss'</span>,</span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    random_state<span class="op">=</span><span class="dv">42</span></span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Train the model with categorical features specified</span></span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>model_goss.fit(</span>
-<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>    X_train,</span>
-<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>    y_train,</span>
-<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>    categorical_feature<span class="op">=</span>categorical_feature</span>
-<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Predict on the test set</span></span>
-<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>y_pred_goss <span class="op">=</span> model_goss.predict(X_test)</span>
-<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate evaluation metrics</span></span>
-<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>rmse_goss <span class="op">=</span> root_mean_squared_error(y_test, y_pred_goss)</span>
-<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>r2_goss <span class="op">=</span> r2_score(y_test, y_pred_goss)</span>
-<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Output results</span></span>
-<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Test RMSE (GOSS): </span><span class="sc">{</span>rmse_goss<span class="sc">:.4f}</span><span class="ss">"</span>)</span>
-<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Test R² (GOSS): </span><span class="sc">{</span>r2_goss<span class="sc">:.4f}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>time</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ===== 2. LightGBM with GOSS Sampling =====</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">===== LightGBM with GOSS Sampling ====="</span>)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize the LightGBM regressor with GOSS</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>model_goss <span class="op">=</span> lgb.LGBMRegressor(</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    boosting_type<span class="op">=</span><span class="st">'goss'</span>,</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    random_state<span class="op">=</span><span class="dv">42</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Train the model with categorical features specified</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>model_goss.fit(</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>    X_train,</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>    y_train,</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>    categorical_feature<span class="op">=</span>categorical_feature</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Predict on the test set</span></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>y_pred_goss <span class="op">=</span> model_goss.predict(X_test)</span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate evaluation metrics</span></span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>rmse_goss <span class="op">=</span> root_mean_squared_error(y_test, y_pred_goss)</span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>r2_goss <span class="op">=</span> r2_score(y_test, y_pred_goss)</span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Output results</span></span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Test RMSE (GOSS): </span><span class="sc">{</span>rmse_goss<span class="sc">:.4f}</span><span class="ss">"</span>)</span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Test R² (GOSS): </span><span class="sc">{</span>r2_goss<span class="sc">:.4f}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 ===== LightGBM with GOSS Sampling =====
@@ -806,53 +804,55 @@ Wall time: 79.6 ms</code></pre>
 </div>
 </div>
 </section>
+</section>
 <section id="tuning-top_rate-and-other_rate-in-goss" class="level4" data-number="11.2.3.4">
 <h4 data-number="11.2.3.4" class="anchored" data-anchor-id="tuning-top_rate-and-other_rate-in-goss"><span class="header-section-number">11.2.3.4</span> Tuning <code>top_rate</code> and <code>other_rate</code> in GOSS</h4>
-<p>Even with this small dataset, we observed a <strong>shorter execution time</strong> and a <strong>slight improvement in performance</strong> using GOSS. Next, we’ll tune the <code>top_rate</code> and <code>other_rate</code> parameters to see if we can further boost the model’s performance.</p>
+<p>Even with this small dataset, we observed a <strong>shorter execution time</strong> and a <strong>slight improvement in performance</strong> using GOSS.</p>
+<p>The default settings are reasonable for many datasets. To leverage <strong>GOSS</strong> more effectively, optimize performance by tuning <strong>top_rate</strong> (e.g., 0.1, 0.2, 0.3, 0.4) and <strong>other_rate</strong> (e.g., 0.05, 0.1, 0.15, 0.2) using cross-validation, especially for large or noisy datasets.</p>
 <blockquote class="blockquote">
 <p>⚠️ <strong>Note:</strong> When using <code>boosting_type='goss'</code>, LightGBM requires that<br>
 <strong><code>top_rate + other_rate ≤ 1.0</code></strong><br>
 This constraint ensures that the combined sample used for training does not exceed the size of the full dataset.</p>
 </blockquote>
 <div id="09e449da" class="cell" data-execution_count="24">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># tuning the top_rate and other_rate parameters</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize the LightGBM regressor with GOSS</span></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>model_goss_tune <span class="op">=</span> lgb.LGBMRegressor(</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    boosting_type<span class="op">=</span><span class="st">'goss'</span>,</span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    random_state<span class="op">=</span><span class="dv">42</span></span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the parameter grid for tuning</span></span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>param_grid <span class="op">=</span> {</span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">'top_rate'</span>: Real(<span class="fl">0.1</span>, <span class="fl">0.6</span>, prior<span class="op">=</span><span class="st">'uniform'</span>),</span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">'other_rate'</span>: Real(<span class="fl">0.1</span>, <span class="fl">0.4</span>, prior<span class="op">=</span><span class="st">'uniform'</span>),</span>
-<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize the BayesSearchCV object</span></span>
-<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>opt <span class="op">=</span> BayesSearchCV(</span>
-<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>    model_goss_tune,</span>
-<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>    param_grid,</span>
-<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>    n_iter<span class="op">=</span><span class="dv">10</span>,</span>
-<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>    cv<span class="op">=</span><span class="dv">3</span>,</span>
-<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>    n_jobs<span class="op">=-</span><span class="dv">1</span>,</span>
-<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>    random_state<span class="op">=</span><span class="dv">42</span></span>
-<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit the model</span></span>
-<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a>opt.fit(</span>
-<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a>    X_train,</span>
-<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a>    y_train,</span>
-<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a>    categorical_feature<span class="op">=</span>categorical_feature</span>
-<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a><span class="co"># the best parameters</span></span>
-<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Best parameters found: "</span>, opt.best_params_)</span>
-<span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-30"><a href="#cb12-30" aria-hidden="true" tabindex="-1"></a><span class="co"># Predict on the test set</span></span>
-<span id="cb12-31"><a href="#cb12-31" aria-hidden="true" tabindex="-1"></a>y_pred_opt <span class="op">=</span> opt.predict(X_test)</span>
-<span id="cb12-32"><a href="#cb12-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-33"><a href="#cb12-33" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate evaluation metrics</span></span>
-<span id="cb12-34"><a href="#cb12-34" aria-hidden="true" tabindex="-1"></a>rmse_opt <span class="op">=</span> root_mean_squared_error(y_test, y_pred_opt)</span>
-<span id="cb12-35"><a href="#cb12-35" aria-hidden="true" tabindex="-1"></a>r2_opt <span class="op">=</span> r2_score(y_test, y_pred_opt)</span>
-<span id="cb12-36"><a href="#cb12-36" aria-hidden="true" tabindex="-1"></a><span class="co"># Output results</span></span>
-<span id="cb12-37"><a href="#cb12-37" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Test RMSE (GOSS with tuning): </span><span class="sc">{</span>rmse_opt<span class="sc">:.4f}</span><span class="ss">"</span>)</span>
-<span id="cb12-38"><a href="#cb12-38" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Test R² (GOSS with tuning): </span><span class="sc">{</span>r2_opt<span class="sc">:.4f}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># tuning the top_rate and other_rate parameters</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize the LightGBM regressor with GOSS</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>model_goss_tune <span class="op">=</span> lgb.LGBMRegressor(</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    boosting_type<span class="op">=</span><span class="st">'goss'</span>,</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    random_state<span class="op">=</span><span class="dv">42</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the parameter grid for tuning</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>param_grid <span class="op">=</span> {</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">'top_rate'</span>: Real(<span class="fl">0.1</span>, <span class="fl">0.6</span>, prior<span class="op">=</span><span class="st">'uniform'</span>),</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">'other_rate'</span>: Real(<span class="fl">0.1</span>, <span class="fl">0.4</span>, prior<span class="op">=</span><span class="st">'uniform'</span>),</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize the BayesSearchCV object</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>opt <span class="op">=</span> BayesSearchCV(</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>    model_goss_tune,</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>    param_grid,</span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>    n_iter<span class="op">=</span><span class="dv">10</span>,</span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>    cv<span class="op">=</span><span class="dv">3</span>,</span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>    n_jobs<span class="op">=-</span><span class="dv">1</span>,</span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>    random_state<span class="op">=</span><span class="dv">42</span></span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit the model</span></span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>opt.fit(</span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>    X_train,</span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>    y_train,</span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>    categorical_feature<span class="op">=</span>categorical_feature</span>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a><span class="co"># the best parameters</span></span>
+<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Best parameters found: "</span>, opt.best_params_)</span>
+<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a><span class="co"># Predict on the test set</span></span>
+<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a>y_pred_opt <span class="op">=</span> opt.predict(X_test)</span>
+<span id="cb10-32"><a href="#cb10-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-33"><a href="#cb10-33" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate evaluation metrics</span></span>
+<span id="cb10-34"><a href="#cb10-34" aria-hidden="true" tabindex="-1"></a>rmse_opt <span class="op">=</span> root_mean_squared_error(y_test, y_pred_opt)</span>
+<span id="cb10-35"><a href="#cb10-35" aria-hidden="true" tabindex="-1"></a>r2_opt <span class="op">=</span> r2_score(y_test, y_pred_opt)</span>
+<span id="cb10-36"><a href="#cb10-36" aria-hidden="true" tabindex="-1"></a><span class="co"># Output results</span></span>
+<span id="cb10-37"><a href="#cb10-37" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Test RMSE (GOSS with tuning): </span><span class="sc">{</span>rmse_opt<span class="sc">:.4f}</span><span class="ss">"</span>)</span>
+<span id="cb10-38"><a href="#cb10-38" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Test R² (GOSS with tuning): </span><span class="sc">{</span>r2_opt<span class="sc">:.4f}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Best parameters found:  OrderedDict({'other_rate': 0.33986603248215197, 'top_rate': 0.31901459322046166})
 Test RMSE (GOSS with tuning): 3458.7664
@@ -860,52 +860,52 @@ Test R² (GOSS with tuning): 0.9592</code></pre>
 </div>
 </div>
 </section>
-<section id="optimizing-lightgbm-with-categorical-features-and-bayessearchcv" class="level4" data-number="11.2.3.5">
-<h4 data-number="11.2.3.5" class="anchored" data-anchor-id="optimizing-lightgbm-with-categorical-features-and-bayessearchcv"><span class="header-section-number">11.2.3.5</span> Optimizing LightGBM with Categorical Features and BayesSearchCV</h4>
+<section id="optimizing-lightgbm-with-bayessearchcv" class="level4" data-number="11.2.3.5">
+<h4 data-number="11.2.3.5" class="anchored" data-anchor-id="optimizing-lightgbm-with-bayessearchcv"><span class="header-section-number">11.2.3.5</span> Optimizing LightGBM with <code>BayesSearchCV</code></h4>
 <p><code>BayesSearchCV</code> from <code>scikit-optimize</code> provides an efficient way to tune hyperparameters. Here’s how to set this up:</p>
 <div id="35e60b3b" class="cell" data-execution_count="26">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>time</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ===== 2. Hyperparameter Tuning with Bayesian Optimization =====</span></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the parameter space for Bayesian optimization</span></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>param_space <span class="op">=</span> {</span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">'num_leaves'</span>: Integer(<span class="dv">20</span>, <span class="dv">100</span>),</span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">'max_depth'</span>: Integer(<span class="dv">5</span>, <span class="dv">50</span>),</span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">'min_data_in_leaf'</span>: Integer(<span class="dv">1</span>, <span class="dv">100</span>),</span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">'learning_rate'</span>: Real(<span class="fl">0.01</span>, <span class="fl">0.5</span>, prior<span class="op">=</span><span class="st">'uniform'</span>),</span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">'n_estimators'</span>: Integer(<span class="dv">50</span>, <span class="dv">500</span>),</span>
-<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">'top_rate'</span>: Real(<span class="fl">0.1</span>, <span class="fl">0.6</span>, prior<span class="op">=</span><span class="st">'uniform'</span>),</span>
-<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">'other_rate'</span>: Real(<span class="fl">0.1</span>, <span class="fl">0.4</span>, prior<span class="op">=</span><span class="st">'uniform'</span>),</span>
-<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the Bayesian search object</span></span>
-<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>bayes_search <span class="op">=</span> BayesSearchCV(</span>
-<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>    <span class="co"># using verbose=-1 to suppress warnings</span></span>
-<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>    <span class="co"># using n_jobs=-1 to use all available cores</span></span>
-<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>    <span class="co"># using random_state=42 for reproducibility</span></span>
-<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>    estimator<span class="op">=</span>lgb.LGBMRegressor( categorical_feature<span class="op">=</span>categorical_feature, random_state<span class="op">=</span><span class="dv">42</span>, boosting_type<span class="op">=</span><span class="st">'goss'</span>, verbose<span class="op">=-</span><span class="dv">1</span>),</span>
-<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Define the parameter space for Bayesian optimization</span></span>
-<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>    search_spaces<span class="op">=</span>param_space,</span>
-<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a>    n_iter<span class="op">=</span><span class="dv">50</span>,</span>
-<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a>    scoring<span class="op">=</span><span class="st">'neg_root_mean_squared_error'</span>,</span>
-<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a>    cv<span class="op">=</span><span class="dv">3</span>,</span>
-<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a>    n_jobs<span class="op">=-</span><span class="dv">1</span>,</span>
-<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a>    random_state<span class="op">=</span><span class="dv">42</span></span>
-<span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb14-27"><a href="#cb14-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit the Bayesian search object to the training data</span></span>
-<span id="cb14-28"><a href="#cb14-28" aria-hidden="true" tabindex="-1"></a>bayes_search.fit(X_train, y_train)</span>
-<span id="cb14-29"><a href="#cb14-29" aria-hidden="true" tabindex="-1"></a><span class="co"># Get the best parameters and score</span></span>
-<span id="cb14-30"><a href="#cb14-30" aria-hidden="true" tabindex="-1"></a>best_params <span class="op">=</span> bayes_search.best_params_</span>
-<span id="cb14-31"><a href="#cb14-31" aria-hidden="true" tabindex="-1"></a>best_score <span class="op">=</span> bayes_search.best_score_</span>
-<span id="cb14-32"><a href="#cb14-32" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Best Parameters: </span><span class="sc">{</span>best_params<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb14-33"><a href="#cb14-33" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Best Score: </span><span class="sc">{</span>best_score<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb14-34"><a href="#cb14-34" aria-hidden="true" tabindex="-1"></a><span class="co"># Get the best model</span></span>
-<span id="cb14-35"><a href="#cb14-35" aria-hidden="true" tabindex="-1"></a>best_model <span class="op">=</span> bayes_search.best_estimator_</span>
-<span id="cb14-36"><a href="#cb14-36" aria-hidden="true" tabindex="-1"></a><span class="co"># Make predictions on the test set</span></span>
-<span id="cb14-37"><a href="#cb14-37" aria-hidden="true" tabindex="-1"></a>y_pred_bayes <span class="op">=</span> best_model.predict(X_test)</span>
-<span id="cb14-38"><a href="#cb14-38" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate RMSE and R2 score for the best model</span></span>
-<span id="cb14-39"><a href="#cb14-39" aria-hidden="true" tabindex="-1"></a>rmse_bayes <span class="op">=</span> root_mean_squared_error(y_test, y_pred_bayes)</span>
-<span id="cb14-40"><a href="#cb14-40" aria-hidden="true" tabindex="-1"></a>r2_bayes <span class="op">=</span> r2_score(y_test, y_pred_bayes)</span>
-<span id="cb14-41"><a href="#cb14-41" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"RMSE (Bayesian Optimized): </span><span class="sc">{</span>rmse_bayes<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb14-42"><a href="#cb14-42" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"R2 Score (Bayesian Optimized): </span><span class="sc">{</span>r2_bayes<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>time</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ===== 2. Hyperparameter Tuning with Bayesian Optimization =====</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the parameter space for Bayesian optimization</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>param_space <span class="op">=</span> {</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">'num_leaves'</span>: Integer(<span class="dv">20</span>, <span class="dv">100</span>),</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">'max_depth'</span>: Integer(<span class="dv">5</span>, <span class="dv">50</span>),</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">'min_data_in_leaf'</span>: Integer(<span class="dv">1</span>, <span class="dv">100</span>),</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">'learning_rate'</span>: Real(<span class="fl">0.01</span>, <span class="fl">0.5</span>, prior<span class="op">=</span><span class="st">'uniform'</span>),</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">'n_estimators'</span>: Integer(<span class="dv">50</span>, <span class="dv">500</span>),</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">'top_rate'</span>: Real(<span class="fl">0.1</span>, <span class="fl">0.6</span>, prior<span class="op">=</span><span class="st">'uniform'</span>),</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">'other_rate'</span>: Real(<span class="fl">0.1</span>, <span class="fl">0.4</span>, prior<span class="op">=</span><span class="st">'uniform'</span>),</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the Bayesian search object</span></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>bayes_search <span class="op">=</span> BayesSearchCV(</span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>    <span class="co"># using verbose=-1 to suppress warnings</span></span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>    <span class="co"># using n_jobs=-1 to use all available cores</span></span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>    <span class="co"># using random_state=42 for reproducibility</span></span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>    estimator<span class="op">=</span>lgb.LGBMRegressor( categorical_feature<span class="op">=</span>categorical_feature, random_state<span class="op">=</span><span class="dv">42</span>, boosting_type<span class="op">=</span><span class="st">'goss'</span>, verbose<span class="op">=-</span><span class="dv">1</span>),</span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Define the parameter space for Bayesian optimization</span></span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>    search_spaces<span class="op">=</span>param_space,</span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>    n_iter<span class="op">=</span><span class="dv">50</span>,</span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a>    scoring<span class="op">=</span><span class="st">'neg_root_mean_squared_error'</span>,</span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a>    cv<span class="op">=</span><span class="dv">3</span>,</span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a>    n_jobs<span class="op">=-</span><span class="dv">1</span>,</span>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a>    random_state<span class="op">=</span><span class="dv">42</span></span>
+<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit the Bayesian search object to the training data</span></span>
+<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a>bayes_search.fit(X_train, y_train)</span>
+<span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a><span class="co"># Get the best parameters and score</span></span>
+<span id="cb12-30"><a href="#cb12-30" aria-hidden="true" tabindex="-1"></a>best_params <span class="op">=</span> bayes_search.best_params_</span>
+<span id="cb12-31"><a href="#cb12-31" aria-hidden="true" tabindex="-1"></a>best_score <span class="op">=</span> bayes_search.best_score_</span>
+<span id="cb12-32"><a href="#cb12-32" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Best Parameters: </span><span class="sc">{</span>best_params<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb12-33"><a href="#cb12-33" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Best Score: </span><span class="sc">{</span>best_score<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb12-34"><a href="#cb12-34" aria-hidden="true" tabindex="-1"></a><span class="co"># Get the best model</span></span>
+<span id="cb12-35"><a href="#cb12-35" aria-hidden="true" tabindex="-1"></a>best_model <span class="op">=</span> bayes_search.best_estimator_</span>
+<span id="cb12-36"><a href="#cb12-36" aria-hidden="true" tabindex="-1"></a><span class="co"># Make predictions on the test set</span></span>
+<span id="cb12-37"><a href="#cb12-37" aria-hidden="true" tabindex="-1"></a>y_pred_bayes <span class="op">=</span> best_model.predict(X_test)</span>
+<span id="cb12-38"><a href="#cb12-38" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate RMSE and R2 score for the best model</span></span>
+<span id="cb12-39"><a href="#cb12-39" aria-hidden="true" tabindex="-1"></a>rmse_bayes <span class="op">=</span> root_mean_squared_error(y_test, y_pred_bayes)</span>
+<span id="cb12-40"><a href="#cb12-40" aria-hidden="true" tabindex="-1"></a>r2_bayes <span class="op">=</span> r2_score(y_test, y_pred_bayes)</span>
+<span id="cb12-41"><a href="#cb12-41" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"RMSE (Bayesian Optimized): </span><span class="sc">{</span>rmse_bayes<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb12-42"><a href="#cb12-42" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"R2 Score (Bayesian Optimized): </span><span class="sc">{</span>r2_bayes<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Best Parameters: OrderedDict({'learning_rate': 0.31777940485083805, 'max_depth': 5, 'min_data_in_leaf': 47, 'n_estimators': 369, 'num_leaves': 20, 'other_rate': 0.4, 'top_rate': 0.6})
 Best Score: -3361.8218393725633
@@ -915,7 +915,7 @@ CPU times: total: 49.4 s
 Wall time: 1min 35s</code></pre>
 </div>
 </div>
-<p>Using GOSS and Feature Estimation by Bagging (FEB) led to a slight improvement in performance compared to XGBoost, while also reducing the time required for cross-validation tuning.</p>
+<p><strong>LightGBM</strong> achieved performance comparable to <strong>XGBoost</strong>. By leveraging <strong>GOSS</strong> (Gradient-based One-Side Sampling) for gradient sampling and <strong>EFB</strong> (Exclusive Feature Bundling) for feature reduction, it improved training speed slightly on large, sparse datasets. These optimizations, along with <strong>native categorical feature support</strong>, can also help reduce cross-validation tuning time by simplifying the feature space and accelerating learning.</p>
 </section>
 </section>
 </section>
@@ -923,23 +923,31 @@ Wall time: 1min 35s</code></pre>
 <h2 data-number="11.3" class="anchored" data-anchor-id="catboost"><span class="header-section-number">11.3</span> CatBoost</h2>
 <section id="what-is-catboost" class="level3" data-number="11.3.1">
 <h3 data-number="11.3.1" class="anchored" data-anchor-id="what-is-catboost"><span class="header-section-number">11.3.1</span> What is CatBoost?</h3>
-<p><strong>CatBoost</strong> (short for <em>Categorical Boosting</em>) is a high-performance gradient boosting framework developed by <strong>Yandex</strong>, specifically designed to handle datasets with <strong>categorical features</strong> without requiring manual preprocessing.</p>
-<p>Like XGBoost and LightGBM, it is based on gradient boosting over decision trees, but CatBoost introduces <strong>key innovations</strong> that make it robust, easy to use, and effective out of the box—particularly on tabular data.</p>
+<p><strong>CatBoost</strong> (short for <em>Categorical Boosting</em>) is a high-performance gradient boosting framework developed by <strong>Yandex</strong>. While several modern boosting frameworks support native categorical features, CatBoost uses <strong>optimized encoding strategies</strong>—such as <strong>ordered target statistics</strong>—that often lead to better performance with less risk of overfitting on <strong>categorical-heavy</strong> data.</p>
+<p>In addition to its categorical handling, CatBoost includes features like <strong>ordered boosting</strong> and strong <strong>regularization</strong>, which help reduce overfitting. It typically requires <strong>less hyperparameter tuning</strong> than XGBoost or LightGBM, making it more <strong>user-friendly</strong>, especially on datasets with many categorical variables.</p>
 </section>
 <section id="what-makes-catboost-unique" class="level3" data-number="11.3.2">
 <h3 data-number="11.3.2" class="anchored" data-anchor-id="what-makes-catboost-unique"><span class="header-section-number">11.3.2</span> What Makes CatBoost Unique?</h3>
-<p>CatBoost offers several innovations that distinguish it from other boosting frameworks:</p>
-<section id="native-categorical-feature-encoding" class="level4" data-number="11.3.2.1">
-<h4 data-number="11.3.2.1" class="anchored" data-anchor-id="native-categorical-feature-encoding"><span class="header-section-number">11.3.2.1</span> Native Categorical Feature Encoding</h4>
+<p>CatBoost introduces several <strong>key innovations</strong> that set it apart from other gradient boosting frameworks:</p>
+<section id="symmetric-oblivious-trees" class="level4" data-number="11.3.2.1">
+<h4 data-number="11.3.2.1" class="anchored" data-anchor-id="symmetric-oblivious-trees"><span class="header-section-number">11.3.2.1</span> Symmetric (Oblivious) Trees</h4>
+<p>CatBoost builds <strong>symmetric (oblivious) decision trees</strong>, where the same feature and split threshold are used at each level of the tree across all nodes. This structure results in:</p>
+<ul>
+<li><strong>Robust to noise</strong></li>
+<li><strong>Improved regularization</strong></li>
+<li><strong>Faster inference times</strong></li>
+</ul>
+</section>
+<section id="advanced-categorical-feature-handling" class="level4" data-number="11.3.2.2">
+<h4 data-number="11.3.2.2" class="anchored" data-anchor-id="advanced-categorical-feature-handling"><span class="header-section-number">11.3.2.2</span> Advanced Categorical Feature Handling</h4>
 <p>CatBoost can <strong>natively process categorical features</strong> using an approach based on <strong>ordered target statistics</strong>, which:</p>
 <ul>
 <li>Avoids target leakage during training</li>
 <li>Typically outperforms traditional encodings like one-hot or label encoding</li>
-<li>Requires <strong>no manual preprocessing</strong> — simply specify the categorical columns</li>
 </ul>
 </section>
-<section id="ordered-boosting-vs.-standard-boosting" class="level4" data-number="11.3.2.2">
-<h4 data-number="11.3.2.2" class="anchored" data-anchor-id="ordered-boosting-vs.-standard-boosting"><span class="header-section-number">11.3.2.2</span> Ordered Boosting (vs.&nbsp;Standard Boosting)</h4>
+<section id="ordered-boosting-vs.-standard-boosting" class="level4" data-number="11.3.2.3">
+<h4 data-number="11.3.2.3" class="anchored" data-anchor-id="ordered-boosting-vs.-standard-boosting"><span class="header-section-number">11.3.2.3</span> Ordered Boosting (vs.&nbsp;Standard Boosting)</h4>
 <p>Traditional gradient boosting algorithms often suffer from <strong>prediction shift</strong>, a form of overfitting that occurs when the model uses the same data to compute residuals and to fit new trees.</p>
 <p>CatBoost addresses this with <strong>ordered boosting</strong>, a permutation-driven strategy that builds each tree on one subset of data and computes residuals on another (unseen) subset.</p>
 <p>Recall that gradient boosting fits trees on the gradient of the loss function:</p>
@@ -955,29 +963,26 @@ r_m = -\left[ \frac{\partial L(y_i, f(x_i))}{\partial f(x_i)} \right]_{f = f_{m-
 </ul>
 <p>This significantly improves the model’s <strong>generalizability</strong> and reduces overfitting, especially on <strong>small or noisy datasets</strong>.</p>
 </section>
-<section id="symmetric-oblivious-trees" class="level4" data-number="11.3.2.3">
-<h4 data-number="11.3.2.3" class="anchored" data-anchor-id="symmetric-oblivious-trees"><span class="header-section-number">11.3.2.3</span> Symmetric (Oblivious) Trees</h4>
-<p>CatBoost builds <strong>symmetric (oblivious) decision trees</strong>, where the same splitting condition is applied across each level of the tree. This structure results in:</p>
-<ul>
-<li><strong>Faster inference times</strong></li>
-<li><strong>Compact model size</strong></li>
-<li><strong>Improved regularization</strong>, due to the constrained tree structure</li>
-</ul>
-<p>These trees are particularly well-suited for deployment scenarios where prediction speed matters.</p>
+<section id="handling-of-text-and-embedding-features" class="level4" data-number="11.3.2.4">
+<h4 data-number="11.3.2.4" class="anchored" data-anchor-id="handling-of-text-and-embedding-features"><span class="header-section-number">11.3.2.4</span> Handling of Text and Embedding Features</h4>
+<p>CatBoost can process text features directly by converting them into numerical representations (e.g., using bag-of-words or embeddings) within the model, reducing the need for external preprocessing. It also supports integration with pre-trained embeddings, which is useful for natural language processing (NLP) tasks.</p>
 <p>Together, these innovations make CatBoost a strong candidate for modeling <strong>high-dimensional, categorical, and imbalanced tabular data</strong>, even with minimal feature engineering or hyperparameter tuning.</p>
-<p>The authors have also shown that CatBoost performs better than XGBoost and LightGBM without tuning, i.e., with default hyperparameter settings.</p>
+</section>
+<section id="ease-of-use-and-defaults" class="level4" data-number="11.3.2.5">
+<h4 data-number="11.3.2.5" class="anchored" data-anchor-id="ease-of-use-and-defaults"><span class="header-section-number">11.3.2.5</span> Ease of Use and Defaults</h4>
+<p>CatBoost’s default hyperparameters are well-tuned for a wide range of problems, reducing the need for extensive tuning. For example, its learning rate, depth, and regularization parameters often yield strong performance out of the box. In the paper, the authors also showed that CatBoost outperforms XGBoost and LightGBM without tuning, i.e., with default hyperparameter settings.</p>
 <p>Read the <a href="https://proceedings.neurips.cc/paper_files/paper/2018/file/14491b756b3a51daac41c24863285549-Paper.pdf">CatBoost paper</a> for more details.</p>
 <p>Here is a good <a href="https://neptune.ai/blog/when-to-choose-catboost-over-xgboost-or-lightgbm">blog</a> listing the key features of CatBoost.</p>
 </section>
 </section>
-<section id="installing-and-using-catboost-with-scikit-learn-api" class="level3" data-number="11.3.3">
-<h3 data-number="11.3.3" class="anchored" data-anchor-id="installing-and-using-catboost-with-scikit-learn-api"><span class="header-section-number">11.3.3</span> Installing and Using CatBoost with Scikit-Learn API</h3>
+<section id="using-catboost" class="level3" data-number="11.3.3">
+<h3 data-number="11.3.3" class="anchored" data-anchor-id="using-catboost"><span class="header-section-number">11.3.3</span> Using CatBoost</h3>
 <p>CatBoost provides a <strong>scikit-learn-compatible API</strong> through <code>CatBoostClassifier</code> and <code>CatBoostRegressor</code>, which makes it easy to integrate into pipelines and use with tools like <code>GridSearchCV</code>, <code>cross_val_score</code>, and <code>train_test_split</code>.</p>
 </section>
 <section id="installation" class="level3" data-number="11.3.4">
 <h3 data-number="11.3.4" class="anchored" data-anchor-id="installation"><span class="header-section-number">11.3.4</span> Installation</h3>
 <p>To install CatBoost, run:</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>pip install catboost</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>pip install catboost</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <blockquote class="blockquote">
 <p>💡 GPU users: CatBoost automatically detects and uses GPU if available. You can explicitly enable it with <code>task_type='GPU'</code>.</p>
 </blockquote>
@@ -987,25 +992,25 @@ r_m = -\left[ \frac{\partial L(y_i, f(x_i))}{\partial f(x_i)} \right]_{f = f_{m-
 <p>Let us check the performance of <code>CatBoostRegressor()</code> without tuning, i.e., with default hyperparameter settings on our car dataset</p>
 <p>The parameter <code>cat_features</code> will be used to specify the indices of the categorical predictors for target encoding.</p>
 <div id="bf0a6c1d" class="cell" data-execution_count="27">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># build a catboostregressor model</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> catboost <span class="im">import</span> CatBoostRegressor</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize the CatBoost regressor</span></span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>model_cat <span class="op">=</span> CatBoostRegressor(</span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>    cat_features<span class="op">=</span>categorical_feature,</span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>    random_seed<span class="op">=</span><span class="dv">42</span>,</span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>    verbose<span class="op">=</span><span class="dv">0</span></span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Train the model</span></span>
-<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>model_cat.fit(X_train, y_train)</span>
-<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Predict on the test set</span></span>
-<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>y_pred_cat <span class="op">=</span> model_cat.predict(X_test)</span>
-<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate evaluation metrics</span></span>
-<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>rmse_cat <span class="op">=</span> root_mean_squared_error(y_test, y_pred_cat)</span>
-<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>r2_cat <span class="op">=</span> r2_score(y_test, y_pred_cat)</span>
-<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Output results</span></span>
-<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Test RMSE (CatBoost): </span><span class="sc">{</span>rmse_cat<span class="sc">:.4f}</span><span class="ss">"</span>)</span>
-<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Test R² (CatBoost): </span><span class="sc">{</span>r2_cat<span class="sc">:.4f}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># build a catboostregressor model</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> catboost <span class="im">import</span> CatBoostRegressor</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize the CatBoost regressor</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>model_cat <span class="op">=</span> CatBoostRegressor(</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    cat_features<span class="op">=</span>categorical_feature,</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    random_seed<span class="op">=</span><span class="dv">42</span>,</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>    verbose<span class="op">=</span><span class="dv">0</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Train the model</span></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>model_cat.fit(X_train, y_train)</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Predict on the test set</span></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>y_pred_cat <span class="op">=</span> model_cat.predict(X_test)</span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate evaluation metrics</span></span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>rmse_cat <span class="op">=</span> root_mean_squared_error(y_test, y_pred_cat)</span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>r2_cat <span class="op">=</span> r2_score(y_test, y_pred_cat)</span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Output results</span></span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Test RMSE (CatBoost): </span><span class="sc">{</span>rmse_cat<span class="sc">:.4f}</span><span class="ss">"</span>)</span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Test R² (CatBoost): </span><span class="sc">{</span>r2_cat<span class="sc">:.4f}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Test RMSE (CatBoost): 3307.2604
 Test R² (CatBoost): 0.9627</code></pre>
@@ -1013,199 +1018,189 @@ Test R² (CatBoost): 0.9627</code></pre>
 </div>
 <p>Even with default hyperparameter settings, CatBoost has outperformed both XGBoost and LightGBM in terms of test RMSE and R-squared.</p>
 </section>
-<section id="tuning-catboostregressor-with-optuna" class="level3" data-number="11.3.6">
-<h3 data-number="11.3.6" class="anchored" data-anchor-id="tuning-catboostregressor-with-optuna"><span class="header-section-number">11.3.6</span> Tuning <code>CatBoostRegressor</code> with Optuna</h3>
-<p>You can tune the hyperparameters of <code>CatBoostRegressor</code> using Optuna, just as you would for XGBoost or LightGBM. However, CatBoost uses a different set of hyperparameters.</p>
-<p>For example, it does <strong>not</strong> include:</p>
+<section id="tuning-catboostregressor" class="level3" data-number="11.3.6">
+<h3 data-number="11.3.6" class="anchored" data-anchor-id="tuning-catboostregressor"><span class="header-section-number">11.3.6</span> Tuning <code>CatBoostRegressor</code></h3>
+<p>You can tune the hyperparameters of <code>CatBoostRegressor</code> using <strong>Optuna</strong> or other tuning strategies, just as you would for <code>XGBoost</code> or <code>LightGBM</code>. However, CatBoost has a <strong>distinct set of hyperparameters</strong>, reflecting its unique design choices.</p>
+<section id="hyperparameters-not-used-in-catboost" class="level4" data-number="11.3.6.1">
+<h4 data-number="11.3.6.1" class="anchored" data-anchor-id="hyperparameters-not-used-in-catboost"><span class="header-section-number">11.3.6.1</span> ❌ Hyperparameters <strong>not used</strong> in CatBoost:</h4>
 <ul>
-<li><code>reg_alpha</code>: L1 regularization on leaf weights<br>
-</li>
-<li><code>colsample_bytree</code>: Subsample ratio of columns when constructing each tree</li>
+<li><code>reg_alpha</code>: CatBoost does <strong>not</strong> support L1 regularization on leaf weights; it uses only <strong>L2 regularization</strong> (<code>l2_leaf_reg</code>).</li>
+<li><code>colsample_bytree</code>: CatBoost <strong>does not</strong> use this parameter; it uses <code>rsm</code> and handles feature selection differently.</li>
 </ul>
-<p>These parameters are available in XGBoost and LightGBM but are not part of CatBoost’s configuration.</p>
-<div id="a6403528" class="cell" data-execution_count="29">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> optuna</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> optuna <span class="im">import</span> create_study</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> catboost <span class="im">import</span> CatBoostRegressor, Pool</span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="co"># create a validation set for early stopping</span></span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>X_train, X_valid, y_train, y_valid <span class="op">=</span> train_test_split(X_train, y_train, test_size<span class="op">=</span><span class="fl">0.1</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a><span class="co">#convert to Catboost pool</span></span>
-<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>train_pool <span class="op">=</span> Pool(X_train, y_train, cat_features<span class="op">=</span>categorical_feature)</span>
-<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>valid_pool <span class="op">=</span> Pool(X_valid, y_valid, cat_features<span class="op">=</span>categorical_feature)</span>
-<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the objective function for Optuna</span></span>
-<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> objective(trial):</span>
-<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Define the hyperparameters to tune</span></span>
-<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>    params <span class="op">=</span> {</span>
-<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>        <span class="st">'learning_rate'</span>: trial.suggest_float(<span class="st">'learning_rate'</span>, <span class="fl">0.01</span>, <span class="fl">0.3</span>),</span>
-<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>        <span class="st">'depth'</span>: trial.suggest_int(<span class="st">'depth'</span>, <span class="dv">4</span>, <span class="dv">10</span>),</span>
-<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a>        <span class="st">'l2_leaf_reg'</span>: trial.suggest_float(<span class="st">'l2_leaf_reg'</span>, <span class="fl">1e-8</span>, <span class="fl">10.0</span>, log<span class="op">=</span><span class="va">True</span>),</span>
-<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a>        <span class="st">'min_data_in_leaf'</span>: trial.suggest_int(<span class="st">'min_data_in_leaf'</span>, <span class="dv">1</span>, <span class="dv">30</span>),</span>
-<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a>        <span class="st">'border_count'</span>: trial.suggest_int(<span class="st">'border_count'</span>, <span class="dv">32</span>, <span class="dv">255</span>),</span>
-<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a>        <span class="st">'bagging_temperature'</span>: trial.suggest_float(<span class="st">'bagging_temperature'</span>, <span class="fl">0.0</span>, <span class="fl">1.0</span>),</span>
-<span id="cb19-22"><a href="#cb19-22" aria-hidden="true" tabindex="-1"></a>        <span class="st">'random_strength'</span>: trial.suggest_float(<span class="st">'random_strength'</span>, <span class="fl">1e-8</span>, <span class="fl">10.0</span>, log<span class="op">=</span><span class="va">True</span>),</span>
-<span id="cb19-23"><a href="#cb19-23" aria-hidden="true" tabindex="-1"></a>        <span class="st">'grow_policy'</span>: trial.suggest_categorical(<span class="st">'grow_policy'</span>, [<span class="st">'SymmetricTree'</span>, <span class="st">'Depthwise'</span>, <span class="st">'Lossguide'</span>]),</span>
-<span id="cb19-24"><a href="#cb19-24" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb19-25"><a href="#cb19-25" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Fixed parameters</span></span>
-<span id="cb19-26"><a href="#cb19-26" aria-hidden="true" tabindex="-1"></a>        <span class="st">'iterations'</span>: <span class="dv">3000</span>,  <span class="co"># Set to a high number, early stopping will determine the actual number</span></span>
-<span id="cb19-27"><a href="#cb19-27" aria-hidden="true" tabindex="-1"></a>        <span class="st">'verbose'</span>: <span class="va">False</span>,</span>
-<span id="cb19-28"><a href="#cb19-28" aria-hidden="true" tabindex="-1"></a>        <span class="st">'random_seed'</span>: <span class="dv">42</span></span>
-<span id="cb19-29"><a href="#cb19-29" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb19-30"><a href="#cb19-30" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb19-31"><a href="#cb19-31" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Create and train the model with early stopping</span></span>
-<span id="cb19-32"><a href="#cb19-32" aria-hidden="true" tabindex="-1"></a>    model <span class="op">=</span> CatBoostRegressor(<span class="op">**</span>params)</span>
-<span id="cb19-33"><a href="#cb19-33" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb19-34"><a href="#cb19-34" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Use early stopping to prevent overfitting</span></span>
-<span id="cb19-35"><a href="#cb19-35" aria-hidden="true" tabindex="-1"></a>    model.fit(</span>
-<span id="cb19-36"><a href="#cb19-36" aria-hidden="true" tabindex="-1"></a>        train_pool,</span>
-<span id="cb19-37"><a href="#cb19-37" aria-hidden="true" tabindex="-1"></a>        eval_set<span class="op">=</span>valid_pool,</span>
-<span id="cb19-38"><a href="#cb19-38" aria-hidden="true" tabindex="-1"></a>        early_stopping_rounds<span class="op">=</span><span class="dv">20</span>,  <span class="co"># Stop if no improvement for 50 rounds</span></span>
-<span id="cb19-39"><a href="#cb19-39" aria-hidden="true" tabindex="-1"></a>        verbose<span class="op">=</span><span class="va">False</span></span>
-<span id="cb19-40"><a href="#cb19-40" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb19-41"><a href="#cb19-41" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb19-42"><a href="#cb19-42" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Evaluate on validation set</span></span>
-<span id="cb19-43"><a href="#cb19-43" aria-hidden="true" tabindex="-1"></a>    y_pred <span class="op">=</span> model.predict(valid_pool)</span>
-<span id="cb19-44"><a href="#cb19-44" aria-hidden="true" tabindex="-1"></a>    val_rmse <span class="op">=</span> root_mean_squared_error(y_valid, y_pred)</span>
-<span id="cb19-45"><a href="#cb19-45" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb19-46"><a href="#cb19-46" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Return negative RMSE (for maximization)</span></span>
-<span id="cb19-47"><a href="#cb19-47" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="op">-</span>val_rmse</span>
-<span id="cb19-48"><a href="#cb19-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-49"><a href="#cb19-49" aria-hidden="true" tabindex="-1"></a><span class="co"># Create and run the study</span></span>
-<span id="cb19-50"><a href="#cb19-50" aria-hidden="true" tabindex="-1"></a>study <span class="op">=</span> optuna.create_study(direction<span class="op">=</span><span class="st">'maximize'</span>)</span>
-<span id="cb19-51"><a href="#cb19-51" aria-hidden="true" tabindex="-1"></a>study.optimize(objective, n_trials<span class="op">=</span><span class="dv">20</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>These parameters are common in XGBoost and LightGBM but are <strong>not part of CatBoost’s configuration</strong>.</p>
+</section>
+<section id="unique-hyperparameters-in-catboost" class="level4" data-number="11.3.6.2">
+<h4 data-number="11.3.6.2" class="anchored" data-anchor-id="unique-hyperparameters-in-catboost"><span class="header-section-number">11.3.6.2</span> ✅ Unique Hyperparameters in CatBoost</h4>
+<p>CatBoost introduces several hyperparameters related to <strong>categorical feature handling</strong> and <strong>ordered boosting</strong>:</p>
+<ul>
+<li><p><code>one_hot_max_size</code>: Threshold for switching between <strong>one-hot encoding</strong> and <strong>target encoding</strong> for categorical features.</p></li>
+<li><p><code>boosting_type='Ordered'</code>: Ordered boosting is <strong>enabled by default</strong> in CatBoost to reduce overfitting and prevent prediction shift.</p></li>
+<li><p><code>bootstrap_type='Bayesian'</code>: Default bootstrap method. Works well with ordered boosting.</p></li>
+<li><p><code>bagging_temperature</code>: Works with <code>bootstrap_type='Bayesian'</code>.<br>
+Controls how sharply bootstrap weights are distributed:</p>
+<ul>
+<li><strong>Low values</strong> (e.g., <code>0</code>): more uniform sampling (close to deterministic).</li>
+<li><strong>High values</strong> (e.g., <code>1</code>, <code>5</code>, <code>10</code>): more aggressive sampling—some rows are weighted more heavily.</li>
+</ul></li>
+<li><p><code>random_strength</code>: Adds randomness to the <strong>split selection score</strong>, especially useful for regularizing categorical splits.</p></li>
+<li><p><code>rsm</code>: Random selection rate for column sampling.</p></li>
+</ul>
+<p>These CatBoost-specific hyperparameters are important when fine-tuning with Cross-Validation, particularly for datasets with many <strong>categorical features</strong> or at risk of <strong>overfitting</strong>.</p>
+<div id="a6403528" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> optuna</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> optuna <span class="im">import</span> create_study</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> catboost <span class="im">import</span> CatBoostRegressor, Pool</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="co"># create a validation set for early stopping</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>X_train, X_valid, y_train, y_valid <span class="op">=</span> train_test_split(X_train, y_train, test_size<span class="op">=</span><span class="fl">0.1</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="co">#convert to Catboost pool</span></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>train_pool <span class="op">=</span> Pool(X_train, y_train, cat_features<span class="op">=</span>categorical_feature)</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>valid_pool <span class="op">=</span> Pool(X_valid, y_valid, cat_features<span class="op">=</span>categorical_feature)</span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the objective function for Optuna</span></span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> objective(trial):</span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Define the hyperparameters to tune</span></span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>    params <span class="op">=</span> {</span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>        <span class="st">'learning_rate'</span>: trial.suggest_float(<span class="st">'learning_rate'</span>, <span class="fl">0.01</span>, <span class="fl">0.3</span>),</span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>        <span class="st">'depth'</span>: trial.suggest_int(<span class="st">'depth'</span>, <span class="dv">4</span>, <span class="dv">10</span>),</span>
+<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a>        <span class="st">'l2_leaf_reg'</span>: trial.suggest_float(<span class="st">'l2_leaf_reg'</span>, <span class="fl">1e-8</span>, <span class="fl">10.0</span>, log<span class="op">=</span><span class="va">True</span>),</span>
+<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a>        <span class="st">'min_data_in_leaf'</span>: trial.suggest_int(<span class="st">'min_data_in_leaf'</span>, <span class="dv">1</span>, <span class="dv">30</span>),</span>
+<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a>        <span class="st">'bagging_temperature'</span>: trial.suggest_float(<span class="st">'bagging_temperature'</span>, <span class="fl">0.0</span>, <span class="fl">1.0</span>),</span>
+<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a>        <span class="st">'random_strength'</span>: trial.suggest_float(<span class="st">'random_strength'</span>, <span class="fl">1e-8</span>, <span class="fl">10.0</span>, log<span class="op">=</span><span class="va">True</span>),</span>
+<span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-23"><a href="#cb17-23" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Fixed parameters</span></span>
+<span id="cb17-24"><a href="#cb17-24" aria-hidden="true" tabindex="-1"></a>        <span class="st">'iterations'</span>: <span class="dv">3000</span>,  <span class="co"># Set to a high number, early stopping will determine the actual number</span></span>
+<span id="cb17-25"><a href="#cb17-25" aria-hidden="true" tabindex="-1"></a>        <span class="st">'verbose'</span>: <span class="va">False</span>,</span>
+<span id="cb17-26"><a href="#cb17-26" aria-hidden="true" tabindex="-1"></a>        <span class="st">'random_seed'</span>: <span class="dv">42</span></span>
+<span id="cb17-27"><a href="#cb17-27" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb17-28"><a href="#cb17-28" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb17-29"><a href="#cb17-29" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Create and train the model with early stopping</span></span>
+<span id="cb17-30"><a href="#cb17-30" aria-hidden="true" tabindex="-1"></a>    model <span class="op">=</span> CatBoostRegressor(<span class="op">**</span>params)</span>
+<span id="cb17-31"><a href="#cb17-31" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb17-32"><a href="#cb17-32" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Use early stopping to prevent overfitting</span></span>
+<span id="cb17-33"><a href="#cb17-33" aria-hidden="true" tabindex="-1"></a>    model.fit(</span>
+<span id="cb17-34"><a href="#cb17-34" aria-hidden="true" tabindex="-1"></a>        train_pool,</span>
+<span id="cb17-35"><a href="#cb17-35" aria-hidden="true" tabindex="-1"></a>        eval_set<span class="op">=</span>valid_pool,</span>
+<span id="cb17-36"><a href="#cb17-36" aria-hidden="true" tabindex="-1"></a>        early_stopping_rounds<span class="op">=</span><span class="dv">20</span>,  <span class="co"># Stop if no improvement for 50 rounds</span></span>
+<span id="cb17-37"><a href="#cb17-37" aria-hidden="true" tabindex="-1"></a>        verbose<span class="op">=</span><span class="va">False</span>,</span>
+<span id="cb17-38"><a href="#cb17-38" aria-hidden="true" tabindex="-1"></a>        n_jobs<span class="op">=-</span><span class="dv">1</span></span>
+<span id="cb17-39"><a href="#cb17-39" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb17-40"><a href="#cb17-40" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb17-41"><a href="#cb17-41" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Evaluate on validation set</span></span>
+<span id="cb17-42"><a href="#cb17-42" aria-hidden="true" tabindex="-1"></a>    y_pred <span class="op">=</span> model.predict(valid_pool)</span>
+<span id="cb17-43"><a href="#cb17-43" aria-hidden="true" tabindex="-1"></a>    val_rmse <span class="op">=</span> root_mean_squared_error(y_valid, y_pred)</span>
+<span id="cb17-44"><a href="#cb17-44" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb17-45"><a href="#cb17-45" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Return negative RMSE (for maximization)</span></span>
+<span id="cb17-46"><a href="#cb17-46" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="op">-</span>val_rmse</span>
+<span id="cb17-47"><a href="#cb17-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-48"><a href="#cb17-48" aria-hidden="true" tabindex="-1"></a><span class="co"># Create and run the study</span></span>
+<span id="cb17-49"><a href="#cb17-49" aria-hidden="true" tabindex="-1"></a>study <span class="op">=</span> optuna.create_study(direction<span class="op">=</span><span class="st">'maximize'</span>)</span>
+<span id="cb17-50"><a href="#cb17-50" aria-hidden="true" tabindex="-1"></a>study.optimize(objective, n_trials<span class="op">=</span><span class="dv">20</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>[I 2025-05-14 03:37:01,074] A new study created in memory with name: no-name-782044d9-7185-49f6-a68b-ddc83fa639a4
-[I 2025-05-14 03:37:20,600] Trial 0 finished with value: -2592.5059280623623 and parameters: {'learning_rate': 0.07952470550019325, 'depth': 8, 'l2_leaf_reg': 0.001114023475261074, 'min_data_in_leaf': 27, 'border_count': 83, 'bagging_temperature': 0.5317851293779137, 'random_strength': 0.0005861214502486961, 'grow_policy': 'Depthwise'}. Best is trial 0 with value: -2592.5059280623623.
-[I 2025-05-14 03:37:31,837] Trial 1 finished with value: -2556.728680370376 and parameters: {'learning_rate': 0.245419708648389, 'depth': 7, 'l2_leaf_reg': 3.3386247434742167, 'min_data_in_leaf': 15, 'border_count': 100, 'bagging_temperature': 0.5050586506217019, 'random_strength': 0.0004718975881753086, 'grow_policy': 'Depthwise'}. Best is trial 1 with value: -2556.728680370376.
-[I 2025-05-14 03:37:40,883] Trial 2 finished with value: -2682.6259877001603 and parameters: {'learning_rate': 0.1520719761941552, 'depth': 8, 'l2_leaf_reg': 0.0046149514168069014, 'min_data_in_leaf': 8, 'border_count': 178, 'bagging_temperature': 0.24466088131049457, 'random_strength': 0.015640185801924847, 'grow_policy': 'Depthwise'}. Best is trial 1 with value: -2556.728680370376.
-[I 2025-05-14 03:38:15,606] Trial 3 finished with value: -2808.7037865332763 and parameters: {'learning_rate': 0.06614862212494911, 'depth': 10, 'l2_leaf_reg': 0.7245780669681481, 'min_data_in_leaf': 19, 'border_count': 34, 'bagging_temperature': 0.8902029685133379, 'random_strength': 0.013193287592498581, 'grow_policy': 'SymmetricTree'}. Best is trial 1 with value: -2556.728680370376.
-[I 2025-05-14 03:38:30,461] Trial 4 finished with value: -2740.549186918632 and parameters: {'learning_rate': 0.2585298479851385, 'depth': 7, 'l2_leaf_reg': 0.12149380817119523, 'min_data_in_leaf': 24, 'border_count': 61, 'bagging_temperature': 0.7820109206688168, 'random_strength': 0.00013909547722379054, 'grow_policy': 'SymmetricTree'}. Best is trial 1 with value: -2556.728680370376.
-[I 2025-05-14 03:39:21,344] Trial 5 finished with value: -2699.921784155897 and parameters: {'learning_rate': 0.1558390710067145, 'depth': 8, 'l2_leaf_reg': 2.8639962432617574e-06, 'min_data_in_leaf': 21, 'border_count': 129, 'bagging_temperature': 0.27054829342202646, 'random_strength': 1.0090519644888372, 'grow_policy': 'Lossguide'}. Best is trial 1 with value: -2556.728680370376.
-[I 2025-05-14 03:39:33,102] Trial 6 finished with value: -2761.634505100397 and parameters: {'learning_rate': 0.29273701564295207, 'depth': 8, 'l2_leaf_reg': 0.0001383950532512802, 'min_data_in_leaf': 29, 'border_count': 53, 'bagging_temperature': 0.543935579774364, 'random_strength': 1.3150608041342185e-05, 'grow_policy': 'SymmetricTree'}. Best is trial 1 with value: -2556.728680370376.
-[I 2025-05-14 03:39:42,048] Trial 7 finished with value: -2796.3445154770925 and parameters: {'learning_rate': 0.1985854921483664, 'depth': 5, 'l2_leaf_reg': 0.0017893237819096464, 'min_data_in_leaf': 24, 'border_count': 228, 'bagging_temperature': 0.6563761366663239, 'random_strength': 3.830259157708319e-05, 'grow_policy': 'Depthwise'}. Best is trial 1 with value: -2556.728680370376.
-[I 2025-05-14 03:40:06,522] Trial 8 finished with value: -2736.652008119944 and parameters: {'learning_rate': 0.12981791308255294, 'depth': 9, 'l2_leaf_reg': 3.6626986581511205, 'min_data_in_leaf': 14, 'border_count': 169, 'bagging_temperature': 0.26693935389565604, 'random_strength': 6.108854259908809e-08, 'grow_policy': 'SymmetricTree'}. Best is trial 1 with value: -2556.728680370376.
-[I 2025-05-14 03:40:33,641] Trial 9 finished with value: -2625.6156037888204 and parameters: {'learning_rate': 0.05266635206771846, 'depth': 10, 'l2_leaf_reg': 8.431301598557988e-05, 'min_data_in_leaf': 22, 'border_count': 38, 'bagging_temperature': 0.20458732239577748, 'random_strength': 0.00026802410291762685, 'grow_policy': 'Depthwise'}. Best is trial 1 with value: -2556.728680370376.
-[I 2025-05-14 03:40:53,462] Trial 10 finished with value: -2802.6759048814906 and parameters: {'learning_rate': 0.2321480916058081, 'depth': 5, 'l2_leaf_reg': 1.9294653593783387e-08, 'min_data_in_leaf': 2, 'border_count': 110, 'bagging_temperature': 0.024153475153251502, 'random_strength': 3.071215792269348e-07, 'grow_policy': 'Lossguide'}. Best is trial 1 with value: -2556.728680370376.
-[I 2025-05-14 03:41:09,188] Trial 11 finished with value: -2626.5794465595454 and parameters: {'learning_rate': 0.0931538267421292, 'depth': 7, 'l2_leaf_reg': 0.044383501183871764, 'min_data_in_leaf': 13, 'border_count': 94, 'bagging_temperature': 0.46970044709843706, 'random_strength': 0.010496613104965287, 'grow_policy': 'Depthwise'}. Best is trial 1 with value: -2556.728680370376.
-[I 2025-05-14 03:42:21,080] Trial 12 finished with value: -2623.594568822965 and parameters: {'learning_rate': 0.013207489266983119, 'depth': 6, 'l2_leaf_reg': 6.27769599914231e-07, 'min_data_in_leaf': 10, 'border_count': 82, 'bagging_temperature': 0.4901244457515505, 'random_strength': 2.391770871806472e-06, 'grow_policy': 'Depthwise'}. Best is trial 1 with value: -2556.728680370376.
-[I 2025-05-14 03:42:39,928] Trial 13 finished with value: -2840.1838885804445 and parameters: {'learning_rate': 0.20525833721959236, 'depth': 4, 'l2_leaf_reg': 5.674336337792675, 'min_data_in_leaf': 29, 'border_count': 137, 'bagging_temperature': 0.672572957300273, 'random_strength': 0.0022624464321546684, 'grow_policy': 'Depthwise'}. Best is trial 1 with value: -2556.728680370376.
-[I 2025-05-14 03:42:58,745] Trial 14 finished with value: -2655.490477601683 and parameters: {'learning_rate': 0.10736768228799226, 'depth': 6, 'l2_leaf_reg': 0.01831562504579733, 'min_data_in_leaf': 17, 'border_count': 82, 'bagging_temperature': 0.4256033457922353, 'random_strength': 6.775957335351946, 'grow_policy': 'Depthwise'}. Best is trial 1 with value: -2556.728680370376.
-[I 2025-05-14 03:43:07,127] Trial 15 finished with value: -2789.7188981990007 and parameters: {'learning_rate': 0.17513907427821254, 'depth': 9, 'l2_leaf_reg': 6.515138402249421e-06, 'min_data_in_leaf': 7, 'border_count': 169, 'bagging_temperature': 0.9865139963615146, 'random_strength': 0.14575672222120323, 'grow_policy': 'Depthwise'}. Best is trial 1 with value: -2556.728680370376.
-[I 2025-05-14 03:43:41,175] Trial 16 finished with value: -2621.361959827787 and parameters: {'learning_rate': 0.2821616638222643, 'depth': 6, 'l2_leaf_reg': 0.33163654681962784, 'min_data_in_leaf': 26, 'border_count': 115, 'bagging_temperature': 0.6342355083316009, 'random_strength': 0.001346200849628001, 'grow_policy': 'Lossguide'}. Best is trial 1 with value: -2556.728680370376.
-[I 2025-05-14 03:44:43,383] Trial 17 finished with value: -2556.489614367946 and parameters: {'learning_rate': 0.01940229207182844, 'depth': 9, 'l2_leaf_reg': 0.0010525861450567827, 'min_data_in_leaf': 12, 'border_count': 72, 'bagging_temperature': 0.3496687786887461, 'random_strength': 4.041308474367292e-06, 'grow_policy': 'Depthwise'}. Best is trial 17 with value: -2556.489614367946.
-[I 2025-05-14 03:45:42,592] Trial 18 finished with value: -2866.4522097973445 and parameters: {'learning_rate': 0.01596497708445574, 'depth': 9, 'l2_leaf_reg': 1.1159472661594606e-08, 'min_data_in_leaf': 4, 'border_count': 248, 'bagging_temperature': 0.3623887368574112, 'random_strength': 2.1384578490475107e-06, 'grow_policy': 'Depthwise'}. Best is trial 17 with value: -2556.489614367946.
-[I 2025-05-14 03:46:46,564] Trial 19 finished with value: -2708.191790901802 and parameters: {'learning_rate': 0.24477192572019485, 'depth': 7, 'l2_leaf_reg': 2.3098308271653418e-05, 'min_data_in_leaf': 12, 'border_count': 59, 'bagging_temperature': 0.0711240090347467, 'random_strength': 5.019623855651714e-08, 'grow_policy': 'Lossguide'}. Best is trial 17 with value: -2556.489614367946.
-[I 2025-05-14 03:47:09,708] Trial 20 finished with value: -2629.0927431412074 and parameters: {'learning_rate': 0.045281219242332915, 'depth': 10, 'l2_leaf_reg': 0.010169259979428625, 'min_data_in_leaf': 17, 'border_count': 190, 'bagging_temperature': 0.13109532595280188, 'random_strength': 5.725889350557309e-06, 'grow_policy': 'Depthwise'}. Best is trial 17 with value: -2556.489614367946.
-[I 2025-05-14 03:47:28,038] Trial 21 finished with value: -2662.8455154565036 and parameters: {'learning_rate': 0.08417126506035016, 'depth': 8, 'l2_leaf_reg': 0.0006641702867048814, 'min_data_in_leaf': 16, 'border_count': 95, 'bagging_temperature': 0.3550175252017867, 'random_strength': 6.473733730238062e-05, 'grow_policy': 'Depthwise'}. Best is trial 17 with value: -2556.489614367946.
-[I 2025-05-14 03:48:22,098] Trial 22 finished with value: -2553.5175758331197 and parameters: {'learning_rate': 0.02854304599072048, 'depth': 9, 'l2_leaf_reg': 0.0004429789647772918, 'min_data_in_leaf': 10, 'border_count': 67, 'bagging_temperature': 0.5558186913583201, 'random_strength': 0.0014086113230469067, 'grow_policy': 'Depthwise'}. Best is trial 22 with value: -2553.5175758331197.
-[I 2025-05-14 03:49:10,065] Trial 23 finished with value: -2567.391805156711 and parameters: {'learning_rate': 0.026764961342591816, 'depth': 9, 'l2_leaf_reg': 4.0555978330521646e-07, 'min_data_in_leaf': 10, 'border_count': 68, 'bagging_temperature': 0.5904786989858626, 'random_strength': 0.003513242023709581, 'grow_policy': 'Depthwise'}. Best is trial 22 with value: -2553.5175758331197.
-[I 2025-05-14 03:49:22,054] Trial 24 finished with value: -2622.624216994232 and parameters: {'learning_rate': 0.11762433128006189, 'depth': 7, 'l2_leaf_reg': 0.00011122236949708718, 'min_data_in_leaf': 6, 'border_count': 112, 'bagging_temperature': 0.7681535959955343, 'random_strength': 6.673067700091263e-07, 'grow_policy': 'Depthwise'}. Best is trial 22 with value: -2553.5175758331197.
-[I 2025-05-14 03:49:53,628] Trial 25 finished with value: -2566.687493479829 and parameters: {'learning_rate': 0.0428655871308162, 'depth': 9, 'l2_leaf_reg': 1.2056415233295121, 'min_data_in_leaf': 11, 'border_count': 146, 'bagging_temperature': 0.38006611000782997, 'random_strength': 0.09046406371852381, 'grow_policy': 'Depthwise'}. Best is trial 22 with value: -2553.5175758331197.
-[I 2025-05-14 03:50:02,251] Trial 26 finished with value: -2832.1352269234903 and parameters: {'learning_rate': 0.1970147411078323, 'depth': 10, 'l2_leaf_reg': 0.07162501984849304, 'min_data_in_leaf': 14, 'border_count': 48, 'bagging_temperature': 0.7456911509314165, 'random_strength': 1.598786064756365e-05, 'grow_policy': 'Depthwise'}. Best is trial 22 with value: -2553.5175758331197.
-[I 2025-05-14 03:50:40,171] Trial 27 finished with value: -2601.1648427815717 and parameters: {'learning_rate': 0.038043609585293056, 'depth': 7, 'l2_leaf_reg': 1.6824470580542856e-05, 'min_data_in_leaf': 9, 'border_count': 69, 'bagging_temperature': 0.4427744483199044, 'random_strength': 0.00030247232285297106, 'grow_policy': 'Depthwise'}. Best is trial 22 with value: -2553.5175758331197.
-[I 2025-05-14 03:51:03,817] Trial 28 finished with value: -2723.539972578103 and parameters: {'learning_rate': 0.063339552281372, 'depth': 9, 'l2_leaf_reg': 0.0033137305082140056, 'min_data_in_leaf': 5, 'border_count': 100, 'bagging_temperature': 0.5728331614449053, 'random_strength': 0.08608571674502018, 'grow_policy': 'SymmetricTree'}. Best is trial 22 with value: -2553.5175758331197.
-[I 2025-05-14 03:51:44,354] Trial 29 finished with value: -2903.438265613962 and parameters: {'learning_rate': 0.22327494818582883, 'depth': 8, 'l2_leaf_reg': 0.00046397471558624393, 'min_data_in_leaf': 19, 'border_count': 77, 'bagging_temperature': 0.33115797120918855, 'random_strength': 0.001283308483124051, 'grow_policy': 'Lossguide'}. Best is trial 22 with value: -2553.5175758331197.
-[I 2025-05-14 03:51:53,564] Trial 30 finished with value: -3143.416961771734 and parameters: {'learning_rate': 0.2615824515538357, 'depth': 8, 'l2_leaf_reg': 2.6721859802422237e-07, 'min_data_in_leaf': 2, 'border_count': 150, 'bagging_temperature': 0.5255403450913998, 'random_strength': 3.7142097112219726e-07, 'grow_policy': 'Depthwise'}. Best is trial 22 with value: -2553.5175758331197.
-[I 2025-05-14 03:53:18,711] Trial 31 finished with value: -2620.1543675837006 and parameters: {'learning_rate': 0.036092954832845386, 'depth': 9, 'l2_leaf_reg': 1.6375335570564933, 'min_data_in_leaf': 11, 'border_count': 126, 'bagging_temperature': 0.4070745587934888, 'random_strength': 1.0037092538282515e-08, 'grow_policy': 'Depthwise'}. Best is trial 22 with value: -2553.5175758331197.
-[I 2025-05-14 03:53:59,231] Trial 32 finished with value: -2566.1296831641434 and parameters: {'learning_rate': 0.06594270014769671, 'depth': 9, 'l2_leaf_reg': 0.5692095900658858, 'min_data_in_leaf': 12, 'border_count': 208, 'bagging_temperature': 0.3165260807907623, 'random_strength': 0.06397745585020524, 'grow_policy': 'Depthwise'}. Best is trial 22 with value: -2553.5175758331197.
-[I 2025-05-14 03:54:35,567] Trial 33 finished with value: -2638.995606936495 and parameters: {'learning_rate': 0.07724237363909499, 'depth': 8, 'l2_leaf_reg': 0.2844212377732495, 'min_data_in_leaf': 15, 'border_count': 204, 'bagging_temperature': 0.16971199093261635, 'random_strength': 0.04813732436092434, 'grow_policy': 'Depthwise'}. Best is trial 22 with value: -2553.5175758331197.
-[I 2025-05-14 03:56:06,127] Trial 34 finished with value: -2647.590494720153 and parameters: {'learning_rate': 0.06460022496756479, 'depth': 10, 'l2_leaf_reg': 6.601504952572579, 'min_data_in_leaf': 8, 'border_count': 215, 'bagging_temperature': 0.280595071181398, 'random_strength': 0.5822640982430759, 'grow_policy': 'Depthwise'}. Best is trial 22 with value: -2553.5175758331197.
-[I 2025-05-14 03:56:26,769] Trial 35 finished with value: -2625.921488111509 and parameters: {'learning_rate': 0.14705058259331355, 'depth': 10, 'l2_leaf_reg': 0.017914490598987375, 'min_data_in_leaf': 13, 'border_count': 39, 'bagging_temperature': 0.3287024903377104, 'random_strength': 0.008267542278170484, 'grow_policy': 'Depthwise'}. Best is trial 22 with value: -2553.5175758331197.
-[I 2025-05-14 04:00:07,278] Trial 36 finished with value: -2713.318053553942 and parameters: {'learning_rate': 0.011286702277088917, 'depth': 8, 'l2_leaf_reg': 0.2339927288492896, 'min_data_in_leaf': 18, 'border_count': 243, 'bagging_temperature': 0.5034843298839619, 'random_strength': 0.00055952127058293, 'grow_policy': 'SymmetricTree'}. Best is trial 22 with value: -2553.5175758331197.
-[I 2025-05-14 04:01:52,318] Trial 37 finished with value: -2599.3830690422274 and parameters: {'learning_rate': 0.026614468934226813, 'depth': 9, 'l2_leaf_reg': 0.006370159217597417, 'min_data_in_leaf': 8, 'border_count': 97, 'bagging_temperature': 0.855566752212292, 'random_strength': 8.32305758695803e-05, 'grow_policy': 'Depthwise'}. Best is trial 22 with value: -2553.5175758331197.
-[I 2025-05-14 04:02:36,816] Trial 38 finished with value: -2610.623762642826 and parameters: {'learning_rate': 0.09686963957512237, 'depth': 7, 'l2_leaf_reg': 0.0014074747896680212, 'min_data_in_leaf': 21, 'border_count': 71, 'bagging_temperature': 0.7156956610821732, 'random_strength': 0.018501470320959317, 'grow_policy': 'SymmetricTree'}. Best is trial 22 with value: -2553.5175758331197.
-[I 2025-05-14 04:03:07,048] Trial 39 finished with value: -2671.015969019692 and parameters: {'learning_rate': 0.16854993390170198, 'depth': 6, 'l2_leaf_reg': 0.6496465232605684, 'min_data_in_leaf': 15, 'border_count': 53, 'bagging_temperature': 0.22219445776878718, 'random_strength': 0.7258361806395729, 'grow_policy': 'Depthwise'}. Best is trial 22 with value: -2553.5175758331197.
-[I 2025-05-14 04:04:30,028] Trial 40 finished with value: -2575.0422520898715 and parameters: {'learning_rate': 0.13301237034987956, 'depth': 8, 'l2_leaf_reg': 0.00025678296288065243, 'min_data_in_leaf': 13, 'border_count': 129, 'bagging_temperature': 0.5756243041812479, 'random_strength': 1.949907402720845e-05, 'grow_policy': 'Lossguide'}. Best is trial 22 with value: -2553.5175758331197.
-[I 2025-05-14 04:05:48,971] Trial 41 finished with value: -2642.556436107284 and parameters: {'learning_rate': 0.049948179063764114, 'depth': 9, 'l2_leaf_reg': 1.5618546291904019, 'min_data_in_leaf': 11, 'border_count': 158, 'bagging_temperature': 0.3964202751479039, 'random_strength': 2.393747505741706, 'grow_policy': 'Depthwise'}. Best is trial 22 with value: -2553.5175758331197.
-[I 2025-05-14 04:06:46,627] Trial 42 finished with value: -2598.4755135822797 and parameters: {'learning_rate': 0.0580674532442787, 'depth': 9, 'l2_leaf_reg': 1.8177693207658425, 'min_data_in_leaf': 11, 'border_count': 187, 'bagging_temperature': 0.29635746209371416, 'random_strength': 0.21208291644651261, 'grow_policy': 'Depthwise'}. Best is trial 22 with value: -2553.5175758331197.
-[I 2025-05-14 04:07:19,719] Trial 43 finished with value: -2657.7880298639225 and parameters: {'learning_rate': 0.07363937743695215, 'depth': 10, 'l2_leaf_reg': 0.04359530886331162, 'min_data_in_leaf': 9, 'border_count': 217, 'bagging_temperature': 0.44664672961449514, 'random_strength': 0.04495554133929357, 'grow_policy': 'Depthwise'}. Best is trial 22 with value: -2553.5175758331197.
-[I 2025-05-14 04:09:46,045] Trial 44 finished with value: -2691.606927827555 and parameters: {'learning_rate': 0.029786575860281366, 'depth': 9, 'l2_leaf_reg': 9.943736562101853, 'min_data_in_leaf': 12, 'border_count': 152, 'bagging_temperature': 0.36930442821158393, 'random_strength': 0.0038218125123354175, 'grow_policy': 'Depthwise'}. Best is trial 22 with value: -2553.5175758331197.
-[I 2025-05-14 04:10:38,605] Trial 45 finished with value: -2616.0330119726023 and parameters: {'learning_rate': 0.046671945704494774, 'depth': 8, 'l2_leaf_reg': 0.12115447142224317, 'min_data_in_leaf': 14, 'border_count': 140, 'bagging_temperature': 0.48481335723150554, 'random_strength': 0.3294399030680058, 'grow_policy': 'Depthwise'}. Best is trial 22 with value: -2553.5175758331197.
-[I 2025-05-14 04:12:54,361] Trial 46 finished with value: -2590.002658938037 and parameters: {'learning_rate': 0.025820733438051514, 'depth': 10, 'l2_leaf_reg': 1.0279696260416582, 'min_data_in_leaf': 16, 'border_count': 85, 'bagging_temperature': 0.2455200340992076, 'random_strength': 0.00015044433051361004, 'grow_policy': 'Depthwise'}. Best is trial 22 with value: -2553.5175758331197.
-[I 2025-05-14 04:13:57,004] Trial 47 finished with value: -2635.6488533277184 and parameters: {'learning_rate': 0.09024036605373528, 'depth': 7, 'l2_leaf_reg': 5.4022309753871646e-05, 'min_data_in_leaf': 19, 'border_count': 43, 'bagging_temperature': 0.5347005159269773, 'random_strength': 0.017468337161715447, 'grow_policy': 'SymmetricTree'}. Best is trial 22 with value: -2553.5175758331197.
-[I 2025-05-14 04:14:16,489] Trial 48 finished with value: -2832.750001651622 and parameters: {'learning_rate': 0.29562301087772724, 'depth': 9, 'l2_leaf_reg': 4.218536936460986, 'min_data_in_leaf': 10, 'border_count': 232, 'bagging_temperature': 0.6069911018530717, 'random_strength': 1.9157498081287359, 'grow_policy': 'Depthwise'}. Best is trial 22 with value: -2553.5175758331197.
-[I 2025-05-14 04:14:46,553] Trial 49 finished with value: -2609.0502948976673 and parameters: {'learning_rate': 0.10265216059916468, 'depth': 8, 'l2_leaf_reg': 0.6037874295139654, 'min_data_in_leaf': 7, 'border_count': 122, 'bagging_temperature': 0.39641107195397474, 'random_strength': 0.0009672456521149151, 'grow_policy': 'Depthwise'}. Best is trial 22 with value: -2553.5175758331197.</code></pre>
+<pre><code>[I 2025-05-16 06:53:24,620] A new study created in memory with name: no-name-2b89c789-86c1-45aa-9511-7e7990a5767a
+[I 2025-05-16 06:53:36,438] Trial 0 finished with value: -2885.7311361568736 and parameters: {'learning_rate': 0.12726746487613003, 'depth': 10, 'l2_leaf_reg': 0.00172009052841597, 'min_data_in_leaf': 13, 'bagging_temperature': 0.21730485409197553, 'random_strength': 0.0002251704542179119}. Best is trial 0 with value: -2885.7311361568736.
+[I 2025-05-16 06:54:07,518] Trial 1 finished with value: -2620.171198484414 and parameters: {'learning_rate': 0.05369228812155998, 'depth': 7, 'l2_leaf_reg': 2.5645654686725287e-07, 'min_data_in_leaf': 28, 'bagging_temperature': 0.03449070019194467, 'random_strength': 2.200162833623553}. Best is trial 1 with value: -2620.171198484414.
+[I 2025-05-16 06:55:01,902] Trial 2 finished with value: -2696.8294539080816 and parameters: {'learning_rate': 0.02548811714993481, 'depth': 8, 'l2_leaf_reg': 0.0023811609906064252, 'min_data_in_leaf': 13, 'bagging_temperature': 0.9288401488970826, 'random_strength': 1.082500115732704}. Best is trial 1 with value: -2620.171198484414.
+[I 2025-05-16 06:55:22,721] Trial 3 finished with value: -2724.528794214105 and parameters: {'learning_rate': 0.06451150035785631, 'depth': 9, 'l2_leaf_reg': 4.5131464056397556e-08, 'min_data_in_leaf': 30, 'bagging_temperature': 0.5960655866129079, 'random_strength': 9.28215317432208e-07}. Best is trial 1 with value: -2620.171198484414.
+[I 2025-05-16 06:55:36,587] Trial 4 finished with value: -2878.820243617394 and parameters: {'learning_rate': 0.11527331094852836, 'depth': 4, 'l2_leaf_reg': 0.4475951626701213, 'min_data_in_leaf': 20, 'bagging_temperature': 0.7324000256379442, 'random_strength': 0.4338664457953787}. Best is trial 1 with value: -2620.171198484414.
+[I 2025-05-16 06:55:49,775] Trial 5 finished with value: -2668.619984949151 and parameters: {'learning_rate': 0.1855528089325658, 'depth': 6, 'l2_leaf_reg': 1.8378952869939127e-05, 'min_data_in_leaf': 24, 'bagging_temperature': 0.5768414336451607, 'random_strength': 0.010522014874970544}. Best is trial 1 with value: -2620.171198484414.
+[I 2025-05-16 06:55:57,119] Trial 6 finished with value: -2912.272947098299 and parameters: {'learning_rate': 0.2451855882147167, 'depth': 10, 'l2_leaf_reg': 1.7673885188960817e-06, 'min_data_in_leaf': 10, 'bagging_temperature': 0.4334470051053827, 'random_strength': 0.11406026772554442}. Best is trial 1 with value: -2620.171198484414.
+[I 2025-05-16 06:56:13,622] Trial 7 finished with value: -2695.2648598625924 and parameters: {'learning_rate': 0.09755102190100745, 'depth': 10, 'l2_leaf_reg': 9.566125114415794e-08, 'min_data_in_leaf': 19, 'bagging_temperature': 0.9211592949414568, 'random_strength': 2.436347090461743e-08}. Best is trial 1 with value: -2620.171198484414.
+[I 2025-05-16 06:56:26,903] Trial 8 finished with value: -2753.084945654914 and parameters: {'learning_rate': 0.18843128663283498, 'depth': 5, 'l2_leaf_reg': 5.835652831494221e-06, 'min_data_in_leaf': 6, 'bagging_temperature': 0.7987698449327993, 'random_strength': 0.06362728767715319}. Best is trial 1 with value: -2620.171198484414.
+[I 2025-05-16 06:56:34,769] Trial 9 finished with value: -2921.4504143784643 and parameters: {'learning_rate': 0.22960449698497942, 'depth': 10, 'l2_leaf_reg': 1.1782309803914464e-08, 'min_data_in_leaf': 22, 'bagging_temperature': 0.7169193876429558, 'random_strength': 0.023405106337219345}. Best is trial 1 with value: -2620.171198484414.
+[I 2025-05-16 06:56:45,103] Trial 10 finished with value: -2797.656433395867 and parameters: {'learning_rate': 0.29638954558703867, 'depth': 7, 'l2_leaf_reg': 7.121156648133439, 'min_data_in_leaf': 1, 'bagging_temperature': 0.028555585214749657, 'random_strength': 0.00013397670124843048}. Best is trial 1 with value: -2620.171198484414.
+[I 2025-05-16 06:57:00,983] Trial 11 finished with value: -2987.804912052353 and parameters: {'learning_rate': 0.17465375823124038, 'depth': 6, 'l2_leaf_reg': 3.169840926062148e-05, 'min_data_in_leaf': 29, 'bagging_temperature': 0.40829527505593155, 'random_strength': 7.361593602808678}. Best is trial 1 with value: -2620.171198484414.
+[I 2025-05-16 06:58:30,211] Trial 12 finished with value: -2656.269812196844 and parameters: {'learning_rate': 0.017073325011989847, 'depth': 7, 'l2_leaf_reg': 0.00018641156280634486, 'min_data_in_leaf': 25, 'bagging_temperature': 0.2504148253088835, 'random_strength': 0.0036050209677933906}. Best is trial 1 with value: -2620.171198484414.
+[I 2025-05-16 06:59:27,791] Trial 13 finished with value: -2744.3027101379294 and parameters: {'learning_rate': 0.01817177055582332, 'depth': 7, 'l2_leaf_reg': 0.03706735720453296, 'min_data_in_leaf': 25, 'bagging_temperature': 0.002547331855073512, 'random_strength': 2.0356833250740667e-05}. Best is trial 1 with value: -2620.171198484414.
+[I 2025-05-16 06:59:53,265] Trial 14 finished with value: -2697.6837955182573 and parameters: {'learning_rate': 0.06236194061749396, 'depth': 8, 'l2_leaf_reg': 5.295910383215519e-07, 'min_data_in_leaf': 27, 'bagging_temperature': 0.20340714193628523, 'random_strength': 0.0018522086502427496}. Best is trial 1 with value: -2620.171198484414.
+[I 2025-05-16 07:00:21,452] Trial 15 finished with value: -2766.897166940931 and parameters: {'learning_rate': 0.061014851192040906, 'depth': 6, 'l2_leaf_reg': 0.00013014280192782276, 'min_data_in_leaf': 17, 'bagging_temperature': 0.21609021631792624, 'random_strength': 9.66330609620808}. Best is trial 1 with value: -2620.171198484414.
+[I 2025-05-16 07:01:00,089] Trial 16 finished with value: -2731.9161533728666 and parameters: {'learning_rate': 0.027412623287634285, 'depth': 8, 'l2_leaf_reg': 0.0010697541231850665, 'min_data_in_leaf': 26, 'bagging_temperature': 0.1205465052440132, 'random_strength': 9.050362919853505e-06}. Best is trial 1 with value: -2620.171198484414.
+[I 2025-05-16 07:01:13,872] Trial 17 finished with value: -2950.387762628911 and parameters: {'learning_rate': 0.06559997537771182, 'depth': 5, 'l2_leaf_reg': 0.03303703827909148, 'min_data_in_leaf': 22, 'bagging_temperature': 0.33823889215394143, 'random_strength': 0.004091235937143242}. Best is trial 1 with value: -2620.171198484414.
+[I 2025-05-16 07:01:24,805] Trial 18 finished with value: -2799.2851339120025 and parameters: {'learning_rate': 0.08913764405155444, 'depth': 7, 'l2_leaf_reg': 4.0696494316792653e-07, 'min_data_in_leaf': 30, 'bagging_temperature': 0.3238078952128749, 'random_strength': 0.0012282635994702415}. Best is trial 1 with value: -2620.171198484414.
+[I 2025-05-16 07:01:36,339] Trial 19 finished with value: -2772.5541221320145 and parameters: {'learning_rate': 0.14059069364937926, 'depth': 9, 'l2_leaf_reg': 9.039692246883738e-05, 'min_data_in_leaf': 23, 'bagging_temperature': 0.07579428007376465, 'random_strength': 0.5896255350389338}. Best is trial 1 with value: -2620.171198484414.</code></pre>
 </div>
 </div>
-<div id="8e347a2b" class="cell" data-execution_count="31">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get best parameters and train final model with early stopping</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>best_params <span class="op">=</span> study.best_params</span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Best parameters:"</span>, best_params)</span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Get the best trial</span></span>
-<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>best_trial <span class="op">=</span> study.best_trial</span>
-<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Best trial:"</span>, best_trial)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="8e347a2b" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get best parameters and train final model with early stopping</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>best_params <span class="op">=</span> study.best_params</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Best parameters:"</span>, best_params)</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Get the best trial</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>best_trial <span class="op">=</span> study.best_trial</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Best trial:"</span>, best_trial)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Best parameters: {'learning_rate': 0.02854304599072048, 'depth': 9, 'l2_leaf_reg': 0.0004429789647772918, 'min_data_in_leaf': 10, 'border_count': 67, 'bagging_temperature': 0.5558186913583201, 'random_strength': 0.0014086113230469067, 'grow_policy': 'Depthwise'}
-Best trial: FrozenTrial(number=22, state=1, values=[-2553.5175758331197], datetime_start=datetime.datetime(2025, 5, 14, 3, 47, 28, 39246), datetime_complete=datetime.datetime(2025, 5, 14, 3, 48, 22, 98057), params={'learning_rate': 0.02854304599072048, 'depth': 9, 'l2_leaf_reg': 0.0004429789647772918, 'min_data_in_leaf': 10, 'border_count': 67, 'bagging_temperature': 0.5558186913583201, 'random_strength': 0.0014086113230469067, 'grow_policy': 'Depthwise'}, user_attrs={}, system_attrs={}, intermediate_values={}, distributions={'learning_rate': FloatDistribution(high=0.3, log=False, low=0.01, step=None), 'depth': IntDistribution(high=10, log=False, low=4, step=1), 'l2_leaf_reg': FloatDistribution(high=10.0, log=True, low=1e-08, step=None), 'min_data_in_leaf': IntDistribution(high=30, log=False, low=1, step=1), 'border_count': IntDistribution(high=255, log=False, low=32, step=1), 'bagging_temperature': FloatDistribution(high=1.0, log=False, low=0.0, step=None), 'random_strength': FloatDistribution(high=10.0, log=True, low=1e-08, step=None), 'grow_policy': CategoricalDistribution(choices=('SymmetricTree', 'Depthwise', 'Lossguide'))}, trial_id=22, value=None)</code></pre>
+<pre><code>Best parameters: {'learning_rate': 0.05369228812155998, 'depth': 7, 'l2_leaf_reg': 2.5645654686725287e-07, 'min_data_in_leaf': 28, 'bagging_temperature': 0.03449070019194467, 'random_strength': 2.200162833623553}
+Best trial: FrozenTrial(number=1, state=1, values=[-2620.171198484414], datetime_start=datetime.datetime(2025, 5, 16, 6, 53, 36, 439603), datetime_complete=datetime.datetime(2025, 5, 16, 6, 54, 7, 518257), params={'learning_rate': 0.05369228812155998, 'depth': 7, 'l2_leaf_reg': 2.5645654686725287e-07, 'min_data_in_leaf': 28, 'bagging_temperature': 0.03449070019194467, 'random_strength': 2.200162833623553}, user_attrs={}, system_attrs={}, intermediate_values={}, distributions={'learning_rate': FloatDistribution(high=0.3, log=False, low=0.01, step=None), 'depth': IntDistribution(high=10, log=False, low=4, step=1), 'l2_leaf_reg': FloatDistribution(high=10.0, log=True, low=1e-08, step=None), 'min_data_in_leaf': IntDistribution(high=30, log=False, low=1, step=1), 'bagging_temperature': FloatDistribution(high=1.0, log=False, low=0.0, step=None), 'random_strength': FloatDistribution(high=10.0, log=True, low=1e-08, step=None)}, trial_id=1, value=None)</code></pre>
 </div>
 </div>
-<div id="58e1c2e5" class="cell" data-execution_count="41">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>np.concatenate((y_train, y_valid))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="41">
-<pre><code>array([48750, 17949, 22995, ..., 27300,  7952, 13498], dtype=int64)</code></pre>
-</div>
-</div>
-<div id="700beb75" class="cell" data-execution_count="42">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Use column indices instead of names</span></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>cat_feature_indices <span class="op">=</span> [X_train.columns.get_loc(col) <span class="cf">for</span> col <span class="kw">in</span> categorical_feature]</span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Add iterations parameter back for final model</span></span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>best_params[<span class="st">'iterations'</span>] <span class="op">=</span> <span class="dv">3000</span>  <span class="co"># High number, early stopping will be used</span></span>
-<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a><span class="co"># create a train+validation set for final model</span></span>
-<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>train_val_pool <span class="op">=</span> Pool(</span>
-<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>    np.vstack((X_train, X_valid)),</span>
-<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>    np.concatenate((y_train, y_valid)),</span>
-<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>    cat_features<span class="op">=</span>cat_feature_indices</span>
-<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a test pool</span></span>
-<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a>test_pool <span class="op">=</span> Pool(X_test, y_test, cat_features<span class="op">=</span>categorical_feature)</span>
-<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Train final model on combined train+validation data</span></span>
-<span id="cb25-18"><a href="#cb25-18" aria-hidden="true" tabindex="-1"></a>final_model <span class="op">=</span> CatBoostRegressor(<span class="op">**</span>best_params)</span>
-<span id="cb25-19"><a href="#cb25-19" aria-hidden="true" tabindex="-1"></a>final_model.fit(</span>
-<span id="cb25-20"><a href="#cb25-20" aria-hidden="true" tabindex="-1"></a>    train_val_pool,</span>
-<span id="cb25-21"><a href="#cb25-21" aria-hidden="true" tabindex="-1"></a>    eval_set<span class="op">=</span>test_pool,</span>
-<span id="cb25-22"><a href="#cb25-22" aria-hidden="true" tabindex="-1"></a>    early_stopping_rounds<span class="op">=</span><span class="dv">50</span>,</span>
-<span id="cb25-23"><a href="#cb25-23" aria-hidden="true" tabindex="-1"></a>    verbose<span class="op">=</span><span class="va">False</span></span>
-<span id="cb25-24"><a href="#cb25-24" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb25-25"><a href="#cb25-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-26"><a href="#cb25-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Get actual number of trees used after early stopping</span></span>
-<span id="cb25-27"><a href="#cb25-27" aria-hidden="true" tabindex="-1"></a>actual_iterations <span class="op">=</span> final_model.tree_count_</span>
-<span id="cb25-28"><a href="#cb25-28" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Actual number of trees used: </span><span class="sc">{</span>actual_iterations<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb25-29"><a href="#cb25-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-30"><a href="#cb25-30" aria-hidden="true" tabindex="-1"></a><span class="co"># Evaluate on test set</span></span>
-<span id="cb25-31"><a href="#cb25-31" aria-hidden="true" tabindex="-1"></a>y_pred_test <span class="op">=</span> final_model.predict(X_test)</span>
-<span id="cb25-32"><a href="#cb25-32" aria-hidden="true" tabindex="-1"></a>test_rmse <span class="op">=</span> root_mean_squared_error(y_test, y_pred_test)</span>
-<span id="cb25-33"><a href="#cb25-33" aria-hidden="true" tabindex="-1"></a>test_r2 <span class="op">=</span> r2_score(y_test, y_pred_test)</span>
-<span id="cb25-34"><a href="#cb25-34" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Test RMSE: </span><span class="sc">{</span>test_rmse<span class="sc">:.4f}</span><span class="ss">"</span>)</span>
-<span id="cb25-35"><a href="#cb25-35" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Test R²: </span><span class="sc">{</span>test_r2<span class="sc">:.4f}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="700beb75" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Use column indices instead of names</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>cat_feature_indices <span class="op">=</span> [X_train.columns.get_loc(col) <span class="cf">for</span> col <span class="kw">in</span> categorical_feature]</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Add iterations parameter back for final model</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>best_params[<span class="st">'iterations'</span>] <span class="op">=</span> <span class="dv">3000</span>  <span class="co"># High number, early stopping will be used</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a><span class="co"># create a train+validation set for final model</span></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>train_val_pool <span class="op">=</span> Pool(</span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>    np.vstack((X_train, X_valid)),</span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>    np.concatenate((y_train, y_valid)),</span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>    cat_features<span class="op">=</span>cat_feature_indices</span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a test pool</span></span>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>test_pool <span class="op">=</span> Pool(X_test, y_test, cat_features<span class="op">=</span>categorical_feature)</span>
+<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Train final model on combined train+validation data</span></span>
+<span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a>final_model <span class="op">=</span> CatBoostRegressor(<span class="op">**</span>best_params)</span>
+<span id="cb21-19"><a href="#cb21-19" aria-hidden="true" tabindex="-1"></a>final_model.fit(</span>
+<span id="cb21-20"><a href="#cb21-20" aria-hidden="true" tabindex="-1"></a>    train_val_pool,</span>
+<span id="cb21-21"><a href="#cb21-21" aria-hidden="true" tabindex="-1"></a>    eval_set<span class="op">=</span>test_pool,</span>
+<span id="cb21-22"><a href="#cb21-22" aria-hidden="true" tabindex="-1"></a>    early_stopping_rounds<span class="op">=</span><span class="dv">50</span>,</span>
+<span id="cb21-23"><a href="#cb21-23" aria-hidden="true" tabindex="-1"></a>    verbose<span class="op">=</span><span class="va">False</span></span>
+<span id="cb21-24"><a href="#cb21-24" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb21-25"><a href="#cb21-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-26"><a href="#cb21-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Get actual number of trees used after early stopping</span></span>
+<span id="cb21-27"><a href="#cb21-27" aria-hidden="true" tabindex="-1"></a>actual_iterations <span class="op">=</span> final_model.tree_count_</span>
+<span id="cb21-28"><a href="#cb21-28" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Actual number of trees used: </span><span class="sc">{</span>actual_iterations<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb21-29"><a href="#cb21-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-30"><a href="#cb21-30" aria-hidden="true" tabindex="-1"></a><span class="co"># Evaluate on test set</span></span>
+<span id="cb21-31"><a href="#cb21-31" aria-hidden="true" tabindex="-1"></a>y_pred_test <span class="op">=</span> final_model.predict(X_test)</span>
+<span id="cb21-32"><a href="#cb21-32" aria-hidden="true" tabindex="-1"></a>test_rmse <span class="op">=</span> root_mean_squared_error(y_test, y_pred_test)</span>
+<span id="cb21-33"><a href="#cb21-33" aria-hidden="true" tabindex="-1"></a>test_r2 <span class="op">=</span> r2_score(y_test, y_pred_test)</span>
+<span id="cb21-34"><a href="#cb21-34" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Test RMSE: </span><span class="sc">{</span>test_rmse<span class="sc">:.4f}</span><span class="ss">"</span>)</span>
+<span id="cb21-35"><a href="#cb21-35" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Test R²: </span><span class="sc">{</span>test_r2<span class="sc">:.4f}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Actual number of trees used: 466
-Test RMSE: 3042.9611
-Test R²: 0.9684</code></pre>
+<pre><code>Actual number of trees used: 1021
+Test RMSE: 3147.8477
+Test R²: 0.9662</code></pre>
 </div>
 </div>
-<div id="c35df952" class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>fig1 <span class="op">=</span> optuna.visualization.plot_optimization_history(study)</span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>fig1.show()</span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>fig2 <span class="op">=</span> optuna.visualization.plot_param_importances(study)</span>
-<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>fig2.show()</span>
-<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot feature importance from the final model</span></span>
-<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>feature_importance <span class="op">=</span> final_model.get_feature_importance()</span>
-<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>sorted_idx <span class="op">=</span> np.argsort(feature_importance)</span>
-<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">6</span>, <span class="dv">9</span>))</span>
-<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>plt.barh(<span class="bu">range</span>(<span class="bu">len</span>(sorted_idx)), feature_importance[sorted_idx])</span>
-<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>plt.yticks(<span class="bu">range</span>(<span class="bu">len</span>(sorted_idx)), np.array(<span class="bu">range</span>(X.shape[<span class="dv">1</span>]))[sorted_idx])</span>
-<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'CatBoost Feature Importance'</span>)</span>
-<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
-<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="c35df952" class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>fig1 <span class="op">=</span> optuna.visualization.plot_optimization_history(study)</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>fig1.show()</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>fig2 <span class="op">=</span> optuna.visualization.plot_param_importances(study)</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>fig2.show()</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot feature importance from the final model</span></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Get feature importance values</span></span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>feature_importance <span class="op">=</span> final_model.get_feature_importance()</span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Get sorted indices</span></span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>sorted_idx <span class="op">=</span> np.argsort(feature_importance)</span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot</span></span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">5</span>, <span class="dv">7</span>))</span>
+<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a>plt.barh(<span class="bu">range</span>(<span class="bu">len</span>(sorted_idx)), feature_importance[sorted_idx])</span>
+<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Use feature names if X is a DataFrame</span></span>
+<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a>feature_names <span class="op">=</span> X.columns <span class="cf">if</span> <span class="bu">hasattr</span>(X, <span class="st">'columns'</span>) <span class="cf">else</span> np.array(<span class="bu">range</span>(X.shape[<span class="dv">1</span>]))</span>
+<span id="cb23-20"><a href="#cb23-20" aria-hidden="true" tabindex="-1"></a>plt.yticks(<span class="bu">range</span>(<span class="bu">len</span>(sorted_idx)), feature_names[sorted_idx])</span>
+<span id="cb23-21"><a href="#cb23-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-22"><a href="#cb23-22" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'CatBoost Feature Importance'</span>)</span>
+<span id="cb23-23"><a href="#cb23-23" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb23-24"><a href="#cb23-24" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <pre><code>Unable to display output for mime type(s): application/vnd.plotly.v1+json</code></pre>
 </div>
@@ -1215,19 +1210,19 @@ Test R²: 0.9684</code></pre>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="LightGBM_CatBoost_files/figure-html/cell-14-output-3.png" class="img-fluid figure-img"></p>
+<p><img src="LightGBM_CatBoost_files/figure-html/cell-13-output-3.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
 </div>
-<p>It takes 2 minutes to tune CatBoost, which is higher than LightGBM and lesser than XGBoost. CatBoost falls in between LightGBM and XGBoost in terms of speed. However, it is likely to be more accurate than XGBoost and LighGBM, and likely to require lesser tuning as compared to XGBoost.</p>
-<p>Check the <a href="https://catboost.ai/en/docs/references/training-parameters/common">documentation</a> for hyperparameter tuning</p>
+<p>Check the <a href="https://catboost.ai/en/docs/references/training-parameters/common">documentation</a> for hyperparameter tuning.</p>
+<p>With proper hyperparameter tuning, CatBoost can achieve better performance than its default settings. However, even without tuning, CatBoost’s default configuration often outperforms the default settings of XGBoost and LightGBM, particularly on datasets with categorical features.</p>
+</section>
 </section>
 <section id="when-to-use-catboost-over-xgboost" class="level3" data-number="11.3.7">
 <h3 data-number="11.3.7" class="anchored" data-anchor-id="when-to-use-catboost-over-xgboost"><span class="header-section-number">11.3.7</span> When to Use <strong>CatBoost</strong> Over <strong>XGBoost</strong></h3>
 <ul>
-<li>When your dataset contains <strong>many categorical features</strong><br>
-</li>
+<li>When your dataset is “categorical-heavy**</li>
 <li><strong>CatBoost</strong> tends to perform well <strong>out of the box</strong> with minimal hyperparameter tuning, making it more user-friendly for quick experimentation or deployment<br>
 </li>
 <li>CatBoost’s <strong>GPU implementation</strong> is optimized for handling categorical data efficiently, and can <strong>outperform XGBoost</strong> on datasets dominated by categorical variables<br>
@@ -1353,7 +1348,7 @@ Test R²: 0.9684</code></pre>
 </li>
 <li><strong>Boosting Innovation</strong>: Uses <em>ordered boosting</em> to prevent prediction shift<br>
 </li>
-<li><strong>Categorical Encoding</strong>: No need for manual preprocessing — uses target-based encoding internally<br>
+<li><strong>Categorical Encoding</strong>: Uses target-based encoding internally<br>
 </li>
 <li><strong>Best for</strong>: Datasets with many categorical variables or limited time for tuning</li>
 </ul>

@@ -32,7 +32,9 @@ book:
         - Gradient_Boosting.ipynb
         - XGBoost.ipynb
         - LightGBM_CatBoost.ipynb
+        - smarter_hyper_tuning.ipynb
         - Lec10_Ensemble.ipynb
+        
   appendices: 
     - Assignment1_sp25.ipynb
     - Assignment2_sp25.ipynb

@@ -1,0 +1,4677 @@
+This is XeTeX, Version 3.141592653-2.6-0.999994 (MiKTeX 22.7) (preloaded format=xelatex 2024.10.8)  18 MAY 2025 15:15
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**./index.tex
+(index.tex
+LaTeX2e <2022-06-01> patch level 5
+L3 programming layer <2022-07-04>
+(C:\Users\lsi8012\AppData\Local\Programs\MiKTeX\tex/latex/koma-script\scrreprt.
+cls
+Document Class: scrreprt 2023/07/07 v3.41 KOMA-Script document class (report)
+
+(C:\Users\lsi8012\AppData\Local\Programs\MiKTeX\tex/latex/koma-script\scrkbase.
+sty
+Package: scrkbase 2023/07/07 v3.41 KOMA-Script package (KOMA-Script-dependent b
+asics and keyval usage)
+
+(C:\Users\lsi8012\AppData\Local\Programs\MiKTeX\tex/latex/koma-script\scrbase.s
+ty
+Package: scrbase 2023/07/07 v3.41 KOMA-Script package (KOMA-Script-independent 
+basics and keyval usage)
+
+(C:\Users\lsi8012\AppData\Local\Programs\MiKTeX\tex/latex/koma-script\scrlfile.
+sty
+Package: scrlfile 2023/07/07 v3.41 KOMA-Script package (file load hooks)
+
+(C:\Users\lsi8012\AppData\Local\Programs\MiKTeX\tex/latex/koma-script\scrlfile-
+hook.sty
+Package: scrlfile-hook 2023/07/07 v3.41 KOMA-Script package (using LaTeX hooks)
+
+
+(C:\Users\lsi8012\AppData\Local\Programs\MiKTeX\tex/latex/koma-script\scrlogo.s
+ty
+Package: scrlogo 2023/07/07 v3.41 KOMA-Script package (logo)
+))) (C:\Users\lsi8012\AppData\Local\Programs\MiKTeX\tex/latex/graphics\keyval.s
+ty
+Package: keyval 2022/05/29 v1.15 key=value parser (DPC)
+\KV@toks@=\toks16
+)
+Applying: [2021/05/01] Usage of raw or classic option list on input line 252.
+Already applied: [0000/00/00] Usage of raw or classic option list on input line
+ 368.
+))
+(C:\Users\lsi8012\AppData\Local\Programs\MiKTeX\tex/latex/koma-script\tocbasic.
+sty
+Package: tocbasic 2023/07/07 v3.41 KOMA-Script package (handling toc-files)
+\scr@dte@tocline@numberwidth=\skip47
+\scr@dte@tocline@numbox=\box51
+)
+Package tocbasic Info: omitting babel extension for `toc'
+(tocbasic)             because of feature `nobabel' available
+(tocbasic)             for `toc' on input line 135.
+Class scrreprt Info: File `scrsize11pt.clo' used instead of
+(scrreprt)           file `scrsize11.clo' to setup font sizes on input line 268
+8.
+
+(C:\Users\lsi8012\AppData\Local\Programs\MiKTeX\tex/latex/koma-script\scrsize11
+pt.clo
+File: scrsize11pt.clo 2023/07/07 v3.41 KOMA-Script font size class option (11pt
+)
+)
+(C:\Users\lsi8012\AppData\Local\Programs\MiKTeX\tex/latex/koma-script\typearea.
+sty
+Package: typearea 2023/07/07 v3.41 KOMA-Script package (type area)
+\ta@bcor=\skip48
+\ta@div=\count181
+Package typearea Info: You've used standard option `letterpaper'.
+(typearea)             This is correct!
+(typearea)             Internally I'm using `paper=letter'.
+(typearea)             If you'd like to set the option with \KOMAoptions,
+(typearea)             you'd have to use `paper=letter' there
+(typearea)             instead of `letterpaper', too.
+\ta@hblk=\skip49
+\ta@vblk=\skip50
+\ta@temp=\skip51
+\footheight=\skip52
+Package typearea Info: These are the values describing the layout:
+(typearea)             DIV  = 11
+(typearea)             BCOR = 0.0pt
+(typearea)             \paperwidth      = 614.295pt
+(typearea)              \textwidth      = 446.76004pt
+(typearea)              DIV departure   = -14%
+(typearea)              \evensidemargin = 11.49748pt
+(typearea)              \oddsidemargin  = 11.49748pt
+(typearea)             \paperheight     = 794.96999pt
+(typearea)              \textheight     = 582.20026pt
+(typearea)              \topmargin      = -37.40001pt
+(typearea)              \headheight     = 17.0pt
+(typearea)              \headsep        = 20.40001pt
+(typearea)              \topskip        = 11.0pt
+(typearea)              \footskip       = 47.6pt
+(typearea)              \baselineskip   = 13.6pt
+(typearea)              on input line 1799.
+)
+\c@part=\count182
+\c@chapter=\count183
+\c@section=\count184
+\c@subsection=\count185
+\c@subsubsection=\count186
+\c@paragraph=\count187
+\c@subparagraph=\count188
+\scr@dte@chapter@maxnumwidth=\skip53
+Class scrreprt Info: using compatibility default `afterindent=bysign'
+(scrreprt)           for `\chapter on input line 5994.
+\scr@dte@section@maxnumwidth=\skip54
+Class scrreprt Info: using compatibility default `runin=bysign'
+(scrreprt)           for `\section on input line 6005.
+Class scrreprt Info: using compatibility default `afterindent=bysign'
+(scrreprt)           for `\section on input line 6005.
+\scr@dte@part@maxnumwidth=\skip55
+Class scrreprt Info: using compatibility default `afterindent=true'
+(scrreprt)           for `\part on input line 6014.
+\scr@dte@subsection@maxnumwidth=\skip56
+Class scrreprt Info: using compatibility default `runin=bysign'
+(scrreprt)           for `\subsection on input line 6024.
+Class scrreprt Info: using compatibility default `afterindent=bysign'
+(scrreprt)           for `\subsection on input line 6024.
+\scr@dte@subsubsection@maxnumwidth=\skip57
+Class scrreprt Info: using compatibility default `runin=bysign'
+(scrreprt)           for `\subsubsection on input line 6034.
+Class scrreprt Info: using compatibility default `afterindent=bysign'
+(scrreprt)           for `\subsubsection on input line 6034.
+\scr@dte@paragraph@maxnumwidth=\skip58
+Class scrreprt Info: using compatibility default `runin=bysign'
+(scrreprt)           for `\paragraph on input line 6045.
+Class scrreprt Info: using compatibility default `afterindent=bysign'
+(scrreprt)           for `\paragraph on input line 6045.
+\scr@dte@subparagraph@maxnumwidth=\skip59
+Class scrreprt Info: using compatibility default `runin=bysign'
+(scrreprt)           for `\subparagraph on input line 6055.
+Class scrreprt Info: using compatibility default `afterindent=bysign'
+(scrreprt)           for `\subparagraph on input line 6055.
+\abovecaptionskip=\skip60
+\belowcaptionskip=\skip61
+\c@pti@nb@sid@b@x=\box52
+Package tocbasic Info: omitting babel extension for `lof'
+(tocbasic)             because of feature `nobabel' available
+(tocbasic)             for `lof' on input line 7240.
+\scr@dte@figure@maxnumwidth=\skip62
+\c@figure=\count189
+Package tocbasic Info: omitting babel extension for `lot'
+(tocbasic)             because of feature `nobabel' available
+(tocbasic)             for `lot' on input line 7257.
+\scr@dte@table@maxnumwidth=\skip63
+\c@table=\count190
+Class scrreprt Info: Redefining `\numberline' on input line 7428.
+\bibindent=\dimen138
+) (C:\Users\lsi8012\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsmath.sty
+Package: amsmath 2022/04/08 v2.17n AMS math features
+\@mathmargin=\skip64
+For additional information on amsmath, use the `?' option.
+(C:\Users\lsi8012\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amstext.sty
+Package: amstext 2021/08/26 v2.01 AMS text
+(C:\Users\lsi8012\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsgen.sty
+File: amsgen.sty 1999/11/30 v2.0 generic functions
+\@emptytoks=\toks17
+\ex@=\dimen139
+)) (C:\Users\lsi8012\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsbsy.sty
+Package: amsbsy 1999/11/29 v1.2d Bold Symbols
+\pmbraise@=\dimen140
+) (C:\Users\lsi8012\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsopn.sty
+Package: amsopn 2022/04/08 v2.04 operator names
+)
+\inf@bad=\count191
+LaTeX Info: Redefining \frac on input line 234.
+\uproot@=\count192
+\leftroot@=\count193
+LaTeX Info: Redefining \overline on input line 399.
+LaTeX Info: Redefining \colon on input line 410.
+\classnum@=\count194
+\DOTSCASE@=\count195
+LaTeX Info: Redefining \ldots on input line 496.
+LaTeX Info: Redefining \dots on input line 499.
+LaTeX Info: Redefining \cdots on input line 620.
+\Mathstrutbox@=\box53
+\strutbox@=\box54
+LaTeX Info: Redefining \big on input line 722.
+LaTeX Info: Redefining \Big on input line 723.
+LaTeX Info: Redefining \bigg on input line 724.
+LaTeX Info: Redefining \Bigg on input line 725.
+\big@size=\dimen141
+LaTeX Font Info:    Redeclaring font encoding OML on input line 743.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 744.
+\macc@depth=\count196
+LaTeX Info: Redefining \bmod on input line 905.
+LaTeX Info: Redefining \pmod on input line 910.
+LaTeX Info: Redefining \smash on input line 940.
+LaTeX Info: Redefining \relbar on input line 970.
+LaTeX Info: Redefining \Relbar on input line 971.
+\c@MaxMatrixCols=\count197
+\dotsspace@=\muskip16
+\c@parentequation=\count198
+\dspbrk@lvl=\count199
+\tag@help=\toks18
+\row@=\count266
+\column@=\count267
+\maxfields@=\count268
+\andhelp@=\toks19
+\eqnshift@=\dimen142
+\alignsep@=\dimen143
+\tagshift@=\dimen144
+\tagwidth@=\dimen145
+\totwidth@=\dimen146
+\lineht@=\dimen147
+\@envbody=\toks20
+\multlinegap=\skip65
+\multlinetaggap=\skip66
+\mathdisplay@stack=\toks21
+LaTeX Info: Redefining \[ on input line 2953.
+LaTeX Info: Redefining \] on input line 2954.
+) (C:\Users\lsi8012\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\amssymb.st
+y
+Package: amssymb 2013/01/14 v3.01 AMS font symbols
+
+(C:\Users\lsi8012\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\amsfonts.sty
+Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
+\symAMSa=\mathgroup4
+\symAMSb=\mathgroup5
+LaTeX Font Info:    Redeclaring math symbol \hbar on input line 98.
+LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
+(Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
+)) (C:\Users\lsi8012\AppData\Local\Programs\MiKTeX\tex/generic/iftex\iftex.sty
+Package: iftex 2022/02/03 v1.0f TeX engine tests
+)
+(C:\Users\lsi8012\AppData\Local\Programs\MiKTeX\tex/latex/unicode-math\unicode-
+math.sty (C:\Users\lsi8012\AppData\Local\Programs\MiKTeX\tex/latex/l3kernel\exp
+l3.sty
+Package: expl3 2022-07-04 L3 programming layer (loader) 
+
+(C:\Users\lsi8012\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend-x
+etex.def
+File: l3backend-xetex.def 2022-07-01 L3 backend support: XeTeX
+\g__graphics_track_int=\count269
+\l__pdf_internal_box=\box55
+\g__pdf_backend_object_int=\count270
+\g__pdf_backend_annotation_int=\count271
+\g__pdf_backend_link_int=\count272
+))
+Package: unicode-math 2023/08/13 v0.8r Unicode maths in XeLaTeX and LuaLaTeX
+
+(C:\Users\lsi8012\AppData\Local\Programs\MiKTeX\tex/latex/unicode-math\unicode-
+math-xetex.sty
+Package: unicode-math-xetex 2023/08/13 v0.8r Unicode maths in XeLaTeX and LuaLa
+TeX
+
+(C:\Users\lsi8012\AppData\Local\Programs\MiKTeX\tex/latex/l3packages/xparse\xpa
+rse.sty
+Package: xparse 2022-06-22 L3 Experimental document command parser
+)
+(C:\Users\lsi8012\AppData\Local\Programs\MiKTeX\tex/latex/l3packages/l3keys2e\l
+3keys2e.sty
+Package: l3keys2e 2022-06-22 LaTeX2e option processing using LaTeX3 keys
+)
+(C:\Users\lsi8012\AppData\Local\Programs\MiKTeX\tex/latex/fontspec\fontspec.sty
+Package: fontspec 2022/01/15 v2.8a Font selection for XeLaTeX and LuaLaTeX
+
+(C:\Users\lsi8012\AppData\Local\Programs\MiKTeX\tex/latex/fontspec\fontspec-xet
+ex.sty
+Package: fontspec-xetex 2022/01/15 v2.8a Font selection for XeLaTeX and LuaLaTe
+X
+\l__fontspec_script_int=\count273
+\l__fontspec_language_int=\count274
+\l__fontspec_strnum_int=\count275
+\l__fontspec_tmp_int=\count276
+\l__fontspec_tmpa_int=\count277
+\l__fontspec_tmpb_int=\count278
+\l__fontspec_tmpc_int=\count279
+\l__fontspec_em_int=\count280
+\l__fontspec_emdef_int=\count281
+\l__fontspec_strong_int=\count282
+\l__fontspec_strongdef_int=\count283
+\l__fontspec_tmpa_dim=\dimen148
+\l__fontspec_tmpb_dim=\dimen149
+\l__fontspec_tmpc_dim=\dimen150
+(C:\Users\lsi8012\AppData\Local\Programs\MiKTeX\tex/latex/base\fontenc.sty
+Package: fontenc 2021/04/29 v2.0v Standard LaTeX package
+)
+(C:\Users\lsi8012\AppData\Local\Programs\MiKTeX\tex/latex/fontspec\fontspec.cfg
+))) (C:\Users\lsi8012\AppData\Local\Programs\MiKTeX\tex/latex/base\fix-cm.sty
+Package: fix-cm 2020/11/24 v1.1t fixes to LaTeX
+(C:\Users\lsi8012\AppData\Local\Programs\MiKTeX\tex/latex/base\ts1enc.def
+File: ts1enc.def 2001/06/05 v3.0e (jk/car/fm) Standard LaTeX file
+LaTeX Font Info:    Redeclaring font encoding TS1 on input line 47.
+))
+\g__um_fam_int=\count284
+\g__um_fonts_used_int=\count285
+\l__um_primecount_int=\count286
+\g__um_primekern_muskip=\muskip17
+
+(C:\Users\lsi8012\AppData\Local\Programs\MiKTeX\tex/latex/unicode-math\unicode-
+math-table.tex))) (C:\Users\lsi8012\AppData\Local\Programs\MiKTeX\tex/latex/lm\
+lmodern.sty
+Package: lmodern 2015/05/01 v1.6.1 Latin Modern Fonts
+LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
+(Font)                  OT1/cmr/m/n --> OT1/lmr/m/n on input line 22.
+LaTeX Font Info:    Overwriting symbol font `letters' in version `normal'
+(Font)                  OML/cmm/m/it --> OML/lmm/m/it on input line 23.
+LaTeX Font Info:    Overwriting symbol font `symbols' in version `normal'
+(Font)                  OMS/cmsy/m/n --> OMS/lmsy/m/n on input line 24.
+LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `normal'
+(Font)                  OMX/cmex/m/n --> OMX/lmex/m/n on input line 25.
+LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
+(Font)                  OT1/cmr/bx/n --> OT1/lmr/bx/n on input line 26.
+LaTeX Font Info:    Overwriting symbol font `letters' in version `bold'
+(Font)                  OML/cmm/b/it --> OML/lmm/b/it on input line 27.
+LaTeX Font Info:    Overwriting symbol font `symbols' in version `bold'
+(Font)                  OMS/cmsy/b/n --> OMS/lmsy/b/n on input line 28.
+LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `bold'
+(Font)                  OMX/cmex/m/n --> OMX/lmex/m/n on input line 29.
+LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
+(Font)                  OT1/cmr/bx/n --> OT1/lmr/bx/n on input line 31.
+LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
+(Font)                  OT1/cmss/m/n --> OT1/lmss/m/n on input line 32.
+LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
+(Font)                  OT1/cmr/m/it --> OT1/lmr/m/it on input line 33.
+LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
+(Font)                  OT1/cmtt/m/n --> OT1/lmtt/m/n on input line 34.
+LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `bold'
+(Font)                  OT1/cmr/bx/n --> OT1/lmr/bx/n on input line 35.
+LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
+(Font)                  OT1/cmss/bx/n --> OT1/lmss/bx/n on input line 36.
+LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
+(Font)                  OT1/cmr/bx/it --> OT1/lmr/bx/it on input line 37.
+LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
+(Font)                  OT1/cmtt/m/n --> OT1/lmtt/m/n on input line 38.
+) (C:\Users\lsi8012\AppData\Local\Programs\MiKTeX\tex/latex/upquote\upquote.sty
+Package: upquote 2012/04/19 v1.3 upright-quote and grave-accent glyphs in verba
+tim
+(C:\Users\lsi8012\AppData\Local\Programs\MiKTeX\tex/latex/base\textcomp.sty
+Package: textcomp 2020/02/02 v2.0n Standard LaTeX package
+))
+(C:\Users\lsi8012\AppData\Local\Programs\MiKTeX\tex/latex/microtype\microtype.s
+ty
+Package: microtype 2024/03/29 v3.1b Micro-typographical refinements (RS)
+
+(C:\Users\lsi8012\AppData\Local\Programs\MiKTeX\tex/latex/etoolbox\etoolbox.sty
+Package: etoolbox 2020/10/05 v2.5k e-TeX tools for LaTeX (JAW)
+\etb@tempcnta=\count287
+)
+\MT@toks=\toks22
+\MT@tempbox=\box56
+\MT@count=\count288
+LaTeX Info: Redefining \noprotrusionifhmode on input line 1061.
+LaTeX Info: Redefining \leftprotrusion on input line 1062.
+\MT@prot@toks=\toks23
+LaTeX Info: Redefining \rightprotrusion on input line 1081.
+LaTeX Info: Redefining \textls on input line 1392.
+\MT@outer@kern=\dimen151
+LaTeX Info: Redefining \textmicrotypecontext on input line 2013.
+\MT@listname@count=\count289
+
+(C:\Users\lsi8012\AppData\Local\Programs\MiKTeX\tex/latex/microtype\microtype-x
+etex.def
+File: microtype-xetex.def 2024/03/29 v3.1b Definitions specific to xetex (RS)
+LaTeX Info: Redefining \lsstyle on input line 238.
+)
+Package microtype Info: Loading configuration file microtype.cfg.
+
+(C:\Users\lsi8012\AppData\Local\Programs\MiKTeX\tex/latex/microtype\microtype.c
+fg
+File: microtype.cfg 2024/03/29 v3.1b microtype main configuration file (RS)
+)) (C:\Users\lsi8012\AppData\Local\Programs\MiKTeX\tex/latex/xcolor\xcolor.sty
+Package: xcolor 2022/06/12 v2.14 LaTeX color extensions (UK)
+
+(C:\Users\lsi8012\AppData\Local\Programs\MiKTeX\tex/latex/graphics-cfg\color.cf
+g
+File: color.cfg 2016/01/02 v1.6 sample color configuration
+)
+Package xcolor Info: Driver file: xetex.def on input line 227.
+
+(C:\Users\lsi8012\AppData\Local\Programs\MiKTeX\tex/latex/graphics-def\xetex.de
+f
+File: xetex.def 2022/04/16 v5.0m Graphics/color driver for xetex
+)
+(C:\Users\lsi8012\AppData\Local\Programs\MiKTeX\tex/latex-dev/graphics\mathcolo
+r.ltx)
+Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1353.
+Package xcolor Info: Model `RGB' extended on input line 1369.
+Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1371.
+Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1372.
+Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1373.
+Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1374.
+Package xcolor Info: Model `Gray' substituted by `gray' on input line 1375.
+Package xcolor Info: Model `wave' substituted by `hsb' on input line 1376.
+
+(C:\Users\lsi8012\AppData\Local\Programs\MiKTeX\tex/latex/graphics\dvipsnam.def
+File: dvipsnam.def 2016/06/17 v3.0m Driver-dependent file (DPC,SPQR)
+) (C:\Users\lsi8012\AppData\Local\Programs\MiKTeX\tex/latex/xcolor\svgnam.def
+File: svgnam.def 2022/06/12 v2.14 Predefined colors according to SVG 1.1 (UK)
+) (C:\Users\lsi8012\AppData\Local\Programs\MiKTeX\tex/latex/xcolor\x11nam.def
+File: x11nam.def 2022/06/12 v2.14 Predefined colors according to Unix/X11 (UK)
+))
+(C:\Users\lsi8012\AppData\Local\Programs\MiKTeX\tex/latex/fancyvrb\fancyvrb.sty
+Package: fancyvrb 2024/01/20 4.5c verbatim text (tvz,hv)
+\FV@CodeLineNo=\count290
+\FV@InFile=\read2
+\FV@TabBox=\box57
+\c@FancyVerbLine=\count291
+\FV@StepNumber=\count292
+\FV@OutFile=\write3
+) (C:\Users\lsi8012\AppData\Local\Programs\MiKTeX\tex/latex/framed\framed.sty
+Package: framed 2011/10/22 v 0.96: framed or shaded text with page breaks
+\OuterFrameSep=\skip67
+\fb@frw=\dimen152
+\fb@frh=\dimen153
+\FrameRule=\dimen154
+\FrameSep=\dimen155
+) (C:\Users\lsi8012\AppData\Local\Programs\MiKTeX\tex/latex/tools\longtable.sty
+Package: longtable 2021-09-01 v4.17 Multi-page Table package (DPC)
+\LTleft=\skip68
+\LTright=\skip69
+\LTpre=\skip70
+\LTpost=\skip71
+\LTchunksize=\count293
+\LTcapwidth=\dimen156
+\LT@head=\box58
+\LT@firsthead=\box59
+\LT@foot=\box60
+\LT@lastfoot=\box61
+\LT@gbox=\box62
+\LT@cols=\count294
+\LT@rows=\count295
+\c@LT@tables=\count296
+\c@LT@chunks=\count297
+\LT@p@ftn=\toks24
+)
+Class scrreprt Info: longtable captions redefined on input line 112.
+
+(C:\Users\lsi8012\AppData\Local\Programs\MiKTeX\tex/latex/booktabs\booktabs.sty
+Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
+\heavyrulewidth=\dimen157
+\lightrulewidth=\dimen158
+\cmidrulewidth=\dimen159
+\belowrulesep=\dimen160
+\belowbottomsep=\dimen161
+\aboverulesep=\dimen162
+\abovetopsep=\dimen163
+\cmidrulesep=\dimen164
+\cmidrulekern=\dimen165
+\defaultaddspace=\dimen166
+\@cmidla=\count298
+\@cmidlb=\count299
+\@aboverulesep=\dimen167
+\@belowrulesep=\dimen168
+\@thisruleclass=\count300
+\@lastruleclass=\count301
+\@thisrulewidth=\dimen169
+) (C:\Users\lsi8012\AppData\Local\Programs\MiKTeX\tex/latex/tools\array.sty
+Package: array 2021/10/04 v2.5f Tabular extension package (FMi)
+\col@sep=\dimen170
+\ar@mcellbox=\box63
+\extrarowheight=\dimen171
+\NC@list=\toks25
+\extratabsurround=\skip72
+\backup@length=\skip73
+\ar@cellbox=\box64
+) (C:\Users\lsi8012\AppData\Local\Programs\MiKTeX\tex/latex/tools\calc.sty
+Package: calc 2017/05/25 v4.3 Infix arithmetic (KKT,FJ)
+\calc@Acount=\count302
+\calc@Bcount=\count303
+\calc@Adimen=\dimen172
+\calc@Bdimen=\dimen173
+\calc@Askip=\skip74
+\calc@Bskip=\skip75
+LaTeX Info: Redefining \setlength on input line 80.
+LaTeX Info: Redefining \addtolength on input line 81.
+\calc@Ccount=\count304
+\calc@Cskip=\skip76
+)
+(C:\Users\lsi8012\AppData\Local\Programs\MiKTeX\tex/latex/footnotehyper\footnot
+ehyper.sty
+Package: footnotehyper 2021/08/13 v1.1e hyperref aware footnote.sty (JFB)
+\FNH@notes=\box65
+\FNH@width=\dimen174
+\FNH@toks=\toks26
+)
+(C:\Users\lsi8012\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graphicx.sty
+Package: graphicx 2021/09/16 v1.2d Enhanced LaTeX Graphics (DPC,SPQR)
+
+(C:\Users\lsi8012\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graphics.sty
+Package: graphics 2022/03/10 v1.4e Standard LaTeX Graphics (DPC,SPQR)
+(C:\Users\lsi8012\AppData\Local\Programs\MiKTeX\tex/latex/graphics\trig.sty
+Package: trig 2021/08/11 v1.11 sin cos tan (DPC)
+)
+(C:\Users\lsi8012\AppData\Local\Programs\MiKTeX\tex/latex/graphics-cfg\graphics
+.cfg
+File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
+)
+Package graphics Info: Driver file: xetex.def on input line 107.
+)
+\Gin@req@height=\dimen175
+\Gin@req@width=\dimen176
+)
+\pandoc@box=\box66
+
+(C:\Users\lsi8012\AppData\Local\Programs\MiKTeX\tex/latex/bookmark\bookmark.sty
+Package: bookmark 2023-12-10 v1.31 PDF bookmarks (HO)
+
+(C:\Users\lsi8012\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\hyperref.sty
+Package: hyperref 2022-06-20 v7.00s Hypertext links for LaTeX
+
+(C:\Users\lsi8012\AppData\Local\Programs\MiKTeX\tex/generic/ltxcmds\ltxcmds.sty
+Package: ltxcmds 2023-12-04 v1.26 LaTeX kernel commands for general use (HO)
+)
+(C:\Users\lsi8012\AppData\Local\Programs\MiKTeX\tex/generic/pdftexcmds\pdftexcm
+ds.sty
+Package: pdftexcmds 2020-06-27 v0.33 Utility functions of pdfTeX for LuaTeX (HO
+)
+
+(C:\Users\lsi8012\AppData\Local\Programs\MiKTeX\tex/generic/infwarerr\infwarerr
+.sty
+Package: infwarerr 2019/12/03 v1.5 Providing info/warning/error messages (HO)
+)
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode not found.
+)
+(C:\Users\lsi8012\AppData\Local\Programs\MiKTeX\tex/latex/kvsetkeys\kvsetkeys.s
+ty
+Package: kvsetkeys 2022-10-05 v1.19 Key value parser (HO)
+)
+(C:\Users\lsi8012\AppData\Local\Programs\MiKTeX\tex/generic/kvdefinekeys\kvdefi
+nekeys.sty
+Package: kvdefinekeys 2019-12-19 v1.6 Define keys (HO)
+)
+(C:\Users\lsi8012\AppData\Local\Programs\MiKTeX\tex/generic/pdfescape\pdfescape
+.sty
+Package: pdfescape 2019/12/09 v1.15 Implements pdfTeX's escape features (HO)
+) (C:\Users\lsi8012\AppData\Local\Programs\MiKTeX\tex/latex/hycolor\hycolor.sty
+Package: hycolor 2020-01-27 v1.10 Color options for hyperref/bookmark (HO)
+)
+(C:\Users\lsi8012\AppData\Local\Programs\MiKTeX\tex/latex/letltxmacro\letltxmac
+ro.sty
+Package: letltxmacro 2019/12/03 v1.6 Let assignment for LaTeX macros (HO)
+) (C:\Users\lsi8012\AppData\Local\Programs\MiKTeX\tex/latex/auxhook\auxhook.sty
+Package: auxhook 2019-12-17 v1.6 Hooks for auxiliary files (HO)
+) (C:\Users\lsi8012\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\nameref.st
+y
+Package: nameref 2022-05-17 v2.50 Cross-referencing by name of section
+
+(C:\Users\lsi8012\AppData\Local\Programs\MiKTeX\tex/latex/refcount\refcount.sty
+Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
+)
+(C:\Users\lsi8012\AppData\Local\Programs\MiKTeX\tex/generic/gettitlestring\gett
+itlestring.sty
+Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
+
+(C:\Users\lsi8012\AppData\Local\Programs\MiKTeX\tex/latex/kvoptions\kvoptions.s
+ty
+Package: kvoptions 2022-06-15 v3.15 Key value format for package options (HO)
+))
+\c@section@level=\count305
+)
+\@linkdim=\dimen177
+\Hy@linkcounter=\count306
+\Hy@pagecounter=\count307
+(C:\Users\lsi8012\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\pd1enc.def
+File: pd1enc.def 2022-06-20 v7.00s Hyperref: PDFDocEncoding definition (HO)
+)
+(C:\Users\lsi8012\AppData\Local\Programs\MiKTeX\tex/generic/intcalc\intcalc.sty
+Package: intcalc 2019/12/15 v1.3 Expandable calculations with integers (HO)
+)
+(C:\Users\lsi8012\AppData\Local\Programs\MiKTeX\tex/generic/etexcmds\etexcmds.s
+ty
+Package: etexcmds 2019/12/15 v1.7 Avoid name clashes with e-TeX commands (HO)
+)
+\Hy@SavedSpaceFactor=\count308
+(C:\Users\lsi8012\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\puenc.def
+File: puenc.def 2022-06-20 v7.00s Hyperref: PDF Unicode definition (HO)
+)
+Package hyperref Info: Option `unicode' set `true' on input line 4045.
+Package hyperref Info: Hyper figures OFF on input line 4162.
+Package hyperref Info: Link nesting OFF on input line 4167.
+Package hyperref Info: Hyper index ON on input line 4170.
+Package hyperref Info: Plain pages OFF on input line 4177.
+Package hyperref Info: Backreferencing OFF on input line 4182.
+Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
+Package hyperref Info: Bookmarks ON on input line 4408.
+\c@Hy@tempcnt=\count309
+(C:\Users\lsi8012\AppData\Local\Programs\MiKTeX\tex/latex/url\url.sty
+\Urlmuskip=\muskip18
+Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
+)
+LaTeX Info: Redefining \url on input line 4746.
+\XeTeXLinkMargin=\dimen178
+(C:\Users\lsi8012\AppData\Local\Programs\MiKTeX\tex/generic/bitset\bitset.sty
+Package: bitset 2019/12/09 v1.3 Handle bit-vector datatype (HO)
+
+(C:\Users\lsi8012\AppData\Local\Programs\MiKTeX\tex/generic/bigintcalc\bigintca
+lc.sty
+Package: bigintcalc 2019/12/15 v1.5 Expandable calculations on big integers (HO
+)
+))
+\Fld@menulength=\count310
+\Field@Width=\dimen179
+\Fld@charsize=\dimen180
+Package hyperref Info: Hyper figures OFF on input line 6024.
+Package hyperref Info: Link nesting OFF on input line 6029.
+Package hyperref Info: Hyper index ON on input line 6032.
+Package hyperref Info: backreferencing OFF on input line 6039.
+Package hyperref Info: Link coloring OFF on input line 6044.
+Package hyperref Info: Link coloring with OCG OFF on input line 6049.
+Package hyperref Info: PDF/A mode OFF on input line 6054.
+
+(C:\Users\lsi8012\AppData\Local\Programs\MiKTeX\tex/latex/base\atbegshi-ltx.sty
+Package: atbegshi-ltx 2021/01/10 v1.0c Emulation of the original atbegshi
+package with kernel methods
+)
+\Hy@abspage=\count311
+\c@Item=\count312
+\c@Hfootnote=\count313
+)
+Package hyperref Info: Driver (autodetected): hxetex.
+(C:\Users\lsi8012\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\hxetex.def
+File: hxetex.def 2022-06-20 v7.00s Hyperref driver for XeTeX
+
+(C:\Users\lsi8012\AppData\Local\Programs\MiKTeX\tex/generic/stringenc\stringenc
+.sty
+Package: stringenc 2019/11/29 v1.12 Convert strings between diff. encodings (HO
+)
+)
+\pdfm@box=\box67
+\c@Hy@AnnotLevel=\count314
+\HyField@AnnotCount=\count315
+\Fld@listcount=\count316
+\c@bookmark@seq@number=\count317
+
+(C:\Users\lsi8012\AppData\Local\Programs\MiKTeX\tex/latex/rerunfilecheck\rerunf
+ilecheck.sty
+Package: rerunfilecheck 2022-07-10 v1.10 Rerun checks for auxiliary files (HO)
+
+(C:\Users\lsi8012\AppData\Local\Programs\MiKTeX\tex/latex/base\atveryend-ltx.st
+y
+Package: atveryend-ltx 2020/08/19 v1.0a Emulation of the original atveryend pac
+kage
+with kernel methods
+)
+(C:\Users\lsi8012\AppData\Local\Programs\MiKTeX\tex/generic/uniquecounter\uniqu
+ecounter.sty
+Package: uniquecounter 2019/12/15 v1.4 Provide unlimited unique counter (HO)
+)
+Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
+85.
+)
+\Hy@SectionHShift=\skip77
+)
+(C:\Users\lsi8012\AppData\Local\Programs\MiKTeX\tex/latex/bookmark\bkm-dvipdfm.
+def
+File: bkm-dvipdfm.def 2023-12-10 v1.31 bookmark driver for dvipdfm (HO)
+\BKM@id=\count318
+)) (C:\Users\lsi8012\AppData\Local\Programs\MiKTeX\tex/latex/caption\caption.st
+y
+Package: caption 2023/08/05 v3.6o Customizing captions (AR)
+(C:\Users\lsi8012\AppData\Local\Programs\MiKTeX\tex/latex/caption\caption3.sty
+Package: caption3 2023/07/31 v2.4d caption3 kernel (AR)
+\caption@tempdima=\dimen181
+\captionmargin=\dimen182
+\caption@leftmargin=\dimen183
+\caption@rightmargin=\dimen184
+\caption@width=\dimen185
+\caption@indent=\dimen186
+\caption@parindent=\dimen187
+\caption@hangindent=\dimen188
+Package caption Info: KOMA-Script document class detected.
+
+(C:\Users\lsi8012\AppData\Local\Programs\MiKTeX\tex/latex/caption\caption-koma.
+sto
+File: caption-koma.sto 2023/09/08 v2.0e Adaption of the caption package to the 
+KOMA-Script document classes (AR)
+))
+\c@caption@flags=\count319
+\c@continuedfloat=\count320
+Package caption Info: hyperref package is loaded.
+Package caption Info: longtable package is loaded.
+
+(C:\Users\lsi8012\AppData\Local\Programs\MiKTeX\tex/latex/caption\ltcaption.sty
+Package: ltcaption 2021/01/08 v1.4c longtable captions (AR)
+)
+Package caption Info: KOMA-Script scrextend package detected.
+\caption@addmargin@hsize=\dimen189
+\caption@addmargin@linewidth=\dimen190
+) (C:\Users\lsi8012\AppData\Local\Programs\MiKTeX\tex/latex/float\float.sty
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count321
+\float@exts=\toks27
+\float@box=\box68
+\@float@everytoks=\toks28
+\@floatcapt=\box69
+)
+\@float@every@codelisting=\toks29
+\c@codelisting=\count322
+
+(C:\Users\lsi8012\AppData\Local\Programs\MiKTeX\tex/latex/caption\subcaption.st
+y
+Package: subcaption 2023/07/28 v1.6b Sub-captions (AR)
+Package caption Info: New subtype `subfigure' on input line 238.
+\c@subfigure=\count323
+Package caption Info: New subtype `subtable' on input line 238.
+\c@subtable=\count324
+) (C:\Users\lsi8012\AppData\Local\Programs\MiKTeX\tex/latex/xurl\xurl.sty
+Package: xurl 2022/01/09 v 0.10 modify URL breaks
+)
+Package hyperref Info: Option `colorlinks' set `true' on input line 195.
+No file index.aux.
+\openout1 = `index.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 209.
+LaTeX Font Info:    ... okay on input line 209.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 209.
+LaTeX Font Info:    ... okay on input line 209.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 209.
+LaTeX Font Info:    ... okay on input line 209.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 209.
+LaTeX Font Info:    ... okay on input line 209.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 209.
+LaTeX Font Info:    ... okay on input line 209.
+LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 209.
+LaTeX Font Info:    ... okay on input line 209.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 209.
+LaTeX Font Info:    ... okay on input line 209.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 209.
+LaTeX Font Info:    ... okay on input line 209.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 209.
+LaTeX Font Info:    ... okay on input line 209.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 209.
+LaTeX Font Info:    ... okay on input line 209.
+Package scrbase Info: activating english \abstractname on input line 209.
+Package scrbase Info: activating english \partname on input line 209.
+Package scrbase Info: activating english \chaptername on input line 209.
+Package scrbase Info: activating english \appendixname on input line 209.
+Package scrbase Info: activating english \figurename on input line 209.
+Package scrbase Info: activating english \tablename on input line 209.
+Package scrbase Info: activating english \contentsname on input line 209.
+Package scrbase Info: activating english \listfigurename on input line 209.
+Package scrbase Info: activating english \listtablename on input line 209.
+Package scrbase Info: activating english \bibname on input line 209.
+Package scrbase Info: activating english \indexname on input line 209.
+LaTeX Font Info:    Overwriting math alphabet `\mathrm' in version `normal'
+(Font)                  OT1/lmr/m/n --> TU/lmr/m/n on input line 209.
+LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
+(Font)                  OT1/lmr/m/it --> TU/lmr/m/it on input line 209.
+LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
+(Font)                  OT1/lmr/bx/n --> TU/lmr/bx/n on input line 209.
+LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
+(Font)                  OT1/lmss/m/n --> TU/lmss/m/n on input line 209.
+LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
+(Font)                  OT1/lmss/bx/n --> TU/lmss/bx/n on input line 209.
+LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
+(Font)                  OT1/lmtt/m/n --> TU/lmtt/m/n on input line 209.
+LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
+(Font)                  OT1/lmtt/m/n --> TU/lmtt/bx/n on input line 209.
+
+Package fontspec Info: latinmodern-math scale = 0.9999967668407183.
+
+
+Package fontspec Info: latinmodern-math scale = 0.9999967668407183.
+
+
+Package fontspec Info: latinmodern-math scale = 0.9999967668407183.
+
+
+Package fontspec Info: Font family 'latinmodern-math.otf(0)' created for font
+(fontspec)             'latinmodern-math.otf' with options
+(fontspec)             [Scale=MatchLowercase,BoldItalicFont={},ItalicFont={},Sm
+allCapsFont={},Script=Math,BoldFont={latinmodern-math.otf}].
+(fontspec)              
+(fontspec)              This font family consists of the following NFSS
+(fontspec)             series/shapes:
+(fontspec)              
+(fontspec)             - 'normal' (m/n) with NFSS spec.:
+(fontspec)             <->s*[0.9999967668407183]"[latinmodern-math.otf]/OT:scri
+pt=math;language=dflt;"
+(fontspec)             - 'small caps'  (m/sc) with NFSS spec.: 
+(fontspec)             - 'bold' (b/n) with NFSS spec.:
+(fontspec)             <->s*[0.9999967668407183]"[latinmodern-math.otf]/OT:scri
+pt=math;language=dflt;"
+(fontspec)             - 'bold small caps'  (b/sc) with NFSS spec.: 
+
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(0)/m/n' will be
+(Font)              scaled to size 10.95pt on input line 209.
+
+Package fontspec Info: latinmodern-math scale = 0.9999967668407183.
+
+
+Package fontspec Info: latinmodern-math scale = 0.9999967668407183.
+
+
+Package fontspec Info: latinmodern-math scale = 0.9999967668407183.
+
+
+Package fontspec Info: latinmodern-math scale = 0.9999967668407183.
+
+
+Package fontspec Info: latinmodern-math scale = 0.9999967668407183.
+
+
+Package fontspec Info: Font family 'latinmodern-math.otf(1)' created for font
+(fontspec)             'latinmodern-math.otf' with options
+(fontspec)             [Scale=MatchLowercase,BoldItalicFont={},ItalicFont={},Sm
+allCapsFont={},Script=Math,SizeFeatures={{Size=9.3075-},{Size=6.57-9.3075,Font=
+latinmodern-math.otf,Style=MathScript},{Size=-6.57,Font=latinmodern-math.otf,St
+yle=MathScriptScript}},BoldFont={latinmodern-math.otf}].
+(fontspec)              
+(fontspec)              This font family consists of the following NFSS
+(fontspec)             series/shapes:
+(fontspec)              
+(fontspec)             - 'normal' (m/n) with NFSS spec.:
+(fontspec)             <9.3075->s*[0.9999967668407183]"[latinmodern-math.otf]/O
+T:script=math;language=dflt;"<6.57-9.3075>s*[0.9999967668407183]"[latinmodern-m
+ath.otf]/OT:script=math;language=dflt;+ssty=0;"<-6.57>s*[0.9999967668407183]"[l
+atinmodern-math.otf]/OT:script=math;language=dflt;+ssty=1;"
+(fontspec)             - 'small caps'  (m/sc) with NFSS spec.: 
+(fontspec)             - 'bold' (b/n) with NFSS spec.:
+(fontspec)             <->s*[0.9999967668407183]"[latinmodern-math.otf]/OT:scri
+pt=math;language=dflt;"
+(fontspec)             - 'bold small caps'  (b/sc) with NFSS spec.: 
+
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
+(Font)              scaled to size 10.95pt on input line 209.
+LaTeX Font Info:    Encoding `OT1' has changed to `TU' for symbol font
+(Font)              `operators' in the math version `normal' on input line 209.
+
+LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
+(Font)                  OT1/lmr/m/n --> TU/latinmodern-math.otf(1)/m/n on input
+ line 209.
+LaTeX Font Info:    Encoding `OT1' has changed to `TU' for symbol font
+(Font)              `operators' in the math version `bold' on input line 209.
+LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
+(Font)                  OT1/lmr/bx/n --> TU/latinmodern-math.otf(1)/b/n on inpu
+t line 209.
+
+Package fontspec Info: latinmodern-math scale = 0.9999967668407183.
+
+
+Package fontspec Info: latinmodern-math scale = 1.000096766517402.
+
+
+Package fontspec Info: latinmodern-math scale = 0.9999967668407183.
+
+
+Package fontspec Info: latinmodern-math scale = 1.000096766517402.
+
+
+Package fontspec Info: latinmodern-math scale = 0.9999967668407183.
+
+
+Package fontspec Info: latinmodern-math scale = 1.000096766517402.
+
+
+Package fontspec Info: latinmodern-math scale = 0.9999967668407183.
+
+
+Package fontspec Info: latinmodern-math scale = 1.000096766517402.
+
+
+Package fontspec Info: latinmodern-math scale = 0.9999967668407183.
+
+
+Package fontspec Info: latinmodern-math scale = 1.000096766517402.
+
+
+Package fontspec Info: Font family 'latinmodern-math.otf(2)' created for font
+(fontspec)             'latinmodern-math.otf' with options
+(fontspec)             [Scale=MatchLowercase,BoldItalicFont={},ItalicFont={},Sm
+allCapsFont={},Script=Math,SizeFeatures={{Size=9.3075-},{Size=6.57-9.3075,Font=
+latinmodern-math.otf,Style=MathScript},{Size=-6.57,Font=latinmodern-math.otf,St
+yle=MathScriptScript}},BoldFont={latinmodern-math.otf},ScaleAgain=1.0001,FontAd
+justment={\fontdimen
+(fontspec)             8\font =7.41315pt\relax \fontdimen 9\font
+(fontspec)             =4.3143pt\relax \fontdimen 10\font =4.8618pt\relax
+(fontspec)             \fontdimen 11\font =7.5117pt\relax \fontdimen 12\font
+(fontspec)             =3.77776pt\relax \fontdimen 13\font =3.97485pt\relax
+(fontspec)             \fontdimen 14\font =3.97485pt\relax \fontdimen 15\font
+(fontspec)             =3.16455pt\relax \fontdimen 16\font =2.70465pt\relax
+(fontspec)             \fontdimen 17\font =2.70465pt\relax \fontdimen 18\font
+(fontspec)             =2.7375pt\relax \fontdimen 19\font =2.19pt\relax
+(fontspec)             \fontdimen 22\font =2.7375pt\relax \fontdimen 20\font
+(fontspec)             =0pt\relax \fontdimen 21\font =0pt\relax }].
+(fontspec)              
+(fontspec)              This font family consists of the following NFSS
+(fontspec)             series/shapes:
+(fontspec)              
+(fontspec)             - 'normal' (m/n) with NFSS spec.:
+(fontspec)             <9.3075->s*[1.000096766517402]"[latinmodern-math.otf]/OT
+:script=math;language=dflt;"<6.57-9.3075>s*[1.000096766517402]"[latinmodern-mat
+h.otf]/OT:script=math;language=dflt;+ssty=0;"<-6.57>s*[1.000096766517402]"[lati
+nmodern-math.otf]/OT:script=math;language=dflt;+ssty=1;"
+(fontspec)             - 'small caps'  (m/sc) with NFSS spec.: 
+(fontspec)             and font adjustment code:
+(fontspec)             \fontdimen 8\font =7.41315pt\relax \fontdimen 9\font
+(fontspec)             =4.3143pt\relax \fontdimen 10\font =4.8618pt\relax
+(fontspec)             \fontdimen 11\font =7.5117pt\relax \fontdimen 12\font
+(fontspec)             =3.77776pt\relax \fontdimen 13\font =3.97485pt\relax
+(fontspec)             \fontdimen 14\font =3.97485pt\relax \fontdimen 15\font
+(fontspec)             =3.16455pt\relax \fontdimen 16\font =2.70465pt\relax
+(fontspec)             \fontdimen 17\font =2.70465pt\relax \fontdimen 18\font
+(fontspec)             =2.7375pt\relax \fontdimen 19\font =2.19pt\relax
+(fontspec)             \fontdimen 22\font =2.7375pt\relax \fontdimen 20\font
+(fontspec)             =0pt\relax \fontdimen 21\font =0pt\relax 
+(fontspec)             - 'bold' (b/n) with NFSS spec.:
+(fontspec)             <->s*[1.000096766517402]"[latinmodern-math.otf]/OT:scrip
+t=math;language=dflt;"
+(fontspec)             - 'bold small caps'  (b/sc) with NFSS spec.: 
+(fontspec)             and font adjustment code:
+(fontspec)             \fontdimen 8\font =7.41315pt\relax \fontdimen 9\font
+(fontspec)             =4.3143pt\relax \fontdimen 10\font =4.8618pt\relax
+(fontspec)             \fontdimen 11\font =7.5117pt\relax \fontdimen 12\font
+(fontspec)             =3.77776pt\relax \fontdimen 13\font =3.97485pt\relax
+(fontspec)             \fontdimen 14\font =3.97485pt\relax \fontdimen 15\font
+(fontspec)             =3.16455pt\relax \fontdimen 16\font =2.70465pt\relax
+(fontspec)             \fontdimen 17\font =2.70465pt\relax \fontdimen 18\font
+(fontspec)             =2.7375pt\relax \fontdimen 19\font =2.19pt\relax
+(fontspec)             \fontdimen 22\font =2.7375pt\relax \fontdimen 20\font
+(fontspec)             =0pt\relax \fontdimen 21\font =0pt\relax 
+
+LaTeX Font Info:    Encoding `OMS' has changed to `TU' for symbol font
+(Font)              `symbols' in the math version `normal' on input line 209.
+LaTeX Font Info:    Overwriting symbol font `symbols' in version `normal'
+(Font)                  OMS/lmsy/m/n --> TU/latinmodern-math.otf(2)/m/n on inpu
+t line 209.
+LaTeX Font Info:    Encoding `OMS' has changed to `TU' for symbol font
+(Font)              `symbols' in the math version `bold' on input line 209.
+LaTeX Font Info:    Overwriting symbol font `symbols' in version `bold'
+(Font)                  OMS/lmsy/b/n --> TU/latinmodern-math.otf(2)/b/n on inpu
+t line 209.
+
+Package fontspec Info: latinmodern-math scale = 0.9999967668407183.
+
+
+Package fontspec Info: latinmodern-math scale = 0.9998967671640342.
+
+
+Package fontspec Info: latinmodern-math scale = 0.9999967668407183.
+
+
+Package fontspec Info: latinmodern-math scale = 0.9998967671640342.
+
+
+Package fontspec Info: latinmodern-math scale = 0.9999967668407183.
+
+
+Package fontspec Info: latinmodern-math scale = 0.9998967671640342.
+
+
+Package fontspec Info: latinmodern-math scale = 0.9999967668407183.
+
+
+Package fontspec Info: latinmodern-math scale = 0.9998967671640342.
+
+
+Package fontspec Info: latinmodern-math scale = 0.9999967668407183.
+
+
+Package fontspec Info: latinmodern-math scale = 0.9998967671640342.
+
+
+Package fontspec Info: Font family 'latinmodern-math.otf(3)' created for font
+(fontspec)             'latinmodern-math.otf' with options
+(fontspec)             [Scale=MatchLowercase,BoldItalicFont={},ItalicFont={},Sm
+allCapsFont={},Script=Math,SizeFeatures={{Size=9.3075-},{Size=6.57-9.3075,Font=
+latinmodern-math.otf,Style=MathScript},{Size=-6.57,Font=latinmodern-math.otf,St
+yle=MathScriptScript}},BoldFont={latinmodern-math.otf},ScaleAgain=0.9999,FontAd
+justment={\fontdimen
+(fontspec)             8\font =0.438pt\relax \fontdimen 9\font =2.19pt\relax
+(fontspec)             \fontdimen 10\font =1.82864pt\relax \fontdimen 11\font
+(fontspec)             =1.21545pt\relax \fontdimen 12\font =6.56999pt\relax
+(fontspec)             \fontdimen 13\font =0pt\relax }].
+(fontspec)              
+(fontspec)              This font family consists of the following NFSS
+(fontspec)             series/shapes:
+(fontspec)              
+(fontspec)             - 'normal' (m/n) with NFSS spec.:
+(fontspec)             <9.3075->s*[0.9998967671640342]"[latinmodern-math.otf]/O
+T:script=math;language=dflt;"<6.57-9.3075>s*[0.9998967671640342]"[latinmodern-m
+ath.otf]/OT:script=math;language=dflt;+ssty=0;"<-6.57>s*[0.9998967671640342]"[l
+atinmodern-math.otf]/OT:script=math;language=dflt;+ssty=1;"
+(fontspec)             - 'small caps'  (m/sc) with NFSS spec.: 
+(fontspec)             and font adjustment code:
+(fontspec)             \fontdimen 8\font =0.438pt\relax \fontdimen 9\font
+(fontspec)             =2.19pt\relax \fontdimen 10\font =1.82864pt\relax
+(fontspec)             \fontdimen 11\font =1.21545pt\relax \fontdimen 12\font
+(fontspec)             =6.56999pt\relax \fontdimen 13\font =0pt\relax 
+(fontspec)             - 'bold' (b/n) with NFSS spec.:
+(fontspec)             <->s*[0.9998967671640342]"[latinmodern-math.otf]/OT:scri
+pt=math;language=dflt;"
+(fontspec)             - 'bold small caps'  (b/sc) with NFSS spec.: 
+(fontspec)             and font adjustment code:
+(fontspec)             \fontdimen 8\font =0.438pt\relax \fontdimen 9\font
+(fontspec)             =2.19pt\relax \fontdimen 10\font =1.82864pt\relax
+(fontspec)             \fontdimen 11\font =1.21545pt\relax \fontdimen 12\font
+(fontspec)             =6.56999pt\relax \fontdimen 13\font =0pt\relax 
+
+LaTeX Font Info:    Encoding `OMX' has changed to `TU' for symbol font
+(Font)              `largesymbols' in the math version `normal' on input line 2
+09.
+LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `normal'
+(Font)                  OMX/lmex/m/n --> TU/latinmodern-math.otf(3)/m/n on inpu
+t line 209.
+LaTeX Font Info:    Encoding `OMX' has changed to `TU' for symbol font
+(Font)              `largesymbols' in the math version `bold' on input line 209
+.
+LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `bold'
+(Font)                  OMX/lmex/m/n --> TU/latinmodern-math.otf(3)/b/n on inpu
+t line 209.
+LaTeX Info: Redefining \microtypecontext on input line 209.
+Package microtype Info: Applying patch `item' on input line 209.
+Package microtype Info: Applying patch `toc' on input line 209.
+Package microtype Info: Applying patch `eqnum' on input line 209.
+Package microtype Info: Applying patch `footnote' on input line 209.
+Package microtype Info: Applying patch `verbatim' on input line 209.
+Package microtype Info: Character protrusion enabled (level 2).
+Package microtype Info: Using protrusion set `basicmath'.
+Package microtype Info: No adjustment of tracking.
+Package microtype Info: No adjustment of spacing.
+Package microtype Info: No adjustment of kerning.
+
+(C:\Users\lsi8012\AppData\Local\Programs\MiKTeX\tex/latex/microtype\mt-LatinMod
+ernRoman.cfg
+File: mt-LatinModernRoman.cfg 2021/02/21 v1.1 microtype config. file: Latin Mod
+ern Roman (RS)
+)
+Package hyperref Info: Link coloring ON on input line 209.
+
+Package hyperref Warning: Rerun to get /PageLabels entry.
+
+Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: float package is loaded.
+Package caption Info: End \AtBeginDocument code.
+Package microtype Info: Loading generic protrusion settings for font family
+(microtype)             `lmss' (encoding: TU).
+(microtype)             For optimal results, create family-specific settings.
+(microtype)             See the microtype manual for details.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
+(Font)              scaled to size 14.4pt on input line 211.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
+(Font)              scaled to size 10.0pt on input line 211.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
+(Font)              scaled to size 7.0pt on input line 211.
+LaTeX Font Info:    Trying to load font information for OML+lmm on input line 2
+11.
+(C:\Users\lsi8012\AppData\Local\Programs\MiKTeX\tex/latex/lm\omllmm.fd
+File: omllmm.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
+(Font)              scaled to size 14.4013pt on input line 211.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
+(Font)              scaled to size 10.00092pt on input line 211.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
+(Font)              scaled to size 7.00064pt on input line 211.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
+(Font)              scaled to size 14.39845pt on input line 211.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
+(Font)              scaled to size 9.99893pt on input line 211.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
+(Font)              scaled to size 6.99925pt on input line 211.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 211
+.
+(C:\Users\lsi8012\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+) (C:\Users\lsi8012\AppData\Local\Programs\MiKTeX\tex/latex/microtype\mt-msa.cf
+g
+File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
+)
+LaTeX Font Info:    Trying to load font information for U+msb on input line 211
+.
+(C:\Users\lsi8012\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsb.fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+) (C:\Users\lsi8012\AppData\Local\Programs\MiKTeX\tex/latex/microtype\mt-msb.cf
+g
+File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
+) [1
+
+
+
+]
+Package tocbasic Info: character protrusion at toc deactivated on input line 21
+6.
+No file index.toc.
+\tf@toc=\write4
+\openout4 = `index.toc'.
+
+[2
+
+] [3
+
+]
+part I.
+Package scrkbase Info: You've told me to use the font selection of the element
+(scrkbase)             `partprefix' that is an alias of element `partnumber'
+(scrkbase)              on input line 247.
+[4
+
+]
+chapter 1.
+
+Class scrreprt Warning: \float@addtolists detected!
+(scrreprt)              Implementation of \float@addtolist became
+(scrreprt)              deprecated in KOMA-Script v3.01 2008/11/14 and
+(scrreprt)              has been replaced by several more flexible
+(scrreprt)              features of package `tocbasic`.
+(scrreprt)              Since Version 3.12 support for deprecated
+(scrreprt)              \float@addtolist interface has been
+(scrreprt)              restricted to only some of the KOMA-Script
+(scrreprt)              features and been removed from others.
+(scrreprt)              Loading of package `scrhack' may help to
+(scrreprt)              avoid this warning, if you are using a
+(scrreprt)              a package that still implements the
+(scrreprt)              deprecated \float@addtolist interface.
+
+[5
+
+]
+LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <10.95> not available
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 321.
+File: Bias_variance_code_files/figure-pdf/cell-4-output-1.png Graphic file (typ
+e bmp)
+<Bias_variance_code_files/figure-pdf/cell-4-output-1.png>
+[6] [7]
+File: Bias_variance_code_files/figure-pdf/cell-10-output-1.png Graphic file (ty
+pe bmp)
+<Bias_variance_code_files/figure-pdf/cell-10-output-1.png>
+[8] [9] [10]
+chapter 2.
+[11
+
+]
+Overfull \vbox (0.15608pt too high) detected at line 590
+ []
+
+[12]
+Overfull \hbox (7.39111pt too wide) in paragraph at lines 621--621
+[]\TU/lmtt/m/n/10.95 numerical features in the pipeline: [[]year[] []mileage[] 
+[]tax[] []mpg[] []engineSize[]][] 
+ []
+
+
+Overfull \hbox (151.10983pt too wide) in paragraph at lines 621--621
+[]\TU/lmtt/m/n/10.95 categorical features in the pipeline: [[]brand_audi[] []br
+and_bmw[] []brand_ford[] []brand_hyundi[] []brand_merc[][] 
+ []
+
+[13]
+LaTeX Font Info:    Font shape `TU/lmss/bx/it' in size <12> not available
+(Font)              Font shape `TU/lmss/bx/sl' tried instead on input line 701.
+
+[14] [15]
+File: KNN_files/figure-pdf/cell-9-output-1.png Graphic file (type bmp)
+<KNN_files/figure-pdf/cell-9-output-1.png>
+
+Overfull \hbox (10.95901pt too wide) in paragraph at lines 781--782
+[][] 
+ []
+
+[16]
+Overfull \hbox (16.49089pt too wide) in alignment at lines 810--817
+ [] [] [] [] [] [] [] [] [] [] 
+ []
+
+
+Package longtable Warning: Column widths have changed
+(longtable)                in table 2.1 on input line 817.
+
+[17]
+Underfull \hbox (badness 10000) in paragraph at lines 836--839
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 839--842
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 853--857
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 869--872
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 882--887
+
+ []
+
+[18]
+Overfull \hbox (24.63734pt too wide) in paragraph at lines 967--967
+[] []\TU/lmtt/m/n/10.95 preprocessor__cat[]: OneHotEncoder(handle_unknown=[]ign
+ore[], sparse_output=False),[] 
+ []
+
+[19] [20]
+Overfull \hbox (1172.03462pt too wide) in alignment at lines 1033--1042
+ [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] 
+ []
+
+
+Overfull \hbox (1172.03462pt too wide) in alignment at lines 1042--1044
+ [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] 
+ []
+
+
+Overfull \hbox (1390.81558pt too wide) in alignment at lines 1044--1075
+ [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] 
+ []
+
+
+Package longtable Warning: Column widths have changed
+(longtable)                in table 2.2 on input line 1075.
+
+
+Overfull \hbox (1172.03462pt too wide) in alignment at lines 1086--1095
+ [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] 
+ []
+
+
+Overfull \hbox (1172.03462pt too wide) in alignment at lines 1095--1097
+ [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] 
+ []
+
+
+Overfull \hbox (1404.20741pt too wide) in alignment at lines 1097--1128
+ [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] 
+ []
+
+[21]
+
+Package longtable Warning: Column widths have changed
+(longtable)                in table 2.3 on input line 1128.
+
+[22] [23] [24]
+Overfull \hbox (335.06976pt too wide) in paragraph at lines 1315--1315
+[]\TU/lmtt/m/n/10.95 Requirement already satisfied: joblib>=0.11 in c:\users\ls
+i8012\appdata\local\anaconda3\lib\site-packages (from scikit-optimize) (1.4.2)[
+] 
+ []
+
+
+Overfull \hbox (346.56726pt too wide) in paragraph at lines 1315--1315
+[]\TU/lmtt/m/n/10.95 Requirement already satisfied: numpy>=1.20.3 in c:\users\l
+si8012\appdata\local\anaconda3\lib\site-packages (from scikit-optimize) (1.26.4
+)[] 
+ []
+
+
+Overfull \hbox (340.81851pt too wide) in paragraph at lines 1315--1315
+[]\TU/lmtt/m/n/10.95 Requirement already satisfied: scipy>=1.1.0 in c:\users\ls
+i8012\appdata\local\anaconda3\lib\site-packages (from scikit-optimize) (1.13.1)
+[] 
+ []
+
+
+Overfull \hbox (375.311pt too wide) in paragraph at lines 1315--1315
+[]\TU/lmtt/m/n/10.95 Requirement already satisfied: scikit-learn>=1.0.0 in c:\u
+sers\lsi8012\appdata\local\anaconda3\lib\site-packages (from scikit-optimize) (
+1.6.1)[] 
+ []
+
+
+Overfull \hbox (375.311pt too wide) in paragraph at lines 1315--1315
+[]\TU/lmtt/m/n/10.95 Requirement already satisfied: packaging>=21.3 in c:\users
+\lsi8012\appdata\roaming\python\python312\site-packages (from scikit-optimize) 
+(24.2)[] 
+ []
+
+
+Overfull \hbox (375.311pt too wide) in paragraph at lines 1315--1315
+[]\TU/lmtt/m/n/10.95 Requirement already satisfied: PyYAML in c:\users\lsi8012\
+appdata\local\anaconda3\lib\site-packages (from pyaml>=16.9->scikit-optimize) (
+6.0.1)[] 
+ []
+
+
+Overfull \hbox (501.78348pt too wide) in paragraph at lines 1315--1315
+[]\TU/lmtt/m/n/10.95 Requirement already satisfied: threadpoolctl>=3.1.0 in c:\
+users\lsi8012\appdata\local\anaconda3\lib\site-packages (from scikit-learn>=1.0
+.0->scikit-optimize) (3.5.0)[] 
+ []
+
+
+Overfull \hbox (7.39111pt too wide) in paragraph at lines 1315--1315
+[]   \TU/lmtt/m/n/10.95 ------------------------------------- -- 102.4/107.8 kB
+ 5.8 MB/s eta 0:00:01[] 
+ []
+
+
+Overfull \hbox (7.39111pt too wide) in paragraph at lines 1315--1315
+[]   \TU/lmtt/m/n/10.95 ---------------------------------------- 107.8/107.8 kB
+ 3.1 MB/s eta 0:00:00[] 
+ []
+
+[25] [26]
+Overfull \hbox (927.19087pt too wide) in paragraph at lines 1395--1395
+[]\TU/lmtt/m/n/10.95 c:\Users\lsi8012\AppData\Local\anaconda3\Lib\site-packages
+\skopt\optimizer\optimizer.py:517: UserWarning: The objective has been evaluate
+d at point [[]manhattan[], 5, 2, []distance[]] before, using random point [[]eu
+clidean[], 12, 1, []distance[]][] 
+ []
+
+
+Overfull \hbox (921.44212pt too wide) in paragraph at lines 1404--1404
+[]\TU/lmtt/m/n/10.95 c:\Users\lsi8012\AppData\Local\anaconda3\Lib\site-packages
+\skopt\optimizer\optimizer.py:517: UserWarning: The objective has been evaluate
+d at point [[]manhattan[], 5, 2, []distance[]] before, using random point [[]eu
+clidean[], 9, 2, []distance[]][] 
+ []
+
+
+Overfull \hbox (921.44212pt too wide) in paragraph at lines 1413--1413
+[]\TU/lmtt/m/n/10.95 c:\Users\lsi8012\AppData\Local\anaconda3\Lib\site-packages
+\skopt\optimizer\optimizer.py:517: UserWarning: The objective has been evaluate
+d at point [[]manhattan[], 5, 2, []distance[]] before, using random point [[]ma
+nhattan[], 5, 1, []distance[]][] 
+ []
+
+
+Overfull \hbox (915.69337pt too wide) in paragraph at lines 1425--1425
+[]\TU/lmtt/m/n/10.95 c:\Users\lsi8012\AppData\Local\anaconda3\Lib\site-packages
+\skopt\optimizer\optimizer.py:517: UserWarning: The objective has been evaluate
+d at point [[]manhattan[], 5, 1, []distance[]] before, using random point [[]ma
+nhattan[], 4, 2, []uniform[]][] 
+ []
+
+
+Overfull \hbox (915.69337pt too wide) in paragraph at lines 1434--1434
+[]\TU/lmtt/m/n/10.95 c:\Users\lsi8012\AppData\Local\anaconda3\Lib\site-packages
+\skopt\optimizer\optimizer.py:517: UserWarning: The objective has been evaluate
+d at point [[]manhattan[], 5, 1, []distance[]] before, using random point [[]eu
+clidean[], 6, 1, []uniform[]][] 
+ []
+
+
+Overfull \hbox (927.19087pt too wide) in paragraph at lines 1443--1443
+[]\TU/lmtt/m/n/10.95 c:\Users\lsi8012\AppData\Local\anaconda3\Lib\site-packages
+\skopt\optimizer\optimizer.py:517: UserWarning: The objective has been evaluate
+d at point [[]manhattan[], 5, 1, []distance[]] before, using random point [[]eu
+clidean[], 13, 1, []distance[]][] 
+ []
+
+
+Overfull \hbox (915.69337pt too wide) in paragraph at lines 1452--1452
+[]\TU/lmtt/m/n/10.95 c:\Users\lsi8012\AppData\Local\anaconda3\Lib\site-packages
+\skopt\optimizer\optimizer.py:517: UserWarning: The objective has been evaluate
+d at point [[]manhattan[], 5, 1, []distance[]] before, using random point [[]eu
+clidean[], 6, 1, []uniform[]][] 
+ []
+
+
+Overfull \hbox (915.69337pt too wide) in paragraph at lines 1461--1461
+[]\TU/lmtt/m/n/10.95 c:\Users\lsi8012\AppData\Local\anaconda3\Lib\site-packages
+\skopt\optimizer\optimizer.py:517: UserWarning: The objective has been evaluate
+d at point [[]manhattan[], 5, 1, []distance[]] before, using random point [[]ma
+nhattan[], 2, 2, []uniform[]][] 
+ []
+
+[27] [28]
+chapter 3.
+
+Overfull \hbox (35.5415pt too wide) in alignment at lines 1535--1540
+ [] [] [] [] [] [] [] [] [] [] [] [] 
+ []
+
+
+Overfull \hbox (35.5415pt too wide) in alignment at lines 1540--1542
+ [] [] [] [] [] [] [] [] [] [] [] [] 
+ []
+
+
+Overfull \hbox (71.27138pt too wide) in alignment at lines 1542--1553
+ [] [] [] [] [] [] [] [] [] [] [] [] 
+ []
+
+[29
+
+]
+
+Package longtable Warning: Column widths have changed
+(longtable)                in table 3.1 on input line 1553.
+
+LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <14.4> not available
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 1572.
+[30]
+Overfull \hbox (191.35107pt too wide) in paragraph at lines 1619--1619
+[]                         []\TU/lmtt/m/n/10.95 n_neighbors[]: array([  5,  10,
+  15,  20,  25,  30,  35,  40,  45,  50,  55,  60,  65,[] 
+ []
+
+[31]
+Overfull \hbox (977.75pt too wide) in alignment at lines 1687--1695
+ [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] 
+ []
+
+
+Overfull \hbox (977.75pt too wide) in alignment at lines 1695--1697
+ [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] 
+ []
+
+
+Overfull \hbox (1179.77742pt too wide) in alignment at lines 1697--1728
+ [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] 
+ []
+
+
+Package longtable Warning: Column widths have changed
+(longtable)                in table 3.2 on input line 1728.
+
+
+Overfull \hbox (977.75pt too wide) in alignment at lines 1744--1752
+ [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] 
+ []
+
+
+Overfull \hbox (977.75pt too wide) in alignment at lines 1752--1754
+ [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] 
+ []
+
+
+Overfull \hbox (1179.77742pt too wide) in alignment at lines 1754--1785
+ [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] 
+ []
+
+
+Package longtable Warning: Column widths have changed
+(longtable)                in table 3.3 on input line 1785.
+
+[32] [33]
+Overfull \hbox (306.32602pt too wide) in paragraph at lines 1869--1869
+[]                                        []\TU/lmtt/m/n/10.95 p[]: <scipy.stat
+s._distn_infrastructure.rv_continuous_frozen object at 0x00000226D6E70700>,[] 
+ []
+
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
+(Font)              scaled to size 7.665pt on input line 1906.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
+(Font)              scaled to size 5.475pt on input line 1906.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
+(Font)              scaled to size 10.95099pt on input line 1906.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
+(Font)              scaled to size 7.66568pt on input line 1906.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
+(Font)              scaled to size 5.4755pt on input line 1906.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
+(Font)              scaled to size 10.94882pt on input line 1906.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
+(Font)              scaled to size 7.66417pt on input line 1906.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
+(Font)              scaled to size 5.47441pt on input line 1906.
+[34] [35] [36] [37]
+File: Hyperparameter tuning_files/figure-pdf/cell-23-output-1.png Graphic file 
+(type bmp)
+<Hyperparameter tuning_files/figure-pdf/cell-23-output-1.png>
+
+Overfull \hbox (10.94745pt too wide) in paragraph at lines 2101--2102
+[][] 
+ []
+
+[38]
+File: Hyperparameter tuning_files/figure-pdf/cell-24-output-1.png Graphic file 
+(type bmp)
+<Hyperparameter tuning_files/figure-pdf/cell-24-output-1.png>
+
+Overfull \hbox (10.954pt too wide) in paragraph at lines 2117--2118
+[][] 
+ []
+
+[39]
+File: Hyperparameter tuning_files/figure-pdf/cell-25-output-1.png Graphic file 
+(type bmp)
+<Hyperparameter tuning_files/figure-pdf/cell-25-output-1.png>
+[40]
+File: Hyperparameter tuning_files/figure-pdf/cell-28-output-1.png Graphic file 
+(type bmp)
+<Hyperparameter tuning_files/figure-pdf/cell-28-output-1.png>
+[41] [42] [43]
+Overfull \hbox (53.3811pt too wide) in paragraph at lines 2278--2278
+[]\TU/lmtt/m/n/10.95 [[]n_neighbors[], []p[], []weights[]] = [9, 1.000832173236
+6932, []distance[]] 5756.172382596493[] 
+ []
+
+File: Hyperparameter tuning_files/figure-pdf/cell-31-output-2.png Graphic file 
+(type bmp)
+<Hyperparameter tuning_files/figure-pdf/cell-31-output-2.png>
+
+Overfull \hbox (179.85358pt too wide) in paragraph at lines 2289--2289
+[]              \TU/lmtt/m/n/10.95 search_spaces={[]n_neighbors[]: Integer(low=
+1, high=500, prior=[]uniform[], transform=[]normalize[]),[] 
+ []
+
+
+Overfull \hbox (99.3711pt too wide) in paragraph at lines 2289--2289
+[]                             []\TU/lmtt/m/n/10.95 p[]: Real(low=1, high=10, p
+rior=[]uniform[], transform=[]normalize[]),[] 
+ []
+
+
+Overfull \hbox (133.86359pt too wide) in paragraph at lines 2289--2289
+[]                             []\TU/lmtt/m/n/10.95 weights[]: Categorical(cate
+gories=([]uniform[], []distance[]), prior=None)})[] 
+ []
+
+[44]
+Overfull \hbox (48.98454pt too wide) in alignment at lines 2312--2317
+ [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] 
+ []
+
+
+Overfull \hbox (48.98454pt too wide) in alignment at lines 2317--2319
+ [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] 
+ []
+
+
+Overfull \hbox (54.45956pt too wide) in alignment at lines 2319--2325
+ [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] 
+ []
+
+
+Package longtable Warning: Column widths have changed
+(longtable)                in table 3.4 on input line 2325.
+
+[45] [46]
+File: Hyperparameter tuning_files/figure-pdf/cell-40-output-1.png Graphic file 
+(type bmp)
+<Hyperparameter tuning_files/figure-pdf/cell-40-output-1.png>
+[47]
+part II.
+Package scrkbase Info: You've told me to use the font selection of the element
+(scrkbase)             `partprefix' that is an alias of element `partnumber'
+(scrkbase)              on input line 2452.
+[48
+
+]
+chapter 4.
+
+Overfull \hbox (54.44241pt too wide) in alignment at lines 2505--2516
+ [] [] [] [] [] [] [] [] [] [] [] 
+ []
+
+[49
+
+]
+
+Package longtable Warning: Column widths have changed
+(longtable)                in table 4.1 on input line 2516.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 2529--2532
+
+ []
+
+[50] [51] [52]
+File: regression_tree_sp25_files/figure-pdf/cell-15-output-1.png Graphic file (
+type bmp)
+<regression_tree_sp25_files/figure-pdf/cell-15-output-1.png>
+
+Overfull \hbox (10.94647pt too wide) in paragraph at lines 2704--2705
+[][] 
+ []
+
+File: regression_tree_sp25_files/figure-pdf/cell-16-output-1.png Graphic file (
+type bmp)
+<regression_tree_sp25_files/figure-pdf/cell-16-output-1.png>
+
+Overfull \hbox (10.94165pt too wide) in paragraph at lines 2733--2734
+[][] 
+ []
+
+[53]
+Overfull \hbox (26.74007pt too wide) in alignment at lines 2754--2765
+ [] [] [] [] [] [] [] [] [] [] 
+ []
+
+
+Package longtable Warning: Column widths have changed
+(longtable)                in table 4.2 on input line 2765.
+
+[54]
+File: regression_tree_sp25_files/figure-pdf/cell-21-output-1.png Graphic file (
+type bmp)
+<regression_tree_sp25_files/figure-pdf/cell-21-output-1.png>
+
+Overfull \hbox (10.94518pt too wide) in paragraph at lines 2804--2805
+[][] 
+ []
+
+[55] [56]
+File: regression_tree_sp25_files/figure-pdf/cell-24-output-1.png Graphic file (
+type bmp)
+<regression_tree_sp25_files/figure-pdf/cell-24-output-1.png>
+
+Overfull \hbox (10.94518pt too wide) in paragraph at lines 2895--2896
+[][] 
+ []
+
+[57]
+LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <12> not available
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 2949.
+
+Underfull \hbox (badness 1253) in paragraph at lines 2956--2959
+[]\TU/lmr/m/n/10.95 If \TU/lmtt/m/n/10.95 None\TU/lmr/m/n/10.95 , the tree will
+ expand until all leaves are pure or contain fewer than
+ []
+
+[58] [59]
+Overfull \hbox (64.8786pt too wide) in paragraph at lines 3065--3065
+[]                                        \TU/lmtt/m/n/10.95 ColumnTransformer(
+force_int_remainder_cols=False,[] 
+ []
+
+
+Overfull \hbox (24.63736pt too wide) in paragraph at lines 3065--3065
+[]                                                          \TU/lmtt/m/n/10.95 
+remainder=[]passthrough[],[] 
+ []
+
+
+Overfull \hbox (7.39111pt too wide) in paragraph at lines 3065--3065
+[]                                                          \TU/lmtt/m/n/10.95 
+transformers=[([]cat[],[] 
+ []
+
+
+Overfull \hbox (197.09981pt too wide) in paragraph at lines 3065--3065
+[]                                                                         \TU/
+lmtt/m/n/10.95 OneHotEncoder(handle_unknown=[]ignore[]),[] 
+ []
+
+
+Overfull \hbox (24.63736pt too wide) in paragraph at lines 3065--3065
+[]                                                                         \TU/
+lmtt/m/n/10.95 [[]brand[],[] 
+ []
+
+
+Overfull \hbox (24.63736pt too wide) in paragraph at lines 3065--3065
+[]                                                                          []\
+TU/lmtt/m/n/10.95 model[],[] 
+ []
+
+
+Overfull \hbox (64.8786pt too wide) in paragraph at lines 3065--3065
+[]                                                                          []\
+TU/lmtt/m/n/10.95 transmission[],[] 
+ []
+
+
+Overfull \hbox (70.62735pt too wide) in paragraph at lines 3065--3065
+[]                                                                          []\
+TU/lmtt/m/n/10.95 fuelType[]])])),[] 
+ []
+
+
+Overfull \hbox (24.63736pt too wide) in paragraph at lines 3065--3065
+[]                                                              \TU/lmtt/m/n/10
+.95 random_state=42))]),[] 
+ []
+
+
+Overfull \hbox (156.85858pt too wide) in paragraph at lines 3065--3065
+[]                      []\TU/lmtt/m/n/10.95 RMSE[]: make_scorer(<lambda>, grea
+ter_is_better=False, response_method=[]predict[])},[] 
+ []
+
+[60]
+Overfull \hbox (490.28598pt too wide) in paragraph at lines 3115--3115
+[]\TU/lmtt/m/n/10.95 {[]regressor__ccp_alpha[]: 0.001, []regressor__max_depth[]
+: None, []regressor__max_features[]: None, []regressor__min_samples_leaf[]: 1, 
+[]regressor__min_samples_split[]: 5}[] 
+ []
+
+
+Overfull \hbox (490.28598pt too wide) in paragraph at lines 3137--3137
+[]\TU/lmtt/m/n/10.95 {[]regressor__ccp_alpha[]: 0.001, []regressor__max_depth[]
+: None, []regressor__max_features[]: None, []regressor__min_samples_leaf[]: 1, 
+[]regressor__min_samples_split[]: 5}[] 
+ []
+
+
+Overfull \hbox (1730.63306pt too wide) in alignment at lines 3152--3163
+ [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] 
+ []
+
+
+Overfull \hbox (1730.63306pt too wide) in alignment at lines 3163--3165
+ [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] 
+ []
+
+
+Overfull \hbox (1946.62175pt too wide) in alignment at lines 3165--3186
+ [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] 
+ []
+
+[61]
+
+Package longtable Warning: Column widths have changed
+(longtable)                in table 4.3 on input line 3186.
+
+File: regression_tree_sp25_files/figure-pdf/cell-30-output-1.png Graphic file (
+type bmp)
+<regression_tree_sp25_files/figure-pdf/cell-30-output-1.png>
+
+Overfull \hbox (10.94383pt too wide) in paragraph at lines 3199--3200
+[][] 
+ []
+
+[62]
+File: regression_tree_sp25_files/figure-pdf/cell-31-output-2.png Graphic file (
+type bmp)
+<regression_tree_sp25_files/figure-pdf/cell-31-output-2.png>
+
+Overfull \hbox (10.94891pt too wide) in paragraph at lines 3246--3247
+[][] 
+ []
+
+[63]
+Missing character: There is no 𝛼 in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 𝛼 in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no ⋅ in font [lmroman10-regular]:mapping=tex-text;!
+[64]
+Overfull \hbox (64.8786pt too wide) in paragraph at lines 3349--3349
+[]                                        \TU/lmtt/m/n/10.95 ColumnTransformer(
+force_int_remainder_cols=False,[] 
+ []
+
+
+Overfull \hbox (24.63736pt too wide) in paragraph at lines 3349--3349
+[]                                                          \TU/lmtt/m/n/10.95 
+remainder=[]passthrough[],[] 
+ []
+
+
+Overfull \hbox (7.39111pt too wide) in paragraph at lines 3349--3349
+[]                                                          \TU/lmtt/m/n/10.95 
+transformers=[([]cat[],[] 
+ []
+
+
+Overfull \hbox (197.09981pt too wide) in paragraph at lines 3349--3349
+[]                                                                         \TU/
+lmtt/m/n/10.95 OneHotEncoder(handle_unknown=[]ignore[]),[] 
+ []
+
+
+Overfull \hbox (24.63736pt too wide) in paragraph at lines 3349--3349
+[]                                                                         \TU/
+lmtt/m/n/10.95 [[]brand[],[] 
+ []
+
+
+Overfull \hbox (24.63736pt too wide) in paragraph at lines 3349--3349
+[]                                                                          []\
+TU/lmtt/m/n/10.95 model[],[] 
+ []
+
+
+Overfull \hbox (64.8786pt too wide) in paragraph at lines 3349--3349
+[]                                                                          []\
+TU/lmtt/m/n/10.95 transmission[],[] 
+ []
+
+
+Overfull \hbox (70.62735pt too wide) in paragraph at lines 3349--3349
+[]                                                                          []\
+TU/lmtt/m/n/10.95 fuelType[]])])),[] 
+ []
+
+[65]
+Overfull \hbox (24.63736pt too wide) in paragraph at lines 3349--3349
+[]                                                              \TU/lmtt/m/n/10
+.95 random_state=42))]),[] 
+ []
+
+
+Overfull \hbox (156.85858pt too wide) in paragraph at lines 3349--3349
+[]                      []\TU/lmtt/m/n/10.95 RMSE[]: make_scorer(<lambda>, grea
+ter_is_better=False, response_method=[]predict[])},[] 
+ []
+
+
+Overfull \hbox (995.95398pt too wide) in alignment at lines 3380--3388
+ [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] 
+ []
+
+
+Overfull \hbox (995.95398pt too wide) in alignment at lines 3388--3390
+ [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] 
+ []
+
+
+Overfull \hbox (1019.3432pt too wide) in alignment at lines 3390--3401
+ [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] 
+ []
+
+
+Package longtable Warning: Column widths have changed
+(longtable)                in table 4.4 on input line 3401.
+
+[66]
+File: regression_tree_sp25_files/figure-pdf/cell-35-output-1.png Graphic file (
+type bmp)
+<regression_tree_sp25_files/figure-pdf/cell-35-output-1.png>
+
+Overfull \hbox (10.94383pt too wide) in paragraph at lines 3437--3438
+[][] 
+ []
+
+[67] [68]
+chapter 5.
+
+Overfull \hbox (48.98454pt too wide) in alignment at lines 3482--3487
+ [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] 
+ []
+
+
+Overfull \hbox (48.98454pt too wide) in alignment at lines 3487--3489
+ [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] 
+ []
+
+
+Overfull \hbox (54.45956pt too wide) in alignment at lines 3489--3495
+ [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] 
+ []
+
+
+Package longtable Warning: Column widths have changed
+(longtable)                in table 5.1 on input line 3495.
+
+[69
+
+] [70]
+File: Classification _Tree_files/figure-pdf/cell-7-output-1.png Graphic file (t
+ype bmp)
+<Classification _Tree_files/figure-pdf/cell-7-output-1.png>
+
+Overfull \hbox (10.94518pt too wide) in paragraph at lines 3565--3566
+[][] 
+ []
+
+[71] [72]
+Overfull \hbox (59.12985pt too wide) in paragraph at lines 3651--3651
+[]\TU/lmtt/m/n/10.95 Best parameters found:  {[]max_depth[]: 6, []min_samples_l
+eaf[]: 2, []min_samples_split[]: 10}[] 
+ []
+
+File: Classification _Tree_files/figure-pdf/cell-11-output-1.png Graphic file (
+type bmp)
+<Classification _Tree_files/figure-pdf/cell-11-output-1.png>
+
+Overfull \hbox (10.94518pt too wide) in paragraph at lines 3679--3680
+[][] 
+ []
+
+[73] [74]
+Overfull \hbox (197.09982pt too wide) in paragraph at lines 3719--3719
+[]\TU/lmtt/m/n/10.95 Best parameters found:  {[]criterion[]: []entropy[], []max
+_depth[]: 4, []min_samples_leaf[]: 1, []min_samples_split[]: 20}[] 
+ []
+
+File: Classification _Tree_files/figure-pdf/cell-14-output-1.png Graphic file (
+type bmp)
+<Classification _Tree_files/figure-pdf/cell-14-output-1.png>
+
+Overfull \hbox (10.94518pt too wide) in paragraph at lines 3747--3748
+[][] 
+ []
+
+[75] [76] [77] [78]
+File: Classification _Tree_files/figure-pdf/cell-17-output-1.png Graphic file (
+type bmp)
+<Classification _Tree_files/figure-pdf/cell-17-output-1.png>
+
+Overfull \hbox (10.94476pt too wide) in paragraph at lines 3886--3887
+[][] 
+ []
+
+[79]
+File: Classification _Tree_files/figure-pdf/cell-19-output-1.png Graphic file (
+type bmp)
+<Classification _Tree_files/figure-pdf/cell-19-output-1.png>
+
+Overfull \hbox (10.94518pt too wide) in paragraph at lines 3930--3931
+[][] 
+ []
+
+[80] [81]
+
+Package longtable Warning: Column widths have changed
+(longtable)                in table 5.2 on input line 3994.
+
+File: Classification _Tree_files/figure-pdf/cell-21-output-1.png Graphic file (
+type bmp)
+<Classification _Tree_files/figure-pdf/cell-21-output-1.png>
+
+Overfull \hbox (10.9629pt too wide) in paragraph at lines 4007--4008
+[][] 
+ []
+
+[82] [83]
+Missing character: There is no 👉 in font [lmroman10-regular]:mapping=tex-text;!
+[84]
+chapter 6.
+[85
+
+]
+Overfull \hbox (54.44241pt too wide) in alignment at lines 4146--4157
+ [] [] [] [] [] [] [] [] [] [] [] 
+ []
+
+
+Package longtable Warning: Column widths have changed
+(longtable)                in table 6.1 on input line 4157.
+
+[86] [87] [88] [89] [90] [91]
+Missing character: There is no ✅ in font [lmroman10-regular]:mapping=tex-text;!
+[92]
+File: bagging_files/figure-pdf/cell-12-output-1.png Graphic file (type bmp)
+<bagging_files/figure-pdf/cell-12-output-1.png>
+
+Overfull \hbox (10.94891pt too wide) in paragraph at lines 4517--4518
+[][] 
+ []
+
+[93] [94]
+Missing character: There is no 🔧 in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 🔧 in font [lmroman10-regular]:mapping=tex-text;!
+[95]
+Overfull \hbox (875.45212pt too wide) in paragraph at lines 4659--4659
+[]\TU/lmtt/m/n/10.95 c:\Users\lsi8012\AppData\Local\anaconda3\Lib\site-packages
+\sklearn\ensemble\_bagging.py:1315: UserWarning: Some inputs do not have OOB sc
+ores. This probably means too few estimators were used to compute any reliable 
+oob estimates.[] 
+ []
+
+
+Overfull \hbox (875.45212pt too wide) in paragraph at lines 4659--4659
+[]\TU/lmtt/m/n/10.95 c:\Users\lsi8012\AppData\Local\anaconda3\Lib\site-packages
+\sklearn\ensemble\_bagging.py:1315: UserWarning: Some inputs do not have OOB sc
+ores. This probably means too few estimators were used to compute any reliable 
+oob estimates.[] 
+ []
+
+
+Overfull \hbox (875.45212pt too wide) in paragraph at lines 4659--4659
+[]\TU/lmtt/m/n/10.95 c:\Users\lsi8012\AppData\Local\anaconda3\Lib\site-packages
+\sklearn\ensemble\_bagging.py:1315: UserWarning: Some inputs do not have OOB sc
+ores. This probably means too few estimators were used to compute any reliable 
+oob estimates.[] 
+ []
+
+File: bagging_files/figure-pdf/cell-14-output-2.png Graphic file (type bmp)
+<bagging_files/figure-pdf/cell-14-output-2.png>
+
+Overfull \hbox (10.94891pt too wide) in paragraph at lines 4661--4662
+[][] 
+ []
+
+[96] [97]
+Overfull \hbox (283.33105pt too wide) in paragraph at lines 4783--4783
+[]\TU/lmtt/m/n/10.95 Best parameters: {[]bootstrap[]: True, []bootstrap_feature
+s[]: False, []max_features[]: 0.75, []max_samples[]: 1.0, []n_estimators[]: 50}
+[] 
+ []
+
+[98]
+Underfull \hbox (badness 10000) in paragraph at lines 4792--4794
+
+ []
+
+[99]
+Overfull \hbox (875.45212pt too wide) in paragraph at lines 4902--4902
+[]\TU/lmtt/m/n/10.95 c:\Users\lsi8012\AppData\Local\anaconda3\Lib\site-packages
+\sklearn\ensemble\_bagging.py:1315: UserWarning: Some inputs do not have OOB sc
+ores. This probably means too few estimators were used to compute any reliable 
+oob estimates.[] 
+ []
+
+
+Overfull \hbox (875.45212pt too wide) in paragraph at lines 4902--4902
+[]\TU/lmtt/m/n/10.95 c:\Users\lsi8012\AppData\Local\anaconda3\Lib\site-packages
+\sklearn\ensemble\_bagging.py:1315: UserWarning: Some inputs do not have OOB sc
+ores. This probably means too few estimators were used to compute any reliable 
+oob estimates.[] 
+ []
+
+
+Overfull \hbox (875.45212pt too wide) in paragraph at lines 4902--4902
+[]\TU/lmtt/m/n/10.95 c:\Users\lsi8012\AppData\Local\anaconda3\Lib\site-packages
+\sklearn\ensemble\_bagging.py:1315: UserWarning: Some inputs do not have OOB sc
+ores. This probably means too few estimators were used to compute any reliable 
+oob estimates.[] 
+ []
+
+
+Overfull \hbox (875.45212pt too wide) in paragraph at lines 4902--4902
+[]\TU/lmtt/m/n/10.95 c:\Users\lsi8012\AppData\Local\anaconda3\Lib\site-packages
+\sklearn\ensemble\_bagging.py:1315: UserWarning: Some inputs do not have OOB sc
+ores. This probably means too few estimators were used to compute any reliable 
+oob estimates.[] 
+ []
+
+
+Overfull \hbox (875.45212pt too wide) in paragraph at lines 4902--4902
+[]\TU/lmtt/m/n/10.95 c:\Users\lsi8012\AppData\Local\anaconda3\Lib\site-packages
+\sklearn\ensemble\_bagging.py:1315: UserWarning: Some inputs do not have OOB sc
+ores. This probably means too few estimators were used to compute any reliable 
+oob estimates.[] 
+ []
+
+
+Overfull \hbox (875.45212pt too wide) in paragraph at lines 4902--4902
+[]\TU/lmtt/m/n/10.95 c:\Users\lsi8012\AppData\Local\anaconda3\Lib\site-packages
+\sklearn\ensemble\_bagging.py:1315: UserWarning: Some inputs do not have OOB sc
+ores. This probably means too few estimators were used to compute any reliable 
+oob estimates.[] 
+ []
+
+[100]
+Overfull \hbox (875.45212pt too wide) in paragraph at lines 4902--4902
+[]\TU/lmtt/m/n/10.95 c:\Users\lsi8012\AppData\Local\anaconda3\Lib\site-packages
+\sklearn\ensemble\_bagging.py:1315: UserWarning: Some inputs do not have OOB sc
+ores. This probably means too few estimators were used to compute any reliable 
+oob estimates.[] 
+ []
+
+
+Overfull \hbox (875.45212pt too wide) in paragraph at lines 4902--4902
+[]\TU/lmtt/m/n/10.95 c:\Users\lsi8012\AppData\Local\anaconda3\Lib\site-packages
+\sklearn\ensemble\_bagging.py:1315: UserWarning: Some inputs do not have OOB sc
+ores. This probably means too few estimators were used to compute any reliable 
+oob estimates.[] 
+ []
+
+
+Overfull \hbox (875.45212pt too wide) in paragraph at lines 4902--4902
+[]\TU/lmtt/m/n/10.95 c:\Users\lsi8012\AppData\Local\anaconda3\Lib\site-packages
+\sklearn\ensemble\_bagging.py:1315: UserWarning: Some inputs do not have OOB sc
+ores. This probably means too few estimators were used to compute any reliable 
+oob estimates.[] 
+ []
+
+
+Overfull \hbox (875.45212pt too wide) in paragraph at lines 4902--4902
+[]\TU/lmtt/m/n/10.95 c:\Users\lsi8012\AppData\Local\anaconda3\Lib\site-packages
+\sklearn\ensemble\_bagging.py:1315: UserWarning: Some inputs do not have OOB sc
+ores. This probably means too few estimators were used to compute any reliable 
+oob estimates.[] 
+ []
+
+
+Overfull \hbox (875.45212pt too wide) in paragraph at lines 4902--4902
+[]\TU/lmtt/m/n/10.95 c:\Users\lsi8012\AppData\Local\anaconda3\Lib\site-packages
+\sklearn\ensemble\_bagging.py:1315: UserWarning: Some inputs do not have OOB sc
+ores. This probably means too few estimators were used to compute any reliable 
+oob estimates.[] 
+ []
+
+
+Overfull \hbox (875.45212pt too wide) in paragraph at lines 4902--4902
+[]\TU/lmtt/m/n/10.95 c:\Users\lsi8012\AppData\Local\anaconda3\Lib\site-packages
+\sklearn\ensemble\_bagging.py:1315: UserWarning: Some inputs do not have OOB sc
+ores. This probably means too few estimators were used to compute any reliable 
+oob estimates.[] 
+ []
+
+
+Overfull \hbox (875.45212pt too wide) in paragraph at lines 4902--4902
+[]\TU/lmtt/m/n/10.95 c:\Users\lsi8012\AppData\Local\anaconda3\Lib\site-packages
+\sklearn\ensemble\_bagging.py:1315: UserWarning: Some inputs do not have OOB sc
+ores. This probably means too few estimators were used to compute any reliable 
+oob estimates.[] 
+ []
+
+
+Overfull \hbox (875.45212pt too wide) in paragraph at lines 4902--4902
+[]\TU/lmtt/m/n/10.95 c:\Users\lsi8012\AppData\Local\anaconda3\Lib\site-packages
+\sklearn\ensemble\_bagging.py:1315: UserWarning: Some inputs do not have OOB sc
+ores. This probably means too few estimators were used to compute any reliable 
+oob estimates.[] 
+ []
+
+
+Overfull \hbox (875.45212pt too wide) in paragraph at lines 4902--4902
+[]\TU/lmtt/m/n/10.95 c:\Users\lsi8012\AppData\Local\anaconda3\Lib\site-packages
+\sklearn\ensemble\_bagging.py:1315: UserWarning: Some inputs do not have OOB sc
+ores. This probably means too few estimators were used to compute any reliable 
+oob estimates.[] 
+ []
+
+
+Overfull \hbox (875.45212pt too wide) in paragraph at lines 4902--4902
+[]\TU/lmtt/m/n/10.95 c:\Users\lsi8012\AppData\Local\anaconda3\Lib\site-packages
+\sklearn\ensemble\_bagging.py:1315: UserWarning: Some inputs do not have OOB sc
+ores. This probably means too few estimators were used to compute any reliable 
+oob estimates.[] 
+ []
+
+
+Overfull \hbox (875.45212pt too wide) in paragraph at lines 4902--4902
+[]\TU/lmtt/m/n/10.95 c:\Users\lsi8012\AppData\Local\anaconda3\Lib\site-packages
+\sklearn\ensemble\_bagging.py:1315: UserWarning: Some inputs do not have OOB sc
+ores. This probably means too few estimators were used to compute any reliable 
+oob estimates.[] 
+ []
+
+
+Overfull \hbox (875.45212pt too wide) in paragraph at lines 4902--4902
+[]\TU/lmtt/m/n/10.95 c:\Users\lsi8012\AppData\Local\anaconda3\Lib\site-packages
+\sklearn\ensemble\_bagging.py:1315: UserWarning: Some inputs do not have OOB sc
+ores. This probably means too few estimators were used to compute any reliable 
+oob estimates.[] 
+ []
+
+
+Overfull \hbox (317.82355pt too wide) in paragraph at lines 4907--4907
+[]\TU/lmtt/m/n/10.95 Best Hyperparameters: {[]bootstrap[]: True, []bootstrap_fe
+atures[]: False, []max_features[]: 0.75, []max_samples[]: 0.75, []n_estimators[
+]: 50}[] 
+ []
+
+[101]
+Missing character: There is no ✅ in font [lmsans10-bold]:mapping=tex-text;!
+Missing character: There is no ✅ in font [lmroman10-regular]:mapping=tex-text;!
+[102]
+Overfull \hbox (15.30138pt too wide) in paragraph at lines 5021--5024
+[]\TU/lmr/m/n/10.95 Your model is based on bagging (e.g., \TU/lmtt/m/n/10.95 Ba
+ggingClassifier\TU/lmr/m/n/10.95 , \TU/lmtt/m/n/10.95 RandomForestClassifier\TU
+/lmr/m/n/10.95 ). 
+ []
+
+Missing character: There is no ⚠ in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no ️ in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no ⚠ in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no ️ in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no ⚠ in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no ️ in font [lmroman10-regular]:mapping=tex-text;!
+
+Overfull \hbox (48.98454pt too wide) in alignment at lines 5062--5067
+ [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] 
+ []
+
+
+Overfull \hbox (48.98454pt too wide) in alignment at lines 5067--5069
+ [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] 
+ []
+
+
+Overfull \hbox (54.45956pt too wide) in alignment at lines 5069--5075
+ [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] 
+ []
+
+
+Package longtable Warning: Column widths have changed
+(longtable)                in table 6.3 on input line 5075.
+
+[103] [104]
+chapter 7.
+Missing character: There is no ✅ in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no ✅ in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no ⚠ in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no ️ in font [lmroman10-regular]:mapping=tex-text;!
+[105
+
+]
+Overfull \hbox (54.44241pt too wide) in alignment at lines 5178--5189
+ [] [] [] [] [] [] [] [] [] [] [] 
+ []
+
+
+Package longtable Warning: Column widths have changed
+(longtable)                in table 7.1 on input line 5189.
+
+[106] [107] [108]
+Missing character: There is no ❓ in font [lmsans10-bold]:mapping=tex-text;!
+[109]
+Missing character: There is no ❓ in font [lmsans10-bold]:mapping=tex-text;!
+Missing character: There is no ⚠ in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no ️ in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no ⚠ in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no ️ in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no ⚠ in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no ️ in font [lmroman10-regular]:mapping=tex-text;!
+[110]
+Overfull \hbox (5.3381pt too wide) in paragraph at lines 5471--5472
+[]\TU/lmr/m/n/10.95 Hyperparameter  
+ []
+
+Missing character: There is no ✅ in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no ✅ in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 🧩 in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 🧩 in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no ✅ in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no ✅ in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no ✅ in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no ✅ in font [lmroman10-regular]:mapping=tex-text;!
+[111] [112] [113] [114]
+File: random_forest_files/figure-pdf/cell-13-output-1.png Graphic file (type bm
+p)
+<random_forest_files/figure-pdf/cell-13-output-1.png>
+
+Overfull \hbox (10.94891pt too wide) in paragraph at lines 5663--5664
+[][] 
+ []
+
+Missing character: There is no 🔑 in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 🔑 in font [lmroman10-regular]:mapping=tex-text;!
+[115] [116] [117] [118] [119]
+File: random_forest_files/figure-pdf/cell-17-output-1.png Graphic file (type bm
+p)
+<random_forest_files/figure-pdf/cell-17-output-1.png>
+
+Overfull \hbox (10.94891pt too wide) in paragraph at lines 5960--5961
+[][] 
+ []
+
+[120]
+Missing character: There is no 🎯 in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 🎯 in font [lmroman10-regular]:mapping=tex-text;!
+[121]
+chapter 8.
+
+Underfull \hbox (badness 1348) in paragraph at lines 6006--6011
+[]\TU/lmr/m/n/10.95 For the exact algorithms underlying the AdaBoost algorithm,
+ check out the papers
+ []
+
+[122
+
+] [123]
+Overfull \hbox (54.44241pt too wide) in alignment at lines 6166--6177
+ [] [] [] [] [] [] [] [] [] [] [] 
+ []
+
+
+Package longtable Warning: Column widths have changed
+(longtable)                in table 8.2 on input line 6177.
+
+[124] [125]
+Missing character: There is no ❓ in font [lmsans10-bold]:mapping=tex-text;!
+
+Overfull \hbox (5.30553pt too wide) in paragraph at lines 6282--6287
+\TU/lmr/m/n/10.95 By default, AdaBoost uses \TU/lmr/bx/n/10.95 Decision Stumps 
+\TU/lmr/m/n/10.95 (\TU/lmtt/m/n/10.95 DecisionTreeRegressor(max_depth=1)\TU/lmr
+/m/n/10.95 ),
+ []
+
+[126] [127]
+File: adaboost_files/figure-pdf/cell-8-output-2.png Graphic file (type bmp)
+<adaboost_files/figure-pdf/cell-8-output-2.png>
+[128]
+Missing character: There is no 🔍 in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 🔺 in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 🔺 in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 🔹 in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 🔹 in font [lmroman10-regular]:mapping=tex-text;!
+[129] [130]
+File: adaboost_files/figure-pdf/cell-9-output-2.png Graphic file (type bmp)
+<adaboost_files/figure-pdf/cell-9-output-2.png>
+
+Overfull \hbox (10.95248pt too wide) in paragraph at lines 6520--6521
+[][] 
+ []
+
+[131]
+Underfull \hbox (badness 10000) in paragraph at lines 6538--6540
+
+ []
+
+[132] [133]
+File: adaboost_files/figure-pdf/cell-10-output-2.png Graphic file (type bmp)
+<adaboost_files/figure-pdf/cell-10-output-2.png>
+[134]
+Overfull \vbox (0.92093pt too high) detected at line 6657
+ []
+
+[135] [136]
+Overfull \hbox (122.36609pt too wide) in paragraph at lines 6712--6712
+[]\TU/lmtt/m/n/10.95 OrderedDict({[]estimator__max_depth[]: 16, []learning_rate
+[]: 1.3460276374020355, []n_estimators[]: 398})[] 
+ []
+
+File: adaboost_files/figure-pdf/cell-14-output-1.png Graphic file (type bmp)
+<adaboost_files/figure-pdf/cell-14-output-1.png>
+[137]
+Overfull \hbox (1504.37325pt too wide) in alignment at lines 6768--6778
+ [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] 
+ []
+
+
+Overfull \hbox (1504.37325pt too wide) in alignment at lines 6778--6780
+ [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] 
+ []
+
+
+Overfull \hbox (1718.29237pt too wide) in alignment at lines 6780--6811
+ [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] [] 
+ []
+
+
+Package longtable Warning: Column widths have changed
+(longtable)                in table 8.4 on input line 6811.
+
+[138]
+File: adaboost_files/figure-pdf/cell-16-output-1.png Graphic file (type bmp)
+<adaboost_files/figure-pdf/cell-16-output-1.png>
+
+Overfull \hbox (10.95412pt too wide) in paragraph at lines 6847--6848
+[][] 
+ []
+
+[139]
+File: adaboost_files/figure-pdf/cell-17-output-1.png Graphic file (type bmp)
+<adaboost_files/figure-pdf/cell-17-output-1.png>
+
+Overfull \hbox (10.94609pt too wide) in paragraph at lines 6888--6889
+[][] 
+ []
+
+[140]
+Overfull \hbox (223.54791pt too wide) in alignment at lines 6900--6906
+ [] [] [] [] [] [] [] 
+ []
+
+
+Overfull \hbox (223.54791pt too wide) in alignment at lines 6906--6908
+ [] [] [] [] [] [] [] 
+ []
+
+
+Overfull \hbox (229.02293pt too wide) in alignment at lines 6908--6919
+ [] [] [] [] [] [] [] 
+ []
+
+
+Package longtable Warning: Column widths have changed
+(longtable)                in table 8.5 on input line 6919.
+
+[141]
+File: adaboost_files/figure-pdf/cell-19-output-1.png Graphic file (type bmp)
+<adaboost_files/figure-pdf/cell-19-output-1.png>
+
+Overfull \hbox (10.95946pt too wide) in paragraph at lines 6938--6939
+[][] 
+ []
+
+[142]
+File: adaboost_files/figure-pdf/cell-20-output-1.png Graphic file (type bmp)
+<adaboost_files/figure-pdf/cell-20-output-1.png>
+
+Overfull \hbox (10.95354pt too wide) in paragraph at lines 6950--6951
+[][] 
+ []
+
+[143] [144]
+Overfull \hbox (248.83853pt too wide) in paragraph at lines 7001--7001
+[]\TU/lmtt/m/n/10.95 Requirement already satisfied: numpy in c:\users\lsi8012\a
+ppdata\local\anaconda3\lib\site-packages (from optuna) (1.26.4)[] 
+ []
+
+
+Overfull \hbox (323.57227pt too wide) in paragraph at lines 7001--7001
+[]\TU/lmtt/m/n/10.95 Requirement already satisfied: packaging>=20.0 in c:\users
+\lsi8012\appdata\roaming\python\python312\site-packages (from optuna) (24.2)[] 
+
+ []
+
+
+Overfull \hbox (317.82352pt too wide) in paragraph at lines 7001--7001
+[]\TU/lmtt/m/n/10.95 Requirement already satisfied: sqlalchemy>=1.4.2 in c:\use
+rs\lsi8012\appdata\local\anaconda3\lib\site-packages (from optuna) (2.0.30)[] 
+ []
+
+
+Overfull \hbox (243.08978pt too wide) in paragraph at lines 7001--7001
+[]\TU/lmtt/m/n/10.95 Requirement already satisfied: tqdm in c:\users\lsi8012\ap
+pdata\local\anaconda3\lib\site-packages (from optuna) (4.66.4)[] 
+ []
+
+
+Overfull \hbox (248.83853pt too wide) in paragraph at lines 7001--7001
+[]\TU/lmtt/m/n/10.95 Requirement already satisfied: PyYAML in c:\users\lsi8012\
+appdata\local\anaconda3\lib\site-packages (from optuna) (6.0.1)[] 
+ []
+
+
+Overfull \hbox (415.55225pt too wide) in paragraph at lines 7001--7001
+[]\TU/lmtt/m/n/10.95 Requirement already satisfied: greenlet!=0.4.17 in c:\user
+s\lsi8012\appdata\local\anaconda3\lib\site-packages (from sqlalchemy>=1.4.2->op
+tuna) (3.0.1)[] 
+ []
+
+
+Overfull \hbox (346.56726pt too wide) in paragraph at lines 7001--7001
+[]\TU/lmtt/m/n/10.95 Requirement already satisfied: colorama in c:\users\lsi801
+2\appdata\roaming\python\python312\site-packages (from colorlog->optuna) (0.4.6
+)[] 
+ []
+
+
+Overfull \hbox (438.54724pt too wide) in paragraph at lines 7001--7001
+[]\TU/lmtt/m/n/10.95 Requirement already satisfied: MarkupSafe>=0.9.2 in c:\use
+rs\lsi8012\appdata\local\anaconda3\lib\site-packages (from Mako->alembic>=1.5.0
+->optuna) (2.1.3)[] 
+ []
+
+
+Overfull \hbox (7.39111pt too wide) in paragraph at lines 7001--7001
+[]   \TU/lmtt/m/n/10.95 ------------------ --------------------- 174.1/386.6 kB
+ 3.5 MB/s eta 0:00:01[] 
+ []
+
+
+Overfull \hbox (7.39111pt too wide) in paragraph at lines 7001--7001
+[]   \TU/lmtt/m/n/10.95 ---------------------------------------- 386.6/386.6 kB
+ 4.8 MB/s eta 0:00:00[] 
+ []
+
+
+Overfull \hbox (7.39111pt too wide) in paragraph at lines 7001--7001
+[]   \TU/lmtt/m/n/10.95 ---------------------------------------- 231.9/231.9 kB
+ 7.2 MB/s eta 0:00:00[] 
+ []
+
+
+Overfull \hbox (18.88861pt too wide) in paragraph at lines 7001--7001
+[]\TU/lmtt/m/n/10.95 Installing collected packages: typing-extensions, Mako, co
+lorlog, alembic, optuna[] 
+ []
+
+
+Overfull \hbox (139.61234pt too wide) in paragraph at lines 7001--7001
+[]\TU/lmtt/m/n/10.95 Successfully installed Mako-1.3.10 alembic-1.15.2 colorlog
+-6.9.0 optuna-4.3.0 typing-extensions-4.13.2[] 
+ []
+
+
+Overfull \hbox (553.52225pt too wide) in paragraph at lines 7006--7006
+[]\TU/lmtt/m/n/10.95 ERROR: pip[]s dependency resolver does not currently take 
+into account all the packages that are installed. This behaviour is the source 
+of the following dependency conflicts.[] 
+ []
+
+
+Overfull \hbox (110.86859pt too wide) in paragraph at lines 7006--7006
+[]\TU/lmtt/m/n/10.95 streamlit 1.32.0 requires packaging<24,>=16.8, but you hav
+e packaging 24.2 which is incompatible.[] 
+ []
+
+[145]
+Overfull \hbox (202.84857pt too wide) in paragraph at lines 7072--7072
+[]\TU/lmtt/m/n/10.95 [I 2025-04-29 18:13:37,366] A new study created in memory 
+with name: no-name-8c1fd49f-a877-442b-99b1-047e129cf2d6[] 
+ []
+
+
+Overfull \hbox (783.4722pt too wide) in paragraph at lines 7072--7072
+[]\TU/lmtt/m/n/10.95 [I 2025-04-29 18:13:55,695] Trial 0 finished with value: 3
+604.108244895723 and parameters: {[]learning_rate[]: 0.2657114590825371, []max_
+depth[]: 16, []n_estimators[]: 118}. Best is trial 0 with value: 3604.108244895
+723.[] 
+ []
+
+
+Overfull \hbox (783.4722pt too wide) in paragraph at lines 7072--7072
+[]\TU/lmtt/m/n/10.95 [I 2025-04-29 18:14:39,369] Trial 1 finished with value: 3
+418.989299711666 and parameters: {[]learning_rate[]: 1.3034198280227978, []max_
+depth[]: 19, []n_estimators[]: 299}. Best is trial 1 with value: 3418.989299711
+666.[] 
+ []
+
+
+Overfull \hbox (783.4722pt too wide) in paragraph at lines 7072--7072
+[]\TU/lmtt/m/n/10.95 [I 2025-04-29 18:15:01,876] Trial 2 finished with value: 6
+675.343723783454 and parameters: {[]learning_rate[]: 1.8424651045294824, []max_
+depth[]: 19, []n_estimators[]: 422}. Best is trial 1 with value: 3418.989299711
+666.[] 
+ []
+
+
+Overfull \hbox (789.22095pt too wide) in paragraph at lines 7072--7072
+[]\TU/lmtt/m/n/10.95 [I 2025-04-29 18:15:51,382] Trial 3 finished with value: 3
+534.3761450527854 and parameters: {[]learning_rate[]: 0.5334103211344221, []max
+_depth[]: 12, []n_estimators[]: 454}. Best is trial 1 with value: 3418.98929971
+1666.[] 
+ []
+
+
+Overfull \hbox (777.72345pt too wide) in paragraph at lines 7072--7072
+[]\TU/lmtt/m/n/10.95 [I 2025-04-29 18:16:17,255] Trial 4 finished with value: 4
+146.601971284103 and parameters: {[]learning_rate[]: 0.3024670447553495, []max_
+depth[]: 8, []n_estimators[]: 291}. Best is trial 1 with value: 3418.9892997116
+66.[] 
+ []
+
+
+Overfull \hbox (794.9697pt too wide) in paragraph at lines 7072--7072
+[]\TU/lmtt/m/n/10.95 [I 2025-04-29 18:16:51,329] Trial 5 finished with value: 3
+373.6473210617305 and parameters: {[]learning_rate[]: 1.5257826326174242, []max
+_depth[]: 16, []n_estimators[]: 256}. Best is trial 5 with value: 3373.64732106
+17305.[] 
+ []
+
+
+Overfull \hbox (783.4722pt too wide) in paragraph at lines 7072--7072
+[]\TU/lmtt/m/n/10.95 [I 2025-04-29 18:17:22,661] Trial 6 finished with value: 4
+645.349739417665 and parameters: {[]learning_rate[]: 0.5297828519634237, []max_
+depth[]: 7, []n_estimators[]: 367}. Best is trial 5 with value: 3373.6473210617
+305.[] 
+ []
+
+
+Overfull \hbox (789.22095pt too wide) in paragraph at lines 7072--7072
+[]\TU/lmtt/m/n/10.95 [I 2025-04-29 18:17:48,173] Trial 7 finished with value: 3
+783.098791065398 and parameters: {[]learning_rate[]: 1.4149558081471842, []max_
+depth[]: 10, []n_estimators[]: 263}. Best is trial 5 with value: 3373.647321061
+7305.[] 
+ []
+
+
+Overfull \hbox (794.9697pt too wide) in paragraph at lines 7072--7072
+[]\TU/lmtt/m/n/10.95 [I 2025-04-29 18:18:07,203] Trial 8 finished with value: 3
+642.6233815254373 and parameters: {[]learning_rate[]: 1.9601482801398697, []max
+_depth[]: 11, []n_estimators[]: 188}. Best is trial 5 with value: 3373.64732106
+17305.[] 
+ []
+
+
+Overfull \hbox (783.4722pt too wide) in paragraph at lines 7072--7072
+[]\TU/lmtt/m/n/10.95 [I 2025-04-29 18:19:28,631] Trial 9 finished with value: 3
+815.355472103091 and parameters: {[]learning_rate[]: 0.259029718590615, []max_d
+epth[]: 25, []n_estimators[]: 452}. Best is trial 5 with value: 3373.6473210617
+305.[] 
+ []
+
+
+Overfull \hbox (794.9697pt too wide) in paragraph at lines 7072--7072
+[]\TU/lmtt/m/n/10.95 [I 2025-04-29 18:19:52,259] Trial 10 finished with value: 
+3460.264767659689 and parameters: {[]learning_rate[]: 1.0867872885809007, []max
+_depth[]: 23, []n_estimators[]: 145}. Best is trial 5 with value: 3373.64732106
+17305.[] 
+ []
+
+
+Overfull \hbox (806.4672pt too wide) in paragraph at lines 7072--7072
+[]\TU/lmtt/m/n/10.95 [I 2025-04-29 18:20:24,557] Trial 11 finished with value: 
+3354.0174995460206 and parameters: {[]learning_rate[]: 1.4283231452601248, []ma
+x_depth[]: 17, []n_estimators[]: 232}. Best is trial 11 with value: 3354.017499
+5460206.[] 
+ []
+
+
+Overfull \hbox (806.4672pt too wide) in paragraph at lines 7072--7072
+[]\TU/lmtt/m/n/10.95 [I 2025-04-29 18:20:51,602] Trial 12 finished with value: 
+3424.5702876072514 and parameters: {[]learning_rate[]: 1.5895892175714832, []ma
+x_depth[]: 15, []n_estimators[]: 217}. Best is trial 11 with value: 3354.017499
+5460206.[] 
+ []
+
+[146]
+Overfull \hbox (806.4672pt too wide) in paragraph at lines 7072--7072
+[]\TU/lmtt/m/n/10.95 [I 2025-04-29 18:21:42,335] Trial 13 finished with value: 
+3428.9633976083956 and parameters: {[]learning_rate[]: 0.9643138493113337, []ma
+x_depth[]: 17, []n_estimators[]: 364}. Best is trial 11 with value: 3354.017499
+5460206.[] 
+ []
+
+
+Overfull \hbox (794.9697pt too wide) in paragraph at lines 7072--7072
+[]\TU/lmtt/m/n/10.95 [I 2025-04-29 18:22:07,861] Trial 14 finished with value: 
+3363.7031695680153 and parameters: {[]learning_rate[]: 1.62982211920311, []max_
+depth[]: 20, []n_estimators[]: 234}. Best is trial 11 with value: 3354.01749954
+60206.[] 
+ []
+
+
+Overfull \hbox (806.4672pt too wide) in paragraph at lines 7072--7072
+[]\TU/lmtt/m/n/10.95 [I 2025-04-29 18:22:38,820] Trial 15 finished with value: 
+3467.0742139036493 and parameters: {[]learning_rate[]: 1.0494403165070592, []ma
+x_depth[]: 21, []n_estimators[]: 195}. Best is trial 11 with value: 3354.017499
+5460206.[] 
+ []
+
+
+Overfull \hbox (800.71844pt too wide) in paragraph at lines 7072--7072
+[]\TU/lmtt/m/n/10.95 [I 2025-04-29 18:23:03,761] Trial 16 finished with value: 
+4339.523251732014 and parameters: {[]learning_rate[]: 1.7528718262914982, []max
+_depth[]: 21, []n_estimators[]: 347}. Best is trial 11 with value: 3354.0174995
+460206.[] 
+ []
+
+
+Overfull \hbox (806.4672pt too wide) in paragraph at lines 7072--7072
+[]\TU/lmtt/m/n/10.95 [I 2025-04-29 18:23:32,216] Trial 17 finished with value: 
+3429.3383627414196 and parameters: {[]learning_rate[]: 1.2930834352035752, []ma
+x_depth[]: 14, []n_estimators[]: 235}. Best is trial 11 with value: 3354.017499
+5460206.[] 
+ []
+
+
+Overfull \hbox (800.71844pt too wide) in paragraph at lines 7072--7072
+[]\TU/lmtt/m/n/10.95 [I 2025-04-29 18:23:46,880] Trial 18 finished with value: 
+3432.187531277779 and parameters: {[]learning_rate[]: 1.6679028063369739, []max
+_depth[]: 19, []n_estimators[]: 145}. Best is trial 11 with value: 3354.0174995
+460206.[] 
+ []
+
+
+Overfull \hbox (110.86859pt too wide) in paragraph at lines 7086--7086
+[]\TU/lmtt/m/n/10.95 Best hyperparameters: {[]learning_rate[]: 1.42832314526012
+48, []max_depth[]: 17, []n_estimators[]: 232}[] 
+ []
+
+[147] [148]
+chapter 9.
+
+Underfull \hbox (badness 10000) in paragraph at lines 7238--7239
+
+ []
+
+[149
+
+]
+Underfull \hbox (badness 10000) in paragraph at lines 7247--7248
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 7255--7256
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 7260--7261
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 7266--7267
+
+ []
+
+[150]
+Overfull \hbox (28.49179pt too wide) in paragraph at lines 7334--7337
+\TU/lmr/m/n/10.95 The primary hyperparameters for \TU/lmtt/m/n/10.95 GradientBo
+ostingClassifier \TU/lmr/m/n/10.95 and \TU/lmtt/m/n/10.95 GradientBoostingRegre
+ssor
+ []
+
+
+Underfull \hbox (badness 1360) in paragraph at lines 7346--7350
+[]\TU/lmr/m/n/10.95 Use \TU/lmr/bx/n/10.95 early stopping \TU/lmr/m/n/10.95 (vi
+a \TU/lmtt/m/n/10.95 n_iter_no_change \TU/lmr/m/n/10.95 and \TU/lmtt/m/n/10.95 
+validation_fraction \TU/lmr/m/n/10.95 in
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 7346--7350
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 7359--7362
+
+ []
+
+[151]
+Underfull \hbox (badness 10000) in paragraph at lines 7386--7388
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 7396--7399
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 7399--7402
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 7411--7414
+
+ []
+
+
+Underfull \hbox (badness 2150) in paragraph at lines 7414--7416
+[]\TU/lmtt/m/n/10.95 max_features\TU/lmr/m/n/10.95 : Fraction/absolute number o
+f features used per split (e.g.,
+ []
+
+[152]
+Overfull \hbox (54.44241pt too wide) in alignment at lines 7468--7479
+ [] [] [] [] [] [] [] [] [] [] [] 
+ []
+
+
+Package longtable Warning: Column widths have changed
+(longtable)                in table 9.1 on input line 7479.
+
+[153] [154]
+File: Gradient_Boosting_files/figure-pdf/cell-6-output-2.png Graphic file (type
+ bmp)
+<Gradient_Boosting_files/figure-pdf/cell-6-output-2.png>
+
+Overfull \hbox (10.95912pt too wide) in paragraph at lines 7591--7592
+[][] 
+ []
+
+[155] [156] [157] [158]
+File: Gradient_Boosting_files/figure-pdf/cell-9-output-1.png Graphic file (type
+ bmp)
+<Gradient_Boosting_files/figure-pdf/cell-9-output-1.png>
+
+Overfull \hbox (10.94034pt too wide) in paragraph at lines 7751--7752
+[][] 
+ []
+
+[159] [160] [161]
+File: Gradient_Boosting_files/figure-pdf/cell-10-output-2.png Graphic file (typ
+e bmp)
+<Gradient_Boosting_files/figure-pdf/cell-10-output-2.png>
+
+Overfull \hbox (10.94951pt too wide) in paragraph at lines 7871--7872
+[][] 
+ []
+
+[162]
+Missing character: There is no ⚠ in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no ️ in font [lmroman10-regular]:mapping=tex-text;!
+
+Overfull \hbox (8.5732pt too wide) in paragraph at lines 7932--7932
+[]|\TU/lmtt/m/n/10.95 max_features|  
+ []
+
+[163]
+File: Gradient_Boosting_files/figure-pdf/cell-12-output-1.png Graphic file (typ
+e bmp)
+<Gradient_Boosting_files/figure-pdf/cell-12-output-1.png>
+
+Overfull \hbox (10.95325pt too wide) in paragraph at lines 7997--7998
+[][] 
+ []
+
+[164] [165] [166] [167] [168]
+Overfull \hbox (530.52725pt too wide) in paragraph at lines 8205--8205
+[]\TU/lmtt/m/n/10.95 Best Parameters: OrderedDict({[]learning_rate[]: 0.01, []m
+ax_depth[]: 32, []max_features[]: 0.6, []min_samples_leaf[]: 1, []min_samples_s
+plit[]: 2, []subsample[]: 0.302790110221997})[] 
+ []
+
+File: Gradient_Boosting_files/figure-pdf/cell-14-output-1.png Graphic file (typ
+e bmp)
+<Gradient_Boosting_files/figure-pdf/cell-14-output-1.png>
+[169]
+File: Gradient_Boosting_files/figure-pdf/cell-15-output-1.png Graphic file (typ
+e bmp)
+<Gradient_Boosting_files/figure-pdf/cell-15-output-1.png>
+
+Overfull \hbox (10.94957pt too wide) in paragraph at lines 8227--8228
+[][] 
+ []
+
+[170] [171]
+Overfull \hbox (202.84857pt too wide) in paragraph at lines 8358--8358
+[]\TU/lmtt/m/n/10.95 [I 2025-05-08 11:07:29,094] A new study created in memory 
+with name: no-name-84a8f2a9-1577-4460-b0fa-ddf16779a99d[] 
+ []
+
+
+Overfull \hbox (1266.3671pt too wide) in paragraph at lines 8358--8358
+[]\TU/lmtt/m/n/10.95 [I 2025-05-08 11:07:30,013] Trial 0 finished with value: 6
+402.677876019744 and parameters: {[]learning_rate[]: 0.035073388881695464, []ma
+x_depth[]: 30, []min_samples_split[]: 46, []min_samples_leaf[]: 26, []subsample
+[]: 0.1177589817042714, []max_features[]: 0.8}. Best is trial 0 with value: 640
+2.677876019744.[] 
+ []
+
+
+Overfull \hbox (1266.3671pt too wide) in paragraph at lines 8358--8358
+[]\TU/lmtt/m/n/10.95 [I 2025-05-08 11:07:31,621] Trial 1 finished with value: 5
+817.716936023959 and parameters: {[]learning_rate[]: 0.01478220034105809, []max
+_depth[]: 10, []min_samples_split[]: 36, []min_samples_leaf[]: 21, []subsample[
+]: 0.15640172328228477, []max_features[]: 0.2}. Best is trial 1 with value: 581
+7.716936023959.[] 
+ []
+
+
+Overfull \hbox (1272.11584pt too wide) in paragraph at lines 8358--8358
+[]\TU/lmtt/m/n/10.95 [I 2025-05-08 11:07:33,048] Trial 2 finished with value: 4
+639.695965157119 and parameters: {[]learning_rate[]: 0.03787502889529579, []max
+_depth[]: 7, []min_samples_split[]: 42, []min_samples_leaf[]: 16, []subsample[]
+: 0.4581205314481861, []max_features[]: []log2[]}. Best is trial 2 with value: 
+4639.695965157119.[] 
+ []
+
+[172]
+Overfull \hbox (1260.61835pt too wide) in paragraph at lines 8358--8358
+[]\TU/lmtt/m/n/10.95 [I 2025-05-08 11:07:33,778] Trial 3 finished with value: 3
+888.640108615851 and parameters: {[]learning_rate[]: 0.18174509299300778, []max
+_depth[]: 17, []min_samples_split[]: 78, []min_samples_leaf[]: 14, []subsample[
+]: 0.5795668347371169, []max_features[]: 0.1}. Best is trial 3 with value: 3888
+.640108615851.[] 
+ []
+
+
+Overfull \hbox (1260.61835pt too wide) in paragraph at lines 8358--8358
+[]\TU/lmtt/m/n/10.95 [I 2025-05-08 11:07:34,527] Trial 4 finished with value: 5
+637.440291328167 and parameters: {[]learning_rate[]: 0.1380752210199847, []max_
+depth[]: 19, []min_samples_split[]: 90, []min_samples_leaf[]: 28, []subsample[]
+: 0.23325390500017087, []max_features[]: 0.7}. Best is trial 3 with value: 3888
+.640108615851.[] 
+ []
+
+
+Overfull \hbox (1272.11584pt too wide) in paragraph at lines 8358--8358
+[]\TU/lmtt/m/n/10.95 [I 2025-05-08 11:08:15,193] Trial 5 finished with value: 4
+349.349334283657 and parameters: {[]learning_rate[]: 0.012573622109971098, []ma
+x_depth[]: 11, []min_samples_split[]: 59, []min_samples_leaf[]: 29, []subsample
+[]: 0.8662915238008442, []max_features[]: None}. Best is trial 3 with value: 38
+88.640108615851.[] 
+ []
+
+
+Overfull \hbox (1254.8696pt too wide) in paragraph at lines 8358--8358
+[]\TU/lmtt/m/n/10.95 [I 2025-05-08 11:08:16,690] Trial 6 finished with value: 3
+538.201600150815 and parameters: {[]learning_rate[]: 0.20506627729566493, []max
+_depth[]: 22, []min_samples_split[]: 29, []min_samples_leaf[]: 1, []subsample[]
+: 0.7644887945675666, []max_features[]: 0.4}. Best is trial 6 with value: 3538.
+201600150815.[] 
+ []
+
+
+Overfull \hbox (1266.3671pt too wide) in paragraph at lines 8358--8358
+[]\TU/lmtt/m/n/10.95 [I 2025-05-08 11:08:40,300] Trial 7 finished with value: 4
+222.0969339973235 and parameters: {[]learning_rate[]: 0.013692887049401567, []m
+ax_depth[]: 12, []min_samples_split[]: 6, []min_samples_leaf[]: 29, []subsample
+[]: 0.7647042705751687, []max_features[]: 0.7}. Best is trial 6 with value: 353
+8.201600150815.[] 
+ []
+
+
+Overfull \hbox (1254.8696pt too wide) in paragraph at lines 8358--8358
+[]\TU/lmtt/m/n/10.95 [I 2025-05-08 11:08:40,844] Trial 8 finished with value: 5
+987.876440565123 and parameters: {[]learning_rate[]: 0.07695507379792597, []max
+_depth[]: 4, []min_samples_split[]: 47, []min_samples_leaf[]: 30, []subsample[]
+: 0.2875628082638476, []max_features[]: 0.1}. Best is trial 6 with value: 3538.
+201600150815.[] 
+ []
+
+
+Overfull \hbox (1266.3671pt too wide) in paragraph at lines 8358--8358
+[]\TU/lmtt/m/n/10.95 [I 2025-05-08 11:08:41,963] Trial 9 finished with value: 5
+930.236597113848 and parameters: {[]learning_rate[]: 0.03751759109605761, []max
+_depth[]: 23, []min_samples_split[]: 89, []min_samples_leaf[]: 14, []subsample[
+]: 0.12412065494979885, []max_features[]: 0.4}. Best is trial 6 with value: 353
+8.201600150815.[] 
+ []
+
+
+Overfull \hbox (1254.8696pt too wide) in paragraph at lines 8358--8358
+[]\TU/lmtt/m/n/10.95 [I 2025-05-08 11:08:43,184] Trial 10 finished with value: 
+4249.647691193036 and parameters: {[]learning_rate[]: 0.7095372554176897, []max
+_depth[]: 29, []min_samples_split[]: 11, []min_samples_leaf[]: 2, []subsample[]
+: 0.9605533508261285, []max_features[]: 0.4}. Best is trial 6 with value: 3538.
+201600150815.[] 
+ []
+
+
+Overfull \hbox (1260.61835pt too wide) in paragraph at lines 8358--8358
+[]\TU/lmtt/m/n/10.95 [I 2025-05-08 11:08:43,792] Trial 11 finished with value: 
+3721.412018003831 and parameters: {[]learning_rate[]: 0.30049152507822724, []ma
+x_depth[]: 18, []min_samples_split[]: 70, []min_samples_leaf[]: 4, []subsample[
+]: 0.6346922402417411, []max_features[]: 0.1}. Best is trial 6 with value: 3538
+.201600150815.[] 
+ []
+
+
+Overfull \hbox (1272.11584pt too wide) in paragraph at lines 8358--8358
+[]\TU/lmtt/m/n/10.95 [I 2025-05-08 11:08:44,200] Trial 12 finished with value: 
+3992.3681134868325 and parameters: {[]learning_rate[]: 0.3980500012172675, []ma
+x_depth[]: 25, []min_samples_split[]: 24, []min_samples_leaf[]: 1, []subsample[
+]: 0.673568941345692, []max_features[]: []sqrt[]}. Best is trial 6 with value: 
+3538.201600150815.[] 
+ []
+
+
+Overfull \hbox (1266.3671pt too wide) in paragraph at lines 8358--8358
+[]\TU/lmtt/m/n/10.95 [I 2025-05-08 11:08:45,596] Trial 13 finished with value: 
+3745.0231375714984 and parameters: {[]learning_rate[]: 0.2685874728814681, []ma
+x_depth[]: 18, []min_samples_split[]: 64, []min_samples_leaf[]: 7, []subsample[
+]: 0.46246048029745535, []max_features[]: 0.6}. Best is trial 6 with value: 353
+8.201600150815.[] 
+ []
+
+
+Overfull \hbox (1254.8696pt too wide) in paragraph at lines 8358--8358
+[]\TU/lmtt/m/n/10.95 [I 2025-05-08 11:08:46,415] Trial 14 finished with value: 
+4496.274561417728 and parameters: {[]learning_rate[]: 0.5835585949486959, []max
+_depth[]: 23, []min_samples_split[]: 73, []min_samples_leaf[]: 7, []subsample[]
+: 0.6950785249386102, []max_features[]: 0.5}. Best is trial 6 with value: 3538.
+201600150815.[] 
+ []
+
+
+Overfull \hbox (1266.3671pt too wide) in paragraph at lines 8358--8358
+[]\TU/lmtt/m/n/10.95 [I 2025-05-08 11:08:50,798] Trial 15 finished with value: 
+3532.351997763184 and parameters: {[]learning_rate[]: 0.09745878730555008, []ma
+x_depth[]: 15, []min_samples_split[]: 25, []min_samples_leaf[]: 6, []subsample[
+]: 0.8242687895348413, []max_features[]: 0.9}. Best is trial 15 with value: 353
+2.351997763184.[] 
+ []
+
+
+Overfull \hbox (1266.3671pt too wide) in paragraph at lines 8358--8358
+[]\TU/lmtt/m/n/10.95 [I 2025-05-08 11:08:57,644] Trial 16 finished with value: 
+3712.683820416855 and parameters: {[]learning_rate[]: 0.08381685480205123, []ma
+x_depth[]: 14, []min_samples_split[]: 24, []min_samples_leaf[]: 9, []subsample[
+]: 0.8376225281110229, []max_features[]: 0.9}. Best is trial 15 with value: 353
+2.351997763184.[] 
+ []
+
+
+Overfull \hbox (1277.8646pt too wide) in paragraph at lines 8358--8358
+[]\TU/lmtt/m/n/10.95 [I 2025-05-08 11:09:08,351] Trial 17 finished with value: 
+3878.4225603020363 and parameters: {[]learning_rate[]: 0.13671338236610117, []m
+ax_depth[]: 26, []min_samples_split[]: 25, []min_samples_leaf[]: 10, []subsampl
+e[]: 0.9981438257438544, []max_features[]: 0.9}. Best is trial 15 with value: 3
+532.351997763184.[] 
+ []
+
+
+Overfull \hbox (1283.61334pt too wide) in paragraph at lines 8358--8358
+[]\TU/lmtt/m/n/10.95 [I 2025-05-08 11:09:12,426] Trial 18 finished with value: 
+3258.6536376666345 and parameters: {[]learning_rate[]: 0.054298295833061686, []
+max_depth[]: 15, []min_samples_split[]: 32, []min_samples_leaf[]: 5, []subsampl
+e[]: 0.8705317335073132, []max_features[]: 0.3}. Best is trial 18 with value: 3
+258.6536376666345.[] 
+ []
+
+
+Overfull \hbox (1277.8646pt too wide) in paragraph at lines 8358--8358
+[]\TU/lmtt/m/n/10.95 [I 2025-05-08 11:09:14,871] Trial 19 finished with value: 
+3299.8057419420575 and parameters: {[]learning_rate[]: 0.05307237898099509, []m
+ax_depth[]: 15, []min_samples_split[]: 15, []min_samples_leaf[]: 5, []subsample
+[]: 0.8923755963839227, []max_features[]: 0.3}. Best is trial 18 with value: 32
+58.6536376666345.[] 
+ []
+
+
+Overfull \hbox (1283.61334pt too wide) in paragraph at lines 8358--8358
+[]\TU/lmtt/m/n/10.95 [I 2025-05-08 11:09:22,909] Trial 20 finished with value: 
+3558.1548802314146 and parameters: {[]learning_rate[]: 0.024374699406738868, []
+max_depth[]: 8, []min_samples_split[]: 13, []min_samples_leaf[]: 11, []subsampl
+e[]: 0.9312911241232275, []max_features[]: 0.3}. Best is trial 18 with value: 3
+258.6536376666345.[] 
+ []
+
+
+Overfull \hbox (1254.8696pt too wide) in paragraph at lines 8358--8358
+[]\TU/lmtt/m/n/10.95 [I 2025-05-08 11:09:24,627] Trial 21 finished with value: 
+3344.1360986274194 and parameters: {[]learning_rate[]: 0.05641174821037, []max_
+depth[]: 15, []min_samples_split[]: 2, []min_samples_leaf[]: 5, []subsample[]: 
+0.8413643277096872, []max_features[]: 0.3}. Best is trial 18 with value: 3258.6
+536376666345.[] 
+ []
+
+
+Overfull \hbox (1266.3671pt too wide) in paragraph at lines 8358--8358
+[]\TU/lmtt/m/n/10.95 [I 2025-05-08 11:09:26,856] Trial 22 finished with value: 
+3346.290872146259 and parameters: {[]learning_rate[]: 0.05576222901451701, []ma
+x_depth[]: 14, []min_samples_split[]: 2, []min_samples_leaf[]: 4, []subsample[]
+: 0.8899852988884344, []max_features[]: 0.3}. Best is trial 18 with value: 3258
+.6536376666345.[] 
+ []
+
+
+Overfull \hbox (1283.61334pt too wide) in paragraph at lines 8358--8358
+[]\TU/lmtt/m/n/10.95 [I 2025-05-08 11:09:30,886] Trial 23 finished with value: 
+3682.572188125887 and parameters: {[]learning_rate[]: 0.053636711663155555, []m
+ax_depth[]: 20, []min_samples_split[]: 12, []min_samples_leaf[]: 18, []subsampl
+e[]: 0.7533492065291382, []max_features[]: 0.3}. Best is trial 18 with value: 3
+258.6536376666345.[] 
+ []
+
+
+Overfull \hbox (1283.61334pt too wide) in paragraph at lines 8358--8358
+[]\TU/lmtt/m/n/10.95 [I 2025-05-08 11:09:36,517] Trial 24 finished with value: 
+3324.1356706329725 and parameters: {[]learning_rate[]: 0.023446567191311374, []
+max_depth[]: 16, []min_samples_split[]: 17, []min_samples_leaf[]: 5, []subsampl
+e[]: 0.8976166400827316, []max_features[]: 0.3}. Best is trial 18 with value: 3
+258.6536376666345.[] 
+ []
+
+
+Overfull \hbox (1272.11584pt too wide) in paragraph at lines 8358--8358
+[]\TU/lmtt/m/n/10.95 [I 2025-05-08 11:09:48,021] Trial 25 finished with value: 
+3477.877832840085 and parameters: {[]learning_rate[]: 0.02114726465183569, []ma
+x_depth[]: 12, []min_samples_split[]: 33, []min_samples_leaf[]: 11, []subsample
+[]: 0.925317351270135, []max_features[]: 0.3}. Best is trial 18 with value: 325
+8.6536376666345.[] 
+ []
+
+
+Overfull \hbox (1283.61334pt too wide) in paragraph at lines 8358--8358
+[]\TU/lmtt/m/n/10.95 [I 2025-05-08 11:09:51,103] Trial 26 finished with value: 
+3543.4521345710564 and parameters: {[]learning_rate[]: 0.022722851512216705, []
+max_depth[]: 16, []min_samples_split[]: 16, []min_samples_leaf[]: 8, []subsampl
+e[]: 0.4238807472210913, []max_features[]: 0.3}. Best is trial 18 with value: 3
+258.6536376666345.[] 
+ []
+
+
+Overfull \hbox (1272.11584pt too wide) in paragraph at lines 8358--8358
+[]\TU/lmtt/m/n/10.95 [I 2025-05-08 11:09:54,116] Trial 27 finished with value: 
+3234.0013427023514 and parameters: {[]learning_rate[]: 0.0283832867263049, []ma
+x_depth[]: 21, []min_samples_split[]: 18, []min_samples_leaf[]: 3, []subsample[
+]: 0.5528086908100067, []max_features[]: 0.3}. Best is trial 27 with value: 323
+4.0013427023514.[] 
+ []
+
+
+Overfull \hbox (1277.8646pt too wide) in paragraph at lines 8358--8358
+[]\TU/lmtt/m/n/10.95 [I 2025-05-08 11:10:00,202] Trial 28 finished with value: 
+3508.54835466015 and parameters: {[]learning_rate[]: 0.046930229833580556, []ma
+x_depth[]: 27, []min_samples_split[]: 38, []min_samples_leaf[]: 3, []subsample[
+]: 0.5371065252040612, []max_features[]: None}. Best is trial 27 with value: 32
+34.0013427023514.[] 
+ []
+
+
+Overfull \hbox (1300.85959pt too wide) in paragraph at lines 8358--8358
+[]\TU/lmtt/m/n/10.95 [I 2025-05-08 11:10:02,298] Trial 29 finished with value: 
+5004.42107047821 and parameters: {[]learning_rate[]: 0.031927515240275074, []ma
+x_depth[]: 20, []min_samples_split[]: 52, []min_samples_leaf[]: 21, []subsample
+[]: 0.39582140307352154, []max_features[]: []log2[]}. Best is trial 27 with val
+ue: 3234.0013427023514.[] 
+ []
+
+
+Overfull \hbox (1277.8646pt too wide) in paragraph at lines 8358--8358
+[]\TU/lmtt/m/n/10.95 [I 2025-05-08 11:10:03,666] Trial 30 finished with value: 
+4324.686970916422 and parameters: {[]learning_rate[]: 0.07372182576303132, []ma
+x_depth[]: 21, []min_samples_split[]: 54, []min_samples_leaf[]: 12, []subsample
+[]: 0.3360673538685467, []max_features[]: 0.5}. Best is trial 27 with value: 32
+34.0013427023514.[] 
+ []
+
+
+Overfull \hbox (1277.8646pt too wide) in paragraph at lines 8358--8358
+[]\TU/lmtt/m/n/10.95 [I 2025-05-08 11:10:11,068] Trial 31 finished with value: 
+3484.424151386007 and parameters: {[]learning_rate[]: 0.028420783094759556, []m
+ax_depth[]: 13, []min_samples_split[]: 18, []min_samples_leaf[]: 5, []subsample
+[]: 0.7793810894071969, []max_features[]: 0.8}. Best is trial 27 with value: 32
+34.0013427023514.[] 
+ []
+
+
+Overfull \hbox (1277.8646pt too wide) in paragraph at lines 8358--8358
+[]\TU/lmtt/m/n/10.95 [I 2025-05-08 11:10:18,699] Trial 32 finished with value: 
+3291.106187349627 and parameters: {[]learning_rate[]: 0.015581688189605165, []m
+ax_depth[]: 17, []min_samples_split[]: 19, []min_samples_leaf[]: 3, []subsample
+[]: 0.7003002093460347, []max_features[]: 0.3}. Best is trial 27 with value: 32
+34.0013427023514.[] 
+ []
+
+
+Overfull \hbox (1272.11584pt too wide) in paragraph at lines 8358--8358
+[]\TU/lmtt/m/n/10.95 [I 2025-05-08 11:10:22,168] Trial 33 finished with value: 
+3325.6927625938033 and parameters: {[]learning_rate[]: 0.01749834216320663, []m
+ax_depth[]: 9, []min_samples_split[]: 34, []min_samples_leaf[]: 2, []subsample[
+]: 0.5707418196808265, []max_features[]: 0.2}. Best is trial 27 with value: 323
+4.0013427023514.[] 
+ []
+
+
+Overfull \hbox (1272.11584pt too wide) in paragraph at lines 8358--8358
+[]\TU/lmtt/m/n/10.95 [I 2025-05-08 11:10:27,550] Trial 34 finished with value: 
+3243.0601177315375 and parameters: {[]learning_rate[]: 0.01860910283944705, []m
+ax_depth[]: 32, []min_samples_split[]: 40, []min_samples_leaf[]: 3, []subsample
+[]: 0.519199766539664, []max_features[]: 0.3}. Best is trial 27 with value: 323
+4.0013427023514.[] 
+ []
+
+
+Overfull \hbox (1277.8646pt too wide) in paragraph at lines 8358--8358
+[]\TU/lmtt/m/n/10.95 [I 2025-05-08 11:10:36,064] Trial 35 finished with value: 
+3258.8499173154833 and parameters: {[]learning_rate[]: 0.010243612859981979, []
+max_depth[]: 30, []min_samples_split[]: 43, []min_samples_leaf[]: 1, []subsampl
+e[]: 0.623847104984506, []max_features[]: 0.3}. Best is trial 27 with value: 32
+34.0013427023514.[] 
+ []
+
+
+Overfull \hbox (1295.11084pt too wide) in paragraph at lines 8358--8358
+[]\TU/lmtt/m/n/10.95 [I 2025-05-08 11:10:40,944] Trial 36 finished with value: 
+4733.54257152398 and parameters: {[]learning_rate[]: 0.010552375239783827, []ma
+x_depth[]: 31, []min_samples_split[]: 44, []min_samples_leaf[]: 24, []subsample
+[]: 0.4832981433471137, []max_features[]: []sqrt[]}. Best is trial 27 with valu
+e: 3234.0013427023514.[] 
+ []
+
+
+Overfull \hbox (1283.61334pt too wide) in paragraph at lines 8358--8358
+[]\TU/lmtt/m/n/10.95 [I 2025-05-08 11:10:55,316] Trial 37 finished with value: 
+3330.1658474531714 and parameters: {[]learning_rate[]: 0.011303182659432521, []
+max_depth[]: 32, []min_samples_split[]: 40, []min_samples_leaf[]: 1, []subsampl
+e[]: 0.6192904496322136, []max_features[]: 0.6}. Best is trial 27 with value: 3
+234.0013427023514.[] 
+ []
+
+
+Overfull \hbox (1277.8646pt too wide) in paragraph at lines 8358--8358
+[]\TU/lmtt/m/n/10.95 [I 2025-05-08 11:11:08,984] Trial 38 finished with value: 
+3657.4081420035955 and parameters: {[]learning_rate[]: 0.01817928172328691, []m
+ax_depth[]: 29, []min_samples_split[]: 47, []min_samples_leaf[]: 8, []subsample
+[]: 0.5215847207874392, []max_features[]: 0.8}. Best is trial 27 with value: 32
+34.0013427023514.[] 
+ []
+
+
+Overfull \hbox (1272.11584pt too wide) in paragraph at lines 8358--8358
+[]\TU/lmtt/m/n/10.95 [I 2025-05-08 11:11:11,528] Trial 39 finished with value: 
+3246.3324692045935 and parameters: {[]learning_rate[]: 0.03864849232157439, []m
+ax_depth[]: 28, []min_samples_split[]: 58, []min_samples_leaf[]: 2, []subsample
+[]: 0.600994007175315, []max_features[]: 0.2}. Best is trial 27 with value: 323
+4.0013427023514.[] 
+ []
+
+
+Overfull \hbox (1272.11584pt too wide) in paragraph at lines 8358--8358
+[]\TU/lmtt/m/n/10.95 [I 2025-05-08 11:11:14,072] Trial 40 finished with value: 
+3223.908916424979 and parameters: {[]learning_rate[]: 0.04161574178039716, []ma
+x_depth[]: 27, []min_samples_split[]: 61, []min_samples_leaf[]: 3, []subsample[
+]: 0.38840542153155744, []max_features[]: 0.2}. Best is trial 40 with value: 32
+23.908916424979.[] 
+ []
+
+
+Overfull \hbox (1283.61334pt too wide) in paragraph at lines 8358--8358
+[]\TU/lmtt/m/n/10.95 [I 2025-05-08 11:11:16,764] Trial 41 finished with value: 
+3262.2664150628366 and parameters: {[]learning_rate[]: 0.040900390028730825, []
+max_depth[]: 28, []min_samples_split[]: 57, []min_samples_leaf[]: 3, []subsampl
+e[]: 0.39000153769914736, []max_features[]: 0.2}. Best is trial 40 with value: 
+3223.908916424979.[] 
+ []
+
+
+Overfull \hbox (1272.11584pt too wide) in paragraph at lines 8358--8358
+[]\TU/lmtt/m/n/10.95 [I 2025-05-08 11:11:18,027] Trial 42 finished with value: 
+3536.1048831110393 and parameters: {[]learning_rate[]: 0.0373869523765574, []ma
+x_depth[]: 25, []min_samples_split[]: 63, []min_samples_leaf[]: 3, []subsample[
+]: 0.22414441067489127, []max_features[]: 0.2}. Best is trial 40 with value: 32
+23.908916424979.[] 
+ []
+
+
+Overfull \hbox (1277.8646pt too wide) in paragraph at lines 8358--8358
+[]\TU/lmtt/m/n/10.95 [I 2025-05-08 11:11:20,006] Trial 43 finished with value: 
+3725.757422297686 and parameters: {[]learning_rate[]: 0.028313793871723975, []m
+ax_depth[]: 31, []min_samples_split[]: 79, []min_samples_leaf[]: 6, []subsample
+[]: 0.33977679725241394, []max_features[]: 0.2}. Best is trial 40 with value: 3
+223.908916424979.[] 
+ []
+
+
+Overfull \hbox (1277.8646pt too wide) in paragraph at lines 8358--8358
+[]\TU/lmtt/m/n/10.95 [I 2025-05-08 11:11:21,612] Trial 44 finished with value: 
+3401.5545066433783 and parameters: {[]learning_rate[]: 0.06669527321370879, []m
+ax_depth[]: 24, []min_samples_split[]: 48, []min_samples_leaf[]: 4, []subsample
+[]: 0.48718984715872016, []max_features[]: 0.2}. Best is trial 40 with value: 3
+223.908916424979.[] 
+ []
+
+
+Overfull \hbox (1266.3671pt too wide) in paragraph at lines 8358--8358
+[]\TU/lmtt/m/n/10.95 [I 2025-05-08 11:11:25,264] Trial 45 finished with value: 
+3635.4930797564184 and parameters: {[]learning_rate[]: 0.0961058290284304, []ma
+x_depth[]: 27, []min_samples_split[]: 30, []min_samples_leaf[]: 7, []subsample[
+]: 0.5935867492892174, []max_features[]: 0.7}. Best is trial 40 with value: 322
+3.908916424979.[] 
+ []
+
+[173]
+Overfull \hbox (1289.36209pt too wide) in paragraph at lines 8358--8358
+[]\TU/lmtt/m/n/10.95 [I 2025-05-08 11:11:26,855] Trial 46 finished with value: 
+3297.8485341280875 and parameters: {[]learning_rate[]: 0.04204785692165129, []m
+ax_depth[]: 32, []min_samples_split[]: 61, []min_samples_leaf[]: 2, []subsample
+[]: 0.5167714519960092, []max_features[]: []log2[]}. Best is trial 40 with valu
+e: 3223.908916424979.[] 
+ []
+
+
+Overfull \hbox (1283.61334pt too wide) in paragraph at lines 8358--8358
+[]\TU/lmtt/m/n/10.95 [I 2025-05-08 11:11:28,066] Trial 47 finished with value: 
+3484.8710748592084 and parameters: {[]learning_rate[]: 0.031490405131204394, []
+max_depth[]: 29, []min_samples_split[]: 68, []min_samples_leaf[]: 1, []subsampl
+e[]: 0.20255680688589325, []max_features[]: 0.2}. Best is trial 40 with value: 
+3223.908916424979.[] 
+ []
+
+
+Overfull \hbox (1289.36209pt too wide) in paragraph at lines 8358--8358
+[]\TU/lmtt/m/n/10.95 [I 2025-05-08 11:11:29,916] Trial 48 finished with value: 
+5067.6932650619365 and parameters: {[]learning_rate[]: 0.13316769809796983, []m
+ax_depth[]: 22, []min_samples_split[]: 81, []min_samples_leaf[]: 18, []subsampl
+e[]: 0.31148972269250275, []max_features[]: None}. Best is trial 40 with value:
+ 3223.908916424979.[] 
+ []
+
+
+Overfull \hbox (1283.61334pt too wide) in paragraph at lines 8358--8358
+[]\TU/lmtt/m/n/10.95 [I 2025-05-08 11:11:33,570] Trial 49 finished with value: 
+3519.5312534022605 and parameters: {[]learning_rate[]: 0.020121256369718885, []
+max_depth[]: 27, []min_samples_split[]: 37, []min_samples_leaf[]: 6, []subsampl
+e[]: 0.43073583851342867, []max_features[]: 0.1}. Best is trial 40 with value: 
+3223.908916424979.[] 
+ []
+
+
+Overfull \hbox (1272.11584pt too wide) in paragraph at lines 8358--8358
+[]\TU/lmtt/m/n/10.95 [I 2025-05-08 11:11:38,292] Trial 50 finished with value: 
+4947.269431523515 and parameters: {[]learning_rate[]: 0.01401704983937264, []ma
+x_depth[]: 30, []min_samples_split[]: 56, []min_samples_leaf[]: 13, []subsample
+[]: 0.2680374684875922, []max_features[]: 0.4}. Best is trial 40 with value: 32
+23.908916424979.[] 
+ []
+
+
+Overfull \hbox (1260.61835pt too wide) in paragraph at lines 8358--8358
+[]\TU/lmtt/m/n/10.95 [I 2025-05-08 11:11:42,794] Trial 51 finished with value: 
+3223.184387572671 and parameters: {[]learning_rate[]: 0.026412005607226167, []m
+ax_depth[]: 30, []min_samples_split[]: 42, []min_samples_leaf[]: 2, []subsample
+[]: 0.65936728502067, []max_features[]: 0.3}. Best is trial 51 with value: 3223
+.184387572671.[] 
+ []
+
+
+Overfull \hbox (1260.61835pt too wide) in paragraph at lines 8358--8358
+[]\TU/lmtt/m/n/10.95 [I 2025-05-08 11:11:47,351] Trial 52 finished with value: 
+3215.28175313329 and parameters: {[]learning_rate[]: 0.026909377347601734, []ma
+x_depth[]: 31, []min_samples_split[]: 30, []min_samples_leaf[]: 2, []subsample[
+]: 0.6638539074973421, []max_features[]: 0.3}. Best is trial 52 with value: 321
+5.28175313329.[] 
+ []
+
+
+Overfull \hbox (1272.11584pt too wide) in paragraph at lines 8358--8358
+[]\TU/lmtt/m/n/10.95 [I 2025-05-08 11:11:51,995] Trial 53 finished with value: 
+3251.8248895524334 and parameters: {[]learning_rate[]: 0.029697182156018534, []
+max_depth[]: 31, []min_samples_split[]: 51, []min_samples_leaf[]: 2, []subsampl
+e[]: 0.6712307703997793, []max_features[]: 0.2}. Best is trial 52 with value: 3
+215.28175313329.[] 
+ []
+
+
+Overfull \hbox (1266.3671pt too wide) in paragraph at lines 8358--8358
+[]\TU/lmtt/m/n/10.95 [I 2025-05-08 11:12:03,513] Trial 54 finished with value: 
+3397.6799413335893 and parameters: {[]learning_rate[]: 0.01643638758357564, []m
+ax_depth[]: 28, []min_samples_split[]: 67, []min_samples_leaf[]: 3, []subsample
+[]: 0.5673934972094804, []max_features[]: 0.7}. Best is trial 52 with value: 32
+15.28175313329.[] 
+ []
+
+
+Overfull \hbox (1272.11584pt too wide) in paragraph at lines 8358--8358
+[]\TU/lmtt/m/n/10.95 [I 2025-05-08 11:12:10,304] Trial 55 finished with value: 
+3260.8279178294406 and parameters: {[]learning_rate[]: 0.026362863130942972, []
+max_depth[]: 30, []min_samples_split[]: 27, []min_samples_leaf[]: 4, []subsampl
+e[]: 0.7153814770338778, []max_features[]: 0.3}. Best is trial 52 with value: 3
+215.28175313329.[] 
+ []
+
+
+Overfull \hbox (1295.11084pt too wide) in paragraph at lines 8358--8358
+[]\TU/lmtt/m/n/10.95 [I 2025-05-08 11:12:12,294] Trial 56 finished with value: 
+3192.9791005502093 and parameters: {[]learning_rate[]: 0.03446122898299111, []m
+ax_depth[]: 25, []min_samples_split[]: 22, []min_samples_leaf[]: 1, []subsample
+[]: 0.6677588032576087, []max_features[]: []sqrt[]}. Best is trial 56 with valu
+e: 3192.9791005502093.[] 
+ []
+
+
+Overfull \hbox (1289.36209pt too wide) in paragraph at lines 8358--8358
+[]\TU/lmtt/m/n/10.95 [I 2025-05-08 11:12:13,927] Trial 57 finished with value: 
+3269.998258903558 and parameters: {[]learning_rate[]: 0.033447603873263364, []m
+ax_depth[]: 26, []min_samples_split[]: 21, []min_samples_leaf[]: 1, []subsample
+[]: 0.669383626299888, []max_features[]: []sqrt[]}. Best is trial 56 with value
+: 3192.9791005502093.[] 
+ []
+
+
+Overfull \hbox (1289.36209pt too wide) in paragraph at lines 8358--8358
+[]\TU/lmtt/m/n/10.95 [I 2025-05-08 11:12:17,716] Trial 58 finished with value: 
+3457.122430183835 and parameters: {[]learning_rate[]: 0.019680446694802907, []m
+ax_depth[]: 24, []min_samples_split[]: 8, []min_samples_leaf[]: 8, []subsample[
+]: 0.6399247722507589, []max_features[]: []sqrt[]}. Best is trial 56 with value
+: 3192.9791005502093.[] 
+ []
+
+
+Overfull \hbox (1289.36209pt too wide) in paragraph at lines 8358--8358
+[]\TU/lmtt/m/n/10.95 [I 2025-05-08 11:12:20,307] Trial 59 finished with value: 
+3247.949537776105 and parameters: {[]learning_rate[]: 0.04792784341369982, []ma
+x_depth[]: 32, []min_samples_split[]: 29, []min_samples_leaf[]: 4, []subsample[
+]: 0.7314524099096733, []max_features[]: []sqrt[]}. Best is trial 56 with value
+: 3192.9791005502093.[] 
+ []
+
+
+Overfull \hbox (1283.61334pt too wide) in paragraph at lines 8358--8358
+[]\TU/lmtt/m/n/10.95 [I 2025-05-08 11:12:51,502] Trial 60 finished with value: 
+4050.280737550346 and parameters: {[]learning_rate[]: 0.013362536181651579, []m
+ax_depth[]: 25, []min_samples_split[]: 21, []min_samples_leaf[]: 26, []subsampl
+e[]: 0.7856311694762674, []max_features[]: 0.6}. Best is trial 56 with value: 3
+192.9791005502093.[] 
+ []
+
+
+Overfull \hbox (1283.61334pt too wide) in paragraph at lines 8358--8358
+[]\TU/lmtt/m/n/10.95 [I 2025-05-08 11:12:56,091] Trial 61 finished with value: 
+3249.9684847878243 and parameters: {[]learning_rate[]: 0.025286437646103447, []
+max_depth[]: 28, []min_samples_split[]: 35, []min_samples_leaf[]: 2, []subsampl
+e[]: 0.5916004227404528, []max_features[]: 0.3}. Best is trial 56 with value: 3
+192.9791005502093.[] 
+ []
+
+
+Overfull \hbox (1283.61334pt too wide) in paragraph at lines 8358--8358
+[]\TU/lmtt/m/n/10.95 [I 2025-05-08 11:13:01,774] Trial 62 finished with value: 
+3328.4822044271473 and parameters: {[]learning_rate[]: 0.037252636958638265, []
+max_depth[]: 29, []min_samples_split[]: 60, []min_samples_leaf[]: 2, []subsampl
+e[]: 0.5509938512062063, []max_features[]: 0.5}. Best is trial 56 with value: 3
+192.9791005502093.[] 
+ []
+
+
+Overfull \hbox (1277.8646pt too wide) in paragraph at lines 8358--8358
+[]\TU/lmtt/m/n/10.95 [I 2025-05-08 11:13:12,800] Trial 63 finished with value: 
+3490.4301182885783 and parameters: {[]learning_rate[]: 0.04480753984980458, []m
+ax_depth[]: 26, []min_samples_split[]: 40, []min_samples_leaf[]: 6, []subsample
+[]: 0.6501238052668078, []max_features[]: 0.9}. Best is trial 56 with value: 31
+92.9791005502093.[] 
+ []
+
+
+Overfull \hbox (1266.3671pt too wide) in paragraph at lines 8358--8358
+[]\TU/lmtt/m/n/10.95 [I 2025-05-08 11:13:15,262] Trial 64 finished with value: 
+3540.8369062274187 and parameters: {[]learning_rate[]: 0.0651918522339886, []ma
+x_depth[]: 5, []min_samples_split[]: 50, []min_samples_leaf[]: 1, []subsample[]
+: 0.6047519410402453, []max_features[]: 0.3}. Best is trial 56 with value: 3192
+.9791005502093.[] 
+ []
+
+
+Overfull \hbox (1272.11584pt too wide) in paragraph at lines 8358--8358
+[]\TU/lmtt/m/n/10.95 [I 2025-05-08 11:13:20,471] Trial 65 finished with value: 
+3294.353628295925 and parameters: {[]learning_rate[]: 0.02196859905859851, []ma
+x_depth[]: 23, []min_samples_split[]: 98, []min_samples_leaf[]: 3, []subsample[
+]: 0.5103851076291236, []max_features[]: 0.3}. Best is trial 56 with value: 319
+2.9791005502093.[] 
+ []
+
+
+Overfull \hbox (1272.11584pt too wide) in paragraph at lines 8358--8358
+[]\TU/lmtt/m/n/10.95 [I 2025-05-08 11:13:29,893] Trial 66 finished with value: 
+3326.4094166662317 and parameters: {[]learning_rate[]: 0.03527083345645445, []m
+ax_depth[]: 31, []min_samples_split[]: 23, []min_samples_leaf[]: 4, []subsample
+[]: 0.687510121444283, []max_features[]: 0.4}. Best is trial 56 with value: 319
+2.9791005502093.[] 
+ []
+
+
+Overfull \hbox (1283.61334pt too wide) in paragraph at lines 8358--8358
+[]\TU/lmtt/m/n/10.95 [I 2025-05-08 11:13:44,533] Trial 67 finished with value: 
+3548.591414006273 and parameters: {[]learning_rate[]: 0.026050250772540858, []m
+ax_depth[]: 29, []min_samples_split[]: 74, []min_samples_leaf[]: 16, []subsampl
+e[]: 0.8079428723552805, []max_features[]: 0.3}. Best is trial 56 with value: 3
+192.9791005502093.[] 
+ []
+
+
+Overfull \hbox (1283.61334pt too wide) in paragraph at lines 8358--8358
+[]\TU/lmtt/m/n/10.95 [I 2025-05-08 11:13:51,439] Trial 68 finished with value: 
+3228.1005724210245 and parameters: {[]learning_rate[]: 0.018440524791042332, []
+max_depth[]: 28, []min_samples_split[]: 45, []min_samples_leaf[]: 5, []subsampl
+e[]: 0.7401907036295743, []max_features[]: 0.1}. Best is trial 56 with value: 3
+192.9791005502093.[] 
+ []
+
+
+Overfull \hbox (1277.8646pt too wide) in paragraph at lines 8358--8358
+[]\TU/lmtt/m/n/10.95 [I 2025-05-08 11:13:58,247] Trial 69 finished with value: 
+3264.495066558836 and parameters: {[]learning_rate[]: 0.015627930519455754, []m
+ax_depth[]: 19, []min_samples_split[]: 31, []min_samples_leaf[]: 5, []subsample
+[]: 0.6551335248065494, []max_features[]: 0.1}. Best is trial 56 with value: 31
+92.9791005502093.[] 
+ []
+
+
+Overfull \hbox (570.7685pt too wide) in paragraph at lines 8364--8364
+[]\TU/lmtt/m/n/10.95 Best Parameters: {[]learning_rate[]: 0.03446122898299111, 
+[]max_depth[]: 25, []min_samples_split[]: 22, []min_samples_leaf[]: 1, []subsam
+ple[]: 0.6677588032576087, []max_features[]: []sqrt[]}[] 
+ []
+
+[174]
+Underfull \hbox (badness 4713) in paragraph at lines 8410--8413
+[]\TU/lmr/m/n/10.95 Tune key hyperparameters: \TU/lmtt/m/n/10.95 learning_rate\
+TU/lmr/m/n/10.95 , \TU/lmtt/m/n/10.95 n_estimators\TU/lmr/m/n/10.95 , \TU/lmtt/
+m/n/10.95 max_depth\TU/lmr/m/n/10.95 , and
+ []
+
+
+Overfull \hbox (132.64844pt too wide) in alignment at lines 8445--8450
+ [] [] [] [] [] [] [] [] [] [] 
+ []
+
+
+Overfull \hbox (132.64844pt too wide) in alignment at lines 8450--8452
+ [] [] [] [] [] [] [] [] [] [] 
+ []
+
+
+Overfull \hbox (138.12346pt too wide) in alignment at lines 8452--8458
+ [] [] [] [] [] [] [] [] [] [] 
+ []
+
+
+Package longtable Warning: Column widths have changed
+(longtable)                in table 9.3 on input line 8458.
+
+[175] [176]
+chapter 10.
+[177
+
+]
+Underfull \hbox (badness 10000) in paragraph at lines 8584--8587
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 8616--8618
+
+ []
+
+[178]
+Underfull \hbox (badness 10000) in paragraph at lines 8618--8620
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 8630--8633
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 8633--8635
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 8635--8637
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 8646--8649
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 8649--8651
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 8659--8663
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 8663--8668
+
+ []
+
+[179]
+Overfull \hbox (54.44241pt too wide) in alignment at lines 8712--8723
+ [] [] [] [] [] [] [] [] [] [] [] 
+ []
+
+
+Package longtable Warning: Column widths have changed
+(longtable)                in table 10.1 on input line 8723.
+
+[180] [181] [182]
+Overfull \hbox (7.3911pt too wide) in paragraph at lines 8894--8894
+[]             \TU/lmtt/m/n/10.95 monotone_constraints=None, multi_strategy=Non
+e, n_estimators=1000,[] 
+ []
+
+[183] [184]
+Missing character: There is no γ in font [lmmono10-regular]:!
+[185]
+Missing character: There is no γ in font [lmmono10-regular]:!
+File: XGBoost_files/figure-pdf/cell-10-output-1.png Graphic file (type bmp)
+<XGBoost_files/figure-pdf/cell-10-output-1.png>
+
+Overfull \hbox (10.96295pt too wide) in paragraph at lines 9064--9065
+[][] 
+ []
+
+[186] [187]
+Missing character: There is no λ in font [lmmono10-regular]:!
+Missing character: There is no α in font [lmmono10-regular]:!
+[188]
+Missing character: There is no λ in font [lmmono10-regular]:!
+Missing character: There is no α in font [lmmono10-regular]:!
+[189]
+File: XGBoost_files/figure-pdf/cell-12-output-1.png Graphic file (type bmp)
+<XGBoost_files/figure-pdf/cell-12-output-1.png>
+
+Overfull \hbox (10.9673pt too wide) in paragraph at lines 9257--9258
+[][] 
+ []
+
+
+Underfull \hbox (badness 1515) in paragraph at lines 9262--9267
+\TU/lmr/m/n/10.95 In addition to \TU/lmtt/m/n/10.95 gamma\TU/lmr/m/n/10.95 , \T
+U/lmtt/m/n/10.95 reg_lambda\TU/lmr/m/n/10.95 , and \TU/lmtt/m/n/10.95 reg_alpha
+\TU/lmr/m/n/10.95 , the parameters \TU/lmtt/m/n/10.95 max_depth \TU/lmr/m/n/10.
+95 and
+ []
+
+[190] [191]
+Overfull \hbox (352.31602pt too wide) in paragraph at lines 9375--9375
+[]\TU/lmtt/m/n/10.95 {[]regressor__max_depth[]: 3, []regressor__min_child_weigh
+t[]: 1, []regressor__gamma[]: 0, []regressor__reg_alpha[]: 0, []regressor__reg_
+lambda[]: 1}[] 
+ []
+
+
+Overfull \hbox (352.31602pt too wide) in paragraph at lines 9375--9375
+[]\TU/lmtt/m/n/10.95 {[]regressor__max_depth[]: 3, []regressor__min_child_weigh
+t[]: 1, []regressor__gamma[]: 0, []regressor__reg_alpha[]: 1, []regressor__reg_
+lambda[]: 1}[] 
+ []
+
+
+Overfull \hbox (363.81352pt too wide) in paragraph at lines 9375--9375
+[]\TU/lmtt/m/n/10.95 {[]regressor__max_depth[]: 5, []regressor__min_child_weigh
+t[]: 3, []regressor__gamma[]: 0.1, []regressor__reg_alpha[]: 0, []regressor__re
+g_lambda[]: 1}[] 
+ []
+
+[192]
+Overfull \hbox (363.81352pt too wide) in paragraph at lines 9375--9375
+[]\TU/lmtt/m/n/10.95 {[]regressor__max_depth[]: 5, []regressor__min_child_weigh
+t[]: 3, []regressor__gamma[]: 0.1, []regressor__reg_alpha[]: 1, []regressor__re
+g_lambda[]: 5}[] 
+ []
+
+
+Overfull \hbox (369.56227pt too wide) in paragraph at lines 9375--9375
+[]\TU/lmtt/m/n/10.95 {[]regressor__max_depth[]: 7, []regressor__min_child_weigh
+t[]: 1, []regressor__gamma[]: 0.2, []regressor__reg_alpha[]: 5, []regressor__re
+g_lambda[]: 10}[] 
+ []
+
+
+Overfull \hbox (369.56227pt too wide) in paragraph at lines 9375--9375
+[]\TU/lmtt/m/n/10.95 {[]regressor__max_depth[]: 7, []regressor__min_child_weigh
+t[]: 1, []regressor__gamma[]: 0.2, []regressor__reg_alpha[]: 5, []regressor__re
+g_lambda[]: 10}[] 
+ []
+
+[193]
+Missing character: There is no ⁸ in font [lmroman10-bold]:mapping=tex-text;!
+[194]
+Underfull \hbox (badness 1540) in paragraph at lines 9503--9508
+[]\TU/lmr/bx/n/10.95 Optuna\TU/lmr/m/n/10.95 : A powerful hyperparameter optimi
+zation framework that uses \TU/lmr/bx/n/10.95 Tree-
+ []
+
+
+Overfull \hbox (27.35303pt too wide) in paragraph at lines 9544--9547
+[]\TU/lmr/m/n/10.95 Keys are hyperparameter names (matching pipeline step names
+ like []\TU/lmtt/m/n/10.95 regressor__max_depth[]\TU/lmr/m/n/10.95 ) 
+ []
+
+[195]
+Missing character: There is no 🔹 in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 🔹 in font [lmroman10-regular]:mapping=tex-text;!
+
+Underfull \hbox (badness 2707) in paragraph at lines 9551--9558
+[]\TU/lmr/m/n/10.95 🔹 \TU/lmr/bx/n/10.95 Key Tip\TU/lmr/m/n/10.95 : Use \TU/lmt
+t/m/n/10.95 Real(..., prior=[]log-uniform[]) \TU/lmr/m/n/10.95 for parameters l
+ike
+ []
+
+[196] [197]
+Overfull \hbox (1358.34705pt too wide) in paragraph at lines 9666--9666
+[]\TU/lmtt/m/n/10.95 OrderedDict({[]regressor__colsample_bytree[]: 0.6350099974
+437949, []regressor__gamma[]: 0.0, []regressor__learning_rate[]: 0.150125768029
+68475, []regressor__max_depth[]: 7, []regressor__min_child_weight[]: 1, []regre
+ssor__reg_alpha[]: 5.0, []regressor__reg_lambda[]: 9.330007518126198, []regress
+or__subsample[]: 0.77576084288087})[] 
+ []
+
+File: XGBoost_files/figure-pdf/cell-16-output-1.png Graphic file (type bmp)
+<XGBoost_files/figure-pdf/cell-16-output-1.png>
+[198]
+File: XGBoost_files/figure-pdf/cell-17-output-1.png Graphic file (type bmp)
+<XGBoost_files/figure-pdf/cell-17-output-1.png>
+
+Overfull \hbox (10.94543pt too wide) in paragraph at lines 9690--9691
+[][] 
+ []
+
+[199] [200]
+File: XGBoost_files/figure-pdf/cell-19-output-1.png Graphic file (type bmp)
+<XGBoost_files/figure-pdf/cell-19-output-1.png>
+
+Overfull \hbox (10.9632pt too wide) in paragraph at lines 9738--9739
+[][] 
+ []
+
+[201]
+
+Package longtable Warning: Column widths have changed
+(longtable)                in table 10.4 on input line 9777.
+
+[202] [203]
+Overfull \hbox (202.84857pt too wide) in paragraph at lines 9882--9882
+[]\TU/lmtt/m/n/10.95 [I 2025-05-14 04:47:06,217] A new study created in memory 
+with name: no-name-59242cf6-161a-4605-a35c-8961a98f403e[] 
+ []
+
+
+Overfull \hbox (1778.00574pt too wide) in paragraph at lines 9882--9882
+[]\TU/lmtt/m/n/10.95 [I 2025-05-14 04:47:07,258] Trial 0 finished with value: -
+3162.7913411458335 and parameters: {[]learning_rate[]: 0.1641733170152142, []ma
+x_depth[]: 4, []min_child_weight[]: 3, []gamma[]: 0.15950428057497823, []subsam
+ple[]: 0.8687525001570833, []colsample_bytree[]: 0.5001903459871172, []reg_alph
+a[]: 2.767789824640966, []reg_lambda[]: 8.129162242032194}. Best is trial 0 wit
+h value: -3162.7913411458335.[] 
+ []
+
+
+Overfull \hbox (1806.74948pt too wide) in paragraph at lines 9882--9882
+[]\TU/lmtt/m/n/10.95 [I 2025-05-14 04:47:09,975] Trial 1 finished with value: -
+3368.8380533854165 and parameters: {[]learning_rate[]: 0.15178125229556488, []m
+ax_depth[]: 7, []min_child_weight[]: 1, []gamma[]: 0.050258482002987326, []subs
+ample[]: 0.5898378683092566, []colsample_bytree[]: 0.9917924243351735, []reg_al
+pha[]: 0.23111115691692774, []reg_lambda[]: 2.0125181234384675}. Best is trial 
+0 with value: -3162.7913411458335.[] 
+ []
+
+
+Overfull \hbox (1778.00574pt too wide) in paragraph at lines 9882--9882
+[]\TU/lmtt/m/n/10.95 [I 2025-05-14 04:47:10,925] Trial 2 finished with value: -
+3432.02392578125 and parameters: {[]learning_rate[]: 0.42391219724854534, []max
+_depth[]: 3, []min_child_weight[]: 5, []gamma[]: 0.13708107402474898, []subsamp
+le[]: 0.6148247399767317, []colsample_bytree[]: 0.7362060869492091, []reg_alpha
+[]: 2.489679115528034, []reg_lambda[]: 2.1233179056863065}. Best is trial 0 wit
+h value: -3162.7913411458335.[] 
+ []
+
+
+Overfull \hbox (1778.00574pt too wide) in paragraph at lines 9882--9882
+[]\TU/lmtt/m/n/10.95 [I 2025-05-14 04:47:12,191] Trial 3 finished with value: -
+3344.6248372395835 and parameters: {[]learning_rate[]: 0.265690187570691, []max
+_depth[]: 4, []min_child_weight[]: 2, []gamma[]: 0.16133880047200677, []subsamp
+le[]: 0.6611070905675426, []colsample_bytree[]: 0.6704715035156631, []reg_alpha
+[]: 4.144973354445489, []reg_lambda[]: 3.9063999949186705}. Best is trial 0 wit
+h value: -3162.7913411458335.[] 
+ []
+
+
+Overfull \hbox (1783.75449pt too wide) in paragraph at lines 9882--9882
+[]\TU/lmtt/m/n/10.95 [I 2025-05-14 04:47:13,975] Trial 4 finished with value: -
+3270.3804524739585 and parameters: {[]learning_rate[]: 0.028752592609356385, []
+max_depth[]: 5, []min_child_weight[]: 2, []gamma[]: 0.03302184395133658, []subs
+ample[]: 0.721688869095855, []colsample_bytree[]: 0.632919922307615, []reg_alph
+a[]: 3.0139736364453245, []reg_lambda[]: 8.336475479937352}. Best is trial 0 wi
+th value: -3162.7913411458335.[] 
+ []
+
+
+Overfull \hbox (1755.01074pt too wide) in paragraph at lines 9882--9882
+[]\TU/lmtt/m/n/10.95 [I 2025-05-14 04:47:16,075] Trial 5 finished with value: -
+3520.0126953125 and parameters: {[]learning_rate[]: 0.3795040467605126, []max_d
+epth[]: 5, []min_child_weight[]: 4, []gamma[]: 0.0923172410962489, []subsample[
+]: 0.6576538128571611, []colsample_bytree[]: 0.5874178737107301, []reg_alpha[]:
+ 4.327790643794075, []reg_lambda[]: 5.539914427905474}. Best is trial 0 with va
+lue: -3162.7913411458335.[] 
+ []
+
+
+Overfull \hbox (1789.50323pt too wide) in paragraph at lines 9882--9882
+[]\TU/lmtt/m/n/10.95 [I 2025-05-14 04:47:18,141] Trial 6 finished with value: -
+3230.2576497395835 and parameters: {[]learning_rate[]: 0.01887765935706954, []m
+ax_depth[]: 7, []min_child_weight[]: 4, []gamma[]: 0.08395864006045435, []subsa
+mple[]: 0.9650583569644329, []colsample_bytree[]: 0.5068836778426125, []reg_alp
+ha[]: 4.319194027803546, []reg_lambda[]: 2.4577201842849408}. Best is trial 0 w
+ith value: -3162.7913411458335.[] 
+ []
+
+
+Overfull \hbox (1783.75449pt too wide) in paragraph at lines 9882--9882
+[]\TU/lmtt/m/n/10.95 [I 2025-05-14 04:47:20,158] Trial 7 finished with value: -
+3265.4407552083335 and parameters: {[]learning_rate[]: 0.10762455895584233, []m
+ax_depth[]: 5, []min_child_weight[]: 1, []gamma[]: 0.18945099975997307, []subsa
+mple[]: 0.6082738049159904, []colsample_bytree[]: 0.8839951047303432, []reg_alp
+ha[]: 1.7804602782057595, []reg_lambda[]: 4.01856427883501}. Best is trial 0 wi
+th value: -3162.7913411458335.[] 
+ []
+
+
+Overfull \hbox (1783.75449pt too wide) in paragraph at lines 9882--9882
+[]\TU/lmtt/m/n/10.95 [I 2025-05-14 04:47:22,225] Trial 8 finished with value: -
+3521.05517578125 and parameters: {[]learning_rate[]: 0.41352773552997424, []max
+_depth[]: 5, []min_child_weight[]: 2, []gamma[]: 0.12690667210056658, []subsamp
+le[]: 0.5821082070503734, []colsample_bytree[]: 0.5074336963373632, []reg_alpha
+[]: 3.7306140414159943, []reg_lambda[]: 3.3055935850297096}. Best is trial 0 wi
+th value: -3162.7913411458335.[] 
+ []
+
+
+Overfull \hbox (1783.75449pt too wide) in paragraph at lines 9882--9882
+[]\TU/lmtt/m/n/10.95 [I 2025-05-14 04:47:23,242] Trial 9 finished with value: -
+3271.8055013020835 and parameters: {[]learning_rate[]: 0.08043112986012362, []m
+ax_depth[]: 3, []min_child_weight[]: 4, []gamma[]: 0.18113380178376634, []subsa
+mple[]: 0.972342410237745, []colsample_bytree[]: 0.9814376966070582, []reg_alph
+a[]: 4.5010583121903815, []reg_lambda[]: 8.046775880725079}. Best is trial 0 wi
+th value: -3162.7913411458335.[] 
+ []
+
+
+Overfull \hbox (1806.74948pt too wide) in paragraph at lines 9882--9882
+[]\TU/lmtt/m/n/10.95 [I 2025-05-14 04:47:25,226] Trial 10 finished with value: 
+-3261.6067708333335 and parameters: {[]learning_rate[]: 0.22708806215964497, []
+max_depth[]: 4, []min_child_weight[]: 3, []gamma[]: 0.0009135391068176013, []su
+bsample[]: 0.8494117211823278, []colsample_bytree[]: 0.8257696123522402, []reg_
+alpha[]: 1.0416025541499645, []reg_lambda[]: 6.671020134916106}. Best is trial 
+0 with value: -3162.7913411458335.[] 
+ []
+
+
+Overfull \hbox (1789.50323pt too wide) in paragraph at lines 9882--9882
+[]\TU/lmtt/m/n/10.95 [I 2025-05-14 04:47:27,859] Trial 11 finished with value: 
+-3377.5233561197915 and parameters: {[]learning_rate[]: 0.20808419263829792, []
+max_depth[]: 7, []min_child_weight[]: 4, []gamma[]: 0.09467108637827251, []subs
+ample[]: 0.9298835740565166, []colsample_bytree[]: 0.5010865276579407, []reg_al
+pha[]: 4.982274512288781, []reg_lambda[]: 6.398529741869817}. Best is trial 0 w
+ith value: -3162.7913411458335.[] 
+ []
+
+
+Overfull \hbox (1789.50323pt too wide) in paragraph at lines 9882--9882
+[]\TU/lmtt/m/n/10.95 [I 2025-05-14 04:47:30,092] Trial 12 finished with value: 
+-3359.8211263020835 and parameters: {[]learning_rate[]: 0.01826323043937967, []
+max_depth[]: 6, []min_child_weight[]: 3, []gamma[]: 0.07224880626353157, []subs
+ample[]: 0.8525172381777258, []colsample_bytree[]: 0.566498265995001, []reg_alp
+ha[]: 3.0087037386707145, []reg_lambda[]: 9.999053425477364}. Best is trial 0 w
+ith value: -3162.7913411458335.[] 
+ []
+
+
+Overfull \hbox (1766.50824pt too wide) in paragraph at lines 9882--9882
+[]\TU/lmtt/m/n/10.95 [I 2025-05-14 04:47:32,225] Trial 13 finished with value: 
+-3389.99609375 and parameters: {[]learning_rate[]: 0.13857618173924105, []max_d
+epth[]: 6, []min_child_weight[]: 5, []gamma[]: 0.1293470109573417, []subsample[
+]: 0.8631896630954577, []colsample_bytree[]: 0.7029461161450377, []reg_alpha[]:
+ 3.4076274113715366, []reg_lambda[]: 1.1597707357570677}. Best is trial 0 with 
+value: -3162.7913411458335.[] 
+ []
+
+
+Overfull \hbox (1766.50824pt too wide) in paragraph at lines 9882--9882
+[]\TU/lmtt/m/n/10.95 [I 2025-05-14 04:47:33,783] Trial 14 finished with value: 
+-3303.03955078125 and parameters: {[]learning_rate[]: 0.3047205728875082, []max
+_depth[]: 4, []min_child_weight[]: 4, []gamma[]: 0.14361295278041297, []subsamp
+le[]: 0.7937194720693732, []colsample_bytree[]: 0.5727779194914605, []reg_alpha
+[]: 2.129378952206828, []reg_lambda[]: 9.80217028801741}. Best is trial 0 with 
+value: -3162.7913411458335.[] 
+ []
+
+
+Overfull \hbox (1783.75449pt too wide) in paragraph at lines 9882--9882
+[]\TU/lmtt/m/n/10.95 [I 2025-05-14 04:47:36,609] Trial 15 finished with value: 
+-3350.712158203125 and parameters: {[]learning_rate[]: 0.17656556325674955, []m
+ax_depth[]: 6, []min_child_weight[]: 3, []gamma[]: 0.10914046017834621, []subsa
+mple[]: 0.9996361890269867, []colsample_bytree[]: 0.821830315105234, []reg_alph
+a[]: 1.4844593608366676, []reg_lambda[]: 8.251897448342861}. Best is trial 0 wi
+th value: -3162.7913411458335.[] 
+ []
+
+
+Overfull \hbox (1795.25198pt too wide) in paragraph at lines 9882--9882
+[]\TU/lmtt/m/n/10.95 [I 2025-05-14 04:47:39,729] Trial 16 finished with value: 
+-3751.3375651041665 and parameters: {[]learning_rate[]: 0.49732527342995736, []
+max_depth[]: 7, []min_child_weight[]: 5, []gamma[]: 0.06646629587180926, []subs
+ample[]: 0.9191757507198699, []colsample_bytree[]: 0.6417276413491501, []reg_al
+pha[]: 3.7131164539205996, []reg_lambda[]: 4.691801429872557}. Best is trial 0 
+with value: -3162.7913411458335.[] 
+ []
+
+
+Overfull \hbox (1783.75449pt too wide) in paragraph at lines 9882--9882
+[]\TU/lmtt/m/n/10.95 [I 2025-05-14 04:47:41,442] Trial 17 finished with value: 
+-3220.991943359375 and parameters: {[]learning_rate[]: 0.06349399117329421, []m
+ax_depth[]: 4, []min_child_weight[]: 4, []gamma[]: 0.16152083780312498, []subsa
+mple[]: 0.5193007623949828, []colsample_bytree[]: 0.5378275423151795, []reg_alp
+ha[]: 4.957968250711724, []reg_lambda[]: 6.887432633162225}. Best is trial 0 wi
+th value: -3162.7913411458335.[] 
+ []
+
+
+Overfull \hbox (1789.50323pt too wide) in paragraph at lines 9882--9882
+[]\TU/lmtt/m/n/10.95 [I 2025-05-14 04:47:42,826] Trial 18 finished with value: 
+-3196.406494140625 and parameters: {[]learning_rate[]: 0.09062768738247484, []m
+ax_depth[]: 4, []min_child_weight[]: 3, []gamma[]: 0.16932220309933962, []subsa
+mple[]: 0.5102446555382051, []colsample_bytree[]: 0.567680668921065, []reg_alph
+a[]: 0.05899287011786036, []reg_lambda[]: 7.095135377059309}. Best is trial 0 w
+ith value: -3162.7913411458335.[] 
+ []
+
+
+Overfull \hbox (1789.50323pt too wide) in paragraph at lines 9882--9882
+[]\TU/lmtt/m/n/10.95 [I 2025-05-14 04:47:43,876] Trial 19 finished with value: 
+-3185.7190755208335 and parameters: {[]learning_rate[]: 0.26626727039895703, []
+max_depth[]: 3, []min_child_weight[]: 2, []gamma[]: 0.19772641560218734, []subs
+ample[]: 0.770138637973236, []colsample_bytree[]: 0.6097234828156883, []reg_alp
+ha[]: 0.4836011903906194, []reg_lambda[]: 9.025056369210269}. Best is trial 0 w
+ith value: -3162.7913411458335.[] 
+ []
+
+
+Overfull \hbox (1783.75449pt too wide) in paragraph at lines 9882--9882
+[]\TU/lmtt/m/n/10.95 [I 2025-05-14 04:47:45,326] Trial 20 finished with value: 
+-3203.70068359375 and parameters: {[]learning_rate[]: 0.26090742668861305, []ma
+x_depth[]: 3, []min_child_weight[]: 2, []gamma[]: 0.19121127716686365, []subsam
+ple[]: 0.7677836477495147, []colsample_bytree[]: 0.6255725064175632, []reg_alph
+a[]: 0.9445649986769805, []reg_lambda[]: 9.184359429957107}. Best is trial 0 wi
+th value: -3162.7913411458335.[] 
+ []
+
+
+Overfull \hbox (1789.50323pt too wide) in paragraph at lines 9882--9882
+[]\TU/lmtt/m/n/10.95 [I 2025-05-14 04:47:46,993] Trial 21 finished with value: 
+-3228.9916178385415 and parameters: {[]learning_rate[]: 0.31856834300340886, []
+max_depth[]: 3, []min_child_weight[]: 3, []gamma[]: 0.167803945880308, []subsam
+ple[]: 0.7143519606311484, []colsample_bytree[]: 0.5838931745172615, []reg_alph
+a[]: 0.12405952462738234, []reg_lambda[]: 7.282731249021393}. Best is trial 0 w
+ith value: -3162.7913411458335.[] 
+ []
+
+
+Overfull \hbox (1778.00574pt too wide) in paragraph at lines 9882--9882
+[]\TU/lmtt/m/n/10.95 [I 2025-05-14 04:47:48,459] Trial 22 finished with value: 
+-3219.378662109375 and parameters: {[]learning_rate[]: 0.19033406785822546, []m
+ax_depth[]: 4, []min_child_weight[]: 2, []gamma[]: 0.1736546025660118, []subsam
+ple[]: 0.7757362268856869, []colsample_bytree[]: 0.5444873799616068, []reg_alph
+a[]: 0.522783087786272, []reg_lambda[]: 8.840854511279815}. Best is trial 0 wit
+h value: -3162.7913411458335.[] 
+ []
+
+
+Overfull \hbox (1783.75449pt too wide) in paragraph at lines 9882--9882
+[]\TU/lmtt/m/n/10.95 [I 2025-05-14 04:47:49,809] Trial 23 finished with value: 
+-3211.786865234375 and parameters: {[]learning_rate[]: 0.12106773616337452, []m
+ax_depth[]: 3, []min_child_weight[]: 3, []gamma[]: 0.15243869650940434, []subsa
+mple[]: 0.5134972988786516, []colsample_bytree[]: 0.622819927934837, []reg_alph
+a[]: 0.9827289505727954, []reg_lambda[]: 7.603828126201174}. Best is trial 0 wi
+th value: -3162.7913411458335.[] 
+ []
+
+
+Overfull \hbox (1760.75949pt too wide) in paragraph at lines 9882--9882
+[]\TU/lmtt/m/n/10.95 [I 2025-05-14 04:47:51,676] Trial 24 finished with value: 
+-3334.4794921875 and parameters: {[]learning_rate[]: 0.3147366533286231, []max_
+depth[]: 4, []min_child_weight[]: 3, []gamma[]: 0.1991269835131424, []subsample
+[]: 0.8079082775226714, []colsample_bytree[]: 0.6818057638014908, []reg_alpha[]
+: 1.552038632861544, []reg_lambda[]: 6.041540266193317}. Best is trial 0 with v
+alue: -3162.7913411458335.[] 
+ []
+
+
+Overfull \hbox (1795.25198pt too wide) in paragraph at lines 9882--9882
+[]\TU/lmtt/m/n/10.95 [I 2025-05-14 04:47:53,576] Trial 25 finished with value: 
+-3267.5618489583335 and parameters: {[]learning_rate[]: 0.23472812275507773, []
+max_depth[]: 4, []min_child_weight[]: 1, []gamma[]: 0.11335743801729878, []subs
+ample[]: 0.8916931874251384, []colsample_bytree[]: 0.7531828256664181, []reg_al
+pha[]: 0.5869522985399849, []reg_lambda[]: 9.145754803235887}. Best is trial 0 
+with value: -3162.7913411458335.[] 
+ []
+
+
+Overfull \hbox (1778.00574pt too wide) in paragraph at lines 9882--9882
+[]\TU/lmtt/m/n/10.95 [I 2025-05-14 04:47:54,926] Trial 26 finished with value: 
+-3202.6060384114585 and parameters: {[]learning_rate[]: 0.08193443679035439, []
+max_depth[]: 3, []min_child_weight[]: 2, []gamma[]: 0.1774109969796935, []subsa
+mple[]: 0.8212131624598183, []colsample_bytree[]: 0.54479642033082, []reg_alpha
+[]: 2.4562856136420543, []reg_lambda[]: 7.804051665963241}. Best is trial 0 wit
+h value: -3162.7913411458335.[] 
+ []
+
+
+Overfull \hbox (1778.00574pt too wide) in paragraph at lines 9882--9882
+[]\TU/lmtt/m/n/10.95 [I 2025-05-14 04:47:56,627] Trial 27 finished with value: 
+-3199.9505208333335 and parameters: {[]learning_rate[]: 0.1648392550100305, []m
+ax_depth[]: 4, []min_child_weight[]: 3, []gamma[]: 0.1995055644785968, []subsam
+ple[]: 0.7369161561012435, []colsample_bytree[]: 0.603109126467272, []reg_alpha
+[]: 1.9696422807593317, []reg_lambda[]: 8.794238617217513}. Best is trial 0 wit
+h value: -3162.7913411458335.[] 
+ []
+
+[204]
+Overfull \hbox (1795.25198pt too wide) in paragraph at lines 9882--9882
+[]\TU/lmtt/m/n/10.95 [I 2025-05-14 04:47:58,059] Trial 28 finished with value: 
+-3233.1486002604165 and parameters: {[]learning_rate[]: 0.2816142969893795, []m
+ax_depth[]: 3, []min_child_weight[]: 2, []gamma[]: 0.14825724873193188, []subsa
+mple[]: 0.6758392394896388, []colsample_bytree[]: 0.5464275473497652, []reg_alp
+ha[]: 0.5537122249305592, []reg_lambda[]: 7.1212918481316265}. Best is trial 0 
+with value: -3162.7913411458335.[] 
+ []
+
+
+Overfull \hbox (1801.00073pt too wide) in paragraph at lines 9882--9882
+[]\TU/lmtt/m/n/10.95 [I 2025-05-14 04:47:59,893] Trial 29 finished with value: 
+-3205.3538411458335 and parameters: {[]learning_rate[]: 0.1469906386117053, []m
+ax_depth[]: 4, []min_child_weight[]: 1, []gamma[]: 0.11925438218317995, []subsa
+mple[]: 0.8909004703392734, []colsample_bytree[]: 0.7322050029057333, []reg_alp
+ha[]: 0.037746661579750096, []reg_lambda[]: 5.289887258623613}. Best is trial 0
+ with value: -3162.7913411458335.[] 
+ []
+
+
+Overfull \hbox (1783.75449pt too wide) in paragraph at lines 9882--9882
+[]\TU/lmtt/m/n/10.95 [I 2025-05-14 04:48:01,494] Trial 30 finished with value: 
+-3383.5137532552085 and parameters: {[]learning_rate[]: 0.37120330910823546, []
+max_depth[]: 3, []min_child_weight[]: 3, []gamma[]: 0.1833492386708398, []subsa
+mple[]: 0.5602887881874641, []colsample_bytree[]: 0.6518986122343293, []reg_alp
+ha[]: 3.0231284972065575, []reg_lambda[]: 9.61973061024477}. Best is trial 0 wi
+th value: -3162.7913411458335.[] 
+ []
+
+
+Overfull \hbox (1783.75449pt too wide) in paragraph at lines 9882--9882
+[]\TU/lmtt/m/n/10.95 [I 2025-05-14 04:48:03,243] Trial 31 finished with value: 
+-3167.3258463541665 and parameters: {[]learning_rate[]: 0.1863689590113835, []m
+ax_depth[]: 4, []min_child_weight[]: 3, []gamma[]: 0.19908264163989292, []subsa
+mple[]: 0.7278685694121224, []colsample_bytree[]: 0.5861480239301309, []reg_alp
+ha[]: 2.026116015039801, []reg_lambda[]: 8.699297071780851}. Best is trial 0 wi
+th value: -3162.7913411458335.[] 
+ []
+
+
+Overfull \hbox (1789.50323pt too wide) in paragraph at lines 9882--9882
+[]\TU/lmtt/m/n/10.95 [I 2025-05-14 04:48:05,445] Trial 32 finished with value: 
+-3281.510986328125 and parameters: {[]learning_rate[]: 0.20151346925924155, []m
+ax_depth[]: 5, []min_child_weight[]: 3, []gamma[]: 0.16458591948116905, []subsa
+mple[]: 0.6958914280325602, []colsample_bytree[]: 0.6042564555277344, []reg_alp
+ha[]: 1.3700762573158425, []reg_lambda[]: 8.518791773797872}. Best is trial 0 w
+ith value: -3162.7913411458335.[] 
+ []
+
+
+Overfull \hbox (1795.25198pt too wide) in paragraph at lines 9882--9882
+[]\TU/lmtt/m/n/10.95 [I 2025-05-14 04:48:07,111] Trial 33 finished with value: 
+-3204.1426595052085 and parameters: {[]learning_rate[]: 0.12026108279051516, []
+max_depth[]: 4, []min_child_weight[]: 2, []gamma[]: 0.15438462102064923, []subs
+ample[]: 0.6242819620230452, []colsample_bytree[]: 0.5342892669503979, []reg_al
+pha[]: 0.4963669112142102, []reg_lambda[]: 7.666852561159716}. Best is trial 0 
+with value: -3162.7913411458335.[] 
+ []
+
+
+Overfull \hbox (1772.25699pt too wide) in paragraph at lines 9882--9882
+[]\TU/lmtt/m/n/10.95 [I 2025-05-14 04:48:08,476] Trial 34 finished with value: 
+-3220.5049641927085 and parameters: {[]learning_rate[]: 0.2337807893313772, []m
+ax_depth[]: 3, []min_child_weight[]: 3, []gamma[]: 0.188224524248803, []subsamp
+le[]: 0.7519391438650187, []colsample_bytree[]: 0.6734690653266131, []reg_alpha
+[]: 2.366857352866043, []reg_lambda[]: 9.337266831653581}. Best is trial 0 with
+ value: -3162.7913411458335.[] 
+ []
+
+
+Overfull \hbox (1795.25198pt too wide) in paragraph at lines 9882--9882
+[]\TU/lmtt/m/n/10.95 [I 2025-05-14 04:48:10,219] Trial 35 finished with value: 
+-3141.7112630208335 and parameters: {[]learning_rate[]: 0.05427916910483564, []
+max_depth[]: 5, []min_child_weight[]: 2, []gamma[]: 0.17217342372478064, []subs
+ample[]: 0.6486895737288911, []colsample_bytree[]: 0.5748420678684818, []reg_al
+pha[]: 2.823104446765354, []reg_lambda[]: 6.123835171658451}. Best is trial 35 
+with value: -3141.7112630208335.[] 
+ []
+
+
+Overfull \hbox (1789.50323pt too wide) in paragraph at lines 9882--9882
+[]\TU/lmtt/m/n/10.95 [I 2025-05-14 04:48:12,727] Trial 36 finished with value: 
+-3424.205810546875 and parameters: {[]learning_rate[]: 0.3434536736887878, []ma
+x_depth[]: 5, []min_child_weight[]: 1, []gamma[]: 0.19798037524773468, []subsam
+ple[]: 0.6462109533575047, []colsample_bytree[]: 0.6013661462288122, []reg_alph
+a[]: 2.8058983646067652, []reg_lambda[]: 5.836376792997449}. Best is trial 35 w
+ith value: -3141.7112630208335.[] 
+ []
+
+
+Overfull \hbox (1801.00073pt too wide) in paragraph at lines 9882--9882
+[]\TU/lmtt/m/n/10.95 [I 2025-05-14 04:48:14,696] Trial 37 finished with value: 
+-3118.7006022135415 and parameters: {[]learning_rate[]: 0.050933621089207015, [
+]max_depth[]: 5, []min_child_weight[]: 2, []gamma[]: 0.17859904779145075, []sub
+sample[]: 0.687046200984366, []colsample_bytree[]: 0.5234986611495844, []reg_al
+pha[]: 2.814493606788762, []reg_lambda[]: 4.8395816535714555}. Best is trial 37
+ with value: -3118.7006022135415.[] 
+ []
+
+
+Overfull \hbox (1795.25198pt too wide) in paragraph at lines 9882--9882
+[]\TU/lmtt/m/n/10.95 [I 2025-05-14 04:48:16,481] Trial 38 finished with value: 
+-3122.8831380208335 and parameters: {[]learning_rate[]: 0.06168478840447832, []
+max_depth[]: 5, []min_child_weight[]: 2, []gamma[]: 0.13797722131867746, []subs
+ample[]: 0.6960007534848832, []colsample_bytree[]: 0.5182244063678463, []reg_al
+pha[]: 2.731920033783212, []reg_lambda[]: 4.550908916595087}. Best is trial 37 
+with value: -3118.7006022135415.[] 
+ []
+
+
+Overfull \hbox (1783.75449pt too wide) in paragraph at lines 9882--9882
+[]\TU/lmtt/m/n/10.95 [I 2025-05-14 04:48:18,515] Trial 39 finished with value: 
+-3139.6028645833335 and parameters: {[]learning_rate[]: 0.05316829440470475, []
+max_depth[]: 5, []min_child_weight[]: 1, []gamma[]: 0.13489818880210416, []subs
+ample[]: 0.6912991523076674, []colsample_bytree[]: 0.517984422252086, []reg_alp
+ha[]: 3.408188018857992, []reg_lambda[]: 4.62131346940151}. Best is trial 37 wi
+th value: -3118.7006022135415.[] 
+ []
+
+
+Overfull \hbox (1806.74948pt too wide) in paragraph at lines 9882--9882
+[]\TU/lmtt/m/n/10.95 [I 2025-05-14 04:48:21,326] Trial 40 finished with value: 
+-3165.2281901041665 and parameters: {[]learning_rate[]: 0.040909566934035954, [
+]max_depth[]: 6, []min_child_weight[]: 1, []gamma[]: 0.13647271109557557, []sub
+sample[]: 0.6868429049917079, []colsample_bytree[]: 0.5098868980895536, []reg_a
+lpha[]: 3.3309798162772895, []reg_lambda[]: 4.842339064732724}. Best is trial 3
+7 with value: -3118.7006022135415.[] 
+ []
+
+
+Overfull \hbox (1801.00073pt too wide) in paragraph at lines 9882--9882
+[]\TU/lmtt/m/n/10.95 [I 2025-05-14 04:48:22,927] Trial 41 finished with value: 
+-3153.988525390625 and parameters: {[]learning_rate[]: 0.04764134215278892, []m
+ax_depth[]: 5, []min_child_weight[]: 1, []gamma[]: 0.13734423615317123, []subsa
+mple[]: 0.6396914085172828, []colsample_bytree[]: 0.5222333533007302, []reg_alp
+ha[]: 2.7683392736744907, []reg_lambda[]: 3.4848817151425147}. Best is trial 37
+ with value: -3118.7006022135415.[] 
+ []
+
+
+Overfull \hbox (1789.50323pt too wide) in paragraph at lines 9882--9882
+[]\TU/lmtt/m/n/10.95 [I 2025-05-14 04:48:25,194] Trial 42 finished with value: 
+-3138.40869140625 and parameters: {[]learning_rate[]: 0.04665794491311853, []ma
+x_depth[]: 5, []min_child_weight[]: 1, []gamma[]: 0.14050710663623797, []subsam
+ple[]: 0.6466622773319057, []colsample_bytree[]: 0.5243207754378303, []reg_alph
+a[]: 2.742598397314503, []reg_lambda[]: 3.4532539995737297}. Best is trial 37 w
+ith value: -3118.7006022135415.[] 
+ []
+
+
+Overfull \hbox (1801.00073pt too wide) in paragraph at lines 9882--9882
+[]\TU/lmtt/m/n/10.95 [I 2025-05-14 04:48:27,181] Trial 43 finished with value: 
+-3634.5953776041665 and parameters: {[]learning_rate[]: 0.010559089516967338, [
+]max_depth[]: 5, []min_child_weight[]: 1, []gamma[]: 0.10464776864762987, []sub
+sample[]: 0.590380693415102, []colsample_bytree[]: 0.5527271103337551, []reg_al
+pha[]: 3.3406191855405254, []reg_lambda[]: 4.270515611372069}. Best is trial 37
+ with value: -3118.7006022135415.[] 
+ []
+
+
+Overfull \hbox (1806.74948pt too wide) in paragraph at lines 9882--9882
+[]\TU/lmtt/m/n/10.95 [I 2025-05-14 04:48:28,967] Trial 44 finished with value: 
+-3160.775146484375 and parameters: {[]learning_rate[]: 0.060736025914241036, []
+max_depth[]: 5, []min_child_weight[]: 1, []gamma[]: 0.12354110870609715, []subs
+ample[]: 0.7089501071182204, []colsample_bytree[]: 0.5237902329649554, []reg_al
+pha[]: 3.7441364304748164, []reg_lambda[]: 2.9387955530200216}. Best is trial 3
+7 with value: -3118.7006022135415.[] 
+ []
+
+
+Overfull \hbox (1806.74948pt too wide) in paragraph at lines 9882--9882
+[]\TU/lmtt/m/n/10.95 [I 2025-05-14 04:48:31,730] Trial 45 finished with value: 
+-3168.1395670572915 and parameters: {[]learning_rate[]: 0.037531801199779405, [
+]max_depth[]: 6, []min_child_weight[]: 2, []gamma[]: 0.14149686953692464, []sub
+sample[]: 0.6665114574999642, []colsample_bytree[]: 0.5033999882927995, []reg_a
+lpha[]: 3.0970914358769033, []reg_lambda[]: 4.899606528403381}. Best is trial 3
+7 with value: -3118.7006022135415.[] 
+ []
+
+
+Overfull \hbox (1795.25198pt too wide) in paragraph at lines 9882--9882
+[]\TU/lmtt/m/n/10.95 [I 2025-05-14 04:48:34,529] Trial 46 finished with value: 
+-3193.5437825520835 and parameters: {[]learning_rate[]: 0.09959112301640272, []
+max_depth[]: 5, []min_child_weight[]: 1, []gamma[]: 0.15729275651842772, []subs
+ample[]: 0.622910390210815, []colsample_bytree[]: 0.5659218113820054, []reg_alp
+ha[]: 2.5987048583369248, []reg_lambda[]: 4.437051597406045}. Best is trial 37 
+with value: -3118.7006022135415.[] 
+ []
+
+
+Overfull \hbox (1789.50323pt too wide) in paragraph at lines 9882--9882
+[]\TU/lmtt/m/n/10.95 [I 2025-05-14 04:48:37,245] Trial 47 finished with value: 
+-3228.6897786458335 and parameters: {[]learning_rate[]: 0.07037240171555721, []
+max_depth[]: 5, []min_child_weight[]: 2, []gamma[]: 0.1344051098663805, []subsa
+mple[]: 0.565145406031194, []colsample_bytree[]: 0.9281697283786465, []reg_alph
+a[]: 2.2287279424305964, []reg_lambda[]: 3.764118180558043}. Best is trial 37 w
+ith value: -3118.7006022135415.[] 
+ []
+
+
+Overfull \hbox (1795.25198pt too wide) in paragraph at lines 9882--9882
+[]\TU/lmtt/m/n/10.95 [I 2025-05-14 04:48:40,511] Trial 48 finished with value: 
+-3211.089111328125 and parameters: {[]learning_rate[]: 0.10995519780575633, []m
+ax_depth[]: 6, []min_child_weight[]: 2, []gamma[]: 0.09688240640580331, []subsa
+mple[]: 0.6949408506367961, []colsample_bytree[]: 0.5247184310894689, []reg_alp
+ha[]: 3.9418544972703486, []reg_lambda[]: 5.287998554183364}. Best is trial 37 
+with value: -3118.7006022135415.[] 
+ []
+
+
+Overfull \hbox (1812.49823pt too wide) in paragraph at lines 9882--9882
+[]\TU/lmtt/m/n/10.95 [I 2025-05-14 04:48:42,711] Trial 49 finished with value: 
+-3200.5746256510415 and parameters: {[]learning_rate[]: 0.028839725004554832, [
+]max_depth[]: 5, []min_child_weight[]: 1, []gamma[]: 0.024679179556514927, []su
+bsample[]: 0.6593982063331032, []colsample_bytree[]: 0.5591427707331742, []reg_
+alpha[]: 2.638934979392886, []reg_lambda[]: 2.9603331872221825}. Best is trial 
+37 with value: -3118.7006022135415.[] 
+ []
+
+[205]
+Missing character: There is no 🔹 in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 🔹 in font [lmroman10-regular]:mapping=tex-text;!
+
+Overfull \hbox (23.70663pt too wide) in paragraph at lines 9957--9961
+[]\TU/lmtt/m/n/10.95 Optuna\TU/lmr/m/n/10.95 ’s built-in plots like \TU/lmtt/m/
+n/10.95 plot_optimization_history() \TU/lmr/m/n/10.95 and \TU/lmtt/m/n/10.95 pl
+ot_param_importances()\TU/lmr/m/n/10.95 . 
+ []
+
+[206] [207]
+Overfull \hbox (132.64844pt too wide) in alignment at lines 10078--10083
+ [] [] [] [] [] [] [] [] [] [] 
+ []
+
+
+Overfull \hbox (132.64844pt too wide) in alignment at lines 10083--10085
+ [] [] [] [] [] [] [] [] [] [] 
+ []
+
+
+Overfull \hbox (138.12346pt too wide) in alignment at lines 10085--10091
+ [] [] [] [] [] [] [] [] [] [] 
+ []
+
+
+Package longtable Warning: Column widths have changed
+(longtable)                in table 10.5 on input line 10091.
+
+[208]
+Overfull \hbox (1.64236pt too wide) in paragraph at lines 10169--10169
+[]                                                   []\TU/lmtt/m/n/10.95 SkinT
+hickness[], []Insulin[],[] 
+ []
+
+
+Overfull \hbox (1.64236pt too wide) in paragraph at lines 10169--10169
+[]                                                   []\TU/lmtt/m/n/10.95 Diabe
+tesPedigreeFunction[],[] 
+ []
+
+
+Overfull \hbox (64.87859pt too wide) in paragraph at lines 10169--10169
+[]                                                  \TU/lmtt/m/n/10.95 OneHotEn
+coder(handle_unknown=[]ignore[]),[] 
+ []
+
+[209]
+Overfull \hbox (13.13985pt too wide) in paragraph at lines 10169--10169
+[]                               \TU/lmtt/m/n/10.95 interaction_constraints=Non
+e, learning_rate=None,[] 
+ []
+
+
+Overfull \hbox (1.64235pt too wide) in paragraph at lines 10169--10169
+[]                               \TU/lmtt/m/n/10.95 monotone_constraints=None, 
+multi_strategy=None,[] 
+ []
+
+[210]
+Overfull \vbox (2.50754pt too high) detected at line 10261
+ []
+
+[211] [212]
+File: XGBoost_files/figure-pdf/cell-29-output-1.png Graphic file (type bmp)
+<XGBoost_files/figure-pdf/cell-29-output-1.png>
+
+Overfull \hbox (10.9632pt too wide) in paragraph at lines 10306--10307
+[][] 
+ []
+
+Missing character: There is no ✅ in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no ✅ in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no ✅ in font [lmroman10-regular]:mapping=tex-text;!
+[213]
+File: XGBoost_files/figure-pdf/cell-30-output-2.png Graphic file (type bmp)
+<XGBoost_files/figure-pdf/cell-30-output-2.png>
+
+Overfull \hbox (10.9632pt too wide) in paragraph at lines 10379--10380
+[][] 
+ []
+
+[214] [215]
+Overfull \hbox (5.35301pt too wide) in paragraph at lines 10442--10442
+[]|\TU/lmr/bx/n/10.95 Flexibility|  
+ []
+
+[216]
+chapter 11.
+[217
+
+] [218] [219]
+Underfull \hbox (badness 10000) in paragraph at lines 10715--10718
+
+ []
+
+Missing character: There is no η in font [lmmono10-regular]:!
+[220]
+Underfull \hbox (badness 1019) in paragraph at lines 10778--10781
+[]\TU/lmtt/m/n/10.95 feature_fraction\TU/lmr/m/n/10.95 : Fraction of features r
+andomly sampled for each tree (a.k.a.
+ []
+
+Missing character: There is no ⚠ in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no ️ in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no ⚠ in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no ️ in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no ⚠ in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no ️ in font [lmroman10-regular]:mapping=tex-text;!
+[221]
+Overfull \hbox (54.44241pt too wide) in alignment at lines 10880--10891
+ [] [] [] [] [] [] [] [] [] [] [] 
+ []
+
+
+Package longtable Warning: Column widths have changed
+(longtable)                in table 11.2 on input line 10891.
+
+[222] [223]
+Missing character: There is no ⚠ in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no ️ in font [lmroman10-regular]:mapping=tex-text;!
+[224]
+Missing character: There is no ⚠ in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no ️ in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no ⚠ in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no ️ in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no ⚠ in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no ️ in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no ≤ in font [lmmonolt10-bold]:!
+[225]
+Overfull \hbox (156.85858pt too wide) in paragraph at lines 11119--11119
+[]\TU/lmtt/m/n/10.95 Best parameters found:  OrderedDict({[]other_rate[]: 0.339
+86603248215197, []top_rate[]: 0.31901459322046166})[] 
+ []
+
+[226]
+Overfull \hbox (605.26099pt too wide) in paragraph at lines 11181--11181
+[]\TU/lmtt/m/n/10.95 Best Parameters: OrderedDict({[]learning_rate[]: 0.3177794
+0485083805, []max_depth[]: 5, []min_data_in_leaf[]: 47, []n_estimators[]: 369, 
+[]num_leaves[]: 20, []other_rate[]: 0.4, []top_rate[]: 0.6})[] 
+ []
+
+[227] [228]
+Underfull \hbox (badness 1953) in paragraph at lines 11294--11297
+[]\TU/lmr/m/n/10.95 Together, these innovations make CatBoost a strong candidat
+e for modeling \TU/lmr/bx/n/10.95 high-
+ []
+
+[229]
+Missing character: There is no 💡 in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 💡 in font [lmroman10-regular]:mapping=tex-text;!
+[230]
+Missing character: There is no ❌ in font [lmsans10-bold]:mapping=tex-text;!
+Missing character: There is no ✅ in font [lmsans10-bold]:mapping=tex-text;!
+[231]
+Underfull \hbox (badness 1721) in paragraph at lines 11446--11449
+[]\TU/lmr/m/n/10.95 These CatBoost-specific hyperparameters are important when 
+fine-tuning with Cross-
+ []
+
+
+Underfull \hbox (badness 1442) in paragraph at lines 11446--11449
+\TU/lmr/m/n/10.95 Validation, particularly for datasets with many \TU/lmr/bx/n/
+10.95 categorical features \TU/lmr/m/n/10.95 or at risk of
+ []
+
+[232]
+Overfull \hbox (202.84857pt too wide) in paragraph at lines 11527--11527
+[]\TU/lmtt/m/n/10.95 [I 2025-05-16 06:53:24,620] A new study created in memory 
+with name: no-name-2b89c789-86c1-45aa-9511-7e7990a5767a[] 
+ []
+
+
+Overfull \hbox (1507.81454pt too wide) in paragraph at lines 11527--11527
+[]\TU/lmtt/m/n/10.95 [I 2025-05-16 06:53:36,438] Trial 0 finished with value: -
+2885.7311361568736 and parameters: {[]learning_rate[]: 0.12726746487613003, []d
+epth[]: 10, []l2_leaf_reg[]: 0.00172009052841597, []min_data_in_leaf[]: 13, []b
+agging_temperature[]: 0.21730485409197553, []random_strength[]: 0.0002251704542
+179119}. Best is trial 0 with value: -2885.7311361568736.[] 
+ []
+
+
+Overfull \hbox (1484.81955pt too wide) in paragraph at lines 11527--11527
+[]\TU/lmtt/m/n/10.95 [I 2025-05-16 06:54:07,518] Trial 1 finished with value: -
+2620.171198484414 and parameters: {[]learning_rate[]: 0.05369228812155998, []de
+pth[]: 7, []l2_leaf_reg[]: 2.5645654686725287e-07, []min_data_in_leaf[]: 28, []
+bagging_temperature[]: 0.03449070019194467, []random_strength[]: 2.200162833623
+553}. Best is trial 1 with value: -2620.171198484414.[] 
+ []
+
+
+Overfull \hbox (1479.0708pt too wide) in paragraph at lines 11527--11527
+[]\TU/lmtt/m/n/10.95 [I 2025-05-16 06:55:01,902] Trial 2 finished with value: -
+2696.8294539080816 and parameters: {[]learning_rate[]: 0.02548811714993481, []d
+epth[]: 8, []l2_leaf_reg[]: 0.0023811609906064252, []min_data_in_leaf[]: 13, []
+bagging_temperature[]: 0.9288401488970826, []random_strength[]: 1.0825001157327
+04}. Best is trial 1 with value: -2620.171198484414.[] 
+ []
+
+
+Overfull \hbox (1496.31705pt too wide) in paragraph at lines 11527--11527
+[]\TU/lmtt/m/n/10.95 [I 2025-05-16 06:55:22,721] Trial 3 finished with value: -
+2724.528794214105 and parameters: {[]learning_rate[]: 0.06451150035785631, []de
+pth[]: 9, []l2_leaf_reg[]: 4.5131464056397556e-08, []min_data_in_leaf[]: 30, []
+bagging_temperature[]: 0.5960655866129079, []random_strength[]: 9.2821531743220
+8e-07}. Best is trial 1 with value: -2620.171198484414.[] 
+ []
+
+
+Overfull \hbox (1461.82455pt too wide) in paragraph at lines 11527--11527
+[]\TU/lmtt/m/n/10.95 [I 2025-05-16 06:55:36,587] Trial 4 finished with value: -
+2878.820243617394 and parameters: {[]learning_rate[]: 0.11527331094852836, []de
+pth[]: 4, []l2_leaf_reg[]: 0.4475951626701213, []min_data_in_leaf[]: 20, []bagg
+ing_temperature[]: 0.7324000256379442, []random_strength[]: 0.4338664457953787}
+. Best is trial 1 with value: -2620.171198484414.[] 
+ []
+
+
+Overfull \hbox (1490.56828pt too wide) in paragraph at lines 11527--11527
+[]\TU/lmtt/m/n/10.95 [I 2025-05-16 06:55:49,775] Trial 5 finished with value: -
+2668.619984949151 and parameters: {[]learning_rate[]: 0.1855528089325658, []dep
+th[]: 6, []l2_leaf_reg[]: 1.8378952869939127e-05, []min_data_in_leaf[]: 24, []b
+agging_temperature[]: 0.5768414336451607, []random_strength[]: 0.01052201487497
+0544}. Best is trial 1 with value: -2620.171198484414.[] 
+ []
+
+
+Overfull \hbox (1490.5683pt too wide) in paragraph at lines 11527--11527
+[]\TU/lmtt/m/n/10.95 [I 2025-05-16 06:55:57,119] Trial 6 finished with value: -
+2912.272947098299 and parameters: {[]learning_rate[]: 0.2451855882147167, []dep
+th[]: 10, []l2_leaf_reg[]: 1.7673885188960817e-06, []min_data_in_leaf[]: 10, []
+bagging_temperature[]: 0.4334470051053827, []random_strength[]: 0.1140602677255
+4442}. Best is trial 1 with value: -2620.171198484414.[] 
+ []
+
+[233]
+Overfull \hbox (1507.81454pt too wide) in paragraph at lines 11527--11527
+[]\TU/lmtt/m/n/10.95 [I 2025-05-16 06:56:13,622] Trial 7 finished with value: -
+2695.2648598625924 and parameters: {[]learning_rate[]: 0.09755102190100745, []d
+epth[]: 10, []l2_leaf_reg[]: 9.566125114415794e-08, []min_data_in_leaf[]: 19, [
+]bagging_temperature[]: 0.9211592949414568, []random_strength[]: 2.436347090461
+743e-08}. Best is trial 1 with value: -2620.171198484414.[] 
+ []
+
+
+Overfull \hbox (1479.0708pt too wide) in paragraph at lines 11527--11527
+[]\TU/lmtt/m/n/10.95 [I 2025-05-16 06:56:26,903] Trial 8 finished with value: -
+2753.084945654914 and parameters: {[]learning_rate[]: 0.18843128663283498, []de
+pth[]: 5, []l2_leaf_reg[]: 5.835652831494221e-06, []min_data_in_leaf[]: 6, []ba
+gging_temperature[]: 0.7987698449327993, []random_strength[]: 0.063627287677153
+19}. Best is trial 1 with value: -2620.171198484414.[] 
+ []
+
+
+Overfull \hbox (1507.81453pt too wide) in paragraph at lines 11527--11527
+[]\TU/lmtt/m/n/10.95 [I 2025-05-16 06:56:34,769] Trial 9 finished with value: -
+2921.4504143784643 and parameters: {[]learning_rate[]: 0.22960449698497942, []d
+epth[]: 10, []l2_leaf_reg[]: 1.1782309803914464e-08, []min_data_in_leaf[]: 22, 
+[]bagging_temperature[]: 0.7169193876429558, []random_strength[]: 0.02340510633
+7219345}. Best is trial 1 with value: -2620.171198484414.[] 
+ []
+
+
+Overfull \hbox (1490.5683pt too wide) in paragraph at lines 11527--11527
+[]\TU/lmtt/m/n/10.95 [I 2025-05-16 06:56:45,103] Trial 10 finished with value: 
+-2797.656433395867 and parameters: {[]learning_rate[]: 0.29638954558703867, []d
+epth[]: 7, []l2_leaf_reg[]: 7.121156648133439, []min_data_in_leaf[]: 1, []baggi
+ng_temperature[]: 0.028555585214749657, []random_strength[]: 0.0001339767012484
+3048}. Best is trial 1 with value: -2620.171198484414.[] 
+ []
+
+
+Overfull \hbox (1484.81955pt too wide) in paragraph at lines 11527--11527
+[]\TU/lmtt/m/n/10.95 [I 2025-05-16 06:57:00,983] Trial 11 finished with value: 
+-2987.804912052353 and parameters: {[]learning_rate[]: 0.17465375823124038, []d
+epth[]: 6, []l2_leaf_reg[]: 3.169840926062148e-05, []min_data_in_leaf[]: 29, []
+bagging_temperature[]: 0.40829527505593155, []random_strength[]: 7.361593602808
+678}. Best is trial 1 with value: -2620.171198484414.[] 
+ []
+
+
+Overfull \hbox (1513.56328pt too wide) in paragraph at lines 11527--11527
+[]\TU/lmtt/m/n/10.95 [I 2025-05-16 06:58:30,211] Trial 12 finished with value: 
+-2656.269812196844 and parameters: {[]learning_rate[]: 0.017073325011989847, []
+depth[]: 7, []l2_leaf_reg[]: 0.00018641156280634486, []min_data_in_leaf[]: 25, 
+[]bagging_temperature[]: 0.2504148253088835, []random_strength[]: 0.00360502096
+77933906}. Best is trial 1 with value: -2620.171198484414.[] 
+ []
+
+
+Overfull \hbox (1513.5633pt too wide) in paragraph at lines 11527--11527
+[]\TU/lmtt/m/n/10.95 [I 2025-05-16 06:59:27,791] Trial 13 finished with value: 
+-2744.3027101379294 and parameters: {[]learning_rate[]: 0.01817177055582332, []
+depth[]: 7, []l2_leaf_reg[]: 0.03706735720453296, []min_data_in_leaf[]: 25, []b
+agging_temperature[]: 0.002547331855073512, []random_strength[]: 2.035683325074
+0667e-05}. Best is trial 1 with value: -2620.171198484414.[] 
+ []
+
+
+Overfull \hbox (1513.5633pt too wide) in paragraph at lines 11527--11527
+[]\TU/lmtt/m/n/10.95 [I 2025-05-16 06:59:53,265] Trial 14 finished with value: 
+-2697.6837955182573 and parameters: {[]learning_rate[]: 0.06236194061749396, []
+depth[]: 8, []l2_leaf_reg[]: 5.295910383215519e-07, []min_data_in_leaf[]: 27, [
+]bagging_temperature[]: 0.20340714193628523, []random_strength[]: 0.00185220865
+02427496}. Best is trial 1 with value: -2620.171198484414.[] 
+ []
+
+
+Overfull \hbox (1490.56828pt too wide) in paragraph at lines 11527--11527
+[]\TU/lmtt/m/n/10.95 [I 2025-05-16 07:00:21,452] Trial 15 finished with value: 
+-2766.897166940931 and parameters: {[]learning_rate[]: 0.061014851192040906, []
+depth[]: 6, []l2_leaf_reg[]: 0.00013014280192782276, []min_data_in_leaf[]: 17, 
+[]bagging_temperature[]: 0.21609021631792624, []random_strength[]: 9.6633060962
+0808}. Best is trial 1 with value: -2620.171198484414.[] 
+ []
+
+
+Overfull \hbox (1513.5633pt too wide) in paragraph at lines 11527--11527
+[]\TU/lmtt/m/n/10.95 [I 2025-05-16 07:01:00,089] Trial 16 finished with value: 
+-2731.9161533728666 and parameters: {[]learning_rate[]: 0.027412623287634285, [
+]depth[]: 8, []l2_leaf_reg[]: 0.0010697541231850665, []min_data_in_leaf[]: 26, 
+[]bagging_temperature[]: 0.1205465052440132, []random_strength[]: 9.05036291985
+3505e-06}. Best is trial 1 with value: -2620.171198484414.[] 
+ []
+
+
+Overfull \hbox (1490.56828pt too wide) in paragraph at lines 11527--11527
+[]\TU/lmtt/m/n/10.95 [I 2025-05-16 07:01:13,872] Trial 17 finished with value: 
+-2950.387762628911 and parameters: {[]learning_rate[]: 0.06559997537771182, []d
+epth[]: 5, []l2_leaf_reg[]: 0.03303703827909148, []min_data_in_leaf[]: 22, []ba
+gging_temperature[]: 0.33823889215394143, []random_strength[]: 0.00409123593714
+3242}. Best is trial 1 with value: -2620.171198484414.[] 
+ []
+
+
+Overfull \hbox (1513.5633pt too wide) in paragraph at lines 11527--11527
+[]\TU/lmtt/m/n/10.95 [I 2025-05-16 07:01:24,805] Trial 18 finished with value: 
+-2799.2851339120025 and parameters: {[]learning_rate[]: 0.08913764405155444, []
+depth[]: 7, []l2_leaf_reg[]: 4.0696494316792653e-07, []min_data_in_leaf[]: 30, 
+[]bagging_temperature[]: 0.3238078952128749, []random_strength[]: 0.00122826359
+94702415}. Best is trial 1 with value: -2620.171198484414.[] 
+ []
+
+
+Overfull \hbox (1496.31705pt too wide) in paragraph at lines 11527--11527
+[]\TU/lmtt/m/n/10.95 [I 2025-05-16 07:01:36,339] Trial 19 finished with value: 
+-2772.5541221320145 and parameters: {[]learning_rate[]: 0.14059069364937926, []
+depth[]: 9, []l2_leaf_reg[]: 9.039692246883738e-05, []min_data_in_leaf[]: 23, [
+]bagging_temperature[]: 0.07579428007376465, []random_strength[]: 0.58962553503
+89338}. Best is trial 1 with value: -2620.171198484414.[] 
+ []
+
+
+Overfull \hbox (771.9747pt too wide) in paragraph at lines 11544--11544
+[]\TU/lmtt/m/n/10.95 Best parameters: {[]learning_rate[]: 0.05369228812155998, 
+[]depth[]: 7, []l2_leaf_reg[]: 2.5645654686725287e-07, []min_data_in_leaf[]: 28
+, []bagging_temperature[]: 0.03449070019194467, []random_strength[]: 2.20016283
+3623553}[] 
+ []
+
+
+Overfull \hbox (5054.79243pt too wide) in paragraph at lines 11544--11544
+[]\TU/lmtt/m/n/10.95 Best trial: FrozenTrial(number=1, state=1, values=[-2620.1
+71198484414], datetime_start=datetime.datetime(2025, 5, 16, 6, 53, 36, 439603),
+ datetime_complete=datetime.datetime(2025, 5, 16, 6, 54, 7, 518257), params={[]
+learning_rate[]: 0.05369228812155998, []depth[]: 7, []l2_leaf_reg[]: 2.56456546
+86725287e-07, []min_data_in_leaf[]: 28, []bagging_temperature[]: 0.034490700191
+94467, []random_strength[]: 2.200162833623553}, user_attrs={}, system_attrs={},
+ intermediate_values={}, distributions={[]learning_rate[]: FloatDistribution(hi
+gh=0.3, log=False, low=0.01, step=None), []depth[]: IntDistribution(high=10, lo
+g=False, low=4, step=1), []l2_leaf_reg[]: FloatDistribution(high=10.0, log=True
+, low=1e-08, step=None), []min_data_in_leaf[]: IntDistribution(high=30, log=Fal
+se, low=1, step=1), []bagging_temperature[]: FloatDistribution(high=1.0, log=Fa
+lse, low=0.0, step=None), []random_strength[]: FloatDistribution(high=10.0, log
+=True, low=1e-08, step=None)}, trial_id=1, value=None)[] 
+ []
+
+[234] [235]
+File: LightGBM_CatBoost_files/figure-pdf/cell-13-output-3.png Graphic file (typ
+e bmp)
+<LightGBM_CatBoost_files/figure-pdf/cell-13-output-3.png>
+[236] [237]
+Underfull \hbox (badness 10000) in paragraph at lines 11649--11653
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 11678--11679
+
+ []
+
+[238]
+Overfull \hbox (1.03813pt too wide) in paragraph at lines 11782--11782
+[]|\TU/lmr/m/n/10.95 XGBoost|  
+ []
+
+
+Overfull \hbox (8.74693pt too wide) in paragraph at lines 11784--11784
+[]|\TU/lmr/m/n/10.95 LightGBM|  
+ []
+
+
+Overfull \hbox (2.17694pt too wide) in paragraph at lines 11786--11786
+[]|\TU/lmr/m/n/10.95 CatBoost|  
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 11803--11806
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 11806--11808
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 11808--11810
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 11810--11812
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 11821--11824
+
+ []
+
+[239]
+Underfull \hbox (badness 10000) in paragraph at lines 11824--11826
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 11826--11829
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 11838--11841
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 11841--11844
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 11844--11846
+
+ []
+
+[240]
+chapter 12.
+[241
+
+] [242] [243]
+Overfull \hbox (54.44241pt too wide) in alignment at lines 12087--12098
+ [] [] [] [] [] [] [] [] [] [] [] 
+ []
+
+
+Package longtable Warning: Column widths have changed
+(longtable)                in table 12.1 on input line 12098.
+
+[244] [245]
+Overfull \hbox (7.39111pt too wide) in paragraph at lines 12201--12201
+[]                                     \TU/lmtt/m/n/10.95 enable_categorical=Tr
+ue, eval_metric=None,[] 
+ []
+
+
+Overfull \hbox (1.64236pt too wide) in paragraph at lines 12201--12201
+[]                                     \TU/lmtt/m/n/10.95 feature_types=None, f
+eature_weights=None,[] 
+ []
+
+
+Overfull \hbox (116.61734pt too wide) in paragraph at lines 12201--12201
+[]                             []\TU/lmtt/m/n/10.95 gamma[]: Real(low=0, high=5
+, prior=[]uniform[], transform=[]normalize[]),[] 
+ []
+
+
+Overfull \hbox (191.35107pt too wide) in paragraph at lines 12201--12201
+[]                             []\TU/lmtt/m/n/10.95 learning_rate[]: Real(low=0
+.01, high=0.3, prior=[]uniform[], transform=[]normalize[]),[] 
+ []
+
+
+Overfull \hbox (162.60733pt too wide) in paragraph at lines 12201--12201
+[]                             []\TU/lmtt/m/n/10.95 max_depth[]: Integer(low=5,
+ high=30, prior=[]uniform[], transform=[]normalize[]),[] 
+ []
+
+
+Overfull \hbox (191.35107pt too wide) in paragraph at lines 12201--12201
+[]                             []\TU/lmtt/m/n/10.95 n_estimators[]: Integer(low
+=50, high=500, prior=[]uniform[], transform=[]normalize[]),[] 
+ []
+
+
+Overfull \hbox (168.35608pt too wide) in paragraph at lines 12201--12201
+[]                             []\TU/lmtt/m/n/10.95 subsample[]: Real(low=0.5, 
+high=1.0, prior=[]uniform[], transform=[]normalize[])})[] 
+ []
+
+
+Overfull \hbox (473.03976pt too wide) in paragraph at lines 12232--12232
+[]\TU/lmtt/m/n/10.95 OrderedDict({[]colsample_bytree[]: 0.7800962787418171, []g
+amma[]: 5.0, []learning_rate[]: 0.03253670126492928, []max_depth[]: 5, []n_esti
+mators[]: 342, []subsample[]: 0.5})[] 
+ []
+
+[246]
+
+LaTeX Warning: File `smarter_hyper_tuning_files/figure-pdf/cell-8-output-1.png'
+ not found on input line 12291.
+
+! Unable to load picture or PDF file 'smarter_hyper_tuning_files/figure-pdf/cel
+l-8-output-1.png'.
+<to be read again> 
+                   }
+l.12291 ..._files/figure-pdf/cell-8-output-1.png}}
+                                                   
+Here is how much of TeX's memory you used:
+ 24835 strings out of 410654
+ 486785 string characters out of 2815893
+ 1149606 words of memory out of 3000000
+ 45532 multiletter control sequences out of 15000+600000
+ 475778 words of font info for 89 fonts, out of 8000000 for 9000
+ 1348 hyphenation exceptions out of 8191
+ 108i,8n,121p,10902b,609s stack positions out of 10000i,1000n,20000p,200000b,80000s
+
+Output written on index.pdf (246 pages).

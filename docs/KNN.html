@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>2&nbsp; KNN – Data Science III with python (Class notes)</title>
+<title>1&nbsp; KNN – Data Science III with python (Class notes)</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -64,8 +64,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./Hyperparameter tuning.html" rel="next">
-<link href="./Bias_variance_code.html" rel="prev">
+<link href="./Bias_variance_code.html" rel="next">
+<link href="./index.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -118,7 +118,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Bias_variance_code.html">Bias &amp; Variance; KNN</a></li><li class="breadcrumb-item"><a href="./KNN.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">KNN</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./KNN.html">Bias &amp; Variance; KNN</a></li><li class="breadcrumb-item"><a href="./KNN.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">KNN</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -163,20 +163,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Bias_variance_code.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Bias-variance tradeoff</span></span></a>
+  <a href="./KNN.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">KNN</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./KNN.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">KNN</span></span></a>
+  <a href="./Bias_variance_code.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Bias-variance tradeoff</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Hyperparameter tuning.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Hyperparameter tuning</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Basic Hyperparameter tuning</span></span></a>
   </div>
 </li>
       </ul>
@@ -241,13 +241,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./smarter_hyper_tuning.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Smarter Hyperparameter Optimization for Tree-Based Models</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Smarter Hyperparameter Tuning</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Lec10_Ensemble.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Ensemble modeling</span></span></a>
+  <a href="./voting_stacking.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Advanced Ensemble Learning</span></span></a>
   </div>
 </li>
       </ul>
@@ -303,17 +303,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#knn-for-regression" id="toc-knn-for-regression" class="nav-link active" data-scroll-target="#knn-for-regression"><span class="header-section-number">2.1</span> KNN for regression</a></li>
-  <li><a href="#feature-scaling-in-knn" id="toc-feature-scaling-in-knn" class="nav-link" data-scroll-target="#feature-scaling-in-knn"><span class="header-section-number">2.2</span> Feature Scaling in KNN</a></li>
-  <li><a href="#hyperparameters-in-knn" id="toc-hyperparameters-in-knn" class="nav-link" data-scroll-target="#hyperparameters-in-knn"><span class="header-section-number">2.3</span> Hyperparameters in KNN</a>
+  <li><a href="#knn-for-regression" id="toc-knn-for-regression" class="nav-link active" data-scroll-target="#knn-for-regression"><span class="header-section-number">1.1</span> KNN for regression</a></li>
+  <li><a href="#feature-scaling-in-knn" id="toc-feature-scaling-in-knn" class="nav-link" data-scroll-target="#feature-scaling-in-knn"><span class="header-section-number">1.2</span> Feature Scaling in KNN</a></li>
+  <li><a href="#hyperparameters-in-knn" id="toc-hyperparameters-in-knn" class="nav-link" data-scroll-target="#hyperparameters-in-knn"><span class="header-section-number">1.3</span> Hyperparameters in KNN</a>
   <ul>
-  <li><a href="#tuning-k-in-knn" id="toc-tuning-k-in-knn" class="nav-link" data-scroll-target="#tuning-k-in-knn"><span class="header-section-number">2.3.1</span> Tuning <em>k</em> in KNN</a></li>
-  <li><a href="#tuning-other-knn-hyperparameters" id="toc-tuning-other-knn-hyperparameters" class="nav-link" data-scroll-target="#tuning-other-knn-hyperparameters"><span class="header-section-number">2.3.2</span> Tuning Other KNN Hyperparameters</a></li>
+  <li><a href="#tuning-k-in-knn" id="toc-tuning-k-in-knn" class="nav-link" data-scroll-target="#tuning-k-in-knn"><span class="header-section-number">1.3.1</span> Tuning <em>k</em> in KNN</a></li>
+  <li><a href="#tuning-other-knn-hyperparameters" id="toc-tuning-other-knn-hyperparameters" class="nav-link" data-scroll-target="#tuning-other-knn-hyperparameters"><span class="header-section-number">1.3.2</span> Tuning Other KNN Hyperparameters</a></li>
   </ul></li>
-  <li><a href="#hyperparameter-tuning" id="toc-hyperparameter-tuning" class="nav-link" data-scroll-target="#hyperparameter-tuning"><span class="header-section-number">2.4</span> Hyperparameter Tuning</a>
+  <li><a href="#hyperparameter-tuning" id="toc-hyperparameter-tuning" class="nav-link" data-scroll-target="#hyperparameter-tuning"><span class="header-section-number">1.4</span> Hyperparameter Tuning</a>
   <ul>
-  <li><a href="#randomizedsearchcv" id="toc-randomizedsearchcv" class="nav-link" data-scroll-target="#randomizedsearchcv"><span class="header-section-number">2.4.0.1</span> RandomizedSearchCV</a></li>
-  <li><a href="#bayessearchcv" id="toc-bayessearchcv" class="nav-link" data-scroll-target="#bayessearchcv"><span class="header-section-number">2.4.0.2</span> BayesSearchCV</a></li>
+  <li><a href="#randomizedsearchcv" id="toc-randomizedsearchcv" class="nav-link" data-scroll-target="#randomizedsearchcv"><span class="header-section-number">1.4.0.1</span> RandomizedSearchCV</a></li>
+  <li><a href="#bayessearchcv" id="toc-bayessearchcv" class="nav-link" data-scroll-target="#bayessearchcv"><span class="header-section-number">1.4.0.2</span> BayesSearchCV</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -321,9 +321,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Bias_variance_code.html">Bias &amp; Variance; KNN</a></li><li class="breadcrumb-item"><a href="./KNN.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">KNN</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./KNN.html">Bias &amp; Variance; KNN</a></li><li class="breadcrumb-item"><a href="./KNN.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">KNN</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">KNN</span></h1>
+<h1 class="title"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">KNN</span></h1>
 </div>
 
 
@@ -359,8 +359,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> OneHotEncoder, FunctionTransformer</span>
 <span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> root_mean_squared_error, r2_score</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="knn-for-regression" class="level2" data-number="2.1">
-<h2 data-number="2.1" class="anchored" data-anchor-id="knn-for-regression"><span class="header-section-number">2.1</span> KNN for regression</h2>
+<section id="knn-for-regression" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="knn-for-regression"><span class="header-section-number">1.1</span> KNN for regression</h2>
 <div id="df5e47f8" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the dataset</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>car <span class="op">=</span> pd.read_csv(<span class="st">'Datasets/car.csv'</span>)</span>
@@ -448,8 +448,8 @@ categorical features in the pipeline: ['brand_audi' 'brand_bmw' 'brand_ford' 'br
 </div>
 </div>
 </section>
-<section id="feature-scaling-in-knn" class="level2" data-number="2.2">
-<h2 data-number="2.2" class="anchored" data-anchor-id="feature-scaling-in-knn"><span class="header-section-number">2.2</span> Feature Scaling in KNN</h2>
+<section id="feature-scaling-in-knn" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="feature-scaling-in-knn"><span class="header-section-number">1.2</span> Feature Scaling in KNN</h2>
 <p><strong>Feature scaling is essential when using K-Nearest Neighbors (KNN)</strong> because the algorithm relies on calculating distances between data points. If features are measured on different scales (e.g., <code>mileage</code> in thousands and <code>mpg</code> in tens), the features with larger numeric ranges can dominate the distance calculations and distort the results.</p>
 <p>To ensure that all features contribute equally, it’s important to <strong>standardize or normalize</strong> them before applying KNN. Common scaling techniques include:</p>
 <ul>
@@ -486,15 +486,15 @@ R² Score without scaling: 0.35</code></pre>
 </div>
 </div>
 </section>
-<section id="hyperparameters-in-knn" class="level2" data-number="2.3">
-<h2 data-number="2.3" class="anchored" data-anchor-id="hyperparameters-in-knn"><span class="header-section-number">2.3</span> Hyperparameters in KNN</h2>
+<section id="hyperparameters-in-knn" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="hyperparameters-in-knn"><span class="header-section-number">1.3</span> Hyperparameters in KNN</h2>
 <p>The most important hyperparameter in K-Nearest Neighbors (KNN) is <strong><em>k</em></strong>, which determines the number of neighbors considered when making predictions. Tuning <em>k</em> helps balance the model’s <strong>bias and variance</strong>:</p>
 <ul>
 <li>A <strong>small <em>k</em></strong> (e.g., 1 or 3) can lead to <strong>low bias but high variance</strong>, making the model sensitive to noise in the training data.</li>
 <li>A <strong>large <em>k</em></strong> results in <strong>higher bias but lower variance</strong>, producing smoother predictions that may underfit the data.</li>
 </ul>
-<section id="tuning-k-in-knn" class="level3" data-number="2.3.1">
-<h3 data-number="2.3.1" class="anchored" data-anchor-id="tuning-k-in-knn"><span class="header-section-number">2.3.1</span> Tuning <em>k</em> in KNN</h3>
+<section id="tuning-k-in-knn" class="level3" data-number="1.3.1">
+<h3 data-number="1.3.1" class="anchored" data-anchor-id="tuning-k-in-knn"><span class="header-section-number">1.3.1</span> Tuning <em>k</em> in KNN</h3>
 <p>To find the optimal value of <em>k</em>, it’s common to use <strong>cross-validation</strong>, which evaluates model performance on different subsets of the data. A popular tool for this is <strong><code>GridSearchCV</code></strong>, which automates the search process by testing multiple values of <em>k</em> using cross-validation behind the scenes. It selects the value of <em>k</em> that minimizes prediction error on unseen data—helping you achieve a good balance between underfitting and overfitting.</p>
 <div id="a8e5cf9f" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create parameter grid for k values</span></span>
@@ -642,8 +642,8 @@ Test R² Score with k=3: 0.94</code></pre>
 </div>
 </div>
 </section>
-<section id="tuning-other-knn-hyperparameters" class="level3" data-number="2.3.2">
-<h3 data-number="2.3.2" class="anchored" data-anchor-id="tuning-other-knn-hyperparameters"><span class="header-section-number">2.3.2</span> Tuning Other KNN Hyperparameters</h3>
+<section id="tuning-other-knn-hyperparameters" class="level3" data-number="1.3.2">
+<h3 data-number="1.3.2" class="anchored" data-anchor-id="tuning-other-knn-hyperparameters"><span class="header-section-number">1.3.2</span> Tuning Other KNN Hyperparameters</h3>
 <p>In addition to the number of neighbors (<em>k</em>), KNN has several other important hyperparameters that can significantly affect the model’s performance. Fine-tuning these settings helps you get the most out of the algorithm. Key hyperparameters include:</p>
 <ul>
 <li><strong><code>weights</code></strong>: Determines how the neighbors contribute to the prediction.
@@ -1067,12 +1067,12 @@ Test RMSE: 3826.94</code></pre>
 <p>The results show that the next two best hyperparameter values yield the same performance as the printed one</p>
 </section>
 </section>
-<section id="hyperparameter-tuning" class="level2" data-number="2.4">
-<h2 data-number="2.4" class="anchored" data-anchor-id="hyperparameter-tuning"><span class="header-section-number">2.4</span> Hyperparameter Tuning</h2>
+<section id="hyperparameter-tuning" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="hyperparameter-tuning"><span class="header-section-number">1.4</span> Hyperparameter Tuning</h2>
 <p>We used <code>GridSearchCV</code> to tune the hyperparameters of our KNN model above. Given a relatively simple set of hyperparameters and a limited number of combinations, this approach was sufficient to reduce the RMSE.</p>
 <p>However, when the number of possible hyperparameter values grows large, <code>GridSearchCV</code> can become computationally expensive. In such cases, <code>RandomizedSearchCV</code> provides a more efficient alternative by sampling a fixed number of random combinations from the specified hyperparameter space. This makes it well-suited for scenarios with limited computational resources.</p>
-<section id="randomizedsearchcv" class="level4" data-number="2.4.0.1">
-<h4 data-number="2.4.0.1" class="anchored" data-anchor-id="randomizedsearchcv"><span class="header-section-number">2.4.0.1</span> RandomizedSearchCV</h4>
+<section id="randomizedsearchcv" class="level4" data-number="1.4.0.1">
+<h4 data-number="1.4.0.1" class="anchored" data-anchor-id="randomizedsearchcv"><span class="header-section-number">1.4.0.1</span> RandomizedSearchCV</h4>
 <div id="22041a57" class="cell" data-execution_count="20">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> RandomizedSearchCV</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.stats <span class="im">import</span> randint</span>
@@ -1157,8 +1157,8 @@ Given the same computational budget, <code>RandomizedSearchCV</code> may cover m
 </ul>
 <p>In summary, <code>RandomizedSearchCV</code> is not only faster but can also lead to better models—especially when the hyperparameter space is large, continuous, or contains irrelevant parameters.</p>
 </section>
-<section id="bayessearchcv" class="level4" data-number="2.4.0.2">
-<h4 data-number="2.4.0.2" class="anchored" data-anchor-id="bayessearchcv"><span class="header-section-number">2.4.0.2</span> BayesSearchCV</h4>
+<section id="bayessearchcv" class="level4" data-number="1.4.0.2">
+<h4 data-number="1.4.0.2" class="anchored" data-anchor-id="bayessearchcv"><span class="header-section-number">1.4.0.2</span> BayesSearchCV</h4>
 <p>In addition to these methods, <strong><code>BayesSearchCV</code></strong>, based on Bayesian optimization, provides a more intelligent approach to hyperparameter tuning. It models the performance landscape and selects hyperparameter combinations to evaluate based on past results, often requiring fewer evaluations to find optimal or near-optimal values. This makes <code>BayesSearchCV</code> a powerful option, especially when training models is costly.</p>
 <div id="1cc4906d" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 1: Install scikit-optimize if not already installed</span></span>
@@ -1750,13 +1750,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./Bias_variance_code.html" class="pagination-link" aria-label="Bias-variance tradeoff">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Bias-variance tradeoff</span></span>
+      <a href="./index.html" class="pagination-link" aria-label="Preface">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Preface</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./Hyperparameter tuning.html" class="pagination-link" aria-label="Hyperparameter tuning">
-        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Hyperparameter tuning</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./Bias_variance_code.html" class="pagination-link" aria-label="Bias-variance tradeoff">
+        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Bias-variance tradeoff</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

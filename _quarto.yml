@@ -18,8 +18,8 @@ book:
     - index.qmd
     - part: "Bias & Variance; KNN"
       chapters:
-        - Bias_variance_code.ipynb
         - KNN.ipynb
+        - Bias_variance_code.ipynb
         - Hyperparameter tuning.ipynb
     - part: "Tree based models"
       chapters:
@@ -33,7 +33,7 @@ book:
         - XGBoost.ipynb
         - LightGBM_CatBoost.ipynb
         - smarter_hyper_tuning.ipynb
-        - Lec10_Ensemble.ipynb
+        - voting_stacking.ipynb
         
   appendices: 
     - Assignment1_sp25.ipynb

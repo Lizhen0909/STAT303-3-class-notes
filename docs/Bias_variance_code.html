@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>1&nbsp; Bias-variance tradeoff – Data Science III with python (Class notes)</title>
+<title>2&nbsp; Bias-variance tradeoff – Data Science III with python (Class notes)</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -64,8 +64,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./KNN.html" rel="next">
-<link href="./index.html" rel="prev">
+<link href="./Hyperparameter tuning.html" rel="next">
+<link href="./KNN.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -115,7 +115,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Bias_variance_code.html">Bias &amp; Variance; KNN</a></li><li class="breadcrumb-item"><a href="./Bias_variance_code.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Bias-variance tradeoff</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./KNN.html">Bias &amp; Variance; KNN</a></li><li class="breadcrumb-item"><a href="./Bias_variance_code.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Bias-variance tradeoff</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -160,20 +160,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Bias_variance_code.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Bias-variance tradeoff</span></span></a>
+  <a href="./KNN.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">KNN</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./KNN.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">KNN</span></span></a>
+  <a href="./Bias_variance_code.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Bias-variance tradeoff</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Hyperparameter tuning.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Hyperparameter tuning</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Basic Hyperparameter tuning</span></span></a>
   </div>
 </li>
       </ul>
@@ -238,13 +238,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./smarter_hyper_tuning.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Smarter Hyperparameter Optimization for Tree-Based Models</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Smarter Hyperparameter Tuning</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Lec10_Ensemble.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Ensemble modeling</span></span></a>
+  <a href="./voting_stacking.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Advanced Ensemble Learning</span></span></a>
   </div>
 </li>
       </ul>
@@ -300,17 +300,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#simple-model-less-flexible" id="toc-simple-model-less-flexible" class="nav-link active" data-scroll-target="#simple-model-less-flexible"><span class="header-section-number">1.1</span> Simple model (Less flexible)</a></li>
-  <li><a href="#complex-model-more-flexible" id="toc-complex-model-more-flexible" class="nav-link" data-scroll-target="#complex-model-more-flexible"><span class="header-section-number">1.2</span> Complex model (more flexible)</a></li>
+  <li><a href="#simple-model-less-flexible" id="toc-simple-model-less-flexible" class="nav-link active" data-scroll-target="#simple-model-less-flexible"><span class="header-section-number">2.1</span> Simple model (Less flexible)</a></li>
+  <li><a href="#complex-model-more-flexible" id="toc-complex-model-more-flexible" class="nav-link" data-scroll-target="#complex-model-more-flexible"><span class="header-section-number">2.2</span> Complex model (more flexible)</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Bias_variance_code.html">Bias &amp; Variance; KNN</a></li><li class="breadcrumb-item"><a href="./Bias_variance_code.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Bias-variance tradeoff</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./KNN.html">Bias &amp; Variance; KNN</a></li><li class="breadcrumb-item"><a href="./Bias_variance_code.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Bias-variance tradeoff</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Bias-variance tradeoff</span></h1>
+<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Bias-variance tradeoff</span></h1>
 </div>
 
 
@@ -342,8 +342,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.tree <span class="im">import</span> DecisionTreeRegressor</span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>sns.<span class="bu">set</span>(font_scale<span class="op">=</span><span class="fl">1.35</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="simple-model-less-flexible" class="level2" data-number="1.1">
-<h2 data-number="1.1" class="anchored" data-anchor-id="simple-model-less-flexible"><span class="header-section-number">1.1</span> Simple model (Less flexible)</h2>
+<section id="simple-model-less-flexible" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="simple-model-less-flexible"><span class="header-section-number">2.1</span> Simple model (Less flexible)</h2>
 <p>Let us consider a linear regression model as the less-flexible <em>(or relatively simple)</em> model.</p>
 <p>We will first simulate the test dataset for which we will compute the bias and variance.</p>
 <div id="70b3de8b" class="cell" data-execution_count="3">
@@ -433,8 +433,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>Note that this is exactly the same as the mean squared error computed above as we are developing a finite number of models, and making predictions on a finite number of test data points.</p>
 </section>
-<section id="complex-model-more-flexible" class="level2" data-number="1.2">
-<h2 data-number="1.2" class="anchored" data-anchor-id="complex-model-more-flexible"><span class="header-section-number">1.2</span> Complex model (more flexible)</h2>
+<section id="complex-model-more-flexible" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="complex-model-more-flexible"><span class="header-section-number">2.2</span> Complex model (more flexible)</h2>
 <p>Let us consider a decion tree as the more flexible model.</p>
 <div id="41a16e48" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">101</span>)</span>
@@ -915,13 +915,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./index.html" class="pagination-link" aria-label="Preface">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Preface</span>
+      <a href="./KNN.html" class="pagination-link" aria-label="KNN">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">KNN</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./KNN.html" class="pagination-link" aria-label="KNN">
-        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">KNN</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./Hyperparameter tuning.html" class="pagination-link" aria-label="Basic Hyperparameter tuning">
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Basic Hyperparameter tuning</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

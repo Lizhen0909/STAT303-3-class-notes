@@ -332,9 +332,9 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#why-ensemble-diverse-models" id="toc-why-ensemble-diverse-models" class="nav-link active" data-scroll-target="#why-ensemble-diverse-models"><span class="header-section-number">13.1</span> Why Ensemble Diverse Models:</a>
+  <li><a href="#why-ensemble-diverse-models" id="toc-why-ensemble-diverse-models" class="nav-link active" data-scroll-target="#why-ensemble-diverse-models"><span class="header-section-number">13.1</span> Why Ensemble Diverse Models</a>
   <ul>
-  <li><a href="#mathematical-justification-for-ensembles" id="toc-mathematical-justification-for-ensembles" class="nav-link" data-scroll-target="#mathematical-justification-for-ensembles"><span class="header-section-number">13.1.1</span> Mathematical Justification for Ensembles</a></li>
+  <li><a href="#mathematical-justification" id="toc-mathematical-justification" class="nav-link" data-scroll-target="#mathematical-justification"><span class="header-section-number">13.1.1</span> Mathematical Justification</a></li>
   </ul></li>
   <li><a href="#combining-model-predictions-two-common-approaches" id="toc-combining-model-predictions-two-common-approaches" class="nav-link" data-scroll-target="#combining-model-predictions-two-common-approaches"><span class="header-section-number">13.2</span> Combining Model Predictions: Two Common Approaches</a></li>
   <li><a href="#exploring-stacking-and-voting-in-regression" id="toc-exploring-stacking-and-voting-in-regression" class="nav-link" data-scroll-target="#exploring-stacking-and-voting-in-regression"><span class="header-section-number">13.3</span> Exploring Stacking and Voting in Regression</a>
@@ -403,7 +403,7 @@ window.Quarto = {
 </ul>
 <p>In this chapter, we’ll go a step further and explore ensembles that <strong>combine different types of models</strong>. For example, we might ensemble a linear regression model, a random forest, and a gradient boosting model. The goal is to build stronger predictors by combining models that complement each other’s strengths and weaknesses.</p>
 <section id="why-ensemble-diverse-models" class="level2" data-number="13.1">
-<h2 data-number="13.1" class="anchored" data-anchor-id="why-ensemble-diverse-models"><span class="header-section-number">13.1</span> Why Ensemble Diverse Models:</h2>
+<h2 data-number="13.1" class="anchored" data-anchor-id="why-ensemble-diverse-models"><span class="header-section-number">13.1</span> Why Ensemble Diverse Models</h2>
 <p><strong>Bias Reduction:</strong></p>
 <ul>
 <li>Different models often exhibit distinct biases. For example, a linear regression model might underfit complex patterns, while a Random Forest might overfit noisy data. Combining their predictions can mitigate these biases, leading to a more generalized model.</li>
@@ -414,10 +414,10 @@ window.Quarto = {
 <li>As seen with Random Forests, averaging predictions from multiple models reduces variance, especially when the models are uncorrelated (recall the variance reduction formula for bagging).</li>
 <li><strong>Key Requirement</strong>: For effective variance reduction, the models should have low correlation in their predictions.</li>
 </ul>
-<section id="mathematical-justification-for-ensembles" class="level3" data-number="13.1.1">
-<h3 data-number="13.1.1" class="anchored" data-anchor-id="mathematical-justification-for-ensembles"><span class="header-section-number">13.1.1</span> Mathematical Justification for Ensembles</h3>
+<section id="mathematical-justification" class="level3" data-number="13.1.1">
+<h3 data-number="13.1.1" class="anchored" data-anchor-id="mathematical-justification"><span class="header-section-number">13.1.1</span> Mathematical Justification</h3>
 <p>We can mathematically illustrate how ensembling improves prediction accuracy using the case of regression.<br>
-Let the predictors be denoted by ( X ), and the response by ( Y ). Assume we have ( m ) individual models $( f_1, f_2, , f_m $). The ensemble predictor is the average:</p>
+Let the predictors be denoted by ( X ), and the response by ( Y ). Assume we have ( m ) individual models ( f_1, f_2, , f_m ). The ensemble predictor is the average:</p>
 <p><span class="math display">\[
 \hat{f}_{ensemble}(X) = \frac{1}{m} \sum_{i=1}^{m} f_i(X)
 \]</span></p>
@@ -432,7 +432,7 @@ E(MSE_{Ensemble}) = \frac{1}{m^2} \sum_{i = 1}^{m} E\left[(f_i(X) - Y)^2 \right]
 <p><span class="math display">\[
 = \frac{1}{m} \left( \frac{1}{m} \sum_{i=1}^m E(MSE_{f_i}) \right) + \frac{1}{m^2} \sum_{i \ne j} E\left[(f_i(X) - Y)(f_j(X) - Y) \right]
 \]</span></p>
-<p>If the individual models $( f_1, , f_m $) are <strong>unbiased</strong>, the cross terms become covariances:</p>
+<p>If the individual models ( f_1, , f_m ) are <strong>unbiased</strong>, the cross terms become covariances:</p>
 <p><span class="math display">\[
 E(MSE_{Ensemble}) = \frac{1}{m} \left( \frac{1}{m} \sum_{i=1}^m E(MSE_{f_i}) \right) + \frac{1}{m^2} \sum_{i \ne j} Cov(f_i(X), f_j(X))
 \]</span></p>

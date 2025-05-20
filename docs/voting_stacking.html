@@ -450,9 +450,17 @@ E(MSE_{Ensemble}) = \frac{1}{m} \left( \frac{1}{m} \sum_{i=1}^m E(MSE_{f_i}) \ri
 <h2 data-number="13.2" class="anchored" data-anchor-id="combining-model-predictions-two-common-approaches"><span class="header-section-number">13.2</span> Combining Model Predictions: Two Common Approaches</h2>
 <p>There are two widely used methods for combining model predictions in ensemble learning:</p>
 <ul>
-<li><p><strong>Voting</strong>: Combines the predictions of multiple models directly. In classification, this could be majority voting; in regression, it’s often simple averaging. Voting is intuitive and works well when the base models are reasonably strong and diverse.</p></li>
-<li><p><strong>Stacking</strong>: Trains a new model (called a <strong>meta-learner</strong>) to learn how to best combine the predictions of the base models. Stacking can capture more complex relationships among the models and often yields higher accuracy, especially when base models differ significantly in structure or behavior.</p></li>
+<li><strong>Voting</strong>: Combines the predictions of multiple models directly. In classification, this could be majority voting; in regression, it’s often simple averaging. Voting is intuitive and works well when the base models are reasonably strong and diverse.</li>
 </ul>
+<p>The idea behind voting is similar to bagging in that it combines predictions from multiple models by averaging their predictions. However, unlike bagging which typically uses homogeneous models (e.g., multiple decision trees), voting allows for combining <strong>heterogeneous models</strong>—different types of algorithms—to leverage their individual strengths.</p>
+<ul>
+<li><strong>Stacking</strong>: Trains a new model (called a <strong>meta-learner</strong>) to learn how to best combine the predictions of the base models. Stacking can capture more complex relationships among the models and often yields higher accuracy, especially when base models differ significantly in structure or behavior.</li>
+</ul>
+<div id="7066e59a" class="cell" data-execution_count="3">
+<div class="cell-output cell-output-display" data-execution_count="3">
+<img src="./Datasets/stacking.jpg" width="400" height="200">
+</div>
+</div>
 </section>
 <section id="exploring-stacking-and-voting-in-regression" class="level2" data-number="13.3">
 <h2 data-number="13.3" class="anchored" data-anchor-id="exploring-stacking-and-voting-in-regression"><span class="header-section-number">13.3</span> Exploring Stacking and Voting in Regression</h2>
@@ -712,12 +720,6 @@ E(MSE_{Ensemble}) = \frac{1}{m} \left( \frac{1}{m} \sum_{i=1}^m E(MSE_{f_i}) \ri
 <section id="voting-regressor" class="level3" data-number="13.3.1">
 <h3 data-number="13.3.1" class="anchored" data-anchor-id="voting-regressor"><span class="header-section-number">13.3.1</span> Voting Regressor</h3>
 <p>In this section, Next, we will build an ensemble model, starting with <strong>voting regressor</strong>, which assigns <strong>equal weight</strong> to each base model. In this approach, all predictions are treated equally when averaged to produce the final combined prediction.</p>
-<div id="869882dc" class="cell" data-execution_count="7">
-<div class="cell-output cell-output-display" data-execution_count="7">
-<img src="./Datasets/voting_vs_bagging.webp" width="400" height="200">
-</div>
-</div>
-<p>The idea behind voting is similar to bagging in that it combines predictions from multiple models by averaging their predictions. However, unlike bagging which typically uses homogeneous models (e.g., multiple decision trees), voting allows for combining <strong>heterogeneous models</strong>—different types of algorithms—to leverage their individual strengths.</p>
 <p>Below is how you can <strong>ensemble the same models</strong> using VotingRegressor with the same preprocessor in a pipeline</p>
 <div id="8ae9a01a" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define base regressors (same as before)</span></span>
@@ -1352,11 +1354,6 @@ Instead of assigning equal importance to each model, assign weights based on the
 <section id="stacking-regressor" class="level3" data-number="13.3.2">
 <h3 data-number="13.3.2" class="anchored" data-anchor-id="stacking-regressor"><span class="header-section-number">13.3.2</span> Stacking Regressor</h3>
 <p><strong>Stacking</strong> is a more sophisticated ensembling technique that learns how to best combine multiple base models using a separate meta-model (also called the <code>final_estimator</code>).</p>
-<div id="64ba1531" class="cell" data-execution_count="10">
-<div class="cell-output cell-output-display" data-execution_count="10">
-<img src="./Datasets/Stacking-in-ml.png" width="800" height="500">
-</div>
-</div>
 <p>Here’s how the process works:</p>
 <ol type="1">
 <li><p><strong>Cross-validated predictions for base models</strong><br>

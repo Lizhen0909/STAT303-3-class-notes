@@ -395,6 +395,11 @@ window.Quarto = {
 </header>
 
 
+<div id="beafd715" class="cell" data-execution_count="11">
+<div class="cell-output cell-output-display" data-execution_count="11">
+<img src="./Datasets/ensemble_learning.png">
+</div>
+</div>
 <p>Ensembling models can improve predictive performance by leveraging the <strong>diversity</strong> and <strong>collective wisdom</strong> of multiple models. Instead of relying on a single model, we train several individual models and combine their predictions to make a final decision.</p>
 <p>We have already seen ensemble methods like bagging and boosting. These ensembles primarily reduce error by:</p>
 <ul>
@@ -452,13 +457,18 @@ E(MSE_{Ensemble}) = \frac{1}{m} \left( \frac{1}{m} \sum_{i=1}^m E(MSE_{f_i}) \ri
 <ul>
 <li><strong>Voting</strong>: Combines the predictions of multiple models directly. In classification, this could be majority voting; in regression, it’s often simple averaging. Voting is intuitive and works well when the base models are reasonably strong and diverse.</li>
 </ul>
+<div id="d7e5c69f" class="cell" data-execution_count="9">
+<div class="cell-output cell-output-display" data-execution_count="9">
+<img src="./Datasets/voting_vs_bagging.webp" width="500" height="250">
+</div>
+</div>
 <p>The idea behind voting is similar to bagging in that it combines predictions from multiple models by averaging their predictions. However, unlike bagging which typically uses homogeneous models (e.g., multiple decision trees), voting allows for combining <strong>heterogeneous models</strong>—different types of algorithms—to leverage their individual strengths.</p>
 <ul>
 <li><strong>Stacking</strong>: Trains a new model (called a <strong>meta-learner</strong>) to learn how to best combine the predictions of the base models. Stacking can capture more complex relationships among the models and often yields higher accuracy, especially when base models differ significantly in structure or behavior.</li>
 </ul>
-<div id="7066e59a" class="cell" data-execution_count="3">
-<div class="cell-output cell-output-display" data-execution_count="3">
-<img src="./Datasets/stacking.jpg" width="400" height="200">
+<div id="7066e59a" class="cell" data-execution_count="6">
+<div class="cell-output cell-output-display" data-execution_count="6">
+<img src="./Datasets/stacking.jpg" width="600" height="300">
 </div>
 </div>
 </section>

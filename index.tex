@@ -6059,6 +6059,10 @@ performance.
 
 \chapter{Adaptive Boosting}\label{adaptive-boosting}
 
+\begin{verbatim}
+<IPython.core.display.Image object>
+\end{verbatim}
+
 After learning how Bagging and Random Forest reduce variance by
 aggregating many trees,\\
 we now turn to a different strategy: \textbf{Boosting}.
@@ -6467,7 +6471,7 @@ leading to better generalization.
 >33 3754.727 (417.368)
 \end{verbatim}
 
-\pandocbounded{\includegraphics[keepaspectratio]{adaboost_files/figure-pdf/cell-8-output-2.png}}
+\pandocbounded{\includegraphics[keepaspectratio]{adaboost_files/figure-pdf/cell-9-output-2.png}}
 
 As shown in the plot, very shallow trees (e.g., \texttt{max\_depth=1} to
 \texttt{3}) result in high cross-validation error due to underfitting.\\
@@ -6582,7 +6586,7 @@ unstable learning \\
 >1.0 10508.4 (507.6)
 \end{verbatim}
 
-\pandocbounded{\includegraphics[keepaspectratio]{adaboost_files/figure-pdf/cell-9-output-2.png}}
+\pandocbounded{\includegraphics[keepaspectratio]{adaboost_files/figure-pdf/cell-10-output-2.png}}
 
 The plot shows that moderate learning rates (0.1--0.2) yield the best
 and most stable model performance, while very small or very large values
@@ -6664,7 +6668,7 @@ cross-validation.
 >500 10024.047 (421.340)
 \end{verbatim}
 
-\pandocbounded{\includegraphics[keepaspectratio]{adaboost_files/figure-pdf/cell-10-output-2.png}}
+\pandocbounded{\includegraphics[keepaspectratio]{adaboost_files/figure-pdf/cell-11-output-2.png}}
 
 With a learning rate of 0.1, the validation error initially decreases,
 then levels off, and eventually starts to increase --- indicating that
@@ -6819,7 +6823,7 @@ cross-validation.
 \end{Highlighting}
 \end{Shaded}
 
-\pandocbounded{\includegraphics[keepaspectratio]{adaboost_files/figure-pdf/cell-14-output-1.png}}
+\pandocbounded{\includegraphics[keepaspectratio]{adaboost_files/figure-pdf/cell-15-output-1.png}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -6909,7 +6913,7 @@ Results}{Analyzing BayesSearchCV Results}}\label{analyzing-bayessearchcv-results
 \end{Highlighting}
 \end{Shaded}
 
-\pandocbounded{\includegraphics[keepaspectratio]{adaboost_files/figure-pdf/cell-16-output-1.png}}
+\pandocbounded{\includegraphics[keepaspectratio]{adaboost_files/figure-pdf/cell-17-output-1.png}}
 
 3D scatterplot
 
@@ -6950,7 +6954,7 @@ Results}{Analyzing BayesSearchCV Results}}\label{analyzing-bayessearchcv-results
 \end{Highlighting}
 \end{Shaded}
 
-\pandocbounded{\includegraphics[keepaspectratio]{adaboost_files/figure-pdf/cell-17-output-1.png}}
+\pandocbounded{\includegraphics[keepaspectratio]{adaboost_files/figure-pdf/cell-18-output-1.png}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -7000,7 +7004,7 @@ Let's analyze radeoffs/interactions
 \end{Highlighting}
 \end{Shaded}
 
-\pandocbounded{\includegraphics[keepaspectratio]{adaboost_files/figure-pdf/cell-19-output-1.png}}
+\pandocbounded{\includegraphics[keepaspectratio]{adaboost_files/figure-pdf/cell-20-output-1.png}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -7012,7 +7016,7 @@ Let's analyze radeoffs/interactions
 \end{Highlighting}
 \end{Shaded}
 
-\pandocbounded{\includegraphics[keepaspectratio]{adaboost_files/figure-pdf/cell-20-output-1.png}}
+\pandocbounded{\includegraphics[keepaspectratio]{adaboost_files/figure-pdf/cell-21-output-1.png}}
 
 \subsection{Using Optuna for Hyperparameter
 Tuning}\label{using-optuna-for-hyperparameter-tuning}
@@ -7253,12 +7257,9 @@ Unable to display output for mime type(s): application/vnd.plotly.v1+json
 
 \chapter{Gradient Boosting}\label{gradient-boosting}
 
-\emph{Note that in this course, lecture notes are not sufficient, you
-must read the book for better understanding. Lecture notes are just
-implementing the concepts of the book on a dataset, but not explaining
-the concepts elaborately.}
-
-\section{What is Gradient Boosting?}\label{what-is-gradient-boosting}
+\begin{verbatim}
+<IPython.core.display.Image object>
+\end{verbatim}
 
 Gradient Boosting is a \textbf{boosting technique} that builds an
 additive model in a forward stage-wise manner. Unlike AdaBoost, which
@@ -7653,7 +7654,7 @@ cross-validation.
 Best number of trees: 1500 with RMSE: 3039.520
 \end{verbatim}
 
-\pandocbounded{\includegraphics[keepaspectratio]{Gradient_Boosting_files/figure-pdf/cell-6-output-2.png}}
+\pandocbounded{\includegraphics[keepaspectratio]{Gradient_Boosting_files/figure-pdf/cell-7-output-2.png}}
 
 \subsubsection{Early stopping in Gradient
 Boosting}\label{early-stopping-in-gradient-boosting}
@@ -7813,7 +7814,7 @@ Let's visulize Comparison. It includes three subplots:
 \end{Highlighting}
 \end{Shaded}
 
-\pandocbounded{\includegraphics[keepaspectratio]{Gradient_Boosting_files/figure-pdf/cell-9-output-1.png}}
+\pandocbounded{\includegraphics[keepaspectratio]{Gradient_Boosting_files/figure-pdf/cell-10-output-1.png}}
 
 The difference in training error between the \texttt{gbm\_full} and the
 \texttt{gbm\_early\_stopping} stems from the fact that\\
@@ -7933,7 +7934,7 @@ prediction error while ensuring model stability.
 >1.00 4208.3 (368.5)
 \end{verbatim}
 
-\pandocbounded{\includegraphics[keepaspectratio]{Gradient_Boosting_files/figure-pdf/cell-10-output-2.png}}
+\pandocbounded{\includegraphics[keepaspectratio]{Gradient_Boosting_files/figure-pdf/cell-11-output-2.png}}
 
 \begin{verbatim}
 
@@ -8059,7 +8060,7 @@ Fitting 5 folds for each of 81 candidates, totalling 405 fits
 \end{Highlighting}
 \end{Shaded}
 
-\pandocbounded{\includegraphics[keepaspectratio]{Gradient_Boosting_files/figure-pdf/cell-12-output-1.png}}
+\pandocbounded{\includegraphics[keepaspectratio]{Gradient_Boosting_files/figure-pdf/cell-13-output-1.png}}
 
 \begin{verbatim}
 Best RMSE: 3748.534 at subsample = 0.5, max_features = 0.7
@@ -8276,7 +8277,7 @@ Best CV RMSE: 3142.483
 \end{Highlighting}
 \end{Shaded}
 
-\pandocbounded{\includegraphics[keepaspectratio]{Gradient_Boosting_files/figure-pdf/cell-14-output-1.png}}
+\pandocbounded{\includegraphics[keepaspectratio]{Gradient_Boosting_files/figure-pdf/cell-15-output-1.png}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -8289,7 +8290,7 @@ Best CV RMSE: 3142.483
 \end{Highlighting}
 \end{Shaded}
 
-\pandocbounded{\includegraphics[keepaspectratio]{Gradient_Boosting_files/figure-pdf/cell-15-output-1.png}}
+\pandocbounded{\includegraphics[keepaspectratio]{Gradient_Boosting_files/figure-pdf/cell-16-output-1.png}}
 
 \subsubsection{Hyperparameter Optimization with
 Optuna}\label{hyperparameter-optimization-with-optuna}
@@ -8559,7 +8560,9 @@ No.~5, pp.~1189--1232\\
 
 \chapter{XGBoost}\label{xgboost}
 
-\section{What is XGBoost?}\label{what-is-xgboost}
+\begin{verbatim}
+<IPython.core.display.Image object>
+\end{verbatim}
 
 \textbf{XGBoost} (Extreme Gradient Boosting) is a scalable and efficient
 implementation of gradient boosting developed by Tianqi Chen and Carlos
@@ -9126,7 +9129,7 @@ R² Score: 0.9622
 \end{Highlighting}
 \end{Shaded}
 
-\pandocbounded{\includegraphics[keepaspectratio]{XGBoost_files/figure-pdf/cell-10-output-1.png}}
+\pandocbounded{\includegraphics[keepaspectratio]{XGBoost_files/figure-pdf/cell-11-output-1.png}}
 
 \textbf{Effect of \texttt{gamma} on XGBoost Performance}
 
@@ -9319,7 +9322,7 @@ R² Score: 0.9570
 \end{Highlighting}
 \end{Shaded}
 
-\pandocbounded{\includegraphics[keepaspectratio]{XGBoost_files/figure-pdf/cell-12-output-1.png}}
+\pandocbounded{\includegraphics[keepaspectratio]{XGBoost_files/figure-pdf/cell-13-output-1.png}}
 
 \subsection{Exploring Regularization Hyperparameters
 Simultaneously}\label{exploring-regularization-hyperparameters-simultaneously}
@@ -9739,7 +9742,7 @@ Let's visualize the search results
 \end{Highlighting}
 \end{Shaded}
 
-\pandocbounded{\includegraphics[keepaspectratio]{XGBoost_files/figure-pdf/cell-16-output-1.png}}
+\pandocbounded{\includegraphics[keepaspectratio]{XGBoost_files/figure-pdf/cell-17-output-1.png}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -9752,7 +9755,7 @@ Let's visualize the search results
 \end{Highlighting}
 \end{Shaded}
 
-\pandocbounded{\includegraphics[keepaspectratio]{XGBoost_files/figure-pdf/cell-17-output-1.png}}
+\pandocbounded{\includegraphics[keepaspectratio]{XGBoost_files/figure-pdf/cell-18-output-1.png}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -9800,7 +9803,7 @@ R² Score: 0.9676
 \end{Highlighting}
 \end{Shaded}
 
-\pandocbounded{\includegraphics[keepaspectratio]{XGBoost_files/figure-pdf/cell-19-output-1.png}}
+\pandocbounded{\includegraphics[keepaspectratio]{XGBoost_files/figure-pdf/cell-20-output-1.png}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -10368,7 +10371,7 @@ Best Recall: 0.67
 \end{Highlighting}
 \end{Shaded}
 
-\pandocbounded{\includegraphics[keepaspectratio]{XGBoost_files/figure-pdf/cell-29-output-1.png}}
+\pandocbounded{\includegraphics[keepaspectratio]{XGBoost_files/figure-pdf/cell-30-output-1.png}}
 
 Tuning \texttt{scale\_pos\_weight} changes the \textbf{model's internal
 learning dynamics}, not just the decision threshold. This allows the
@@ -10441,7 +10444,7 @@ Precision with Adjusted Threshold: 0.68
 Recall with Adjusted Threshold: 0.82
 \end{verbatim}
 
-\pandocbounded{\includegraphics[keepaspectratio]{XGBoost_files/figure-pdf/cell-30-output-2.png}}
+\pandocbounded{\includegraphics[keepaspectratio]{XGBoost_files/figure-pdf/cell-31-output-2.png}}
 
 \subsection{\texorpdfstring{Alternative Method: Custom Instance Weights
 (\texttt{sample\_weight})}{Alternative Method: Custom Instance Weights (sample\_weight)}}\label{alternative-method-custom-instance-weights-sample_weight}
@@ -10546,6 +10549,10 @@ resources:
 \end{itemize}
 
 \chapter{LightGBM and CatBoost}\label{lightgbm-and-catboost}
+
+\begin{verbatim}
+<IPython.core.display.Image object>
+\end{verbatim}
 
 Gradient boosting is one of the most powerful techniques for
 \textbf{structured/tabular data}, often serving as the \textbf{go-to
@@ -11691,7 +11698,7 @@ Unable to display output for mime type(s): application/vnd.plotly.v1+json
 Unable to display output for mime type(s): application/vnd.plotly.v1+json
 \end{verbatim}
 
-\pandocbounded{\includegraphics[keepaspectratio]{LightGBM_CatBoost_files/figure-pdf/cell-13-output-3.png}}
+\pandocbounded{\includegraphics[keepaspectratio]{LightGBM_CatBoost_files/figure-pdf/cell-14-output-3.png}}
 
 Check the
 \href{https://catboost.ai/en/docs/references/training-parameters/common}{documentation}
@@ -11948,6 +11955,10 @@ guideline:
 \chapter{Smarter Hyperparameter
 Tuning}\label{smarter-hyperparameter-tuning}
 
+\begin{verbatim}
+<IPython.core.display.Image object>
+\end{verbatim}
+
 Tree-based models, like decision trees, random forests, and boosting
 algorithms (e.g., XGBoost, LightGBM, CatBoost), benefit significantly
 from hyperparameter optimization. Tools like \texttt{GridSearchCV},
@@ -12058,23 +12069,29 @@ distributions.
 \textbf{computational resources are limited} but the search space is
 large.
 
-\section{Challenges with Boosting
-Models}\label{challenges-with-boosting-models}
+\section{Smarter Tuning for Complex
+Models}\label{smarter-tuning-for-complex-models}
 
-Boosting models (e.g., Gradient Boosting, XGBoost, LightGBM) are
-powerful but have \textbf{many hyperparameters} (e.g., learning rate,
-max depth, number of estimators, regularization terms). This complexity
-makes \texttt{GridSearchCV} impractical and \texttt{RandomizedSearchCV}
-suboptimal, as random sampling can be inefficient in high-dimensional
-spaces.
+For boosting models, neural networks, and other high-dimensional
+algorithms, hyperparameter tuning becomes especially challenging.
+Boosting models---such as \textbf{Gradient Boosting}, \textbf{XGBoost},
+and \textbf{LightGBM}---are powerful but come with a large number of
+hyperparameters, including learning rate, max depth, number of
+estimators, and regularization terms. Many of these parameters exist in
+a \textbf{continuous space}, rather than a simple set of discrete
+options.
 
-\section{Smarter Alternatives for Complex
-Models}\label{smarter-alternatives-for-complex-models}
+This complexity makes \textbf{GridSearchCV} computationally expensive
+and often impractical. Even \textbf{RandomizedSearchCV}, while more
+efficient, can be suboptimal in high-dimensional or continuous search
+spaces due to its purely random sampling strategy.
 
-For boosting models, neural networks, or other high-dimensional
-algorithms, intelligent optimization methods outperform traditional
-approaches by efficiently exploring the hyperparameter space. Here are
-the top alternatives:
+To overcome these limitations, more advanced hyperparameter optimization
+techniques have been developed. These methods efficiently explore the
+hyperparameter space and often achieve better performance with fewer
+evaluations.
+
+Below, we introduce two such approaches.
 
 \subsection{\texorpdfstring{\texttt{BayesSearchCV} (Bayesian
 Optimization)}{BayesSearchCV (Bayesian Optimization)}}\label{bayessearchcv-bayesian-optimization}
@@ -12362,7 +12379,7 @@ Let's plot the convergence first
 \end{Highlighting}
 \end{Shaded}
 
-\pandocbounded{\includegraphics[keepaspectratio]{smarter_hyper_tuning_files/figure-pdf/cell-8-output-1.png}}
+\pandocbounded{\includegraphics[keepaspectratio]{smarter_hyper_tuning_files/figure-pdf/cell-9-output-1.png}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -12421,7 +12438,7 @@ Let's plot the objective next
 \end{Highlighting}
 \end{Shaded}
 
-\pandocbounded{\includegraphics[keepaspectratio]{smarter_hyper_tuning_files/figure-pdf/cell-10-output-1.png}}
+\pandocbounded{\includegraphics[keepaspectratio]{smarter_hyper_tuning_files/figure-pdf/cell-11-output-1.png}}
 
 Let's plot evalutions next
 
@@ -12434,7 +12451,7 @@ Let's plot evalutions next
 \end{Highlighting}
 \end{Shaded}
 
-\pandocbounded{\includegraphics[keepaspectratio]{smarter_hyper_tuning_files/figure-pdf/cell-11-output-1.png}}
+\pandocbounded{\includegraphics[keepaspectratio]{smarter_hyper_tuning_files/figure-pdf/cell-12-output-1.png}}
 
 Let's visualize parameter distributions next
 
@@ -12468,7 +12485,7 @@ Let's visualize parameter distributions next
 \end{Highlighting}
 \end{Shaded}
 
-\pandocbounded{\includegraphics[keepaspectratio]{smarter_hyper_tuning_files/figure-pdf/cell-12-output-1.png}}
+\pandocbounded{\includegraphics[keepaspectratio]{smarter_hyper_tuning_files/figure-pdf/cell-13-output-1.png}}
 
 \subsubsection{Next Steps for Hyperparameter
 Tuning}\label{next-steps-for-hyperparameter-tuning}
@@ -12611,7 +12628,7 @@ these steps.
 \end{Highlighting}
 \end{Shaded}
 
-\pandocbounded{\includegraphics[keepaspectratio]{smarter_hyper_tuning_files/figure-pdf/cell-15-output-1.png}}
+\pandocbounded{\includegraphics[keepaspectratio]{smarter_hyper_tuning_files/figure-pdf/cell-16-output-1.png}}
 
 With 75 iterations, the search appears sufficient, as the objective
 value stabilizes
@@ -12995,15 +13012,46 @@ different samplers. The default settings are robust and adaptive, so for
 most practical use cases, tuning Optuna's internal configuration is not
 necessary.
 
-\section{AutoML (Fast and Lightweight
-AutoML)}\label{automl-fast-and-lightweight-automl}
+\section{AutoML}\label{automl}
 
-\textbf{FLAML} is a lightweight and efficient AutoML library developed
-by Microsoft Research. It's designed for fast and economical
-hyperparameter optimization and model selection without relying on
-expensive Bayesian optimization.
+\textbf{Automated Machine Learning (AutoML)} refers to the process of
+automating the end-to-end tasks of applying machine learning to
+real-world problems. This includes model selection, hyperparameter
+tuning, data preprocessing, and even ensemble building---reducing the
+need for manual intervention and expert knowledge.
 
-you need to install FLAML
+AutoML tools are especially useful when you want to: - Quickly benchmark
+multiple models, - Optimize hyperparameters efficiently, - Reduce the
+time and effort needed for model development.
+
+\subsection{FLAML: A Lightweight AutoML
+Library}\label{flaml-a-lightweight-automl-library}
+
+\textbf{FLAML} (Fast and Lightweight AutoML) is an open-source AutoML
+library developed by Microsoft Research. It is designed for
+\textbf{fast, cost-effective}, and \textbf{resource-efficient} model
+selection and hyperparameter optimization.
+
+Unlike many other AutoML tools, FLAML:
+
+\begin{itemize}
+\tightlist
+\item
+  Avoids expensive Bayesian optimization,
+\item
+  Uses \textbf{greedy search strategies} with built-in heuristics,
+\item
+  Supports regression, classification, and time series tasks,
+\item
+  Is easy to integrate into existing machine learning pipelines.
+\end{itemize}
+
+FLAML is particularly well-suited for scenarios where computational
+resources are limited or quick iteration is needed.
+
+Just like \textbf{Optuna}, \textbf{FLAML} needs to be installed
+separately, as it's not part of the standard Python library. You can
+install it using the following command:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -13239,6 +13287,10 @@ doing.
 
 \chapter{Advanced Ensemble Learning}\label{advanced-ensemble-learning}
 
+\begin{verbatim}
+<IPython.core.display.Image object>
+\end{verbatim}
+
 Ensembling models can improve predictive performance by leveraging the
 \textbf{diversity} and \textbf{collective wisdom} of multiple models.
 Instead of relying on a single model, we train several individual models
@@ -13260,8 +13312,7 @@ ensemble a linear regression model, a random forest, and a gradient
 boosting model. The goal is to build stronger predictors by combining
 models that complement each other's strengths and weaknesses.
 
-\section{Why Ensemble Diverse
-Models:}\label{why-ensemble-diverse-models}
+\section{Why Ensemble Diverse Models}\label{why-ensemble-diverse-models}
 
 \textbf{Bias Reduction:}
 
@@ -13291,14 +13342,14 @@ Models:}\label{why-ensemble-diverse-models}
   should have low correlation in their predictions.
 \end{itemize}
 
-\subsection{Mathematical Justification for
-Ensembles}\label{mathematical-justification-for-ensembles}
+\subsection{Mathematical
+Justification}\label{mathematical-justification}
 
 We can mathematically illustrate how ensembling improves prediction
 accuracy using the case of regression.\\
 Let the predictors be denoted by ( X ), and the response by ( Y ).
-Assume we have ( m ) individual models \$( f\_1, f\_2, \dots, f\_m \$).
-The ensemble predictor is the average:
+Assume we have ( m ) individual models ( f\_1, f\_2, \dots, f\_m ). The
+ensemble predictor is the average:
 
 \[
 \hat{f}_{ensemble}(X) = \frac{1}{m} \sum_{i=1}^{m} f_i(X)
@@ -13320,8 +13371,8 @@ E(MSE_{Ensemble}) = \frac{1}{m^2} \sum_{i = 1}^{m} E\left[(f_i(X) - Y)^2 \right]
 = \frac{1}{m} \left( \frac{1}{m} \sum_{i=1}^m E(MSE_{f_i}) \right) + \frac{1}{m^2} \sum_{i \ne j} E\left[(f_i(X) - Y)(f_j(X) - Y) \right]
 \]
 
-If the individual models \$( f\_1, \dots, f\_m \$) are
-\textbf{unbiased}, the cross terms become covariances:
+If the individual models ( f\_1, \dots, f\_m ) are \textbf{unbiased},
+the cross terms become covariances:
 
 \[
 E(MSE_{Ensemble}) = \frac{1}{m} \left( \frac{1}{m} \sum_{i=1}^m E(MSE_{f_i}) \right) + \frac{1}{m^2} \sum_{i \ne j} Cov(f_i(X), f_j(X))
@@ -13355,11 +13406,27 @@ There are two widely used methods for combining model predictions in
 ensemble learning:
 
 \begin{itemize}
+\tightlist
 \item
   \textbf{Voting}: Combines the predictions of multiple models directly.
   In classification, this could be majority voting; in regression, it's
   often simple averaging. Voting is intuitive and works well when the
   base models are reasonably strong and diverse.
+\end{itemize}
+
+\begin{verbatim}
+<IPython.core.display.Image object>
+\end{verbatim}
+
+The idea behind voting is similar to bagging in that it combines
+predictions from multiple models by averaging their predictions.
+However, unlike bagging which typically uses homogeneous models (e.g.,
+multiple decision trees), voting allows for combining
+\textbf{heterogeneous models}---different types of algorithms---to
+leverage their individual strengths.
+
+\begin{itemize}
+\tightlist
 \item
   \textbf{Stacking}: Trains a new model (called a \textbf{meta-learner})
   to learn how to best combine the predictions of the base models.
@@ -13368,15 +13435,24 @@ ensemble learning:
   significantly in structure or behavior.
 \end{itemize}
 
-Let's apply them to our car dataset
+\begin{verbatim}
+<IPython.core.display.Image object>
+\end{verbatim}
+
+\section{Exploring Stacking and Voting in
+Regression}\label{exploring-stacking-and-voting-in-regression}
+
+Building on the previous chapters where we consistently used the car
+dataset for regression tasks, we will now explore the application of
+stacking and voting ensemble methods using the same dataset.
+
+Let's begin by importing the necessary libraries
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \ImportTok{import}\NormalTok{ pandas }\ImportTok{as}\NormalTok{ pd}
 \ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
-\ImportTok{import}\NormalTok{ seaborn }\ImportTok{as}\NormalTok{ sns}
-\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt}
-\ImportTok{from}\NormalTok{ sklearn.metrics }\ImportTok{import}\NormalTok{ mean\_squared\_error}
+
 \ImportTok{from}\NormalTok{ sklearn.model\_selection }\ImportTok{import}\NormalTok{ cross\_val\_score,train\_test\_split, GridSearchCV, ParameterGrid, }\OperatorTok{\textbackslash{}}
 \NormalTok{StratifiedKFold, RandomizedSearchCV}
 \ImportTok{from}\NormalTok{ sklearn.metrics }\ImportTok{import}\NormalTok{ root\_mean\_squared\_error, mean\_squared\_error,r2\_score,roc\_curve,auc,precision\_recall\_curve, accuracy\_score, roc\_auc\_score, f1\_score}
@@ -13385,18 +13461,26 @@ Let's apply them to our car dataset
 \ImportTok{from}\NormalTok{ sklearn.ensemble }\ImportTok{import}\NormalTok{ VotingRegressor, VotingClassifier, StackingRegressor, }\OperatorTok{\textbackslash{}}
 \NormalTok{StackingClassifier, GradientBoostingRegressor,GradientBoostingClassifier, BaggingRegressor, }\OperatorTok{\textbackslash{}}
 \NormalTok{BaggingClassifier,RandomForestRegressor,RandomForestClassifier,AdaBoostRegressor,AdaBoostClassifier}
-\ImportTok{from}\NormalTok{ sklearn.linear\_model }\ImportTok{import}\NormalTok{ LinearRegression,LogisticRegression, LassoCV, RidgeCV, ElasticNetCV}
+\ImportTok{from}\NormalTok{ sklearn.linear\_model }\ImportTok{import}\NormalTok{ LinearRegression,LogisticRegression, Ridge, ElasticNetCV}
 \ImportTok{from}\NormalTok{ sklearn.neighbors }\ImportTok{import}\NormalTok{ KNeighborsRegressor, KNeighborsClassifier}
-\ImportTok{import}\NormalTok{ itertools }\ImportTok{as}\NormalTok{ it}
-\ImportTok{import}\NormalTok{ time }\ImportTok{as}\NormalTok{ time}
 \ImportTok{import}\NormalTok{ xgboost }\ImportTok{as}\NormalTok{ xgb}
-\ImportTok{from}\NormalTok{ catboost }\ImportTok{import}\NormalTok{ CatBoostRegressor}
-\ImportTok{from}\NormalTok{ lightgbm }\ImportTok{import}\NormalTok{ LGBMRegressor}
-\ImportTok{from}\NormalTok{ sklearn.preprocessing }\ImportTok{import}\NormalTok{ PolynomialFeatures}
+\ImportTok{import}\NormalTok{ lightgbm }\ImportTok{as}\NormalTok{ lgb}
+\ImportTok{import}\NormalTok{ catboost }\ImportTok{as}\NormalTok{ cb}
+\ImportTok{from}\NormalTok{ sklearn.preprocessing }\ImportTok{import}\NormalTok{ StandardScaler, OneHotEncoder, PolynomialFeatures}
 \ImportTok{from}\NormalTok{ sklearn.compose }\ImportTok{import}\NormalTok{ ColumnTransformer}
 \ImportTok{from}\NormalTok{ sklearn.pipeline }\ImportTok{import}\NormalTok{ Pipeline}
+
+\ImportTok{import}\NormalTok{ seaborn }\ImportTok{as}\NormalTok{ sns}
+\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt}
+\ImportTok{import}\NormalTok{ itertools }\ImportTok{as}\NormalTok{ it}
+\ImportTok{import}\NormalTok{ time }\ImportTok{as}\NormalTok{ time}
+\OperatorTok{\%}\NormalTok{matplotlib inline}
+\ImportTok{import}\NormalTok{ warnings}
+\NormalTok{warnings.filterwarnings(}\StringTok{"ignore"}\NormalTok{, category}\OperatorTok{=}\PreprocessorTok{FutureWarning}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
+
+Load the dataset
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -13426,6 +13510,8 @@ engineSize & price \\
 2.3 & 28990 \\
 \end{longtable}
 
+Data preprocessing
+
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{X }\OperatorTok{=}\NormalTok{ car.drop(columns}\OperatorTok{=}\NormalTok{[}\StringTok{\textquotesingle{}price\textquotesingle{}}\NormalTok{])}
@@ -13442,11 +13528,14 @@ engineSize & price \\
 \end{Highlighting}
 \end{Shaded}
 
+While some of the models we will ensemble---such as tree-based
+models---do not require feature scaling or one-hot encoding, we'll apply
+a unified preprocessing pipeline for all models to ensure consistency
+and compatibility. This approach simplifies the workflow and avoids
+errors when combining models with different preprocessing requirements.
+
 \begin{Shaded}
 \begin{Highlighting}[]
-
-\ImportTok{from}\NormalTok{ sklearn.preprocessing }\ImportTok{import}\NormalTok{ StandardScaler, OneHotEncoder}
-
 \CommentTok{\# Create preprocessing steps}
 \NormalTok{preprocessor }\OperatorTok{=}\NormalTok{ ColumnTransformer(}
 \NormalTok{    transformers}\OperatorTok{=}\NormalTok{[}
@@ -13456,28 +13545,28 @@ engineSize & price \\
 \end{Highlighting}
 \end{Shaded}
 
-Below is the models we have covered so far
+For quick prototyping, we started with default model settings to
+evaluate whether ensembling improves performance. We also set a fixed
+random state to ensure reproducibility. Below is a list of the models
+you have learned so far.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\ImportTok{import}\NormalTok{ lightgbm }\ImportTok{as}\NormalTok{ lgb}
-\ImportTok{import}\NormalTok{ catboost }\ImportTok{as}\NormalTok{ cb}
-
 \CommentTok{\# Define models to evaluate}
-\NormalTok{models }\OperatorTok{=}\NormalTok{ \{}
-    \StringTok{\textquotesingle{}Linear Regression\textquotesingle{}}\NormalTok{: LinearRegression(),}
-    \StringTok{\textquotesingle{}KNN Regressor\textquotesingle{}}\NormalTok{: KNeighborsRegressor(),}
-    \StringTok{\textquotesingle{}Decision Tree\textquotesingle{}}\NormalTok{: DecisionTreeRegressor(random\_state}\OperatorTok{=}\DecValTok{42}\NormalTok{),}
-    \StringTok{\textquotesingle{}Random Forest\textquotesingle{}}\NormalTok{: RandomForestRegressor( random\_state}\OperatorTok{=}\DecValTok{42}\NormalTok{),}
-    \StringTok{\textquotesingle{}XGBoost\textquotesingle{}}\NormalTok{: xgb.XGBRegressor( random\_state}\OperatorTok{=}\DecValTok{42}\NormalTok{),}
-    \StringTok{\textquotesingle{}LightGBM\textquotesingle{}}\NormalTok{: lgb.LGBMRegressor(random\_state}\OperatorTok{=}\DecValTok{42}\NormalTok{),}
-    \StringTok{\textquotesingle{}CatBoost\textquotesingle{}}\NormalTok{: cb.CatBoostRegressor(random\_state}\OperatorTok{=}\DecValTok{42}\NormalTok{, verbose}\OperatorTok{=}\DecValTok{0}\NormalTok{)}
+\NormalTok{regressor\_models }\OperatorTok{=}\NormalTok{ \{}
+    \StringTok{\textquotesingle{}Baseline Linear Regression\textquotesingle{}}\NormalTok{: LinearRegression(),}
+    \StringTok{\textquotesingle{}Baseline KNN Regressor\textquotesingle{}}\NormalTok{: KNeighborsRegressor(),}
+    \StringTok{\textquotesingle{}Baseline Decision Tree\textquotesingle{}}\NormalTok{: DecisionTreeRegressor(random\_state}\OperatorTok{=}\DecValTok{42}\NormalTok{),}
+    \StringTok{\textquotesingle{}Baseline Random Forest\textquotesingle{}}\NormalTok{: RandomForestRegressor( random\_state}\OperatorTok{=}\DecValTok{42}\NormalTok{),}
+    \StringTok{\textquotesingle{}Baseline XGBoost\textquotesingle{}}\NormalTok{: xgb.XGBRegressor( random\_state}\OperatorTok{=}\DecValTok{42}\NormalTok{),}
+    \StringTok{\textquotesingle{}Baseline LightGBM\textquotesingle{}}\NormalTok{: lgb.LGBMRegressor(random\_state}\OperatorTok{=}\DecValTok{42}\NormalTok{, verbose}\OperatorTok{=}\DecValTok{0}\NormalTok{),}
+    \StringTok{\textquotesingle{}Baseline CatBoost\textquotesingle{}}\NormalTok{: cb.CatBoostRegressor(random\_state}\OperatorTok{=}\DecValTok{42}\NormalTok{, verbose}\OperatorTok{=}\DecValTok{0}\NormalTok{)}
 \NormalTok{\}}
 \end{Highlighting}
 \end{Shaded}
 
-We'll first evaluate each model with default settings to establish
-baseline performance before ensembling.
+We will first build each model using its default settings to establish
+baseline performance before applying ensembling techniques.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -13485,7 +13574,7 @@ baseline performance before ensembling.
 \NormalTok{reg\_results }\OperatorTok{=}\NormalTok{ \{\}}
 
 \CommentTok{\# Loop through models}
-\ControlFlowTok{for}\NormalTok{ name, model }\KeywordTok{in}\NormalTok{ models.items():}
+\ControlFlowTok{for}\NormalTok{ name, model }\KeywordTok{in}\NormalTok{ regressor\_models.items():}
     \CommentTok{\# Create a pipeline with preprocessing and the model}
 \NormalTok{    pipeline }\OperatorTok{=}\NormalTok{ Pipeline(steps}\OperatorTok{=}\NormalTok{[(}\StringTok{\textquotesingle{}preprocessor\textquotesingle{}}\NormalTok{, preprocessor),}
 \NormalTok{                               (}\StringTok{\textquotesingle{}model\textquotesingle{}}\NormalTok{, model)])}
@@ -13513,18 +13602,8 @@ baseline performance before ensembling.
 \end{Shaded}
 
 \begin{verbatim}
-c:\Users\lsi8012\AppData\Local\anaconda3\Lib\site-packages\sklearn\utils\deprecation.py:151: FutureWarning: 'force_all_finite' was renamed to 'ensure_all_finite' in 1.6 and will be removed in 1.8.
+c:\Users\lsi8012\AppData\Local\anaconda3\Lib\site-packages\sklearn\utils\validation.py:2739: UserWarning: X does not have valid feature names, but LGBMRegressor was fitted with feature names
   warnings.warn(
-c:\Users\lsi8012\AppData\Local\anaconda3\Lib\site-packages\sklearn\utils\deprecation.py:151: FutureWarning: 'force_all_finite' was renamed to 'ensure_all_finite' in 1.6 and will be removed in 1.8.
-  warnings.warn(
-\end{verbatim}
-
-\begin{verbatim}
-[LightGBM] [Info] Auto-choosing col-wise multi-threading, the overhead of testing was 0.000154 seconds.
-You can set `force_col_wise=true` to remove the overhead.
-[LightGBM] [Info] Total Bins 764
-[LightGBM] [Info] Number of data points in the train set: 6105, number of used features: 86
-[LightGBM] [Info] Start training from score 23554.115971
 \end{verbatim}
 
 \begin{longtable}[]{@{}lll@{}}
@@ -13534,99 +13613,45 @@ You can set `force_col_wise=true` to remove the overhead.
 \endhead
 \bottomrule\noalign{}
 \endlastfoot
-0 & CatBoost & 3296.493137 \\
-1 & XGBoost & 3397.155518 \\
-2 & Random Forest & 3660.145970 \\
-3 & LightGBM & 3729.955778 \\
-4 & KNN Regressor & 4062.839680 \\
-5 & Decision Tree & 5015.812547 \\
-6 & Linear Regression & 5801.435399 \\
+0 & Baseline CatBoost & 3296.493137 \\
+1 & Baseline XGBoost & 3397.155518 \\
+2 & Baseline Random Forest & 3660.145970 \\
+3 & Baseline LightGBM & 3729.955778 \\
+4 & Baseline KNN Regressor & 4062.839680 \\
+5 & Baseline Decision Tree & 5015.812547 \\
+6 & Baseline Linear Regression & 5801.435399 \\
 \end{longtable}
 
-\section{Voting}\label{voting}
+Evidently, \textbf{CatBoost} outperforms the other models using its
+default settings, achieving the lowest RMSE. This aligns with what
+you've learned---CatBoost typically requires less hyperparameter tuning
+compared to \textbf{XGBoost} and \textbf{LightGBM}.
 
-In this section, we explore the \textbf{Voting Regressor}, a simple but
-effective ensemble method that combines the predictions of multiple
-models.
+\subsection{Voting Regressor}\label{voting-regressor}
 
-\subsection{What Is Voting in
-Regression?}\label{what-is-voting-in-regression}
-
-While voting is often associated with classification (e.g., majority
-vote), in regression tasks, it typically refers to \textbf{averaging}
-the predicted values from multiple base models. This approach is
-implemented in scikit-learn using \texttt{VotingRegressor}.
-
-\subsection{How It Works}\label{how-it-works-1}
-
-The \texttt{VotingRegressor} takes a list of individual regression
-models and: - Trains all of them \textbf{simultaneously} on the same
-training data. - Averages their predictions during inference to generate
-the final prediction.
-
-\begin{quote}
-📌 \textbf{Note}: We \textbf{do not need to fit the models individually}
-before including them in the \texttt{VotingRegressor}. Doing so would
-result in unnecessary computation and \textbf{waste time}, as
-\texttt{VotingRegressor.fit()} will handle training for all models
-internally.
-\end{quote}
-
-\subsection{Why It Works}\label{why-it-works}
-
-\begin{itemize}
-\tightlist
-\item
-  \textbf{Variance Reduction}: Averaging helps smooth out individual
-  model fluctuations.
-\item
-  \textbf{Error Compensation}: If one model overpredicts and another
-  underpredicts, the ensemble prediction may be closer to the true
-  value.
-\item
-  \textbf{Robustness}: Combining diverse models helps ensure that
-  weaknesses of one model are offset by strengths of another.
-\end{itemize}
-
-\subsection{Equal Weights}\label{equal-weights}
-
-By default, \texttt{VotingRegressor} assigns \textbf{equal weights} to
-all models --- treating each prediction equally in the average.\\
-Let us now ensemble the models using the voting ensemble with
-\textbf{equal weights} to obtain a combined prediction.
-
-\subsection{When to Use}\label{when-to-use}
-
-\begin{itemize}
-\tightlist
-\item
-  You have multiple well-performing but diverse models.
-\item
-  You want a quick ensemble method without the added complexity of
-  training a meta-model (as in stacking).
-\end{itemize}
+In this section, Next, we will build an ensemble model, starting with
+\textbf{voting regressor}, which assigns \textbf{equal weight} to each
+base model. In this approach, all predictions are treated equally when
+averaged to produce the final combined prediction.
 
 Below is how you can \textbf{ensemble the same models} using
-VotingRegressor with the same preprocessor in a pipeline, without
-fitting each model individually again:
+VotingRegressor with the same preprocessor in a pipeline
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\ImportTok{from}\NormalTok{ sklearn.ensemble }\ImportTok{import}\NormalTok{ VotingRegressor}
-
 \CommentTok{\# Define base regressors (same as before)}
-\NormalTok{voting\_estimators }\OperatorTok{=}\NormalTok{ [}
+\NormalTok{base\_regressor\_list }\OperatorTok{=}\NormalTok{ [}
 \NormalTok{    (}\StringTok{\textquotesingle{}lr\textquotesingle{}}\NormalTok{, LinearRegression()),}
 \NormalTok{    (}\StringTok{\textquotesingle{}knn\textquotesingle{}}\NormalTok{, KNeighborsRegressor()),}
 \NormalTok{    (}\StringTok{\textquotesingle{}dt\textquotesingle{}}\NormalTok{, DecisionTreeRegressor(random\_state}\OperatorTok{=}\DecValTok{42}\NormalTok{)),}
 \NormalTok{    (}\StringTok{\textquotesingle{}rf\textquotesingle{}}\NormalTok{, RandomForestRegressor(random\_state}\OperatorTok{=}\DecValTok{42}\NormalTok{)),}
 \NormalTok{    (}\StringTok{\textquotesingle{}xgb\textquotesingle{}}\NormalTok{, xgb.XGBRegressor(random\_state}\OperatorTok{=}\DecValTok{42}\NormalTok{)),}
-\NormalTok{    (}\StringTok{\textquotesingle{}lgb\textquotesingle{}}\NormalTok{, lgb.LGBMRegressor(random\_state}\OperatorTok{=}\DecValTok{42}\NormalTok{)),}
+\NormalTok{    (}\StringTok{\textquotesingle{}lgb\textquotesingle{}}\NormalTok{, lgb.LGBMRegressor(random\_state}\OperatorTok{=}\DecValTok{42}\NormalTok{, verbose}\OperatorTok{=}\DecValTok{0}\NormalTok{)),}
 \NormalTok{    (}\StringTok{\textquotesingle{}cat\textquotesingle{}}\NormalTok{, cb.CatBoostRegressor(random\_state}\OperatorTok{=}\DecValTok{42}\NormalTok{, verbose}\OperatorTok{=}\DecValTok{0}\NormalTok{))}
 \NormalTok{]}
 
 \CommentTok{\# Create a VotingRegressor with equal weights}
-\NormalTok{voting\_regressor }\OperatorTok{=}\NormalTok{ VotingRegressor(estimators}\OperatorTok{=}\NormalTok{voting\_estimators)}
+\NormalTok{voting\_regressor }\OperatorTok{=}\NormalTok{ VotingRegressor(estimators}\OperatorTok{=}\NormalTok{base\_regressor\_list)}
 
 \CommentTok{\# Create a pipeline with preprocessing and voting ensemble}
 \NormalTok{voting\_pipeline }\OperatorTok{=}\NormalTok{ Pipeline(steps}\OperatorTok{=}\NormalTok{[}
@@ -13636,35 +13661,66 @@ fitting each model individually again:
 
 \CommentTok{\# Fit the ensemble model (no need to fit individual models beforehand!)}
 \NormalTok{voting\_pipeline.fit(X\_train, y\_train)}
+\end{Highlighting}
+\end{Shaded}
 
+\begin{verbatim}
+Pipeline(steps=[('preprocessor',
+                 ColumnTransformer(transformers=[('num', StandardScaler(),
+                                                  ['year', 'mileage', 'tax',
+                                                   'mpg', 'engineSize']),
+                                                 ('cat',
+                                                  OneHotEncoder(handle_unknown='ignore'),
+                                                  ['brand', 'model',
+                                                   'transmission',
+                                                   'fuelType'])])),
+                ('ensemble',
+                 VotingRegressor(estimators=[('lr', LinearRegression()),
+                                             ('knn', KNeighborsRegressor()),
+                                             ('dt',
+                                              DecisionTreeRegressor...
+                                                           max_cat_threshold=None,
+                                                           max_cat_to_onehot=None,
+                                                           max_delta_step=None,
+                                                           max_depth=None,
+                                                           max_leaves=None,
+                                                           min_child_weight=None,
+                                                           missing=nan,
+                                                           monotone_constraints=None,
+                                                           multi_strategy=None,
+                                                           n_estimators=None,
+                                                           n_jobs=None,
+                                                           num_parallel_tree=None, ...)),
+                                             ('lgb',
+                                              LGBMRegressor(random_state=42,
+                                                            verbose=0)),
+                                             ('cat',
+                                              <catboost.core.CatBoostRegressor object at 0x000001F1F6715370>)]))])
+\end{verbatim}
+
+\textbf{Note}: You \textbf{do not need to fit the models individually}
+before including them in the \texttt{VotingRegressor}. Doing so would
+result in unnecessary computation and \textbf{waste time}, as
+\texttt{VotingRegressor.fit()} will handle training for all models
+internally.
+
+\begin{Shaded}
+\begin{Highlighting}[]
 \CommentTok{\# Predict and evaluate}
 \NormalTok{y\_pred\_vote }\OperatorTok{=}\NormalTok{ voting\_pipeline.predict(X\_test)}
 \NormalTok{rmse\_vote }\OperatorTok{=}\NormalTok{ root\_mean\_squared\_error(y\_test, y\_pred\_vote)}
 
 \CommentTok{\# Add ensemble result to the results\_df}
-\NormalTok{reg\_results\_df.loc[}\BuiltInTok{len}\NormalTok{(reg\_results\_df.index)] }\OperatorTok{=}\NormalTok{ [}\StringTok{\textquotesingle{}Voting Ensemble\textquotesingle{}}\NormalTok{, rmse\_vote]}
-\NormalTok{results\_df }\OperatorTok{=}\NormalTok{ reg\_results\_df.sort\_values(by}\OperatorTok{=}\StringTok{\textquotesingle{}RMSE\textquotesingle{}}\NormalTok{, ascending}\OperatorTok{=}\VariableTok{True}\NormalTok{).reset\_index(drop}\OperatorTok{=}\VariableTok{True}\NormalTok{)}
+\NormalTok{reg\_results\_df.loc[}\BuiltInTok{len}\NormalTok{(reg\_results\_df.index)] }\OperatorTok{=}\NormalTok{ [}\StringTok{\textquotesingle{}Voting Regressor\textquotesingle{}}\NormalTok{, rmse\_vote]}
+\NormalTok{reg\_results\_df }\OperatorTok{=}\NormalTok{ reg\_results\_df.sort\_values(by}\OperatorTok{=}\StringTok{\textquotesingle{}RMSE\textquotesingle{}}\NormalTok{, ascending}\OperatorTok{=}\VariableTok{True}\NormalTok{).reset\_index(drop}\OperatorTok{=}\VariableTok{True}\NormalTok{)}
 
 \CommentTok{\# Show updated results}
-\NormalTok{results\_df}
+\NormalTok{reg\_results\_df}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-c:\Users\lsi8012\AppData\Local\anaconda3\Lib\site-packages\sklearn\utils\deprecation.py:151: FutureWarning: 'force_all_finite' was renamed to 'ensure_all_finite' in 1.6 and will be removed in 1.8.
-  warnings.warn(
-\end{verbatim}
-
-\begin{verbatim}
-[LightGBM] [Info] Auto-choosing col-wise multi-threading, the overhead of testing was 0.000180 seconds.
-You can set `force_col_wise=true` to remove the overhead.
-[LightGBM] [Info] Total Bins 764
-[LightGBM] [Info] Number of data points in the train set: 6105, number of used features: 86
-[LightGBM] [Info] Start training from score 23554.115971
-\end{verbatim}
-
-\begin{verbatim}
-c:\Users\lsi8012\AppData\Local\anaconda3\Lib\site-packages\sklearn\utils\deprecation.py:151: FutureWarning: 'force_all_finite' was renamed to 'ensure_all_finite' in 1.6 and will be removed in 1.8.
+c:\Users\lsi8012\AppData\Local\anaconda3\Lib\site-packages\sklearn\utils\validation.py:2739: UserWarning: X does not have valid feature names, but LGBMRegressor was fitted with feature names
   warnings.warn(
 \end{verbatim}
 
@@ -13675,25 +13731,23 @@ c:\Users\lsi8012\AppData\Local\anaconda3\Lib\site-packages\sklearn\utils\depreca
 \endhead
 \bottomrule\noalign{}
 \endlastfoot
-0 & CatBoost & 3296.493137 \\
-1 & Voting Ensemble & 3302.202159 \\
-2 & XGBoost & 3397.155518 \\
-3 & Random Forest & 3660.145970 \\
-4 & LightGBM & 3729.955778 \\
-5 & KNN Regressor & 4062.839680 \\
-6 & Decision Tree & 5015.812547 \\
-7 & Linear Regression & 5801.435399 \\
+0 & Baseline CatBoost & 3296.493137 \\
+1 & Voting Regressor & 3302.202159 \\
+2 & Baseline XGBoost & 3397.155518 \\
+3 & Baseline Random Forest & 3660.145970 \\
+4 & Baseline LightGBM & 3729.955778 \\
+5 & Baseline KNN Regressor & 4062.839680 \\
+6 & Baseline Decision Tree & 5015.812547 \\
+7 & Baseline Linear Regression & 5801.435399 \\
 \end{longtable}
 
-It's not uncommon for a single, well-optimized model like CatBoost to
-outperform a voting ensemble, especially if the ensemble's models lack
-diversity, aren't well-tuned, or if the dataset doesn't benefit from
-ensembling. CatBoost's advanced categorical feature handling and robust
-defaults likely gave it an edge, particularly if your voting ensemble
-relied on models with correlated predictions or wasn't optimized for the
-specific dataset characteristics (e.g., size, complexity, or imbalance).
+It's not surprising that CatBoost outperformed the Voting Ensemble, as a
+well-optimized gradient boosting model can often outshine an
+ensemble---especially when the ensemble's constituent models lack
+diversity, are poorly tuned, or fail to leverage the dataset's
+characteristics.
 
-\subsection{Strategies to Improve Voting Ensemble
+\subsubsection{Strategies to Improve Voting Ensemble
 Performance}\label{strategies-to-improve-voting-ensemble-performance}
 
 To boost the effectiveness of a voting ensemble, consider the following
@@ -13723,7 +13777,7 @@ enhancements:
   learning the best combination strategy using a meta-model.)}
 \end{itemize}
 
-\section{Stacking}\label{stacking}
+\subsection{Stacking Regressor}\label{stacking-regressor}
 
 \textbf{Stacking} is a more sophisticated ensembling technique that
 learns how to best combine multiple base models using a separate
@@ -13759,6 +13813,21 @@ Here's how the process works:
   prediction.
 \end{enumerate}
 
+Please see the stacking implementation below
+
+Training Set\\
+│\\
+├── Cross-Validation Process (k folds)\\
+│ ├── Fold 1: Train C₁-C₄ on folds 2-k → Predict on Fold 1 → P₁-P₄ for
+Fold 1\\
+│ ├── Fold 2: Train C₁-C₄ on folds 1,3-k → Predict on Fold 2 → P₁-P₄ for
+Fold 2\\
+│ └── \ldots{} (repeat for all k folds)\\
+│\\
+├── Aggregated Meta-Features: P₁-P₄ for entire training set\\
+│\\
+└── Meta-Classifier → Final Prediction
+
 \begin{quote}
 The goal of stacking is to leverage the strengths of each individual
 model while minimizing their weaknesses, often resulting in improved
@@ -13770,29 +13839,17 @@ regression}\label{metamodel-linear-regression}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# Define your full list of diverse base models}
-\NormalTok{stacking\_estimators }\OperatorTok{=}\NormalTok{ [}
-\NormalTok{    (}\StringTok{\textquotesingle{}lr\textquotesingle{}}\NormalTok{, LinearRegression()),}
-\NormalTok{    (}\StringTok{\textquotesingle{}knn\textquotesingle{}}\NormalTok{, KNeighborsRegressor()),}
-\NormalTok{    (}\StringTok{\textquotesingle{}dt\textquotesingle{}}\NormalTok{, DecisionTreeRegressor(random\_state}\OperatorTok{=}\DecValTok{42}\NormalTok{)),}
-\NormalTok{    (}\StringTok{\textquotesingle{}rf\textquotesingle{}}\NormalTok{, RandomForestRegressor(random\_state}\OperatorTok{=}\DecValTok{42}\NormalTok{)),}
-\NormalTok{    (}\StringTok{\textquotesingle{}xgb\textquotesingle{}}\NormalTok{, xgb.XGBRegressor(random\_state}\OperatorTok{=}\DecValTok{42}\NormalTok{)),}
-\NormalTok{    (}\StringTok{\textquotesingle{}lgb\textquotesingle{}}\NormalTok{, lgb.LGBMRegressor(random\_state}\OperatorTok{=}\DecValTok{42}\NormalTok{, verbose}\OperatorTok{={-}}\DecValTok{1}\NormalTok{)),}
-\NormalTok{    (}\StringTok{\textquotesingle{}cat\textquotesingle{}}\NormalTok{, cb.CatBoostRegressor(random\_state}\OperatorTok{=}\DecValTok{42}\NormalTok{, verbose}\OperatorTok{=}\DecValTok{0}\NormalTok{))}
-\NormalTok{]}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{Shaded}
-\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ warnings}
+\NormalTok{warnings.filterwarnings(}\StringTok{"ignore"}\NormalTok{, message}\OperatorTok{=}\StringTok{"X does not have valid feature names"}\NormalTok{)}
 \CommentTok{\# Define a meta{-}model}
-\NormalTok{meta\_model }\OperatorTok{=}\NormalTok{ LinearRegression()}
+\NormalTok{meta\_lr }\OperatorTok{=}\NormalTok{ LinearRegression()}
 
 \CommentTok{\# Create the stacking regressor}
 \NormalTok{stacking\_model }\OperatorTok{=}\NormalTok{ StackingRegressor(}
-\NormalTok{    estimators}\OperatorTok{=}\NormalTok{stacking\_estimators,}
-\NormalTok{    final\_estimator}\OperatorTok{=}\NormalTok{meta\_model,}
-\NormalTok{    cv}\OperatorTok{=}\DecValTok{5}\NormalTok{,}
+\NormalTok{    estimators}\OperatorTok{=}\NormalTok{base\_regressor\_list,}
+\NormalTok{    final\_estimator}\OperatorTok{=}\NormalTok{meta\_lr,}
+\NormalTok{    cv}\OperatorTok{=}\NormalTok{KFold(n\_splits}\OperatorTok{=}\DecValTok{5}\NormalTok{, shuffle}\OperatorTok{=}\VariableTok{True}\NormalTok{, random\_state}\OperatorTok{=}\DecValTok{42}\NormalTok{), }\CommentTok{\# ensures all base models use the same 5{-}fold CV}
+\NormalTok{    n\_jobs}\OperatorTok{={-}}\DecValTok{1}\NormalTok{,  }\CommentTok{\# Use all available cores}
 \NormalTok{    passthrough}\OperatorTok{=}\VariableTok{False}  \CommentTok{\# Set to True if you want to include original features in meta{-}model}
 \NormalTok{)}
 
@@ -13804,7 +13861,44 @@ regression}\label{metamodel-linear-regression}
 
 \CommentTok{\# Fit the stacking model}
 \NormalTok{stacking\_pipeline.fit(X\_train, y\_train)}
+\end{Highlighting}
+\end{Shaded}
 
+\begin{verbatim}
+Pipeline(steps=[('preprocessor',
+                 ColumnTransformer(transformers=[('num', StandardScaler(),
+                                                  ['year', 'mileage', 'tax',
+                                                   'mpg', 'engineSize']),
+                                                 ('cat',
+                                                  OneHotEncoder(handle_unknown='ignore'),
+                                                  ['brand', 'model',
+                                                   'transmission',
+                                                   'fuelType'])])),
+                ('stacking',
+                 StackingRegressor(cv=KFold(n_splits=5, random_state=42, shuffle=True),
+                                   estimators=[('lr', LinearRegression()),
+                                               ('knn...
+                                                             max_delta_step=None,
+                                                             max_depth=None,
+                                                             max_leaves=None,
+                                                             min_child_weight=None,
+                                                             missing=nan,
+                                                             monotone_constraints=None,
+                                                             multi_strategy=None,
+                                                             n_estimators=None,
+                                                             n_jobs=None,
+                                                             num_parallel_tree=None, ...)),
+                                               ('lgb',
+                                                LGBMRegressor(random_state=42,
+                                                              verbose=0)),
+                                               ('cat',
+                                                <catboost.core.CatBoostRegressor object at 0x000001F1F6715370>)],
+                                   final_estimator=LinearRegression(),
+                                   n_jobs=-1))])
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
 \CommentTok{\# Predict and evaluate}
 \NormalTok{y\_pred\_stack }\OperatorTok{=}\NormalTok{ stacking\_pipeline.predict(X\_test)}
 \NormalTok{rmse\_stack }\OperatorTok{=}\NormalTok{ root\_mean\_squared\_error(y\_test, y\_pred\_stack)}
@@ -13814,77 +13908,13 @@ regression}\label{metamodel-linear-regression}
 \end{Shaded}
 
 \begin{verbatim}
-c:\Users\lsi8012\AppData\Local\anaconda3\Lib\site-packages\sklearn\utils\deprecation.py:151: FutureWarning: 'force_all_finite' was renamed to 'ensure_all_finite' in 1.6 and will be removed in 1.8.
-  warnings.warn(
-\end{verbatim}
-
-\begin{verbatim}
-[LightGBM] [Info] Auto-choosing col-wise multi-threading, the overhead of testing was 0.000157 seconds.
-You can set `force_col_wise=true` to remove the overhead.
-[LightGBM] [Info] Total Bins 764
-[LightGBM] [Info] Number of data points in the train set: 6105, number of used features: 86
-[LightGBM] [Info] Start training from score 23554.115971
-\end{verbatim}
-
-\begin{verbatim}
-c:\Users\lsi8012\AppData\Local\anaconda3\Lib\site-packages\sklearn\utils\deprecation.py:151: FutureWarning: 'force_all_finite' was renamed to 'ensure_all_finite' in 1.6 and will be removed in 1.8.
-  warnings.warn(
-c:\Users\lsi8012\AppData\Local\anaconda3\Lib\site-packages\sklearn\utils\deprecation.py:151: FutureWarning: 'force_all_finite' was renamed to 'ensure_all_finite' in 1.6 and will be removed in 1.8.
-  warnings.warn(
-c:\Users\lsi8012\AppData\Local\anaconda3\Lib\site-packages\sklearn\utils\deprecation.py:151: FutureWarning: 'force_all_finite' was renamed to 'ensure_all_finite' in 1.6 and will be removed in 1.8.
-  warnings.warn(
-\end{verbatim}
-
-\begin{verbatim}
-[LightGBM] [Info] Auto-choosing col-wise multi-threading, the overhead of testing was 0.000191 seconds.
-You can set `force_col_wise=true` to remove the overhead.
-[LightGBM] [Info] Total Bins 749
-[LightGBM] [Info] Number of data points in the train set: 4884, number of used features: 80
-[LightGBM] [Info] Start training from score 23420.609746
-[LightGBM] [Info] Auto-choosing col-wise multi-threading, the overhead of testing was 0.000178 seconds.
-You can set `force_col_wise=true` to remove the overhead.
-[LightGBM] [Info] Total Bins 752
-[LightGBM] [Info] Number of data points in the train set: 4884, number of used features: 82
-[LightGBM] [Info] Start training from score 23802.703522
-[LightGBM] [Info] Auto-choosing col-wise multi-threading, the overhead of testing was 0.000208 seconds.
-You can set `force_col_wise=true` to remove the overhead.
-[LightGBM] [Info] Total Bins 752
-[LightGBM] [Info] Number of data points in the train set: 4884, number of used features: 81
-[LightGBM] [Info] Start training from score 23610.587633
-\end{verbatim}
-
-\begin{verbatim}
-c:\Users\lsi8012\AppData\Local\anaconda3\Lib\site-packages\sklearn\utils\deprecation.py:151: FutureWarning: 'force_all_finite' was renamed to 'ensure_all_finite' in 1.6 and will be removed in 1.8.
-  warnings.warn(
-c:\Users\lsi8012\AppData\Local\anaconda3\Lib\site-packages\sklearn\utils\deprecation.py:151: FutureWarning: 'force_all_finite' was renamed to 'ensure_all_finite' in 1.6 and will be removed in 1.8.
-  warnings.warn(
-c:\Users\lsi8012\AppData\Local\anaconda3\Lib\site-packages\sklearn\utils\deprecation.py:151: FutureWarning: 'force_all_finite' was renamed to 'ensure_all_finite' in 1.6 and will be removed in 1.8.
-  warnings.warn(
-\end{verbatim}
-
-\begin{verbatim}
-[LightGBM] [Info] Auto-choosing col-wise multi-threading, the overhead of testing was 0.000256 seconds.
-You can set `force_col_wise=true` to remove the overhead.
-[LightGBM] [Info] Total Bins 750
-[LightGBM] [Info] Number of data points in the train set: 4884, number of used features: 81
-[LightGBM] [Info] Start training from score 23507.457821
-[LightGBM] [Info] Auto-choosing col-wise multi-threading, the overhead of testing was 0.000201 seconds.
-You can set `force_col_wise=true` to remove the overhead.
-[LightGBM] [Info] Total Bins 747
-[LightGBM] [Info] Number of data points in the train set: 4884, number of used features: 79
-[LightGBM] [Info] Start training from score 23429.221130
-Stacking Regressor RMSE: 3147.70
-\end{verbatim}
-
-\begin{verbatim}
-c:\Users\lsi8012\AppData\Local\anaconda3\Lib\site-packages\sklearn\utils\deprecation.py:151: FutureWarning: 'force_all_finite' was renamed to 'ensure_all_finite' in 1.6 and will be removed in 1.8.
-  warnings.warn(
+Stacking Regressor RMSE: 3190.11
 \end{verbatim}
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{\# Append the Stacking Regressor result to results\_df}
-\NormalTok{reg\_results\_df.loc[}\BuiltInTok{len}\NormalTok{(reg\_results\_df.index)] }\OperatorTok{=}\NormalTok{ [}\StringTok{\textquotesingle{}Stacking Regressor\textquotesingle{}}\NormalTok{, rmse\_stack]}
+\NormalTok{reg\_results\_df.loc[}\BuiltInTok{len}\NormalTok{(reg\_results\_df.index)] }\OperatorTok{=}\NormalTok{ [}\StringTok{\textquotesingle{}Lr Stacking Regressor\textquotesingle{}}\NormalTok{, rmse\_stack]}
 
 \CommentTok{\# Sort by RMSE in ascending order and reset index}
 \NormalTok{reg\_results\_df }\OperatorTok{=}\NormalTok{ reg\_results\_df.sort\_values(by}\OperatorTok{=}\StringTok{\textquotesingle{}RMSE\textquotesingle{}}\NormalTok{, ascending}\OperatorTok{=}\VariableTok{True}\NormalTok{).reset\_index(drop}\OperatorTok{=}\VariableTok{True}\NormalTok{)}
@@ -13901,16 +13931,29 @@ c:\Users\lsi8012\AppData\Local\anaconda3\Lib\site-packages\sklearn\utils\depreca
 \endhead
 \bottomrule\noalign{}
 \endlastfoot
-0 & Stacking Regressor & 3147.701164 \\
-1 & CatBoost & 3296.493137 \\
-2 & Voting Ensemble & 3302.202159 \\
-3 & XGBoost & 3397.155518 \\
-4 & Random Forest & 3660.145970 \\
-5 & LightGBM & 3729.955778 \\
-6 & KNN Regressor & 4062.839680 \\
-7 & Decision Tree & 5015.812547 \\
-8 & Linear Regression & 5801.435399 \\
+0 & Lr Stacking Regressor & 3190.112423 \\
+1 & Baseline CatBoost & 3296.493137 \\
+2 & Voting Regressor & 3302.202159 \\
+3 & Baseline XGBoost & 3397.155518 \\
+4 & Baseline Random Forest & 3660.145970 \\
+5 & Baseline LightGBM & 3729.955778 \\
+6 & Baseline KNN Regressor & 4062.839680 \\
+7 & Baseline Decision Tree & 5015.812547 \\
+8 & Baseline Linear Regression & 5801.435399 \\
 \end{longtable}
+
+From the results, the \textbf{stacking Regressor} not only outperforms
+the \textbf{Voting Regressor}, but also surpasses the best individual
+model---\textbf{CatBoost}---when using default settings.
+
+While voting assigns equal weights to each base model, stacking uses a
+\textbf{meta-model} (in this case, linear regression) to learn an
+optimal weighted combination of predictions. This allows it to assign
+different importance to each base model based on their contributions to
+overall performance.
+
+Next, let's examine the coefficients learned by the stacking model to
+understand how it weighted each base model's prediction.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -13918,7 +13961,7 @@ c:\Users\lsi8012\AppData\Local\anaconda3\Lib\site-packages\sklearn\utils\depreca
 \NormalTok{meta\_model }\OperatorTok{=}\NormalTok{ stacking\_pipeline.named\_steps[}\StringTok{\textquotesingle{}stacking\textquotesingle{}}\NormalTok{].final\_estimator\_}
 
 \CommentTok{\# Get model names in the same order as the coefficients}
-\NormalTok{model\_names }\OperatorTok{=}\NormalTok{ [name }\ControlFlowTok{for}\NormalTok{ name, \_ }\KeywordTok{in}\NormalTok{ stacking\_estimators]}
+\NormalTok{model\_names }\OperatorTok{=}\NormalTok{ [name }\ControlFlowTok{for}\NormalTok{ name, \_ }\KeywordTok{in}\NormalTok{ base\_regressor\_list]}
 
 \CommentTok{\# Extract coefficients}
 \NormalTok{coefs }\OperatorTok{=}\NormalTok{ meta\_model.coef\_}
@@ -13932,7 +13975,6 @@ c:\Users\lsi8012\AppData\Local\anaconda3\Lib\site-packages\sklearn\utils\depreca
 
 \CommentTok{\# Show the weights}
 \NormalTok{coef\_df}
-
 \end{Highlighting}
 \end{Shaded}
 
@@ -13943,13 +13985,13 @@ c:\Users\lsi8012\AppData\Local\anaconda3\Lib\site-packages\sklearn\utils\depreca
 \endhead
 \bottomrule\noalign{}
 \endlastfoot
-0 & cat & 0.583701 \\
-1 & rf & 0.147426 \\
-2 & xgb & 0.126955 \\
-3 & knn & 0.124413 \\
-4 & lr & 0.034756 \\
-5 & dt & 0.008769 \\
-6 & lgb & -0.011164 \\
+0 & cat & 0.763462 \\
+1 & knn & 0.140259 \\
+2 & xgb & 0.084874 \\
+3 & lr & 0.043660 \\
+4 & dt & 0.037379 \\
+5 & rf & 0.005741 \\
+6 & lgb & -0.056054 \\
 \end{longtable}
 
 Note the above coefficients of the meta-model. The model gives the
@@ -13959,7 +14001,7 @@ model.
 
 Also, note that the \textbf{coefficients need not sum to one.}
 
-\subsection{Why did LightGBM get the lowest (even negative)
+\subsubsection{Why did LightGBM get the lowest (even negative)
 coefficient?}\label{why-did-lightgbm-get-the-lowest-even-negative-coefficient}
 
 \begin{enumerate}
@@ -14012,14 +14054,15 @@ coefficient?}\label{why-did-lightgbm-get-the-lowest-even-negative-coefficient}
   \end{itemize}
 \end{enumerate}
 
-Let us try improving the RMSE further by removing the weaker models from
-the ensemble. Let us remove the three weakest models based on the size
-of their coefficients in the linear regression metamodel.
+To further improve the RMSE, we will refine the ensemble by removing
+weaker or highly correlated base models. Specifically, we will retain
+only the top four models, selected based on the magnitude of their
+coefficients in the linear regression meta-model.
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{\# Define top 4 base models}
-\NormalTok{top\_models }\OperatorTok{=}\NormalTok{ [}
+\NormalTok{top4\_regressor\_list }\OperatorTok{=}\NormalTok{ [}
 \NormalTok{    (}\StringTok{\textquotesingle{}cat\textquotesingle{}}\NormalTok{, cb.CatBoostRegressor(random\_state}\OperatorTok{=}\DecValTok{42}\NormalTok{, verbose}\OperatorTok{=}\DecValTok{0}\NormalTok{)),}
 \NormalTok{    (}\StringTok{\textquotesingle{}rf\textquotesingle{}}\NormalTok{, RandomForestRegressor(random\_state}\OperatorTok{=}\DecValTok{42}\NormalTok{)),}
 \NormalTok{    (}\StringTok{\textquotesingle{}xgb\textquotesingle{}}\NormalTok{, xgb.XGBRegressor(random\_state}\OperatorTok{=}\DecValTok{42}\NormalTok{)),}
@@ -14027,12 +14070,12 @@ of their coefficients in the linear regression metamodel.
 \NormalTok{]}
 
 \CommentTok{\# Meta{-}model}
-\NormalTok{meta\_model }\OperatorTok{=}\NormalTok{ LinearRegression()}
+\NormalTok{top4\_meta\_lr }\OperatorTok{=}\NormalTok{ LinearRegression()}
 
 \CommentTok{\# Build the stacking ensemble}
 \NormalTok{stacking\_top4 }\OperatorTok{=}\NormalTok{ StackingRegressor(}
-\NormalTok{    estimators}\OperatorTok{=}\NormalTok{top\_models,}
-\NormalTok{    final\_estimator}\OperatorTok{=}\NormalTok{meta\_model,}
+\NormalTok{    estimators}\OperatorTok{=}\NormalTok{top4\_regressor\_list,}
+\NormalTok{    final\_estimator}\OperatorTok{=}\NormalTok{top4\_meta\_lr,}
 \NormalTok{    cv}\OperatorTok{=}\DecValTok{5}
 \NormalTok{)}
 
@@ -14044,14 +14087,53 @@ of their coefficients in the linear regression metamodel.
 
 \CommentTok{\# Fit the pipeline}
 \NormalTok{stacking\_top4\_pipeline.fit(X\_train, y\_train)}
+\end{Highlighting}
+\end{Shaded}
 
+\begin{verbatim}
+Pipeline(steps=[('preprocessor',
+                 ColumnTransformer(transformers=[('num', StandardScaler(),
+                                                  ['year', 'mileage', 'tax',
+                                                   'mpg', 'engineSize']),
+                                                 ('cat',
+                                                  OneHotEncoder(handle_unknown='ignore'),
+                                                  ['brand', 'model',
+                                                   'transmission',
+                                                   'fuelType'])])),
+                ('stacking',
+                 StackingRegressor(cv=5,
+                                   estimators=[('cat',
+                                                <catboost.core.CatBoostRegressor object at 0x000001F1F68DB1D0>),
+                                               ('rf',
+                                                Ra...
+                                                             interaction_constraints=None,
+                                                             learning_rate=None,
+                                                             max_bin=None,
+                                                             max_cat_threshold=None,
+                                                             max_cat_to_onehot=None,
+                                                             max_delta_step=None,
+                                                             max_depth=None,
+                                                             max_leaves=None,
+                                                             min_child_weight=None,
+                                                             missing=nan,
+                                                             monotone_constraints=None,
+                                                             multi_strategy=None,
+                                                             n_estimators=None,
+                                                             n_jobs=None,
+                                                             num_parallel_tree=None, ...)),
+                                               ('knn', KNeighborsRegressor())],
+                                   final_estimator=LinearRegression()))])
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
 \CommentTok{\# Predict and evaluate}
 \NormalTok{y\_pred\_top4 }\OperatorTok{=}\NormalTok{ stacking\_top4\_pipeline.predict(X\_test)}
 \NormalTok{rmse\_top4 }\OperatorTok{=}\NormalTok{ root\_mean\_squared\_error(y\_test, y\_pred\_top4)}
 
 \CommentTok{\# Add result to results\_df}
-\NormalTok{reg\_results\_df.loc[}\BuiltInTok{len}\NormalTok{(results\_df.index)] }\OperatorTok{=}\NormalTok{ [}\StringTok{\textquotesingle{}Stacking Top 4 Models\textquotesingle{}}\NormalTok{, rmse\_top4]}
-\NormalTok{reg\_results\_df }\OperatorTok{=}\NormalTok{ results\_df.sort\_values(by}\OperatorTok{=}\StringTok{\textquotesingle{}RMSE\textquotesingle{}}\NormalTok{, ascending}\OperatorTok{=}\VariableTok{True}\NormalTok{).reset\_index(drop}\OperatorTok{=}\VariableTok{True}\NormalTok{)}
+\NormalTok{reg\_results\_df.loc[}\BuiltInTok{len}\NormalTok{(reg\_results\_df.index)] }\OperatorTok{=}\NormalTok{ [}\StringTok{\textquotesingle{}Lr Stacking Top 4 Regressor\textquotesingle{}}\NormalTok{, rmse\_top4]}
+\NormalTok{reg\_results\_df }\OperatorTok{=}\NormalTok{ reg\_results\_df.sort\_values(by}\OperatorTok{=}\StringTok{\textquotesingle{}RMSE\textquotesingle{}}\NormalTok{, ascending}\OperatorTok{=}\VariableTok{True}\NormalTok{).reset\_index(drop}\OperatorTok{=}\VariableTok{True}\NormalTok{)}
 
 \CommentTok{\# Show updated results}
 \NormalTok{reg\_results\_df}
@@ -14065,14 +14147,16 @@ of their coefficients in the linear regression metamodel.
 \endhead
 \bottomrule\noalign{}
 \endlastfoot
-0 & CatBoost & 3296.493137 \\
-1 & Voting Ensemble & 3302.202159 \\
-2 & XGBoost & 3397.155518 \\
-3 & Random Forest & 3660.145970 \\
-4 & LightGBM & 3729.955778 \\
-5 & KNN Regressor & 4062.839680 \\
-6 & Decision Tree & 5015.812547 \\
-7 & Linear Regression & 5801.435399 \\
+0 & Lr Stacking Top 4 Regressor & 3135.705167 \\
+1 & Lr Stacking Regressor & 3190.112423 \\
+2 & Baseline CatBoost & 3296.493137 \\
+3 & Voting Regressor & 3302.202159 \\
+4 & Baseline XGBoost & 3397.155518 \\
+5 & Baseline Random Forest & 3660.145970 \\
+6 & Baseline LightGBM & 3729.955778 \\
+7 & Baseline KNN Regressor & 4062.839680 \\
+8 & Baseline Decision Tree & 5015.812547 \\
+9 & Baseline Linear Regression & 5801.435399 \\
 \end{longtable}
 
 The metamodel accuracy \textbf{improves further}, when \textbf{strong
@@ -14084,7 +14168,7 @@ models} are ensembled.
 \NormalTok{meta\_model\_top4 }\OperatorTok{=}\NormalTok{ stacking\_top4\_pipeline.named\_steps[}\StringTok{\textquotesingle{}stacking\textquotesingle{}}\NormalTok{].final\_estimator\_}
 
 \CommentTok{\# Get the names of the base models}
-\NormalTok{top\_model\_names }\OperatorTok{=}\NormalTok{ [name }\ControlFlowTok{for}\NormalTok{ name, \_ }\KeywordTok{in}\NormalTok{ top\_models]}
+\NormalTok{top\_model\_names }\OperatorTok{=}\NormalTok{ [name }\ControlFlowTok{for}\NormalTok{ name, \_ }\KeywordTok{in}\NormalTok{ top4\_regressor\_list]}
 
 \CommentTok{\# Extract coefficients}
 \NormalTok{top4\_coefs }\OperatorTok{=}\NormalTok{ meta\_model\_top4.coef\_}
@@ -14113,13 +14197,14 @@ models} are ensembled.
 3 & xgb & 0.122639 \\
 \end{longtable}
 
-\subsection{Choosing the Meta-Model in
+\subsubsection{Choosing the Meta-Model in
 Stacking}\label{choosing-the-meta-model-in-stacking}
 
-In stacking, the \textbf{meta-model} (also called the \emph{final
-estimator}) is responsible for learning how to combine the predictions
-of the base models. It takes the base models' predictions as input
-features and learns how to best map them to the target.
+In stacking, the \textbf{meta-model} (also called the
+\emph{\texttt{final\_estimator}}) is responsible for learning how to
+combine the predictions of the base models. It takes the base models'
+predictions as input features and learns how to best map them to the
+target.
 
 While \texttt{LinearRegression} is a popular default choice due to its
 \textbf{simplicity}, \textbf{speed}, and \textbf{interpretability}, you
@@ -14144,7 +14229,7 @@ meta-model, depending on your goals:
 The choice of meta-model can significantly affect the performance of
 your stacked ensemble.
 
-\subsection{General Guidelines for Choosing a Meta-Model in
+\subsubsection{General Guidelines for Choosing a Meta-Model in
 Stacking}\label{general-guidelines-for-choosing-a-meta-model-in-stacking}
 
 When selecting a meta-model (final estimator) for a stacking ensemble,
@@ -14174,131 +14259,91 @@ The meta-model should complement your base models and match the
 complexity of the prediction task.
 
 In this car dataset, CatBoost, XGBoost, LightGBM, and Random Forest are
-all tree-based. They're likely making similar predictions. This causes:
+all tree-based models, and they are likely generating similar
+predictions. This can lead to:
 
 \begin{itemize}
+\tightlist
 \item
-  Multicollinearity
+  \textbf{Multicollinearity} among the base models\\
 \item
-  Unstable or suboptimal coefficients Let's try a regularized model
-  Ridge to suppress redundant contributions more effectively and reduce
-  overfitting
+  \textbf{Unstable or suboptimal coefficients} in the meta-model
 \end{itemize}
+
+\subsubsection{Metamodel: Ridge
+regression}\label{metamodel-ridge-regression}
+
+To address this, we'll try using a \textbf{regularized linear model like
+Ridge regression} as the meta-model. Ridge can better handle redundant
+information by shrinking correlated coefficients, which helps reduce
+overfitting and improve generalization.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\ImportTok{from}\NormalTok{ sklearn.linear\_model }\ImportTok{import}\NormalTok{ Ridge, RidgeCV}
-
 \CommentTok{\# Replace meta{-}model}
-\NormalTok{stacking\_model }\OperatorTok{=}\NormalTok{ StackingRegressor(}
-\NormalTok{    estimators}\OperatorTok{=}\NormalTok{stacking\_estimators,}
+\NormalTok{stacking\_ridge\_model }\OperatorTok{=}\NormalTok{ StackingRegressor(}
+\NormalTok{    estimators}\OperatorTok{=}\NormalTok{base\_regressor\_list,}
 \NormalTok{    final\_estimator}\OperatorTok{=}\NormalTok{Ridge(),}
 \NormalTok{    cv}\OperatorTok{=}\DecValTok{5}
 \NormalTok{)}
 
 \CommentTok{\# Create pipeline with preprocessing}
-\NormalTok{stacking\_pipeline }\OperatorTok{=}\NormalTok{ Pipeline(steps}\OperatorTok{=}\NormalTok{[}
+\NormalTok{stacking\_ridge\_pipeline }\OperatorTok{=}\NormalTok{ Pipeline(steps}\OperatorTok{=}\NormalTok{[}
 \NormalTok{    (}\StringTok{\textquotesingle{}preprocessor\textquotesingle{}}\NormalTok{, preprocessor),}
-\NormalTok{    (}\StringTok{\textquotesingle{}stacking\textquotesingle{}}\NormalTok{, stacking\_model)}
+\NormalTok{    (}\StringTok{\textquotesingle{}stacking\textquotesingle{}}\NormalTok{, stacking\_ridge\_model)}
 \NormalTok{])}
 \CommentTok{\# Fit the pipeline}
-\NormalTok{stacking\_pipeline.fit(X\_train, y\_train)}
-\CommentTok{\# Predict and evaluate}
-\NormalTok{y\_pred\_ridge }\OperatorTok{=}\NormalTok{ stacking\_pipeline.predict(X\_test)}
-\NormalTok{rmse\_ridge }\OperatorTok{=}\NormalTok{ root\_mean\_squared\_error(y\_test, y\_pred\_ridge)}
-\CommentTok{\# Add result to results\_df}
-\NormalTok{reg\_results\_df.loc[}\BuiltInTok{len}\NormalTok{(results\_df.index)] }\OperatorTok{=}\NormalTok{ [}\StringTok{\textquotesingle{}Stacking with Ridge\textquotesingle{}}\NormalTok{, rmse\_ridge]}
-\NormalTok{reg\_results\_df }\OperatorTok{=}\NormalTok{ results\_df.sort\_values(by}\OperatorTok{=}\StringTok{\textquotesingle{}RMSE\textquotesingle{}}\NormalTok{, ascending}\OperatorTok{=}\VariableTok{True}\NormalTok{).reset\_index(drop}\OperatorTok{=}\VariableTok{True}\NormalTok{)}
-\CommentTok{\# Show updated results}
-\NormalTok{reg\_results\_df}
+\NormalTok{stacking\_ridge\_pipeline.fit(X\_train, y\_train)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-c:\Users\lsi8012\AppData\Local\anaconda3\Lib\site-packages\sklearn\utils\deprecation.py:151: FutureWarning: 'force_all_finite' was renamed to 'ensure_all_finite' in 1.6 and will be removed in 1.8.
-  warnings.warn(
-c:\Users\lsi8012\AppData\Local\anaconda3\Lib\site-packages\sklearn\utils\deprecation.py:151: FutureWarning: 'force_all_finite' was renamed to 'ensure_all_finite' in 1.6 and will be removed in 1.8.
-  warnings.warn(
-c:\Users\lsi8012\AppData\Local\anaconda3\Lib\site-packages\sklearn\utils\deprecation.py:151: FutureWarning: 'force_all_finite' was renamed to 'ensure_all_finite' in 1.6 and will be removed in 1.8.
-  warnings.warn(
-c:\Users\lsi8012\AppData\Local\anaconda3\Lib\site-packages\sklearn\utils\deprecation.py:151: FutureWarning: 'force_all_finite' was renamed to 'ensure_all_finite' in 1.6 and will be removed in 1.8.
-  warnings.warn(
-c:\Users\lsi8012\AppData\Local\anaconda3\Lib\site-packages\sklearn\utils\deprecation.py:151: FutureWarning: 'force_all_finite' was renamed to 'ensure_all_finite' in 1.6 and will be removed in 1.8.
-  warnings.warn(
-c:\Users\lsi8012\AppData\Local\anaconda3\Lib\site-packages\sklearn\utils\deprecation.py:151: FutureWarning: 'force_all_finite' was renamed to 'ensure_all_finite' in 1.6 and will be removed in 1.8.
-  warnings.warn(
-c:\Users\lsi8012\AppData\Local\anaconda3\Lib\site-packages\sklearn\utils\deprecation.py:151: FutureWarning: 'force_all_finite' was renamed to 'ensure_all_finite' in 1.6 and will be removed in 1.8.
-  warnings.warn(
-c:\Users\lsi8012\AppData\Local\anaconda3\Lib\site-packages\sklearn\utils\deprecation.py:151: FutureWarning: 'force_all_finite' was renamed to 'ensure_all_finite' in 1.6 and will be removed in 1.8.
-  warnings.warn(
+Pipeline(steps=[('preprocessor',
+                 ColumnTransformer(transformers=[('num', StandardScaler(),
+                                                  ['year', 'mileage', 'tax',
+                                                   'mpg', 'engineSize']),
+                                                 ('cat',
+                                                  OneHotEncoder(handle_unknown='ignore'),
+                                                  ['brand', 'model',
+                                                   'transmission',
+                                                   'fuelType'])])),
+                ('stacking',
+                 StackingRegressor(cv=5,
+                                   estimators=[('lr', LinearRegression()),
+                                               ('knn', KNeighborsRegressor()),
+                                               ('dt',
+                                                DecisionTreeRe...
+                                                             max_cat_to_onehot=None,
+                                                             max_delta_step=None,
+                                                             max_depth=None,
+                                                             max_leaves=None,
+                                                             min_child_weight=None,
+                                                             missing=nan,
+                                                             monotone_constraints=None,
+                                                             multi_strategy=None,
+                                                             n_estimators=None,
+                                                             n_jobs=None,
+                                                             num_parallel_tree=None, ...)),
+                                               ('lgb',
+                                                LGBMRegressor(random_state=42,
+                                                              verbose=0)),
+                                               ('cat',
+                                                <catboost.core.CatBoostRegressor object at 0x000001F1F6715370>)],
+                                   final_estimator=Ridge()))])
 \end{verbatim}
-
-\begin{longtable}[]{@{}lll@{}}
-\toprule\noalign{}
-& Model & RMSE \\
-\midrule\noalign{}
-\endhead
-\bottomrule\noalign{}
-\endlastfoot
-0 & CatBoost & 3296.493137 \\
-1 & Voting Ensemble & 3302.202159 \\
-2 & XGBoost & 3397.155518 \\
-3 & Random Forest & 3660.145970 \\
-4 & LightGBM & 3729.955778 \\
-5 & KNN Regressor & 4062.839680 \\
-6 & Decision Tree & 5015.812547 \\
-7 & Linear Regression & 5801.435399 \\
-\end{longtable}
-
-It obtained the same result as linearregression, alpha needs to be tuned
-for better performance,
-
-\subsubsection{Metamodel: CatBoost}\label{metamodel-catboost}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# use catboost as meta{-}model}
-\NormalTok{stacking\_model }\OperatorTok{=}\NormalTok{ StackingRegressor(}
-\NormalTok{    estimators}\OperatorTok{=}\NormalTok{stacking\_estimators,}
-\NormalTok{    final\_estimator}\OperatorTok{=}\NormalTok{cb.CatBoostRegressor(random\_state}\OperatorTok{=}\DecValTok{42}\NormalTok{, verbose}\OperatorTok{=}\DecValTok{0}\NormalTok{),}
-\NormalTok{    cv}\OperatorTok{=}\DecValTok{5}
-\NormalTok{)}
-\CommentTok{\# Create pipeline with preprocessing}
-\NormalTok{stacking\_pipeline }\OperatorTok{=}\NormalTok{ Pipeline(steps}\OperatorTok{=}\NormalTok{[}
-\NormalTok{    (}\StringTok{\textquotesingle{}preprocessor\textquotesingle{}}\NormalTok{, preprocessor),}
-\NormalTok{    (}\StringTok{\textquotesingle{}stacking\textquotesingle{}}\NormalTok{, stacking\_model)}
-\NormalTok{])}
-\CommentTok{\# Fit the pipeline}
-\NormalTok{stacking\_pipeline.fit(X\_train, y\_train)}
 \CommentTok{\# Predict and evaluate}
-\NormalTok{y\_pred\_cat }\OperatorTok{=}\NormalTok{ stacking\_pipeline.predict(X\_test)}
-\NormalTok{rmse\_cat }\OperatorTok{=}\NormalTok{ root\_mean\_squared\_error(y\_test, y\_pred\_cat)}
+\NormalTok{y\_pred\_ridge }\OperatorTok{=}\NormalTok{ stacking\_ridge\_pipeline.predict(X\_test)}
+\NormalTok{rmse\_ridge }\OperatorTok{=}\NormalTok{ root\_mean\_squared\_error(y\_test, y\_pred\_ridge)}
 \CommentTok{\# Add result to results\_df}
-\NormalTok{reg\_results\_df.loc[}\BuiltInTok{len}\NormalTok{(results\_df.index)] }\OperatorTok{=}\NormalTok{ [}\StringTok{\textquotesingle{}Stacking with CatBoost\textquotesingle{}}\NormalTok{, rmse\_cat]}
-\NormalTok{reg\_results\_df }\OperatorTok{=}\NormalTok{ results\_df.sort\_values(by}\OperatorTok{=}\StringTok{\textquotesingle{}RMSE\textquotesingle{}}\NormalTok{, ascending}\OperatorTok{=}\VariableTok{True}\NormalTok{).reset\_index(drop}\OperatorTok{=}\VariableTok{True}\NormalTok{)}
+\NormalTok{reg\_results\_df.loc[}\BuiltInTok{len}\NormalTok{(reg\_results\_df.index)] }\OperatorTok{=}\NormalTok{ [}\StringTok{\textquotesingle{}Stacking with Ridge\textquotesingle{}}\NormalTok{, rmse\_ridge]}
+\NormalTok{reg\_results\_df }\OperatorTok{=}\NormalTok{ reg\_results\_df.sort\_values(by}\OperatorTok{=}\StringTok{\textquotesingle{}RMSE\textquotesingle{}}\NormalTok{, ascending}\OperatorTok{=}\VariableTok{True}\NormalTok{).reset\_index(drop}\OperatorTok{=}\VariableTok{True}\NormalTok{)}
 \CommentTok{\# Show updated results}
 \NormalTok{reg\_results\_df}
 \end{Highlighting}
 \end{Shaded}
-
-\begin{verbatim}
-c:\Users\lsi8012\AppData\Local\anaconda3\Lib\site-packages\sklearn\utils\deprecation.py:151: FutureWarning: 'force_all_finite' was renamed to 'ensure_all_finite' in 1.6 and will be removed in 1.8.
-  warnings.warn(
-c:\Users\lsi8012\AppData\Local\anaconda3\Lib\site-packages\sklearn\utils\deprecation.py:151: FutureWarning: 'force_all_finite' was renamed to 'ensure_all_finite' in 1.6 and will be removed in 1.8.
-  warnings.warn(
-c:\Users\lsi8012\AppData\Local\anaconda3\Lib\site-packages\sklearn\utils\deprecation.py:151: FutureWarning: 'force_all_finite' was renamed to 'ensure_all_finite' in 1.6 and will be removed in 1.8.
-  warnings.warn(
-c:\Users\lsi8012\AppData\Local\anaconda3\Lib\site-packages\sklearn\utils\deprecation.py:151: FutureWarning: 'force_all_finite' was renamed to 'ensure_all_finite' in 1.6 and will be removed in 1.8.
-  warnings.warn(
-c:\Users\lsi8012\AppData\Local\anaconda3\Lib\site-packages\sklearn\utils\deprecation.py:151: FutureWarning: 'force_all_finite' was renamed to 'ensure_all_finite' in 1.6 and will be removed in 1.8.
-  warnings.warn(
-c:\Users\lsi8012\AppData\Local\anaconda3\Lib\site-packages\sklearn\utils\deprecation.py:151: FutureWarning: 'force_all_finite' was renamed to 'ensure_all_finite' in 1.6 and will be removed in 1.8.
-  warnings.warn(
-c:\Users\lsi8012\AppData\Local\anaconda3\Lib\site-packages\sklearn\utils\deprecation.py:151: FutureWarning: 'force_all_finite' was renamed to 'ensure_all_finite' in 1.6 and will be removed in 1.8.
-  warnings.warn(
-c:\Users\lsi8012\AppData\Local\anaconda3\Lib\site-packages\sklearn\utils\deprecation.py:151: FutureWarning: 'force_all_finite' was renamed to 'ensure_all_finite' in 1.6 and will be removed in 1.8.
-  warnings.warn(
-\end{verbatim}
 
 \begin{longtable}[]{@{}lll@{}}
 \toprule\noalign{}
@@ -14307,15 +14352,51 @@ c:\Users\lsi8012\AppData\Local\anaconda3\Lib\site-packages\sklearn\utils\depreca
 \endhead
 \bottomrule\noalign{}
 \endlastfoot
-0 & CatBoost & 3296.493137 \\
-1 & Voting Ensemble & 3302.202159 \\
-2 & XGBoost & 3397.155518 \\
-3 & Random Forest & 3660.145970 \\
-4 & LightGBM & 3729.955778 \\
-5 & KNN Regressor & 4062.839680 \\
-6 & Decision Tree & 5015.812547 \\
-7 & Linear Regression & 5801.435399 \\
+0 & Lr Stacking Top 4 Regressor & 3135.705167 \\
+1 & Stacking with Ridge & 3147.701164 \\
+2 & Lr Stacking Regressor & 3190.112423 \\
+3 & Baseline CatBoost & 3296.493137 \\
+4 & Voting Regressor & 3302.202159 \\
+5 & Baseline XGBoost & 3397.155518 \\
+6 & Baseline Random Forest & 3660.145970 \\
+7 & Baseline LightGBM & 3729.955778 \\
+8 & Baseline KNN Regressor & 4062.839680 \\
+9 & Baseline Decision Tree & 5015.812547 \\
+10 & Baseline Linear Regression & 5801.435399 \\
 \end{longtable}
+
+\textbf{Interpretation of Results:}
+
+From the table, we observe that the \textbf{``Lr Stacking Top 4
+Regressor''} achieved the lowest RMSE, indicating the best performance
+among all models evaluated. This model stacked the top 4 individually
+optimized regressors (CatBoost, XGBoost, Random Forest, and KNN) using a
+simple linear regression as the meta-model.
+
+Interestingly, the \textbf{``Stacking with Ridge''} model---another
+stacking model using Ridge Regression as the meta-model---performed
+slightly worse than the simple linear stacking. This could be due to the
+Ridge model introducing regularization that slightly underweighted some
+strong base learners, leading to a minor decrease in overall
+performance.
+
+Additional observations:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{``Voting Regressor''} performed better than most baseline
+  models but was still outperformed by stacking approaches. This is
+  expected, as voting ensembles assign equal weights to base learners,
+  whereas stacking learns optimal weights through a meta-model.
+\item
+  All \textbf{baseline tree-based models} (CatBoost, XGBoost, Random
+  Forest, LightGBM) performed reasonably well, with CatBoost being the
+  best among them even without tuning.
+\item
+  The \textbf{baseline linear regression} performed the worst due to its
+  limited capability to capture non-linear relationship in the data
+\end{itemize}
 
 \subsection{Should You Tune Base Models Before Stacking or
 Voting?}\label{should-you-tune-base-models-before-stacking-or-voting}
@@ -14342,22 +14423,6 @@ Models}\label{benefits-of-tuning-base-models}
   strong and diverse.
 \end{itemize}
 
-\subsubsection{Exceptions \& Practical
-Advice}\label{exceptions-practical-advice}
-
-\begin{itemize}
-\tightlist
-\item
-  For \textbf{quick prototypes}, you can start with default settings to
-  test if ensembling helps.
-\item
-  For \textbf{computational efficiency}, focus tuning on your top models
-  (e.g., CatBoost, XGBoost).
-\item
-  Use tools like \textbf{Optuna}, \textbf{RandomizedSearchCV}, or
-  \textbf{BayesSearchCV} to efficiently tune key hyperparameters.
-\end{itemize}
-
 \subsubsection{Summary}\label{summary}
 
 \begin{longtable}[]{@{}
@@ -14382,13 +14447,18 @@ ones. \\
 meaningful base predictions. \\
 \end{longtable}
 
-Since we have tuned the top 4 models in the previous chapters, let's use
-their optimized hyperparamters for stacking next
+For quick prototyping, so far we have used default model settings to
+assess whether ensembling could improve performance. Now that we have
+identified the top 4 models, we will leverage their optimized versions
+for stacking. These models were fine-tuned in previous chapters using
+tools like \textbf{Optuna}, \textbf{RandomizedSearchCV}, or
+\textbf{BayesSearchCV} to efficiently search for the best
+hyperparameters.
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{\# tuned catboost model from section 11.3.6}
-\NormalTok{catboost\_model }\OperatorTok{=}\NormalTok{ cb.CatBoostRegressor(}
+\NormalTok{catboost\_tuned }\OperatorTok{=}\NormalTok{ cb.CatBoostRegressor(}
 \NormalTok{    iterations}\OperatorTok{=}\DecValTok{1021}\NormalTok{,}
 \NormalTok{    learning\_rate}\OperatorTok{=}\FloatTok{0.0536}\NormalTok{,}
 \NormalTok{    depth}\OperatorTok{=}\DecValTok{7}\NormalTok{,}
@@ -14400,7 +14470,7 @@ their optimized hyperparamters for stacking next
 \NormalTok{    verbose}\OperatorTok{=}\DecValTok{0}
 \NormalTok{)}
 \CommentTok{\# tuned random forest model from section 7.4.4}
-\NormalTok{rf\_model }\OperatorTok{=}\NormalTok{ RandomForestRegressor(}
+\NormalTok{rf\_tuned }\OperatorTok{=}\NormalTok{ RandomForestRegressor(}
 \NormalTok{    n\_estimators}\OperatorTok{=}\DecValTok{60}\NormalTok{,}
 \NormalTok{    max\_depth}\OperatorTok{=}\DecValTok{28}\NormalTok{,}
 \NormalTok{    max\_features}\OperatorTok{=}\FloatTok{0.58}\NormalTok{,}
@@ -14409,7 +14479,7 @@ their optimized hyperparamters for stacking next
 \NormalTok{)}
 
 \CommentTok{\#tuned knn model from section 2.4.1}
-\NormalTok{knn\_model }\OperatorTok{=}\NormalTok{ KNeighborsRegressor(}
+\NormalTok{knn\_tuned }\OperatorTok{=}\NormalTok{ KNeighborsRegressor(}
 \NormalTok{    n\_neighbors}\OperatorTok{=}\DecValTok{8}\NormalTok{,}
 \NormalTok{    weights}\OperatorTok{=}\StringTok{\textquotesingle{}distance\textquotesingle{}}\NormalTok{,}
 \NormalTok{    metric}\OperatorTok{=}\StringTok{\textquotesingle{}manhattan\textquotesingle{}}\NormalTok{,}
@@ -14417,7 +14487,7 @@ their optimized hyperparamters for stacking next
 \NormalTok{)}
 
 \CommentTok{\# tuned xgboost model from section  10.5.10}
-\NormalTok{xgb\_model }\OperatorTok{=}\NormalTok{ xgb.XGBRegressor(}
+\NormalTok{xgb\_tuned }\OperatorTok{=}\NormalTok{ xgb.XGBRegressor(}
 \NormalTok{    n\_estimators}\OperatorTok{=}\DecValTok{193}\NormalTok{,}
 \NormalTok{    learning\_rate}\OperatorTok{=}\FloatTok{0.15}\NormalTok{,}
 \NormalTok{    max\_depth}\OperatorTok{=}\DecValTok{7}\NormalTok{,}
@@ -14434,50 +14504,50 @@ their optimized hyperparamters for stacking next
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{optimized\_estimators }\OperatorTok{=}\NormalTok{ [}
-\NormalTok{    (}\StringTok{\textquotesingle{}cat\textquotesingle{}}\NormalTok{, cb.CatBoostRegressor(depth}\OperatorTok{=}\DecValTok{6}\NormalTok{, learning\_rate}\OperatorTok{=}\FloatTok{0.1}\NormalTok{, verbose}\OperatorTok{=}\DecValTok{0}\NormalTok{, random\_state}\OperatorTok{=}\DecValTok{42}\NormalTok{)),}
-\NormalTok{    (}\StringTok{\textquotesingle{}rf\textquotesingle{}}\NormalTok{, RandomForestRegressor(n\_estimators}\OperatorTok{=}\DecValTok{100}\NormalTok{, max\_depth}\OperatorTok{=}\DecValTok{10}\NormalTok{, random\_state}\OperatorTok{=}\DecValTok{42}\NormalTok{)),}
-\NormalTok{    (}\StringTok{\textquotesingle{}knn\textquotesingle{}}\NormalTok{, KNeighborsRegressor(n\_neighbors}\OperatorTok{=}\DecValTok{5}\NormalTok{)),}
-\NormalTok{    (}\StringTok{\textquotesingle{}xgb\textquotesingle{}}\NormalTok{, xgb.XGBRegressor(max\_depth}\OperatorTok{=}\DecValTok{4}\NormalTok{, learning\_rate}\OperatorTok{=}\FloatTok{0.1}\NormalTok{, n\_estimators}\OperatorTok{=}\DecValTok{100}\NormalTok{, random\_state}\OperatorTok{=}\DecValTok{42}\NormalTok{))}
-\NormalTok{]}
+\CommentTok{\# Define models to evaluate}
+\NormalTok{tuned\_regressor\_models }\OperatorTok{=}\NormalTok{ \{}
+    \StringTok{\textquotesingle{}Optmized KNN Regressor\textquotesingle{}}\NormalTok{: knn\_tuned,}
+    \StringTok{\textquotesingle{}Optmized Random Forest\textquotesingle{}}\NormalTok{: rf\_tuned,}
+    \StringTok{\textquotesingle{}Optmized XGBoost\textquotesingle{}}\NormalTok{: xgb\_tuned,}
+    \StringTok{\textquotesingle{}Optmized CatBoost\textquotesingle{}}\NormalTok{: catboost\_tuned}
+\NormalTok{\}}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# loop through the models}
-\NormalTok{tuned\_models }\OperatorTok{=}\NormalTok{ \{}
-    \StringTok{\textquotesingle{}Optmized CatBoost\textquotesingle{}}\NormalTok{: catboost\_model,}
-    \StringTok{\textquotesingle{}Optmized Random Forest\textquotesingle{}}\NormalTok{: rf\_model,}
-    \StringTok{\textquotesingle{}Optmized KNN\textquotesingle{}}\NormalTok{: knn\_model,}
-    \StringTok{\textquotesingle{}Optmized XGBoost\textquotesingle{}}\NormalTok{: xgb\_model}
-\NormalTok{\}}
-\CommentTok{\# store the results}
-\NormalTok{tuned\_results }\OperatorTok{=}\NormalTok{ \{\}}
-\CommentTok{\# Loop through models}
-\ControlFlowTok{for}\NormalTok{ name, model }\KeywordTok{in}\NormalTok{ tuned\_models.items():}
+\CommentTok{\# Initialize results dictionary}
+\NormalTok{tuned\_top4\_results }\OperatorTok{=}\NormalTok{ \{\}}
+
+\CommentTok{\# Loop through tuned regressor models}
+\ControlFlowTok{for}\NormalTok{ name, model }\KeywordTok{in}\NormalTok{ tuned\_regressor\_models.items():}
     \CommentTok{\# Create a pipeline with preprocessing and the model}
-\NormalTok{    pipeline }\OperatorTok{=}\NormalTok{ Pipeline(steps}\OperatorTok{=}\NormalTok{[(}\StringTok{\textquotesingle{}preprocessor\textquotesingle{}}\NormalTok{, preprocessor),}
-\NormalTok{                               (}\StringTok{\textquotesingle{}model\textquotesingle{}}\NormalTok{, model)])}
+\NormalTok{    tuned\_pipeline }\OperatorTok{=}\NormalTok{ Pipeline(steps}\OperatorTok{=}\NormalTok{[}
+\NormalTok{        (}\StringTok{\textquotesingle{}preprocessor\textquotesingle{}}\NormalTok{, preprocessor),}
+\NormalTok{        (}\StringTok{\textquotesingle{}model\textquotesingle{}}\NormalTok{, model)}
+\NormalTok{    ])}
     
     \CommentTok{\# Fit the model}
-\NormalTok{    pipeline.fit(X\_train, y\_train)}
+\NormalTok{    tuned\_pipeline.fit(X\_train, y\_train)}
     
     \CommentTok{\# Make predictions}
-\NormalTok{    y\_pred }\OperatorTok{=}\NormalTok{ pipeline.predict(X\_test)}
+\NormalTok{    y\_tuned\_pred }\OperatorTok{=}\NormalTok{ tuned\_pipeline.predict(X\_test)}
     
-    \CommentTok{\# Calculate RMSE}
-\NormalTok{    rmse }\OperatorTok{=}\NormalTok{ root\_mean\_squared\_error(y\_test, y\_pred)}
+    \CommentTok{\# Calculate RMSE (correct target used)}
+\NormalTok{    tuned\_rmse }\OperatorTok{=}\NormalTok{ root\_mean\_squared\_error(y\_test, y\_tuned\_pred)}
     
-    \CommentTok{\# Store the results}
-\NormalTok{    tuned\_results[name] }\OperatorTok{=}\NormalTok{ rmse}
-\CommentTok{\# Convert results to DataFrame for better visualization}
-\NormalTok{tuned\_results\_df }\OperatorTok{=}\NormalTok{ pd.DataFrame.from\_dict(tuned\_results, orient}\OperatorTok{=}\StringTok{\textquotesingle{}index\textquotesingle{}}\NormalTok{, columns}\OperatorTok{=}\NormalTok{[}\StringTok{\textquotesingle{}RMSE\textquotesingle{}}\NormalTok{])}
-\NormalTok{tuned\_results\_df }\OperatorTok{=}\NormalTok{ tuned\_results\_df.sort\_values(by}\OperatorTok{=}\StringTok{\textquotesingle{}RMSE\textquotesingle{}}\NormalTok{, ascending}\OperatorTok{=}\VariableTok{True}\NormalTok{)}
-\NormalTok{tuned\_results\_df.reset\_index(inplace}\OperatorTok{=}\VariableTok{True}\NormalTok{)}
-\NormalTok{tuned\_results\_df.columns }\OperatorTok{=}\NormalTok{ [}\StringTok{\textquotesingle{}Model\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}RMSE\textquotesingle{}}\NormalTok{]}
-\CommentTok{\# Print the results}
-\NormalTok{tuned\_results\_df}
+    \CommentTok{\# Store the result with a consistent label}
+\NormalTok{    tuned\_top4\_results[name] }\OperatorTok{=}\NormalTok{ tuned\_rmse}
+
+\CommentTok{\# Append new results to reg\_results\_df}
+\ControlFlowTok{for}\NormalTok{ name, rmse }\KeywordTok{in}\NormalTok{ tuned\_top4\_results.items():}
+\NormalTok{    reg\_results\_df.loc[}\BuiltInTok{len}\NormalTok{(reg\_results\_df)] }\OperatorTok{=}\NormalTok{ [name, rmse]}
+
+\CommentTok{\# Sort and reset index}
+\NormalTok{reg\_results\_df }\OperatorTok{=}\NormalTok{ reg\_results\_df.sort\_values(by}\OperatorTok{=}\StringTok{\textquotesingle{}RMSE\textquotesingle{}}\NormalTok{, ascending}\OperatorTok{=}\VariableTok{True}\NormalTok{).reset\_index(drop}\OperatorTok{=}\VariableTok{True}\NormalTok{)}
+
+\CommentTok{\# Show updated results}
+\NormalTok{reg\_results\_df}
 \end{Highlighting}
 \end{Shaded}
 
@@ -14489,31 +14559,53 @@ their optimized hyperparamters for stacking next
 \bottomrule\noalign{}
 \endlastfoot
 0 & Optmized XGBoost & 3105.835205 \\
-1 & Optmized CatBoost & 3175.161327 \\
-2 & Optmized Random Forest & 3279.094977 \\
-3 & Optmized KNN & 3680.370319 \\
+1 & Lr Stacking Top 4 Regressor & 3135.705167 \\
+2 & Stacking with Ridge & 3147.701164 \\
+3 & Optmized CatBoost & 3175.161327 \\
+4 & Lr Stacking Regressor & 3190.112423 \\
+5 & Optmized Random Forest & 3279.094977 \\
+6 & Baseline CatBoost & 3296.493137 \\
+7 & Voting Regressor & 3302.202159 \\
+8 & Baseline XGBoost & 3397.155518 \\
+9 & Baseline Random Forest & 3660.145970 \\
+10 & Optmized KNN Regressor & 3680.370319 \\
+11 & Baseline LightGBM & 3729.955778 \\
+12 & Baseline KNN Regressor & 4062.839680 \\
+13 & Baseline Decision Tree & 5015.812547 \\
+14 & Baseline Linear Regression & 5801.435399 \\
 \end{longtable}
+
+\subsubsection{Metamodel: Linear Regression on Tuned Top 4
+Models}\label{metamodel-linear-regression-on-tuned-top-4-models}
 
 \begin{Shaded}
 \begin{Highlighting}[]
+\CommentTok{\# define top 4 optimized base models}
+\NormalTok{tuned\_top4\_regressor\_list }\OperatorTok{=}\NormalTok{ [}
+\NormalTok{    (}\StringTok{\textquotesingle{}cat\textquotesingle{}}\NormalTok{, catboost\_tuned),}
+\NormalTok{    (}\StringTok{\textquotesingle{}rf\textquotesingle{}}\NormalTok{, rf\_tuned),}
+\NormalTok{    (}\StringTok{\textquotesingle{}knn\textquotesingle{}}\NormalTok{, knn\_tuned),}
+\NormalTok{    (}\StringTok{\textquotesingle{}xgb\textquotesingle{}}\NormalTok{, xgb\_tuned)}
+\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
 
-\CommentTok{\# Meta{-}model}
-\NormalTok{meta\_model }\OperatorTok{=}\NormalTok{ LinearRegression()}
-
+\begin{Shaded}
+\begin{Highlighting}[]
 \CommentTok{\# Build the stacking ensemble}
-\NormalTok{stacking\_optimized\_top4 }\OperatorTok{=}\NormalTok{ StackingRegressor(}
-\NormalTok{    estimators}\OperatorTok{=}\NormalTok{optimized\_estimators,}
-\NormalTok{    final\_estimator}\OperatorTok{=}\NormalTok{meta\_model,}
+\NormalTok{stacking\_tuned\_top4 }\OperatorTok{=}\NormalTok{ StackingRegressor(}
+\NormalTok{    estimators}\OperatorTok{=}\NormalTok{tuned\_top4\_regressor\_list,}
+\NormalTok{    final\_estimator}\OperatorTok{=}\NormalTok{LinearRegression(),}
 \NormalTok{    cv}\OperatorTok{=}\DecValTok{5}
 \NormalTok{)}
 \CommentTok{\# Create pipeline with preprocessing}
-\NormalTok{stacking\_top4\_pipeline }\OperatorTok{=}\NormalTok{ Pipeline(steps}\OperatorTok{=}\NormalTok{[}
+\NormalTok{stacking\_tuned\_top4\_pipeline }\OperatorTok{=}\NormalTok{ Pipeline(steps}\OperatorTok{=}\NormalTok{[}
 \NormalTok{    (}\StringTok{\textquotesingle{}preprocessor\textquotesingle{}}\NormalTok{, preprocessor),}
-\NormalTok{    (}\StringTok{\textquotesingle{}stacking\textquotesingle{}}\NormalTok{, stacking\_optimized\_top4)}
+\NormalTok{    (}\StringTok{\textquotesingle{}stacking\textquotesingle{}}\NormalTok{, stacking\_tuned\_top4)}
 \NormalTok{])}
 
 \CommentTok{\# Fit the pipeline}
-\NormalTok{stacking\_top4\_pipeline.fit(X\_train, y\_train)}
+\NormalTok{stacking\_tuned\_top4\_pipeline.fit(X\_train, y\_train)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -14530,23 +14622,23 @@ Pipeline(steps=[('preprocessor',
                 ('stacking',
                  StackingRegressor(cv=5,
                                    estimators=[('cat',
-                                                <catboost.core.CatBoostRegressor object at 0x000001921300B440>),
+                                                <catboost.core.CatBoostRegressor object at 0x000001F1F65C5A60>),
                                                ('rf',
                                                 Ra...
                                                              importance_type=None,
                                                              interaction_constraints=None,
-                                                             learning_rate=0.1,
+                                                             learning_rate=0.15,
                                                              max_bin=None,
                                                              max_cat_threshold=None,
                                                              max_cat_to_onehot=None,
                                                              max_delta_step=None,
-                                                             max_depth=4,
+                                                             max_depth=7,
                                                              max_leaves=None,
-                                                             min_child_weight=None,
+                                                             min_child_weight=1,
                                                              missing=nan,
                                                              monotone_constraints=None,
                                                              multi_strategy=None,
-                                                             n_estimators=100,
+                                                             n_estimators=193,
                                                              n_jobs=None,
                                                              num_parallel_tree=None, ...))],
                                    final_estimator=LinearRegression()))])
@@ -14555,11 +14647,11 @@ Pipeline(steps=[('preprocessor',
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{\# Predict and evaluate}
-\NormalTok{y\_pred\_top4\_optimized }\OperatorTok{=}\NormalTok{ stacking\_top4\_pipeline.predict(X\_test)}
-\NormalTok{rmse\_top4\_optimized }\OperatorTok{=}\NormalTok{ root\_mean\_squared\_error(y\_test, y\_pred\_top4\_optimized)}
+\NormalTok{y\_pred\_top4\_tuned }\OperatorTok{=}\NormalTok{ stacking\_tuned\_top4\_pipeline.predict(X\_test)}
+\NormalTok{rmse\_top4\_tuned }\OperatorTok{=}\NormalTok{ root\_mean\_squared\_error(y\_test, y\_pred\_top4\_tuned)}
 
 \CommentTok{\# Add result to results\_df}
-\NormalTok{reg\_results\_df.loc[}\BuiltInTok{len}\NormalTok{(reg\_results\_df.index)] }\OperatorTok{=}\NormalTok{ [}\StringTok{\textquotesingle{}Stacking Optimized Top 4 Models\textquotesingle{}}\NormalTok{, rmse\_top4\_optimized]}
+\NormalTok{reg\_results\_df.loc[}\BuiltInTok{len}\NormalTok{(reg\_results\_df.index)] }\OperatorTok{=}\NormalTok{ [}\StringTok{\textquotesingle{}Stacking Optimized Top 4 Models\textquotesingle{}}\NormalTok{, rmse\_top4\_tuned]}
 
 \CommentTok{\# Sort and reset index}
 \NormalTok{reg\_results\_df }\OperatorTok{=}\NormalTok{ reg\_results\_df.sort\_values(by}\OperatorTok{=}\StringTok{\textquotesingle{}RMSE\textquotesingle{}}\NormalTok{, ascending}\OperatorTok{=}\VariableTok{True}\NormalTok{).reset\_index(drop}\OperatorTok{=}\VariableTok{True}\NormalTok{)}
@@ -14576,27 +14668,89 @@ Pipeline(steps=[('preprocessor',
 \endhead
 \bottomrule\noalign{}
 \endlastfoot
-0 & Stacking Optimized Top 4 Models & 3037.698440 \\
-1 & Stacking Optimized Top 4 Models & 3037.698440 \\
-2 & CatBoost & 3296.493137 \\
-3 & Voting Ensemble & 3302.202159 \\
-4 & XGBoost & 3397.155518 \\
-5 & Random Forest & 3660.145970 \\
-6 & LightGBM & 3729.955778 \\
-7 & KNN Regressor & 4062.839680 \\
-8 & Decision Tree & 5015.812547 \\
-9 & Linear Regression & 5801.435399 \\
+0 & Stacking Optimized Top 4 Models & 2971.389848 \\
+1 & Optmized XGBoost & 3105.835205 \\
+2 & Lr Stacking Top 4 Regressor & 3135.705167 \\
+3 & Stacking with Ridge & 3147.701164 \\
+4 & Optmized CatBoost & 3175.161327 \\
+5 & Lr Stacking Regressor & 3190.112423 \\
+6 & Optmized Random Forest & 3279.094977 \\
+7 & Baseline CatBoost & 3296.493137 \\
+8 & Voting Regressor & 3302.202159 \\
+9 & Baseline XGBoost & 3397.155518 \\
+10 & Baseline Random Forest & 3660.145970 \\
+11 & Optmized KNN Regressor & 3680.370319 \\
+12 & Baseline LightGBM & 3729.955778 \\
+13 & Baseline KNN Regressor & 4062.839680 \\
+14 & Baseline Decision Tree & 5015.812547 \\
+15 & Baseline Linear Regression & 5801.435399 \\
 \end{longtable}
 
-\section{Ensembling Classification Models with Stacking and
-Voting}\label{ensembling-classification-models-with-stacking-and-voting}
+\textbf{Key Takeaway}
 
-\subsection{How Voting Works for
-Classification}\label{how-voting-works-for-classification}
+\begin{itemize}
+\tightlist
+\item
+  By using the tuned regressors, the performance of our stacking model
+  improved further, achieving the lowest RMSE overall.
+\item
+  Optimized regularized boosting tree models---such as \textbf{XGBoost}
+  and \textbf{CatBoost}---demonstrated strong predictive performance
+  even without stacking.
+\item
+  These optimized models outperformed several stacking models that used
+  default base regressors.
+\item
+  This highlights the importance of proper \textbf{hyperparameter
+  tuning}, especially for powerful individual learners.
+\end{itemize}
+
+Overall, stacking with well-tuned base models and a simple meta-model
+(even without regularization) offers a significant boost in predictive
+accuracy, outperforming both individual models and simple averaging
+ensembles.
+
+\subsection{Ensembling Models Based on Different Feature
+Sets}\label{ensembling-models-based-on-different-feature-sets}
+
+Ensemble learning benefits significantly from model diversity---it helps
+reduce overfitting and improves the robustness of predictions. By
+combining models that learn from different perspectives, an ensemble has
+the potential to outperform any single model.
+
+So far, we've shown how to ensemble diverse models by varying
+algorithms. Another powerful approach is to introduce diversity through
+\textbf{different feature subsets}, allowing each model to focus on
+specific aspects of the data. This idea is similar to how methods like
+\textbf{bagging} and \textbf{boosting} inject diversity through data
+sampling or random feature selection (\texttt{max\_features},
+\texttt{colsample\_bytree}, etc.).
+
+An alternative way to introduce such diversity is to train
+\textbf{strong base models on different subsets of features}. These
+subsets can be selected using techniques like: - \textbf{Polynomial
+features} - \textbf{Tree-based feature importance} - \textbf{Stepwise
+feature selection}
+
+By assigning tailored feature sets to different models, tuning each
+individually, and then combining them in a stacked ensemble, we can
+potentially achieve even lower RMSE.
+
+Building such a system involves: 1. Selecting a meaningful feature
+subset for each base model, 2. Tuning each model on its selected
+features, and 3. Ensembling them using a meta-learner.
+
+This more advanced form of stacking is a powerful technique---I'll leave
+its full exploration to you!
+
+\section{Exploring Stacking and Voting in
+Classification}\label{exploring-stacking-and-voting-in-classification}
+
+\subsection{Voting Classifier}\label{voting-classifier}
 
 There are two main types of voting in classification ensembles:
 
-\subsubsection{Hard Voting}\label{hard-voting}
+\textbf{Hard Voting:}
 
 \begin{itemize}
 \tightlist
@@ -14608,22 +14762,21 @@ There are two main types of voting in classification ensembles:
   Simple and interpretable.
 \end{itemize}
 
-\subsubsection{Soft Voting}\label{soft-voting}
+\textbf{Soft Voting:} - Each base model predicts \textbf{class
+probabilities}. - The probabilities are \textbf{averaged}, and the final
+prediction is the class with the \textbf{highest average probability}. -
+Usually performs better than hard voting (especially with
+well-calibrated models).
 
-\begin{itemize}
-\tightlist
-\item
-  Each base model predicts \textbf{class probabilities}.
-\item
-  The probabilities are \textbf{averaged}, and the final prediction is
-  the class with the \textbf{highest average probability}.
-\item
-  Usually performs better than hard voting (especially with
-  well-calibrated models).
-\end{itemize}
+The figure below illustrates the difference between hard and soft
+voting.
 
-We'll ensemble models for predicting accuracy of identifying people
-having a heart disease.
+\begin{verbatim}
+<IPython.core.display.Image object>
+\end{verbatim}
+
+We'll build an ensemble of models to predict whether a person has heart
+disease, focusing on improving classification accuracy.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -14660,71 +14813,74 @@ normal & No \\
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{\# Define target and features}
-\NormalTok{X }\OperatorTok{=}\NormalTok{ heart\_data.drop(columns}\OperatorTok{=}\StringTok{\textquotesingle{}AHD\textquotesingle{}}\NormalTok{)}
-\NormalTok{y }\OperatorTok{=}\NormalTok{ heart\_data[}\StringTok{\textquotesingle{}AHD\textquotesingle{}}\NormalTok{].}\BuiltInTok{map}\NormalTok{(\{}\StringTok{\textquotesingle{}Yes\textquotesingle{}}\NormalTok{: }\DecValTok{1}\NormalTok{, }\StringTok{\textquotesingle{}No\textquotesingle{}}\NormalTok{: }\DecValTok{0}\NormalTok{\})  }\CommentTok{\# Convert target to binary 0/1}
+\NormalTok{clf\_X }\OperatorTok{=}\NormalTok{ heart\_data.drop(columns}\OperatorTok{=}\StringTok{\textquotesingle{}AHD\textquotesingle{}}\NormalTok{)}
+\NormalTok{clf\_y }\OperatorTok{=}\NormalTok{ heart\_data[}\StringTok{\textquotesingle{}AHD\textquotesingle{}}\NormalTok{].}\BuiltInTok{map}\NormalTok{(\{}\StringTok{\textquotesingle{}Yes\textquotesingle{}}\NormalTok{: }\DecValTok{1}\NormalTok{, }\StringTok{\textquotesingle{}No\textquotesingle{}}\NormalTok{: }\DecValTok{0}\NormalTok{\})  }\CommentTok{\# Convert target to binary 0/1}
 
 \CommentTok{\# Train{-}test split}
-\NormalTok{X\_train, X\_test, y\_train, y\_test }\OperatorTok{=}\NormalTok{ train\_test\_split(X, y, stratify}\OperatorTok{=}\NormalTok{y, test\_size}\OperatorTok{=}\FloatTok{0.2}\NormalTok{, random\_state}\OperatorTok{=}\DecValTok{42}\NormalTok{)}
-
-\CommentTok{\# Identify column types}
-\NormalTok{numeric\_cols }\OperatorTok{=}\NormalTok{ [}\StringTok{\textquotesingle{}Age\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}RestBP\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Chol\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}MaxHR\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Oldpeak\textquotesingle{}}\NormalTok{]}
-\NormalTok{categorical\_cols }\OperatorTok{=}\NormalTok{ [}\StringTok{\textquotesingle{}Sex\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}ChestPain\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Fbs\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}RestECG\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}ExAng\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Slope\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Ca\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Thal\textquotesingle{}}\NormalTok{]}
+\NormalTok{clf\_X\_train, clf\_X\_test, clf\_y\_train, clf\_y\_test }\OperatorTok{=}\NormalTok{ train\_test\_split(}
+\NormalTok{    clf\_X, clf\_y, stratify}\OperatorTok{=}\NormalTok{clf\_y, test\_size}\OperatorTok{=}\FloatTok{0.2}\NormalTok{, random\_state}\OperatorTok{=}\DecValTok{42}
+\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# Preprocessing pipelines}
-\NormalTok{numeric\_transformer }\OperatorTok{=}\NormalTok{ StandardScaler()}
-\NormalTok{categorical\_transformer }\OperatorTok{=}\NormalTok{ OneHotEncoder(handle\_unknown}\OperatorTok{=}\StringTok{\textquotesingle{}ignore\textquotesingle{}}\NormalTok{)}
+\CommentTok{\# Identify column types}
+\NormalTok{clf\_numeric\_cols }\OperatorTok{=}\NormalTok{ [}\StringTok{\textquotesingle{}Age\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}RestBP\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Chol\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}MaxHR\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Oldpeak\textquotesingle{}}\NormalTok{]}
+\NormalTok{clf\_categorical\_cols }\OperatorTok{=}\NormalTok{ [}\StringTok{\textquotesingle{}Sex\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}ChestPain\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Fbs\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}RestECG\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}ExAng\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Slope\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Ca\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Thal\textquotesingle{}}\NormalTok{]}
 
-\NormalTok{preprocessor }\OperatorTok{=}\NormalTok{ ColumnTransformer([}
-\NormalTok{    (}\StringTok{\textquotesingle{}num\textquotesingle{}}\NormalTok{, numeric\_transformer, numeric\_cols),}
-\NormalTok{    (}\StringTok{\textquotesingle{}cat\textquotesingle{}}\NormalTok{, categorical\_transformer, categorical\_cols)}
+\CommentTok{\# Preprocessing pipelines}
+\NormalTok{clf\_numeric\_transformer }\OperatorTok{=}\NormalTok{ StandardScaler()}
+\NormalTok{clf\_categorical\_transformer }\OperatorTok{=}\NormalTok{ OneHotEncoder(handle\_unknown}\OperatorTok{=}\StringTok{\textquotesingle{}ignore\textquotesingle{}}\NormalTok{)}
+
+\NormalTok{clf\_preprocessor }\OperatorTok{=}\NormalTok{ ColumnTransformer([}
+\NormalTok{    (}\StringTok{\textquotesingle{}num\textquotesingle{}}\NormalTok{, clf\_numeric\_transformer, clf\_numeric\_cols),}
+\NormalTok{    (}\StringTok{\textquotesingle{}cat\textquotesingle{}}\NormalTok{, clf\_categorical\_transformer, clf\_categorical\_cols)}
 \NormalTok{])}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# Define all 8 classifiers}
-\NormalTok{models }\OperatorTok{=}\NormalTok{ \{}
+\CommentTok{\# Define all 8 base classifiers}
+\NormalTok{base\_clf\_models }\OperatorTok{=}\NormalTok{ \{}
     \StringTok{\textquotesingle{}Logistic Regression\textquotesingle{}}\NormalTok{: LogisticRegression(max\_iter}\OperatorTok{=}\DecValTok{1000}\NormalTok{, random\_state}\OperatorTok{=}\DecValTok{42}\NormalTok{),}
     \StringTok{\textquotesingle{}Decision Tree\textquotesingle{}}\NormalTok{: DecisionTreeClassifier(random\_state}\OperatorTok{=}\DecValTok{42}\NormalTok{),}
     \StringTok{\textquotesingle{}KNN\textquotesingle{}}\NormalTok{: KNeighborsClassifier(),}
     \StringTok{\textquotesingle{}Random Forest\textquotesingle{}}\NormalTok{: RandomForestClassifier(random\_state}\OperatorTok{=}\DecValTok{42}\NormalTok{),}
     \StringTok{\textquotesingle{}Gradient Boosting\textquotesingle{}}\NormalTok{: GradientBoostingClassifier(random\_state}\OperatorTok{=}\DecValTok{42}\NormalTok{),}
-    \StringTok{\textquotesingle{}XGBoost\textquotesingle{}}\NormalTok{: xgb.XGBClassifier(use\_label\_encoder}\OperatorTok{=}\VariableTok{False}\NormalTok{, eval\_metric}\OperatorTok{=}\StringTok{\textquotesingle{}logloss\textquotesingle{}}\NormalTok{, random\_state}\OperatorTok{=}\DecValTok{42}\NormalTok{),}
+    \StringTok{\textquotesingle{}XGBoost\textquotesingle{}}\NormalTok{: xgb.XGBClassifier(eval\_metric}\OperatorTok{=}\StringTok{\textquotesingle{}logloss\textquotesingle{}}\NormalTok{, random\_state}\OperatorTok{=}\DecValTok{42}\NormalTok{),}
     \StringTok{\textquotesingle{}LightGBM\textquotesingle{}}\NormalTok{: lgb.LGBMClassifier(random\_state}\OperatorTok{=}\DecValTok{42}\NormalTok{, verbose}\OperatorTok{={-}}\DecValTok{1}\NormalTok{),}
     \StringTok{\textquotesingle{}CatBoost\textquotesingle{}}\NormalTok{: cb.CatBoostClassifier(random\_state}\OperatorTok{=}\DecValTok{42}\NormalTok{, verbose}\OperatorTok{=}\DecValTok{0}\NormalTok{)}
 \NormalTok{\}}
 
-\CommentTok{\# Store results}
+\CommentTok{\# Store results for both base and ensemble models}
 \NormalTok{clf\_results }\OperatorTok{=}\NormalTok{ []}
 
-\ControlFlowTok{for}\NormalTok{ name, model }\KeywordTok{in}\NormalTok{ models.items():}
+\ControlFlowTok{for}\NormalTok{ name, model }\KeywordTok{in}\NormalTok{ base\_clf\_models.items():}
     \CommentTok{\# Create pipeline}
-\NormalTok{    pipeline }\OperatorTok{=}\NormalTok{ Pipeline([}
-\NormalTok{        (}\StringTok{\textquotesingle{}preprocessor\textquotesingle{}}\NormalTok{, preprocessor),}
+\NormalTok{    base\_clf\_pipeline }\OperatorTok{=}\NormalTok{ Pipeline([}
+\NormalTok{        (}\StringTok{\textquotesingle{}preprocessor\textquotesingle{}}\NormalTok{, clf\_preprocessor),}
 \NormalTok{        (}\StringTok{\textquotesingle{}classifier\textquotesingle{}}\NormalTok{, model)}
 \NormalTok{    ])}
     
     \CommentTok{\# Train}
-\NormalTok{    pipeline.fit(X\_train, y\_train)}
-        \CommentTok{\# Predict}
-\NormalTok{    y\_pred }\OperatorTok{=}\NormalTok{ pipeline.predict(X\_test)}
-\NormalTok{    y\_proba }\OperatorTok{=}\NormalTok{ pipeline.predict\_proba(X\_test)[:, }\DecValTok{1}\NormalTok{]}
+\NormalTok{    base\_clf\_pipeline.fit(clf\_X\_train, clf\_y\_train)}
+    
+    \CommentTok{\# Predict}
+\NormalTok{    base\_y\_pred }\OperatorTok{=}\NormalTok{ base\_clf\_pipeline.predict(clf\_X\_test)}
+\NormalTok{    base\_y\_proba }\OperatorTok{=}\NormalTok{ base\_clf\_pipeline.predict\_proba(clf\_X\_test)[:, }\DecValTok{1}\NormalTok{]}
     
     \CommentTok{\# Compute metrics}
-\NormalTok{    acc }\OperatorTok{=}\NormalTok{ accuracy\_score(y\_test, y\_pred)}
-\NormalTok{    roc }\OperatorTok{=}\NormalTok{ roc\_auc\_score(y\_test, y\_proba)}
-\NormalTok{    f1 }\OperatorTok{=}\NormalTok{ f1\_score(y\_test, y\_pred)}
+\NormalTok{    base\_acc }\OperatorTok{=}\NormalTok{ accuracy\_score(clf\_y\_test, base\_y\_pred)}
+\NormalTok{    base\_roc }\OperatorTok{=}\NormalTok{ roc\_auc\_score(clf\_y\_test, base\_y\_proba)}
+\NormalTok{    base\_f1 }\OperatorTok{=}\NormalTok{ f1\_score(clf\_y\_test, base\_y\_pred)}
     
 \NormalTok{    clf\_results.append(\{}
         \StringTok{\textquotesingle{}Model\textquotesingle{}}\NormalTok{: name,}
-        \StringTok{\textquotesingle{}Accuracy\textquotesingle{}}\NormalTok{: acc,}
-        \StringTok{\textquotesingle{}ROC AUC\textquotesingle{}}\NormalTok{: roc,}
-        \StringTok{\textquotesingle{}F1 Score\textquotesingle{}}\NormalTok{: f1}
+        \StringTok{\textquotesingle{}Accuracy\textquotesingle{}}\NormalTok{: base\_acc,}
+        \StringTok{\textquotesingle{}ROC AUC\textquotesingle{}}\NormalTok{: base\_roc,}
+        \StringTok{\textquotesingle{}F1 Score\textquotesingle{}}\NormalTok{: base\_f1}
 \NormalTok{    \})}
 
 \CommentTok{\# Create DataFrame}
@@ -14732,19 +14888,6 @@ normal & No \\
 \NormalTok{clf\_results\_df}
 \end{Highlighting}
 \end{Shaded}
-
-\begin{verbatim}
-c:\Users\lsi8012\AppData\Local\anaconda3\Lib\site-packages\xgboost\training.py:183: UserWarning: [21:00:48] WARNING: C:\actions-runner\_work\xgboost\xgboost\src\learner.cc:738: 
-Parameters: { "use_label_encoder" } are not used.
-
-  bst.update(dtrain, iteration=i, fobj=obj)
-c:\Users\lsi8012\AppData\Local\anaconda3\Lib\site-packages\sklearn\utils\deprecation.py:151: FutureWarning: 'force_all_finite' was renamed to 'ensure_all_finite' in 1.6 and will be removed in 1.8.
-  warnings.warn(
-c:\Users\lsi8012\AppData\Local\anaconda3\Lib\site-packages\sklearn\utils\deprecation.py:151: FutureWarning: 'force_all_finite' was renamed to 'ensure_all_finite' in 1.6 and will be removed in 1.8.
-  warnings.warn(
-c:\Users\lsi8012\AppData\Local\anaconda3\Lib\site-packages\sklearn\utils\deprecation.py:151: FutureWarning: 'force_all_finite' was renamed to 'ensure_all_finite' in 1.6 and will be removed in 1.8.
-  warnings.warn(
-\end{verbatim}
 
 \begin{longtable}[]{@{}lllll@{}}
 \toprule\noalign{}
@@ -14763,132 +14906,104 @@ c:\Users\lsi8012\AppData\Local\anaconda3\Lib\site-packages\sklearn\utils\depreca
 7 & Decision Tree & 0.655738 & 0.660173 & 0.655738 \\
 \end{longtable}
 
+Define base classifiers (as tuples) for ensemble models like
+VotingClassifier or StackingClassifier
+
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\#\# Hard voting ensemble}
-
 \CommentTok{\# Define all classifiers (as tuples for VotingClassifier)}
-\NormalTok{voting\_estimators }\OperatorTok{=}\NormalTok{ [}
+\NormalTok{clf\_base\_learners }\OperatorTok{=}\NormalTok{ [}
 \NormalTok{    (}\StringTok{\textquotesingle{}lr\textquotesingle{}}\NormalTok{, LogisticRegression(max\_iter}\OperatorTok{=}\DecValTok{1000}\NormalTok{, random\_state}\OperatorTok{=}\DecValTok{42}\NormalTok{)),}
 \NormalTok{    (}\StringTok{\textquotesingle{}dt\textquotesingle{}}\NormalTok{, DecisionTreeClassifier(random\_state}\OperatorTok{=}\DecValTok{42}\NormalTok{)),}
 \NormalTok{    (}\StringTok{\textquotesingle{}knn\textquotesingle{}}\NormalTok{, KNeighborsClassifier()),}
 \NormalTok{    (}\StringTok{\textquotesingle{}rf\textquotesingle{}}\NormalTok{, RandomForestClassifier(random\_state}\OperatorTok{=}\DecValTok{42}\NormalTok{)),}
 \NormalTok{    (}\StringTok{\textquotesingle{}gb\textquotesingle{}}\NormalTok{, GradientBoostingClassifier(random\_state}\OperatorTok{=}\DecValTok{42}\NormalTok{)),}
-\NormalTok{    (}\StringTok{\textquotesingle{}xgb\textquotesingle{}}\NormalTok{, xgb.XGBClassifier(use\_label\_encoder}\OperatorTok{=}\VariableTok{False}\NormalTok{, eval\_metric}\OperatorTok{=}\StringTok{\textquotesingle{}logloss\textquotesingle{}}\NormalTok{, random\_state}\OperatorTok{=}\DecValTok{42}\NormalTok{)),}
+\NormalTok{    (}\StringTok{\textquotesingle{}xgb\textquotesingle{}}\NormalTok{, xgb.XGBClassifier(eval\_metric}\OperatorTok{=}\StringTok{\textquotesingle{}logloss\textquotesingle{}}\NormalTok{, random\_state}\OperatorTok{=}\DecValTok{42}\NormalTok{)),}
 \NormalTok{    (}\StringTok{\textquotesingle{}lgb\textquotesingle{}}\NormalTok{, lgb.LGBMClassifier(random\_state}\OperatorTok{=}\DecValTok{42}\NormalTok{)),}
 \NormalTok{    (}\StringTok{\textquotesingle{}cat\textquotesingle{}}\NormalTok{, cb.CatBoostClassifier(random\_state}\OperatorTok{=}\DecValTok{42}\NormalTok{, verbose}\OperatorTok{=}\DecValTok{0}\NormalTok{))}
 \NormalTok{]}
-
-\CommentTok{\# Create a hard voting classifier (voting=\textquotesingle{}hard\textquotesingle{})}
-\NormalTok{hard\_voting\_clf }\OperatorTok{=}\NormalTok{ VotingClassifier(}
-\NormalTok{    estimators}\OperatorTok{=}\NormalTok{voting\_estimators,}
-\NormalTok{    voting}\OperatorTok{=}\StringTok{\textquotesingle{}hard\textquotesingle{}}
-\NormalTok{)}
-
-\CommentTok{\# Pipeline with preprocessing}
-\NormalTok{hard\_voting\_pipeline }\OperatorTok{=}\NormalTok{ Pipeline([}
-\NormalTok{    (}\StringTok{\textquotesingle{}preprocessor\textquotesingle{}}\NormalTok{, preprocessor),}
-\NormalTok{    (}\StringTok{\textquotesingle{}voting\textquotesingle{}}\NormalTok{, hard\_voting\_clf)}
-\NormalTok{])}
-
-\CommentTok{\# Fit model}
-\NormalTok{hard\_voting\_pipeline.fit(X\_train, y\_train)}
-
-\CommentTok{\# Predict}
-\NormalTok{y\_pred\_hard }\OperatorTok{=}\NormalTok{ hard\_voting\_pipeline.predict(X\_test)}
-\CommentTok{\# Compute metrics}
-\NormalTok{acc\_hard }\OperatorTok{=}\NormalTok{ accuracy\_score(y\_test, y\_pred\_hard)}
-\NormalTok{roc\_hard }\OperatorTok{=}\NormalTok{ roc\_auc\_score(y\_test, y\_pred\_hard)}
-\NormalTok{f1\_hard }\OperatorTok{=}\NormalTok{ f1\_score(y\_test, y\_pred\_hard)}
-
-\CommentTok{\# Store results}
-\NormalTok{clf\_results.append(\{}
-    \StringTok{\textquotesingle{}Model\textquotesingle{}}\NormalTok{: }\StringTok{\textquotesingle{}Hard Voting Ensemble\textquotesingle{}}\NormalTok{,}
-    \StringTok{\textquotesingle{}Accuracy\textquotesingle{}}\NormalTok{: acc\_hard,}
-    \StringTok{\textquotesingle{}ROC AUC\textquotesingle{}}\NormalTok{: roc\_hard,}
-    \StringTok{\textquotesingle{}F1 Score\textquotesingle{}}\NormalTok{: f1\_hard}
-\NormalTok{\})}
-\CommentTok{\# Create DataFrame}
-\NormalTok{clf\_results\_df }\OperatorTok{=}\NormalTok{ pd.DataFrame(clf\_results).sort\_values(by}\OperatorTok{=}\StringTok{\textquotesingle{}ROC AUC\textquotesingle{}}\NormalTok{, ascending}\OperatorTok{=}\VariableTok{False}\NormalTok{).reset\_index(drop}\OperatorTok{=}\VariableTok{True}\NormalTok{)}
-\NormalTok{clf\_results\_df}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{verbatim}
-c:\Users\lsi8012\AppData\Local\anaconda3\Lib\site-packages\xgboost\training.py:183: UserWarning: [21:00:55] WARNING: C:\actions-runner\_work\xgboost\xgboost\src\learner.cc:738: 
-Parameters: { "use_label_encoder" } are not used.
-
-  bst.update(dtrain, iteration=i, fobj=obj)
-c:\Users\lsi8012\AppData\Local\anaconda3\Lib\site-packages\sklearn\utils\deprecation.py:151: FutureWarning: 'force_all_finite' was renamed to 'ensure_all_finite' in 1.6 and will be removed in 1.8.
-  warnings.warn(
-c:\Users\lsi8012\AppData\Local\anaconda3\Lib\site-packages\sklearn\utils\deprecation.py:151: FutureWarning: 'force_all_finite' was renamed to 'ensure_all_finite' in 1.6 and will be removed in 1.8.
-  warnings.warn(
-\end{verbatim}
-
-\begin{longtable}[]{@{}lllll@{}}
-\toprule\noalign{}
-& Model & Accuracy & ROC AUC & F1 Score \\
-\midrule\noalign{}
-\endhead
-\bottomrule\noalign{}
-\endlastfoot
-0 & LightGBM & 0.901639 & 0.965368 & 0.896552 \\
-1 & Logistic Regression & 0.885246 & 0.958874 & 0.881356 \\
-2 & KNN & 0.868852 & 0.946970 & 0.862069 \\
-3 & CatBoost & 0.885246 & 0.945887 & 0.885246 \\
-4 & Gradient Boosting & 0.868852 & 0.943723 & 0.866667 \\
-5 & Random Forest & 0.868852 & 0.937229 & 0.866667 \\
-6 & XGBoost & 0.836066 & 0.920996 & 0.838710 \\
-7 & Hard Voting Ensemble & 0.901639 & 0.906385 & 0.900000 \\
-8 & Decision Tree & 0.655738 & 0.660173 & 0.655738 \\
-\end{longtable}
-
-\subsection{Create a soft voting}\label{create-a-soft-voting}
+\subsubsection{Hard Voting Ensemble}\label{hard-voting-ensemble}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# define soft voting ensemble}
-\NormalTok{soft\_voting\_clf }\OperatorTok{=}\NormalTok{ VotingClassifier(}
-\NormalTok{    estimators}\OperatorTok{=}\NormalTok{voting\_estimators,}
-\NormalTok{    voting}\OperatorTok{=}\StringTok{\textquotesingle{}soft\textquotesingle{}}
+\CommentTok{\# Create a hard voting classifier (voting=\textquotesingle{}hard\textquotesingle{})}
+\NormalTok{ens\_clf\_hard\_voting }\OperatorTok{=}\NormalTok{ VotingClassifier(}
+\NormalTok{    estimators}\OperatorTok{=}\NormalTok{clf\_base\_learners,}
+\NormalTok{    voting}\OperatorTok{=}\StringTok{\textquotesingle{}hard\textquotesingle{}}  \CommentTok{\# Use predicted class labels for majority rule voting}
 \NormalTok{)}
-\CommentTok{\# Create pipeline with preprocessing}
-\NormalTok{soft\_voting\_pipeline }\OperatorTok{=}\NormalTok{ Pipeline([}
-\NormalTok{    (}\StringTok{\textquotesingle{}preprocessor\textquotesingle{}}\NormalTok{, preprocessor),}
-\NormalTok{    (}\StringTok{\textquotesingle{}voting\textquotesingle{}}\NormalTok{, soft\_voting\_clf)}
-\NormalTok{])}
-\CommentTok{\# Fit model}
-\NormalTok{soft\_voting\_pipeline.fit(X\_train, y\_train)}
-\CommentTok{\# Predict}
-\NormalTok{y\_pred\_soft }\OperatorTok{=}\NormalTok{ soft\_voting\_pipeline.predict(X\_test)}
-\CommentTok{\# Compute metrics}
-\NormalTok{acc\_soft }\OperatorTok{=}\NormalTok{ accuracy\_score(y\_test, y\_pred\_soft)}
-\NormalTok{roc\_soft }\OperatorTok{=}\NormalTok{ roc\_auc\_score(y\_test, y\_pred\_soft)}
-\NormalTok{f1\_soft }\OperatorTok{=}\NormalTok{ f1\_score(y\_test, y\_pred\_soft)}
-\CommentTok{\# Store results}
-\NormalTok{clf\_results.append(\{}
-    \StringTok{\textquotesingle{}Model\textquotesingle{}}\NormalTok{: }\StringTok{\textquotesingle{}Soft Voting Ensemble\textquotesingle{}}\NormalTok{,}
-    \StringTok{\textquotesingle{}Accuracy\textquotesingle{}}\NormalTok{: acc\_soft,}
-    \StringTok{\textquotesingle{}ROC AUC\textquotesingle{}}\NormalTok{: roc\_soft,}
-    \StringTok{\textquotesingle{}F1 Score\textquotesingle{}}\NormalTok{: f1\_soft}
-\NormalTok{\})}
-\CommentTok{\# Create DataFrame}
-\NormalTok{clf\_results\_df }\OperatorTok{=}\NormalTok{ pd.DataFrame(clf\_results).sort\_values(by}\OperatorTok{=}\StringTok{\textquotesingle{}ROC AUC\textquotesingle{}}\NormalTok{, ascending}\OperatorTok{=}\VariableTok{False}\NormalTok{).reset\_index(drop}\OperatorTok{=}\VariableTok{True}\NormalTok{)}
-\NormalTok{clf\_results\_df}
 
+\CommentTok{\# Pipeline with preprocessing}
+\NormalTok{ens\_clf\_hard\_voting\_pipeline }\OperatorTok{=}\NormalTok{ Pipeline([}
+\NormalTok{    (}\StringTok{\textquotesingle{}preprocessor\textquotesingle{}}\NormalTok{, clf\_preprocessor),}
+\NormalTok{    (}\StringTok{\textquotesingle{}voting\textquotesingle{}}\NormalTok{, ens\_clf\_hard\_voting)}
+\NormalTok{])}
+
+\CommentTok{\# Fit model}
+\NormalTok{ens\_clf\_hard\_voting\_pipeline.fit(clf\_X\_train, clf\_y\_train)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-c:\Users\lsi8012\AppData\Local\anaconda3\Lib\site-packages\xgboost\training.py:183: UserWarning: [21:01:46] WARNING: C:\actions-runner\_work\xgboost\xgboost\src\learner.cc:738: 
-Parameters: { "use_label_encoder" } are not used.
-
-  bst.update(dtrain, iteration=i, fobj=obj)
-c:\Users\lsi8012\AppData\Local\anaconda3\Lib\site-packages\sklearn\utils\deprecation.py:151: FutureWarning: 'force_all_finite' was renamed to 'ensure_all_finite' in 1.6 and will be removed in 1.8.
-  warnings.warn(
-c:\Users\lsi8012\AppData\Local\anaconda3\Lib\site-packages\sklearn\utils\deprecation.py:151: FutureWarning: 'force_all_finite' was renamed to 'ensure_all_finite' in 1.6 and will be removed in 1.8.
-  warnings.warn(
+Pipeline(steps=[('preprocessor',
+                 ColumnTransformer(transformers=[('num', StandardScaler(),
+                                                  ['Age', 'RestBP', 'Chol',
+                                                   'MaxHR', 'Oldpeak']),
+                                                 ('cat',
+                                                  OneHotEncoder(handle_unknown='ignore'),
+                                                  ['Sex', 'ChestPain', 'Fbs',
+                                                   'RestECG', 'ExAng', 'Slope',
+                                                   'Ca', 'Thal'])])),
+                ('voting',
+                 VotingClassifier(estimators=[('lr',
+                                               LogisticRegression(max_iter=1000,
+                                                                  random_state=42)),
+                                              ('dt',
+                                               Dec...
+                                                             max_bin=None,
+                                                             max_cat_threshold=None,
+                                                             max_cat_to_onehot=None,
+                                                             max_delta_step=None,
+                                                             max_depth=None,
+                                                             max_leaves=None,
+                                                             min_child_weight=None,
+                                                             missing=nan,
+                                                             monotone_constraints=None,
+                                                             multi_strategy=None,
+                                                             n_estimators=None,
+                                                             n_jobs=None,
+                                                             num_parallel_tree=None, ...)),
+                                              ('lgb',
+                                               LGBMClassifier(random_state=42)),
+                                              ('cat',
+                                               <catboost.core.CatBoostClassifier object at 0x000001F18B3AF380>)]))])
 \end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Predict}
+\NormalTok{ens\_y\_pred\_hard }\OperatorTok{=}\NormalTok{ ens\_clf\_hard\_voting\_pipeline.predict(clf\_X\_test)}
+
+\CommentTok{\# Compute metrics}
+\NormalTok{ens\_acc\_hard }\OperatorTok{=}\NormalTok{ accuracy\_score(clf\_y\_test, ens\_y\_pred\_hard)}
+\NormalTok{ens\_roc\_hard }\OperatorTok{=}\NormalTok{ roc\_auc\_score(clf\_y\_test, ens\_y\_pred\_hard)}
+\NormalTok{ens\_f1\_hard }\OperatorTok{=}\NormalTok{ f1\_score(clf\_y\_test, ens\_y\_pred\_hard)}
+
+\CommentTok{\# Store results}
+\NormalTok{clf\_results.append(\{}
+    \StringTok{\textquotesingle{}Model\textquotesingle{}}\NormalTok{: }\StringTok{\textquotesingle{}Hard Voting Classifier\textquotesingle{}}\NormalTok{,}
+    \StringTok{\textquotesingle{}Accuracy\textquotesingle{}}\NormalTok{: ens\_acc\_hard,}
+    \StringTok{\textquotesingle{}ROC AUC\textquotesingle{}}\NormalTok{: ens\_roc\_hard,}
+    \StringTok{\textquotesingle{}F1 Score\textquotesingle{}}\NormalTok{: ens\_f1\_hard}
+\NormalTok{\})}
+
+\CommentTok{\# Create or update results DataFrame}
+\NormalTok{clf\_results\_df }\OperatorTok{=}\NormalTok{ pd.DataFrame(clf\_results).sort\_values(by}\OperatorTok{=}\StringTok{\textquotesingle{}ROC AUC\textquotesingle{}}\NormalTok{, ascending}\OperatorTok{=}\VariableTok{False}\NormalTok{).reset\_index(drop}\OperatorTok{=}\VariableTok{True}\NormalTok{)}
+\NormalTok{clf\_results\_df}
+\end{Highlighting}
+\end{Shaded}
 
 \begin{longtable}[]{@{}lllll@{}}
 \toprule\noalign{}
@@ -14904,86 +15019,157 @@ c:\Users\lsi8012\AppData\Local\anaconda3\Lib\site-packages\sklearn\utils\depreca
 4 & Gradient Boosting & 0.868852 & 0.943723 & 0.866667 \\
 5 & Random Forest & 0.868852 & 0.937229 & 0.866667 \\
 6 & XGBoost & 0.836066 & 0.920996 & 0.838710 \\
-7 & Hard Voting Ensemble & 0.901639 & 0.906385 & 0.900000 \\
-8 & Soft Voting Ensemble & 0.901639 & 0.906385 & 0.900000 \\
+7 & Hard Voting Classifier & 0.901639 & 0.906385 & 0.900000 \\
+8 & Decision Tree & 0.655738 & 0.660173 & 0.655738 \\
+\end{longtable}
+
+\subsubsection{Soft Voting Ensemble}\label{soft-voting-ensemble}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#\# Soft Voting Ensemble}
+
+\CommentTok{\# Define soft voting classifier}
+\NormalTok{ens\_clf\_soft\_voting }\OperatorTok{=}\NormalTok{ VotingClassifier(}
+\NormalTok{    estimators}\OperatorTok{=}\NormalTok{clf\_base\_learners,}
+\NormalTok{    voting}\OperatorTok{=}\StringTok{\textquotesingle{}soft\textquotesingle{}}  \CommentTok{\# Use predicted probabilities}
+\NormalTok{)}
+
+\CommentTok{\# Create pipeline with preprocessing}
+\NormalTok{ens\_clf\_soft\_voting\_pipeline }\OperatorTok{=}\NormalTok{ Pipeline([}
+\NormalTok{    (}\StringTok{\textquotesingle{}preprocessor\textquotesingle{}}\NormalTok{, clf\_preprocessor),}
+\NormalTok{    (}\StringTok{\textquotesingle{}voting\textquotesingle{}}\NormalTok{, ens\_clf\_soft\_voting)}
+\NormalTok{])}
+
+\CommentTok{\# Fit model}
+\NormalTok{ens\_clf\_soft\_voting\_pipeline.fit(clf\_X\_train, clf\_y\_train)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Pipeline(steps=[('preprocessor',
+                 ColumnTransformer(transformers=[('num', StandardScaler(),
+                                                  ['Age', 'RestBP', 'Chol',
+                                                   'MaxHR', 'Oldpeak']),
+                                                 ('cat',
+                                                  OneHotEncoder(handle_unknown='ignore'),
+                                                  ['Sex', 'ChestPain', 'Fbs',
+                                                   'RestECG', 'ExAng', 'Slope',
+                                                   'Ca', 'Thal'])])),
+                ('voting',
+                 VotingClassifier(estimators=[('lr',
+                                               LogisticRegression(max_iter=1000,
+                                                                  random_state=42)),
+                                              ('dt',
+                                               Dec...
+                                                             max_cat_threshold=None,
+                                                             max_cat_to_onehot=None,
+                                                             max_delta_step=None,
+                                                             max_depth=None,
+                                                             max_leaves=None,
+                                                             min_child_weight=None,
+                                                             missing=nan,
+                                                             monotone_constraints=None,
+                                                             multi_strategy=None,
+                                                             n_estimators=None,
+                                                             n_jobs=None,
+                                                             num_parallel_tree=None, ...)),
+                                              ('lgb',
+                                               LGBMClassifier(random_state=42)),
+                                              ('cat',
+                                               <catboost.core.CatBoostClassifier object at 0x000001F18B3AF380>)],
+                                  voting='soft'))])
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Predict}
+\NormalTok{ens\_y\_pred\_soft }\OperatorTok{=}\NormalTok{ ens\_clf\_soft\_voting\_pipeline.predict(clf\_X\_test)}
+
+\CommentTok{\# Compute metrics}
+\NormalTok{ens\_acc\_soft }\OperatorTok{=}\NormalTok{ accuracy\_score(clf\_y\_test, ens\_y\_pred\_soft)}
+\NormalTok{ens\_roc\_soft }\OperatorTok{=}\NormalTok{ roc\_auc\_score(clf\_y\_test, ens\_y\_pred\_soft)}
+\NormalTok{ens\_f1\_soft }\OperatorTok{=}\NormalTok{ f1\_score(clf\_y\_test, ens\_y\_pred\_soft)}
+
+\CommentTok{\# Store results}
+\NormalTok{clf\_results.append(\{}
+    \StringTok{\textquotesingle{}Model\textquotesingle{}}\NormalTok{: }\StringTok{\textquotesingle{}Soft Voting Classifier\textquotesingle{}}\NormalTok{,}
+    \StringTok{\textquotesingle{}Accuracy\textquotesingle{}}\NormalTok{: ens\_acc\_soft,}
+    \StringTok{\textquotesingle{}ROC AUC\textquotesingle{}}\NormalTok{: ens\_roc\_soft,}
+    \StringTok{\textquotesingle{}F1 Score\textquotesingle{}}\NormalTok{: ens\_f1\_soft}
+\NormalTok{\})}
+
+\CommentTok{\# Update results DataFrame}
+\NormalTok{clf\_results\_df }\OperatorTok{=}\NormalTok{ pd.DataFrame(clf\_results).sort\_values(by}\OperatorTok{=}\StringTok{\textquotesingle{}ROC AUC\textquotesingle{}}\NormalTok{, ascending}\OperatorTok{=}\VariableTok{False}\NormalTok{).reset\_index(drop}\OperatorTok{=}\VariableTok{True}\NormalTok{)}
+\NormalTok{clf\_results\_df}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{longtable}[]{@{}lllll@{}}
+\toprule\noalign{}
+& Model & Accuracy & ROC AUC & F1 Score \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+0 & LightGBM & 0.901639 & 0.965368 & 0.896552 \\
+1 & Logistic Regression & 0.885246 & 0.958874 & 0.881356 \\
+2 & KNN & 0.868852 & 0.946970 & 0.862069 \\
+3 & CatBoost & 0.885246 & 0.945887 & 0.885246 \\
+4 & Gradient Boosting & 0.868852 & 0.943723 & 0.866667 \\
+5 & Random Forest & 0.868852 & 0.937229 & 0.866667 \\
+6 & XGBoost & 0.836066 & 0.920996 & 0.838710 \\
+7 & Hard Voting Classifier & 0.901639 & 0.906385 & 0.900000 \\
+8 & Soft Voting Classifier & 0.901639 & 0.906385 & 0.900000 \\
 9 & Decision Tree & 0.655738 & 0.660173 & 0.655738 \\
 \end{longtable}
 
-\subsection{Stacking classifier}\label{stacking-classifier}
+\subsection{Stacking Classifier}\label{stacking-classifier}
 
 Conceptually, the idea is similar to that of Stacking regressor.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# create a meta{-}model}
-\NormalTok{meta\_model }\OperatorTok{=}\NormalTok{ LogisticRegression(max\_iter}\OperatorTok{=}\DecValTok{1000}\NormalTok{, random\_state}\OperatorTok{=}\DecValTok{42}\NormalTok{)}
-\CommentTok{\# Create the stacking classifier    }
-\NormalTok{stacking\_model }\OperatorTok{=}\NormalTok{ StackingClassifier(}
-\NormalTok{    estimators}\OperatorTok{=}\NormalTok{voting\_estimators,}
-\NormalTok{    final\_estimator}\OperatorTok{=}\NormalTok{meta\_model,}
+\CommentTok{\# Create a meta{-}model}
+\NormalTok{ens\_meta\_clf }\OperatorTok{=}\NormalTok{ LogisticRegression(max\_iter}\OperatorTok{=}\DecValTok{1000}\NormalTok{, random\_state}\OperatorTok{=}\DecValTok{42}\NormalTok{)}
+
+\CommentTok{\# Define the stacking classifier}
+\NormalTok{ens\_clf\_stacking }\OperatorTok{=}\NormalTok{ StackingClassifier(}
+\NormalTok{    estimators}\OperatorTok{=}\NormalTok{clf\_base\_learners,}
+\NormalTok{    final\_estimator}\OperatorTok{=}\NormalTok{ens\_meta\_clf,}
 \NormalTok{    cv}\OperatorTok{=}\DecValTok{5}
 \NormalTok{)}
+
 \CommentTok{\# Create pipeline with preprocessing}
-\NormalTok{stacking\_pipeline }\OperatorTok{=}\NormalTok{ Pipeline([}
-\NormalTok{    (}\StringTok{\textquotesingle{}preprocessor\textquotesingle{}}\NormalTok{, preprocessor),}
-\NormalTok{    (}\StringTok{\textquotesingle{}stacking\textquotesingle{}}\NormalTok{, stacking\_model)}
+\NormalTok{ens\_clf\_stacking\_pipeline }\OperatorTok{=}\NormalTok{ Pipeline([}
+\NormalTok{    (}\StringTok{\textquotesingle{}preprocessor\textquotesingle{}}\NormalTok{, clf\_preprocessor),}
+\NormalTok{    (}\StringTok{\textquotesingle{}stacking\textquotesingle{}}\NormalTok{, ens\_clf\_stacking)}
 \NormalTok{])}
+
 \CommentTok{\# Fit the pipeline}
-\NormalTok{stacking\_pipeline.fit(X\_train, y\_train)}
+\NormalTok{ens\_clf\_stacking\_pipeline.fit(clf\_X\_train, clf\_y\_train)}
+
 \CommentTok{\# Predict}
-\NormalTok{y\_pred\_stack }\OperatorTok{=}\NormalTok{ stacking\_pipeline.predict(X\_test)}
+\NormalTok{ens\_y\_pred\_stack }\OperatorTok{=}\NormalTok{ ens\_clf\_stacking\_pipeline.predict(clf\_X\_test)}
+
 \CommentTok{\# Compute metrics}
-\NormalTok{acc\_stack }\OperatorTok{=}\NormalTok{ accuracy\_score(y\_test, y\_pred\_stack)}
-\NormalTok{roc\_stack }\OperatorTok{=}\NormalTok{ roc\_auc\_score(y\_test, y\_pred\_stack)}
-\NormalTok{f1\_stack }\OperatorTok{=}\NormalTok{ f1\_score(y\_test, y\_pred\_stack)}
+\NormalTok{ens\_acc\_stack }\OperatorTok{=}\NormalTok{ accuracy\_score(clf\_y\_test, ens\_y\_pred\_stack)}
+\NormalTok{ens\_roc\_stack }\OperatorTok{=}\NormalTok{ roc\_auc\_score(clf\_y\_test, ens\_y\_pred\_stack)}
+\NormalTok{ens\_f1\_stack }\OperatorTok{=}\NormalTok{ f1\_score(clf\_y\_test, ens\_y\_pred\_stack)}
+
 \CommentTok{\# Store results}
 \NormalTok{clf\_results.append(\{}
-    \StringTok{\textquotesingle{}Model\textquotesingle{}}\NormalTok{: }\StringTok{\textquotesingle{}Stacking Ensemble\textquotesingle{}}\NormalTok{,}
-    \StringTok{\textquotesingle{}Accuracy\textquotesingle{}}\NormalTok{: acc\_stack,}
-    \StringTok{\textquotesingle{}ROC AUC\textquotesingle{}}\NormalTok{: roc\_stack,}
-    \StringTok{\textquotesingle{}F1 Score\textquotesingle{}}\NormalTok{: f1\_stack}
+    \StringTok{\textquotesingle{}Model\textquotesingle{}}\NormalTok{: }\StringTok{\textquotesingle{}Stacking Classifier\textquotesingle{}}\NormalTok{,}
+    \StringTok{\textquotesingle{}Accuracy\textquotesingle{}}\NormalTok{: ens\_acc\_stack,}
+    \StringTok{\textquotesingle{}ROC AUC\textquotesingle{}}\NormalTok{: ens\_roc\_stack,}
+    \StringTok{\textquotesingle{}F1 Score\textquotesingle{}}\NormalTok{: ens\_f1\_stack}
 \NormalTok{\})}
-\CommentTok{\# Create DataFrame}
+
+\CommentTok{\# Update results DataFrame}
 \NormalTok{clf\_results\_df }\OperatorTok{=}\NormalTok{ pd.DataFrame(clf\_results).sort\_values(by}\OperatorTok{=}\StringTok{\textquotesingle{}ROC AUC\textquotesingle{}}\NormalTok{, ascending}\OperatorTok{=}\VariableTok{False}\NormalTok{).reset\_index(drop}\OperatorTok{=}\VariableTok{True}\NormalTok{)}
 \NormalTok{clf\_results\_df}
-
 \end{Highlighting}
 \end{Shaded}
-
-\begin{verbatim}
-c:\Users\lsi8012\AppData\Local\anaconda3\Lib\site-packages\xgboost\training.py:183: UserWarning: [21:02:17] WARNING: C:\actions-runner\_work\xgboost\xgboost\src\learner.cc:738: 
-Parameters: { "use_label_encoder" } are not used.
-
-  bst.update(dtrain, iteration=i, fobj=obj)
-c:\Users\lsi8012\AppData\Local\anaconda3\Lib\site-packages\sklearn\utils\deprecation.py:151: FutureWarning: 'force_all_finite' was renamed to 'ensure_all_finite' in 1.6 and will be removed in 1.8.
-  warnings.warn(
-c:\Users\lsi8012\AppData\Local\anaconda3\Lib\site-packages\xgboost\training.py:183: UserWarning: [21:02:20] WARNING: C:\actions-runner\_work\xgboost\xgboost\src\learner.cc:738: 
-Parameters: { "use_label_encoder" } are not used.
-
-  bst.update(dtrain, iteration=i, fobj=obj)
-c:\Users\lsi8012\AppData\Local\anaconda3\Lib\site-packages\sklearn\utils\deprecation.py:151: FutureWarning: 'force_all_finite' was renamed to 'ensure_all_finite' in 1.6 and will be removed in 1.8.
-  warnings.warn(
-c:\Users\lsi8012\AppData\Local\anaconda3\Lib\site-packages\sklearn\utils\deprecation.py:151: FutureWarning: 'force_all_finite' was renamed to 'ensure_all_finite' in 1.6 and will be removed in 1.8.
-  warnings.warn(
-c:\Users\lsi8012\AppData\Local\anaconda3\Lib\site-packages\sklearn\utils\deprecation.py:151: FutureWarning: 'force_all_finite' was renamed to 'ensure_all_finite' in 1.6 and will be removed in 1.8.
-  warnings.warn(
-c:\Users\lsi8012\AppData\Local\anaconda3\Lib\site-packages\sklearn\utils\deprecation.py:151: FutureWarning: 'force_all_finite' was renamed to 'ensure_all_finite' in 1.6 and will be removed in 1.8.
-  warnings.warn(
-c:\Users\lsi8012\AppData\Local\anaconda3\Lib\site-packages\sklearn\utils\deprecation.py:151: FutureWarning: 'force_all_finite' was renamed to 'ensure_all_finite' in 1.6 and will be removed in 1.8.
-  warnings.warn(
-c:\Users\lsi8012\AppData\Local\anaconda3\Lib\site-packages\sklearn\utils\deprecation.py:151: FutureWarning: 'force_all_finite' was renamed to 'ensure_all_finite' in 1.6 and will be removed in 1.8.
-  warnings.warn(
-c:\Users\lsi8012\AppData\Local\anaconda3\Lib\site-packages\sklearn\utils\deprecation.py:151: FutureWarning: 'force_all_finite' was renamed to 'ensure_all_finite' in 1.6 and will be removed in 1.8.
-  warnings.warn(
-c:\Users\lsi8012\AppData\Local\anaconda3\Lib\site-packages\sklearn\utils\deprecation.py:151: FutureWarning: 'force_all_finite' was renamed to 'ensure_all_finite' in 1.6 and will be removed in 1.8.
-  warnings.warn(
-c:\Users\lsi8012\AppData\Local\anaconda3\Lib\site-packages\sklearn\utils\deprecation.py:151: FutureWarning: 'force_all_finite' was renamed to 'ensure_all_finite' in 1.6 and will be removed in 1.8.
-  warnings.warn(
-c:\Users\lsi8012\AppData\Local\anaconda3\Lib\site-packages\sklearn\utils\deprecation.py:151: FutureWarning: 'force_all_finite' was renamed to 'ensure_all_finite' in 1.6 and will be removed in 1.8.
-  warnings.warn(
-c:\Users\lsi8012\AppData\Local\anaconda3\Lib\site-packages\sklearn\utils\deprecation.py:151: FutureWarning: 'force_all_finite' was renamed to 'ensure_all_finite' in 1.6 and will be removed in 1.8.
-  warnings.warn(
-\end{verbatim}
 
 \begin{longtable}[]{@{}lllll@{}}
 \toprule\noalign{}
@@ -14999,27 +15185,36 @@ c:\Users\lsi8012\AppData\Local\anaconda3\Lib\site-packages\sklearn\utils\depreca
 4 & Gradient Boosting & 0.868852 & 0.943723 & 0.866667 \\
 5 & Random Forest & 0.868852 & 0.937229 & 0.866667 \\
 6 & XGBoost & 0.836066 & 0.920996 & 0.838710 \\
-7 & Hard Voting Ensemble & 0.901639 & 0.906385 & 0.900000 \\
-8 & Soft Voting Ensemble & 0.901639 & 0.906385 & 0.900000 \\
-9 & Stacking Ensemble & 0.901639 & 0.906385 & 0.900000 \\
+7 & Hard Voting Classifier & 0.901639 & 0.906385 & 0.900000 \\
+8 & Soft Voting Classifier & 0.901639 & 0.906385 & 0.900000 \\
+9 & Stacking Classifier & 0.901639 & 0.906385 & 0.900000 \\
 10 & Decision Tree & 0.655738 & 0.660173 & 0.655738 \\
 \end{longtable}
 
+Let's print out the coefficients of the logistic regression meta-model
+
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\#Coefficients of the logistic regression metamodel}
 \CommentTok{\# Access the trained meta{-}model inside the stacking pipeline}
-\NormalTok{meta\_model }\OperatorTok{=}\NormalTok{ stacking\_pipeline.named\_steps[}\StringTok{\textquotesingle{}stacking\textquotesingle{}}\NormalTok{].final\_estimator\_}
+\NormalTok{ens\_meta\_clf }\OperatorTok{=}\NormalTok{ ens\_clf\_stacking\_pipeline.named\_steps[}\StringTok{\textquotesingle{}stacking\textquotesingle{}}\NormalTok{].final\_estimator\_}
+
 \CommentTok{\# Get model names in the same order as the coefficients}
-\NormalTok{model\_names }\OperatorTok{=}\NormalTok{ [name }\ControlFlowTok{for}\NormalTok{ name, \_ }\KeywordTok{in}\NormalTok{ voting\_estimators]}
+\NormalTok{meta\_model\_names }\OperatorTok{=}\NormalTok{ [name }\ControlFlowTok{for}\NormalTok{ name, \_ }\KeywordTok{in}\NormalTok{ clf\_base\_learners]}
+
 \CommentTok{\# Extract coefficients}
-\NormalTok{coefs }\OperatorTok{=}\NormalTok{ meta\_model.coef\_[}\DecValTok{0}\NormalTok{]  }\CommentTok{\# For binary classification, we take the first row}
+\NormalTok{meta\_model\_coefs }\OperatorTok{=}\NormalTok{ ens\_meta\_clf.coef\_[}\DecValTok{0}\NormalTok{]  }\CommentTok{\# For binary classification}
+
 \CommentTok{\# Create a DataFrame to display model weights}
-\NormalTok{coef\_df }\OperatorTok{=}\NormalTok{ pd.DataFrame(\{}\StringTok{\textquotesingle{}Base Model\textquotesingle{}}\NormalTok{: model\_names, }\StringTok{\textquotesingle{}Meta{-}Model Coefficient\textquotesingle{}}\NormalTok{: coefs\})}
-\CommentTok{\# Sort by weight (optional)}
-\NormalTok{coef\_df }\OperatorTok{=}\NormalTok{ coef\_df.sort\_values(by}\OperatorTok{=}\StringTok{\textquotesingle{}Meta{-}Model Coefficient\textquotesingle{}}\NormalTok{, ascending}\OperatorTok{=}\VariableTok{False}\NormalTok{).reset\_index(drop}\OperatorTok{=}\VariableTok{True}\NormalTok{)}
-\CommentTok{\# Show the weights}
-\NormalTok{coef\_df}
+\NormalTok{meta\_coef\_df }\OperatorTok{=}\NormalTok{ pd.DataFrame(\{}
+    \StringTok{\textquotesingle{}Base Model\textquotesingle{}}\NormalTok{: meta\_model\_names,}
+    \StringTok{\textquotesingle{}Meta{-}Model Coefficient\textquotesingle{}}\NormalTok{: meta\_model\_coefs}
+\NormalTok{\})}
+
+\CommentTok{\# Sort by coefficient value (optional)}
+\NormalTok{meta\_coef\_df }\OperatorTok{=}\NormalTok{ meta\_coef\_df.sort\_values(by}\OperatorTok{=}\StringTok{\textquotesingle{}Meta{-}Model Coefficient\textquotesingle{}}\NormalTok{, ascending}\OperatorTok{=}\VariableTok{False}\NormalTok{).reset\_index(drop}\OperatorTok{=}\VariableTok{True}\NormalTok{)}
+
+\CommentTok{\# Show the coefficients}
+\NormalTok{meta\_coef\_df}
 \end{Highlighting}
 \end{Shaded}
 
@@ -15040,20 +15235,81 @@ c:\Users\lsi8012\AppData\Local\anaconda3\Lib\site-packages\sklearn\utils\depreca
 7 & gb & -0.317501 \\
 \end{longtable}
 
-\section{Ensembling Models Based on Different Feature
-Sets}\label{ensembling-models-based-on-different-feature-sets}
+\subsection{Interpretation of Ensemble
+Results}\label{interpretation-of-ensemble-results}
 
-While tree-based models like CatBoost and XGBoost are often the most
-accurate, weaker models (e.g., KNN, bagging, linear models) can
-sometimes hurt ensemble performance despite adding diversity.
+Interestingly, the \textbf{Hard Voting}, \textbf{Soft Voting}, and
+\textbf{Stacking Classifier} all achieved identical performance across
+\texttt{accuracy}, \texttt{ROC\_AUC}, and \texttt{F1\_score}. This
+outcome can be explained by the following factors:
 
-An alternative way to introduce diversity is to train \textbf{strong
-models on different subsets of predictors}. These subsets can be derived
-using techniques like \textbf{PolynomialFeature}, \textbf{tree-based
-feature importance}, or \textbf{stepwise feature selection}. Even if the
-models are of the same type, using distinct feature sets allows the
-ensemble to benefit from varied perspectives while maintaining strong
-individual performance.
+\begin{itemize}
+\item
+  \textbf{Highly correlated base models}: All three ensemble methods use
+  the same set of strong classifiers (e.g., LightGBM, CatBoost, Logistic
+  Regression), which already produce very similar predictions. As a
+  result, the ensembles also produce very similar outputs.
+\item
+  \textbf{Limited benefit from ensembling}: Since the individual base
+  models perform well and are well-aligned, combining them using
+  different ensemble strategies yields nearly identical predictions.
+\item
+  \textbf{Meta-model in stacking mimics soft voting}: The stacking
+  classifier uses a Logistic Regression meta-model, which may learn
+  weights close to equal when base predictions are similar---effectively
+  behaving like soft voting.
+\item
+  \textbf{No diversity in feature views or training subsets}: All base
+  models were trained on the same feature set and data. Adding diversity
+  (e.g., by using different subsets of features or training data) could
+  help stacking outperform voting-based ensembles.
+\end{itemize}
+
+While ensemble methods are designed to improve performance by combining
+diverse models, in this case, the base learners were already strong and
+aligned, limiting the potential gain from ensembling.
+
+\section{Summary: Stacking and Voting
+Ensembles}\label{summary-stacking-and-voting-ensembles}
+
+In this chapter, we explored ensemble learning methods---\textbf{Voting}
+and \textbf{Stacking}---and applied them to both regression and
+classification tasks. We incorporated all the models you've learned
+throughout this sequence and compared their performance against
+individual base models using a variety of evaluation metrics, including
+\textbf{RMSE}, \textbf{Accuracy}, \textbf{ROC AUC}, and \textbf{F1
+Score}.
+
+Key takeaways include:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Voting} combines predictions from multiple models either by
+  majority rule (hard voting) or by averaging probabilities (soft
+  voting). It's simple, intuitive, and often improves robustness.
+\item
+  \textbf{Stacking} uses a meta-model to learn the best way to combine
+  base model predictions. It has the potential to outperform voting when
+  base models offer complementary strengths.
+\item
+  In practice, the performance gains from ensembling depend heavily on
+  the \textbf{diversity and strength of the base models}. When base
+  models are highly correlated or already strong, ensembling may yield
+  limited additional benefit.
+\end{itemize}
+
+This chapter also highlighted the importance of:
+
+\begin{itemize}
+\tightlist
+\item
+  Selecting diverse and well-tuned base learners,
+\item
+  Understanding the behavior of meta-models in stacking,
+\item
+  Evaluating ensemble strategies based on the specific task and dataset.
+\end{itemize}
 
 \cleardoublepage
 \phantomsection

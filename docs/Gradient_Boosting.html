@@ -332,31 +332,30 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#what-is-gradient-boosting" id="toc-what-is-gradient-boosting" class="nav-link active" data-scroll-target="#what-is-gradient-boosting"><span class="header-section-number">9.1</span> What is Gradient Boosting?</a></li>
-  <li><a href="#gradient-boosting-intuition" id="toc-gradient-boosting-intuition" class="nav-link" data-scroll-target="#gradient-boosting-intuition"><span class="header-section-number">9.2</span> Gradient Boosting Intuition</a></li>
-  <li><a href="#how-gradient-boosting-works-regression-example" id="toc-how-gradient-boosting-works-regression-example" class="nav-link" data-scroll-target="#how-gradient-boosting-works-regression-example"><span class="header-section-number">9.3</span> How Gradient Boosting Works (Regression Example)</a></li>
-  <li><a href="#gradient-boosting-in-scikit-learn" id="toc-gradient-boosting-in-scikit-learn" class="nav-link" data-scroll-target="#gradient-boosting-in-scikit-learn"><span class="header-section-number">9.4</span> Gradient Boosting in Scikit-Learn</a></li>
-  <li><a href="#core-hyperparameters-categories" id="toc-core-hyperparameters-categories" class="nav-link" data-scroll-target="#core-hyperparameters-categories"><span class="header-section-number">9.5</span> Core Hyperparameters Categories</a></li>
-  <li><a href="#hyperparameter-tuning" id="toc-hyperparameter-tuning" class="nav-link" data-scroll-target="#hyperparameter-tuning"><span class="header-section-number">9.6</span> Hyperparameter Tuning</a>
+  <li><a href="#gradient-boosting-intuition" id="toc-gradient-boosting-intuition" class="nav-link active" data-scroll-target="#gradient-boosting-intuition"><span class="header-section-number">9.1</span> Gradient Boosting Intuition</a></li>
+  <li><a href="#how-gradient-boosting-works-regression-example" id="toc-how-gradient-boosting-works-regression-example" class="nav-link" data-scroll-target="#how-gradient-boosting-works-regression-example"><span class="header-section-number">9.2</span> How Gradient Boosting Works (Regression Example)</a></li>
+  <li><a href="#gradient-boosting-in-scikit-learn" id="toc-gradient-boosting-in-scikit-learn" class="nav-link" data-scroll-target="#gradient-boosting-in-scikit-learn"><span class="header-section-number">9.3</span> Gradient Boosting in Scikit-Learn</a></li>
+  <li><a href="#core-hyperparameters-categories" id="toc-core-hyperparameters-categories" class="nav-link" data-scroll-target="#core-hyperparameters-categories"><span class="header-section-number">9.4</span> Core Hyperparameters Categories</a></li>
+  <li><a href="#hyperparameter-tuning" id="toc-hyperparameter-tuning" class="nav-link" data-scroll-target="#hyperparameter-tuning"><span class="header-section-number">9.5</span> Hyperparameter Tuning</a>
   <ul>
-  <li><a href="#individual-hyperparameter-impact-analysis" id="toc-individual-hyperparameter-impact-analysis" class="nav-link" data-scroll-target="#individual-hyperparameter-impact-analysis"><span class="header-section-number">9.6.1</span> Individual Hyperparameter Impact Analysis</a>
+  <li><a href="#individual-hyperparameter-impact-analysis" id="toc-individual-hyperparameter-impact-analysis" class="nav-link" data-scroll-target="#individual-hyperparameter-impact-analysis"><span class="header-section-number">9.5.1</span> Individual Hyperparameter Impact Analysis</a>
   <ul class="collapse">
-  <li><a href="#effect-of-number-of-trees-on-cross-validation-error" id="toc-effect-of-number-of-trees-on-cross-validation-error" class="nav-link" data-scroll-target="#effect-of-number-of-trees-on-cross-validation-error"><span class="header-section-number">9.6.1.1</span> Effect of Number of Trees on Cross-Validation Error</a></li>
-  <li><a href="#early-stopping-in-gradient-boosting" id="toc-early-stopping-in-gradient-boosting" class="nav-link" data-scroll-target="#early-stopping-in-gradient-boosting"><span class="header-section-number">9.6.1.2</span> Early stopping in Gradient Boosting</a></li>
-  <li><a href="#effect-of-learning-rate-on-cross-validation-error" id="toc-effect-of-learning-rate-on-cross-validation-error" class="nav-link" data-scroll-target="#effect-of-learning-rate-on-cross-validation-error"><span class="header-section-number">9.6.1.3</span> Effect of Learning Rate on Cross-Validation Error</a></li>
-  <li><a href="#learning-rate-and-number-of-trees-are-closely-linked" id="toc-learning-rate-and-number-of-trees-are-closely-linked" class="nav-link" data-scroll-target="#learning-rate-and-number-of-trees-are-closely-linked"><span class="header-section-number">9.6.1.4</span> Learning Rate and Number of Trees Are Closely Linked</a></li>
-  <li><a href="#effect-of-stochastic-gradient-boosting-on-cross-validation-error" id="toc-effect-of-stochastic-gradient-boosting-on-cross-validation-error" class="nav-link" data-scroll-target="#effect-of-stochastic-gradient-boosting-on-cross-validation-error"><span class="header-section-number">9.6.1.5</span> Effect of Stochastic Gradient Boosting on Cross-Validation Error</a></li>
-  <li><a href="#effect-of-tree-complexity-on-cross-validation-error-not-tuned-here" id="toc-effect-of-tree-complexity-on-cross-validation-error-not-tuned-here" class="nav-link" data-scroll-target="#effect-of-tree-complexity-on-cross-validation-error-not-tuned-here"><span class="header-section-number">9.6.1.6</span> Effect of Tree Complexity on Cross-Validation Error (Not Tuned Here)</a></li>
-  <li><a href="#loss-function-loss" id="toc-loss-function-loss" class="nav-link" data-scroll-target="#loss-function-loss"><span class="header-section-number">9.6.1.7</span> Loss Function (<code>loss</code>)</a></li>
+  <li><a href="#effect-of-number-of-trees-on-cross-validation-error" id="toc-effect-of-number-of-trees-on-cross-validation-error" class="nav-link" data-scroll-target="#effect-of-number-of-trees-on-cross-validation-error"><span class="header-section-number">9.5.1.1</span> Effect of Number of Trees on Cross-Validation Error</a></li>
+  <li><a href="#early-stopping-in-gradient-boosting" id="toc-early-stopping-in-gradient-boosting" class="nav-link" data-scroll-target="#early-stopping-in-gradient-boosting"><span class="header-section-number">9.5.1.2</span> Early stopping in Gradient Boosting</a></li>
+  <li><a href="#effect-of-learning-rate-on-cross-validation-error" id="toc-effect-of-learning-rate-on-cross-validation-error" class="nav-link" data-scroll-target="#effect-of-learning-rate-on-cross-validation-error"><span class="header-section-number">9.5.1.3</span> Effect of Learning Rate on Cross-Validation Error</a></li>
+  <li><a href="#learning-rate-and-number-of-trees-are-closely-linked" id="toc-learning-rate-and-number-of-trees-are-closely-linked" class="nav-link" data-scroll-target="#learning-rate-and-number-of-trees-are-closely-linked"><span class="header-section-number">9.5.1.4</span> Learning Rate and Number of Trees Are Closely Linked</a></li>
+  <li><a href="#effect-of-stochastic-gradient-boosting-on-cross-validation-error" id="toc-effect-of-stochastic-gradient-boosting-on-cross-validation-error" class="nav-link" data-scroll-target="#effect-of-stochastic-gradient-boosting-on-cross-validation-error"><span class="header-section-number">9.5.1.5</span> Effect of Stochastic Gradient Boosting on Cross-Validation Error</a></li>
+  <li><a href="#effect-of-tree-complexity-on-cross-validation-error-not-tuned-here" id="toc-effect-of-tree-complexity-on-cross-validation-error-not-tuned-here" class="nav-link" data-scroll-target="#effect-of-tree-complexity-on-cross-validation-error-not-tuned-here"><span class="header-section-number">9.5.1.6</span> Effect of Tree Complexity on Cross-Validation Error (Not Tuned Here)</a></li>
+  <li><a href="#loss-function-loss" id="toc-loss-function-loss" class="nav-link" data-scroll-target="#loss-function-loss"><span class="header-section-number">9.5.1.7</span> Loss Function (<code>loss</code>)</a></li>
   </ul></li>
-  <li><a href="#joint-hyperparameter-optimization" id="toc-joint-hyperparameter-optimization" class="nav-link" data-scroll-target="#joint-hyperparameter-optimization"><span class="header-section-number">9.6.2</span> Joint Hyperparameter Optimization</a>
+  <li><a href="#joint-hyperparameter-optimization" id="toc-joint-hyperparameter-optimization" class="nav-link" data-scroll-target="#joint-hyperparameter-optimization"><span class="header-section-number">9.5.2</span> Joint Hyperparameter Optimization</a>
   <ul class="collapse">
-  <li><a href="#using-bayessearchcv-for-hyperparameter-tuning" id="toc-using-bayessearchcv-for-hyperparameter-tuning" class="nav-link" data-scroll-target="#using-bayessearchcv-for-hyperparameter-tuning"><span class="header-section-number">9.6.2.1</span> Using <code>BayesSearchCV</code> for Hyperparameter Tuning</a></li>
-  <li><a href="#hyperparameter-optimization-with-optuna" id="toc-hyperparameter-optimization-with-optuna" class="nav-link" data-scroll-target="#hyperparameter-optimization-with-optuna"><span class="header-section-number">9.6.2.2</span> Hyperparameter Optimization with Optuna</a></li>
+  <li><a href="#using-bayessearchcv-for-hyperparameter-tuning" id="toc-using-bayessearchcv-for-hyperparameter-tuning" class="nav-link" data-scroll-target="#using-bayessearchcv-for-hyperparameter-tuning"><span class="header-section-number">9.5.2.1</span> Using <code>BayesSearchCV</code> for Hyperparameter Tuning</a></li>
+  <li><a href="#hyperparameter-optimization-with-optuna" id="toc-hyperparameter-optimization-with-optuna" class="nav-link" data-scroll-target="#hyperparameter-optimization-with-optuna"><span class="header-section-number">9.5.2.2</span> Hyperparameter Optimization with Optuna</a></li>
   </ul></li>
   </ul></li>
-  <li><a href="#independent-study" id="toc-independent-study" class="nav-link" data-scroll-target="#independent-study"><span class="header-section-number">9.7</span> Independent Study</a></li>
-  <li><a href="#foundational-paper" id="toc-foundational-paper" class="nav-link" data-scroll-target="#foundational-paper"><span class="header-section-number">9.8</span> Foundational Paper</a></li>
+  <li><a href="#independent-study" id="toc-independent-study" class="nav-link" data-scroll-target="#independent-study"><span class="header-section-number">9.6</span> Independent Study</a></li>
+  <li><a href="#foundational-paper" id="toc-foundational-paper" class="nav-link" data-scroll-target="#foundational-paper"><span class="header-section-number">9.7</span> Foundational Paper</a></li>
   </ul>
 </nav>
     </div>
@@ -382,14 +381,15 @@ window.Quarto = {
 </header>
 
 
-<p><em>Note that in this course, lecture notes are not sufficient, you must read the book for better understanding. Lecture notes are just implementing the concepts of the book on a dataset, but not explaining the concepts elaborately.</em></p>
-<section id="what-is-gradient-boosting" class="level2" data-number="9.1">
-<h2 data-number="9.1" class="anchored" data-anchor-id="what-is-gradient-boosting"><span class="header-section-number">9.1</span> What is Gradient Boosting?</h2>
+<div id="c030794c" class="cell" data-execution_count="3">
+<div class="cell-output cell-output-display" data-execution_count="3">
+<img src="./Datasets/vanilla_gradient_boosting.webp">
+</div>
+</div>
 <p>Gradient Boosting is a <strong>boosting technique</strong> that builds an additive model in a forward stage-wise manner. Unlike AdaBoost, which adjusts weights on training instances, Gradient Boosting fits new models to the <strong>residual errors</strong> made by prior models using the gradient of a specified loss function.</p>
 <p>At each stage, a new weak learner is trained to minimize the loss function by correcting the errors of the current ensemble.</p>
-</section>
-<section id="gradient-boosting-intuition" class="level2" data-number="9.2">
-<h2 data-number="9.2" class="anchored" data-anchor-id="gradient-boosting-intuition"><span class="header-section-number">9.2</span> Gradient Boosting Intuition</h2>
+<section id="gradient-boosting-intuition" class="level2" data-number="9.1">
+<h2 data-number="9.1" class="anchored" data-anchor-id="gradient-boosting-intuition"><span class="header-section-number">9.1</span> Gradient Boosting Intuition</h2>
 <p>Gradient Boosting can be understood as <strong>functional gradient descent</strong>:</p>
 <ul>
 <li>We start with an initial prediction (e.g., the mean of the targets).</li>
@@ -399,8 +399,8 @@ window.Quarto = {
 </ul>
 <p>By sequentially adding models that reduce the remaining error, the ensemble gradually improves.</p>
 </section>
-<section id="how-gradient-boosting-works-regression-example" class="level2" data-number="9.3">
-<h2 data-number="9.3" class="anchored" data-anchor-id="how-gradient-boosting-works-regression-example"><span class="header-section-number">9.3</span> How Gradient Boosting Works (Regression Example)</h2>
+<section id="how-gradient-boosting-works-regression-example" class="level2" data-number="9.2">
+<h2 data-number="9.2" class="anchored" data-anchor-id="how-gradient-boosting-works-regression-example"><span class="header-section-number">9.2</span> How Gradient Boosting Works (Regression Example)</h2>
 <ol type="1">
 <li><p><strong>Initialize</strong> the model with a constant prediction:<br>
 <span class="math display">\[
@@ -451,8 +451,8 @@ r_i^{(m)} = - \left[ \frac{\partial L(y_i, \hat{f}(x_i))}{\partial \hat{f}(x_i)}
 <span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython <span class="im">import</span> display</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="gradient-boosting-in-scikit-learn" class="level2" data-number="9.4">
-<h2 data-number="9.4" class="anchored" data-anchor-id="gradient-boosting-in-scikit-learn"><span class="header-section-number">9.4</span> Gradient Boosting in Scikit-Learn</h2>
+<section id="gradient-boosting-in-scikit-learn" class="level2" data-number="9.3">
+<h2 data-number="9.3" class="anchored" data-anchor-id="gradient-boosting-in-scikit-learn"><span class="header-section-number">9.3</span> Gradient Boosting in Scikit-Learn</h2>
 <p>Scikit-learn offers a standard implementation of Gradient Boosting through two primary estimators:</p>
 <ul>
 <li><a href="https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.GradientBoostingClassifier.html"><code>GradientBoostingClassifier</code></a> for classification tasks</li>
@@ -465,8 +465,8 @@ r_i^{(m)} = - \left[ \frac{\partial L(y_i, \hat{f}(x_i))}{\partial \hat{f}(x_i)}
 <li><a href="https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.HistGradientBoostingRegressor.html"><code>HistGradientBoostingRegressor</code></a></li>
 </ul>
 </section>
-<section id="core-hyperparameters-categories" class="level2" data-number="9.5">
-<h2 data-number="9.5" class="anchored" data-anchor-id="core-hyperparameters-categories"><span class="header-section-number">9.5</span> Core Hyperparameters Categories</h2>
+<section id="core-hyperparameters-categories" class="level2" data-number="9.4">
+<h2 data-number="9.4" class="anchored" data-anchor-id="core-hyperparameters-categories"><span class="header-section-number">9.4</span> Core Hyperparameters Categories</h2>
 <p>The primary hyperparameters for <code>GradientBoostingClassifier</code> and <code>GradientBoostingRegressor</code> can be grouped into the following categories:</p>
 <ol type="1">
 <li><p><strong>Number of Trees</strong> (<code>n_estimators</code>)</p>
@@ -522,8 +522,8 @@ r_i^{(m)} = - \left[ \frac{\partial L(y_i, \hat{f}(x_i))}{\partial \hat{f}(x_i)}
 <li><a href="https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.GradientBoostingRegressor.html">GradientBoostingRegressor Documentation</a></li>
 </ul>
 </section>
-<section id="hyperparameter-tuning" class="level2" data-number="9.6">
-<h2 data-number="9.6" class="anchored" data-anchor-id="hyperparameter-tuning"><span class="header-section-number">9.6</span> Hyperparameter Tuning</h2>
+<section id="hyperparameter-tuning" class="level2" data-number="9.5">
+<h2 data-number="9.5" class="anchored" data-anchor-id="hyperparameter-tuning"><span class="header-section-number">9.5</span> Hyperparameter Tuning</h2>
 <p>Let’s reuse the car dataset to evaluate how different hyperparameter settings affect the performance of gradient boosting</p>
 <div id="a9036ef3" class="cell" data-execution_count="32">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the dataset</span></span>
@@ -647,10 +647,10 @@ r_i^{(m)} = - \left[ \frac{\partial L(y_i, \hat{f}(x_i))}{\partial \hat{f}(x_i)}
 <span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>X_train_final <span class="op">=</span> pd.concat([X_train_encoded_df, X_train[numerical_feature].reset_index(drop<span class="op">=</span><span class="va">True</span>)], axis<span class="op">=</span><span class="dv">1</span>)</span>
 <span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>X_test_final <span class="op">=</span> pd.concat([X_test_encoded_df, X_test[numerical_feature].reset_index(drop<span class="op">=</span><span class="va">True</span>)], axis<span class="op">=</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="individual-hyperparameter-impact-analysis" class="level3" data-number="9.6.1">
-<h3 data-number="9.6.1" class="anchored" data-anchor-id="individual-hyperparameter-impact-analysis"><span class="header-section-number">9.6.1</span> Individual Hyperparameter Impact Analysis</h3>
-<section id="effect-of-number-of-trees-on-cross-validation-error" class="level4" data-number="9.6.1.1">
-<h4 data-number="9.6.1.1" class="anchored" data-anchor-id="effect-of-number-of-trees-on-cross-validation-error"><span class="header-section-number">9.6.1.1</span> Effect of Number of Trees on Cross-Validation Error</h4>
+<section id="individual-hyperparameter-impact-analysis" class="level3" data-number="9.5.1">
+<h3 data-number="9.5.1" class="anchored" data-anchor-id="individual-hyperparameter-impact-analysis"><span class="header-section-number">9.5.1</span> Individual Hyperparameter Impact Analysis</h3>
+<section id="effect-of-number-of-trees-on-cross-validation-error" class="level4" data-number="9.5.1.1">
+<h4 data-number="9.5.1.1" class="anchored" data-anchor-id="effect-of-number-of-trees-on-cross-validation-error"><span class="header-section-number">9.5.1.1</span> Effect of Number of Trees on Cross-Validation Error</h4>
 <p>Effect of Number of Trees on Cross-Validation Error In Gradient Boosting, the number of trees (<code>n_estimators</code>) controls how many boosting rounds the model performs. Adding more trees can reduce bias and improve training accuracy, but it also increases the risk of overfitting, especially with a high learning rate.</p>
 <p>The optimal number of trees is often found by balancing <strong>model complexity</strong> and <strong>generalization performance</strong> using cross-validation.</p>
 <div id="452c9c3a" class="cell" data-execution_count="35">
@@ -713,14 +713,14 @@ Best number of trees: 1500 with RMSE: 3039.520</code></pre>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Gradient_Boosting_files/figure-html/cell-6-output-2.png" class="img-fluid figure-img"></p>
+<p><img src="Gradient_Boosting_files/figure-html/cell-7-output-2.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
 </div>
 </section>
-<section id="early-stopping-in-gradient-boosting" class="level4" data-number="9.6.1.2">
-<h4 data-number="9.6.1.2" class="anchored" data-anchor-id="early-stopping-in-gradient-boosting"><span class="header-section-number">9.6.1.2</span> Early stopping in Gradient Boosting</h4>
+<section id="early-stopping-in-gradient-boosting" class="level4" data-number="9.5.1.2">
+<h4 data-number="9.5.1.2" class="anchored" data-anchor-id="early-stopping-in-gradient-boosting"><span class="header-section-number">9.5.1.2</span> Early stopping in Gradient Boosting</h4>
 <p><strong>Why Early Stopping Matters</strong></p>
 <p>Specifying a fixed number of trees means deciding in advance how many boosting rounds (i.e., trees) the model will train.</p>
 <p>This approach can be inefficient or risky:</p>
@@ -832,7 +832,7 @@ Best number of trees: 1500 with RMSE: 3039.520</code></pre>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Gradient_Boosting_files/figure-html/cell-9-output-1.png" class="img-fluid figure-img"></p>
+<p><img src="Gradient_Boosting_files/figure-html/cell-10-output-1.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
@@ -850,8 +850,8 @@ Models with early stopping often require <strong>fewer estimators</strong> while
 This reduces training time significantly compared to training without early stopping.</p></li>
 </ul>
 </section>
-<section id="effect-of-learning-rate-on-cross-validation-error" class="level4" data-number="9.6.1.3">
-<h4 data-number="9.6.1.3" class="anchored" data-anchor-id="effect-of-learning-rate-on-cross-validation-error"><span class="header-section-number">9.6.1.3</span> Effect of Learning Rate on Cross-Validation Error</h4>
+<section id="effect-of-learning-rate-on-cross-validation-error" class="level4" data-number="9.5.1.3">
+<h4 data-number="9.5.1.3" class="anchored" data-anchor-id="effect-of-learning-rate-on-cross-validation-error"><span class="header-section-number">9.5.1.3</span> Effect of Learning Rate on Cross-Validation Error</h4>
 <p>The learning rate (<code>learning_rate</code>) determines how much each new tree contributes to the overall model. A <strong>smaller learning rate</strong> results in slower learning and often requires more trees to achieve good performance. A <strong>larger learning rate</strong> speeds up learning but increases the risk of overfitting.</p>
 <p>Finding the optimal learning rate involves balancing: - <strong>High learning rate</strong> → faster convergence, but higher risk of overfitting<br>
 - <strong>Low learning rate</strong> → better generalization, but requires more trees and longer training time</p>
@@ -932,7 +932,7 @@ This reduces training time significantly compared to training without early stop
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Gradient_Boosting_files/figure-html/cell-10-output-2.png" class="img-fluid figure-img"></p>
+<p><img src="Gradient_Boosting_files/figure-html/cell-11-output-2.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
@@ -942,8 +942,8 @@ Best model: 0.50 with RMSE: 3529.563</code></pre>
 </div>
 </div>
 </section>
-<section id="learning-rate-and-number-of-trees-are-closely-linked" class="level4" data-number="9.6.1.4">
-<h4 data-number="9.6.1.4" class="anchored" data-anchor-id="learning-rate-and-number-of-trees-are-closely-linked"><span class="header-section-number">9.6.1.4</span> Learning Rate and Number of Trees Are Closely Linked</h4>
+<section id="learning-rate-and-number-of-trees-are-closely-linked" class="level4" data-number="9.5.1.4">
+<h4 data-number="9.5.1.4" class="anchored" data-anchor-id="learning-rate-and-number-of-trees-are-closely-linked"><span class="header-section-number">9.5.1.4</span> Learning Rate and Number of Trees Are Closely Linked</h4>
 <p>The <strong>learning rate</strong> and <strong>number of trees</strong> (<code>n_estimators</code>) are tightly coupled hyperparameters in gradient boosting. Their balance plays a key role in model performance and overfitting control.</p>
 <ul>
 <li>A <strong>lower learning rate</strong> slows the learning process, requiring <strong>more trees</strong> to achieve strong performance.</li>
@@ -952,8 +952,8 @@ Best model: 0.50 with RMSE: 3529.563</code></pre>
 <p>⚠️ A high learning rate with too few trees can lead to poor generalization, while a very low learning rate with too many trees may improve accuracy but increase training time significantly.</p>
 <p><strong>Best practice:</strong> Use a low to moderate learning rate (e.g., <code>0.01</code>–<code>0.1</code>) combined with <strong>early stopping</strong> to find the optimal number of trees.</p>
 </section>
-<section id="effect-of-stochastic-gradient-boosting-on-cross-validation-error" class="level4" data-number="9.6.1.5">
-<h4 data-number="9.6.1.5" class="anchored" data-anchor-id="effect-of-stochastic-gradient-boosting-on-cross-validation-error"><span class="header-section-number">9.6.1.5</span> Effect of Stochastic Gradient Boosting on Cross-Validation Error</h4>
+<section id="effect-of-stochastic-gradient-boosting-on-cross-validation-error" class="level4" data-number="9.5.1.5">
+<h4 data-number="9.5.1.5" class="anchored" data-anchor-id="effect-of-stochastic-gradient-boosting-on-cross-validation-error"><span class="header-section-number">9.5.1.5</span> Effect of Stochastic Gradient Boosting on Cross-Validation Error</h4>
 <p><strong>Stochastic Gradient Boosting</strong> enhances generalization by introducing randomness into the model-building process. Two key hyperparameters that control this are <code>subsample</code> and <code>max_features</code>, and they operate on <strong>different dimensions</strong> of the data:</p>
 <table class="caption-top table">
 <colgroup>
@@ -1034,7 +1034,7 @@ Best model: 0.50 with RMSE: 3529.563</code></pre>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Gradient_Boosting_files/figure-html/cell-12-output-1.png" class="img-fluid figure-img"></p>
+<p><img src="Gradient_Boosting_files/figure-html/cell-13-output-1.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
@@ -1043,8 +1043,8 @@ Best model: 0.50 with RMSE: 3529.563</code></pre>
 </div>
 </div>
 </section>
-<section id="effect-of-tree-complexity-on-cross-validation-error-not-tuned-here" class="level4" data-number="9.6.1.6">
-<h4 data-number="9.6.1.6" class="anchored" data-anchor-id="effect-of-tree-complexity-on-cross-validation-error-not-tuned-here"><span class="header-section-number">9.6.1.6</span> Effect of Tree Complexity on Cross-Validation Error (Not Tuned Here)</h4>
+<section id="effect-of-tree-complexity-on-cross-validation-error-not-tuned-here" class="level4" data-number="9.5.1.6">
+<h4 data-number="9.5.1.6" class="anchored" data-anchor-id="effect-of-tree-complexity-on-cross-validation-error-not-tuned-here"><span class="header-section-number">9.5.1.6</span> Effect of Tree Complexity on Cross-Validation Error (Not Tuned Here)</h4>
 <p><strong>Tree complexity</strong> controls how expressive and flexible each individual tree in the gradient boosting ensemble can be. While deeper and more complex trees can capture intricate patterns in the data, they are also more prone to overfitting, especially when combined with many trees.</p>
 <p>Key parameters include:</p>
 <ul>
@@ -1055,8 +1055,8 @@ Best model: 0.50 with RMSE: 3529.563</code></pre>
 <p>These parameters influence the bias-variance trade-off by adjusting how expressive each tree can be.</p>
 <p>Since we have already discussed and tuned these parameters in earlier lessons (decision trees and random forests), we will <strong>not tune them again here</strong>.</p>
 </section>
-<section id="loss-function-loss" class="level4" data-number="9.6.1.7">
-<h4 data-number="9.6.1.7" class="anchored" data-anchor-id="loss-function-loss"><span class="header-section-number">9.6.1.7</span> Loss Function (<code>loss</code>)</h4>
+<section id="loss-function-loss" class="level4" data-number="9.5.1.7">
+<h4 data-number="9.5.1.7" class="anchored" data-anchor-id="loss-function-loss"><span class="header-section-number">9.5.1.7</span> Loss Function (<code>loss</code>)</h4>
 <p>In gradient boosting, the loss function determines how the model measures prediction errors and guides the optimization process during training. Here’s a breakdown of common loss functions for regression and classification tasks:</p>
 <ul>
 <li><strong>Regression</strong>:
@@ -1074,11 +1074,11 @@ Best model: 0.50 with RMSE: 3529.563</code></pre>
 <p>Choosing an appropriate loss function ensures the model is optimized for the specific structure and goals of the problem.</p>
 </section>
 </section>
-<section id="joint-hyperparameter-optimization" class="level3" data-number="9.6.2">
-<h3 data-number="9.6.2" class="anchored" data-anchor-id="joint-hyperparameter-optimization"><span class="header-section-number">9.6.2</span> Joint Hyperparameter Optimization</h3>
+<section id="joint-hyperparameter-optimization" class="level3" data-number="9.5.2">
+<h3 data-number="9.5.2" class="anchored" data-anchor-id="joint-hyperparameter-optimization"><span class="header-section-number">9.5.2</span> Joint Hyperparameter Optimization</h3>
 <p>Since the optimal values of hyperparameters are often interdependent, they should be tuned <strong>together</strong> rather than in isolation to achieve the best performance.Next we will simultaneously tune multiple core hyperparameters to find the best combination for overall model performance.</p>
-<section id="using-bayessearchcv-for-hyperparameter-tuning" class="level4" data-number="9.6.2.1">
-<h4 data-number="9.6.2.1" class="anchored" data-anchor-id="using-bayessearchcv-for-hyperparameter-tuning"><span class="header-section-number">9.6.2.1</span> Using <code>BayesSearchCV</code> for Hyperparameter Tuning</h4>
+<section id="using-bayessearchcv-for-hyperparameter-tuning" class="level4" data-number="9.5.2.1">
+<h4 data-number="9.5.2.1" class="anchored" data-anchor-id="using-bayessearchcv-for-hyperparameter-tuning"><span class="header-section-number">9.5.2.1</span> Using <code>BayesSearchCV</code> for Hyperparameter Tuning</h4>
 <p>We can use <code>BayesSearchCV</code> with early stopping to <strong>simultaneously tune multiple hyperparameters</strong> in a more efficient and automated way.</p>
 <div id="65054b73" class="cell" data-execution_count="42">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># time the search</span></span>
@@ -1192,7 +1192,7 @@ Best CV RMSE: 3142.483</code></pre>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Gradient_Boosting_files/figure-html/cell-14-output-1.png" class="img-fluid figure-img"></p>
+<p><img src="Gradient_Boosting_files/figure-html/cell-15-output-1.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
@@ -1207,14 +1207,14 @@ Best CV RMSE: 3142.483</code></pre>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Gradient_Boosting_files/figure-html/cell-15-output-1.png" class="img-fluid figure-img"></p>
+<p><img src="Gradient_Boosting_files/figure-html/cell-16-output-1.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
 </div>
 </section>
-<section id="hyperparameter-optimization-with-optuna" class="level4" data-number="9.6.2.2">
-<h4 data-number="9.6.2.2" class="anchored" data-anchor-id="hyperparameter-optimization-with-optuna"><span class="header-section-number">9.6.2.2</span> Hyperparameter Optimization with Optuna</h4>
+<section id="hyperparameter-optimization-with-optuna" class="level4" data-number="9.5.2.2">
+<h4 data-number="9.5.2.2" class="anchored" data-anchor-id="hyperparameter-optimization-with-optuna"><span class="header-section-number">9.5.2.2</span> Hyperparameter Optimization with Optuna</h4>
 <div id="681af397" class="cell" data-execution_count="45">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> objective(trial):</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Define hyperparameters to optimize</span></span>
@@ -1362,8 +1362,8 @@ Best CV RMSE: 3192.979</code></pre>
 </section>
 </section>
 </section>
-<section id="independent-study" class="level2" data-number="9.7">
-<h2 data-number="9.7" class="anchored" data-anchor-id="independent-study"><span class="header-section-number">9.7</span> Independent Study</h2>
+<section id="independent-study" class="level2" data-number="9.6">
+<h2 data-number="9.6" class="anchored" data-anchor-id="independent-study"><span class="header-section-number">9.6</span> Independent Study</h2>
 <p>In this notebook, we used the car dataset for a guided regression task to illustrate the core hyperparameters in gradient boosting and how to tune them to balance bias and variance.</p>
 <p>For your practice, please work with the <strong>diabetes dataset</strong> and complete the following:</p>
 <ul>
@@ -1489,8 +1489,8 @@ Name: proportion, dtype: float64</code></pre>
 <span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>y_test <span class="op">=</span> test[<span class="st">'Outcome'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="foundational-paper" class="level2" data-number="9.8">
-<h2 data-number="9.8" class="anchored" data-anchor-id="foundational-paper"><span class="header-section-number">9.8</span> Foundational Paper</h2>
+<section id="foundational-paper" class="level2" data-number="9.7">
+<h2 data-number="9.7" class="anchored" data-anchor-id="foundational-paper"><span class="header-section-number">9.7</span> Foundational Paper</h2>
 <p>The foundational paper introducing “vanilla” Gradient Boosting is:</p>
 <p><strong>Greedy Function Approximation: A Gradient Boosting Machine</strong><br>
 <em>Author</em>: Jerome H. Friedman<br>

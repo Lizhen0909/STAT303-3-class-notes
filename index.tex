@@ -17332,7 +17332,7 @@ Boosting}\label{d-xgboost-vs.-gradient-boosting}
 Strategies}\label{e-tuning-xgboost-with-different-search-strategies}
 
 Tune an \textbf{XGBoost Regressor} to achieve a \textbf{cross-validation
-MAE below \$42,500}.
+MAE below \$43,000}.
 
 \begin{itemize}
 \tightlist
@@ -17520,7 +17520,8 @@ CatBoost):
 CatBoost}\label{d-model-evaluation-xgboost-lightgbm-and-catboost}
 
 Evaluate the performance of the following models: \textbf{XGBoost},
-\textbf{LightGBM}, and \textbf{CatBoost}, using the metrics below:
+\textbf{LightGBM}, and \textbf{CatBoost}, using the metrics on test set
+below:
 
 \begin{itemize}
 \tightlist
@@ -17614,7 +17615,7 @@ Tune a \textbf{CatBoost classifier} to achieve:
 \begin{itemize}
 \tightlist
 \item
-  \textbf{Cross-validation accuracy ≥ 75\%}
+  \textbf{Cross-validation accuracy ≥ 70\%}
 \item
   \textbf{Cross-validation recall ≥ 65\%}
 \end{itemize}
@@ -17701,6 +17702,379 @@ scratch} when increasing \texttt{n\_trials} or \texttt{n\_iter}?
   Provide code to demonstrate how these strategies \textbf{reuse
   previous results} rather
 \end{itemize}
+
+\chapter{Assignment 5}\label{assignment-5}
+
+\section*{Instructions}\label{instructions-4}
+\addcontentsline{toc}{section}{Instructions}
+
+\markright{Instructions}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  You may talk to a friend, discuss the questions and potential
+  directions for solving them. However, you need to write your own
+  solutions and code separately, and not as a group activity.
+\item
+  Write your code in the \textbf{Code cells} and your answers in the
+  \textbf{Markdown cells} of the Jupyter notebook. Ensure that the
+  solution is written neatly enough to for the graders to understand and
+  follow.
+\item
+  Use
+  \href{https://quarto.org/docs/output-formats/html-basics.html}{Quarto}
+  to render the \textbf{.ipynb} file as HTML. You will need to open the
+  command prompt, navigate to the directory containing the file, and use
+  the command: \texttt{quarto\ render\ filename.ipynb\ -\/-to\ html}.
+  Submit the HTML file.
+\item
+  The assignment is worth 100 points, and is due on \textbf{Tuesday, 3th
+  June 2025 at 11:59 pm}.
+\item
+  \textbf{Five points are properly formatting the assignment}. The
+  breakdown is as follows:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Must be an HTML file rendered using Quarto \textbf{(1 point)}.
+    \emph{If you have a Quarto issue, you must mention the issue \&
+    quote the error you get when rendering using Quarto in the comments
+    section of Canvas, and submit the ipynb file.}
+  \item
+    No name can be written on the assignment, nor can there be any
+    indicator of the student's identity---e.g.~printouts of the working
+    directory should not be included in the final submission. \textbf{(1
+    point)}
+  \item
+    There aren't excessively long outputs of extraneous information
+    (e.g.~no printouts of entire data frames without good reason, there
+    aren't long printouts of which iteration a loop is on, there aren't
+    long sections of commented-out code, etc.) \textbf{(1 point)}
+  \item
+    Final answers to each question are written in the Markdown cells.
+    \textbf{(1 point)}
+  \item
+    There is no piece of unnecessary / redundant code, and no
+    unnecessary / redundant text. \textbf{(1 point)}
+  \end{itemize}
+\item
+  The maximum possible score in the assigment is 95 + 5 = 100 out of
+  100.
+\end{enumerate}
+
+\section{1) Conceptual Questions}\label{conceptual-questions}
+
+\textbf{(9 points)}
+
+\subsection{a) Ensemble vs.~Base Model
+Performance}\label{a-ensemble-vs.-base-model-performance}
+
+Is it possible for an \textbf{ensemble model} (Voting or Stacking) to
+perform \textbf{worse than one or more of its base models}?\\
+\textbf{(1 point)}
+
+Explain \textbf{why or why not}.\\
+\textbf{(4 points)}
+
+\subsection{b) Addressing Underperformance in Ensemble
+Models}\label{b-addressing-underperformance-in-ensemble-models}
+
+If an \textbf{ensemble model} (Voting or Stacking) performs worse than
+one or more of its base models,\\
+what should be the appropriate \textbf{course of action}?\\
+\textbf{(4 points)}
+
+\section{2) Regression with Voting and Stacking (45
+points)}\label{regression-with-voting-and-stacking-45-points}
+
+For this question, you will use the \textbf{\texttt{miami\_housing.csv}}
+file.\\
+The description of the variables can be found
+\href{https://www.kaggle.com/datasets/deepcontractor/miami-housing-dataset}{here}.
+
+\begin{itemize}
+\tightlist
+\item
+  The \textbf{\texttt{SALE\_PRC}} variable is the response (target) for
+  the regression task.
+\item
+  All other variables, except \textbf{\texttt{PARCELNO}}, should be used
+  as predictors.
+\end{itemize}
+
+\subsection{a) Train-Test Split}\label{a-train-test-split}
+
+Read the dataset and create training and test sets using a 60\%-40\%
+split.\\
+Use \texttt{random\_state=1} to ensure reproducibility.\\
+\textbf{(1 point)}
+
+\subsection{b) Train Tuned Base Models}\label{b-train-tuned-base-models}
+
+Recreate and train the following \textbf{tuned} regression models from
+previous assignments.\\
+\textbf{Set \texttt{random\_state=1} for all models.}
+
+\begin{itemize}
+\tightlist
+\item
+  Bagged Trees (from Assignment 3)\\
+\item
+  Random Forest (from Assignment 3)\\
+\item
+  AdaBoost (from Assignment 4)\\
+\item
+  Gradient Boosting (from Assignment 4)\\
+\item
+  XGBoost (from Assignment 4)
+\end{itemize}
+
+\textbf{Note:}\\
+There is no need for cross-validation, as each model should be created
+using the best hyperparameters identified in the respective
+assignments.\\
+Although XGBoost has native support for categorical features, for
+simplicity and consistency across models, you may use one-hot encoding
+for XGBoost as well.
+
+Print the test MAE of all five tuned models.\\
+\textbf{(5 × 0.5 = 2.5 points)}
+
+\subsection{c) Voting Ensemble
+Regressor}\label{c-voting-ensemble-regressor}
+
+Train a \textbf{Voting Ensemble Regressor} using all five tuned models
+from part (b).\\
+Since each base model is already tuned, the ensemble is considered
+``tuned'' in a greedy manner.
+
+Print the test MAE of the Voting Ensemble.\\
+\textbf{(5 points)}
+
+Is the ensemble's performance better than that of all the individual
+base models?\\
+\textbf{(1 point)}
+
+\subsection{d) Refined Voting Ensemble}\label{d-refined-voting-ensemble}
+
+Retrain the \textbf{Voting Ensemble Regressor} using only the two models
+from part (b) that achieved the lowest test MAEs.
+
+Print the test MAE of this new ensemble and compare it with the results
+from parts (b) and (c).\\
+\textbf{(3 points)}
+
+\subsection{e) Stacking Ensemble with Linear
+Regression}\label{e-stacking-ensemble-with-linear-regression}
+
+Develop a linear regression metamodel using the base models from Q2(b).
+Report the MAE of the metamodel on the test data. Which base model
+receives the highest weight (i.e., coefficient) in the ensemble?
+
+\textbf{Note:}
+
+\begin{itemize}
+\tightlist
+\item
+  Use a 5-fold \texttt{KFold} object with \texttt{random\_state=1} and
+  \texttt{shuffle=True} to generate base model predictions.
+\end{itemize}
+
+\textbf{(5 points)}
+
+\subsection{f) Base Model Weights in Linear Regression Stacking
+Ensemble}\label{f-base-model-weights-in-linear-regression-stacking-ensemble}
+
+Print the weights (i.e., coefficients) assigned to each base model by
+the linear regression metamodel in the Stacking Ensemble from part
+(e).\\
+\textbf{(2 points)}
+
+\subsection{g) Tuned Stacking Ensemble with Lasso
+Metamodel}\label{g-tuned-stacking-ensemble-with-lasso-metamodel}
+
+Train and \textbf{tune} a \texttt{StackingRegressor} using all five base
+models from Q2(b), with \textbf{Lasso regression} as the metamodel. Use
+the same cross-validation settings as in the previous step. Tune the
+Lasso hyperparameter using the following values:
+\texttt{{[}0.001,\ 0.01,\ 0.1,\ 1,\ 10,\ 100{]}}.\\
+\textbf{(3 points)}
+
+Report the best cross-validated MAE and the test MAE.\\
+\textbf{(1 point)}
+
+You are optimizing for MAE. Would you use \texttt{LassoCV} or
+\texttt{GridSearchCV}? Justify your choice.\\
+\textbf{(2 points)}
+
+\subsection{h) Base Model Weights in Tuned Lasso Stacking
+Ensemble}\label{h-base-model-weights-in-tuned-lasso-stacking-ensemble}
+
+Print the weights (i.e., coefficients) assigned to each base model by
+the Lasso metamodel in the Stacking Ensemble from part (g).\\
+\textbf{(1 point)}
+
+\subsection{i) Tuned Stacking Ensemble with Decision Tree
+Metamodel}\label{i-tuned-stacking-ensemble-with-decision-tree-metamodel}
+
+Train and \textbf{tune} a \texttt{StackingRegressor} using all five base
+models from part 2(b), with a \textbf{Decision Tree} as the metamodel
+(\texttt{random\_state=1}).\\
+Use the same cross-validation setting as in previous steps.
+
+Tune the \texttt{max\_depth} hyperparameter for the decision tree over
+the range \textbf{2 to 10 (inclusive)}.\\
+\textbf{(5 points)}
+
+Print the best cross-validated MAE and the test MAE.\\
+\textbf{(1 point)}
+
+\subsection{j) Base Model Importances in Decision Tree Stacking
+Ensemble}\label{j-base-model-importances-in-decision-tree-stacking-ensemble}
+
+Print the feature importances assigned to each base model by the
+Decision Tree metamodel in the Stacking Ensemble from part (i).\\
+\textbf{(2 points)}
+
+\subsection{k) Comparing Weights and Importances Across
+Metamodels}\label{k-comparing-weights-and-importances-across-metamodels}
+
+Compare the weights and importances obtained in parts 2(f), 2(h), and
+2(j).\\
+Based on the test MAEs of the base models, do the weights/importances
+assigned by the different metamodels make sense?\\
+\textbf{(2 points)}
+
+\subsection{l) Ensemble of Ensembles}\label{l-ensemble-of-ensembles}
+
+Using the three Stacking Ensemble models from parts 2(e), 2(g), and
+2(i), build an \textbf{``ensemble of ensembles''} by using them as base
+models in a \textbf{Voting Regressor}.
+
+\textbf{(5 points)}
+
+Print the test MAE of this final ensemble model.\\
+\textbf{(1 point)}
+
+\section{3) Classification with Voting and Stacking (41
+points)}\label{classification-with-voting-and-stacking-41-points}
+
+For this question, you will use the \textbf{\texttt{train.csv}} and
+\textbf{\texttt{test.csv}} files. Each observation represents a
+marketing call from a banking institution.
+
+The target variable is \textbf{\texttt{y}}, indicating whether the
+client subscribed to a term deposit (\textbf{1}) or not (\textbf{0});
+this is a classification problem.
+
+The predictors to use are: \textbf{\texttt{age}}, \textbf{\texttt{day}},
+\textbf{\texttt{month}}, and \textbf{\texttt{education}}.\\
+\emph{As mentioned earlier, \texttt{duration} cannot be used as a
+predictor --- models that include it will not receive credit.}
+
+\subsection{a) Data Preprocessing}\label{a-data-preprocessing-1}
+
+Perform the following preprocessing steps:
+
+\begin{itemize}
+\tightlist
+\item
+  Read the \texttt{train.csv} and \texttt{test.csv} files.
+\item
+  Define the predictor and response variables.
+\item
+  Convert the response variable \texttt{y} to binary format (1 for
+  ``yes'', 0 for ``no'').
+\item
+  One-hot encode the categorical predictors.\\
+  \textbf{Do not} use \texttt{drop\_first=True}.
+\end{itemize}
+
+\textbf{(1 point)}
+
+\subsection{b) Hard Voting Ensemble
+Classifier}\label{b-hard-voting-ensemble-classifier}
+
+Train a \textbf{Hard Voting Ensemble Classifier} using the following
+\textbf{tuned} models and their \textbf{tuned thresholds}:
+
+\begin{itemize}
+\tightlist
+\item
+  Random Forest (from Assignment 3)\\
+\item
+  LightGBM (from Assignment 4) --- \emph{ignore the \texttt{season}
+  predictor and use the same best-tuned hyperparameter grid}\\
+\item
+  CatBoost (from Assignment 4) --- \emph{ignore the \texttt{season}
+  predictor and use the same best-tuned hyperparameter grid}
+\end{itemize}
+
+Print the \textbf{test accuracy} and \textbf{test recall} of the
+ensemble.\\
+\textbf{(8 points)}
+
+\subsection{c) Soft Voting Classifier with Tuned
+Threshold}\label{c-soft-voting-classifier-with-tuned-threshold}
+
+Using the same base models from part (b), train a \textbf{Soft Voting
+Classifier}.\\
+\textbf{Do not} apply the tuned thresholds of the individual base
+models.\\
+Instead, tune the classification threshold by \textbf{cross-validating
+the ensemble's predicted probabilities}.
+
+\textbf{(10 points)}
+
+Print the best cross-validation \textbf{accuracy} that achieves a
+\textbf{recall above 60\%}, along with the corresponding
+\textbf{threshold} that yields this result.\\
+\textbf{(2 points)}
+
+\subsection{d) Test Performance of Soft Voting
+Classifier}\label{d-test-performance-of-soft-voting-classifier}
+
+Using the trained \textbf{Soft Voting Classifier} from part (c) and the
+\textbf{tuned threshold},\\
+print the \textbf{test accuracy} and \textbf{test recall}.\\
+\textbf{(2 points)}
+
+\subsection{e) Stacking Classifier with Logistic Regression
+Metamodel}\label{e-stacking-classifier-with-logistic-regression-metamodel}
+
+Using the base models from part 3(b), train a \textbf{Stacking
+Classifier} with \textbf{logistic regression} as the metamodel.
+
+Tune both the \textbf{regularization parameter} of logistic regression
+and the \textbf{classification threshold} to achieve:\\
+- \textbf{Cross-validation accuracy ≥ 70\%}, and\\
+- \textbf{Cross-validation recall ≥ 60\%}
+
+Print the optimal values of: - The regularization parameter\\
+- The classification threshold
+
+\textbf{(13 points)}
+
+\subsection{f) Test Performance of Stacking
+Classifier}\label{f-test-performance-of-stacking-classifier}
+
+Using the trained \textbf{Stacking Classifier} from part 3(e) and the
+\textbf{tuned threshold},\\
+print the \textbf{test accuracy} and \textbf{test recall}.\\
+\textbf{(2 points)}
+
+\subsection{g) Base Model Weights in Stacking
+Classifier}\label{g-base-model-weights-in-stacking-classifier}
+
+Return the \textbf{weights (coefficients)} assigned to each base model
+by the logistic regression metamodel in the Stacking Classifier.\\
+\textbf{(2 points)}
+
+Based on the weights, which base model appears to be the \textbf{most
+important} in the ensemble?\\
+\textbf{(1 point)}
 
 \chapter{Datasets, assignment and project
 files}\label{datasets-assignment-and-project-files}

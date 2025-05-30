@@ -1,0 +1,101 @@
+[
+  {
+    "objectID": "Final_Report_Template.html",
+    "href": "Final_Report_Template.html",
+    "title": "Appendix F — Prediction Problem Final Report",
+    "section": "",
+    "text": "Instructions",
+    "crumbs": [
+      "Appendices",
+      "<span class='chapter-number'>F</span>  <span class='chapter-title'>Prediction Problem Final Report</span>"
+    ]
+  },
+  {
+    "objectID": "Final_Report_Template.html#instructions",
+    "href": "Final_Report_Template.html#instructions",
+    "title": "Appendix F — Prediction Problem Final Report",
+    "section": "",
+    "text": "This notebook serves as the template for your code and final report on the Prediction Problem.\nYou may modify the template as needed, but it should include all required sections and information listed below.\nPlease make sure to include your name at the top of the assignment.",
+    "crumbs": [
+      "Appendices",
+      "<span class='chapter-number'>F</span>  <span class='chapter-title'>Prediction Problem Final Report</span>"
+    ]
+  },
+  {
+    "objectID": "Final_Report_Template.html#model-setup",
+    "href": "Final_Report_Template.html#model-setup",
+    "title": "Appendix F — Prediction Problem Final Report",
+    "section": "F.1 Model Setup",
+    "text": "F.1 Model Setup\nThis section should include any data preprocessing (e.g., encoding, scaling) and feature engineering you applied specifically for the final model.",
+    "crumbs": [
+      "Appendices",
+      "<span class='chapter-number'>F</span>  <span class='chapter-title'>Prediction Problem Final Report</span>"
+    ]
+  },
+  {
+    "objectID": "Final_Report_Template.html#model-training",
+    "href": "Final_Report_Template.html#model-training",
+    "title": "Appendix F — Prediction Problem Final Report",
+    "section": "F.2 Model Training",
+    "text": "F.2 Model Training\nBuild and train your base model(s) in this section.\nIf you are using techniques like stacking or voting, be sure to show how the base models and the final estimator are defined and fit.",
+    "crumbs": [
+      "Appendices",
+      "<span class='chapter-number'>F</span>  <span class='chapter-title'>Prediction Problem Final Report</span>"
+    ]
+  },
+  {
+    "objectID": "Final_Report_Template.html#hyperparameter-tuning",
+    "href": "Final_Report_Template.html#hyperparameter-tuning",
+    "title": "Appendix F — Prediction Problem Final Report",
+    "section": "F.3 Hyperparameter Tuning",
+    "text": "F.3 Hyperparameter Tuning\nDescribe and implement any hyperparameter tuning you applied (e.g., using Optuna, BayesSearchCV, or other methods).\nInclude your code and clearly report the best parameters found.\n\n⚠️ Even if your tuned model did not outperform the default settings, this step is still required. You must demonstrate and document your tuning efforts.",
+    "crumbs": [
+      "Appendices",
+      "<span class='chapter-number'>F</span>  <span class='chapter-title'>Prediction Problem Final Report</span>"
+    ]
+  },
+  {
+    "objectID": "Final_Report_Template.html#final-model-training-prediction",
+    "href": "Final_Report_Template.html#final-model-training-prediction",
+    "title": "Appendix F — Prediction Problem Final Report",
+    "section": "F.4 Final Model Training & Prediction",
+    "text": "F.4 Final Model Training & Prediction\nRetrain your final model using the best hyperparameters from the tuning step, and generate predictions for evaluation.\nMake sure to include code for both training and prediction, along with the evaluation metric (e.g., MAE).",
+    "crumbs": [
+      "Appendices",
+      "<span class='chapter-number'>F</span>  <span class='chapter-title'>Prediction Problem Final Report</span>"
+    ]
+  },
+  {
+    "objectID": "Final_Report_Template.html#justification-for-final-model-credit",
+    "href": "Final_Report_Template.html#justification-for-final-model-credit",
+    "title": "Appendix F — Prediction Problem Final Report",
+    "section": "F.5 Justification for Final Model Credit",
+    "text": "F.5 Justification for Final Model Credit\nExplain why this model goes beyond the boosting model, even if the performance is not better.\nHighlight any techniques you applied—such as stacking, voting, extensive tuning, or any other technique that you tried—that reflect a meaningful effort beyond what was done for the boosting model.\nExample justification:\nI applied stacking with multiple base models and meta-learning. I also tuned all components using Optuna. Although the leaderboard score did not surpass the boosting model, this work demonstrates a thoughtful attempt and applies techniques covered in class.",
+    "crumbs": [
+      "Appendices",
+      "<span class='chapter-number'>F</span>  <span class='chapter-title'>Prediction Problem Final Report</span>"
+    ]
+  },
+  {
+    "objectID": "Final_Report_Template.html#comparison-with-boosting-model",
+    "href": "Final_Report_Template.html#comparison-with-boosting-model",
+    "title": "Appendix F — Prediction Problem Final Report",
+    "section": "F.6 Comparison with Boosting Model",
+    "text": "F.6 Comparison with Boosting Model\nWas your final model better than your previously submitted boosting model?\n\nYes / No\nBrief explanation: What metric(s) did you use to compare? Did the final model improve MAE on cross-validation or the leaderboard? If not, why do you think that happened?",
+    "crumbs": [
+      "Appendices",
+      "<span class='chapter-number'>F</span>  <span class='chapter-title'>Prediction Problem Final Report</span>"
+    ]
+  },
+  {
+    "objectID": "Final_Report_Template.html#key-takeaways-short-reflection",
+    "href": "Final_Report_Template.html#key-takeaways-short-reflection",
+    "title": "Appendix F — Prediction Problem Final Report",
+    "section": "F.7 Key Takeaways (Short Reflection)",
+    "text": "F.7 Key Takeaways (Short Reflection)\n\nProvide a brief summary of your key takeaways from working on this prediction problem.\nReflect on any challenges you faced and lessons you learned during the model-building process.\nYou may also include insights about what worked well, what didn’t, and what you might do differently in future projects.",
+    "crumbs": [
+      "Appendices",
+      "<span class='chapter-number'>F</span>  <span class='chapter-title'>Prediction Problem Final Report</span>"
+    ]
+  }
+]

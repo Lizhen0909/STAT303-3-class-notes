@@ -17203,9 +17203,15 @@ important---even if it's not explicitly required in the instructions.}
 \section{AdaBoost vs Bagging (4
 points)}\label{adaboost-vs-bagging-4-points}
 
-Which model among AdaBoost and Random Forest is more sensitive to
-outliers? \textbf{(1 point)} Explain your reasoning with the theory you
-learned on the training process of both models. \textbf{(3 points)}
+\begin{itemize}
+\tightlist
+\item
+  Which model among AdaBoost and Random Forest is more sensitive to
+  outliers? \textbf{(1 point)}
+\item
+  Explain your reasoning with the theory you learned on the training
+  process of both models. \textbf{(3 points)}
+\end{itemize}
 
 \section{Regression with Boosting (54
 points)}\label{regression-with-boosting-54-points}
@@ -17213,16 +17219,17 @@ points)}\label{regression-with-boosting-54-points}
 For this question, you will use the \textbf{miami\_housing.csv} file.
 You can find the description for the variables
 \href{https://www.kaggle.com/datasets/deepcontractor/miami-housing-dataset}{here}.
-
 The \texttt{SALE\_PRC} variable is the regression response and the rest
 of the variables, except \texttt{PARCELNO}, are the predictors.
 
-\subsection{a): Preprocessing}\label{a-preprocessing}
+\subsection{\texorpdfstring{a) Preprocessing \emph{(3
+point)}}{a) Preprocessing (3 point)}}\label{a-preprocessing-3-point}
 
 Read the dataset. Create the training and test sets with a 60\%-40\%
-split and \texttt{random\_state\ =\ 1}. \textbf{(1 point)}
+split and \texttt{random\_state\ =\ 1}.
 
-\subsection{b) AdaBoost}\label{b-adaboost}
+\subsection{\texorpdfstring{b) AdaBoost \emph{(7
+points)}}{b) AdaBoost (7 points)}}\label{b-adaboost-7-points}
 
 Tune an \textbf{AdaBoost Regressor} to achieve a \textbf{test MAE below
 \$47,000}.
@@ -17237,12 +17244,20 @@ Tune an \textbf{AdaBoost Regressor} to achieve a \textbf{test MAE below
   \texttt{random\_state} will receive zero credit.}
 \end{itemize}
 
-\textbf{Scoring:} - 5 points for achieving test MAE \textless{} \$47,000
-- 1 point for reporting the training MAE of your tuned model to evaluate
-generalization
+\textbf{Scoring:}
 
-\subsection{c) Loss Functions in Gradient
-Boosting}\label{c-loss-functions-in-gradient-boosting}
+\begin{itemize}
+\tightlist
+\item
+  5 points for achieving test MAE \textless{} \$47,000
+\item
+  2 point for reporting the training MAE of your tuned model to evaluate
+  generalization
+\end{itemize}
+
+\subsection{\texorpdfstring{c) Loss Functions in Gradient Boosting
+\emph{(7
+points)}}{c) Loss Functions in Gradient Boosting (7 points)}}\label{c-loss-functions-in-gradient-boosting-7-points}
 
 Gradient Boosting supports multiple loss functions, including
 \textbf{\texttt{squared\_error}}, \textbf{\texttt{absolute\_error}}, and
@@ -17251,14 +17266,14 @@ Gradient Boosting supports multiple loss functions, including
 \begin{itemize}
 \tightlist
 \item
-  \textbf{(1 point)} Which loss function performs best on this dataset?
+  \textbf{(5 point)} Which loss function performs best on this dataset?
 \item
-  \textbf{(3 points)} What are the advantages of this loss function
+  \textbf{(2 points)} What are the advantages of this loss function
   compared to the other two?
 \end{itemize}
 
-\subsection{Task: Tune a Gradient Boosting
-Model}\label{task-tune-a-gradient-boosting-model}
+\subsection{\texorpdfstring{d) Tune a Gradient Boosting Model \emph{(12
+points)}}{d) Tune a Gradient Boosting Model (12 points)}}\label{d-tune-a-gradient-boosting-model-12-points}
 
 Your goal is to tune a \textbf{Gradient Boosting Regressor} to achieve a
 \textbf{cross-validation MAE below \$45,000}.
@@ -17272,11 +17287,18 @@ Your goal is to tune a \textbf{Gradient Boosting Regressor} to achieve a
   receive zero credit, even if the MAE cutoff is met.}
 \end{itemize}
 
-\textbf{Scoring (10 points total):}\\
-- 5 points for using a well-reasoned hyperparameter search strategy\\
-- 5 points for achieving MAE \textless{} \$45,000 - 1 point for
-reporting the training MAE of your tuned model to evaluate
-generalization
+\textbf{Scoring:}
+
+\begin{itemize}
+\tightlist
+\item
+  5 points for using a well-reasoned hyperparameter search strategy\\
+\item
+  5 points for achieving MAE \textless{} \$45,000
+\item
+  2 point for reporting the training MAE of your tuned model to evaluate
+  generalization
+\end{itemize}
 
 \textbf{Hints}
 
@@ -17296,8 +17318,8 @@ generalization
   performance enhancements.
 \end{itemize}
 
-\subsection{d) XGBoost vs.~Gradient
-Boosting}\label{d-xgboost-vs.-gradient-boosting}
+\subsection{\texorpdfstring{e) XGBoost vs.~Gradient Boosting \emph{(5
+points)}}{e) XGBoost vs.~Gradient Boosting (5 points)}}\label{e-xgboost-vs.-gradient-boosting-5-points}
 
 \textbf{XGBoost Enhancements:}
 
@@ -17328,82 +17350,114 @@ Boosting}\label{d-xgboost-vs.-gradient-boosting}
   well-implemented in \textbf{vanilla Gradient Boosting}? (1 point)
 \end{itemize}
 
-\subsection{e) Tuning XGBoost with Different Search
-Strategies}\label{e-tuning-xgboost-with-different-search-strategies}
+\subsection{\texorpdfstring{f) Tuning XGBoost with Different Search
+Strategies \emph{(15
+points)}}{f) Tuning XGBoost with Different Search Strategies (15 points)}}\label{f-tuning-xgboost-with-different-search-strategies-15-points}
 
-Tune an \textbf{XGBoost Regressor} to achieve a \textbf{cross-validation
-MAE below \$43,000}.
+Your task is to tune an \textbf{XGBoost Regressor} and compare the
+effectiveness of different hyperparameter tuning strategies, with the
+goal of achieving a \textbf{cross-validation MAE below \$43,000}.
 
 \begin{itemize}
 \tightlist
 \item
-  You \textbf{must keep \texttt{random\_state=1} in all components}
-  (e.g., XGBoost model, CV splits, search objects).
+  You \textbf{must use \texttt{random\_state=1}} consistently across all
+  components (e.g., the XGBoost model, CV splits, and search objects).\\
 \item
-  \textbf{Submissions that meet the cutoff using any other
+  \textbf{Submissions that meet the cutoff using a different
   \texttt{random\_state} will receive zero credit.}
 \end{itemize}
 
-\textbf{Scoring (10 points total):}
+\subsubsection{Required Search Strategy
+Comparison}\label{required-search-strategy-comparison}
 
-\begin{itemize}
-\tightlist
-\item
-  5 points for a well-designed and appropriate hyperparameter search
-  strategy
-\item
-  5 using 3 different search strategies
-\item
-  5 points for achieving MAE \textless{} \$42,500
-\end{itemize}
-
-\textbf{Search Strategies (Required Comparison)}
-
-You must tune the model using \textbf{three different search settings}:
+You must tune your model using the following \textbf{three search
+strategies}, and compare them in terms of both \textbf{execution time}
+and \textbf{performance (MAE)}:
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
+\tightlist
 \item
   \textbf{BayesSearchCV}
 
   \begin{itemize}
   \tightlist
   \item
-    Unlike vanilla \texttt{GradientBoostingRegressor}, XGBoost supports
-    parallel training and can benefit from multi-core processing
-    (\texttt{n\_jobs=-1}), so \texttt{BayesSearchCV} is practica with
-    it.
+    XGBoost supports parallel training via \texttt{n\_jobs=-1}, which
+    makes it compatible with \texttt{BayesSearchCV}.
   \end{itemize}
 \item
   \textbf{Optuna (with \texttt{n\_jobs=-1})}
-\item
-  \textbf{Optuna (default single-threaded)}
-\end{enumerate}
-
-\textbf{Execution Time}
-
-You must report the \textbf{execution time} for each tuning strategy.
-
-\begin{itemize}
-\tightlist
-\item
-  You can measure this using:
 
   \begin{itemize}
   \tightlist
   \item
-    A \textbf{Jupyter magic command} like \texttt{\%\%time}, or
-  \item
-    Python's \texttt{time.time()} (end - start)
+    Parallelized optimization using multiple CPU cores.
   \end{itemize}
+\item
+  \textbf{Optuna (default single-threaded)}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Standard single-threaded search for baseline comparison.
+  \end{itemize}
+\end{enumerate}
+
+\begin{quote}
+🔁 Use the \textbf{same hyperparameter search space} across all three
+strategies to ensure a fair comparison.
+\end{quote}
+
+\subsubsection{Execution Time and Performance
+Reporting}\label{execution-time-and-performance-reporting}
+
+For each tuning strategy, you must report:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Execution time}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Use Jupyter's \texttt{\%\%time} or Python's \texttt{time.time()} for
+    measurement
+  \end{itemize}
+\item
+  \textbf{Best MAE (on validation folds)}
 \end{itemize}
 
-For a \textbf{fair comparison}, use the \textbf{same search space}
-across all methods.\\
-Only one of the tuned models needs to meet the performance cutoff, but
-you should still report times for all three.
+You are expected to:
 
-\subsection{f) Feature Importance}\label{f-feature-importance}
+\begin{itemize}
+\tightlist
+\item
+  Present the \textbf{comparison} of all three strategies in terms of
+  \textbf{time taken} and \textbf{achieved MAE}
+\item
+  Ensure \textbf{at least one tuned model} reaches MAE \textless{}
+  \textbf{\$43,000}
+\end{itemize}
+
+\textbf{Scoring Breakdown} (15 points total)
+
+\begin{longtable}[]{@{}ll@{}}
+\toprule\noalign{}
+Criteria & Points \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Well-designed and appropriate search space & 5 points \\
+Use and comparison of all 3 search strategies & 5 points \\
+Achieving MAE \textless{} \textbf{\$43,000} & 5 points \\
+\end{longtable}
+
+\subsection{\texorpdfstring{g) Feature Importance \emph{(5
+points)}}{g) Feature Importance (5 points)}}\label{g-feature-importance-5-points}
 
 Using the \textbf{best hyperparameter settings}, fit the final model and
 \textbf{output the feature importances}.
@@ -17434,7 +17488,8 @@ The predictors you should use are: \texttt{age}, \texttt{day},
 \texttt{duration} \textbf{must not be used as a predictor}.\\
 \textbf{No credit will be given} for models that include it.
 
-\subsection{a) Data Preprocessing}\label{a-data-preprocessing}
+\subsection{\texorpdfstring{a) Data Preprocessing \emph{(3
+points)}}{a) Data Preprocessing (3 points)}}\label{a-data-preprocessing-3-points}
 
 Perform the following preprocessing steps:
 
@@ -17455,13 +17510,12 @@ Perform the following preprocessing steps:
   and \texttt{1}).
 \end{itemize}
 
-\textbf{(5 points)}
-
 We will rely on the \textbf{native categorical feature support} provided
 by each library (XGBoost, LightGBM, and CatBoost), so explicit one-hot
 encoding is \textbf{not} required.
 
-\subsection{b) Target Exploration}\label{b-target-exploration}
+\subsection{\texorpdfstring{b) Target Exploration \emph{(1
+points)}}{b) Target Exploration (1 points)}}\label{b-target-exploration-1-points}
 
 For classification tasks, it's important to examine the distribution of
 the target variable to determine whether the classes are imbalanced.
@@ -17475,9 +17529,8 @@ classification.
   \textbf{test} sets.
 \end{itemize}
 
-\textbf{(2 points)}
-
-\subsection{c) LightGBM and CatBoost}\label{c-lightgbm-and-catboost}
+\subsection{\texorpdfstring{c) LightGBM and CatBoost \emph{(6
+points)}}{c) LightGBM and CatBoost (6 points)}}\label{c-lightgbm-and-catboost-6-points}
 
 LightGBM and CatBoost are gradient boosting frameworks, like XGBoost,
 but each introduces unique innovations.
@@ -17485,21 +17538,21 @@ but each introduces unique innovations.
 \begin{itemize}
 \tightlist
 \item
-  What do LightGBM and CatBoost have in common with XGBoost? \textbf{(2
+  What do LightGBM and CatBoost have in common with XGBoost? \textbf{(1
   points)}\\
 \item
-  What advantages do they offer over XGBoost? \textbf{(2 points)}\\
+  What advantages do they offer over XGBoost? \textbf{(1 points)}\\
 \item
-  How are these advantages implemented in each model? \textbf{(3
+  How are these advantages implemented in each model? \textbf{(2
   points)}\\
 \item
-  All three libraries support native categorical feature handling.\\
   Do they use the same approach? If not, explain the differences.
-  \textbf{(3 points)}
+  \textbf{(2 points)}
 \end{itemize}
 
-\subsection{c) Handling Imbalanced Classification in Gradient Boosting
-Extensions}\label{c-handling-imbalanced-classification-in-gradient-boosting-extensions}
+\subsection{\texorpdfstring{d) Handling Imbalanced Classification in
+Gradient Boosting Extensions \emph{(3
+points)}}{d) Handling Imbalanced Classification in Gradient Boosting Extensions (3 points)}}\label{d-handling-imbalanced-classification-in-gradient-boosting-extensions-3-points}
 
 For all extensions of Gradient Boosting (XGBoost, LightGBM, and
 CatBoost):
@@ -17516,8 +17569,9 @@ CatBoost):
   results? \textbf{(1 point)}
 \end{itemize}
 
-\subsection{d) Model Evaluation: XGBoost, LightGBM, and
-CatBoost}\label{d-model-evaluation-xgboost-lightgbm-and-catboost}
+\subsection{\texorpdfstring{e) Model Evaluation: XGBoost, LightGBM, and
+CatBoost \emph{(9
+points)}}{e) Model Evaluation: XGBoost, LightGBM, and CatBoost (9 points)}}\label{e-model-evaluation-xgboost-lightgbm-and-catboost-9-points}
 
 Evaluate the performance of the following models: \textbf{XGBoost},
 \textbf{LightGBM}, and \textbf{CatBoost}, using the metrics on test set
@@ -17559,8 +17613,21 @@ For each model, build and compare \textbf{two versions}:
   classification, and try to explain why.
 \end{itemize}
 
-\subsection{d) Tuning LightGBM for
-Classification}\label{d-tuning-lightgbm-for-classification}
+\textbf{Scoring (9 points total):}
+
+\begin{itemize}
+\tightlist
+\item
+  3 points for baseline model\\
+\item
+  3 points for imbalance-aware model\\
+\item
+  3 points for summary and comparison
+\end{itemize}
+
+\subsection{\texorpdfstring{f) Tuning LightGBM for Classification
+\emph{(9
+points)}}{f) Tuning LightGBM for Classification (9 points)}}\label{f-tuning-lightgbm-for-classification-9-points}
 
 Tune a \textbf{LightGBM classifier} to achieve:
 
@@ -17577,9 +17644,15 @@ model, cross-validation, search objects).\\
 \textbf{Submissions that exceed the cutoffs using any other
 \texttt{random\_state} will receive zero credit.}
 
-\textbf{Scoring (15 points total):}\\
-- 7.5 points for a well-designed and justified search strategy\\
-- 7.5 points for meeting both performance thresholds
+\textbf{Scoring (9 points total):}
+
+\begin{itemize}
+\tightlist
+\item
+  4.5 points for a well-designed and justified search strategy\\
+\item
+  4.5 points for meeting both performance thresholds
+\end{itemize}
 
 \textbf{Hints:}
 
@@ -17590,7 +17663,8 @@ model, cross-validation, search objects).\\
   (not just model hyperparameters).
 \end{itemize}
 
-\subsection{e) Test Set Evaluation}\label{e-test-set-evaluation}
+\subsection{\texorpdfstring{g) Test Set Evaluation \emph{(1
+points)}}{g) Test Set Evaluation (1 points)}}\label{g-test-set-evaluation-1-points}
 
 Evaluate the \textbf{tuned LightGBM model} on the \textbf{test set}:
 
@@ -17605,10 +17679,9 @@ Evaluate the \textbf{tuned LightGBM model} on the \textbf{test set}:
 This will help assess how well the model generalizes beyond the training
 data.
 
-\textbf{(2 points)}
-
-\subsection{f) Tuning CatBoost for
-Classification}\label{f-tuning-catboost-for-classification}
+\subsection{\texorpdfstring{f) Tuning CatBoost for Classification
+\emph{(9
+points)}}{f) Tuning CatBoost for Classification (9 points)}}\label{f-tuning-catboost-for-classification-9-points}
 
 Tune a \textbf{CatBoost classifier} to achieve:
 
@@ -17625,10 +17698,10 @@ model, cross-validation, search objects).\\
 \textbf{Submissions that exceed the cutoffs using any other
 \texttt{random\_state} will receive zero credit.}
 
-\textbf{Scoring (15 points total):}\\
-- 7.5 points for a well-structured and appropriate hyperparameter
+\textbf{Scoring (9 points total):}\\
+- 4.5 points for a well-structured and appropriate hyperparameter
 search\\
-- 7.5 points for meeting both performance thresholds
+- 4.5 points for meeting both performance thresholds
 
 \textbf{Hints:}
 
@@ -17643,7 +17716,8 @@ search\\
   performance criteria.
 \end{itemize}
 
-\subsection{g) Test Set Evaluation}\label{g-test-set-evaluation}
+\subsection{\texorpdfstring{h) Test Set Evaluation \emph{(1
+point)}}{h) Test Set Evaluation (1 point)}}\label{h-test-set-evaluation-1-point}
 
 Evaluate the \textbf{tuned CatBoost model} on the \textbf{test set}:
 
@@ -17656,8 +17730,7 @@ Evaluate the \textbf{tuned CatBoost model} on the \textbf{test set}:
 \end{itemize}
 
 This will help assess whether the model generalizes well beyond the
-training data.\\
-\textbf{(1 point)}
+training data.
 
 \section{🎁 Bonus (Extra Credit) -- 20
 Points}\label{bonus-extra-credit-20-points}
@@ -17974,7 +18047,7 @@ The predictors to use are: \textbf{\texttt{age}}, \textbf{\texttt{day}},
 \emph{As mentioned earlier, \texttt{duration} cannot be used as a
 predictor --- models that include it will not receive credit.}
 
-\subsection{a) Data Preprocessing}\label{a-data-preprocessing-1}
+\subsection{a) Data Preprocessing}\label{a-data-preprocessing}
 
 Perform the following preprocessing steps:
 
@@ -18075,6 +18148,103 @@ by the logistic regression metamodel in the Stacking Classifier.\\
 Based on the weights, which base model appears to be the \textbf{most
 important} in the ensemble?\\
 \textbf{(1 point)}
+
+\chapter{Prediction Problem Final Report: STAT 303-3, Spring
+2025}\label{prediction-problem-final-report-stat-303-3-spring-2025}
+
+\section*{Instructions}\label{instructions-5}
+\addcontentsline{toc}{section}{Instructions}
+
+\markright{Instructions}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  This notebook serves as the template for your code and final report on
+  the Prediction Problem.
+\item
+  You may modify the template as needed, but it should include all
+  required sections and information listed below.
+\item
+  Please make sure to include your name at the top of the assignment.
+\end{enumerate}
+
+\section{1) Model Setup}\label{model-setup}
+
+This section should include any \textbf{data preprocessing} (e.g.,
+encoding, scaling) and \textbf{feature engineering} you applied
+specifically for the final model.
+
+\section{2) Model Training}\label{model-training}
+
+Build and train your base model(s) in this section.\\
+If you are using techniques like stacking or voting, be sure to show how
+the base models and the final estimator are defined and fit.
+
+\section{3) Hyperparameter Tuning}\label{hyperparameter-tuning-2}
+
+Describe and implement any hyperparameter tuning you applied (e.g.,
+using Optuna, BayesSearchCV, or other methods).\\
+Include your code and clearly report the best parameters found.
+
+\begin{quote}
+⚠️ Even if your tuned model did not outperform the default settings,
+this step is still required. You must demonstrate and document your
+tuning efforts.
+\end{quote}
+
+\section{4) Final Model Training \&
+Prediction}\label{final-model-training-prediction}
+
+Retrain your final model using the best hyperparameters from the tuning
+step, and generate predictions for evaluation.\\
+Make sure to include code for both training and prediction, along with
+the evaluation metric (e.g., MAE).
+
+\section{5) Justification for Final Model
+Credit}\label{justification-for-final-model-credit}
+
+Explain why this model goes beyond the boosting model, even if the
+performance is not better.\\
+Highlight any techniques you applied---such as stacking, voting,
+extensive tuning, or any other technique that you tried---that reflect a
+meaningful effort beyond what was done for the boosting model.
+
+\textbf{Example justification:}
+
+\emph{I applied stacking with multiple base models and meta-learning. I
+also tuned all components using Optuna. Although the leaderboard score
+did not surpass the boosting model, this work demonstrates a thoughtful
+attempt and applies techniques covered in class.}
+
+\section{6) Comparison with Boosting
+Model}\label{comparison-with-boosting-model}
+
+Was your final model better than your previously submitted boosting
+model?
+
+\begin{quote}
+\textbf{Yes / No}\\
+\emph{Brief explanation:} What metric(s) did you use to compare? Did the
+final model improve MAE on cross-validation or the leaderboard? If not,
+why do you think that happened?
+\end{quote}
+
+\section{7) Key Takeaways (Short
+Reflection)}\label{key-takeaways-short-reflection}
+
+\begin{itemize}
+\tightlist
+\item
+  Provide a brief summary of your key takeaways from working on this
+  prediction problem.
+\item
+  Reflect on any challenges you faced and lessons you learned during the
+  model-building process.
+\item
+  You may also include insights about what worked well, what didn't, and
+  what you might do differently in future projects.
+\end{itemize}
 
 \chapter{Datasets, assignment and project
 files}\label{datasets-assignment-and-project-files}

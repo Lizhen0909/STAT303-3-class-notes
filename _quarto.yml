@@ -7,7 +7,7 @@ book:
   title: "Data Science III with python (Class notes)"
   subtitle: "STAT 303-3"
   author: "Lizhen Shi"
-  date: "4/2/2025"
+
   
   sidebar:
     search: true
@@ -36,12 +36,12 @@ book:
         - voting_stacking.ipynb
         
   appendices: 
-    - Assignment1_sp25.ipynb
-    - Assignment2_sp25.ipynb
-    - Assignment3_sp25.ipynb
-    - Assignment4_sp25.ipynb
-    - Assignment5_sp25.ipynb
-    - Final_Report_Template.ipynb
+    #- Assignment1_sp25.ipynb
+    #- Assignment2_sp25.ipynb
+    #- Assignment3_sp25.ipynb
+    #- Assignment4_sp25.ipynb
+    #- Assignment5_sp25.ipynb
+    #- Final_Report_Template.ipynb
     #- App_GridSearchCV_vs_RandomSearchCV.ipynb
     - Datasets.ipynb
 

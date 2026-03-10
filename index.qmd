@@ -1,6 +1,6 @@
 # Preface {.unnumbered}
 
-This book serves as the course notes for STAT 303 Sec20, Spring 2025 at Northwestern University. To enhance your understanding of the material, you are expected to read the textbook before using these notes.
+This website contains the course notes for STAT 303 Sec20 at Northwestern University. To enhance your understanding of the material, you are expected to read the textbook before using these notes.
 
 It is an evolving resource designed to support the course’s learning objectives. This edition builds upon the foundational work of Professor Arvind Krishna, whose contributions have provided a strong framework for this resource. We are deeply grateful for his efforts, which continue to shape the book’s development.
 
